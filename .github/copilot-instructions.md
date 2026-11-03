@@ -32,7 +32,8 @@
 - **Local Development**:
   - `python3 dev_server.py` runs local server on `http://localhost:3000`.
 - **Deployment**:
-  - `python3 deploy_ftp.py` uploads compiled files directly to cPanel `public_html/`.
+  - GitHub Actions builds and tests the public-only bundle; production deployment uses explicit FTPS after its credentials are configured in GitHub Actions Secrets.
+  - Do not use the legacy local FTP uploader or copy the repository wholesale to `public_html`.
 
 ## 4. Completed Pages (16/16 - 100% Complete)
 1. `/` (`index.html`): Homepage with Hero, stats, programs, news, partner institutions.
@@ -61,12 +62,9 @@
   - Rotate any credentials previously committed; removing them from this file does not remove Git history.
 
 ## 6. Pending Tasks & Roadmap for Next Steps
-1. **Form Processing Backend**:
+1. **Enable production deployment**: Create a dedicated FTP account limited to `public_html`, configure GitHub Actions secrets/variables, and verify a release before removing any legacy files.
+2. **Form Processing Backend**:
    - The consultation forms currently have frontend validation only.
    - Task: Create a backend endpoint (e.g. lightweight PHP or serverless API) to save form submissions to MySQL or dispatch webhook notifications (Telegram / Google Sheets / Email).
-2. **SEO Optimization & Structured Data (JSON-LD)**:
-   - Add Schema.org structured data (`Organization`, `EducationalOrganization`, `Course`, `BreadcrumbList`) following `KIPA - SEO Plan.xlsx`.
-3. **CI/CD Automation via GitHub Actions**:
-   - Create `.github/workflows/deploy.yml` to automatically build and deploy via FTP on every push to `master`.
-4. **Blog / Articles Dynamic Engine**:
+3. **Blog / Articles Dynamic Engine**:
    - Build a lightweight template for single news articles / guides to expand SEO traffic.

@@ -102,11 +102,13 @@ Workflow chạy kiểm thử và build khi push/PR vào `master`; có thể ch�
 **Actions → Build and deploy KIPA → Run workflow**. Artifact `kipa-public-site`
 là bản website đã build, không chứa toàn bộ repository.
 
-**Chưa có kết nối hosting được kiểm chứng.** Bước deploy mặc định bị khóa.
-Trước khi bật, hỏi Nhân Hòa/cPanel xem tài khoản có hỗ trợ **explicit FTPS**
-(thường cổng 21), hostname có chứng chỉ TLS hợp lệ và đường dẫn FTP trỏ tới
-document root nào. FTPS khác SFTP/SSH; script hiện không hỗ trợ SFTP,
-không dùng FTP không mã hóa và không bỏ kiểm tra chứng chỉ.
+Đã kiểm tra kết nối **explicit FTPS** và xác minh chứng chỉ TLS cho
+`wordpress-hosting10.nhanhoa.com` trên cổng 21. Chưa xác nhận đăng nhập FTP,
+quyền ghi và document root vì hosting hiện chưa có tài khoản FTP riêng.
+Git Version Control không có trong giao diện cPanel này; GitHub Actions là
+luồng triển khai dự kiến. Deploy production vẫn bị khóa đến khi kiểm tra được
+tài khoản FTPS. FTPS khác SFTP/SSH; script không hỗ trợ SFTP, không dùng FTP
+không mã hóa và không bỏ kiểm tra chứng chỉ.
 
 Trong **GitHub → Settings → Secrets and variables → Actions**, cấu hình:
 
@@ -115,7 +117,7 @@ Trong **GitHub → Settings → Secrets and variables → Actions**, cấu hình
 | Secret | `FTP_HOST` | Hostname FTPS khớp chứng chỉ TLS |
 | Secret | `FTP_USER` | Tài khoản FTP giới hạn vào website nếu có thể |
 | Secret | `FTP_PASSWORD` | Mật khẩu mới, không dùng mật khẩu đã lộ |
-| Variable | `FTP_REMOTE_DIR` | Đường dẫn tuyệt đối theo góc nhìn tài khoản FTP, ví dụ `/public_html` hoặc `/` nếu đã chroot vào document root |
+| Variable | `FTP_REMOTE_DIR` | Đường dẫn tuyệt đối theo góc nhìn tài khoản FTP. Nếu tài khoản bị giới hạn trực tiếp vào `public_html`, đặt `/` |
 | Variable | `FTP_PORT` | Cổng explicit FTPS; mặc định `21` |
 | Variable | `DEPLOY_ENABLED` | Chỉ đặt `true` sau khi xác nhận kết nối, đường dẫn và có bản sao lưu |
 
@@ -123,6 +125,11 @@ Trong **GitHub → Settings → Secrets and variables → Actions**, cấu hình
 deploy khởi chạy. Các secret và biến `FTP_REMOTE_DIR`, `FTP_PORT` có thể đặt
 trong environment `production`; nên cấu hình người duyệt bắt buộc cho
 environment này trước lần deploy đầu.
+
+Với host đã kiểm tra, `FTP_HOST=wordpress-hosting10.nhanhoa.com` và
+`FTP_PORT=21`. Tạo một tài khoản FTPS riêng trong cPanel, giới hạn thư mục ở
+`public_html`; khi đó `FTP_USER` là tên FTP đầy đủ (kèm `@kipaviethan.edu.vn`)
+và `FTP_REMOTE_DIR=/`. Không dùng tài khoản chính cPanel làm FTP deployment.
 
 Khi bật, mỗi push lên `master` sẽ build, kiểm thử và upload artifact. Script
 kiểm tra danh sách file được phép, bảo vệ kênh điều khiển và dữ liệu bằng TLS,
