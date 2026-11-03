@@ -130,6 +130,8 @@
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="/assets/js/kipa-forms.js?v=20261103-3" defer></script>
+<script src="/assets/js/kipa-site.js?v=20261103-1" defer></script>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Phudu:wght@600;700;800;900&display=swap');
@@ -308,7 +310,7 @@
                 </div>
 
                 <a href="/#stories" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
-                <a href="/tin-tuc/" class="kipa-nav-item hover:text-[#0274BD]">Tin tức</a>
+                <a href="/faq/" class="kipa-nav-item hover:text-[#0274BD]">Hỏi đáp</a>
                 <a href="/co-so/" class="kipa-nav-item hover:text-[#0274BD]">Cơ sở</a>
                 <a href="/lien-he/" class="kipa-nav-item hover:text-[#0274BD]">Liên hệ</a>
             </nav>
@@ -316,9 +318,9 @@
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
             <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
-                <button type="button" aria-label="Tìm kiếm" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                </button>
+                </a>
 
                 <!-- Button Dang ky tu van -->
                 <a href="/dang-ky-tu-van/" class="hidden sm:inline-flex items-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-xs xl:text-sm font-semibold px-4 xl:px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all shrink-0 whitespace-nowrap group">
@@ -327,7 +329,7 @@
                 </a>
 
                 <!-- Mobile Hamburger Button -->
-                <button type="button" onclick="document.getElementById('mobile-header-menu').classList.toggle('hidden')" aria-label="Menu điều hướng" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 flex items-center justify-center shrink-0">
+                <button type="button" data-mobile-menu-toggle aria-controls="mobile-header-menu" aria-expanded="false" aria-label="Menu điều hướng" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 flex items-center justify-center shrink-0">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
@@ -352,7 +354,6 @@
             <a href="/hop-tac-quoc-te/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🤝 Hợp tác giáo dục quốc tế</a>
         </div>
         <a href="/#stories" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
-        <a href="/tin-tuc/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Tin tức</a>
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
@@ -803,15 +804,15 @@
                     <div class="lg:col-span-7 bg-white text-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
                         <h4 class="font-phudu font-bold text-lg text-slate-900 mb-4 pb-2 border-b border-slate-100">Đề xuất hợp tác với KIPA Việt Hàn</h4>
                         
-                        <form onsubmit="alert('Cảm ơn đơn vị đã gửi đề xuất hợp tác. Đại diện KIPA Việt Hàn sẽ liên hệ lại trong thời gian sớm nhất!'); return false;" class="space-y-3.5 text-xs sm:text-sm">
+                        <form data-kipa-form="partnership" data-source-page="/hop-tac-quoc-te/" class="space-y-3.5 text-xs sm:text-sm">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Tên trường / tổ chức <span class="text-brand-red">*</span></label>
-                                    <input type="text" required placeholder="Nhập tên trường hoặc tổ chức" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="text" name="organization" required maxlength="254" placeholder="Nhập tên trường hoặc tổ chức" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Loại hình đơn vị <span class="text-brand-red">*</span></label>
-                                    <select required class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <select name="org_type" required class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                         <option value="" disabled selected>Chọn loại hình</option>
                                         <option value="thpt">Trường THPT / THCS</option>
                                         <option value="dai-hoc">Trường Đại học / Cao đẳng</option>
@@ -824,28 +825,28 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Người liên hệ <span class="text-brand-red">*</span></label>
-                                    <input type="text" required placeholder="Họ và tên người đại diện" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="text" name="contact_name" required maxlength="254" placeholder="Họ và tên người đại diện" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Chức vụ</label>
-                                    <input type="text" placeholder="Ví dụ: Hiệu trưởng, Trưởng khoa, Giám đốc..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="text" name="position" maxlength="254" placeholder="Ví dụ: Hiệu trưởng, Trưởng khoa, Giám đốc..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Số điện thoại <span class="text-brand-red">*</span></label>
-                                    <input type="tel" required placeholder="Nhập số điện thoại liên hệ" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại liên hệ" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Email <span class="text-brand-red">*</span></label>
-                                    <input type="email" required placeholder="Nhập email làm việc" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="email" name="email" required maxlength="254" placeholder="Nhập email làm việc" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block font-bold text-slate-700 mb-1">Mô hình hợp tác quan tâm <span class="text-brand-red">*</span></label>
-                                <select required class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                <select name="cooperation_type" required class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                     <option value="" disabled selected>Chọn mô hình hợp tác</option>
                                     <option value="dao-tao">Hợp tác đào tạo tiếng Hàn</option>
                                     <option value="huong-nghiep">Tư vấn hướng nghiệp & du học</option>
@@ -857,13 +858,19 @@
 
                             <div>
                                 <label class="block font-bold text-slate-700 mb-1">Nội dung đề xuất cụ thể</label>
-                                <textarea rows="3" placeholder="Mô tả tóm tắt nhu cầu, quy mô hoặc đề xuất hợp tác của quý đơn vị..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue"></textarea>
+                                <textarea name="proposal" maxlength="2000" rows="3" placeholder="Mô tả tóm tắt nhu cầu, quy mô hoặc đề xuất hợp tác của quý đơn vị..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue"></textarea>
                             </div>
 
+                            <label class="flex items-start gap-2 text-xs text-slate-600">
+                                <input type="checkbox" name="consent" value="yes" required class="mt-0.5">
+                                <span>Tôi đồng ý để KIPA Việt Hàn sử dụng thông tin này nhằm phản hồi đề xuất theo <a href="/chinh-sach-bao-mat/" class="underline">Chính sách bảo mật</a>.</span>
+                            </label>
                             <button type="submit" class="w-full py-3.5 rounded-full bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-paper-plane text-xs"></i>
                                 <span>Gửi đề xuất hợp tác</span>
                             </button>
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[10000px]">
+                            <p data-form-status aria-live="polite" class="text-sm" role="status"></p>
                         </form>
                     </div>
 
@@ -1184,7 +1191,7 @@
 
 <!-- FLOATING CTA BUTTONS (Ghim goc phai man hinh) -->
 <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-    <a href="https://zalo.me" target="_blank" rel="noopener" aria-label="Chat Zalo KIPA" class="w-12 h-12 rounded-full bg-[#0084ff] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+    <a href="https://zalo.me/0368513865" target="_blank" rel="noopener" aria-label="Chat Zalo KIPA" class="w-12 h-12 rounded-full bg-[#0084ff] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
         <i class="fa-solid fa-comment-dots text-lg"></i>
     </a>
     <a href="tel:0368513865" aria-label="Gọi điện thoại KIPA" class="w-12 h-12 rounded-full bg-[#ec1e1b] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform animate-bounce">

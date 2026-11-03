@@ -129,6 +129,7 @@ class BuildTests(unittest.TestCase):
 
     def test_all_consultation_forms_require_explicit_consent_and_use_backend(self):
         forms = {
+            'index.html': 'home_consultation',
             'dang-ky-tu-van.html': 'consultation',
             'lien-he.html': 'contact',
             'tieng-han.html': 'korean_course',
@@ -151,7 +152,10 @@ class BuildTests(unittest.TestCase):
                 )
                 self.assertRegex(form, r'name="website"')
                 self.assertIn('data-form-status', form)
-                self.assertNotIn('onsubmit=', html)
+                self.assertNotRegex(
+                    html,
+                    rf'<form\b(?=[^>]*data-kipa-form="{form_type}")[^>]*\bonsubmit=',
+                )
         header = (Path(build.BASE_DIR) / 'header.html').read_text(encoding='utf-8')
         self.assertIn('/assets/js/kipa-forms.js', header)
 

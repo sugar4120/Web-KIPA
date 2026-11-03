@@ -68,8 +68,8 @@ try {
             if (!preg_match('/^[A-Za-z0-9._-]{3,64}$/', $username)) {
                 kipa_admin_error('Tên đăng nhập phải có từ 3 đến 64 ký tự gồm chữ cái, số, dấu chấm, gạch ngang hoặc gạch dưới.');
             }
-            if (strlen($password) < 12 || strlen($password) > 1024 || !hash_equals($password, $confirm)) {
-                kipa_admin_error('Mật khẩu phải có ít nhất 12 ký tự và hai lần nhập phải giống nhau.');
+            if (strlen($password) < 12 || strlen($password) > 72 || str_contains($password, "\0") || !hash_equals($password, $confirm)) {
+                kipa_admin_error('Mật khẩu phải có từ 12 đến 72 byte và hai lần nhập phải giống nhau.');
             }
             $statement = $db->prepare(
                 'INSERT INTO kipa_admins (username, password_hash, created_at)
@@ -155,8 +155,8 @@ try {
             if (!$admin || !password_verify($oldPassword, $admin['password_hash'])) {
                 kipa_admin_error('Mật khẩu hiện tại không đúng.');
             }
-            if (strlen($newPassword) < 12 || strlen($newPassword) > 1024 || !hash_equals($newPassword, $confirmPassword)) {
-                kipa_admin_error('Mật khẩu mới phải có ít nhất 12 ký tự và hai lần nhập phải giống nhau.');
+            if (strlen($newPassword) < 12 || strlen($newPassword) > 72 || str_contains($newPassword, "\0") || !hash_equals($newPassword, $confirmPassword)) {
+                kipa_admin_error('Mật khẩu mới phải có từ 12 đến 72 byte và hai lần nhập phải giống nhau.');
             }
             $statement = $db->prepare('UPDATE kipa_admins SET password_hash = :password_hash WHERE id = :id');
             $statement->execute([
@@ -186,8 +186,8 @@ try {
         $content .= kipa_admin_form_start('setup', $csrf);
         $content .= '<label>Mã thiết lập<input name="setup_token" type="password" required autocomplete="off"></label>';
         $content .= '<label>Tên đăng nhập<input name="username" required minlength="3" maxlength="64" autocomplete="username"></label>';
-        $content .= '<label>Mật khẩu (ít nhất 12 ký tự)<input name="password" type="password" required minlength="12" maxlength="1024" autocomplete="new-password"></label>';
-        $content .= '<label>Nhập lại mật khẩu<input name="password_confirm" type="password" required minlength="12" maxlength="1024" autocomplete="new-password"></label>';
+        $content .= '<label>Mật khẩu (12–72 byte)<input name="password" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
+        $content .= '<label>Nhập lại mật khẩu<input name="password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
         $content .= '<p><button type="submit">Tạo tài khoản quản trị</button></p></form></section>';
         kipa_admin_page('Thiết lập quản trị', $content);
     }
@@ -212,6 +212,8 @@ try {
     $page = $page === false ? 1 : max(1, min(100000, $page));
     $perPage = 50;
     $total = (int)$db->query('SELECT COUNT(*) FROM kipa_leads')->fetchColumn();
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
     $statement = $db->prepare(
         'SELECT id, form_type, contact_name, phone, email, program, source_page, details_json, created_at
          FROM kipa_leads ORDER BY created_at DESC, id DESC LIMIT :limit OFFSET :offset'
@@ -255,15 +257,26 @@ try {
                 '</td><td>' . kipa_h($program) . '</td><td><pre>' . kipa_h(implode("\n", $detailsText)) .
                 '</pre></td><td>' . kipa_admin_form_start('delete', $csrf) .
                 '<input type="hidden" name="lead_id" value="' . (int)$lead['id'] .
-                '"><button class="danger" type="submit" onclick="return confirm(\'Xóa đăng ký này?\')">Xóa</button></form></td></tr>';
+                '"><button class="danger" type="submit">Xóa</button></form></td></tr>';
         }
         $content .= '</tbody></table></div>';
+    }
+    if ($totalPages > 1) {
+        $content .= '<nav class="actions" aria-label="Phân trang đăng ký">';
+        if ($page > 1) {
+            $content .= '<a href="/api/admin.php?page=' . ($page - 1) . '">Trang trước</a>';
+        }
+        $content .= '<span>Trang ' . $page . ' / ' . $totalPages . '</span>';
+        if ($page < $totalPages) {
+            $content .= '<a href="/api/admin.php?page=' . ($page + 1) . '">Trang sau</a>';
+        }
+        $content .= '</nav>';
     }
     $content .= '<p class="muted">Dữ liệu quá 12 tháng sẽ tự xóa khi trang quản trị hoặc biểu mẫu được sử dụng. Múi giờ hiển thị: UTC.</p></section>';
     $content .= '<section class="card"><h2>Đổi mật khẩu</h2>' . kipa_admin_form_start('change_password', $csrf);
     $content .= '<label>Mật khẩu hiện tại<input name="old_password" type="password" required autocomplete="current-password"></label>';
-    $content .= '<label>Mật khẩu mới (ít nhất 12 ký tự)<input name="new_password" type="password" required minlength="12" maxlength="1024" autocomplete="new-password"></label>';
-    $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="1024" autocomplete="new-password"></label>';
+    $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
+    $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
     $content .= '<p><button type="submit">Đổi mật khẩu</button></p></form></section>';
     kipa_admin_page('Đăng ký tư vấn', $content);
 } catch (PDOException $error) {

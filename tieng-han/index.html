@@ -185,6 +185,8 @@
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="/assets/js/kipa-forms.js?v=20261103-3" defer></script>
+<script src="/assets/js/kipa-site.js?v=20261103-1" defer></script>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Phudu:wght@600;700;800;900&display=swap');
@@ -363,7 +365,7 @@
                 </div>
 
                 <a href="/#stories" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
-                <a href="/tin-tuc/" class="kipa-nav-item hover:text-[#0274BD]">Tin tức</a>
+                <a href="/faq/" class="kipa-nav-item hover:text-[#0274BD]">Hỏi đáp</a>
                 <a href="/co-so/" class="kipa-nav-item hover:text-[#0274BD]">Cơ sở</a>
                 <a href="/lien-he/" class="kipa-nav-item hover:text-[#0274BD]">Liên hệ</a>
             </nav>
@@ -371,9 +373,9 @@
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
             <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
-                <button type="button" aria-label="Tìm kiếm" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                </button>
+                </a>
 
                 <!-- Button Dang ky tu van -->
                 <a href="/dang-ky-tu-van/" class="hidden sm:inline-flex items-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-xs xl:text-sm font-semibold px-4 xl:px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all shrink-0 whitespace-nowrap group">
@@ -382,7 +384,7 @@
                 </a>
 
                 <!-- Mobile Hamburger Button -->
-                <button type="button" onclick="document.getElementById('mobile-header-menu').classList.toggle('hidden')" aria-label="Menu điều hướng" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 flex items-center justify-center shrink-0">
+                <button type="button" data-mobile-menu-toggle aria-controls="mobile-header-menu" aria-expanded="false" aria-label="Menu điều hướng" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 flex items-center justify-center shrink-0">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
@@ -407,7 +409,6 @@
             <a href="/hop-tac-quoc-te/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🤝 Hợp tác giáo dục quốc tế</a>
         </div>
         <a href="/#stories" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
-        <a href="/tin-tuc/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Tin tức</a>
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
@@ -1540,17 +1541,17 @@
                         </div>
 
                         <!-- Right Form Fields -->
-                        <form onsubmit="handleConsultationSubmit(event)" class="sm:col-span-8 space-y-3 bg-white p-4 sm:p-5 rounded-2xl text-slate-800 shadow-md">
+                        <form data-kipa-form="korean_course" data-source-page="/tieng-han/" class="sm:col-span-8 space-y-3 bg-white p-4 sm:p-5 rounded-2xl text-slate-800 shadow-md">
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Họ và tên *</label>
-                                    <input type="text" name="name" required placeholder="Nhập họ và tên" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <input type="text" name="name" required maxlength="254" placeholder="Nhập họ và tên" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                 </div>
 
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Số điện thoại *</label>
-                                    <input type="tel" name="phone" required placeholder="Nhập số điện thoại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                 </div>
                             </div>
 
@@ -1598,7 +1599,7 @@
                             </div>
 
                             <div class="flex items-center gap-2 pt-1 text-[11px] text-slate-600">
-                                <input type="checkbox" required checked class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
+                                <input type="checkbox" name="consent" value="yes" required class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
                                 <span>Tôi muốn đăng ký nhận tư vấn và ưu đãi từ KIPA</span>
                             </div>
 
@@ -1607,6 +1608,8 @@
                                 <span>Đăng ký tư vấn ngay</span>
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[10000px]">
+                            <p data-form-status aria-live="polite" class="text-sm" role="status"></p>
 
                         </form>
 
@@ -1630,10 +1633,6 @@
         el.classList.toggle('active');
     }
 
-    function handleConsultationSubmit(e) {
-        e.preventDefault();
-        window.location.href = '/cam-on/';
-    }
 </script>
     </main>
 
@@ -1943,7 +1942,7 @@
 
 <!-- FLOATING CTA BUTTONS (Ghim goc phai man hinh) -->
 <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-    <a href="https://zalo.me" target="_blank" rel="noopener" aria-label="Chat Zalo KIPA" class="w-12 h-12 rounded-full bg-[#0084ff] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+    <a href="https://zalo.me/0368513865" target="_blank" rel="noopener" aria-label="Chat Zalo KIPA" class="w-12 h-12 rounded-full bg-[#0084ff] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
         <i class="fa-solid fa-comment-dots text-lg"></i>
     </a>
     <a href="tel:0368513865" aria-label="Gọi điện thoại KIPA" class="w-12 h-12 rounded-full bg-[#ec1e1b] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform animate-bounce">

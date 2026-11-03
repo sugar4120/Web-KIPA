@@ -9,6 +9,7 @@ async function checkForm(entries, response, shouldRedirect) {
     let submitted;
     let redirect;
     let prevented = false;
+    let requestCount = 0;
     const button = {
         textContent: 'Send',
         disabled: false,
@@ -35,18 +36,25 @@ async function checkForm(entries, response, shouldRedirect) {
             forEach(callback) { entries.forEach(([key, value]) => callback(value, key)); }
         },
         fetch: async (url, options) => {
+            requestCount++;
             assert.equal(url, '/api/submit.php');
             submitted = JSON.parse(options.body);
             assert.equal(button.disabled, true);
-            return { ok: response.ok, json: async () => response.body };
+            return {
+                ok: response.ok,
+                headers: { get: () => response.contentType || 'application/json' },
+                json: async () => response.body
+            };
         },
         window: { location: { pathname: '/lien-he/', assign(url) { redirect = url; } } },
-        Error
+        Error, TypeError, AbortController, setTimeout, clearTimeout
     });
     handler({ target: form, currentTarget: document, preventDefault() { prevented = true; } });
+    handler({ target: form, currentTarget: document, preventDefault() {} });
     await new Promise(setImmediate);
     assert.equal(prevented, true);
     assert.ok(submitted, 'The form must reach the backend.');
+    assert.equal(requestCount, 1, 'Double submit must not create concurrent requests.');
     assert.equal(submitted.form_type, 'contact');
     assert.equal(submitted.source_page, '/lien-he/');
     assert.equal(submitted.website, '');
@@ -70,6 +78,10 @@ async function checkForm(entries, response, shouldRedirect) {
     const multiple = await checkForm([...fields, ['topics', 'Costs'], ['topics', 'Study']], success, true);
     assert.deepEqual(multiple.fields.topics, ['Costs', 'Study']);
     await checkForm(fields, { ok: false, body: { error: 'Please retry.' } }, false);
+    await checkForm(fields, {
+        ok: false, contentType: 'text/html',
+        body: { error: 'Máy chủ chưa thể xử lý biểu mẫu. Vui lòng thử lại sau.' }
+    }, false);
     console.log('Form delegation, checkbox serialization, and failure handling tests passed.');
 })().catch(error => {
     console.error(error);

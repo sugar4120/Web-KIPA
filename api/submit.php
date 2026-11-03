@@ -42,6 +42,12 @@ $formTypes = [
         'required' => ['name', 'phone', 'area', 'contact_time', 'program', 'consent'],
         'contact' => 'name',
     ],
+    'home_consultation' => [
+        'path' => '/',
+        'keys' => ['name', 'phone', 'program', 'consent'],
+        'required' => ['name', 'phone', 'program', 'consent'],
+        'contact' => 'name',
+    ],
     'contact' => [
         'path' => '/lien-he/',
         'keys' => ['fullname', 'phone', 'email', 'program', 'topics', 'branch', 'message', 'consent'],
@@ -125,7 +131,7 @@ foreach ($form['required'] as $required) {
 $name = $cleanFields[$form['contact']];
 $phone = $cleanFields['phone'];
 $digits = preg_replace('/\D+/', '', $phone);
-if ($digits === null || strlen($digits) < 7 || strlen($digits) > 15 || !preg_match('/^\+?[\d\s().-]+$/', $phone)) {
+if (strlen($phone) > 32 || $digits === null || strlen($digits) < 7 || strlen($digits) > 15 || !preg_match('/^\+?[\d\s().-]+$/', $phone)) {
     kipa_json_response(422, ['error' => 'Vui lòng nhập số điện thoại hợp lệ.']);
 }
 $email = $cleanFields['email'] ?? null;

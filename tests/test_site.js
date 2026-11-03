@@ -1,0 +1,47 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+
+const root = path.resolve(process.argv[2] || 'dist');
+const files = fs.readdirSync(root).filter(name => name.endsWith('.html') && !['header.html', 'footer.html'].includes(name));
+assert.equal(files.length, 16);
+const pages = Object.fromEntries(files.map(file => [file, fs.readFileSync(path.join(root, file), 'utf8')]));
+
+for (const [file, html] of Object.entries(pages)) {
+    const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(new Set(ids).size, ids.length, `${file}: duplicate element IDs`);
+    for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+        if (!/src=|application\/ld\+json/.test(match[1])) {
+            new vm.Script(match[2], { filename: file });
+        }
+    }
+    for (const match of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)) {
+        const value = match[1];
+        if (/^(?:https?:|data:|tel:|mailto:|javascript:|\/\/)/.test(value)) continue;
+        assert.notEqual(value, '#', `${file}: placeholder link`);
+        const url = new URL(value, `https://kipaviethan.edu.vn/${file}`);
+        const relative = decodeURIComponent(url.pathname).replace(/^\//, '');
+        const target = relative === '' ? 'index.html'
+            : relative.endsWith('/') ? `${relative}index.html` : relative;
+        assert.ok(fs.existsSync(path.join(root, target)), `${file}: missing resource ${value}`);
+        if (url.hash && target.endsWith('.html')) {
+            const content = fs.readFileSync(path.join(root, target), 'utf8');
+            const ids = [...content.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+            assert.ok(ids.includes(decodeURIComponent(url.hash.slice(1))), `${file}: missing anchor ${value}`);
+        }
+    }
+}
+const home = pages['index.html'];
+assert.match(home, /data-kipa-form="home_consultation"/);
+assert.doesNotMatch(home, /handleConsultationSubmit|alert\(/);
+assert.match(home, /name="consent"[^>]*required/);
+assert.match(home, /id="story-modal"/);
+const letter = home.match(/<dialog\b[^>]*id="letter-modal"[^>]*>([\s\S]*?)<\/dialog>/);
+assert.ok(letter, 'The letter must be a native dialog.');
+assert.match(letter[1], /<form\b/);
+assert.match(letter[1], /name="author"/);
+assert.match(letter[1], /name="letter"/);
+assert.match(home, /link\.download = 'kipa-la-thu-tuong-lai\.txt'/);
+assert.match(pages['faq.html'], /function applyFaqFilters/);
+console.log('All 16 built pages passed link, anchor, script and form integrity checks.');

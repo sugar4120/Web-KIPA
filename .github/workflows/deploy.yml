@@ -31,9 +31,14 @@ jobs:
           php tests/test_cleanup.php
           php tests/test_config.php
       - name: Test browser form submission logic
-        run: node tests/test_forms.js
+        run: |
+          node tests/test_forms.js
+          node tests/test_submit.js
+          node tests/test_interactions.js
       - name: Build public website
         run: python3 build.py --output-dir dist
+      - name: Check page links and JavaScript integrity
+        run: node tests/test_site.js dist
       - name: Validate deployment contents
         run: python3 -c "from deploy_ftps import public_files; print(f'{len(public_files(\"dist\"))} public files validated')"
       - uses: actions/upload-artifact@v4

@@ -77,7 +77,10 @@ python3 -m unittest discover -s tests -v
 php tests/test_cleanup.php
 php tests/test_config.php
 node tests/test_forms.js
+node tests/test_submit.js
+node tests/test_interactions.js
 python3 build.py --output-dir dist
+node tests/test_site.js dist
 ```
 
 `dist/` phải chưa tồn tại hoặc còn trống. Gói này chỉ chứa trang HTML đã build,
@@ -171,7 +174,7 @@ tiện ích này. Không đưa thông tin đăng nhập của tiện ích cũ v�
 
 ### 4. Backend form và trang quản trị
 
-Năm form tại `dang-ky-tu-van.html`, `lien-he.html`, `tieng-han.html`,
+Sáu form tại trang chủ `index.html`, `dang-ky-tu-van.html`, `lien-he.html`, `tieng-han.html`,
 `xuat-khau-lao-dong.html` và `hop-tac-quoc-te.html` gửi JSON tới
 `api/submit.php`. Dữ liệu chỉ được chuyển tới `/cam-on/` sau khi database xác
 nhận lưu thành công; lỗi cấu hình/kết nối hiển thị thông báo để người gửi thử
@@ -203,9 +206,10 @@ have a different suffix from the database name.
 Không commit cấu hình thật hoặc gửi mật khẩu qua chat. Tài khoản MySQL chỉ nên
 có quyền cần thiết trên ba bảng backend; không cấp quyền tới database WordPress.
 Sau khi import schema và đặt config, mở `https://kipaviethan.edu.vn/api/admin.php`,
-dùng `setup_token` để tạo tài khoản quản trị đầu tiên (mật khẩu tối thiểu 12 ký
-tự). Dashboard yêu cầu đăng nhập, có CSRF protection, giới hạn thử đăng nhập,
-cho xem và xác nhận xóa lead, đổi mật khẩu; không có chức năng xuất hàng loạt.
+dùng `setup_token` để tạo tài khoản quản trị đầu tiên (mật khẩu 12–72 byte;
+ký tự có dấu có thể chiếm nhiều byte). Dashboard yêu cầu đăng nhập, có CSRF
+protection, giới hạn thử đăng nhập, phân trang 50 đăng ký mỗi trang, cho xem
+và xác nhận xóa lead, đổi mật khẩu; không có chức năng xuất hàng loạt.
 
 Lead biểu mẫu được tự động xóa sau 12 tháng. Trong cPanel **Cron Jobs**, cấu hình
 chạy hằng ngày:
@@ -225,6 +229,14 @@ Việc deploy production cần giữ `DEPLOY_ENABLED=false` cho tới khi hoàn 
 database, config, tài khoản quản trị và kiểm tra thành công trên hosting.
 
 ### 5. Blog có trang quản trị — mới tư vấn, chưa triển khai
+
+Menu không dẫn tới `/tin-tuc/` khi chưa có trang thật; trang chủ liên kết tới
+các cẩm nang chương trình và FAQ hiện có thay vì các bài mẫu không có nội dung.
+Quiz trang chủ thu thập đủ năm lựa chọn rồi chuyển vào phần ghi chú của form
+tư vấn; chỉ lưu vào MySQL sau khi người dùng điền thông tin và đồng ý bảo mật.
+“Lá thư gửi tương lai” chỉ tạo tệp văn bản tải về thiết bị, không thu email,
+không lưu trên máy chủ và không tự gửi thư sau ba năm. Các thẻ hành trình chưa
+có video hiển thị thông báo rõ ràng và liên kết tư vấn thay vì mở video giả.
 
 Hai hướng không cần quay lại WordPress:
 
