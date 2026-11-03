@@ -74,6 +74,9 @@ Toàn bộ 16 trang web sẽ tự động được cập nhật đồng bộ tro
 ### 3. Kiểm thử và tạo gói triển khai:
 ```bash
 python3 -m unittest discover -s tests -v
+php tests/test_cleanup.php
+php tests/test_config.php
+node tests/test_forms.js
 python3 build.py --output-dir dist
 ```
 
@@ -177,6 +180,10 @@ lại. Backend không gửi lead ra email, Telegram hoặc dịch vụ bên ngo�
 
 Backend cần PHP 8.1+ với PDO MySQL và một database/tài khoản MySQL **riêng**,
 không dùng database hay user WordPress. Tạo ba bảng trong `backend/schema.sql`.
+Trên hosting Nhân Hòa hiện tại, `api/.htaccess` chọn CloudLinux PHP 8.3 riêng
+cho `/api/` bằng handler `application/x-httpd-alt-php83___lsphp`; không thay đổi
+PHP của WordPress cũ. Khi chuyển hosting, cần thay handler này theo cấu hình
+máy chủ mới và xác minh PHP/PDO trước khi deploy.
 Đặt cấu hình PHP bên ngoài document root tại
 `/home/<cpanel-user>/kipa-private/config.php` (thư mục quyền `700`, file `600`):
 
@@ -205,11 +212,13 @@ Lead biểu mẫu được tự động xóa sau 12 tháng. Trong cPanel **Cron 
 chạy hằng ngày:
 
 ```sh
-/usr/local/bin/php /home/<cpanel-user>/public_html/api/cleanup.php >> /home/<cpanel-user>/kipa-private/cleanup.log 2>&1
+/opt/alt/php83/usr/bin/php /home/<cpanel-user>/public_html/api/cleanup.php >> /home/<cpanel-user>/kipa-private/cleanup.log 2>&1
 ```
 
-Lệnh cleanup chỉ chạy qua CLI; đường dẫn PHP trên máy chủ có thể khác và cần
-kiểm tra trong cPanel. Rate-limit chỉ lưu HMAC của IP (không lưu IP gốc) tối đa
+Lệnh cleanup chỉ chạy qua CLI; đường dẫn trên đã được kiểm chứng với PHP 8.3
+của hosting hiện tại. Lịch chạy là `0 0 * * *` (00:00 theo múi giờ máy chủ),
+kết quả và lỗi được ghi vào log riêng bên ngoài webroot. Khi chuyển hosting,
+cần kiểm tra lại đường dẫn PHP. Rate-limit chỉ lưu HMAC của IP (không lưu IP gốc) tối đa
 24 giờ. Backup database phải được cấu hình riêng và bảo vệ tương đương dữ liệu
 cá nhân. Chính sách bảo mật hiện nêu thời hạn lưu lead 12 tháng.
 

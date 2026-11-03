@@ -13,7 +13,7 @@
 
     async function submit(event) {
         event.preventDefault();
-        var form = event.currentTarget;
+        var form = event.target;
         var button = form.querySelector('[type="submit"]');
         var originalText = button ? button.textContent : '';
         var fields = {};
@@ -23,6 +23,8 @@
             value = String(value).trim();
             if (key === 'website') {
                 website = value;
+            } else if (key === 'topics') {
+                fields[key] = (fields[key] || []).concat(value);
             } else if (Object.prototype.hasOwnProperty.call(fields, key)) {
                 fields[key] = Array.isArray(fields[key]) ? fields[key].concat(value) : [fields[key], value];
             } else {

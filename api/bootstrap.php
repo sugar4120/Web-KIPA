@@ -13,7 +13,10 @@ const KIPA_ALLOWED_ORIGINS = [
 
 function kipa_config(): array
 {
-    $documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__);
+    $documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? '';
+    if ($documentRoot === '') {
+        $documentRoot = dirname(__DIR__);
+    }
     $configPath = dirname($documentRoot) . '/kipa-private/config.php';
     if (!is_file($configPath)) {
         throw new RuntimeException('Backend configuration is missing.');

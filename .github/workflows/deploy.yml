@@ -25,6 +25,13 @@ jobs:
           python-version: '3.12'
       - name: Test build and deployment rules
         run: python3 -m unittest discover -s tests -v
+      - name: Validate PHP backend and retention cleanup
+        run: |
+          for file in api/*.php; do php -l "$file"; done
+          php tests/test_cleanup.php
+          php tests/test_config.php
+      - name: Test browser form submission logic
+        run: node tests/test_forms.js
       - name: Build public website
         run: python3 build.py --output-dir dist
       - name: Validate deployment contents

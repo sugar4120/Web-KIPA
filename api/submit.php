@@ -85,6 +85,7 @@ foreach ($fields as $key => $value) {
         if ($value !== 'yes') {
             kipa_json_response(422, ['error' => 'Bạn cần đồng ý với chính sách bảo mật trước khi gửi.']);
         }
+        $cleanFields[$key] = $value;
         continue;
     }
     if ($key === 'topics') {
