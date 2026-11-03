@@ -6,7 +6,7 @@ Hệ thống website chính thức của **KIPA Việt Hàn** — Đơn vị hà
 
 ## 🌟 Tính Năng & Điểm Nổi Bật
 
-- **Website HTML tĩnh**: Không phụ thuộc WordPress khi hiển thị trang. Form hiện chưa có backend nhận dữ liệu; không coi việc chuyển sang trang cảm ơn là gửi thành công.
+- **Website HTML tĩnh**: Không phụ thuộc WordPress khi hiển thị trang. Năm form đăng ký gửi qua API PHP tới database riêng, chỉ chuyển tới trang cảm ơn sau khi lưu thành công.
 - **Thiết kế chuẩn Figma 100%**: Đầy đủ 16 trang chuyên nghiệp, tương thích 100% Mobile & Desktop.
 - **Hệ thống Component dùng chung**: Header và Footer được quản lý độc lập tại `header.html` và `footer.html`, tự động build đồng bộ vào tất cả các trang qua script `build.py`.
 - **Hosting chính**: LiteSpeed/cPanel. GitHub Actions build và kiểm thử tự động; bước deploy FTPS chỉ chạy khi được bật và cấu hình đầy đủ.
@@ -167,25 +167,54 @@ tiện ích này. Không đưa thông tin đăng nhập của tiện ích cũ v�
   JSON-LD hợp lệ không đảm bảo Google hiển thị rich results; cần kiểm tra thêm
   bằng Schema Markup Validator/Search Console sau khi deploy.
 
-### 4. Backend form — mới khảo sát, chưa triển khai
+### 4. Backend form và trang quản trị
 
-Năm trang có form cần nối backend: `dang-ky-tu-van.html`, `lien-he.html`,
-`tieng-han.html`, `xuat-khau-lao-dong.html`, `hop-tac-quoc-te.html`.
-Một số trường còn thiếu `name`; handler hiện chuyển trang cảm ơn hoặc hiện alert
-mà không lưu/gửi dữ liệu.
+Năm form tại `dang-ky-tu-van.html`, `lien-he.html`, `tieng-han.html`,
+`xuat-khau-lao-dong.html` và `hop-tac-quoc-te.html` gửi JSON tới
+`api/submit.php`. Dữ liệu chỉ được chuyển tới `/cam-on/` sau khi database xác
+nhận lưu thành công; lỗi cấu hình/kết nối hiển thị thông báo để người gửi thử
+lại. Backend không gửi lead ra email, Telegram hoặc dịch vụ bên ngoài.
 
-Phương án phù hợp hosting hiện tại là endpoint PHP dùng PDO, tài khoản MySQL
-riêng và bảng lead riêng, không dùng bảng WordPress. Khi được duyệt:
+Backend cần PHP 8.1+ với PDO MySQL và một database/tài khoản MySQL **riêng**,
+không dùng database hay user WordPress. Tạo ba bảng trong `backend/schema.sql`.
+Đặt cấu hình PHP bên ngoài document root tại
+`/home/<cpanel-user>/kipa-private/config.php` (thư mục quyền `700`, file `600`):
 
-1. Chuẩn hóa trường tên, số điện thoại, chương trình, nội dung, nguồn trang;
-   chỉ thu thập email/năm sinh/khu vực khi cần thiết.
-2. Kiểm tra dữ liệu, đồng ý chính sách, chống spam/rate limit ở máy chủ;
-   lưu bằng prepared statements, cấu hình bí mật ngoài document root.
-3. Chỉ chuyển trang cảm ơn sau khi lưu thành công; báo lỗi rõ và giữ dữ liệu form khi thất bại.
-4. Nếu thêm Telegram/email, xác định nơi nhận, quyền truy cập, thời hạn lưu dữ liệu
-   và cơ chế báo lỗi thông báo; không công khai dữ liệu khách hàng trong Git/log.
+```php
+<?php
+return [
+    'db_dsn' => 'mysql:host=localhost;dbname=<cpanel-prefix>_kipa_forms;charset=utf8mb4',
+    'db_user' => '<full-cpanel-database-user-name>',
+    'db_password' => '<database-user-password>',
+    'app_key' => '<random-string-at-least-32-characters>',
+    'setup_token' => '<different-random-string-at-least-32-characters>',
+];
+```
 
-Chưa tạo endpoint, bảng MySQL hoặc gửi thử dữ liệu tới dịch vụ ngoài.
+`db_user` is the full cPanel-prefixed name of the dedicated MySQL user; it can
+have a different suffix from the database name.
+
+Không commit cấu hình thật hoặc gửi mật khẩu qua chat. Tài khoản MySQL chỉ nên
+có quyền cần thiết trên ba bảng backend; không cấp quyền tới database WordPress.
+Sau khi import schema và đặt config, mở `https://kipaviethan.edu.vn/api/admin.php`,
+dùng `setup_token` để tạo tài khoản quản trị đầu tiên (mật khẩu tối thiểu 12 ký
+tự). Dashboard yêu cầu đăng nhập, có CSRF protection, giới hạn thử đăng nhập,
+cho xem và xác nhận xóa lead, đổi mật khẩu; không có chức năng xuất hàng loạt.
+
+Lead biểu mẫu được tự động xóa sau 12 tháng. Trong cPanel **Cron Jobs**, cấu hình
+chạy hằng ngày:
+
+```sh
+/usr/local/bin/php /home/<cpanel-user>/public_html/api/cleanup.php >> /home/<cpanel-user>/kipa-private/cleanup.log 2>&1
+```
+
+Lệnh cleanup chỉ chạy qua CLI; đường dẫn PHP trên máy chủ có thể khác và cần
+kiểm tra trong cPanel. Rate-limit chỉ lưu HMAC của IP (không lưu IP gốc) tối đa
+24 giờ. Backup database phải được cấu hình riêng và bảo vệ tương đương dữ liệu
+cá nhân. Chính sách bảo mật hiện nêu thời hạn lưu lead 12 tháng.
+
+Việc deploy production cần giữ `DEPLOY_ENABLED=false` cho tới khi hoàn tất
+database, config, tài khoản quản trị và kiểm tra thành công trên hosting.
 
 ### 5. Blog có trang quản trị — mới tư vấn, chưa triển khai
 

@@ -17,7 +17,11 @@ def public_files(directory):
         f"{cfg['slug']}/index.html"
         for cfg in PAGES_CONFIG if cfg['slug'] and cfg['slug'] != '404'
     )
-    expected.update({'.htaccess', 'robots.txt', 'sitemap.xml', 'Logo.jpg'})
+    expected.update({
+        '.htaccess', 'robots.txt', 'sitemap.xml', 'Logo.jpg',
+        'api/.htaccess', 'api/admin.php', 'api/bootstrap.php',
+        'api/cleanup.php', 'api/submit.php',
+    })
     if not root.is_dir():
         raise ValueError(f'Build directory does not exist: {root}')
     files = []
@@ -36,7 +40,10 @@ def public_files(directory):
     if expected - found:
         raise ValueError(f'Incomplete public build: {", ".join(sorted(expected - found))}')
     return sorted(files, key=lambda p: (
-        2 if p.name == '.htaccess' else 1 if p.suffix == '.html' else 0,
+        3 if p.relative_to(root).as_posix() == '.htaccess'
+        else 2 if p.name == '.htaccess'
+        else 1 if p.suffix in {'.html', '.php'}
+        else 0,
         p.relative_to(root).as_posix(),
     ))
 

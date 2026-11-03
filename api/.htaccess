@@ -1,0 +1,9 @@
+Options -Indexes
+
+<FilesMatch "^(?!submit\.php$|admin\.php$).+\.php$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(sql|ini|log|bak)$">
+    Require all denied
+</FilesMatch>

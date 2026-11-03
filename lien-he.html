@@ -794,7 +794,7 @@
                     </div>
 
                     <!-- Consultation Form -->
-                    <form onsubmit="handleConsultationSubmit(event)" class="space-y-5">
+                    <form data-kipa-form="contact" data-source-page="/lien-he/" class="space-y-5">
                         
                         <!-- Row 1: Name & Phone -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -802,7 +802,7 @@
                                 <label class="block text-xs font-bold text-slate-700">Họ và tên <span class="text-brand-red">*</span></label>
                                 <div class="relative">
                                     <i class="fa-regular fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                                    <input type="text" name="fullname" required placeholder="Nhập họ và tên của bạn" 
+                                    <input type="text" name="fullname" required maxlength="254" placeholder="Nhập họ và tên của bạn"
                                            class="w-full pl-9 pr-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50/50">
                                 </div>
                             </div>
@@ -811,7 +811,7 @@
                                 <label class="block text-xs font-bold text-slate-700">Số điện thoại <span class="text-brand-red">*</span></label>
                                 <div class="relative">
                                     <i class="fa-solid fa-phone absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                                    <input type="tel" name="phone" required placeholder="Nhập số điện thoại liên hệ" 
+                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại liên hệ"
                                            class="w-full pl-9 pr-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50/50">
                                 </div>
                             </div>
@@ -822,7 +822,7 @@
                             <label class="block text-xs font-bold text-slate-700">Email</label>
                             <div class="relative">
                                 <i class="fa-regular fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                                <input type="email" name="email" placeholder="Nhập địa chỉ email (không bắt buộc)" 
+                                <input type="email" name="email" maxlength="254" placeholder="Nhập địa chỉ email (không bắt buộc)"
                                        class="w-full pl-9 pr-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50/50">
                             </div>
                         </div>
@@ -832,7 +832,7 @@
                             <label class="block text-xs font-bold text-slate-700">Bạn đang quan tâm đến chương trình nào? <span class="text-brand-red">*</span></label>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs text-slate-700">
                                 <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-slate-50 border border-slate-100">
-                                    <input type="radio" name="program" value="Du học Hàn Quốc" checked class="text-brand-blue focus:ring-brand-blue">
+                                    <input type="radio" name="program" value="Du học Hàn Quốc" checked required class="text-brand-blue focus:ring-brand-blue">
                                     <span class="leading-tight">Du học Hàn Quốc</span>
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-slate-50 border border-slate-100">
@@ -894,7 +894,7 @@
                             <label class="block text-xs font-bold text-slate-700">Cơ sở bạn muốn được hỗ trợ <span class="text-brand-red">*</span></label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-700">
                                 <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-slate-50">
-                                    <input type="radio" name="branch" value="Hải Phòng" checked class="text-brand-blue">
+                                    <input type="radio" name="branch" value="Hải Phòng" checked required class="text-brand-blue">
                                     <span>Hải Phòng</span>
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-slate-50">
@@ -931,13 +931,13 @@
                         <!-- Row 6: Nội dung cần tư vấn -->
                         <div class="space-y-1">
                             <label class="block text-xs font-bold text-slate-700">Nội dung cần tư vấn <span class="text-brand-red">*</span></label>
-                            <textarea name="message" rows="3" required placeholder="Hãy chia sẻ thêm về dự định, mong muốn hoặc câu hỏi của bạn..."
+                            <textarea name="message" rows="3" required maxlength="2000" placeholder="Hãy chia sẻ thêm về dự định, mong muốn hoặc câu hỏi của bạn..."
                                       class="w-full p-3 text-xs rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50/50"></textarea>
                         </div>
 
                         <!-- Row 7: Checkbox agreement -->
                         <div class="flex items-start gap-2 pt-1 text-xs text-slate-600">
-                            <input type="checkbox" required checked class="rounded text-brand-blue focus:ring-brand-blue mt-0.5 shrink-0">
+                            <input type="checkbox" name="consent" value="yes" required class="rounded text-brand-blue focus:ring-brand-blue mt-0.5 shrink-0">
                             <span class="leading-normal">
                                 Tôi đồng ý để KIPA Việt Hàn tiếp nhận và sử dụng thông tin cá nhân đã cung cấp nhằm liên hệ, tư vấn và hỗ trợ theo <a href="/chinh-sach-bao-mat/" class="text-brand-blue font-semibold hover:underline">Chính sách bảo mật</a>.
                             </span>
@@ -955,7 +955,8 @@
                                 <span>Thông tin của bạn sẽ được tiếp nhận để phục vụ nhu cầu tư vấn. Vui lòng cung cấp số điện thoại chính xác để KIPA có thể liên hệ.</span>
                             </p>
                         </div>
-
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[10000px]">
+                        <p data-form-status aria-live="polite" class="text-sm" role="status"></p>
                     </form>
                 </div>
 
@@ -1266,10 +1267,6 @@
     }
 
     // Form submit redirect to thank you page
-    function handleConsultationSubmit(e) {
-        e.preventDefault();
-        window.location.href = '/cam-on/';
-    }
 </script>
     </main>
 

@@ -370,7 +370,11 @@ def build_site(output_dir=None):
             raise ValueError('Output directory must be empty to avoid publishing stale or private files.')
         output.mkdir(parents=True, exist_ok=True)
 
-    required = ['header.html', 'footer.html', '.htaccess', 'robots.txt', 'Logo.jpg']
+    required = [
+        'header.html', 'footer.html', '.htaccess', 'robots.txt', 'Logo.jpg',
+        'api/.htaccess', 'api/admin.php', 'api/bootstrap.php',
+        'api/cleanup.php', 'api/submit.php',
+    ]
     required.extend(cfg['file'] for cfg in PAGES_CONFIG)
     for name in required:
         if not (Path(BASE_DIR) / name).is_file():
@@ -434,6 +438,7 @@ def build_site(output_dir=None):
                 target = output / source.relative_to(BASE_DIR)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, target)
+        shutil.copytree(Path(BASE_DIR) / 'api', output / 'api')
 
     print("-" * 60)
     print(f"🎉 HOÀN THÀNH! Đã build {count} trang web độc lập, sẵn sàng deploy lên Git!")

@@ -1540,17 +1540,17 @@
                         </div>
 
                         <!-- Right Form Fields -->
-                        <form onsubmit="handleConsultationSubmit(event)" class="sm:col-span-8 space-y-3 bg-white p-4 sm:p-5 rounded-2xl text-slate-800 shadow-md">
+                        <form data-kipa-form="korean_course" data-source-page="/tieng-han/" class="sm:col-span-8 space-y-3 bg-white p-4 sm:p-5 rounded-2xl text-slate-800 shadow-md">
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Họ và tên *</label>
-                                    <input type="text" name="name" required placeholder="Nhập họ và tên" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <input type="text" name="name" required maxlength="254" placeholder="Nhập họ và tên" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                 </div>
 
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Số điện thoại *</label>
-                                    <input type="tel" name="phone" required placeholder="Nhập số điện thoại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                 </div>
                             </div>
 
@@ -1598,7 +1598,7 @@
                             </div>
 
                             <div class="flex items-center gap-2 pt-1 text-[11px] text-slate-600">
-                                <input type="checkbox" required checked class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
+                                <input type="checkbox" name="consent" value="yes" required class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
                                 <span>Tôi muốn đăng ký nhận tư vấn và ưu đãi từ KIPA</span>
                             </div>
 
@@ -1607,6 +1607,8 @@
                                 <span>Đăng ký tư vấn ngay</span>
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[10000px]">
+                            <p data-form-status aria-live="polite" class="text-sm" role="status"></p>
 
                         </form>
 
@@ -1630,10 +1632,6 @@
         el.classList.toggle('active');
     }
 
-    function handleConsultationSubmit(e) {
-        e.preventDefault();
-        window.location.href = '/cam-on/';
-    }
 </script>
     </main>
 

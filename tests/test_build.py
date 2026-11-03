@@ -115,11 +115,45 @@ class BuildTests(unittest.TestCase):
         for private in [
             '.env', '.env.example', '.git/config', '.github/copilot-instructions.md',
             'KIPA - SEO Plan.xlsx', 'deploy_ftp.py', 'build.py', 'README.md', '.cpanel.yml',
+            'backend/schema.sql',
         ]:
             self.assertNotIn(private, names)
         self.assertIn('.htaccess', names)
+        self.assertIn('api/submit.php', names)
+        self.assertIn('api/admin.php', names)
+        self.assertIn('api/bootstrap.php', names)
+        self.assertIn('api/cleanup.php', names)
+        self.assertIn('api/.htaccess', names)
         self.assertIn('Logo.jpg', names)
         self.assertTrue(any(name.startswith('assets/') for name in names))
+
+    def test_all_consultation_forms_require_explicit_consent_and_use_backend(self):
+        forms = {
+            'dang-ky-tu-van.html': 'consultation',
+            'lien-he.html': 'contact',
+            'tieng-han.html': 'korean_course',
+            'xuat-khau-lao-dong.html': 'labor',
+            'hop-tac-quoc-te.html': 'partnership',
+        }
+        for filename, form_type in forms.items():
+            with self.subTest(page=filename):
+                html = (Path(build.BASE_DIR) / filename).read_text(encoding='utf-8')
+                matches = re.findall(
+                    rf'<form\b(?=[^>]*data-kipa-form="{form_type}")[^>]*>(.*?)</form>',
+                    html, re.DOTALL,
+                )
+                self.assertEqual(len(matches), 1)
+                form = matches[0]
+                self.assertRegex(form, r'<input\b(?=[^>]*name="consent")(?=[^>]*required)')
+                self.assertNotRegex(
+                    form,
+                    r'<input\b(?=[^>]*name="consent")[^>]*\bchecked\b',
+                )
+                self.assertRegex(form, r'name="website"')
+                self.assertIn('data-form-status', form)
+                self.assertNotIn('onsubmit=', html)
+        header = (Path(build.BASE_DIR) / 'header.html').read_text(encoding='utf-8')
+        self.assertIn('/assets/js/kipa-forms.js', header)
 
     def test_rejects_nonempty_staging_directory(self):
         with self.assertRaisesRegex(ValueError, 'must be empty'):

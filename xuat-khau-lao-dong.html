@@ -1670,18 +1670,18 @@
                 <div class="lg:col-span-7">
                     <div class="bg-white rounded-2xl p-6 sm:p-8 text-gray-800 shadow-2xl border border-white/20">
                         
-                        <form id="xkldConsultationForm" onsubmit="handleXkldSubmit(event)" class="space-y-4">
+                        <form id="xkldConsultationForm" data-kipa-form="labor" data-source-page="/xuat-khau-lao-dong/" class="space-y-4">
                             
                             <!-- Row 1: Name & Phone -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Họ và tên <span class="text-brand-red">*</span></label>
-                                    <input type="text" name="fullname" required placeholder="Nhập họ và tên" 
+                                    <input type="text" name="fullname" required maxlength="254" placeholder="Nhập họ và tên"
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Số điện thoại <span class="text-brand-red">*</span></label>
-                                    <input type="tel" name="phone" required placeholder="Nhập số điện thoại" 
+                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại"
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                             </div>
@@ -1757,10 +1757,16 @@
                                 </button>
                             </div>
 
+                            <div class="flex items-start gap-2 text-[11px] text-gray-600">
+                                <input type="checkbox" name="consent" value="yes" required class="mt-0.5">
+                                <span>Tôi đồng ý để KIPA Việt Hàn sử dụng thông tin đã cung cấp để liên hệ tư vấn theo <a href="/chinh-sach-bao-mat/" class="underline">Chính sách bảo mật</a>.</span>
+                            </div>
                             <p class="text-[11px] text-gray-400 text-center pt-1">
                                 <i class="fas fa-shield-alt text-emerald-500 mr-1"></i>
-                                Thông tin của bạn sẽ được bảo mật và chỉ sử dụng cho mục đích tư vấn.
+                                Thông tin chỉ được lưu sau khi bạn đồng ý và gửi biểu mẫu.
                             </p>
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[10000px]">
+                            <p data-form-status aria-live="polite" class="text-sm" role="status"></p>
 
                         </form>
 
@@ -1801,15 +1807,6 @@
     });
 
     // Handle Form Submit
-    function handleXkldSubmit(e) {
-        e.preventDefault();
-        const form = e.target;
-        const fullname = form.fullname.value;
-        const phone = form.phone.value;
-        
-        alert('Cảm ơn ' + fullname + '! KIPA Việt Hàn đã nhận được thông tin đăng ký tư vấn qua số ' + phone + '. Đội ngũ chuyên viên sẽ liên hệ với bạn trong thời gian sớm nhất.');
-        form.reset();
-    }
 </script>
     </main>
 
