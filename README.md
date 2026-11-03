@@ -106,18 +106,17 @@ Workflow chạy kiểm thử và build khi push/PR vào `master`; có thể ch�
 là bản website đã build, không chứa toàn bộ repository.
 
 Đã kiểm tra kết nối **explicit FTPS** và xác minh chứng chỉ TLS cho
-`wordpress-hosting10.nhanhoa.com` trên cổng 21. Chưa xác nhận đăng nhập FTP,
-quyền ghi và document root vì hosting hiện chưa có tài khoản FTP riêng.
-Git Version Control không có trong giao diện cPanel này; GitHub Actions là
-luồng triển khai dự kiến. Deploy production vẫn bị khóa đến khi kiểm tra được
-tài khoản FTPS. FTPS khác SFTP/SSH; script không hỗ trợ SFTP, không dùng FTP
+`wordpress-hosting10.nhanhoa.com` trên cổng 21. Tài khoản FTP riêng đã được
+xác minh đăng nhập, giới hạn tại `public_html`, tải lên, đọc lại và xóa file
+kiểm thử. GitHub Actions là luồng triển khai qua Git; không cần WordPress.
+FTPS khác SFTP/SSH; script không hỗ trợ SFTP, không dùng FTP
 không mã hóa và không bỏ kiểm tra chứng chỉ.
 
 Trong **GitHub → Settings → Secrets and variables → Actions**, cấu hình:
 
 | Loại | Tên | Nội dung |
 |---|---|---|
-| Secret | `FTP_HOST` | Hostname FTPS khớp chứng chỉ TLS |
+| Variable | `FTP_HOST` | Hostname FTPS khớp chứng chỉ TLS |
 | Secret | `FTP_USER` | Tài khoản FTP giới hạn vào website nếu có thể |
 | Secret | `FTP_PASSWORD` | Mật khẩu mới, không dùng mật khẩu đã lộ |
 | Variable | `FTP_REMOTE_DIR` | Đường dẫn tuyệt đối theo góc nhìn tài khoản FTP. Nếu tài khoản bị giới hạn trực tiếp vào `public_html`, đặt `/` |
