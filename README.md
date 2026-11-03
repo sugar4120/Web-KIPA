@@ -131,6 +131,11 @@ trang cũ cần được xử lý riêng. Đây là upload từng file, không p
 phát hành nguyên tử; lỗi giữa chừng có thể để lại bản cập nhật chưa đầy đủ.
 Khôi phục bằng cách triển khai lại bản tốt đã biết.
 
+`.htaccess` của website tĩnh chặn chạy trực tiếp PHP ngoài `/api/`, để tạm dừng
+WordPress trong khi giữ nguyên các tệp và database làm bản dự phòng. Việc
+chuyển lại WordPress cần khôi phục thông tin kết nối database và xem xét lại
+các quy tắc truy cập. Bản deploy không xóa tệp WordPress.
+
 Trước khi dùng Actions làm luồng deploy chính, tắt hoặc thống nhất luồng deploy
 cPanel cũ: `.cpanel.yml` hiện copy cả thư mục làm việc, không dùng gói public
 được kiểm tra ở trên. Không chạy song song hai luồng.

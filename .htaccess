@@ -7,6 +7,10 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Keep the legacy WordPress files for rollback, but stop PHP execution.
+# Future application endpoints can be placed under /api/.
+RewriteRule ^(?!api/).*\.php$ - [F,L,NC]
+
 # Redirect trailing slashes for non-directories
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

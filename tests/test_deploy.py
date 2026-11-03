@@ -1,5 +1,6 @@
 import contextlib
 import io
+import re
 import ssl
 import tempfile
 import unittest
@@ -73,6 +74,22 @@ class DeploymentTests(unittest.TestCase):
                 with contextlib.redirect_stdout(output), self.assertRaises(error_perm):
                     deploy_ftps.deploy(directory)
                 self.assertNotIn('Deployed', output.getvalue())
+
+    def test_static_hosting_pauses_legacy_php_without_deleting_it(self):
+        rewrite_rules = [
+            line.strip()
+            for line in (Path(build.BASE_DIR) / '.htaccess').read_text(encoding='utf-8').splitlines()
+            if line.strip().startswith('RewriteRule')
+        ]
+        self.assertIn(r'RewriteRule ^(?!api/).*\.php$ - [F,L,NC]', rewrite_rules)
+        rule = next(line for line in rewrite_rules if r'(?!api/)' in line)
+        expression = re.compile(rule.split()[1], re.IGNORECASE)
+        for path in ['wp-login.php', 'wp-admin/admin-ajax.php', 'wp-config.php', 'index_wp_backup.php']:
+            with self.subTest(path=path):
+                self.assertIsNotNone(expression.search(path))
+        for path in ['api/submit.php', 'index.html', 'wp-content/uploads/logo.jpg']:
+            with self.subTest(path=path):
+                self.assertIsNone(expression.search(path))
 
 
 if __name__ == '__main__':
