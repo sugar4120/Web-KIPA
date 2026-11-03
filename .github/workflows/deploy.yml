@@ -54,7 +54,7 @@ jobs:
           path: dist/
       - name: Upload public files over explicit FTPS
         env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_HOST: ${{ vars.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_REMOTE_DIR: ${{ vars.FTP_REMOTE_DIR }}

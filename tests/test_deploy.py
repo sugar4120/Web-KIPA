@@ -91,6 +91,11 @@ class DeploymentTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertIsNone(expression.search(path))
 
+    def test_hidden_rollback_files_are_not_publicly_served(self):
+        htaccess = (Path(build.BASE_DIR) / '.htaccess').read_text(encoding='utf-8')
+        self.assertIn('<FilesMatch "^\\.ht">', htaccess)
+        self.assertIn('Require all denied', htaccess)
+
 
 if __name__ == '__main__':
     unittest.main()

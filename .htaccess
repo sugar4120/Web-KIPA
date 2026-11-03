@@ -1,6 +1,11 @@
 # KIPA VIET HAN - LiteSpeed / Apache Configuration
 DirectoryIndex index.html index.php
 
+# Keep hidden server configuration and rollback copies inaccessible over HTTP.
+<FilesMatch "^\.ht">
+    Require all denied
+</FilesMatch>
+
 RewriteEngine On
 
 # Force HTTPS
