@@ -306,6 +306,93 @@
 
     <!-- MAIN PAGE CONTENT -->
     <main class="flex-grow">
+        <!-- SITE HEADER -->
+    <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Phudu:wght@600;700;800;900&display=swap');
+    
+    .font-phudu { font-family: 'Phudu', sans-serif !important; }
+    .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
+    .kipa-blue { color: #0274BD !important; }
+    .kipa-bg-blue { background-color: #0274BD !important; }
+    .kipa-bg-navy { background-color: #081D36 !important; }
+    .kipa-border-blue { border-color: #0274BD !important; }
+
+    /* TRIET DE CHONG XUNG DOT THE VUA WORDPRESS / ELEMENTOR */
+    #kipa-header,
+    #kipa-header * {
+        box-sizing: border-box !important;
+    }
+
+    #kipa-header a {
+        text-decoration: none !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+    }
+
+    /* Xoa bo toan bo border/outline/background mac dinh cua button tu WordPress Theme */
+    #kipa-header button,
+    #kipa-header button:focus,
+    #kipa-header button:hover,
+    #kipa-header button:active {
+        border: none !important;
+        outline: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font: inherit !important;
+        color: inherit !important;
+        cursor: pointer !important;
+    }
+
+    /* Khoa cung white-space nowrap cho tat ca menu items */
+    #kipa-header nav,
+    #kipa-header nav > *,
+    #kipa-header nav a,
+    #kipa-header nav span,
+    #kipa-header nav div {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Hieu ung gach chan active va hover menu */
+    .kipa-nav-item {
+        position: relative;
+        padding: 6px 0;
+        transition: color 0.2s ease;
+    }
+    .kipa-nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2.5px;
+        background-color: #0274BD;
+        border-radius: 9999px;
+        transition: width 0.25s ease;
+    }
+    .kipa-nav-item:hover::after,
+    .kipa-nav-item.active::after {
+        width: 100%;
+    }
+
+    /* Override Elementor widget container padding */
+    .elementor-widget-html .elementor-widget-container {
+        padding: 0 !important;
+    }
+</style>
+
+<!-- HEADER CONTAINER -->
+
+
+    <!-- MAIN PAGE CONTENT -->
+    <main class="flex-grow">
         <!-- KIPA VIET HAN - TRANG HOC TIENG HAN (Chuan 100% thiet ke anhdemo/tranghoctienghan.png & Tuong thich Elementor / WordPress) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -1519,6 +1606,87 @@
         window.location.href = '/cam-on/';
     }
 </script>
+    </main>
+
+    <!-- SITE FOOTER -->
+    <!-- KIPA VIET HAN - FOOTER COMPONENT (Tuong thich 100% Elementor & WordPress - Khong loi WAF/Access Denied) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap');
+    
+    #kipa-footer,
+    #kipa-footer * {
+        box-sizing: border-box !important;
+    }
+
+    #kipa-footer {
+        font-family: 'Be Vietnam Pro', sans-serif !important;
+        background-color: #07192e !important;
+        color: #ffffff !important;
+    }
+
+    #kipa-footer .font-phudu { font-family: 'Phudu', sans-serif !important; }
+    #kipa-footer .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
+    #kipa-footer .font-script { font-family: 'Dancing Script', cursive !important; }
+    
+    #kipa-footer a {
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+    }
+
+    #kipa-footer .branch-card p {
+        font-size: 13.5px !important;
+        line-height: 1.5 !important;
+    }
+
+    #kipa-footer .branch-card {
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 16px !important;
+        padding: 16px !important;
+        transition: all 0.25s ease !important;
+    }
+    #kipa-footer .branch-card:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: rgba(255, 240, 23, 0.3) !important;
+        transform: translateY(-2px) !important;
+    }
+</style>
+
+<!-- FOOTER CONTAINER -->
+
+
+<!-- FLOATING CTA BUTTONS (Ghim goc phai man hinh) -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <a href="https://zalo.me" target="_blank" rel="noopener" aria-label="Chat Zalo KIPA" class="w-12 h-12 rounded-full bg-[#0084ff] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+        <i class="fa-solid fa-comment-dots text-lg"></i>
+    </a>
+    <a href="tel:0368513865" aria-label="Gọi điện thoại KIPA" class="w-12 h-12 rounded-full bg-[#ec1e1b] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform animate-bounce">
+        <i class="fa-solid fa-phone text-base"></i>
+    </a>
+</div>
+
+    <!-- Global Scripts -->
+    <script>
+        // Mobile Navigation Drawer Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('mobile-menu-toggle');
+            const menu = document.getElementById('mobile-header-menu');
+            if (btn && menu) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                        menu.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
     </main>
 
     <!-- SITE FOOTER -->

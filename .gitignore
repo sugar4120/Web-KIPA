@@ -5,6 +5,7 @@ Thumbs.db
 .vscode/
 *.swp
 *.log
+deploy_ftp.py
 
 # Python / Cache
 __pycache__/
