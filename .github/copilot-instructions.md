@@ -56,10 +56,9 @@
 - **Live Status**: Successfully deployed and live at `https://kipaviethan.edu.vn/`.
 - **Legacy WordPress**: Preserved on host (`index.php` renamed to `index_wp_backup.php`, all `wp-content` preserved).
 - **Database (MySQL)**:
-  - Database Name: `nhkip9ij_wp_5rlma`
-  - User: `nhkip9ij_wp_uivi1`
-  - Password: `huP_0T32bs!q2K!N`
-  - Host: `localhost:3306`
+  - Configure connection details privately on the hosting server, outside the public web root.
+  - Never put database credentials, tokens, or deployment secrets in source code or project instructions.
+  - Rotate any credentials previously committed; removing them from this file does not remove Git history.
 
 ## 6. Pending Tasks & Roadmap for Next Steps
 1. **Form Processing Backend**:

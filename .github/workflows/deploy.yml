@@ -1,0 +1,62 @@
+name: Build and deploy KIPA
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kipa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test build and deployment rules
+        run: python3 -m unittest discover -s tests -v
+      - name: Build public website
+        run: python3 build.py --output-dir dist
+      - name: Validate deployment contents
+        run: python3 -c "from deploy_ftps import public_files; print(f'{len(public_files(\"dist\"))} public files validated')"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kipa-public-site
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: kipa-public-site
+          path: dist/
+      - name: Upload public files over explicit FTPS
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_DIR: ${{ vars.FTP_REMOTE_DIR }}
+          FTP_PORT: ${{ vars.FTP_PORT || '21' }}
+        run: python3 deploy_ftps.py dist

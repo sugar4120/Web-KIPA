@@ -6,11 +6,33 @@ Tu dong bien dich va dong goi toan bo 16 trang web KIPA thanh trang HTML tinh ho
 chuan SEO, tich hop Header, Footer dung chung, san sang deploy len Git/Vercel/Netlify/Hosting.
 """
 
+import argparse
+import json
 import os
 import re
 import shutil
+from pathlib import Path
+from xml.sax.saxutils import escape
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SITE_URL = 'https://kipaviethan.edu.vn'
+NOINDEX_SLUGS = {'cam-on', '404'}
+PUBLIC_ASSET_SUFFIXES = {
+    '.avif', '.css', '.gif', '.ico', '.jpeg', '.jpg', '.js', '.mp4',
+    '.pdf', '.png', '.svg', '.ttf', '.webm', '.webp', '.woff', '.woff2',
+}
+KOREAN_COURSES = [
+    ('nhap-mon', 'Tiếng Hàn nhập môn',
+     'Làm quen Hangul, phát âm, từ vựng và câu cơ bản; giao tiếp tình huống đơn giản.'),
+    ('so-cap', 'Tiếng Hàn sơ cấp',
+     'Ngữ pháp và từ vựng nền tảng, giao tiếp cơ bản và phát triển kỹ năng nghe, nói, đọc, viết.'),
+    ('trung-cap', 'Tiếng Hàn trung cấp',
+     'Phát triển bốn kỹ năng nâng cao, giao tiếp theo chủ đề, chuẩn bị cho học tập và việc làm.'),
+    ('du-hoc', 'Tiếng Hàn du học',
+     'Ngôn ngữ phỏng vấn visa, kỹ năng học thuật và chuẩn bị đời sống tại Hàn Quốc.'),
+    ('topik', 'Luyện thi TOPIK',
+     'Ôn tập theo cấu trúc đề, chiến lược làm bài thi, thi thử và đánh giá định kỳ.'),
+]
 
 PAGES_CONFIG = [
     {
@@ -132,11 +154,25 @@ def load_component(fname):
     if os.path.isfile(path):
         with open(path, 'r', encoding='utf-8') as f:
             return f.read().strip()
-    return ''
+    raise FileNotFoundError(f'Missing shared component: {path}')
 
 def extract_body_content(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
+
+    # Unwrap older builds too: previous builds could nest the generated layout.
+    layout_pattern = (
+        r'<!-- MAIN PAGE CONTENT -->\s*<(?P<layout_tag>main|div)\b[^>]*>(?P<content>.*)'
+        r'</(?P=layout_tag)>\s*<!-- SITE FOOTER -->'
+    )
+    match = re.search(layout_pattern, content, re.DOTALL | re.IGNORECASE)
+    if match:
+        content = match.group('content').strip()
+        while True:
+            match = re.search(layout_pattern, content, re.DOTALL | re.IGNORECASE)
+            if not match:
+                return content
+            content = match.group('content').strip()
 
     # If it's already a full HTML page, extract inside <body ...> ... </body>
     body_match = re.search(r'<body[^>]*>(.*?)</body>', content, re.DOTALL | re.IGNORECASE)
@@ -157,11 +193,70 @@ def extract_body_content(file_path):
     
     return content.strip()
 
+def page_url(cfg):
+    return f"{SITE_URL}/{cfg['slug'] + '/' if cfg['slug'] else ''}"
+
+
+def structured_data(cfg):
+    organization_id = f'{SITE_URL}/#organization'
+    graph = [{
+        '@type': ['Organization', 'EducationalOrganization'],
+        '@id': organization_id,
+        'name': 'KIPA Việt Hàn',
+        'url': f'{SITE_URL}/',
+        'logo': f'{SITE_URL}/Logo.jpg',
+        'email': 'duhocquoctekipaviethan@gmail.com',
+        'telephone': '+84368513865',
+        'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': '135 Bạch Năng Thi, Phường Tân Hưng',
+            'addressLocality': 'Hải Phòng',
+            'addressCountry': 'VN',
+        },
+        'contactPoint': [{
+            '@type': 'ContactPoint',
+            'contactType': 'Tư vấn tuyển sinh',
+            'telephone': phone,
+            'availableLanguage': ['vi'],
+        } for phone in ['+84368513865', '+84889222255']],
+    }]
+    if cfg['slug'] and cfg['slug'] not in NOINDEX_SLUGS:
+        graph.append({
+            '@type': 'BreadcrumbList',
+            '@id': page_url(cfg) + '#breadcrumb',
+            'itemListElement': [
+                {'@type': 'ListItem', 'position': 1, 'name': 'Trang chủ',
+                 'item': f'{SITE_URL}/'},
+                {'@type': 'ListItem', 'position': 2,
+                 'name': cfg['title'].split('|')[0].strip(),
+                 'item': page_url(cfg)},
+            ],
+        })
+    if cfg['slug'] == 'tieng-han':
+        graph.extend({
+            '@type': 'Course',
+            '@id': f'{page_url(cfg)}#course-{slug}',
+            'url': page_url(cfg) + '#khoa-hoc',
+            'name': name,
+            'description': description,
+            'inLanguage': 'vi',
+            'provider': {'@id': organization_id},
+        } for slug, name, description in KOREAN_COURSES)
+    # Keep JSON safe inside an HTML script element, including future content edits.
+    return json.dumps(
+        {'@context': 'https://schema.org', '@graph': graph},
+        ensure_ascii=False, indent=4,
+    ).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
+
+
 def render_full_html(cfg, body_content, header_html, footer_html):
-    title = cfg['title']
-    desc = cfg['desc']
-    keywords = cfg.get('keywords', 'kipa việt hàn, du học hàn quốc, du học úc')
-    canonical = f"https://kipaviethan.edu.vn/{cfg['slug'] + '/' if cfg['slug'] else ''}"
+    title = escape(cfg['title'], {'"': '&quot;'})
+    desc = escape(cfg['desc'], {'"': '&quot;'})
+    keywords = escape(cfg.get('keywords', 'kipa việt hàn, du học hàn quốc, du học úc'),
+                      {'"': '&quot;'})
+    canonical = page_url(cfg)
+    robots = 'noindex, follow' if cfg['slug'] in NOINDEX_SLUGS else 'index, follow'
+    layout_tag = 'div' if re.search(r'<main\b', body_content, re.IGNORECASE) else 'main'
     
     return f"""<!DOCTYPE html>
 <html lang="vi">
@@ -171,8 +266,11 @@ def render_full_html(cfg, body_content, header_html, footer_html):
     <title>{title}</title>
     <meta name="description" content="{desc}">
     <meta name="keywords" content="{keywords}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{robots}">
     <link rel="canonical" href="{canonical}">
+    <script type="application/ld+json">
+{structured_data(cfg)}
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="/Logo.jpg">
@@ -234,9 +332,9 @@ def render_full_html(cfg, body_content, header_html, footer_html):
     {header_html}
 
     <!-- MAIN PAGE CONTENT -->
-    <main class="flex-grow">
+    <{layout_tag} class="flex-grow">
         {body_content}
-    </main>
+    </{layout_tag}>
 
     <!-- SITE FOOTER -->
     {footer_html}
@@ -264,7 +362,20 @@ def render_full_html(cfg, body_content, header_html, footer_html):
 </html>
 """
 
-def main():
+def build_site(output_dir=None):
+    output = Path(output_dir).resolve() if output_dir is not None else Path(BASE_DIR)
+    staging = output != Path(BASE_DIR)
+    if staging:
+        if output.exists() and any(output.iterdir()):
+            raise ValueError('Output directory must be empty to avoid publishing stale or private files.')
+        output.mkdir(parents=True, exist_ok=True)
+
+    required = ['header.html', 'footer.html', '.htaccess', 'robots.txt', 'Logo.jpg']
+    required.extend(cfg['file'] for cfg in PAGES_CONFIG)
+    for name in required:
+        if not (Path(BASE_DIR) / name).is_file():
+            raise FileNotFoundError(f'Missing required site file: {name}')
+
     print("=" * 60)
     print("🏗️  KIPA VIỆT HÀN - BẮT ĐẦU BUILD STATIC SITE")
     print("=" * 60)
@@ -280,10 +391,6 @@ def main():
     for cfg in PAGES_CONFIG:
         fname = cfg['file']
         fpath = os.path.join(BASE_DIR, fname)
-        if not os.path.isfile(fpath):
-            print(f"⚠️  Bỏ qua {fname}: không tìm thấy file!")
-            continue
-
         # Extract pure body content
         body = extract_body_content(fpath)
         
@@ -291,14 +398,14 @@ def main():
         full_html = render_full_html(cfg, body, header_html, footer_html)
 
         # 1. Update the root HTML file directly (e.g. gioi-thieu.html)
-        with open(fpath, 'w', encoding='utf-8') as f:
+        with open(output / fname, 'w', encoding='utf-8') as f:
             f.write(full_html)
 
         # 2. Also create clean directory with index.html for pretty URLs if slug exists
         # e.g. gioi-thieu/index.html
         slug = cfg['slug']
         if slug and slug != '404':
-            slug_dir = os.path.join(BASE_DIR, slug)
+            slug_dir = os.path.join(output, slug)
             os.makedirs(slug_dir, exist_ok=True)
             slug_index = os.path.join(slug_dir, 'index.html')
             with open(slug_index, 'w', encoding='utf-8') as f:
@@ -307,10 +414,38 @@ def main():
         count += 1
         print(f"✓ [{count:02d}/{len(PAGES_CONFIG):02d}] Đã build thành công: {fname} (và /{slug}/ nếu có)")
 
+    urls = '\n'.join(
+        f'    <url><loc>{escape(page_url(cfg))}</loc></url>'
+        for cfg in PAGES_CONFIG if cfg['slug'] not in NOINDEX_SLUGS
+    )
+    (output / 'sitemap.xml').write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f'{urls}\n</urlset>\n', encoding='utf-8',
+    )
+    if staging:
+        for name in ['.htaccess', 'robots.txt', 'Logo.jpg']:
+            shutil.copyfile(Path(BASE_DIR) / name, output / name)
+        assets = Path(BASE_DIR) / 'assets'
+        for source in assets.rglob('*'):
+            if source.is_symlink():
+                raise ValueError(f'Symbolic links cannot be published: {source}')
+            if source.is_file() and source.suffix.lower() in PUBLIC_ASSET_SUFFIXES:
+                target = output / source.relative_to(BASE_DIR)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, target)
+
     print("-" * 60)
     print(f"🎉 HOÀN THÀNH! Đã build {count} trang web độc lập, sẵn sàng deploy lên Git!")
     print("=" * 60)
 
+
+def main():
+    parser = argparse.ArgumentParser(description='Build the public KIPA website.')
+    parser.add_argument('--output-dir', help='Build into an empty directory instead of updating source HTML.')
+    args = parser.parse_args()
+    build_site(args.output_dir)
+
+
 if __name__ == '__main__':
     main()
-
