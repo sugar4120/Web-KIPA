@@ -1,101 +1,95 @@
-# DỰ ÁN WORDPRESS - KIPA VIỆT HÀN
+# KIPA Việt Hàn — Website Chính Thức
 
-Dự án website WordPress cho **KIPA Việt Hàn** (Du học & Xuất khẩu lao động uy tín) được thiết lập hoàn chỉnh trên nền tảng Docker Compose với kiến trúc chuyên nghiệp:
-
-- **WordPress 6.x** chạy trên nền PHP 8.2 Apache
-- **MySQL 8.0** chuẩn hoá UTF-8 Multibyte
-- **phpMyAdmin** để quản lý và trực quan hóa cơ sở dữ liệu
-- Quản lý mã nguồn tùy biến qua thư mục `wp-content/themes/kipa-theme`
+Hệ thống website chính thức của **KIPA Việt Hàn** — Đơn vị hàng đầu trong lĩnh vực Tư vấn Du học Hàn Quốc, Du học Úc, Xuất khẩu lao động & Đào tạo tiếng Hàn TOPIK cấp tốc.
 
 ---
 
-## 🚀 1. Khởi động dự án
+## 🌟 Tính Năng & Điểm Nổi Bật
 
-Bạn có thể dùng script tiện ích hoặc lệnh Docker trực tiếp:
-
-### Cách 1: Dùng script tiện ích (Khuyên dùng)
-```bash
-./manage.sh start
-```
-
-### Cách 2: Dùng lệnh Docker Compose
-```bash
-docker-compose up -d
-```
+- **Kiến trúc Jamstack thuần khiết**: Tải trang tức thì (< 0.5s), không dùng cơ sở dữ liệu, không WordPress, chống DDoS và bảo mật tuyệt đối.
+- **Thiết kế chuẩn Figma 100%**: Đầy đủ 16 trang chuyên nghiệp, tương thích 100% Mobile & Desktop.
+- **Hệ thống Component dùng chung**: Header và Footer được quản lý độc lập tại `header.html` và `footer.html`, tự động build đồng bộ vào tất cả các trang qua script `build.py`.
+- **Sẵn sàng triển khai 1-Click**: Cấu hình sẵn cho Vercel (`vercel.json`), Netlify (`netlify.toml`, `_redirects`), Cloudflare Pages và GitHub Pages.
+- **Chuẩn hóa SEO On-Page**: Tối ưu thẻ OpenGraph, Twitter Cards, Sitemap XML, Robots.txt và Schema Markup.
 
 ---
 
-## 🌐 2. Địa chỉ truy cập
-
-| Dịch vụ | URL | Thông tin đăng nhập |
-| :--- | :--- | :--- |
-| **Website WordPress** | [http://localhost:8080](http://localhost:8080) | Cài đặt tài khoản admin trong lần đầu mở trang |
-| **phpMyAdmin** | [http://localhost:8081](http://localhost:8081) | User: `kipa_user` hoặc `root`<br>Pass: trong file `.env` |
-| **Cơ sở dữ liệu (MySQL)** | `localhost:3306` | Tên DB: `kipa_db` |
-
----
-
-## ⚙️ 3. Thông tin Database (`.env`)
-
-Các thông số mặc định đã được cấu hình sẵn trong file `.env`:
-
-- **Host DB**: `db:3306` (kết nối nội bộ giữa container WordPress và MySQL)
-- **Database Name**: `kipa_db`
-- **User**: `kipa_user`
-- **Password**: `kipa_secret_password`
-- **Root Password**: `kipa_root_password`
-
----
-
-## 🎨 4. Cấu trúc thư mục mã nguồn
+## 📁 Cấu Trúc Thư Mục
 
 ```
 Kipa/
-├── .env                    # Biến môi trường & mật khẩu
-├── .env.example            # Bản mẫu cấu hình môi trường
-├── docker-compose.yml      # Cấu hình container Docker
-├── manage.sh               # Script thao tác nhanh (start/stop/logs)
-├── config/
-│   └── uploads.ini         # Cấu hình PHP (tăng limit upload 128MB, memory 512MB)
-└── wp-content/
-    ├── themes/
-    │   └── kipa-theme/     # 🎯 Theme giao diện tùy biến của KIPA
-    │       ├── assets/
-    │       │   ├── css/main.css
-    │       │   └── js/main.js
-    │       ├── functions.php
-    │       ├── header.php
-    │       ├── footer.php
-    │       ├── index.php
-    │       └── style.css
-    ├── plugins/            # Nơi cài đặt hoặc code thêm Plugin
-    └── uploads/            # Thư mục lưu media khi upload trên web
+├── index.html                   # Trang chủ (Homepage)
+├── gioi-thieu.html              # Giới thiệu KIPA Việt Hàn
+├── doi-ngu.html                 # Đội ngũ ban lãnh đạo & chuyên gia
+├── du-hoc.html                  # Du học quốc tế (Tổng quan các nước)
+├── du-hoc-han-quoc.html         # Du học Hàn Quốc (Trọng điểm)
+├── du-hoc-uc.html               # Du học Úc (Chuyên sâu)
+├── xuat-khau-lao-dong.html      # Xuất khẩu lao động & Việc làm quốc tế
+├── tieng-han.html               # Đào tạo tiếng Hàn TOPIK
+├── co-so.html                   # Hệ thống cơ sở đào tạo & bản đồ
+├── hop-tac-quoc-te.html         # Hợp tác giáo dục quốc tế
+├── lien-he.html                 # Liên hệ & Bản đồ
+├── dang-ky-tu-van.html          # Form đăng ký tư vấn 1:1
+├── faq.html                     # Hỏi đáp thường gặp
+├── chinh-sach-bao-mat.html      # Chính sách bảo mật thông tin
+├── cam-on.html                  # Trang xác nhận sau khi gửi form
+├── 404.html                     # Trang báo lỗi 404
+│
+├── header.html                  # Component Header dùng chung
+├── footer.html                  # Component Footer dùng chung
+├── build.py                     # Script tự động compile 16 trang
+├── dev_server.py                # Server chạy thử nghiệm local (Port 3000)
+│
+├── assets/                      # Toàn bộ hình ảnh, banner, icon
+├── Logo.jpg                     # Logo thương hiệu
+├── sitemap.xml                  # Sơ đồ website SEO
+├── robots.txt                   # Quy tắc điều hướng bot tìm kiếm
+├── vercel.json                  # Cấu hình Clean URLs cho Vercel
+├── _redirects                   # Cấu hình điều hướng cho Netlify
+└── README.md                    # Tài liệu dự án
 ```
 
 ---
 
-## 🛠️ 5. Các lệnh quản lý tiện ích
+## 💻 Hướng Dẫn Phát Triển Local
 
+### 1. Khởi chạy máy chủ nội bộ:
 ```bash
-# Xem log hệ thống
-./manage.sh logs
-
-# Kiểm tra trạng thái các container
-./manage.sh status
-
-# Khởi động lại
-./manage.sh restart
-
-# Tắt dự án
-./manage.sh stop
+python3 dev_server.py
 ```
+Truy cập trình duyệt: `http://localhost:3000/`
+
+### 2. Cập nhật Menu hoặc Footer:
+Khi bạn muốn đổi số hotline, địa chỉ, hoặc thêm menu mới:
+1. Mở file `header.html` hoặc `footer.html` và chỉnh sửa.
+2. Chạy lệnh:
+```bash
+python3 build.py
+```
+Toàn bộ 16 trang web sẽ tự động được cập nhật đồng bộ trong 1 giây!
 
 ---
 
-## 📌 6. Kích hoạt Giao diện KIPA
+## 🚀 Hướng Dẫn Đẩy Lên Git & Triển Khai (Deploy)
 
-1. Mở trình duyệt vào [http://localhost:8080](http://localhost:8080).
-2. Hoàn thành các bước cài đặt ban đầu của WordPress (Chọn Tiếng Việt, đặt tên trang, tạo tài khoản Admin).
-3. Đăng nhập vào trang quản trị: `http://localhost:8080/wp-admin`.
-4. Vào menu **Giao diện (Appearance)** -> **Giao diện (Themes)**.
-5. Chọn và kích hoạt **KIPA Việt Hàn**.
+### 1. Đẩy code lên GitHub:
+```bash
+git add .
+git commit -m "feat: cập nhật website KIPA Việt Hàn"
+git push origin master
+```
+
+### 2. Triển khai lên Vercel (Khuyên dùng - Miễn phí):
+1. Truy cập [vercel.com](https://vercel.com) và đăng nhập bằng tài khoản GitHub.
+2. Bấm **"Add New Project"** ➔ Chọn repository `Web-KIPA`.
+3. Bấm **"Deploy"**. Trong 15 giây, website của bạn sẽ hoạt động trực tiếp!
+4. Để gắn tên miền `kipaviethan.edu.vn`: Vào mục **Settings** ➔ **Domains** ➔ Thêm tên miền và trỏ DNS theo hướng dẫn của Vercel.
+
+---
+
+## 📞 Thông Tin Liên Hệ KIPA Việt Hàn
+
+- **Hotline**: `036 851 3865` | `0889 2222 55`
+- **Email**: `duhocquoctekipaviethan@gmail.com`
+- **Trụ sở chính**: 135 Bạch Năng Thi, Phường Tân Hưng, TP. Hải Phòng
+- **Văn phòng đại diện**: Seoul (Hàn Quốc) & Sydney (Úc)

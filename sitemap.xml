@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
+    <url>
+        <loc>https://kipaviethan.edu.vn/</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Pillar: Du Học Quốc Tế (Volume 12,100) -->
+    <url>
+        <loc>https://kipaviethan.edu.vn/du-hoc/</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Sub-Pillar: Đào Tạo Tiếng Hàn -->
+    <url>
+        <loc>https://kipaviethan.edu.vn/tieng-han/</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Authority / E-E-A-T: Giới Thiệu KIPA -->
+    <url>
+        <loc>https://kipaviethan.edu.vn/gioi-thieu/</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Facilities: Hệ Thống Cơ Sở -->
+    <url>
+        <loc>https://kipaviethan.edu.vn/co-so/</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Conversion: Liên Hệ & Tư Vấn -->
+    <url>
+        <loc>https://kipaviethan.edu.vn/lien-he/</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>
+

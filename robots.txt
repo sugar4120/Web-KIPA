@@ -1,0 +1,10 @@
+# Robots.txt for KIPA Việt Hàn (https://kipaviethan.edu.vn)
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cam-on.html
+Disallow: /404.html
+
+# Sitemap
+Sitemap: https://kipaviethan.edu.vn/sitemap.xml
+
