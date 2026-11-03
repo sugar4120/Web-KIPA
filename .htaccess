@@ -16,6 +16,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Future application endpoints can be placed under /api/.
 RewriteRule ^(?!api/).*\.php$ - [F,L,NC]
 
+# BEGIN KIPA CMS REDIRECTS
+# END KIPA CMS REDIRECTS
+
 # Redirect trailing slashes for non-directories
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

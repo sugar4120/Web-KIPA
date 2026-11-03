@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 define('KIPA_API_BOOTSTRAP', true);
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/content.php';
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     header('Allow: POST');
@@ -184,6 +185,11 @@ try {
         'details_json' => json_encode($cleanFields, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE),
     ]);
     $id = (int)$db->lastInsertId();
+    if (kipa_content_ready($db)) {
+        $stored = $db->prepare('SELECT * FROM kipa_leads WHERE id = ?');
+        $stored->execute([$id]);
+        kipa_content_capture($db, $stored->fetch());
+    }
     $db->commit();
     kipa_json_response(201, ['ok' => true, 'id' => $id]);
 } catch (PDOException $error) {
@@ -192,7 +198,10 @@ try {
     }
     error_log('[kipa-form] Database operation failed: ' . $error->getCode());
     kipa_json_response(503, ['error' => 'Hiện chưa thể gửi thông tin. Vui lòng thử lại sau hoặc liên hệ trực tiếp với KIPA.']);
-} catch (RuntimeException $error) {
+} catch (RuntimeException | JsonException $error) {
+    if (isset($db) && $db instanceof PDO && $db->inTransaction()) {
+        $db->rollBack();
+    }
     error_log('[kipa-form] Backend configuration failed.');
     kipa_json_response(503, ['error' => 'Hiện chưa thể gửi thông tin. Vui lòng thử lại sau hoặc liên hệ trực tiếp với KIPA.']);
 }

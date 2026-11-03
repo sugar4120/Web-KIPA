@@ -6,11 +6,12 @@ Hệ thống website chính thức của **KIPA Việt Hàn** — Đơn vị hà
 
 ## 🌟 Tính Năng & Điểm Nổi Bật
 
-- **Website HTML tĩnh**: Không phụ thuộc WordPress khi hiển thị trang. Năm form đăng ký gửi qua API PHP tới database riêng, chỉ chuyển tới trang cảm ơn sau khi lưu thành công.
+- **Website HTML tĩnh**: Không phụ thuộc WordPress khi hiển thị trang. Sáu form đăng ký gửi qua API PHP tới database riêng, chỉ chuyển tới trang cảm ơn sau khi lưu thành công.
 - **Thiết kế chuẩn Figma 100%**: Đầy đủ 16 trang chuyên nghiệp, tương thích 100% Mobile & Desktop.
 - **Hệ thống Component dùng chung**: Header và Footer được quản lý độc lập tại `header.html` và `footer.html`, tự động build đồng bộ vào tất cả các trang qua script `build.py`.
 - **Hosting chính**: LiteSpeed/cPanel. GitHub Actions build và kiểm thử tự động; bước deploy FTPS chỉ chạy khi được bật và cấu hình đầy đủ.
 - **SEO On-Page**: OpenGraph, Twitter Cards, canonical, sitemap và JSON-LD được sinh qua `build.py`.
+- **CMS hybrid theo SEO Plan**: 85 bảng thuộc 10 nhóm A–J, dùng tài khoản quản trị hiện có, lưu nháp trong MySQL rồi xuất bản HTML tĩnh. Xem [thiết kế database, migration và phạm vi đã nối](backend/DATABASE.md). Nội dung của 16 trang thiết kế sẵn chưa tự chuyển sang CMS.
 
 ---
 
@@ -204,7 +205,8 @@ return [
 have a different suffix from the database name.
 
 Không commit cấu hình thật hoặc gửi mật khẩu qua chat. Tài khoản MySQL chỉ nên
-có quyền cần thiết trên ba bảng backend; không cấp quyền tới database WordPress.
+có quyền cần thiết trên database backend/CMS này; migration nội dung cần quyền
+CREATE/ALTER/INDEX và CRUD. Không cấp quyền tới database WordPress.
 Sau khi import schema và đặt config, mở `https://kipaviethan.edu.vn/api/admin.php`,
 dùng `setup_token` để tạo tài khoản quản trị đầu tiên (mật khẩu 12–72 byte;
 ký tự có dấu có thể chiếm nhiều byte). Dashboard yêu cầu đăng nhập, có CSRF
@@ -228,9 +230,9 @@ cá nhân. Chính sách bảo mật hiện nêu thời hạn lưu lead 12 tháng
 Việc deploy production cần giữ `DEPLOY_ENABLED=false` cho tới khi hoàn tất
 database, config, tài khoản quản trị và kiểm tra thành công trên hosting.
 
-### 5. Blog có trang quản trị — mới tư vấn, chưa triển khai
+### 5. CMS hybrid và trạng thái các tính năng nội dung
 
-Menu không dẫn tới `/tin-tuc/` khi chưa có trang thật; trang chủ liên kết tới
+Menu cũ chưa chuyển sang Blog CMS; trang chủ vẫn liên kết tới
 các cẩm nang chương trình và FAQ hiện có thay vì các bài mẫu không có nội dung.
 Quiz trang chủ thu thập đủ năm lựa chọn rồi chuyển vào phần ghi chú của form
 tư vấn; chỉ lưu vào MySQL sau khi người dùng điền thông tin và đồng ý bảo mật.
@@ -238,19 +240,13 @@ tư vấn; chỉ lưu vào MySQL sau khi người dùng điền thông tin và �
 không lưu trên máy chủ và không tự gửi thư sau ba năm. Các thẻ hành trình chưa
 có video hiển thị thông báo rõ ràng và liên kết tư vấn thay vì mở video giả.
 
-Hai hướng không cần quay lại WordPress:
-
-- **CMS dựa trên Git (ví dụ Decap CMS):** biên tập viên soạn bài, upload ảnh,
-  lưu nháp/xuất bản qua giao diện. Nội dung được commit vào repository, build
-  ra `/tin-tuc/` và `/tin-tuc/<slug>/`; cần cấu hình đăng nhập/OAuth và quyền
-  repository. Lưu ý repository public không phù hợp lưu bản nháp bí mật.
-- **CMS PHP + MySQL trên hosting:** tài khoản quản trị riêng, không yêu cầu
-  biên tập viên dùng GitHub, nhưng cần thiết kế đăng nhập, phân quyền,
-  bảo vệ upload, xử lý nội dung an toàn và sao lưu database.
-
-Đề xuất hướng Git nếu ưu tiên website tĩnh và ít vận hành backend.
-Chưa cài CMS, tạo tài khoản, template bài viết hoặc bài viết mẫu. Cần chốt
-đăng nhập, người biên tập, yêu cầu nháp riêng tư và dịch vụ xác thực trước khi làm.
+Đã chọn và triển khai **PHP/MySQL + xuất bản HTML tĩnh** theo thiết kế A–J
+trong Excel. Sau migration, tài khoản quản trị hiện có dùng `/api/cms.php` để
+lưu nháp, chỉnh sửa và bấm xuất bản. Bài viết có template tĩnh tại
+`/tin-tuc/<slug>/`; danh mục nội dung tại `/noi-dung/`.
+Không có bài viết mẫu giả được xuất bản. Chưa có rich text, upload file hoặc
+phân quyền nhiều vai trò; media hiện quản lý metadata/URL.
+Xem [hướng dẫn và giới hạn chuyển đổi](backend/DATABASE.md) trước khi sử dụng.
 
 ### 6. Thông tin đăng nhập
 

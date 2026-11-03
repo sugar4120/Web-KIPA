@@ -226,7 +226,7 @@ try {
     $csrf = kipa_h($_SESSION['csrf']);
     $content = '<section class="card"><div class="top"><div><h1>Đăng ký tư vấn KIPA</h1><p class="muted">Đang đăng nhập: ' .
         kipa_h((string)$_SESSION['admin_username']) . ' · ' . $total . ' đăng ký</p></div>';
-    $content .= kipa_admin_form_start('logout', $csrf) . '<button class="secondary" type="submit">Đăng xuất</button></form></div>';
+    $content .= '<a href="/api/cms.php">Quản trị dữ liệu A–J</a>' . kipa_admin_form_start('logout', $csrf) . '<button class="secondary" type="submit">Đăng xuất</button></form></div>';
     if (isset($_GET['deleted'])) {
         $content .= '<p class="message">Đã xóa đăng ký.</p>';
     }

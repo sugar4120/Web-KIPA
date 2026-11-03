@@ -13,6 +13,22 @@ import deploy_ftps
 
 
 class DeploymentTests(unittest.TestCase):
+    def test_cms_redirects_survive_code_deployment(self):
+        source = (Path(build.BASE_DIR) / '.htaccess').read_text(encoding='utf-8')
+        block = 'RewriteRule ^cu\\.html$ /tin-tuc/moi/ [R=301,L,NE]\n'
+        remote = source.replace(deploy_ftps.CMS_RULE_START + '\n', deploy_ftps.CMS_RULE_START + '\n' + block)
+        merged = deploy_ftps.preserve_cms_redirects(source, remote)
+        self.assertIn(block, merged)
+        self.assertEqual(merged.count(deploy_ftps.CMS_RULE_START), 1)
+        self.assertEqual(deploy_ftps.preserve_cms_redirects(source, ''), source)
+        for invalid in [
+            remote.replace(block, 'Require all granted\n'),
+            remote + '\n' + deploy_ftps.CMS_RULE_START,
+            remote.replace(deploy_ftps.CMS_RULE_END, ''),
+        ]:
+            with self.subTest(invalid=invalid[:80]), self.assertRaises(ValueError):
+                deploy_ftps.preserve_cms_redirects(source, invalid)
+
     def test_rejects_private_file_and_incomplete_build(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)

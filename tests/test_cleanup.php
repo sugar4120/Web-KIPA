@@ -6,6 +6,7 @@ mkdir($directory, 0700);
 
 try {
     copy(__DIR__ . '/../api/cleanup.php', $directory . '/cleanup.php');
+    file_put_contents($directory . '/content.php', '<?php function kipa_content_cleanup(PDO $db): int { return 0; }');
     file_put_contents($directory . '/bootstrap.php', <<<'PHP'
 <?php
 class CleanupTestPDO extends PDO
@@ -35,7 +36,7 @@ PHP);
     require $directory . '/cleanup.php';
     $output = ob_get_clean();
     $db = $GLOBALS['cleanupTestDb'];
-    if ($output !== "Deleted 2 expired leads and 3 expired rate-limit records.\n") {
+    if ($output !== "Deleted 2 expired leads and 3 expired rate-limit records.\nDeleted 0 additional expired content registration/log records.\n") {
         throw new RuntimeException('Cleanup reported incorrect affected-row counts.');
     }
     if (!$db->committed || $db->queries !== [
@@ -48,5 +49,6 @@ PHP);
 } finally {
     unlink($directory . '/cleanup.php');
     unlink($directory . '/bootstrap.php');
+    unlink($directory . '/content.php');
     rmdir($directory);
 }

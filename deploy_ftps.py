@@ -2,12 +2,36 @@
 """Upload only the built public website using certificate-verified explicit FTPS."""
 
 import argparse
+import io
 import os
+import re
 import ssl
 from ftplib import FTP_TLS, error_perm
 from pathlib import Path, PurePosixPath
 
-from build import PAGES_CONFIG, PUBLIC_ASSET_SUFFIXES
+from build import API_FILES, PAGES_CONFIG, PUBLIC_ASSET_SUFFIXES
+
+CMS_RULE_START = '# BEGIN KIPA CMS REDIRECTS'
+CMS_RULE_END = '# END KIPA CMS REDIRECTS'
+
+
+def preserve_cms_redirects(source, remote):
+    if CMS_RULE_START not in remote and CMS_RULE_END not in remote:
+        return source
+    pattern = re.compile(
+        re.escape(CMS_RULE_START) + r'\n(.*?)' + re.escape(CMS_RULE_END), re.DOTALL,
+    )
+    if remote.count(CMS_RULE_START) != 1 or remote.count(CMS_RULE_END) != 1:
+        raise ValueError('Malformed remote CMS redirect markers.')
+    match = pattern.search(remote)
+    if not match or len(match[1]) > 65536:
+        raise ValueError('Invalid remote CMS redirect block.')
+    for line in match[1].splitlines():
+        if line and not re.fullmatch(r'RewriteRule \^[a-zA-Z0-9/_.\\-]*\$ \S+ \[R=(301|302|307|308),L,NE\]', line):
+            raise ValueError('Unexpected directive in CMS redirect block.')
+    if source.count(CMS_RULE_START) != 1 or source.count(CMS_RULE_END) != 1 or not pattern.search(source):
+        raise ValueError('Source CMS redirect markers are missing.')
+    return pattern.sub(lambda _: CMS_RULE_START + '\n' + match[1] + CMS_RULE_END, source)
 
 
 def public_files(directory):
@@ -19,9 +43,8 @@ def public_files(directory):
     )
     expected.update({
         '.htaccess', 'robots.txt', 'sitemap.xml', 'Logo.jpg',
-        'api/.htaccess', 'api/admin.php', 'api/bootstrap.php',
-        'api/cleanup.php', 'api/submit.php',
     })
+    expected.update(API_FILES)
     if not root.is_dir():
         raise ValueError(f'Build directory does not exist: {root}')
     files = []
@@ -99,8 +122,19 @@ def deploy(directory):
         for path in files:
             target = destination / path.relative_to(source).as_posix()
             ensure_directory(ftp, target.parent, created)
-            with path.open('rb') as stream:
+            if path.relative_to(source).as_posix() == '.htaccess':
+                remote = io.BytesIO()
+                try:
+                    ftp.retrbinary(f'RETR {target}', remote.write)
+                except error_perm as error:
+                    if not str(error).startswith('550'):
+                        raise
+                merged = preserve_cms_redirects(path.read_text(encoding='utf-8'), remote.getvalue().decode('utf-8'))
+                stream = io.BytesIO(merged.encode('utf-8'))
                 ftp.storbinary(f'STOR {target}', stream)
+            else:
+                with path.open('rb') as stream:
+                    ftp.storbinary(f'STOR {target}', stream)
             print(f'Uploaded {path.relative_to(source).as_posix()}')
     print(f'Deployed {len(files)} public files. No remote files were deleted.')
 

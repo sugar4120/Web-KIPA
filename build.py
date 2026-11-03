@@ -21,6 +21,11 @@ PUBLIC_ASSET_SUFFIXES = {
     '.avif', '.css', '.gif', '.ico', '.jpeg', '.jpg', '.js', '.mp4',
     '.pdf', '.png', '.svg', '.ttf', '.webm', '.webp', '.woff', '.woff2',
 }
+API_FILES = {
+    'api/.htaccess', 'api/admin.php', 'api/bootstrap.php', 'api/cleanup.php',
+    'api/submit.php', 'api/content.php', 'api/content-model.json',
+    'api/cms.php', 'api/migrate.php', 'api/publish.php',
+}
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',
      'Làm quen Hangul, phát âm, từ vựng và câu cơ bản; giao tiếp tình huống đơn giản.'),
@@ -372,9 +377,8 @@ def build_site(output_dir=None):
 
     required = [
         'header.html', 'footer.html', '.htaccess', 'robots.txt', 'Logo.jpg',
-        'api/.htaccess', 'api/admin.php', 'api/bootstrap.php',
-        'api/cleanup.php', 'api/submit.php',
     ]
+    required.extend(sorted(API_FILES))
     required.extend(cfg['file'] for cfg in PAGES_CONFIG)
     for name in required:
         if not (Path(BASE_DIR) / name).is_file():

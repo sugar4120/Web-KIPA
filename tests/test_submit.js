@@ -11,7 +11,7 @@ const { setTimeout: delay } = require('node:timers/promises');
     let server;
     try {
         fs.mkdirSync(path.join(root, 'api'));
-        for (const file of ['bootstrap.php', 'submit.php']) {
+        for (const file of ['bootstrap.php', 'content.php', 'content-model.json', 'submit.php']) {
             fs.copyFileSync(path.join(__dirname, '../api', file), path.join(root, 'api', file));
         }
         const listener = net.createServer();
