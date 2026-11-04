@@ -461,7 +461,7 @@
         #kipa-co-so .map-sticky-sidebar {
             position: -webkit-sticky !important;
             position: sticky !important;
-            top: 24px !important;
+            top: 96px !important;
             z-index: 10 !important;
         }
     }
@@ -471,6 +471,14 @@
             max-width: 540px !important;
             margin: 0 auto !important;
         }
+    }
+    /* Touch & responsive improvements */
+    #kipa-co-so .filter-scroll-container {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    #kipa-co-so .facility-card-item {
+        min-height: 340px;
     }
 </style>
 
@@ -588,31 +596,31 @@
             <!-- Filter Tabs & Real-time Search Input -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2">
                 <!-- Location Pills -->
-                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-                    <button type="button" class="filter-btn active bg-brand-blue text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs transition-all shrink-0" data-filter="all">
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 filter-scroll-container">
+                    <button type="button" class="filter-btn active bg-brand-blue text-white px-4 py-2 min-h-[36px] rounded-full text-xs font-bold shadow-xs transition-all shrink-0 flex items-center justify-center" data-filter="all">
                         Tất cả
                     </button>
-                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="hai-phong">
+                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-2 min-h-[36px] rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="hai-phong">
                         <i class="fa-solid fa-location-dot text-brand-blue text-[10px]"></i>
                         <span>Hải Phòng</span>
                     </button>
-                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="hai-duong">
+                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-2 min-h-[36px] rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="hai-duong">
                         <i class="fa-solid fa-location-dot text-brand-blue text-[10px]"></i>
                         <span>Hải Dương</span>
                     </button>
-                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="quang-ninh">
+                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-2 min-h-[36px] rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="quang-ninh">
                         <i class="fa-solid fa-location-dot text-brand-blue text-[10px]"></i>
                         <span>Quảng Ninh</span>
                     </button>
-                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="han-quoc">
+                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-2 min-h-[36px] rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="han-quoc">
                         <i class="fa-solid fa-globe text-brand-blue text-[10px]"></i>
                         <span>Hàn Quốc</span>
                     </button>
-                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="uc">
+                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-2 min-h-[36px] rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="uc">
                         <i class="fa-solid fa-globe text-brand-blue text-[10px]"></i>
                         <span>Úc</span>
                     </button>
-                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="hcm">
+                    <button type="button" class="filter-btn bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200 px-3.5 py-2 min-h-[36px] rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0" data-filter="hcm">
                         <i class="fa-solid fa-location-dot text-brand-blue text-[10px]"></i>
                         <span>TP. Hồ Chí Minh</span>
                     </button>
@@ -633,7 +641,7 @@
                 <div class="facility-main-col w-full md:w-2/3 lg:w-2/3 min-w-0">
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 items-stretch" id="facility-grid">
 <!-- CARD 1: Trụ sở chính – Hải Phòng -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-phong">
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-phong" data-slug="tru-so-chinh-hai-phong">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -654,7 +662,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">135 Bạch Năng Thi, Phường Tân Hưng, TP. Hải Phòng</span>
+                                    <span class="leading-tight break-words">135 Bạch Năng Thi, Phường Tân Hưng, TP. Hải Phòng</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -679,7 +687,7 @@
                 </div>
 
                 <!-- CARD 2: Văn phòng Hải Phòng -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-phong">
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-phong" data-slug="van-phong-hai-phong">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -700,7 +708,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">16 Bùi Thị Xuân, Phường Lê Thanh Nghị, TP. Hải Phòng</span>
+                                    <span class="leading-tight break-words">16 Bùi Thị Xuân, Phường Lê Thanh Nghị, TP. Hải Phòng</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -725,7 +733,7 @@
                 </div>
 
                 <!-- CARD 3: Chi nhánh Nam Sách -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-duong">
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-duong" data-slug="chi-nhanh-nam-sach">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -746,7 +754,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">Phố Vận Tải, xã Nam Sách, TP. Hải Phòng</span>
+                                    <span class="leading-tight break-words">Phố Vận Tải, xã Nam Sách, TP. Hải Phòng</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -770,8 +778,8 @@
                     </div>
                 </div>
 
-<!-- CARD 5: Chi nhánh Quảng Ninh -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="quang-ninh">
+                <!-- CARD 4: Chi nhánh Quảng Ninh -->
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="quang-ninh" data-slug="chi-nhanh-quang-ninh">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -792,7 +800,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">Số 31, ngõ 44 Tô Hiệu, P. Cẩm Trung, Cẩm Phả, Quảng Ninh</span>
+                                    <span class="leading-tight break-words">Số 31, ngõ 44 Tô Hiệu, P. Cẩm Trung, Cẩm Phả, Quảng Ninh</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -816,8 +824,8 @@
                     </div>
                 </div>
 
-                <!-- CARD 6: Chi nhánh TP. Hồ Chí Minh -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hcm">
+                <!-- CARD 5: Chi nhánh TP. Hồ Chí Minh -->
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hcm" data-slug="chi-nhanh-tp-ho-chi-minh">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -838,7 +846,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">93 Calmette, Phường Bến Thành, TP. Hồ Chí Minh</span>
+                                    <span class="leading-tight break-words">93 Calmette, Phường Bến Thành, TP. Hồ Chí Minh</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -862,8 +870,8 @@
                     </div>
                 </div>
 
-                <!-- CARD 7: VPĐD tại Hàn Quốc -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="han-quoc">
+                <!-- CARD 6: VPĐD tại Hàn Quốc -->
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="han-quoc" data-slug="vpdd-han-quoc">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -884,7 +892,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">Seoul, Korea (Hỗ trợ trực tiếp du học sinh tại Hàn)</span>
+                                    <span class="leading-tight break-words">Seoul, Korea (Hỗ trợ trực tiếp du học sinh tại Hàn)</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -908,8 +916,8 @@
                     </div>
                 </div>
 
-                <!-- CARD 8: VPĐD tại Úc -->
-                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="uc">
+                <!-- CARD 7: VPĐD tại Úc -->
+                <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="uc" data-slug="vpdd-uc">
                     <div class="space-y-3">
                         <!-- Image with Badge -->
                         <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
@@ -930,7 +938,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">Sydney, Úc (Đồng hành du học & việc làm Úc)</span>
+                                    <span class="leading-tight break-words">Sydney, Úc (Đồng hành du học & việc làm Úc)</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -1035,7 +1043,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                 
                 <!-- Left Palace Artwork (Extracted from demo) -->
-                <div class="lg:col-span-3 flex items-center justify-start">
+                <div class="lg:col-span-3 flex items-center justify-center lg:justify-start">
                     <img src="/assets/co-so/bottom_palace.png" 
                          alt="Cung điện Seoul & Hoa anh đào" 
                          class="w-full max-w-[260px] object-contain">
@@ -1050,13 +1058,13 @@
                         Đội ngũ KIPA Việt Hàn luôn sẵn sàng lắng nghe và hỗ trợ bạn tại tất cả các cơ sở trên toàn quốc.
                     </p>
                     <div class="flex flex-wrap items-center gap-3 pt-1">
-                        <a href="/dang-ky-tu-van/" class="inline-flex items-center gap-2 bg-brand-red hover:bg-rose-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md transition-all group">
+                        <a href="/dang-ky-tu-van/" class="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-rose-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md transition-all group w-full sm:w-auto">
                             <i class="fa-solid fa-headset text-xs"></i>
                             <span>Đăng ký tư vấn ngay</span>
                             <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                         </a>
 
-                        <a href="/du-hoc/" class="inline-flex items-center gap-2 border border-brand-blue text-brand-blue hover:bg-blue-50 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full transition-all bg-white shadow-xs">
+                        <a href="/du-hoc/" class="inline-flex items-center justify-center gap-2 border border-brand-blue text-brand-blue hover:bg-blue-50 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full transition-all bg-white shadow-xs w-full sm:w-auto">
                             <i class="fa-solid fa-book-open text-xs"></i>
                             <span>Khám phá chương trình</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
