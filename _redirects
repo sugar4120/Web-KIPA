@@ -1,0 +1,19 @@
+# KIPA VIET HAN - NETLIFY REDIRECTS & CLEAN URLS
+/gioi-thieu          /gioi-thieu/          301!
+/doi-ngu            /doi-ngu/            301!
+/du-hoc             /du-hoc/             301!
+/du-hoc-han-quoc    /du-hoc-han-quoc/    301!
+/du-hoc-uc          /du-hoc-uc/          301!
+/xuat-khau-lao-dong /xuat-khau-lao-dong/ 301!
+/tieng-han          /tieng-han/          301!
+/co-so              /co-so/              301!
+/hop-tac-quoc-te    /hop-tac-quoc-te/    301!
+/lien-he            /lien-he/            301!
+/dang-ky-tu-van     /dang-ky-tu-van/     301!
+/faq                /faq/                301!
+/chinh-sach-bao-mat /chinh-sach-bao-mat/ 301!
+/cam-on             /cam-on/             301!
+
+# 404 Fallback
+/*                  /404.html            404
+

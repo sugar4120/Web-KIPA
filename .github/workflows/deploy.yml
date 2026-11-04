@@ -1,0 +1,91 @@
+name: Build and deploy KIPA
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kipa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_DATABASE: kipa_content_test
+        ports:
+          - 3306/tcp
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test build and deployment rules
+        run: python3 -m unittest discover -s tests -v
+      - name: Validate PHP backend and retention cleanup
+        run: |
+          for file in api/*.php; do php -l "$file"; done
+          php tests/test_cleanup.php
+          php tests/test_config.php
+      - name: Test real database migration, CMS and static publishing
+        env:
+          KIPA_TEST_DSN: mysql:host=127.0.0.1;port=${{ job.services.mysql.ports[3306] }};dbname=kipa_content_test;charset=utf8mb4
+        run: php tests/test_content.php
+      - name: Test browser form submission logic
+        run: |
+          node tests/test_forms.js
+          node tests/test_submit.js
+          node tests/test_interactions.js
+      - name: Build public website
+        run: python3 build.py --output-dir dist
+      - name: Check page links and JavaScript integrity
+        run: node tests/test_site.js dist
+      - name: Validate deployment contents
+        run: python3 -c "from deploy_ftps import public_files; print(f'{len(public_files(\"dist\"))} public files validated')"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kipa-public-site
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: kipa-public-site
+          path: dist/
+      - name: Upload public files over explicit FTPS
+        env:
+          FTP_HOST: ${{ vars.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_DIR: ${{ vars.FTP_REMOTE_DIR }}
+          FTP_PORT: ${{ vars.FTP_PORT || '21' }}
+        run: python3 deploy_ftps.py dist

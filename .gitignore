@@ -1,0 +1,21 @@
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log
+deploy_ftp.py
+
+# Python / Cache
+__pycache__/
+*.pyc
+
+# Environment & Credentials
+.env
+.env.local
+
+# Build & Deployment temporary files
+.vercel/
+.netlify/
+dist/
