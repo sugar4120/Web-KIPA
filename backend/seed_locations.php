@@ -191,3 +191,4 @@ function kipa_seed_locations(PDO $db, string $jsonPath = ''): array
         throw $e;
     }
 }
+
