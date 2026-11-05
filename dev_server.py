@@ -3,7 +3,14 @@ import os
 import sys
 import mimetypes
 from urllib.parse import urlparse
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
+
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
 
 PORT = 3000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +37,9 @@ ROUTE_MAP = {
     '/xuat-khau-lao-dong': 'xuat-khau-lao-dong.html',
     '/xuat-khau-lao-dong/': 'xuat-khau-lao-dong.html',
     '/xuat-khau-lao-dong.html': 'xuat-khau-lao-dong.html',
+    '/xuat-khau-lao-dong-han-quoc': 'xuat-khau-lao-dong-han-quoc.html',
+    '/xuat-khau-lao-dong-han-quoc/': 'xuat-khau-lao-dong-han-quoc.html',
+    '/xuat-khau-lao-dong-han-quoc.html': 'xuat-khau-lao-dong-han-quoc.html',
     '/hop-tac-quoc-te': 'hop-tac-quoc-te.html',
     '/hop-tac-quoc-te/': 'hop-tac-quoc-te.html',
     '/hop-tac-quoc-te.html': 'hop-tac-quoc-te.html',
@@ -67,6 +77,7 @@ PAGE_TITLES = {
     'du-hoc-han-quoc.html': 'Du Học Hàn Quốc KIPA Việt Hàn | Lộ Trình Rõ Ràng, Vững Bước Tương Lai',
     'du-hoc-uc.html': 'Du Học Úc Cùng KIPA Việt Hàn | Định Hướng Lộ Trình & Học Bổng Toàn Diện',
     'xuat-khau-lao-dong.html': 'Xuất Khẩu Lao Động & Việc Làm Quốc Tế | KIPA Việt Hàn',
+    'xuat-khau-lao-dong-han-quoc.html': 'Xuất Khẩu Lao Động Hàn Quốc | KIPA Việt Hàn EPS E-9 & E-7',
     'hop-tac-quoc-te.html': 'Hợp Tác Quốc Tế & Liên Kết Giáo Dục | KIPA Việt Hàn',
     'dang-ky-tu-van.html': 'Đăng Ký Tư Vấn Du Học & Việc Làm | KIPA Việt Hàn',
     'faq.html': 'Câu Hỏi Thường Gặp (FAQ) | KIPA Việt Hàn',
@@ -216,7 +227,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
 def run():
     server_address = ('', PORT)
-    httpd = HTTPServer(server_address, KipaDevHandler)
+    httpd = ThreadingHTTPServer(server_address, KipaDevHandler)
     print("=" * 60)
     print(f"🚀 KIPA VIỆT HÀN LOCALHOST ĐÃ KHỞI CHẠY!")
     print(f"👉 Local URL:     http://localhost:{PORT}/")
