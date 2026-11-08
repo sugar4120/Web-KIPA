@@ -75,9 +75,9 @@ $formTypes = [
     ],
     'future_letter' => [
         'path' => '/',
-        'keys' => ['fullname', 'phone', 'email', 'target_year', 'letter', 'consent'],
-        'required' => ['fullname', 'phone', 'letter', 'consent'],
-        'contact' => 'fullname',
+        'keys' => ['author', 'fullname', 'phone', 'email', 'target_year', 'letter', 'consent'],
+        'required' => ['author', 'phone', 'letter', 'consent'],
+        'contact' => 'author',
     ],
 ];
 
