@@ -19,3 +19,6 @@ __pycache__/
 .vercel/
 .netlify/
 dist/
+
+# Raw media source files (>100MB)
+media/
