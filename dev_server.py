@@ -51,6 +51,15 @@ ROUTE_MAP = {
     '/lien-he': 'lien-he.html',
     '/lien-he/': 'lien-he.html',
     '/lien-he.html': 'lien-he.html',
+    '/tin-tuc': 'tin-tuc.html',
+    '/tin-tuc/': 'tin-tuc.html',
+    '/tin-tuc.html': 'tin-tuc.html',
+    '/cau-chuyen-hoc-vien': 'cau-chuyen-hoc-vien.html',
+    '/cau-chuyen-hoc-vien/': 'cau-chuyen-hoc-vien.html',
+    '/cau-chuyen-hoc-vien.html': 'cau-chuyen-hoc-vien.html',
+    '/hoat-dong-su-kien': 'hoat-dong-su-kien.html',
+    '/hoat-dong-su-kien/': 'hoat-dong-su-kien.html',
+    '/hoat-dong-su-kien.html': 'hoat-dong-su-kien.html',
     '/cam-on': 'cam-on.html',
     '/cam-on/': 'cam-on.html',
     '/cam-on.html': 'cam-on.html',
@@ -74,6 +83,9 @@ PAGE_TITLES = {
     'tieng-han.html': 'Đào Tạo Tiếng Hàn Cấp Tốc TOPIK 1 - 6 | KIPA Việt Hàn',
     'co-so.html': 'Hệ Thống Cơ Sở & Ký Túc Xá | KIPA Việt Hàn',
     'lien-he.html': 'Liên Hệ KIPA Việt Hàn | Điểm Khởi Đầu Cho Tương Lai',
+    'tin-tuc.html': 'Tin Tức & Cẩm Nang Du Học, Việc Làm Quốc Tế | KIPA Việt Hàn',
+    'cau-chuyen-hoc-vien.html': 'Câu Chuyện Học Viên KIPA Việt Hàn | Hành Trình Vươn Xa Quốc Tế',
+    'hoat-dong-su-kien.html': 'Hoạt Động & Sự Kiện KIPA Việt Hàn | Kết nối cơ hội, phát triển tương lai',
     'cam-on.html': 'Cảm Ơn Bạn Đã Đăng Ký | KIPA Việt Hàn',
     '404.html': '404 - Không Tìm Thấy Trang | KIPA Việt Hàn'
 }
@@ -101,13 +113,6 @@ class KipaDevHandler(BaseHTTPRequestHandler):
         target_file = ROUTE_MAP.get(clean_path) or ROUTE_MAP.get(parsed.path)
 
         if not target_file:
-            # Maybe clean_path is like /tin-tuc
-            if clean_path in ['/tin-tuc', '/tin-tuc/']:
-                self.send_response(302)
-                self.send_header('Location', '/#stories')
-                self.end_headers()
-                return
-
             # Check if file exists relative to BASE_DIR
             rel_path = parsed.path.lstrip('/')
             file_path = os.path.join(BASE_DIR, rel_path)

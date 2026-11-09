@@ -39,7 +39,7 @@ if (isset($request['website']) && (!is_string($request['website']) || $request['
 $formTypes = [
     'consultation' => [
         'path' => '/dang-ky-tu-van/',
-        'keys' => ['name', 'phone', 'area', 'contact_time', 'program', 'notes', 'consent'],
+        'keys' => ['name', 'phone', 'email', 'area', 'contact_time', 'program', 'notes', 'consent'],
         'required' => ['name', 'phone', 'area', 'contact_time', 'program', 'consent'],
         'contact' => 'name',
     ],
@@ -75,9 +75,15 @@ $formTypes = [
     ],
     'future_letter' => [
         'path' => '/',
-        'keys' => ['author', 'fullname', 'phone', 'email', 'target_year', 'letter', 'consent'],
-        'required' => ['author', 'phone', 'letter', 'consent'],
+        'keys' => ['author', 'fullname', 'phone', 'email', 'target_year', 'receive_date', 'graduation_date', 'letter', 'consent'],
+        'required' => ['author', 'email', 'letter', 'consent'],
         'contact' => 'author',
+    ],
+    'event_registration' => [
+        'path' => '/tin-tuc/',
+        'keys' => ['name', 'phone', 'email', 'program', 'school', 'notes', 'consent'],
+        'required' => ['name', 'phone', 'program', 'consent'],
+        'contact' => 'name',
     ],
 ];
 
@@ -136,10 +142,14 @@ foreach ($form['required'] as $required) {
     }
 }
 $name = $cleanFields[$form['contact']];
-$phone = $cleanFields['phone'];
-$digits = preg_replace('/\D+/', '', $phone);
-if (strlen($phone) > 32 || $digits === null || strlen($digits) < 7 || strlen($digits) > 15 || !preg_match('/^\+?[\d\s().-]+$/', $phone)) {
-    kipa_json_response(422, ['error' => 'Vui lòng nhập số điện thoại hợp lệ.']);
+$phone = $cleanFields['phone'] ?? null;
+if ($phone !== null && $phone !== '') {
+    $digits = preg_replace('/\D+/', '', $phone);
+    if (strlen($phone) > 32 || $digits === null || strlen($digits) < 7 || strlen($digits) > 15 || !preg_match('/^\+?[\d\s().-]+$/', $phone)) {
+        kipa_json_response(422, ['error' => 'Vui lòng nhập số điện thoại hợp lệ.']);
+    }
+} elseif (in_array('phone', $form['required'], true)) {
+    kipa_json_response(422, ['error' => 'Vui lòng nhập số điện thoại.']);
 }
 $email = $cleanFields['email'] ?? null;
 if ($email !== null && $email !== '' && (strlen($email) > 254 || filter_var($email, FILTER_VALIDATE_EMAIL) === false)) {
@@ -160,7 +170,7 @@ $program = $cleanFields['program']
     ?? $cleanFields['course']
     ?? $cleanFields['market']
     ?? $cleanFields['cooperation_type']
-    ?? ($type === 'future_letter' ? ('Lá thư tương lai' . (isset($cleanFields['target_year']) && $cleanFields['target_year'] !== '' ? ' (' . $cleanFields['target_year'] . ')' : '')) : null);
+    ?? ($type === 'future_letter' ? ('Lá thư tương lai' . (isset($cleanFields['receive_date']) && $cleanFields['receive_date'] !== '' ? ' (Dự kiến: ' . $cleanFields['receive_date'] . ')' : (isset($cleanFields['target_year']) && $cleanFields['target_year'] !== '' ? ' (' . $cleanFields['target_year'] . ')' : ''))) : null);
 $email = $email === '' ? null : $email;
 
 try {

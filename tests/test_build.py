@@ -103,7 +103,8 @@ class BuildTests(unittest.TestCase):
             if cfg['slug'] not in build.NOINDEX_SLUGS
         ]
         self.assertCountEqual(urls, expected)
-        self.assertEqual(len(urls), 14)
+        self.assertEqual(len(urls), len(expected))
+        self.assertEqual(len(urls), 17)
         for cfg in build.PAGES_CONFIG:
             html = (self.output / cfg['file']).read_text(encoding='utf-8')
             robots = 'noindex, follow' if cfg['slug'] in build.NOINDEX_SLUGS else 'index, follow'
