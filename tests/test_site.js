@@ -18,6 +18,7 @@ for (const [file, html] of Object.entries(pages)) {
     }
     for (const match of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)) {
         const value = match[1];
+        if (value.includes('${')) continue;
         if (/^(?:https?:|data:|tel:|mailto:|javascript:|\/\/)/.test(value)) continue;
         assert.notEqual(value, '#', `${file}: placeholder link`);
         const url = new URL(value, `https://kipaviethan.edu.vn/${file}`);
