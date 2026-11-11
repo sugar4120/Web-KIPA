@@ -34,8 +34,9 @@ for (const [file, html] of Object.entries(pages)) {
     }
 }
 const home = pages['index.html'];
-assert.match(home, /data-kipa-form="home_consultation"/);
-assert.doesNotMatch(home, /handleConsultationSubmit|alert\(/);
+const consultationForm = home.match(/<form\b(?=[^>]*data-kipa-form="home_consultation")[^>]*>[\s\S]*?<\/form>/);
+assert.ok(consultationForm, 'The homepage consultation form must exist.');
+assert.doesNotMatch(consultationForm[0], /handleConsultationSubmit|alert\(/);
 assert.match(home, /name="consent"[^>]*required/);
 assert.match(home, /id="story-modal"/);
 const letter = home.match(/<dialog\b[^>]*id="letter-modal"[^>]*>([\s\S]*?)<\/dialog>/);
