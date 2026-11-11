@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS kipa_admins (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(64) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
+    must_change_password BOOLEAN NOT NULL DEFAULT 0,
     created_at DATETIME NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY uq_kipa_admin_username (username)

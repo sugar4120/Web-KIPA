@@ -74,6 +74,11 @@ function kipa_cms_shell(string $title, string $body, string $active = ''): never
 $table = '';
 try {
     $db = kipa_db(kipa_config());
+    $admin = kipa_current_admin($db);
+    if (!$admin || (bool)$admin['must_change_password']) {
+        header('Location: /api/admin.php', true, 303);
+        exit;
+    }
     if (!kipa_content_ready($db)) {
         http_response_code(503);
         kipa_cms_shell('Chưa khởi tạo dữ liệu nội dung', '<p class="notice">Cần sao lưu database và chạy migration bằng PHP CLI trước khi sử dụng CMS. Form đăng ký cũ vẫn hoạt động.</p>');

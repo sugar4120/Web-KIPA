@@ -50,6 +50,7 @@ try {
     $db = kipa_db($config);
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     $remoteKey = kipa_remote_key($config);
+    $currentAdmin = kipa_current_admin($db);
 
     if ($method === 'POST') {
         kipa_require_origin();
@@ -94,7 +95,7 @@ try {
             kipa_record_rate_event($db, 'login', $remoteKey);
             $username = trim((string)($_POST['username'] ?? ''));
             $password = (string)($_POST['password'] ?? '');
-            $statement = $db->prepare('SELECT id, username, password_hash FROM kipa_admins WHERE username = :username LIMIT 1');
+            $statement = $db->prepare('SELECT id, username, password_hash, must_change_password FROM kipa_admins WHERE username = :username LIMIT 1');
             $statement->execute(['username' => $username]);
             $admin = $statement->fetch();
             if (!$admin || !password_verify($password, $admin['password_hash'])) {
@@ -104,6 +105,7 @@ try {
             $_SESSION['csrf'] = bin2hex(random_bytes(32));
             $_SESSION['admin_id'] = (int)$admin['id'];
             $_SESSION['admin_username'] = $admin['username'];
+            $_SESSION['must_change_password'] = (bool)$admin['must_change_password'];
             header('Location: /api/admin.php', true, 303);
             exit;
         }
@@ -116,6 +118,9 @@ try {
             session_destroy();
             header('Location: /api/admin.php', true, 303);
             exit;
+        }
+        if ($currentAdmin && (bool)$currentAdmin['must_change_password'] && $action !== 'change_password') {
+            kipa_admin_error('Bạn phải đổi mật khẩu trước khi sử dụng chức năng quản trị.', 403);
         }
         if ($action === 'delete') {
             $id = filter_var($_POST['lead_id'] ?? null, FILTER_VALIDATE_INT);
@@ -158,13 +163,17 @@ try {
             if (strlen($newPassword) < 12 || strlen($newPassword) > 72 || str_contains($newPassword, "\0") || !hash_equals($newPassword, $confirmPassword)) {
                 kipa_admin_error('Mật khẩu mới phải có từ 12 đến 72 byte và hai lần nhập phải giống nhau.');
             }
-            $statement = $db->prepare('UPDATE kipa_admins SET password_hash = :password_hash WHERE id = :id');
+            if (password_verify($newPassword, $admin['password_hash'])) {
+                kipa_admin_error('Mật khẩu mới phải khác mật khẩu hiện tại.');
+            }
+            $statement = $db->prepare('UPDATE kipa_admins SET password_hash = :password_hash, must_change_password = 0 WHERE id = :id');
             $statement->execute([
                 'password_hash' => password_hash($newPassword, PASSWORD_DEFAULT),
                 'id' => (int)$_SESSION['admin_id'],
             ]);
             session_regenerate_id(true);
             $_SESSION['csrf'] = bin2hex(random_bytes(32));
+            unset($_SESSION['must_change_password']);
             header('Location: /api/admin.php?password_changed=1', true, 303);
             exit;
         }
@@ -174,6 +183,18 @@ try {
     if ($method !== 'GET') {
         header('Allow: GET, POST');
         kipa_admin_error('Phương thức gửi không được hỗ trợ.');
+    }
+
+    if ($currentAdmin && (bool)$currentAdmin['must_change_password']) {
+        $content = '<section class="card"><h1>Bắt buộc đổi mật khẩu</h1>';
+        $content .= '<p class="message">Đổi mật khẩu ban đầu trước khi truy cập dữ liệu hoặc sử dụng chức năng quản trị.</p>';
+        $content .= kipa_admin_form_start('change_password', $_SESSION['csrf']);
+        $content .= '<label>Mật khẩu hiện tại<input name="old_password" type="password" required autocomplete="current-password"></label>';
+        $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
+        $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
+        $content .= '<p><button type="submit">Đổi mật khẩu</button></p></form>';
+        $content .= kipa_admin_form_start('logout', $_SESSION['csrf']) . '<button class="secondary">Đăng xuất</button></form></section>';
+        kipa_admin_page('Bắt buộc đổi mật khẩu', $content);
     }
 
     $db->exec('DELETE FROM kipa_rate_limits WHERE occurred_at < UTC_TIMESTAMP() - INTERVAL 1 DAY');

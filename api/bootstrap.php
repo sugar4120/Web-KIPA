@@ -113,6 +113,21 @@ function kipa_check_csrf(): void
     }
 }
 
+function kipa_current_admin(PDO $db): ?array
+{
+    if (!isset($_SESSION['admin_id'])) {
+        return null;
+    }
+    $query = $db->prepare('SELECT id, username, must_change_password FROM kipa_admins WHERE id = :id');
+    $query->execute(['id' => (int)$_SESSION['admin_id']]);
+    $admin = $query->fetch();
+    if (!$admin || (!empty($_SESSION['must_change_password']) && !(bool)$admin['must_change_password'])) {
+        unset($_SESSION['admin_id'], $_SESSION['admin_username'], $_SESSION['must_change_password']);
+        return null;
+    }
+    return $admin;
+}
+
 function kipa_rate_limited(PDO $db, string $scope, string $remoteKey, int $limit, int $minutes): bool
 {
     $cutoff = gmdate('Y-m-d H:i:s', time() - ($minutes * 60));
