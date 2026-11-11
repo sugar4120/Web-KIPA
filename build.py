@@ -118,6 +118,27 @@ PAGES_CONFIG = [
         'keywords': 'liên hệ kipa, hotline kipa, địa chỉ kipa việt hàn'
     },
     {
+        'file': 'tin-tuc.html',
+        'slug': 'tin-tuc',
+        'title': 'Tin Tức & Cẩm Nang Du Học, Việc Làm Quốc Tế | KIPA Việt Hàn',
+        'desc': 'Tổng hợp tin tức, cẩm nang du học Hàn Quốc, học tiếng Hàn TOPIK, kinh nghiệm chuẩn bị hồ sơ và việc làm quốc tế mới nhất từ KIPA Việt Hàn.',
+        'keywords': 'tin tức du học hàn quốc, cẩm nang du học kipa, kinh nghiệm du học hàn quốc, học tiếng hàn topik'
+    },
+    {
+        'file': 'cau-chuyen-hoc-vien.html',
+        'slug': 'cau-chuyen-hoc-vien',
+        'title': 'Câu Chuyện Học Viên KIPA Việt Hàn | Hành Trình Vươn Xa Quốc Tế',
+        'desc': 'Những câu chuyện thật, trải nghiệm thật của học viên KIPA Việt Hàn trên hành trình du học và làm việc tại Hàn Quốc, Úc, Nhật Bản và Châu Âu.',
+        'keywords': 'câu chuyện học viên, trải nghiệm du học kipa, du học hàn quốc kipa, du học úc, việc làm quốc tế kipa'
+    },
+    {
+        'file': 'hoat-dong-su-kien.html',
+        'slug': 'hoat-dong-su-kien',
+        'title': 'Hoạt Động & Sự Kiện KIPA Việt Hàn | Kết nối cơ hội, phát triển tương lai',
+        'desc': 'Khám phá hoạt động và sự kiện KIPA Việt Hàn: hội thảo du học, đào tạo tiếng Hàn, hợp tác giáo dục, tuyển sinh và các chương trình cộng đồng.',
+        'keywords': 'Hoạt động KIPA Việt Hàn, sự kiện KIPA, hội thảo du học, tuyển sinh du học, đào tạo tiếng Hàn'
+    },
+    {
         'file': 'dang-ky-tu-van.html',
         'slug': 'dang-ky-tu-van',
         'title': 'Đăng Ký Tư Vấn Du Học & Việc Làm Quốc Tế | KIPA Việt Hàn',

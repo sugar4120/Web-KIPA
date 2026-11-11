@@ -253,6 +253,13 @@
                                 <div class="text-[10px] text-slate-400 font-normal">Lãnh đạo & chuyên gia</div>
                             </div>
                         </a>
+                        <a href="/hoat-dong-su-kien/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-red-50/60 hover:text-[#EC1E1B] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn"></i></span>
+                            <div>
+                                <div class="font-bold">Hoạt động &amp; Sự kiện</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Hội thảo, ký kết, đào tạo</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -309,7 +316,8 @@
                     </div>
                 </div>
 
-                <a href="/#stories" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
+                <a href="/cau-chuyen-hoc-vien/" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
+                <a href="/tin-tuc/" class="kipa-nav-item hover:text-[#0274BD]">Tin tức</a>
                 <a href="/faq/" class="kipa-nav-item hover:text-[#0274BD]">Hỏi đáp</a>
                 <a href="/co-so/" class="kipa-nav-item hover:text-[#0274BD]">Cơ sở</a>
                 <a href="/lien-he/" class="kipa-nav-item hover:text-[#0274BD]">Liên hệ</a>
@@ -343,6 +351,7 @@
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Về KIPA</div>
             <a href="/gioi-thieu/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🏢 Giới thiệu KIPA</a>
             <a href="/doi-ngu/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">👥 Đội ngũ KIPA</a>
+            <a href="/hoat-dong-su-kien/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🎉 Hoạt động &amp; Sự kiện</a>
         </div>
         <div class="pl-3 py-1 space-y-2 border-l border-slate-100 ml-1">
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Chương trình đào tạo</div>
@@ -353,7 +362,8 @@
             <a href="/tieng-han/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📖 Đào tạo tiếng Hàn TOPIK</a>
             <a href="/hop-tac-quoc-te/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🤝 Hợp tác giáo dục quốc tế</a>
         </div>
-        <a href="/#stories" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
+        <a href="/cau-chuyen-hoc-vien/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
+        <a href="/tin-tuc/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Tin tức &amp; Cẩm nang</a>
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
@@ -556,11 +566,48 @@
                     </div>
                 </div>
 
-                <!-- Right: Real Physical KIPA Building Facade & Entrance (Extracted from demo) -->
-                <div class="lg:col-span-6 relative flex items-center justify-end">
-                    <img src="/assets/co-so/hero_building.png" 
-                         alt="Trụ sở chính KIPA Việt Hàn - 16 Bùi Thị Xuân Hải Phòng" 
-                         class="w-full max-w-2xl object-cover rounded-2xl shadow-sm border border-slate-100">
+                <!-- Right: Real Physical KIPA Building Facade & Entrance -->
+                <div class="lg:col-span-6 relative flex items-center justify-center lg:justify-end">
+                    <div class="relative w-full max-w-lg group">
+                        <!-- Main Building Real Photograph -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900">
+                            <img src="/assets/co-so/hero_building.png" 
+                                 alt="Trụ sở Tòa nhà KIPA Việt Hàn - 16 Bùi Thị Xuân Hải Phòng" 
+                                 class="w-full h-[460px] sm:h-[500px] object-cover object-top transition-transform duration-700 group-hover:scale-105">
+                            
+                            <!-- Gradient overlay at bottom for badge contrast -->
+                            <div class="absolute inset-x-0 bottom-0 h-40 pointer-events-none" style="background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.25) 50%, transparent 100%);"></div>
+
+                            <!-- Floating Facility Badge at Bottom -->
+                            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white p-3 sm:p-3.5 rounded-xl border border-slate-100 shadow-xl flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-lg bg-red-50 text-brand-red flex items-center justify-center shrink-0 text-base shadow-xs">
+                                        <i class="fa-solid fa-building"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">Tòa nhà KIPA Việt Hàn</div>
+                                        <div class="text-[11px] text-slate-600 truncate flex items-center gap-1 mt-0.5">
+                                            <i class="fa-solid fa-location-dot text-brand-red text-[10px]"></i>
+                                            <span>16 Bùi Thị Xuân, TP. Hải Phòng</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shrink-0 flex items-center gap-2">
+                                    <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-brand-blue px-2.5 py-1.5 rounded-full shadow-xs">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                        <span>Đang hoạt động</span>
+                                    </span>
+                                    <button type="button" onclick="openFacilityModal('16-bui-thi-xuan')" class="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-brand-red hover:bg-red-700 px-3 py-1.5 rounded-xl shadow-md transition-all hover:scale-105">
+                                        <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                                        <span>Tham quan cơ sở</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Decorative subtle shadow accent -->
+                        <div class="absolute -z-10 -bottom-2 -right-2 w-full h-full rounded-2xl bg-blue-100/60 blur-sm pointer-events-none"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -635,14 +682,20 @@
 <!-- CARD 1: Trụ sở chính – Hải Phòng -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-phong">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
-                            <img src="/assets/co-so/card_tru_so.png" 
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('135-bach-nang-thi')" title="Bấm để tham quan cơ sở vật chất">
+                            <img src="/assets/co-so/real_card_tru_so.jpg" 
                                  alt="Trụ sở chính KIPA Hải Phòng" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-location-dot text-[9px]"></i>
                                 <span>Cơ sở chính</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -668,12 +721,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=135+Bạch+Năng+Thi,+Hải+Phòng" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('135-bach-nang-thi')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-brand-blue hover:bg-blue-800 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=135+Bạch+Năng+Thi,+Hải+Phòng" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -681,14 +739,20 @@
                 <!-- CARD 2: Văn phòng Hải Phòng -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-phong">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
-                            <img src="/assets/co-so/card_van_phong.png" 
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('16-bui-thi-xuan')" title="Bấm để tham quan cơ sở vật chất">
+                            <img src="/assets/co-so/real_card_van_phong.jpg" 
                                  alt="Văn phòng Hải Phòng KIPA" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-brand-blue text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-location-dot text-[9px]"></i>
                                 <span>Cơ sở</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -714,12 +778,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=16+Bùi+Thị+Xuân,+Hải+Phòng" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('16-bui-thi-xuan')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-brand-blue hover:bg-blue-800 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=16+Bùi+Thị+Xuân,+Hải+Phòng" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -727,14 +796,20 @@
                 <!-- CARD 3: Chi nhánh Nam Sách -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hai-duong">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
-                            <img src="/assets/co-so/card_nam_sach.png" 
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('nam-sach')" title="Bấm để tham quan cơ sở vật chất">
+                            <img src="/assets/co-so/real_card_nam_sach.jpg" 
                                  alt="Chi nhánh Nam Sách KIPA" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-brand-blue text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-location-dot text-[9px]"></i>
                                 <span>Cơ sở</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -746,7 +821,7 @@
                             <div class="space-y-1.5 text-xs text-slate-600">
                                 <div class="flex items-start gap-1.5">
                                     <i class="fa-solid fa-location-dot text-brand-blue text-xs mt-0.5 shrink-0"></i>
-                                    <span class="leading-tight">Phố Vận Tải, xã Nam Sách, TP. Hải Phòng</span>
+                                    <span class="leading-tight">Phố Vận Tải, Nam Sách, Hải Dương</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-phone text-brand-blue text-xs shrink-0"></i>
@@ -760,12 +835,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=Phố+Vận+Tải,+Nam+Sách" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('nam-sach')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-brand-blue hover:bg-blue-800 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=Phố+Vận+Tải,+Nam+Sách" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -773,14 +853,20 @@
 <!-- CARD 5: Chi nhánh Quảng Ninh -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="quang-ninh">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
-                            <img src="/assets/co-so/card_quang_ninh.png" 
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('quang-ninh')" title="Bấm để tham quan cơ sở vật chất">
+                            <img src="/assets/co-so/real_card_quang_ninh.jpg" 
                                  alt="Chi nhánh Quảng Ninh KIPA" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-brand-blue text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-location-dot text-[9px]"></i>
                                 <span>Cơ sở</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -806,12 +892,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=31+ngõ+44+Tô+Hiệu,+Cẩm+Phả,+Quảng+Ninh" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('quang-ninh')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-brand-blue hover:bg-blue-800 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=31+ngõ+44+Tô+Hiệu,+Cẩm+Phả,+Quảng+Ninh" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -819,14 +910,20 @@
                 <!-- CARD 6: Chi nhánh TP. Hồ Chí Minh -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="hcm">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
-                            <img src="/assets/co-so/card_hcm.png" 
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('hcm')" title="Bấm để tham quan cơ sở vật chất">
+                            <img src="/assets/co-so/real_card_hcm.jpg" 
                                  alt="Chi nhánh TP. Hồ Chí Minh KIPA" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-brand-blue text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-location-dot text-[9px]"></i>
                                 <span>Cơ sở</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -852,12 +949,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=93+Calmette,+Bến+Thành,+Hồ+Chí+Minh" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('hcm')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-brand-blue hover:bg-blue-800 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=93+Calmette,+Bến+Thành,+Hồ+Chí+Minh" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -865,14 +967,20 @@
                 <!-- CARD 7: VPĐD tại Hàn Quốc -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="han-quoc">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('han-quoc')" title="Bấm để tham quan cơ sở vật chất">
                             <img src="/assets/co-so/card_korea.png" 
                                  alt="VPĐD KIPA tại Hàn Quốc" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-indigo-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-plane-departure text-[9px]"></i>
                                 <span>VP Quốc tế</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -898,12 +1006,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=Seoul,+Korea" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('han-quoc')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=Seoul,+Korea" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -911,14 +1024,20 @@
                 <!-- CARD 8: VPĐD tại Úc -->
                 <div class="facility-card-item facility-card rounded-2xl overflow-hidden flex flex-col justify-between p-3.5 shadow-xs" data-city="uc">
                     <div class="space-y-3">
-                        <!-- Image with Badge -->
-                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100">
+                        <!-- Image with Badge (Click to Tour) -->
+                        <div class="relative h-40 rounded-xl overflow-hidden bg-slate-100 cursor-pointer group/img" onclick="openFacilityModal('uc')" title="Bấm để tham quan cơ sở vật chất">
                             <img src="/assets/co-so/card_uc.png" 
                                  alt="VPĐD KIPA tại Úc" 
-                                 class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105">
                             <div class="absolute top-2.5 left-2.5 bg-sky-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                                 <i class="fa-solid fa-globe text-[9px]"></i>
                                 <span>VP Quốc tế</span>
+                            </div>
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white/95 text-brand-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                    <i class="fa-solid fa-camera-retro text-brand-red text-xs"></i>
+                                    <span>Tham quan cơ sở</span>
+                                </span>
                             </div>
                         </div>
 
@@ -944,12 +1063,17 @@
                         </div>
                     </div>
 
-                    <!-- Action Link Button -->
-                    <div class="pt-3 border-t border-slate-100 mt-3">
-                        <a href="https://maps.google.com/?q=Sydney,+Australia" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue px-3 py-1.5 rounded-full border border-slate-200 hover:border-brand-blue transition-all group">
-                            <span>Xem chi tiết</span>
-                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    <!-- Action Buttons: CTA Tham quan & Chỉ đường -->
+                    <div class="pt-3 border-t border-slate-100 mt-3 flex items-center gap-2">
+                        <button type="button" onclick="openFacilityModal('uc')" 
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-sky-600 hover:bg-sky-700 py-2 px-3 rounded-xl transition-all shadow-xs group">
+                            <i class="fa-solid fa-camera-retro text-amber-300 text-xs"></i>
+                            <span>Tham quan cơ sở</span>
+                        </button>
+                        <a href="https://maps.google.com/?q=Sydney,+Australia" target="_blank" rel="noopener noreferrer" title="Mở bản đồ Google Maps"
+                           class="inline-flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 hover:text-brand-blue bg-white hover:bg-slate-50 py-2 px-2.5 rounded-xl border border-slate-200 transition-all shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-red text-xs"></i>
+                            <span class="hidden sm:inline">Chỉ đường</span>
                         </a>
                     </div>
                 </div>
@@ -1028,17 +1152,163 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- 3. SECTION 3: LIÊN HỆ VỚI CƠ SỞ GẦN BẠN NHẤT -->
+    <!-- 3. SECTION: KIPA VIỆT HÀN – ĐẾN LÀ BAY (VIDEO TOUR THỰC TẾ) -->
+    <!-- ========================================== -->
+    <section class="py-12 sm:py-16 lg:py-20 text-white relative overflow-hidden" style="background: linear-gradient(135deg, #07192e 0%, #0c2d54 50%, #005baa 100%);">
+        
+        <!-- Decorative Ambient Light Circles -->
+        <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-10">
+            
+            <!-- Section Header: Centered with Badge, Main Title & Slogan -->
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#fed049] text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                    <i class="fa-solid fa-clapperboard text-xs"></i>
+                    <span>Thước phim thực tế cơ sở KIPA</span>
+                </div>
+
+                <h2 class="font-phudu text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                    <span>KIPA Việt Hàn</span>
+                    <span class="text-[#fed049] mx-1">–</span>
+                    <span class="text-white">Đến là bay</span>
+                </h2>
+
+                <p class="font-phudu text-sm sm:text-lg lg:text-xl font-bold text-blue-200 tracking-wide">
+                    Đúng định hướng – Vững hành trình – Rộng mở tương lai
+                </p>
+
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto pt-1">
+                    Cùng trải nghiệm không gian học tập, hội trường ký kết quốc tế và không khí sôi nổi tại tòa nhà 16 Bùi Thị Xuân, Hải Phòng qua phóng sự khai trương chính thức từ KIPA Việt Hàn.
+                </p>
+            </div>
+
+            <!-- Video Player Display Container (16:9 Cinematic Frame) -->
+            <div class="max-w-4xl mx-auto">
+                <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 bg-slate-950 group">
+                    <div class="relative w-full" style="padding-top: 56.25%;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/1zehiW1ufag?rel=0&modestbranding=1" 
+                            title="Khai trương cơ sở mới KIPA Việt Hàn | 16 Bùi Thị Xuân - Mở rộng hành trình chắp cánh ước mơ" 
+                            class="absolute inset-0 w-full h-full"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- Subtle bottom bar on video card -->
+                    <div class="p-3 sm:p-4 bg-slate-900/95 backdrop-blur-md border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold shrink-0">
+                                <i class="fa-brands fa-youtube text-sm"></i>
+                            </span>
+                            <div>
+                                <div class="font-bold text-white text-xs sm:text-sm truncate">Khai trương cơ sở mới KIPA Việt Hàn | 16 Bùi Thị Xuân</div>
+                                <div class="text-[11px] text-slate-400">Kênh chính thức: KIPA Việt Hàn - Du học & XKLD</div>
+                            </div>
+                        </div>
+
+                        <a href="https://youtu.be/1zehiW1ufag" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-red-600 hover:bg-red-700 px-3.5 py-1.5 rounded-lg transition-colors shrink-0 shadow-xs">
+                            <i class="fa-brands fa-youtube"></i>
+                            <span>Xem trên YouTube</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Pillar Feature Cards (Glassmorphism) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto pt-2">
+                <!-- Pillar 1 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 hover:bg-white/15 transition-all shadow-sm space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-red-500/20 text-[#fed049] flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <div class="text-sm font-extrabold text-white">Đến Là Bay</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Tỷ lệ đỗ visa đạt 98.6%. Lộ trình minh bạch, cam kết hỗ trợ nhập học đúng kỳ mục tiêu.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 hover:bg-white/15 transition-all shadow-sm space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <div class="text-sm font-extrabold text-white">Đúng Định Hướng</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Tư vấn 1:1 theo hồ sơ năng lực cá nhân, chọn trường và ngành học có tỷ lệ việc làm cao.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 hover:bg-white/15 transition-all shadow-sm space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-[#fed049] flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="text-sm font-extrabold text-white">Vững Hành Trình</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Cơ sở vật chất 6 tầng hiện đại, giảng viên bản ngữ đào tạo tiếng Hàn cấp tốc chuẩn TOPIK.
+                    </p>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 hover:bg-white/15 transition-all shadow-sm space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="text-sm font-extrabold text-white">Rộng Mở Tương Lai</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Học bổng từ 30% - 100%, hỗ trợ tìm việc làm thêm hợp pháp và đồng hành định cư sau tốt nghiệp.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom CTAs -->
+            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-4">
+                <a href="/dang-ky-tu-van/" 
+                   class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-xl transition-all hover:scale-105 group">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    <span>Đăng ký tham gia lộ trình "Đến là bay"</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <button type="button" onclick="openFacilityModal('16-bui-thi-xuan')" 
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-xs sm:text-sm backdrop-blur-md transition-all shadow-md">
+                    <i class="fa-solid fa-camera-retro text-[#fed049] text-xs"></i>
+                    <span>Tham quan ảnh thực tế cơ sở 16 Bùi Thị Xuân</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 4. SECTION 4: LIÊN HỆ VỚI CƠ SỞ GẦN BẠN NHẤT -->
     <!-- ========================================== -->
     <section class="py-10 lg:py-14 bg-white border-t border-slate-200/70 relative overflow-hidden">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                 
-                <!-- Left Palace Artwork (Extracted from demo) -->
-                <div class="lg:col-span-3 flex items-center justify-start">
-                    <img src="/assets/co-so/bottom_palace.png" 
-                         alt="Cung điện Seoul & Hoa anh đào" 
-                         class="w-full max-w-[260px] object-contain">
+                <!-- Left: Real Physical KIPA Center Team & Reception Photo -->
+                <div class="lg:col-span-4 flex items-center justify-center lg:justify-start">
+                    <div class="relative w-full max-w-sm rounded-2xl overflow-hidden shadow-md border border-slate-200/90 group bg-slate-100">
+                        <img src="/assets/co-so/bottom_center_real.jpg" 
+                             alt="Đội ngũ cán bộ tư vấn & giảng viên KIPA Việt Hàn" 
+                             class="w-full h-48 sm:h-52 lg:h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        <!-- Floating badge -->
+                        <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-xs px-2.5 py-1.5 rounded-xl shadow-md border border-slate-100/90 flex items-center justify-between pointer-events-none">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                                <span class="text-[11px] font-extrabold text-brand-blue truncate">Đội ngũ KIPA Việt Hàn</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-slate-500 shrink-0">Tận tâm • Đồng hành</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Center: Callout Heading & Action Buttons -->
@@ -1065,7 +1335,7 @@
                 </div>
 
                 <!-- Right: 4 Contact Channels -->
-                <div class="lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-slate-100 lg:pl-6 text-center">
+                <div class="lg:col-span-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2.5 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-slate-100 lg:pl-6 text-center">
                     
                     <!-- 1. Hotline -->
                     <div class="space-y-1">
@@ -1178,6 +1448,612 @@
             }
         }
     })();
+</script>
+    
+<!-- ================================================================= -->
+<!-- MODAL / CỬA SỔ PHỤ: THAM QUAN CƠ SỞ VẬT CHẤT (KIPA VIRTUAL TOUR) -->
+<!-- ================================================================= -->
+<div id="facility-tour-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 lg:p-6 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-facility-title">
+    <!-- Backdrop Blur Overlay -->
+    <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity duration-300" onclick="closeFacilityModal()"></div>
+
+    <!-- Modal Dialog Container -->
+    <div class="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden z-10 border border-slate-100 animate-fadeIn transition-all">
+        
+        <!-- Top Gradient Accent Bar -->
+        <div class="h-1.5 w-full bg-gradient-to-r from-brand-red via-brand-blue to-amber-400"></div>
+
+        <!-- 1. MODAL HEADER -->
+        <div class="px-4 sm:px-6 py-4 border-b border-slate-100 flex items-start justify-between gap-4 bg-slate-50/80">
+            <div class="space-y-1.5 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span id="modal-badge" class="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-xs bg-brand-red text-white">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span>
+                        <span id="modal-badge-text">Cơ sở chính</span>
+                    </span>
+                    <span class="text-xs text-slate-500 flex items-center gap-1">
+                        <i class="fa-solid fa-clock text-slate-400 text-[11px]"></i>
+                        <span id="modal-hours">7:00 – 17:00 (Thứ 2 – Thứ 7)</span>
+                    </span>
+                </div>
+                <h3 id="modal-facility-title" class="font-phudu text-lg sm:text-2xl font-extrabold text-brand-blue leading-snug truncate">
+                    Tên cơ sở KIPA
+                </h3>
+                <p class="text-xs text-slate-600 flex items-center gap-1.5 truncate">
+                    <i class="fa-solid fa-location-dot text-brand-red text-xs shrink-0"></i>
+                    <span id="modal-address">Địa chỉ cơ sở</span>
+                </p>
+            </div>
+
+            <!-- Close Button -->
+            <button type="button" onclick="closeFacilityModal()" aria-label="Đóng cửa sổ"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-red-50 text-slate-400 hover:text-brand-red border border-slate-200 hover:border-red-200 flex items-center justify-center transition-all shadow-xs shrink-0">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+        </div>
+
+        <!-- 2. NAVIGATION TABS -->
+        <div class="px-4 sm:px-6 bg-white border-b border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <button type="button" id="tab-btn-photos" onclick="switchFacilityTab('photos')" 
+                    class="facility-modal-tab active py-3 px-3.5 text-xs sm:text-sm font-bold border-b-2 border-brand-blue text-brand-blue flex items-center gap-2 whitespace-nowrap transition-colors">
+                <i class="fa-solid fa-images text-xs"></i>
+                <span>Hình ảnh thực tế</span>
+                <span id="modal-photo-badge" class="text-[10px] bg-blue-100 text-brand-blue px-2 py-0.5 rounded-full font-bold">0</span>
+            </button>
+            <button type="button" id="tab-btn-video" onclick="switchFacilityTab('video')" 
+                    class="facility-modal-tab py-3 px-3.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-brand-blue flex items-center gap-2 whitespace-nowrap transition-colors">
+                <i class="fa-solid fa-film text-xs"></i>
+                <span>Video tham quan</span>
+                <span id="modal-video-badge" class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-semibold">Clip</span>
+            </button>
+            <button type="button" id="tab-btn-info" onclick="switchFacilityTab('info')" 
+                    class="facility-modal-tab py-3 px-3.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-brand-blue flex items-center gap-2 whitespace-nowrap transition-colors">
+                <i class="fa-solid fa-circle-info text-xs"></i>
+                <span>Tiện ích & Dịch vụ</span>
+            </button>
+        </div>
+
+        <!-- 3. MODAL BODY (Scrollable) -->
+        <div class="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50/50 space-y-4">
+            
+            <!-- TAB 1: HÌNH ẢNH THỰC TẾ -->
+            <div id="tab-content-photos" class="space-y-4">
+                <!-- Large Featured Image Showcase (Visible when photos exist) -->
+                <div id="modal-gallery-active-container" class="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-md">
+                    <div class="relative w-full h-[260px] sm:h-[380px] lg:h-[420px] flex items-center justify-center bg-black">
+                        <img id="modal-active-img" src="" alt="Hình ảnh cơ sở" 
+                             class="max-w-full max-h-full object-contain transition-all duration-300">
+                        
+                        <!-- Navigation Arrows -->
+                        <button type="button" onclick="prevModalPhoto()" aria-label="Ảnh trước"
+                                class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-sm flex items-center justify-center transition-all hover:scale-105 shadow-md">
+                            <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
+                        </button>
+                        <button type="button" onclick="nextModalPhoto()" aria-label="Ảnh sau"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-sm flex items-center justify-center transition-all hover:scale-105 shadow-md">
+                            <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
+                        </button>
+
+                        <!-- Counter Pill -->
+                        <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs">
+                            <span id="modal-photo-current">1</span> / <span id="modal-photo-total">1</span>
+                        </div>
+                    </div>
+
+                    <!-- Photo Caption Bar -->
+                    <div class="p-3 bg-white border-t border-slate-100 flex items-center justify-between gap-3">
+                        <p id="modal-active-caption" class="text-xs sm:text-sm font-semibold text-slate-800 leading-snug">
+                            Mô tả hình ảnh cơ sở
+                        </p>
+                        <span class="text-[11px] text-slate-400 font-medium shrink-0 flex items-center gap-1">
+                            <i class="fa-solid fa-camera text-slate-400 text-[10px]"></i>
+                            Ảnh thực tế KIPA
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Strip -->
+                <div id="modal-thumbs-container" class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-7 gap-2 pt-1">
+                    <!-- Dynamic Thumbnails Rendered Here -->
+                </div>
+
+                <!-- Empty State (When no photos exist) -->
+                <div id="modal-photos-empty" class="hidden text-center py-12 px-6 bg-white rounded-2xl border border-dashed border-slate-300 shadow-xs">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 text-brand-blue flex items-center justify-center text-2xl mx-auto mb-3 shadow-inner">
+                        <i class="fa-solid fa-images"></i>
+                    </div>
+                    <h4 class="font-phudu font-bold text-slate-800 text-base">Hình ảnh thực tế đang được cập nhật</h4>
+                    <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto leading-relaxed">
+                        Đội ngũ truyền thông KIPA đang tiến hành ghi hình thực tế cơ sở vật chất tại chi nhánh này. Nội dung sẽ được cập nhật sớm nhất.
+                    </p>
+                    <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
+                        <a href="https://zalo.me/0368513865" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0084ff] hover:bg-blue-600 text-white text-xs font-bold shadow-xs transition-colors">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            <span>Yêu cầu hình ảnh cơ sở qua Zalo</span>
+                        </a>
+                        <a href="tel:0368513865" 
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-semibold transition-colors">
+                            <i class="fa-solid fa-phone text-brand-red"></i>
+                            <span>Gọi hotline 036 851 3865</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: VIDEO THAM QUAN -->
+            <div id="tab-content-video" class="space-y-4 hidden">
+                <!-- Video Player Container (When video exists) -->
+                <div id="modal-video-container" class="rounded-2xl overflow-hidden bg-black border border-slate-200 shadow-md">
+                    <video id="modal-video-player" class="w-full h-[260px] sm:h-[380px] lg:h-[420px] object-contain bg-black" 
+                           controls playsinline preload="metadata">
+                        <source src="" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                    </video>
+                    <div class="p-3 bg-white border-t border-slate-100 flex items-center justify-between gap-3">
+                        <p id="modal-video-title" class="text-xs sm:text-sm font-bold text-slate-800 truncate">
+                            Video tham quan thực tế cơ sở KIPA
+                        </p>
+                        <span class="text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full shrink-0 flex items-center gap-1">
+                            <i class="fa-solid fa-circle-play text-[10px]"></i>
+                            Video HD
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Video Empty State (When no video exists) -->
+                <div id="modal-video-empty" class="hidden text-center py-12 px-6 bg-white rounded-2xl border border-dashed border-slate-300 shadow-xs">
+                    <div class="w-14 h-14 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-2xl mx-auto mb-3 shadow-inner">
+                        <i class="fa-solid fa-clapperboard"></i>
+                    </div>
+                    <h4 class="font-phudu font-bold text-slate-800 text-base">Video tour 360° đang được cập nhật</h4>
+                    <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto leading-relaxed">
+                        Video clip tham quan cơ sở vật chất chi tiết đang được ghi hình & hậu kỳ. Quý phụ huynh & học viên có thể kết nối video call trực tiếp với chuyên viên tư vấn tại cơ sở để tham quan trực tiếp.
+                    </p>
+                    <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
+                        <a href="tel:0368513865" 
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-red hover:bg-red-700 text-white text-xs font-bold shadow-xs transition-colors">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>Gọi xem cơ sở qua video call</span>
+                        </a>
+                        <a href="https://zalo.me/0368513865" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-brand-blue border border-blue-200 text-xs font-bold transition-colors">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            <span>Nhắn Zalo đặt lịch hẹn</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: TIỆN ÍCH & DỊCH VỤ -->
+            <div id="tab-content-info" class="space-y-4 hidden">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+                    <div>
+                        <h4 class="font-phudu text-sm font-bold text-brand-blue uppercase tracking-wide">
+                            Giới thiệu tổng quan
+                        </h4>
+                        <p id="modal-info-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1.5">
+                            Mô tả cơ sở vật chất...
+                        </p>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100">
+                        <h4 class="font-phudu text-sm font-bold text-slate-800 uppercase tracking-wide mb-2.5">
+                            Tiện ích nổi bật tại cơ sở
+                        </h4>
+                        <ul id="modal-info-features" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                            <!-- Dynamic Feature List -->
+                        </ul>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 bg-blue-50/50 p-3.5 rounded-xl border border-blue-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div>
+                            <div class="text-xs font-bold text-slate-900">Cần tư vấn trực tiếp tại cơ sở này?</div>
+                            <div class="text-[11px] text-slate-600 mt-0.5">Đặt lịch hẹn tư vấn 1:1 miễn phí cùng chuyên gia du học KIPA</div>
+                        </div>
+                        <a href="/dang-ky-tu-van/" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-brand-blue text-white text-xs font-bold hover:bg-blue-800 transition-colors shrink-0 shadow-xs">
+                            <span>Đăng ký ngay</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 4. MODAL FOOTER ACTION BAR -->
+        <div class="px-4 sm:px-6 py-3 bg-white border-t border-slate-100 flex flex-wrap items-center justify-between gap-2.5">
+            <div class="flex items-center gap-2 flex-wrap">
+                <a id="modal-call-btn" href="tel:0368513865" 
+                   class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-red hover:bg-red-700 text-white text-xs font-bold shadow-xs transition-colors">
+                    <i class="fa-solid fa-phone text-xs"></i>
+                    <span>Gọi tư vấn</span>
+                </a>
+                <a href="https://zalo.me/0368513865" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0084ff] hover:bg-blue-600 text-white text-xs font-bold shadow-xs transition-colors">
+                    <i class="fa-solid fa-comment-dots text-xs"></i>
+                    <span>Chat Zalo</span>
+                </a>
+                <a id="modal-maps-btn" href="#" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold border border-slate-200 transition-colors">
+                    <i class="fa-solid fa-diamond-turn-right text-brand-blue text-xs"></i>
+                    <span>Chỉ đường</span>
+                </a>
+            </div>
+
+            <button type="button" onclick="closeFacilityModal()" 
+                    class="px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-600 text-xs font-semibold transition-colors">
+                Đóng
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================================================================= -->
+<!-- MODAL SCRIPT: DỮ LIỆU CƠ SỞ & HÀM ĐIỀU KHIỂN CỬA SỔ PHỤ THAM QUAN -->
+<!-- ================================================================= -->
+<script>
+    var FACILITY_DATA = {
+        '135-bach-nang-thi': {
+            name: 'Trụ sở chính – 135 Bạch Năng Thi, Hải Phòng',
+            badge: 'Trụ sở chính',
+            badgeColor: 'bg-brand-red text-white',
+            address: '135 Bạch Năng Thi, Phường Tân Hưng, TP. Hải Phòng',
+            phone: '036 851 3865',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=135+Bạch+Năng+Thi,+Hải+Phòng',
+            description: 'Trụ sở pháp lý và trung tâm đào tạo tiếng Hàn trọng điểm của KIPA Việt Hàn tại Hải Phòng. Nơi tập trung phòng làm việc của Ban Giám đốc, hội đồng chuyên môn xử lý visa và các lớp học tiếng Hàn chuẩn quốc tế.',
+            features: [
+                'Phòng học ngoại ngữ hiện đại, trang bị đầy đủ máy lạnh, bảng tương tác & âm thanh',
+                'Khu vực tư vấn hồ sơ du học 1:1 bảo mật và chuyên sâu',
+                'Phòng Tổng Giám đốc và bộ phận kiểm duyệt visa trực tiếp',
+                'Không gian tiếp đón đại diện các trường Đại học danh tiếng Hàn Quốc',
+                'Đội ngũ giảng viên bản ngữ và cố vấn giáo dục túc trực thường xuyên'
+            ],
+            photos: [
+                { src: '/assets/co-so/gallery/bnt_toan_canh.jpg', caption: 'Toàn cảnh mặt tiền trụ sở chính 135 Bạch Năng Thi & tập thể cán bộ học viên KIPA' },
+                { src: '/assets/co-so/gallery/bnt_phong_giam_doc.jpg', caption: 'Phòng làm việc Tổng Giám đốc Nguyễn Thị Khuyên tại trụ sở' },
+                { src: '/assets/co-so/gallery/bnt_lop_hoc_1.jpg', caption: 'Lớp đào tạo tiếng Hàn cấp tốc chuẩn TOPIK du học' },
+                { src: '/assets/co-so/gallery/bnt_doi_tac_han_quoc.jpg', caption: 'Phòng hội thảo đón tiếp đại diện các trường Đại học Hàn Quốc' },
+                { src: '/assets/co-so/gallery/bnt_lop_hoc_2.jpg', caption: 'Học viên KIPA trong giờ học tương tác văn hóa và ngôn ngữ Hàn' }
+            ],
+            video: null
+        },
+        '16-bui-thi-xuan': {
+            name: 'Văn phòng & Tòa nhà Hải Phòng – 16 Bùi Thị Xuân',
+            badge: 'Tòa nhà 6 tầng & VP Tuyển sinh',
+            badgeColor: 'bg-brand-blue text-white',
+            address: '16 Bùi Thị Xuân, Phường Lê Thanh Nghị, TP. Hải Phòng',
+            phone: '036 851 3865',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=16+Bùi+Thị+Xuân,+Hải+Phòng',
+            description: 'Tòa nhà văn phòng 6 tầng quy mô lớn của KIPA tại trục đường trung tâm Hải Phòng với sảnh lễ tân ốp gỗ hiện đại, hội trường ký kết hợp tác quốc tế với màn hình LED cỡ lớn và các phòng chức năng tư vấn chuyên sâu.',
+            features: [
+                'Tòa nhà 6 tầng bề thế, biển LED đỏ nhận diện KIPA nổi bật trên tầng thượng',
+                'Sảnh đón tiếp & quầy lễ tân sang trọng với logo 3D mạ vàng phát sáng',
+                'Hội trường ký kết đối tác quốc tế trang bị màn hình LED lớn và hệ thống âm thanh hiện đại',
+                'Khu vực tư vấn du học các nước (Hàn, Úc, Nhật, Âu) và văn phòng chuyên viên',
+                'Vị trí đắc địa, thuận tiện giao thông cho phụ huynh và học sinh toàn thành phố'
+            ],
+            photos: [
+                { src: '/assets/co-so/btx/btx_toan_canh.jpg', caption: '🏢 [Toàn cảnh 6 tầng] Tòa nhà độc lập 16 Bùi Thị Xuân, Phường Lê Thanh Nghị, TP. Hải Phòng' },
+                { src: '/assets/co-so/btx/btx_mat_tien.jpg', caption: '🏢 [Mặt tiền Tầng 1] Lối đón tiếp học viên & phụ huynh, biển Sở GD&ĐT cấp phép và bãi đỗ xe rộng rãi' },
+                { src: '/assets/co-so/btx/btx_bien_led_dem.jpg', caption: '🏢 [Tầng thượng] Hệ thống biển hiệu LED "DU HỌC QUỐC TẾ KIPA" rực rỡ bên hồ về đêm' },
+                { src: '/assets/co-so/btx/btx_sanh_le_tan.jpg', caption: '🛎️ [Tầng 1 - Sảnh lễ tân] Quầy tiếp đón phụ huynh & học sinh tư vấn lộ trình 1:1 chuyên nghiệp' },
+                { src: '/assets/co-so/btx/btx_cua_kinh_vao.jpg', caption: '🛎️ [Tầng 1 - Lối vào] Cửa kính trượt tự động mở ra không gian đón tiếp sang trọng, yên tĩnh' },
+                { src: '/assets/co-so/btx/btx_sanh_thang_may.jpg', caption: '🛎️ [Tầng 1 - Sảnh thang máy] Thang máy tốc độ cao kết nối 6 tầng & bảng chỉ dẫn sơ đồ phân khu chức năng' },
+                { src: '/assets/co-so/btx/btx_vach_thuong_hieu.jpg', caption: '🛎️ [Tầng 1 - Vách Brand] Biểu trưng tròn KIPA phát sáng cùng slogan "Uy Tín Tạo Thương Hiệu"' },
+                { src: '/assets/co-so/btx/btx_van_phong_lam_viec.jpg', caption: '💼 [Tầng 1 - Văn phòng làm việc] Khu bàn modul chuyên viên đối soát hồ sơ, dịch thuật công chứng & visa' },
+                { src: '/assets/co-so/btx/btx_doi_ngu_tu_van.jpg', caption: '💼 [Tầng 1 - Đội ngũ KIPA] Cán bộ tư vấn tuyển sinh & ban quản lý cơ sở Hải Phòng luôn tận tâm hỗ trợ' },
+                { src: '/assets/co-so/btx/btx_phong_hoc_topik.jpg', caption: '📚 [Tầng 2 & 3 - Phòng học TOPIK] Phòng học tiếng Hàn chuẩn hóa trang bị bảng từ, điều hòa hai chiều và máy chiếu' },
+                { src: '/assets/co-so/btx/btx_hoc_vien_lop.jpg', caption: '📚 [Tầng 2 & 3 - Lớp tương tác] Học viên KIPA trong giờ rèn luyện phản xạ phát âm và luyện phỏng vấn visa' },
+                { src: '/assets/co-so/btx/btx_hoi_truong_ky_ket.jpg', caption: '🤝 [Tầng 3 - Hội trường sự kiện] Lễ ký kết MOU cùng các trường Đại học Suseong, CĐ Munkyung, CĐ Daegu' },
+                { src: '/assets/co-so/btx/btx_don_doan_han_quoc.jpg', caption: '🤝 [Tầng 3 - Ngoại giao quốc tế] Tiếp đón và làm việc trực tiếp cùng phái đoàn Suwon Women\'s University' },
+                { src: '/assets/co-so/btx/btx_le_khai_truong.jpg', caption: '🤝 [Tầng 3 - Sân khấu sự kiện] Nghi thức cắt băng khánh thành và biểu diễn nghệ thuật khai trương cơ sở' },
+                { src: '/assets/co-so/btx/btx_phong_giam_doc.jpg', caption: '🏛️ [Tầng 4 - Ban Giám Đốc] Không gian làm việc Tổng Giám đốc KIPA và nơi tiếp đón các đối tác cấp cao' }
+            ],
+            video: null
+        },
+        'nam-sach': {
+            name: 'Chi nhánh Nam Sách – Hải Dương',
+            badge: 'Cơ sở tiếp nhận hồ sơ',
+            badgeColor: 'bg-brand-blue text-white',
+            address: 'Phố Vận Tải, Nam Sách, Hải Dương',
+            phone: '036 851 3865',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=Phố+Vận+Tải,+Nam+Sách',
+            description: 'Văn phòng tiếp nhận hồ sơ cơ sở 5 của KIPA Việt Hàn tại huyện Nam Sách, tỉnh Hải Dương. Giúp học sinh và phụ huynh khu vực Hải Dương tiếp cận thông tin du học chính ngạch mà không cần di chuyển xa.',
+            features: [
+                'Văn phòng tiếp nhận hồ sơ & tư vấn du học trực tiếp tại trung tâm Nam Sách',
+                'Đội ngũ chuyên viên tư vấn giàu kinh nghiệm, am hiểu quy trình xin học bổng',
+                'Hỗ trợ toàn bộ thủ tục công chứng, dịch thuật, hoàn thiện hồ sơ visa nhanh chóng',
+                'Thường xuyên tổ chức các buổi tư vấn định hướng du học & phổ cập tiếng Hàn'
+            ],
+            photos: [
+                { src: '/assets/co-so/gallery/ns_mat_tien.jpg', caption: 'Văn phòng tiếp nhận hồ sơ cơ sở 5 KIPA tại Phố Vận Tải, Nam Sách' },
+                { src: '/assets/co-so/gallery/ns_van_phong_1.jpg', caption: 'Bàn tiếp đón phụ huynh & học sinh tư vấn lộ trình du học' },
+                { src: '/assets/co-so/gallery/ns_van_phong_2.jpg', caption: 'Không gian văn phòng chi nhánh Nam Sách' },
+                { src: '/assets/co-so/gallery/ns_hoat_dong.jpg', caption: 'Hoạt động giao lưu và tư vấn định hướng tương lai cho học sinh' }
+            ],
+            video: {
+                src: '/assets/co-so/video/nam_sach_video.mp4',
+                title: 'Video hoạt động phổ cập & tham quan cơ sở Nam Sách'
+            }
+        },
+        'quang-ninh': {
+            name: 'Chi nhánh Quảng Ninh',
+            badge: 'Chi nhánh liên kết',
+            badgeColor: 'bg-brand-blue text-white',
+            address: 'Số 31, ngõ 44 Tô Hiệu, P. Cẩm Trung, Cẩm Phả, Quảng Ninh',
+            phone: '0889 2222 55',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=31+ngõ+44+Tô+Hiệu,+Cẩm+Phả,+Quảng+Ninh',
+            description: 'Chi nhánh liên kết chiến lược giữa KIPA Việt Hàn và Công ty CP Du lịch & Sự kiện Biển Bắc (North Sea Travel) tại Quảng Ninh, mở ra cơ hội du học và làm việc quốc tế thuận lợi cho học sinh vùng mỏ.',
+            features: [
+                'Hợp tác liên kết chiến lược chính thống giữa KIPA & North Sea Travel',
+                'Đầu mối tuyển sinh du học Hàn Quốc, Úc, Nhật Bản chính ngạch tại Cẩm Phả - Hạ Long',
+                'Quy trình tiếp nhận và xử lý hồ sơ đồng bộ trực tiếp với hội đồng tuyển sinh Hải Phòng',
+                'Hỗ trợ tư vấn chi phí minh bạch, cam kết lộ trình rõ ràng'
+            ],
+            photos: [
+                { src: '/assets/co-so/gallery/qn_khai_truong_1.jpg', caption: 'Lễ khai trương chi nhánh KIPA Quảng Ninh' },
+                { src: '/assets/co-so/gallery/qn_khai_truong_2.jpg', caption: 'Nghi thức cắt băng khánh thành cơ sở Quảng Ninh' },
+                { src: '/assets/co-so/gallery/qn_ky_ket.jpg', caption: 'Lễ ký kết biên bản hợp tác phát triển chi nhánh Quảng Ninh' },
+                { src: '/assets/co-so/gallery/qn_trao_chung_nhan.jpg', caption: 'Trao chứng nhận ủy nhiệm văn phòng tuyển sinh' }
+            ],
+            video: null
+        },
+        'hcm': {
+            name: 'Chi nhánh TP. Hồ Chí Minh',
+            badge: 'Chi nhánh miền Nam',
+            badgeColor: 'bg-brand-blue text-white',
+            address: '93 Calmette, Phường Bến Thành, TP. Hồ Chí Minh',
+            phone: '036 851 3865',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=93+Calmette,+Bến+Thành,+Hồ+Chí+Minh',
+            description: 'Đầu mối tuyển sinh và tư vấn du học quốc tế của KIPA Việt Hàn phục vụ phụ huynh và học sinh tại TP. Hồ Chí Minh và các tỉnh thành phía Nam.',
+            features: [
+                'Vị trí trung tâm Quận 1, thuận tiện cho phụ huynh và học sinh đến tư vấn',
+                'Tư vấn đầy đủ các hệ du học Hàn Quốc (D4-1, D2), du học Úc và xuất khẩu lao động',
+                'Đồng bộ dữ liệu và quy trình xử lý hồ sơ cùng trụ sở chính KIPA'
+            ],
+            photos: [],
+            video: null
+        },
+        'han-quoc': {
+            name: 'Văn phòng đại diện tại Hàn Quốc',
+            badge: 'VP Quốc tế',
+            badgeColor: 'bg-indigo-600 text-white',
+            address: 'Seoul, Korea (Hỗ trợ trực tiếp du học sinh tại Hàn)',
+            phone: '036 851 3865',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=Seoul,+Korea',
+            description: 'Văn phòng đại diện của KIPA tại thủ đô Seoul, trực tiếp đồng hành và chăm lo đời sống học viên KIPA từ khi hạ cánh xuống sân bay Incheon cho đến suốt thời gian học tập tại Hàn Quốc.',
+            features: [
+                'Đón du học sinh tại sân bay quốc tế Incheon, hỗ trợ đưa về trường/ký túc xá',
+                'Hướng dẫn làm thủ tục thẻ cư trú người nước ngoài (ARC) và mở tài khoản ngân hàng',
+                'Kết nối việc làm thêm an toàn, hợp pháp theo quy định của Cục Quản lý Xuất nhập cảnh Hàn Quốc',
+                'Hỗ trợ học viên chuyển đổi visa D4-1 sang D2 đại học, cao học và visa E7 kỹ sư',
+                'Đường dây nóng hỗ trợ khẩn cấp 24/7 cho du học sinh và gia đình'
+            ],
+            photos: [],
+            video: null
+        },
+        'uc': {
+            name: 'Văn phòng đại diện tại Úc',
+            badge: 'VP Quốc tế',
+            badgeColor: 'bg-sky-600 text-white',
+            address: 'Sydney & Melbourne, Australia',
+            phone: '036 851 3865',
+            hours: '7:00 – 17:00 (Thứ 2 – Thứ 7)',
+            mapsUrl: 'https://maps.google.com/?q=Sydney,+Australia',
+            description: 'Văn phòng hỗ trợ du học sinh và người lao động của KIPA tại Australia, là điểm tựa vững chắc giúp học viên hòa nhập môi trường sống và học tập mới tại Úc.',
+            features: [
+                'Hướng dẫn thủ tục nhập học, kích hoạt bảo hiểm y tế du học sinh OSHC',
+                'Hỗ trợ tìm kiếm homestay, phòng trọ an toàn gần trường học',
+                'Tư vấn pháp lý, gia hạn visa du học Subclass 500 và định hướng visa việc làm 485 sau tốt nghiệp'
+            ],
+            photos: [],
+            video: null
+        }
+    };
+
+    var currentFacility = null;
+    var currentPhotoIdx = 0;
+
+    window.openFacilityModal = function(key) {
+        var data = FACILITY_DATA[key];
+        if (!data) return;
+
+        currentFacility = data;
+        currentPhotoIdx = 0;
+
+        // Fill Header Info
+        document.getElementById('modal-facility-title').innerText = data.name;
+        document.getElementById('modal-address').innerText = data.address;
+        document.getElementById('modal-hours').innerText = data.hours;
+        
+        var badgeEl = document.getElementById('modal-badge');
+        badgeEl.className = 'inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-xs ' + data.badgeColor;
+        document.getElementById('modal-badge-text').innerText = data.badge;
+
+        // Action links
+        document.getElementById('modal-call-btn').href = 'tel:' + data.phone.replace(/\s+/g, '');
+        document.getElementById('modal-maps-btn').href = data.mapsUrl;
+
+        // Photo count badge
+        var photoCount = data.photos ? data.photos.length : 0;
+        document.getElementById('modal-photo-badge').innerText = photoCount;
+
+        // Video badge
+        var videoBadge = document.getElementById('modal-video-badge');
+        if (data.video) {
+            videoBadge.className = 'text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold';
+            videoBadge.innerText = 'Sẵn sàng';
+        } else {
+            videoBadge.className = 'text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium';
+            videoBadge.innerText = 'Cập nhật';
+        }
+
+        // Render Photos Tab
+        var galleryActiveContainer = document.getElementById('modal-gallery-active-container');
+        var thumbsContainer = document.getElementById('modal-thumbs-container');
+        var photosEmpty = document.getElementById('modal-photos-empty');
+
+        if (photoCount > 0) {
+            galleryActiveContainer.classList.remove('hidden');
+            thumbsContainer.classList.remove('hidden');
+            photosEmpty.classList.add('hidden');
+
+            renderThumbnails(data.photos);
+            selectModalPhoto(0);
+        } else {
+            galleryActiveContainer.classList.add('hidden');
+            thumbsContainer.classList.add('hidden');
+            photosEmpty.classList.remove('hidden');
+        }
+
+        // Render Video Tab
+        var videoContainer = document.getElementById('modal-video-container');
+        var videoEmpty = document.getElementById('modal-video-empty');
+        var videoPlayer = document.getElementById('modal-video-player');
+
+        if (data.video && data.video.src) {
+            videoContainer.classList.remove('hidden');
+            videoEmpty.classList.add('hidden');
+            videoPlayer.src = data.video.src;
+            document.getElementById('modal-video-title').innerText = data.video.title || 'Video tham quan cơ sở';
+        } else {
+            videoContainer.classList.add('hidden');
+            videoEmpty.classList.remove('hidden');
+            videoPlayer.pause();
+            videoPlayer.removeAttribute('src');
+            videoPlayer.load();
+        }
+
+        // Render Info Tab
+        document.getElementById('modal-info-desc').innerText = data.description;
+        var featuresList = document.getElementById('modal-info-features');
+        featuresList.innerHTML = '';
+        if (data.features && data.features.length) {
+            data.features.forEach(function(feat) {
+                var li = document.createElement('li');
+                li.className = 'flex items-start gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100';
+                li.innerHTML = '<i class="fa-solid fa-circle-check text-brand-blue text-xs mt-0.5 shrink-0"></i><span>' + feat + '</span>';
+                featuresList.appendChild(li);
+            });
+        }
+
+        // Reset to photos tab (or video tab if photos empty and video exists)
+        if (photoCount === 0 && data.video) {
+            switchFacilityTab('video');
+        } else {
+            switchFacilityTab('photos');
+        }
+
+        // Open Modal
+        var modal = document.getElementById('facility-tour-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeFacilityModal = function() {
+        var modal = document.getElementById('facility-tour-modal');
+        if (modal) modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        
+        // Pause any video playback
+        var videoPlayer = document.getElementById('modal-video-player');
+        if (videoPlayer) {
+            videoPlayer.pause();
+        }
+    };
+
+    window.switchFacilityTab = function(tabName) {
+        var tabs = ['photos', 'video', 'info'];
+        tabs.forEach(function(t) {
+            var btn = document.getElementById('tab-btn-' + t);
+            var content = document.getElementById('tab-content-' + t);
+            if (t === tabName) {
+                btn.className = 'facility-modal-tab active py-3 px-3.5 text-xs sm:text-sm font-bold border-b-2 border-brand-blue text-brand-blue flex items-center gap-2 whitespace-nowrap transition-colors';
+                content.classList.remove('hidden');
+            } else {
+                btn.className = 'facility-modal-tab py-3 px-3.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-brand-blue flex items-center gap-2 whitespace-nowrap transition-colors';
+                content.classList.add('hidden');
+            }
+        });
+
+        // Pause video if switching away from video tab
+        if (tabName !== 'video') {
+            var videoPlayer = document.getElementById('modal-video-player');
+            if (videoPlayer) videoPlayer.pause();
+        }
+    };
+
+    function renderThumbnails(photos) {
+        var container = document.getElementById('modal-thumbs-container');
+        container.innerHTML = '';
+        photos.forEach(function(p, idx) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'modal-thumb-btn relative h-14 sm:h-16 rounded-xl overflow-hidden border-2 transition-all ' + (idx === 0 ? 'border-brand-blue ring-2 ring-blue-300' : 'border-transparent opacity-70 hover:opacity-100');
+            btn.setAttribute('data-idx', idx);
+            btn.onclick = function() { selectModalPhoto(idx); };
+            btn.innerHTML = '<img src="' + p.src + '" alt="' + p.caption + '" class="w-full h-full object-cover">';
+            container.appendChild(btn);
+        });
+    }
+
+    window.selectModalPhoto = function(idx) {
+        if (!currentFacility || !currentFacility.photos || !currentFacility.photos.length) return;
+        if (idx < 0) idx = currentFacility.photos.length - 1;
+        if (idx >= currentFacility.photos.length) idx = 0;
+
+        currentPhotoIdx = idx;
+        var photo = currentFacility.photos[idx];
+
+        var img = document.getElementById('modal-active-img');
+        img.src = photo.src;
+        img.alt = photo.caption;
+
+        document.getElementById('modal-active-caption').innerText = photo.caption;
+        document.getElementById('modal-photo-current').innerText = idx + 1;
+        document.getElementById('modal-photo-total').innerText = currentFacility.photos.length;
+
+        // Update thumbnail borders
+        var thumbs = document.querySelectorAll('.modal-thumb-btn');
+        thumbs.forEach(function(t, i) {
+            if (i === idx) {
+                t.className = 'modal-thumb-btn relative h-14 sm:h-16 rounded-xl overflow-hidden border-2 border-brand-blue ring-2 ring-blue-300';
+            } else {
+                t.className = 'modal-thumb-btn relative h-14 sm:h-16 rounded-xl overflow-hidden border-2 border-transparent opacity-70 hover:opacity-100';
+            }
+        });
+    };
+
+    window.nextModalPhoto = function() {
+        selectModalPhoto(currentPhotoIdx + 1);
+    };
+
+    window.prevModalPhoto = function() {
+        selectModalPhoto(currentPhotoIdx - 1);
+    };
+
+    
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', function(e) {
+        var modal = document.getElementById('facility-tour-modal');
+        if (modal && !modal.classList.contains('hidden')) {
+            if (e.key === 'Escape') {
+                closeFacilityModal();
+            } else if (e.key === 'ArrowRight') {
+                nextModalPhoto();
+            } else if (e.key === 'ArrowLeft') {
+                prevModalPhoto();
+            }
+        }
+    });
 </script>
     </main>
 

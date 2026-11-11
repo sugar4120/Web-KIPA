@@ -253,6 +253,13 @@
                                 <div class="text-[10px] text-slate-400 font-normal">Lãnh đạo & chuyên gia</div>
                             </div>
                         </a>
+                        <a href="/hoat-dong-su-kien/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-red-50/60 hover:text-[#EC1E1B] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn"></i></span>
+                            <div>
+                                <div class="font-bold">Hoạt động &amp; Sự kiện</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Hội thảo, ký kết, đào tạo</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -309,7 +316,8 @@
                     </div>
                 </div>
 
-                <a href="/#stories" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
+                <a href="/cau-chuyen-hoc-vien/" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
+                <a href="/tin-tuc/" class="kipa-nav-item hover:text-[#0274BD]">Tin tức</a>
                 <a href="/faq/" class="kipa-nav-item hover:text-[#0274BD]">Hỏi đáp</a>
                 <a href="/co-so/" class="kipa-nav-item hover:text-[#0274BD]">Cơ sở</a>
                 <a href="/lien-he/" class="kipa-nav-item hover:text-[#0274BD]">Liên hệ</a>
@@ -343,6 +351,7 @@
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Về KIPA</div>
             <a href="/gioi-thieu/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🏢 Giới thiệu KIPA</a>
             <a href="/doi-ngu/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">👥 Đội ngũ KIPA</a>
+            <a href="/hoat-dong-su-kien/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🎉 Hoạt động &amp; Sự kiện</a>
         </div>
         <div class="pl-3 py-1 space-y-2 border-l border-slate-100 ml-1">
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Chương trình đào tạo</div>
@@ -353,7 +362,8 @@
             <a href="/tieng-han/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📖 Đào tạo tiếng Hàn TOPIK</a>
             <a href="/hop-tac-quoc-te/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🤝 Hợp tác giáo dục quốc tế</a>
         </div>
-        <a href="/#stories" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
+        <a href="/cau-chuyen-hoc-vien/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
+        <a href="/tin-tuc/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Tin tức &amp; Cẩm nang</a>
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
@@ -562,6 +572,26 @@
                         </div>
                     </div>
 
+                    <!-- Document Request Alert Box (Hiển thị khi người dùng đến từ nút Tải tài liệu trên Blog/Cẩm nang) -->
+                    <div id="document-request-banner" class="hidden mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border-2 border-[#0274BD]/30 shadow-xs transition-all duration-300">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-[#0274BD] text-white flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-file-circle-check text-lg"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0274BD]/10 text-[#0274BD] text-[11px] font-bold uppercase tracking-wider mb-1">
+                                    <i class="fa-solid fa-gift text-amber-500"></i> Đăng ký nhận tài liệu độc quyền KIPA
+                                </div>
+                                <h4 id="doc-banner-title" class="text-xs sm:text-sm md:text-base font-bold text-slate-900 leading-snug">
+                                    Trọn Bộ Sổ Tay Lộ Trình Du Học &amp; Xuất Khẩu Lao Động (Cẩm Nang KIPA 2026)
+                                </h4>
+                                <p class="text-[11.5px] sm:text-xs text-slate-600 mt-1 leading-relaxed">
+                                    Vui lòng nhập <strong class="text-slate-900">địa chỉ Email</strong> bên dưới để KIPA Việt Hàn gửi trọn bộ tài liệu kèm Checklist 15 mục hồ sơ và bảng dự toán chi phí qua Email cho bạn trong vòng 5 phút!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- The Actual Form -->
                     <form id="consultation-form" data-kipa-form="consultation" data-source-page="/dang-ky-tu-van/" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -577,6 +607,12 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">
+                                    Địa chỉ Email <span id="email-label-mark" class="text-slate-400 font-normal text-[11px]">(nhận tài liệu qua email)</span>
+                                </label>
+                                <input type="email" name="email" id="field-email" maxlength="254" placeholder="email@gmail.com" class="w-full text-xs sm:text-sm p-3.5 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue focus:bg-white transition-all">
+                            </div>
+                            <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1.5">Khu vực sinh sống <span class="text-brand-red">*</span></label>
                                 <select name="area" required class="w-full text-xs sm:text-sm p-3.5 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue focus:bg-white transition-all text-slate-700">
                                     <option value="" disabled selected>Chọn tỉnh/thành phố</option>
@@ -588,44 +624,52 @@
                                     <option value="khac">Tỉnh/thành khác</option>
                                 </select>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Thời gian tiện liên hệ <span class="text-brand-red">*</span></label>
-                                <select name="contact_time" required class="w-full text-xs sm:text-sm p-3.5 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue focus:bg-white transition-all text-slate-700">
-                                    <option value="bat-ky">Bất kỳ lúc nào</option>
-                                    <option value="sang">Buổi sáng (8h - 12h)</option>
-                                    <option value="chieu">Buổi chiều (13h30 - 17h30)</option>
-                                    <option value="toi">Buổi tối (18h - 21h)</option>
-                                </select>
-                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Thời gian tiện liên hệ <span class="text-brand-red">*</span></label>
+                            <select name="contact_time" required class="w-full text-xs sm:text-sm p-3.5 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue focus:bg-white transition-all text-slate-700">
+                                <option value="bat-ky">Bất kỳ lúc nào</option>
+                                <option value="sang">Buổi sáng (8h - 12h)</option>
+                                <option value="chieu">Buổi chiều (13h30 - 17h30)</option>
+                                <option value="toi">Buổi tối (18h - 21h)</option>
+                            </select>
                         </div>
 
                         <!-- Radio Program Selection -->
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-2">Chương trình quan tâm <span class="text-brand-red">*</span></label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                                <label class="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs" id="program-radios-container">
+                                <label class="program-radio-box flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50 transition-all">
                                     <input type="radio" name="program" value="du-hoc" checked required class="text-brand-blue focus:ring-0">
                                     <span class="font-medium">Du học</span>
                                 </label>
-                                <label class="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50">
+                                <label class="program-radio-box flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50 transition-all">
                                     <input type="radio" name="program" value="xuat-khau" class="text-brand-blue focus:ring-0">
                                     <span class="font-medium">XKLĐ</span>
                                 </label>
-                                <label class="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50">
+                                <label class="program-radio-box flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50 transition-all">
                                     <input type="radio" name="program" value="tieng-han" class="text-brand-blue focus:ring-0">
                                     <span class="font-medium">Tiếng Hàn</span>
                                 </label>
-                                <label class="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50">
+                                <label class="program-radio-box flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50 transition-all">
                                     <input type="radio" name="program" value="hop-tac" class="text-brand-blue focus:ring-0">
                                     <span class="font-medium">Hợp tác GD</span>
+                                </label>
+                                <label class="program-radio-box flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-blue-50/50 transition-all" id="label-nhan-tai-lieu">
+                                    <input type="radio" name="program" value="nhan-tai-lieu" class="text-brand-blue focus:ring-0">
+                                    <span class="font-medium flex items-center gap-1.5 text-[#0274BD] font-semibold">
+                                        <i class="fa-solid fa-file-arrow-down text-emerald-600 text-[11px]"></i>
+                                        <span>Nhận tài liệu</span>
+                                    </span>
                                 </label>
                             </div>
                         </div>
 
                         <!-- Notes / Questions -->
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Nội dung cần tư vấn (nếu có)</label>
-                            <textarea name="notes" maxlength="2000" rows="3" placeholder="Ví dụ: Tôi muốn tìm hiểu du học Hàn Quốc kỳ tháng 9, chi phí và điều kiện..." class="w-full text-xs sm:text-sm p-3.5 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue focus:bg-white transition-all"></textarea>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Nội dung cần tư vấn / Tài liệu yêu cầu</label>
+                            <textarea name="notes" id="field-notes" maxlength="2000" rows="3" placeholder="Ví dụ: Tôi muốn tìm hiểu du học Hàn Quốc kỳ tháng 9, chi phí và điều kiện..." class="w-full text-xs sm:text-sm p-3.5 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue focus:bg-white transition-all"></textarea>
                         </div>
 
                         <!-- Privacy Consent Checkbox -->
@@ -637,7 +681,7 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit" class="w-full py-4 rounded-full bg-brand-red hover:bg-red-700 text-white font-bold text-sm sm:text-base shadow-lg shadow-red-500/20 transition-all flex items-center justify-center gap-2">
+                        <button type="submit" id="btn-submit-consultation" class="w-full py-4 rounded-full bg-brand-red hover:bg-red-700 text-white font-bold text-sm sm:text-base shadow-lg shadow-red-500/20 transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane text-xs"></i>
                             <span>Gửi đăng ký tư vấn ngay</span>
                         </button>
@@ -801,6 +845,89 @@
             if (radio) radio.checked = true;
         }
 
+        // Tự động nhận diện URL params khi người dùng đến từ nút "Tải tài liệu ngay"
+        // Tự động nhận diện URL params khi người dùng đến từ nút "Tải tài liệu ngay"
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const taiLieu = urlParams.get('tai_lieu') || urlParams.get('tai-lieu') || urlParams.get('document');
+            const tieuDe = urlParams.get('tieu_de') || urlParams.get('title') || urlParams.get('tieu-de');
+            const progParam = urlParams.get('chuong_trinh') || urlParams.get('program');
+
+            // Interactive radio styling
+            document.querySelectorAll('input[name="program"]').forEach(r => {
+                r.addEventListener('change', function() {
+                    document.querySelectorAll('.program-radio-box').forEach(b => b.classList.remove('border-[#0274BD]', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'font-bold'));
+                    const parent = this.closest('label');
+                    if (parent) {
+                        parent.classList.add('border-[#0274BD]', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'font-bold');
+                    }
+                });
+            });
+
+            if (taiLieu || tieuDe || progParam === 'nhan-tai-lieu') {
+                const docTitle = tieuDe ? decodeURIComponent(tieuDe) : 'Trọn Bộ Sổ Tay Lộ Trình Du Học & Xuất Khẩu Lao Động (Cẩm Nang KIPA 2026)';
+
+                // 1. Tự động chọn radio "Nhận tài liệu" ở phía trên để dữ liệu về tiện phân loại
+                const radioTaiLieu = document.querySelector('input[name="program"][value="nhan-tai-lieu"]');
+                if (radioTaiLieu) {
+                    radioTaiLieu.checked = true;
+                    document.querySelectorAll('.program-radio-box').forEach(b => b.classList.remove('border-[#0274BD]', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'font-bold'));
+                    const labelBox = document.getElementById('label-nhan-tai-lieu');
+                    if (labelBox) {
+                        labelBox.classList.add('border-[#0274BD]', 'bg-blue-50', 'ring-2', 'ring-blue-200', 'font-bold');
+                    }
+                }
+
+                // 2. Hiển thị thông báo nhận tài liệu trên đầu form
+                const banner = document.getElementById('document-request-banner');
+                const bannerTitle = document.getElementById('doc-banner-title');
+                if (banner) {
+                    banner.classList.remove('hidden');
+                }
+                if (bannerTitle) {
+                    bannerTitle.textContent = docTitle;
+                }
+
+                // 3. Điền sẵn ghi chú tiêu đề tài liệu để KIPA gửi qua email
+                const notesField = document.getElementById('field-notes') || document.querySelector('textarea[name="notes"]');
+                const customNote = urlParams.get('note');
+                if (notesField) {
+                    if (customNote) {
+                        notesField.value = decodeURIComponent(customNote);
+                    } else {
+                        notesField.value = `[YÊU CẦU NHẬN TÀI LIỆU QUA EMAIL]\n• Tiêu đề tài liệu: ${docTitle}\n• Đề nghị KIPA gửi trọn bộ tài liệu kèm Checklist 15 mục hồ sơ và dự toán chi phí qua email cho tôi.`;
+                    }
+                    notesField.classList.add('border-blue-400', 'bg-blue-50/20');
+                }
+
+                // 4. Yêu cầu nhập Email bắt buộc
+                const emailField = document.getElementById('field-email');
+                const emailMark = document.getElementById('email-label-mark');
+                if (emailField) {
+                    emailField.setAttribute('required', 'required');
+                    emailField.classList.add('border-blue-400', 'bg-blue-50/20');
+                }
+                if (emailMark) {
+                    emailMark.innerHTML = '<span class="text-brand-red font-bold">*</span> <span class="text-blue-600 font-semibold">(Bắt buộc để nhận tài liệu)</span>';
+                }
+
+                // 5. Đổi nhãn nút submit
+                const submitBtn = document.getElementById('btn-submit-consultation');
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-file-arrow-down text-sm"></i><span>Gửi đăng ký &amp; Nhận tài liệu qua Email ngay</span>';
+                }
+
+                // 6. Cuộn mượt tới form
+                setTimeout(function () {
+                    const formTarget = document.getElementById('consultation-form');
+                    if (formTarget) {
+                        formTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 300);
+            } else if (progParam) {
+                setProgram(progParam);
+            }
+        });
     </script>
     </div>
 
