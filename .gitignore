@@ -10,6 +10,7 @@ deploy_ftp.py
 # Python / Cache
 __pycache__/
 *.pyc
+node_modules/
 
 # Environment & Credentials
 .env

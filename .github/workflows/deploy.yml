@@ -2,17 +2,15 @@ name: Build and deploy KIPA
 
 on:
   push:
-    branches: [master]
   pull_request:
-    branches: [master]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: kipa-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+  group: kipa-ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -36,6 +34,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build:css
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, pdo_sqlite
+          coverage: none
       - name: Test build and deployment rules
         run: python3 -m unittest discover -s tests -v
       - name: Validate PHP backend and retention cleanup
@@ -73,6 +82,9 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && vars.DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: kipa-production-deploy
+      cancel-in-progress: false
     environment: production
     steps:
       - uses: actions/checkout@v4

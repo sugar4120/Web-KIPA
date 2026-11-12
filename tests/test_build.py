@@ -5,10 +5,61 @@ import re
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 from pathlib import Path
 
 import build
 from deploy_ftps import public_files
+
+
+class FormLabelParser(HTMLParser):
+    VOID_ELEMENTS = {
+        'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+        'meta', 'param', 'source', 'track', 'wbr',
+    }
+
+    def __init__(self):
+        super().__init__()
+        self.labels_by_for = set()
+        self.controls = []
+        self.label_depth = 0
+        self.hidden_depth = 0
+        self.stack = []
+
+    def handle_starttag(self, tag, raw_attrs):
+        attrs = dict(raw_attrs)
+        if tag == 'label':
+            self.label_depth += 1
+            if attrs.get('for'):
+                self.labels_by_for.add(attrs['for'])
+        if tag in {'input', 'select', 'textarea'}:
+            self.controls.append({
+                'tag': tag,
+                'type': attrs.get('type', '').lower(),
+                'id': attrs.get('id'),
+                'nested_label': self.label_depth > 0,
+                'aria_label': attrs.get('aria-label') or attrs.get('aria-labelledby'),
+                'title': attrs.get('title'),
+                'hidden': (
+                    self.hidden_depth > 0
+                    or 'hidden' in attrs
+                    or attrs.get('aria-hidden', '').lower() == 'true'
+                ),
+                'line': self.getpos()[0],
+            })
+        if tag not in self.VOID_ELEMENTS:
+            hidden = attrs.get('aria-hidden', '').lower() == 'true'
+            self.stack.append((tag, hidden))
+            self.hidden_depth += int(hidden)
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, -1, -1):
+            open_tag, hidden = self.stack.pop()
+            self.hidden_depth -= int(hidden)
+            if open_tag == tag:
+                if tag == 'label':
+                    self.label_depth -= 1
+                break
 
 
 class BuildTests(unittest.TestCase):
@@ -159,6 +210,34 @@ class BuildTests(unittest.TestCase):
                 )
         header = (Path(build.BASE_DIR) / 'header.html').read_text(encoding='utf-8')
         self.assertIn('/assets/js/kipa-forms.js', header)
+
+    def test_form_controls_have_accessible_names(self):
+        failures = []
+        for path in self.output.glob('*.html'):
+            parser = FormLabelParser()
+            parser.feed(path.read_text(encoding='utf-8'))
+            for control in parser.controls:
+                if control['hidden'] or control['type'] == 'hidden':
+                    continue
+                if not (
+                    control['nested_label']
+                    or control['aria_label']
+                    or control['title']
+                    or (control['id'] and control['id'] in parser.labels_by_for)
+                ):
+                    failures.append(
+                        f"{path.name}:{control['line']} {control['tag']}#{control['id'] or '(no id)'}"
+                    )
+        self.maxDiff = None
+        self.assertEqual(failures, [], 'Form controls need an associated label: ' + ', '.join(failures))
+
+    def test_tailwind_is_built_locally_for_every_page(self):
+        css_path = Path(build.BASE_DIR) / 'assets/css/kipa.css'
+        self.assertTrue(css_path.is_file(), 'Compile the local Tailwind stylesheet before building.')
+        for path in self.output.glob('*.html'):
+            html = path.read_text(encoding='utf-8')
+            self.assertIn('/assets/css/kipa.css', html, f'{path.name}: missing local stylesheet')
+            self.assertNotIn('cdn.tailwindcss.com', html, f'{path.name}: runtime Tailwind CDN remains')
 
     def test_rejects_nonempty_staging_directory(self):
         with self.assertRaisesRegex(ValueError, 'must be empty'):

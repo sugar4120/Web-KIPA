@@ -1,18 +1,36 @@
 <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="/assets/js/kipa-forms.js?v=20261103-3" defer></script>
 <script src="/assets/js/kipa-site.js?v=20261103-1" defer></script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Phudu:wght@600;700;800;900&display=swap');
-    
     .font-phudu { font-family: 'Phudu', sans-serif !important; }
     .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
     .kipa-blue { color: #0274BD !important; }
     .kipa-bg-blue { background-color: #0274BD !important; }
     .kipa-bg-navy { background-color: #081D36 !important; }
     .kipa-border-blue { border-color: #0274BD !important; }
+
+    @media (max-width: 359px) {
+        #kipa-header .kipa-header-search {
+            display: none !important;
+        }
+
+        #kipa-header .kipa-admin-login-label {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        #kipa-header .kipa-header-actions {
+            gap: 0.25rem !important;
+        }
+    }
 
     /* TRIET DE CHONG XUNG DOT THE VUA WORDPRESS / ELEMENTOR */
     #kipa-header,
@@ -87,7 +105,7 @@
         <div class="flex items-center justify-between h-[74px] gap-2 lg:gap-4">
             
             <!-- 1. Brand Logo (Ben trai) -->
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
+            <a href="/" class="kipa-header-brand flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
                 <img src="/Logo.jpg" alt="Logo KIPA Việt Hàn" class="w-11 h-11 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform border border-slate-100 shrink-0">
                 <div class="flex flex-col">
                     <span class="font-phudu text-lg sm:text-[21px] font-bold tracking-tight text-slate-900 group-hover:text-[#0274BD] transition-colors leading-none flex items-center gap-1.5 whitespace-nowrap">
@@ -195,13 +213,13 @@
             </nav>
 
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
-            <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+            <div class="kipa-header-actions flex items-center gap-2.5 sm:gap-3.5 shrink-0">
                 <a href="/api/admin.php" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập quản trị">
                     <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
-                    <span>Đăng nhập</span>
+                    <span class="kipa-admin-login-label">Đăng nhập</span>
                 </a>
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
-                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="kipa-header-search w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </a>
 

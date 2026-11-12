@@ -321,9 +321,7 @@ def render_full_html(cfg, body_content, header_html, footer_html):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    
+    <link rel="stylesheet" href="/assets/css/kipa.css?v=20261112-1">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -398,6 +396,7 @@ def build_site(output_dir=None):
 
     required = [
         'header.html', 'footer.html', '.htaccess', 'robots.txt', 'Logo.jpg',
+        'assets/css/kipa.css',
     ]
     required.extend(sorted(API_FILES))
     required.extend(cfg['file'] for cfg in PAGES_CONFIG)
