@@ -1691,12 +1691,12 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Họ và tên <span class="text-brand-red">*</span></label>
-                                    <input type="text" name="fullname" required maxlength="254" placeholder="Nhập họ và tên"
+                                    <input type="text" name="fullname" required maxlength="254" aria-label="Họ và tên" placeholder="Nhập họ và tên"
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Số điện thoại <span class="text-brand-red">*</span></label>
-                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại"
+                                    <input type="tel" name="phone" required maxlength="32" aria-label="Số điện thoại" placeholder="Nhập số điện thoại"
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                             </div>
@@ -1705,7 +1705,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Năm sinh <span class="text-brand-red">*</span></label>
-                                    <select name="birth_year" required class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
+                                    <select name="birth_year" required aria-label="Năm sinh" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
                                         <option value="">Chọn năm sinh</option>
                                         <option value="2007">2007 (19 tuổi)</option>
                                         <option value="2006">2006 (20 tuổi)</option>
@@ -1730,7 +1730,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Thị trường mong muốn</label>
-                                    <select name="market" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
+                                    <select name="market" aria-label="Thị trường mong muốn" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
                                         <option value="">Chọn thị trường</option>
                                         <option value="HQ">Hàn Quốc (E7 / E9)</option>
                                         <option value="NB">Nhật Bản (TTS / Tokutei)</option>
@@ -1745,7 +1745,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Ngành nghề quan tâm</label>
-                                    <select name="industry" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
+                                    <select name="industry" aria-label="Ngành nghề quan tâm" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
                                         <option value="">Chọn ngành nghề</option>
                                         <option value="san_xuat">Sản xuất – Chế tạo</option>
                                         <option value="co_khi">Cơ khí – Hàn – Kỹ thuật</option>
@@ -1759,7 +1759,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Nội dung cần tư vấn</label>
-                                    <input type="text" name="notes" placeholder="Nhập nội dung cần hỗ trợ..." 
+                                    <input type="text" name="notes" aria-label="Nội dung cần tư vấn" placeholder="Nhập nội dung cần hỗ trợ..."
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                             </div>
@@ -1773,7 +1773,7 @@
                             </div>
 
                             <div class="flex items-start gap-2 text-[11px] text-gray-600">
-                                <input type="checkbox" name="consent" value="yes" required class="mt-0.5">
+                                <input type="checkbox" name="consent" value="yes" required aria-label="Đồng ý với Chính sách bảo mật" class="mt-0.5">
                                 <span>Tôi đồng ý để KIPA Việt Hàn sử dụng thông tin đã cung cấp để liên hệ tư vấn theo <a href="/chinh-sach-bao-mat/" class="underline">Chính sách bảo mật</a>.</span>
                             </div>
                             <p class="text-[11px] text-gray-400 text-center pt-1">

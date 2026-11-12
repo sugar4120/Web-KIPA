@@ -1071,7 +1071,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-1">
                         <div class="space-y-1">
                             <label class="text-[11px] font-bold text-slate-700 block">Trình độ hiện tại</label>
-                            <select class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
+                            <select aria-label="Trình độ tiếng Hàn hiện tại" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
                                 <option>Chưa từng học</option>
                                 <option>Đã biết bảng chữ cái</option>
                                 <option>Sơ cấp (TOPIK 1-2)</option>
@@ -1081,7 +1081,7 @@
 
                         <div class="space-y-1">
                             <label class="text-[11px] font-bold text-slate-700 block">Mục tiêu học tập</label>
-                            <select class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
+                            <select aria-label="Mục tiêu học tập tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
                                 <option>Học tiếng Hàn du học</option>
                                 <option>Giao tiếp đời sống</option>
                                 <option>Luyện thi TOPIK</option>
@@ -1091,7 +1091,7 @@
 
                         <div class="space-y-1">
                             <label class="text-[11px] font-bold text-slate-700 block">Hình thức học</label>
-                            <select class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
+                            <select aria-label="Hình thức học tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
                                 <option>Học trực tiếp</option>
                                 <option>Học trực tuyến (Online)</option>
                             </select>
@@ -1099,7 +1099,7 @@
 
                         <div class="space-y-1">
                             <label class="text-[11px] font-bold text-slate-700 block">Thời gian mở học</label>
-                            <select class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
+                            <select aria-label="Thời gian có thể bắt đầu học tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
                                 <option>Buổi tối</option>
                                 <option>Buổi sáng</option>
                                 <option>Buổi chiều</option>
@@ -1560,19 +1560,19 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Họ và tên *</label>
-                                    <input type="text" name="name" required maxlength="254" placeholder="Nhập họ và tên" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <input type="text" name="name" required maxlength="254" aria-label="Họ và tên" placeholder="Nhập họ và tên" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                 </div>
 
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Số điện thoại *</label>
-                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <input type="tel" name="phone" required maxlength="32" aria-label="Số điện thoại" placeholder="Nhập số điện thoại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Trình độ hiện tại</label>
-                                    <select name="level" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <select name="level" aria-label="Trình độ tiếng Hàn hiện tại" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                         <option>Chưa từng học</option>
                                         <option>Đã biết sơ cấp</option>
                                         <option>Đã biết bảng chữ cái</option>
@@ -1582,7 +1582,7 @@
 
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Trực tiếp hay Online</label>
-                                    <select name="format" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <select name="format" aria-label="Hình thức học tiếng Hàn" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                         <option>Học trực tiếp</option>
                                         <option>Học trực tuyến</option>
                                     </select>
@@ -1592,7 +1592,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Khóa học quan tâm</label>
-                                    <select name="course" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <select name="course" aria-label="Khóa học tiếng Hàn quan tâm" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                         <option>Tiếng Hàn nhập môn</option>
                                         <option>Tiếng Hàn sơ cấp</option>
                                         <option>Tiếng Hàn trung cấp</option>
@@ -1603,7 +1603,7 @@
 
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-bold text-slate-700 block">Thời gian có thể bắt đầu</label>
-                                    <select name="timing" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
+                                    <select name="timing" aria-label="Thời gian có thể bắt đầu học" class="w-full text-xs p-2 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50">
                                         <option>Càng sớm càng tốt</option>
                                         <option>Trong tuần này</option>
                                         <option>Tháng này</option>
@@ -1613,7 +1613,7 @@
                             </div>
 
                             <div class="flex items-center gap-2 pt-1 text-[11px] text-slate-600">
-                                <input type="checkbox" name="consent" value="yes" required class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
+                                <input type="checkbox" name="consent" value="yes" required aria-label="Đồng ý nhận tư vấn và ưu đãi từ KIPA" class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
                                 <span>Tôi muốn đăng ký nhận tư vấn và ưu đãi từ KIPA</span>
                             </div>
 
