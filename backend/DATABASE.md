@@ -117,6 +117,43 @@ cầu một bản migration nâng cấp riêng thay vì giả vờ đã cập nh
 
 - Đăng nhập tài khoản hiện có tại `/api/admin.php`, chọn **Quản trị dữ liệu A–J**,
   hoặc mở `/api/cms.php`.
+- Tài khoản quản trị đầu tiên được khởi tạo một lần bằng `setup_token` trong cấu
+  hình riêng trên hosting. Sau khi khởi tạo, dùng tài khoản được cấu hình sẵn
+  để đăng nhập với toàn quyền quản trị; không có chức năng tạo thêm quản trị
+  viên trong dashboard. Mật khẩu được lưu dưới dạng băm, không đặt sẵn trong
+  mã nguồn. Đổi mật khẩu yêu cầu 12–72 byte.
+- Tài khoản được cấp bằng CLI bên dưới bắt buộc đổi mật khẩu trước khi xem
+  đăng ký, sửa dữ liệu hoặc xuất bản. Backend kiểm tra cờ trong database ở cả
+  trang quản trị và CMS, không chỉ ẩn giao diện.
+
+### Cấp tài khoản admin có mật khẩu ban đầu
+
+Sao lưu database trước. Chạy công cụ từ bản mã nguồn riêng, không đưa thư mục
+`backend` vào webroot. Trên hosting đã có bảng `kipa_admins`, chạy migration
+**trước khi triển khai PHP mới**, kể cả khi không cần tạo tài khoản:
+
+```bash
+php backend/admin_account.php --migrate-only /home/<cpanel-user>/public_html
+```
+
+Sau đó tạo tài khoản `admin`, nhập mật khẩu ban đầu qua stdin từ một shell
+Bash tin cậy; không ghi mật khẩu vào lệnh, file SQL hay Git:
+
+```bash
+read -r -s -p 'Initial password: ' initial_password
+printf '\n'
+printf '%s\n' "$initial_password" | php backend/admin_account.php --create /home/<cpanel-user>/public_html
+unset initial_password
+```
+
+CLI chỉ lưu bản băm và đặt `must_change_password = 1`, không in mật khẩu.
+Nếu `admin` đã tồn tại, công cụ dừng, không đặt lại mật khẩu hay ghi đè tài khoản.
+Tài khoản khác vẫn được giữ nguyên. Mật khẩu ban đầu yếu chỉ nên dùng trong môi
+trường được giới hạn truy cập; người biết nó vẫn có thể đăng nhập trước chủ sở
+hữu. Đổi ngay sau khi cấp, không để tài khoản với mật khẩu mặc định trên Internet.
+
+### Chức năng CMS
+
 - Các bảng có danh sách, tìm kiếm, phân trang 50 bản ghi, thêm/sửa/xóa với xác
   nhận. Datalist FK gợi ý 300 bản ghi gần nhất; vẫn nhập được ID hợp lệ khác.
 - Kiểm tra đầu vào, FK, lựa chọn, ngày giờ, JSON, khoảng số; kiểm tra vòng lặp

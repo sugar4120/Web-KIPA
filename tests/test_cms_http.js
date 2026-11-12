@@ -44,6 +44,45 @@ const { setTimeout: delay } = require('node:timers/promises');
             action: 'login', csrf, username: 'test-admin', password: 'KIPA-test-password-2026'
         });
         assert.equal(authenticated.status, 303);
+        const forcedPage = await (await request('/api/admin.php')).text();
+        assert.ok(forcedPage.includes('Bắt buộc đổi mật khẩu'));
+        assert.ok(!forcedPage.includes('Đăng ký tư vấn KIPA</h1>'), 'Leads must remain inaccessible until the password is changed.');
+        const forcedCsrf = forcedPage.match(/name="csrf" value="([^"]+)"/)[1];
+        assert.equal((await request('/api/cms.php')).status, 303);
+        assert.equal((await request('/api/cms.php', { action: 'publish', csrf: forcedCsrf })).status, 303);
+        assert.equal((await request('/api/admin.php', {
+            action: 'confirm_delete', csrf: forcedCsrf, lead_id: '2'
+        })).status, 403, 'Direct mutations must be blocked before changing the password.');
+        const change = {
+            action: 'change_password', csrf: forcedCsrf, old_password: 'KIPA-test-password-2026',
+            new_password: 'KIPA-changed-password-2026', new_password_confirm: 'KIPA-changed-password-2026'
+        };
+        assert.equal((await request('/api/admin.php', { ...change, csrf: 'wrong' })).status, 403);
+        assert.equal((await request('/api/admin.php', { ...change, old_password: 'wrong' })).status, 400);
+        assert.equal((await request('/api/admin.php', { ...change, new_password: 'short', new_password_confirm: 'short' })).status, 400);
+        assert.equal((await request('/api/admin.php', {
+            ...change, new_password: change.old_password, new_password_confirm: change.old_password
+        })).status, 400, 'The initial password must not be reused.');
+        assert.equal((await request('/api/admin.php', { ...change, new_password_confirm: 'different' })).status, 400);
+        assert.equal((await request('/api/admin.php', change)).status, 303);
+        cookie = '';
+        const relogin = await (await request('/api/admin.php')).text();
+        const reloginCsrf = relogin.match(/name="csrf" value="([^"]+)"/)[1];
+        assert.equal((await request('/api/admin.php', {
+            action: 'login', csrf: reloginCsrf, username: 'test-admin', password: change.old_password
+        })).status, 400, 'The initial password must no longer work.');
+        assert.equal((await request('/api/admin.php', {
+            action: 'login', csrf: reloginCsrf, username: 'test-admin', password: change.new_password
+        })).status, 303);
+        const adminPage = await (await request('/api/admin.php')).text();
+        assert.ok(!adminPage.includes('Bắt buộc đổi mật khẩu'), 'The completed password change must persist across logins.');
+        const adminCsrf = adminPage.match(/name="csrf" value="([^"]+)"/)[1];
+        assert.ok(!adminPage.includes('Tạo tài khoản quản trị viên'), 'Administrator creation must not appear in the dashboard.');
+        const newAdmin = {
+            action: 'create_admin', csrf: adminCsrf, username: 'admin',
+            password: 'KIPA-new-admin-password-2026', password_confirm: 'KIPA-new-admin-password-2026'
+        };
+        assert.equal((await request('/api/admin.php', newAdmin)).status, 400, 'Administrator creation must be rejected even when authenticated.');
         const home = await (await request('/api/cms.php')).text();
         assert.ok(home.includes('Trung tâm quản trị KIPA'));
         const token = home.match(/name="csrf" value="([^"]+)"/)[1];

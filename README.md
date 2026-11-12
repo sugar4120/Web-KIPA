@@ -63,6 +63,13 @@ python3 dev_server.py
 ```
 Truy cập trình duyệt: `http://localhost:3000/`
 
+Server Python chỉ hiển thị website tĩnh, không thực thi PHP. Nút **Đăng nhập**
+và đường dẫn `/api/admin.php`, `/api/cms.php` trên localhost chuyển sang
+`https://kipaviethan.edu.vn` để sử dụng backend thật và dữ liệu trên hosting.
+Đây không phải môi trường quản trị thử nghiệm độc lập: thao tác sau khi đăng
+nhập ảnh hưởng dữ liệu thật. Các file PHP khác bị chặn, không tải mã nguồn xuống.
+Form tư vấn trên localhost không được chuyển tiếp tới production.
+
 ### 2. Cập nhật Menu hoặc Footer:
 Khi bạn muốn đổi số hotline, địa chỉ, hoặc thêm menu mới:
 1. Mở file `header.html` hoặc `footer.html` và chỉnh sửa.
@@ -77,6 +84,7 @@ Toàn bộ 16 trang web sẽ tự động được cập nhật đồng bộ tro
 python3 -m unittest discover -s tests -v
 php tests/test_cleanup.php
 php tests/test_config.php
+php tests/test_admin.php
 node tests/test_forms.js
 node tests/test_submit.js
 node tests/test_interactions.js

@@ -79,7 +79,7 @@ try {
     }
     content_assert(!kipa_content_ready($db), 'Legacy backend must remain usable before migration.');
     $hash = password_hash('KIPA-test-password-2026', PASSWORD_DEFAULT);
-    $q = $db->prepare('INSERT INTO kipa_admins (username,password_hash,created_at) VALUES (?,?,UTC_TIMESTAMP())');
+    $q = $db->prepare('INSERT INTO kipa_admins (username,password_hash,must_change_password,created_at) VALUES (?,?,1,UTC_TIMESTAMP())');
     $q->execute(['test-admin', $hash]);
     $insert = $db->prepare('INSERT INTO kipa_leads (form_type,contact_name,phone,email,program,source_page,details_json,consented_at,created_at) VALUES (?,?,?,?,?,?,?,UTC_TIMESTAMP(),UTC_TIMESTAMP())');
     foreach (['home_consultation', 'consultation', 'contact', 'korean_course', 'labor', 'partnership'] as $type) {
