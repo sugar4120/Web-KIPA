@@ -1,7 +1,8 @@
 # Email OTP đăng ký tài khoản
 
-Website dùng một địa chỉ Gmail của KIPA để **gửi** mã OTP; học viên **nhận** mã
-trong hộp thư và nhập lại trên website để xác thực email khi đăng ký tài khoản.
+Website dùng địa chỉ Gmail **kipaviethan@gmail.com** của KIPA để **gửi** mã OTP;
+học viên **nhận** mã trong hộp thư và nhập lại trên website để xác thực email
+khi đăng ký tài khoản.
 
 ```text
 /dang-ky-tai-khoan/ ──POST {action: send, email}──> /api/otp.php ──SMTP Gmail──> hộp thư học viên
@@ -10,7 +11,7 @@ trong hộp thư và nhập lại trên website để xác thực email khi đă
 
 ## 1. Chuẩn bị Gmail (một lần)
 
-1. Bật **xác minh 2 bước** cho tài khoản Gmail của KIPA.
+1. Bật **xác minh 2 bước** cho tài khoản Gmail `kipaviethan@gmail.com`.
 2. Tạo **App Password** (Mật khẩu ứng dụng) tại
    <https://myaccount.google.com/apppasswords> — Gmail không cho đăng nhập SMTP
    bằng mật khẩu thường.
@@ -27,9 +28,9 @@ return [
     // ...các khóa db_dsn, db_user, db_password, app_key, setup_token hiện có...
     'smtp_host' => 'smtp.gmail.com',
     'smtp_port' => 587,                                   // STARTTLS
-    'smtp_username' => 'duhocquoctekipaviethan@gmail.com',
+    'smtp_username' => 'kipaviethan@gmail.com',
     'smtp_password' => '<app-password-16-ky-tu>',
-    'smtp_from_email' => 'duhocquoctekipaviethan@gmail.com',
+    'smtp_from_email' => 'kipaviethan@gmail.com',
     'smtp_from_name' => 'KIPA Việt Hàn',                  // tùy chọn
 ];
 ```
