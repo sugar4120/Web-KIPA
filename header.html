@@ -214,8 +214,12 @@
 
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
             <div class="kipa-header-actions flex items-center gap-2.5 sm:gap-3.5 shrink-0">
-                <a href="/api/admin.php" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập quản trị">
-                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                <a href="/dang-ky-tai-khoan/" class="inline-flex items-center gap-2 text-slate-600 hover:text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng ký tài khoản học viên">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                    <span class="hidden xl:inline">Đăng ký tài khoản</span>
+                </a>
+                <a href="/dang-nhap/" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập tài khoản học viên">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
                     <span class="kipa-admin-login-label">Đăng nhập</span>
                 </a>
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
@@ -260,6 +264,11 @@
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
+        <div class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tài khoản học viên</div>
+            <a href="/dang-nhap/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🔑 Đăng nhập</a>
+            <a href="/dang-ky-tai-khoan/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📝 Đăng ký tài khoản</a>
+        </div>
         <div class="pt-3">
             <a href="/dang-ky-tu-van/" class="w-full inline-flex items-center justify-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-sm font-semibold py-3 rounded-full shadow-md transition-colors">
                 <span>Đăng ký tư vấn ngay</span>
