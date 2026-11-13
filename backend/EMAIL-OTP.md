@@ -4,8 +4,8 @@ Website dùng một địa chỉ Gmail của KIPA để **gửi** mã OTP; học
 trong hộp thư và nhập lại trên website để xác thực email khi đăng ký tài khoản.
 
 ```text
-Trình duyệt ──POST {action: send, email}──> /api/otp.php ──SMTP Gmail──> hộp thư học viên
-Trình duyệt ──POST {action: verify, email, code}──> /api/otp.php ──> kipa_otp_codes
+/dang-ky-tai-khoan/ ──POST {action: send, email}──> /api/otp.php ──SMTP Gmail──> hộp thư học viên
+/dang-ky-tai-khoan/ ──POST {full_name, email, password, code}──> /api/register.php ──> kipa_users
 ```
 
 ## 1. Chuẩn bị Gmail (một lần)
@@ -34,35 +34,52 @@ return [
 ];
 ```
 
-Sau đó tạo bảng lưu mã OTP (chạy một lần, không đổi dữ liệu hiện có):
+Sau đó tạo bảng lưu mã OTP và bảng tài khoản (chạy một lần, không đổi dữ liệu hiện có):
 
 ```bash
-/opt/alt/php83/usr/bin/php backend/otp_table.php /home/<cpanel-user>/public_html
+/opt/alt/php83/usr/bin/php backend/account_tables.php /home/<cpanel-user>/public_html
 ```
 
 ## 3. API
 
-`POST /api/otp.php` với `Content-Type: application/json`, cùng Origin của
-website. Trường honeypot `website` phải rỗng nếu gửi kèm.
+Trang `/dang-ky-tai-khoan/` dùng hai endpoint JSON (`Content-Type: application/json`,
+cùng Origin của website). Trường honeypot `website` phải rỗng nếu gửi kèm.
 
-### Gửi mã
+### Gửi mã — `POST /api/otp.php`
 
 ```json
 { "action": "send", "email": "hocvien@example.com" }
 ```
 
-- Mã 6 chữ số, hiệu lực **10 phút**; yêu cầu mã mới sẽ hủy mã cũ chưa dùng.
+- Mã 6 chữ số, hiệu lực **10 phút**; chỉ mã mới nhất có thể dùng.
+- Từ chối email đã có tài khoản (409).
 - Giới hạn: 5 lần gửi / 15 phút mỗi IP và 5 mã / giờ mỗi email.
 
-### Xác thực mã
+### Xác thực mã (tùy chọn, dùng cho luồng khác) — `POST /api/otp.php`
 
 ```json
 { "action": "verify", "email": "hocvien@example.com", "code": "123456" }
 ```
 
 - Tối đa **5 lần nhập sai** mỗi mã; 15 lần xác thực / 15 phút mỗi IP.
-- Thành công trả `{"ok": true}` và ghi `verified_at`; backend đăng ký tài khoản
-  sau này kiểm tra bản ghi đã xác thực trong `kipa_otp_codes`.
+- Thành công trả `{"ok": true}` và ghi `verified_at`.
+
+### Hoàn tất đăng ký — `POST /api/register.php`
+
+```json
+{
+  "full_name": "Nguyễn Văn A",
+  "email": "hocvien@example.com",
+  "phone": "0368513865",
+  "password": "mat-khau-8-ky-tu",
+  "code": "123456"
+}
+```
+
+- Kiểm tra OTP và tạo tài khoản **trong cùng một transaction**; mã OTP được
+  tiêu thụ ngay khi đăng ký thành công (không gọi `verify` trước đó).
+- Mật khẩu 8–72 ký tự, lưu bằng `password_hash()`; email trùng trả 409.
+- Giới hạn 10 lần đăng ký / giờ mỗi IP. Thành công trả `201 {"ok": true}`.
 
 ## 4. Bảo mật
 

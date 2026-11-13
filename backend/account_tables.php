@@ -7,7 +7,7 @@ if (PHP_SAPI !== 'cli') {
 }
 
 if ($argc !== 2 || !is_dir($argv[1] . '/api')) {
-    fwrite(STDERR, "Usage: php backend/otp_table.php /absolute/path/to/public_html\nCreates the kipa_otp_codes table used by api/otp.php. Existing data is never changed.\n");
+    fwrite(STDERR, "Usage: php backend/account_tables.php /absolute/path/to/public_html\nCreates the kipa_otp_codes and kipa_users tables used by api/otp.php and api/register.php. Existing data is never changed.\n");
     exit(2);
 }
 
@@ -29,9 +29,20 @@ try {
         KEY idx_kipa_otp_email_created (email, created_at),
         KEY idx_kipa_otp_expires (expires_at)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
-    fwrite(STDOUT, "OTP table migration completed; kipa_otp_codes is ready.\n");
+    $db->exec('CREATE TABLE IF NOT EXISTS kipa_users (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        email VARCHAR(254) NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        full_name VARCHAR(160) NOT NULL,
+        phone VARCHAR(32) NULL,
+        email_verified_at DATETIME NOT NULL,
+        created_at DATETIME NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY uq_kipa_user_email (email)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+    fwrite(STDOUT, "Account table migration completed; kipa_otp_codes and kipa_users are ready.\n");
 } catch (PDOException $error) {
-    fwrite(STDERR, 'OTP table migration failed (database error ' . $error->getCode() . ").\n");
+    fwrite(STDERR, 'Account table migration failed (database error ' . $error->getCode() . ").\n");
     exit(1);
 } catch (RuntimeException $error) {
     fwrite(STDERR, $error->getMessage() . "\n");

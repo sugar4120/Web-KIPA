@@ -54,6 +54,12 @@ try {
 
     if ($action === 'send') {
         $db->beginTransaction();
+        $registered = $db->prepare('SELECT id FROM kipa_users WHERE email = :email');
+        $registered->execute(['email' => $email]);
+        if ($registered->fetchColumn()) {
+            $db->rollBack();
+            kipa_json_response(409, ['error' => 'Email này đã được đăng ký tài khoản. Vui lòng dùng email khác.']);
+        }
         if (kipa_rate_limited($db, 'otp_send', $remoteKey, 5, 15)) {
             $db->rollBack();
             kipa_json_response(429, ['error' => 'Bạn đã yêu cầu quá nhiều mã OTP. Vui lòng thử lại sau.']);
