@@ -3,7 +3,7 @@ Options -Indexes
 # Keep the backend on PHP 8.3 without changing the legacy WordPress runtime.
 AddHandler application/x-httpd-alt-php83___lsphp .php
 
-<FilesMatch "^(?!submit\.php$|admin\.php$|cms\.php$).+\.php$">
+<FilesMatch "^(?!submit\.php$|admin\.php$|cms\.php$|otp\.php$|register\.php$).+\.php$">
     Require all denied
 </FilesMatch>
 

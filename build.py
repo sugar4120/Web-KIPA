@@ -25,6 +25,7 @@ API_FILES = {
     'api/.htaccess', 'api/admin.php', 'api/bootstrap.php', 'api/cleanup.php',
     'api/submit.php', 'api/content.php', 'api/content-model.json',
     'api/cms.php', 'api/migrate.php', 'api/publish.php',
+    'api/mailer.php', 'api/otp.php', 'api/register.php',
 }
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',
@@ -144,6 +145,13 @@ PAGES_CONFIG = [
         'title': 'Đăng Ký Tư Vấn Du Học & Việc Làm Quốc Tế | KIPA Việt Hàn',
         'desc': 'Để lại thông tin nhận tư vấn 1:1 miễn phí lộ trình du học Hàn Quốc, Úc, học tiếng Hàn và việc làm quốc tế phù hợp nhất với nguyện vọng của bạn.',
         'keywords': 'đăng ký tư vấn du học, tư vấn du học miễn phí kipa'
+    },
+    {
+        'file': 'dang-ky-tai-khoan.html',
+        'slug': 'dang-ky-tai-khoan',
+        'title': 'Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn',
+        'desc': 'Tạo tài khoản học viên KIPA Việt Hàn với xác thực email bằng mã OTP để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận thông tin ưu tiên.',
+        'keywords': 'đăng ký tài khoản kipa, tài khoản học viên kipa việt hàn'
     },
     {
         'file': 'faq.html',
