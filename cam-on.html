@@ -190,6 +190,42 @@
     .elementor-widget-html .elementor-widget-container {
         padding: 0 !important;
     }
+
+    /* 2nd-tier flyout submenu styling */
+    .kipa-has-flyout {
+        position: relative;
+    }
+    .kipa-flyout-menu {
+        position: absolute;
+        left: 100%;
+        top: -6px;
+        margin-left: 6px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-4px);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        z-index: 60;
+    }
+    /* Hover bridge: keeps hover active between parent and submenu */
+    .kipa-has-flyout::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -12px;
+        width: 16px;
+        display: none;
+    }
+    .kipa-has-flyout:hover::after {
+        display: block;
+    }
+    .kipa-has-flyout:hover > .kipa-flyout-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
 </style>
 
 <!-- HEADER CONTAINER -->
@@ -251,36 +287,137 @@
                         <span>Chương trình</span>
                         <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-[#0274BD] transition-transform duration-200 group-hover:rotate-180"></i>
                     </div>
-                    <!-- Dropdown Content -->
-                    <div class="absolute left-0 top-full -mt-1 w-68 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                        <a href="/du-hoc/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
-                            <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0"><i class="fa-solid fa-globe"></i></span>
-                            <div>
-                                <div class="font-bold">Du học quốc tế</div>
-                                <div class="text-[10px] text-slate-400 font-normal">Tổng quan tất cả các nước</div>
+                    <!-- Dropdown Content Cấp 1 -->
+                    <div class="absolute left-0 top-full -mt-1 w-72 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        
+                        <!-- 1. Du học quốc tế (Có menu con cấp 2 chỉa sang phải) -->
+                        <div class="kipa-has-flyout">
+                            <a href="/du-hoc/" class="flex items-center justify-between px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors group/item">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-globe"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-bold text-slate-800 group-hover/item:text-[#0274BD]">Du học quốc tế</div>
+                                        <div class="text-[10px] text-slate-400 font-normal">Hàn Quốc, Úc, Nhật Bản...</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover/item:text-[#0274BD] group-hover/item:translate-x-0.5 transition-all"></i>
+                            </a>
+
+                            <!-- Menu Cấp 2: Các chương trình du học -->
+                            <div class="kipa-flyout-menu w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2">
+                                <div class="px-4 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1 flex items-center justify-between">
+                                    <span>Điểm đến du học</span>
+                                    <a href="/du-hoc/" class="text-[#0274BD] hover:underline font-semibold normal-case">Tất cả &rarr;</a>
+                                </div>
+
+                                <a href="/du-hoc-han-quoc/" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-red-50/60 hover:text-[#EC1E1B] transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-graduation-cap"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-[#EC1E1B] flex items-center gap-1.5">
+                                            <span>Du học Hàn Quốc</span>
+                                            <span class="text-[9px] bg-red-100 text-[#EC1E1B] font-extrabold px-1.5 py-0.2 rounded-full">HOT</span>
+                                        </div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Chương trình trọng điểm KIPA</div>
+                                    </div>
+                                </a>
+
+                                <a href="/du-hoc-uc/" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-plane-departure"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-[#0274BD]">Du học Úc</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Định hướng &amp; Học bổng toàn diện</div>
+                                    </div>
+                                </a>
+
+                                <a href="/du-hoc-nhat.html" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-rose-50/60 hover:text-rose-600 transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-torii-gate"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-rose-600">Du học Nhật Bản</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Học bổng &amp; Vừa học vừa làm</div>
+                                    </div>
+                                </a>
+
+                                <div class="border-t border-slate-100 my-1"></div>
+
+                                <a href="/du-hoc/" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-compass"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-[#0274BD]">Tổng quan tất cả các nước</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Lộ trình &amp; so sánh chi phí</div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                        <a href="/du-hoc-han-quoc/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
-                            <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0"><i class="fa-solid fa-graduation-cap"></i></span>
-                            <div>
-                                <div class="font-bold text-[#EC1E1B]">Du học Hàn Quốc</div>
-                                <div class="text-[10px] text-slate-400 font-normal">Chương trình trọng điểm KIPA</div>
+                        </div>
+
+                        <!-- 2. Xuất khẩu lao động (Có menu con cấp 2 chỉa sang phải) -->
+                        <div class="kipa-has-flyout">
+                            <a href="/xuat-khau-lao-dong/" class="flex items-center justify-between px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-amber-50/60 hover:text-amber-600 transition-colors group/item">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-briefcase"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-bold text-slate-800 group-hover/item:text-amber-600">Xuất khẩu lao động</div>
+                                        <div class="text-[10px] text-slate-400 font-normal">Hàn, Nhật, Úc, Châu Âu...</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover/item:text-amber-600 group-hover/item:translate-x-0.5 transition-all"></i>
+                            </a>
+
+                            <!-- Menu Cấp 2: Các thị trường việc làm -->
+                            <div class="kipa-flyout-menu w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2">
+                                <div class="px-4 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 mb-1 flex items-center justify-between">
+                                    <span>Thị trường việc làm</span>
+                                    <a href="/xuat-khau-lao-dong/" class="text-amber-600 hover:underline font-semibold normal-case">Tất cả &rarr;</a>
+                                </div>
+
+                                <a href="/xuat-khau-lao-dong/#market-korea" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-red-50/60 hover:text-[#EC1E1B] transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-passport"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-[#EC1E1B]">Làm việc tại Hàn Quốc</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Visa E-7, E-8, E-9 chính ngạch</div>
+                                    </div>
+                                </a>
+
+                                <a href="/xuat-khau-lao-dong/#market-japan" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-rose-50/60 hover:text-rose-600 transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-user-gear"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-rose-600">Làm việc tại Nhật Bản</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Kỹ năng đặc định Tokutei &amp; TTS</div>
+                                    </div>
+                                </a>
+
+                                <a href="/xuat-khau-lao-dong/#market-australia" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-tractor"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-[#0274BD]">Làm việc tại Úc</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Nông nghiệp &amp; Tay nghề cao</div>
+                                    </div>
+                                </a>
+
+                                <a href="/xuat-khau-lao-dong/#market-europe" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50/60 hover:text-indigo-600 transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-building-columns"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-indigo-600">Làm việc tại Châu Âu</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Đức, Ba Lan, Romania, Hungary</div>
+                                    </div>
+                                </a>
+
+                                <div class="border-t border-slate-100 my-1"></div>
+
+                                <a href="/xuat-khau-lao-dong/" class="flex items-center gap-3 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-amber-50/60 hover:text-amber-600 transition-colors group/sub">
+                                    <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-chart-line"></i></span>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-slate-800 group-hover/sub:text-amber-600">Tổng quan thị trường</div>
+                                        <div class="text-[10px] text-slate-400 font-normal truncate">Quy trình, chi phí &amp; thu nhập</div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                        <a href="/du-hoc-uc/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
-                            <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0"><i class="fa-solid fa-plane-departure"></i></span>
-                            <div>
-                                <div class="font-bold text-[#0274BD]">Du học Úc</div>
-                                <div class="text-[10px] text-slate-400 font-normal">Định hướng & Học bổng toàn diện</div>
-                            </div>
-                        </a>
-                        <a href="/xuat-khau-lao-dong/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-amber-50/60 hover:text-amber-600 transition-colors">
-                            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-briefcase"></i></span>
-                            <div>
-                                <div class="font-bold">Xuất khẩu lao động</div>
-                                <div class="text-[10px] text-slate-400 font-normal">Chính ngạch, thu nhập cao</div>
-                            </div>
-                        </a>
+                        </div>
+
+                        <!-- 3. Đào tạo tiếng Hàn -->
                         <a href="/tieng-han/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50/60 hover:text-emerald-600 transition-colors">
                             <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-book-open"></i></span>
                             <div>
@@ -288,6 +425,8 @@
                                 <div class="text-[10px] text-slate-400 font-normal">Luyện thi TOPIK cấp tốc 3 - 6 tháng</div>
                             </div>
                         </a>
+
+                        <!-- 4. Hợp tác giáo dục -->
                         <a href="/hop-tac-quoc-te/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50/60 hover:text-indigo-600 transition-colors">
                             <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-handshake"></i></span>
                             <div>
@@ -337,11 +476,36 @@
         </div>
         <div class="pl-3 py-1 space-y-2 border-l border-slate-100 ml-1">
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Chương trình đào tạo</div>
-            <a href="/du-hoc/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🌐 Du học quốc tế (Tổng quan)</a>
-            <a href="/du-hoc-han-quoc/" class="block text-sm text-brand-red font-bold hover:text-[#0274BD]">🇰🇷 Du học Hàn Quốc (Trọng điểm)</a>
-            <a href="/du-hoc-uc/" class="block text-sm text-brand-blue font-bold hover:text-[#0274BD]">🇦🇺 Du học Úc (Chuyên sâu)</a>
-            <a href="/xuat-khau-lao-dong/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">💼 Xuất khẩu lao động & Việc làm</a>
-            <a href="/tieng-han/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📖 Đào tạo tiếng Hàn TOPIK</a>
+            
+            <!-- Nhóm 1: Du học quốc tế -->
+            <div class="pt-1">
+                <div class="flex items-center justify-between text-sm text-[#0274BD] font-bold">
+                    <span>🌐 Du học quốc tế</span>
+                    <a href="/du-hoc/" class="text-[11px] text-slate-500 hover:text-[#0274BD] font-normal">Tất cả &rarr;</a>
+                </div>
+                <div class="pl-3 space-y-1 border-l-2 border-blue-100 ml-1.5 mt-1">
+                    <a href="/du-hoc-han-quoc/" class="block text-xs text-brand-red font-bold py-1 hover:text-[#0274BD]">🇰🇷 Du học Hàn Quốc (Trọng điểm)</a>
+                    <a href="/du-hoc-uc/" class="block text-xs text-brand-blue font-bold py-1 hover:text-[#0274BD]">🇦🇺 Du học Úc (Chuyên sâu)</a>
+                    <a href="/du-hoc-nhat.html" class="block text-xs text-slate-700 font-medium py-1 hover:text-[#0274BD]">🇯🇵 Du học Nhật Bản</a>
+                </div>
+            </div>
+
+            <!-- Nhóm 2: Xuất khẩu lao động -->
+            <div class="pt-1.5">
+                <div class="flex items-center justify-between text-sm text-amber-600 font-bold">
+                    <span>💼 Xuất khẩu lao động</span>
+                    <a href="/xuat-khau-lao-dong/" class="text-[11px] text-slate-500 hover:text-amber-600 font-normal">Tất cả &rarr;</a>
+                </div>
+                <div class="pl-3 space-y-1 border-l-2 border-amber-100 ml-1.5 mt-1">
+                    <a href="/xuat-khau-lao-dong/#market-korea" class="block text-xs text-slate-700 font-medium py-1 hover:text-amber-600">🇰🇷 Việc làm tại Hàn Quốc</a>
+                    <a href="/xuat-khau-lao-dong/#market-japan" class="block text-xs text-slate-700 font-medium py-1 hover:text-amber-600">🇯🇵 Việc làm tại Nhật Bản</a>
+                    <a href="/xuat-khau-lao-dong/#market-australia" class="block text-xs text-slate-700 font-medium py-1 hover:text-amber-600">🇦🇺 Lao động định cư Úc</a>
+                    <a href="/xuat-khau-lao-dong/#market-europe" class="block text-xs text-slate-700 font-medium py-1 hover:text-amber-600">🇪🇺 Việc làm tại Châu Âu</a>
+                </div>
+            </div>
+
+            <!-- Nhóm 3: Đào tạo tiếng Hàn & Hợp tác -->
+            <a href="/tieng-han/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD] pt-1">📖 Đào tạo tiếng Hàn TOPIK</a>
             <a href="/hop-tac-quoc-te/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🤝 Hợp tác giáo dục quốc tế</a>
         </div>
         <a href="/cau-chuyen-hoc-vien/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
