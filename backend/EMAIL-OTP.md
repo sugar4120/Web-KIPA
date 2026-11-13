@@ -82,6 +82,16 @@ cùng Origin của website). Trường honeypot `website` phải rỗng nếu g�
 - Mật khẩu 8–72 ký tự, lưu bằng `password_hash()`; email trùng trả 409.
 - Giới hạn 10 lần đăng ký / giờ mỗi IP. Thành công trả `201 {"ok": true}`.
 
+### Đăng nhập học viên — `POST /api/login.php`
+
+Trang `/dang-nhap/` dùng endpoint này với các `action`:
+
+- `login` (`email`, `password`): xác thực bằng `password_verify`, tạo phiên
+  cookie `kipa_user` (HttpOnly, Secure, SameSite=Lax); sai thông tin trả 401
+  với thông báo chung, giới hạn 10 lần / 15 phút mỗi IP.
+- `me`: trả `{"ok": true, "user": {...}}` hoặc `user: null` nếu chưa đăng nhập.
+- `logout`: hủy phiên.
+
 ## 4. Bảo mật
 
 - Database chỉ lưu **HMAC-SHA256** của mã (khóa `app_key`), không lưu mã thô.

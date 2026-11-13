@@ -25,7 +25,7 @@ API_FILES = {
     'api/.htaccess', 'api/admin.php', 'api/bootstrap.php', 'api/cleanup.php',
     'api/submit.php', 'api/content.php', 'api/content-model.json',
     'api/cms.php', 'api/migrate.php', 'api/publish.php',
-    'api/mailer.php', 'api/otp.php', 'api/register.php',
+    'api/mailer.php', 'api/otp.php', 'api/register.php', 'api/login.php',
 }
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',
@@ -152,6 +152,13 @@ PAGES_CONFIG = [
         'title': 'Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn',
         'desc': 'Tạo tài khoản học viên KIPA Việt Hàn với xác thực email bằng mã OTP để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận thông tin ưu tiên.',
         'keywords': 'đăng ký tài khoản kipa, tài khoản học viên kipa việt hàn'
+    },
+    {
+        'file': 'dang-nhap.html',
+        'slug': 'dang-nhap',
+        'title': 'Đăng Nhập Tài Khoản Học Viên | KIPA Việt Hàn',
+        'desc': 'Đăng nhập tài khoản học viên KIPA Việt Hàn để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận hỗ trợ ưu tiên từ đội ngũ tư vấn.',
+        'keywords': 'đăng nhập kipa, tài khoản học viên kipa việt hàn'
     },
     {
         'file': 'faq.html',
