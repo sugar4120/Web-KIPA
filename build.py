@@ -25,6 +25,7 @@ API_FILES = {
     'api/.htaccess', 'api/admin.php', 'api/bootstrap.php', 'api/cleanup.php',
     'api/submit.php', 'api/content.php', 'api/content-model.json',
     'api/cms.php', 'api/migrate.php', 'api/publish.php',
+    'api/mailer.php', 'api/otp.php',
 }
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',

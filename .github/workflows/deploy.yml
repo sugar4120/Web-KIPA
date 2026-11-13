@@ -51,9 +51,11 @@ jobs:
         run: |
           for file in api/*.php; do php -l "$file"; done
           php -l backend/admin_account.php
+          php -l backend/otp_table.php
           php tests/test_cleanup.php
           php tests/test_config.php
           php tests/test_admin.php
+          php tests/test_otp.php
       - name: Test real database migration, CMS and static publishing
         env:
           KIPA_TEST_DSN: mysql:host=127.0.0.1;port=${{ job.services.mysql.ports[3306] }};dbname=kipa_content_test;charset=utf8mb4
