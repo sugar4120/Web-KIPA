@@ -883,129 +883,631 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- 4. SECTION 4: TÌM CHƯƠNG TRÌNH PHÙ HỢP VỚI BẠN -->
+    <!-- 4. SECTION 4: CÔNG CỤ TÍNH CHI PHÍ DU HỌC TOÀN DIỆN (ALL CÁC NƯỚC) -->
     <!-- ========================================== -->
-    <section id="quiz-tu-van" class="py-14 lg:py-18 bg-white border-b border-slate-200/70">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+    <section id="quiz-tu-van" class="py-14 lg:py-20 bg-white border-b border-slate-200/70">
+        <div id="tinh-chi-phi" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-brand-blue font-bold text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>DỰ TOÁN TÀI CHÍNH DU HỌC MINH BẠCH</span>
+                </div>
+                <h2 class="font-phudu text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Công cụ tính chi phí du học thực tế
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Chủ động kế hoạch tài chính với công cụ dự toán tự động của KIPA. Chọn quốc gia, hệ đào tạo và điều kiện cá nhân để nhận bảng bóc tách chi phí thực tế từng khoản từ Việt Nam đến khi nhập học tại nước ngoài.
+                </p>
+
+                <!-- Quick Country Selector Pills -->
+                <div class="flex items-center justify-center gap-2 pt-2 flex-wrap">
+                    <button type="button" onclick="setCalcCountryGroup('kr')" class="calc-country-pill active px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-blue text-white shadow-xs cursor-pointer">
+                        🇰🇷 Hàn Quốc
+                    </button>
+                    <button type="button" onclick="setCalcCountryGroup('au')" class="calc-country-pill px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-brand-blue cursor-pointer">
+                        🇦🇺 Du học Úc
+                    </button>
+                    <button type="button" onclick="setCalcCountryGroup('jp')" class="calc-country-pill px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-brand-blue cursor-pointer">
+                        🇯🇵 Nhật Bản
+                    </button>
+                    <button type="button" onclick="setCalcCountryGroup('eu')" class="calc-country-pill px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-brand-blue cursor-pointer">
+                        🇪🇺 Châu Âu (Đức)
+                    </button>
+                    <button type="button" onclick="setCalcCountryGroup('all')" class="calc-country-pill px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-brand-blue cursor-pointer">
+                        🌐 Tất cả các nước
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- Left Column: Title + Subtitle + Button -->
-                <div class="lg:col-span-4 flex flex-col justify-center space-y-4">
-                    <div class="space-y-3">
-                        <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
-                            Tìm chương trình phù hợp với bạn
-                        </h2>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                            Trả lời một vài câu hỏi ngắn để nhận gợi ý chương trình du học phù hợp với mục tiêu, học vấn và định hướng của bạn.
+                <!-- LEFT COLUMN: Input Options Form (lg:col-span-6) -->
+                <div class="lg:col-span-6 space-y-4">
+                    
+                    <!-- 1. Quốc gia & Hệ đào tạo -->
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-2xs">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-earth-asia text-brand-blue"></i>
+                                <span>1. Quốc gia & Chương trình du học</span>
+                            </span>
+                            <span class="text-[11px] text-brand-blue font-semibold">Bắt buộc</span>
+                        </label>
+                        <select id="duhoc-cost-country" aria-label="Quốc gia du học để tính chi phí" onchange="calculateDuhocCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                            <!-- Korea -->
+                            <optgroup label="🇰🇷 HÀN QUỐC" id="optgroup-kr">
+                                <option value="kr-d4" selected>Du học Hàn Quốc – Hệ tiếng D4-1 (Phổ biến nhất)</option>
+                                <option value="kr-d4-3">Du học Hàn Quốc – Hệ Cấp 3 D4-3 (Học bổng lên đến 100%)</option>
+                                <option value="kr-d2-1">Du học Hàn Quốc – Hệ Cao đẳng D2-1 (Thực hành nghề)</option>
+                                <option value="kr-d2-2">Du học Hàn Quốc – Hệ Đại học D2-2 (Cử nhân chính quy)</option>
+                                <option value="kr-d2-3">Du học Hàn Quốc – Hệ Sau đại học D2-3 (Thạc sĩ, Tiến sĩ)</option>
+                            </optgroup>
+                            <!-- Australia -->
+                            <optgroup label="🇦🇺 DU HỌC ÚC" id="optgroup-au">
+                                <option value="au-thpt">Du học Úc – Phổ thông THPT (Lớp 10, 11, 12)</option>
+                                <option value="au-vet">Du học Úc – Cao đẳng nghề VET & TAFE (Chi phí tiết kiệm)</option>
+                                <option value="au-uni">Du học Úc – Hệ Cử nhân Đại học (Học bổng 20% - 100%)</option>
+                                <option value="au-master">Du học Úc – Hệ Sau đại học & Thạc sĩ (Visa làm việc 2 - 4 năm)</option>
+                            </optgroup>
+                            <!-- Japan -->
+                            <optgroup label="🇯🇵 NHẬT BẢN" id="optgroup-jp">
+                                <option value="jp-tieng">Du học Nhật Bản – Trường Nhật ngữ (Vừa học vừa làm 28h/tuần)</option>
+                                <option value="jp-senmon">Du học Nhật Bản – Cao đẳng nghề Senmon</option>
+                                <option value="jp-uni">Du học Nhật Bản – Hệ Đại học chính quy</option>
+                                <option value="jp-tokutei">Nhật Bản – Kỹ năng đặc định Tokutei (Lương người bản xứ)</option>
+                            </optgroup>
+                            <!-- Europe / Germany -->
+                            <optgroup label="🇪🇺 CHÂU ÂU (ĐỨC & EU)" id="optgroup-eu">
+                                <option value="eu-ausbildung">Du học nghề Đức Ausbildung – Miễn 100% học phí + Lương thực hành</option>
+                                <option value="eu-uni">Đại học Công lập Đức & EU – Miễn học phí trường công</option>
+                                <option value="eu-master">Thạc sĩ Châu Âu & Erasmus – 100% tiếng Anh</option>
+                                <option value="eu-pre">Khóa tiếng & Dự bị Đại học (Studienkolleg Đức)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- 2. Khu vực trường học -->
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-2xs">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-city text-amber-500"></i>
+                                <span>2. Khu vực trường học</span>
+                            </span>
+                            <span class="text-[11px] text-slate-500">Ảnh hưởng sinh hoạt phí</span>
+                        </label>
+                        <select id="duhoc-cost-region" aria-label="Khu vực trường học để tính chi phí" onchange="calculateDuhocCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                            <option value="center">Thủ đô / Trung tâm sầm uất (Seoul / Sydney / Tokyo / Berlin)</option>
+                            <option value="suburb" selected>Thành phố lớn trực thuộc (Busan / Melbourne / Osaka / Frankfurt)</option>
+                            <option value="province">Khu vực ngoại ô / Tỉnh lân cận (Chi phí tiết kiệm nhất)</option>
+                        </select>
+                    </div>
+
+                    <!-- 3. Ký túc xá & Nhà ở ban đầu -->
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-2xs">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-hotel text-emerald-500"></i>
+                                <span>3. Hình thức lưu trú ban đầu (6 tháng)</span>
+                            </span>
+                            <span class="text-[11px] text-slate-500">Ký túc xá / Trọ</span>
+                        </label>
+                        <select id="duhoc-cost-housing" aria-label="Hình thức lưu trú trong 6 tháng đầu" onchange="calculateDuhocCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                            <option value="ktx" selected>Ký túc xá trường (Phòng 2 - 4 người an toàn, tiện nghi)</option>
+                            <option value="ngoai">Thuê phòng đơn ngoài (Studio / Homestay / Gosiwon riêng tư)</option>
+                            <option value="nguoi-than">Ở cùng người thân / bạn bè (Miễn tiền trọ)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- 4. Học bổng dự kiến -->
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-2xs">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-award text-purple-600"></i>
+                                <span>4. Mức học bổng</span>
+                            </label>
+                            <select id="duhoc-cost-scholarship" aria-label="Mức học bổng dự kiến" onchange="calculateDuhocCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
+                                <option value="0" selected>Chưa có học bổng (0%)</option>
+                                <option value="30">Học bổng 30% học phí</option>
+                                <option value="50">Học bổng 50% học phí</option>
+                                <option value="70">Học bổng 70% học phí</option>
+                                <option value="100">Học bổng 100% học phí</option>
+                            </select>
+                        </div>
+
+                        <!-- 5. Đào tạo ngoại ngữ tại VN -->
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-2xs">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-graduation-cap text-rose-500"></i>
+                                <span>5. Học tiếng tại KIPA</span>
+                            </label>
+                            <select id="duhoc-cost-vn-lang" aria-label="Khóa học tiếng tại KIPA" onchange="calculateDuhocCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
+                                <option value="full" selected>Trọn gói cấp tốc + Luyện phỏng vấn</option>
+                                <option value="basic">Khóa học nền tảng cơ bản</option>
+                                <option value="none">Đã có chứng chỉ (Miễn học)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Trust Commit Badge -->
+                    <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 flex items-center gap-3">
+                        <i class="fa-solid fa-file-contract text-brand-blue text-xl shrink-0"></i>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Cam kết pháp lý KIPA:</strong> Toàn bộ chi phí được minh bạch, niêm yết rõ ràng trong hợp đồng đào tạo và tư vấn du học. Tuyệt đối không phát sinh chi phí trung gian.
                         </p>
-                        <div class="pt-1">
-                            <a href="/dang-ky-tu-van/" class="inline-flex items-center gap-2 bg-brand-red hover:bg-rose-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md transition-colors">
-                                <i class="fa-solid fa-bullseye"></i>
-                                <span>Bắt đầu tìm hiểu</span>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Real-Time Results & Itemized Breakdown (lg:col-span-6) -->
+                <div class="lg:col-span-6 space-y-5">
+                    <div class="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/70 border border-blue-200/80 shadow-md">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200/70 mb-4">
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">DỰ TOÁN TRỌN GÓI XUẤT CẢNH</span>
+                                <span id="duhoc-cost-title" class="text-xs sm:text-sm font-bold text-brand-blue">Du học Hàn Quốc – Hệ tiếng D4-1</span>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold shrink-0">
+                                Minh bạch 100%
+                            </span>
+                        </div>
+
+                        <!-- Big Price Display -->
+                        <div class="mb-5">
+                            <div class="flex items-baseline gap-2">
+                                <span id="duhoc-cost-total" class="font-phudu text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-red tracking-tight">
+                                    156.000.000
+                                </span>
+                                <span class="text-base sm:text-lg font-bold text-slate-700">VNĐ</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                                <span id="duhoc-cost-subtext">Đã bao gồm học phí nộp trường, hồ sơ trọn gói, ký túc xá và vé máy bay.</span>
+                            </p>
+                        </div>
+
+                        <!-- Itemized Detail List -->
+                        <div class="space-y-3 pt-3 border-t border-slate-200/70 text-xs sm:text-sm">
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-slate-600 flex items-center gap-2">
+                                    <i class="fa-solid fa-flag text-rose-500 text-xs w-4"></i>
+                                    <span>Chi phí xử lý hồ sơ, dịch thuật & công chứng:</span>
+                                </span>
+                                <span id="duhoc-item-dossier" class="font-bold text-slate-900">25.000.000 VNĐ</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-slate-600 flex items-center gap-2">
+                                    <i class="fa-solid fa-school text-brand-blue text-xs w-4"></i>
+                                    <span id="duhoc-label-tuition">Học phí chính quy 1 năm nộp sang trường:</span>
+                                </span>
+                                <span id="duhoc-item-tuition" class="font-bold text-slate-900">85.000.000 VNĐ</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-slate-600 flex items-center gap-2">
+                                    <i class="fa-solid fa-bed text-amber-500 text-xs w-4"></i>
+                                    <span>Ký túc xá & bảo hiểm quốc tế (6 tháng):</span>
+                                </span>
+                                <span id="duhoc-item-housing" class="font-bold text-slate-900">26.000.000 VNĐ</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-slate-600 flex items-center gap-2">
+                                    <i class="fa-solid fa-book-open text-emerald-500 text-xs w-4"></i>
+                                    <span>Đào tạo tiếng tại KIPA & luyện phỏng vấn visa:</span>
+                                </span>
+                                <span id="duhoc-item-lang" class="font-bold text-slate-900">10.000.000 VNĐ</span>
+                            </div>
+
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-slate-600 flex items-center gap-2">
+                                    <i class="fa-solid fa-plane-departure text-purple-600 text-xs w-4"></i>
+                                    <span>Vé máy bay, khám sức khỏe & lệ phí cấp Visa:</span>
+                                </span>
+                                <span id="duhoc-item-visa" class="font-bold text-slate-900">10.000.000 VNĐ</span>
+                            </div>
+
+                            <div id="duhoc-scholarship-row" class="hidden flex items-center justify-between py-1 text-emerald-700 bg-emerald-50/80 px-2.5 py-1.5 rounded-lg border border-emerald-200">
+                                <span class="flex items-center gap-2 font-semibold">
+                                    <i class="fa-solid fa-gift text-xs w-4"></i>
+                                    <span>Học bổng khấu trừ trực tiếp:</span>
+                                </span>
+                                <span id="duhoc-item-scholarship" class="font-extrabold">- 0 VNĐ</span>
+                            </div>
+                        </div>
+
+                        <!-- Financial ROI & Part-time Work Insights -->
+                        <div class="mt-6 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2">
+                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-wallet text-brand-blue"></i>
+                                    <span>Thu nhập làm thêm dự kiến:</span>
+                                </span>
+                                <span id="duhoc-earning-rate" class="text-xs sm:text-sm font-extrabold text-emerald-600">
+                                    22 - 30 triệu VNĐ/tháng
+                                </span>
+                            </div>
+                            <p id="duhoc-earning-desc" class="text-[11px] text-slate-500 leading-relaxed">
+                                Sau 6 tháng học tiếng tại Hàn, học viên được phép làm thêm 20h/tuần và toàn thời gian các kỳ nghỉ lễ.
+                            </p>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                            <a id="duhoc-btn-apply" href="/dang-ky-tu-van/?country=han-quoc&program=d4-1" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all text-center">
+                                <span>Nhận bảng dự toán chi tiết 1:1</span>
                                 <i class="fa-solid fa-arrow-right text-xs"></i>
                             </a>
+                            <a href="https://zalo.me/0368513865" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#0084ff] hover:bg-[#0070da] text-white font-bold text-xs sm:text-sm shadow-md transition-all text-center shrink-0">
+                                <i class="fa-solid fa-comment-dots text-base"></i>
+                                <span>Zalo tư vấn chi phí</span>
+                            </a>
                         </div>
+
+                        <!-- Notice -->
+                        <div class="mt-4 pt-3 border-t border-slate-200/70 text-center">
+                            <p class="text-[11px] text-slate-500 italic flex items-center justify-center gap-1.5 leading-relaxed">
+                                <i class="fa-solid fa-circle-info text-brand-blue text-xs shrink-0"></i>
+                                <span>* Lưu ý: Bảng dự toán mang tính chất tham khảo khách quan. Chi phí thực tế sẽ phụ thuộc vào trường học và tỷ giá ngoại tệ tại thời điểm nộp hồ sơ.</span>
+                            </p>
+                        </div>
+
                     </div>
-                </div>
-
-                <!-- Middle Column: Interactive Step Quiz Form Card -->
-                <div class="lg:col-span-5 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div class="space-y-4">
-                        <!-- Step Progress Bar -->
-                        <div class="flex items-center justify-between text-[11px] font-bold text-slate-500 border-b border-slate-100 pb-3">
-                            <span class="text-brand-blue flex items-center gap-1.5">
-                                <span class="w-4 h-4 rounded-full bg-brand-blue text-white text-[10px] inline-flex items-center justify-center font-bold">1</span>
-                                <span>Mục tiêu</span>
-                            </span>
-                            <span class="text-slate-400">2 Học vấn</span>
-                            <span class="text-slate-400">3 Quốc gia</span>
-                            <span class="text-slate-400">4 Ngân sách</span>
-                            <span class="text-slate-400">5 Ngoại ngữ</span>
-                        </div>
-
-                        <!-- Question Label -->
-                        <div class="space-y-1">
-                            <h3 class="font-bold text-slate-900 text-sm sm:text-base">
-                                Bạn mong muốn du học với mục tiêu nào?
-                            </h3>
-                        </div>
-
-                        <!-- 5 Radio Options (Clean 2-column or list) -->
-                        <div class="space-y-2 pt-1" id="quiz-options-group">
-                            <label class="quiz-option active flex items-center gap-2.5 p-2.5 bg-blue-50/60 rounded-xl border border-brand-blue text-xs sm:text-sm text-brand-blue font-semibold">
-                                <input type="radio" name="duhoc_muctieu" value="tieng" checked class="text-brand-blue focus:ring-0">
-                                <span>Học tiếng và trải nghiệm</span>
-                            </label>
-
-                            <label class="quiz-option flex items-center gap-2.5 p-2.5 bg-slate-50/70 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700">
-                                <input type="radio" name="duhoc_muctieu" value="daihoc" class="text-brand-blue focus:ring-0">
-                                <span>Học cao đẳng / đại học</span>
-                            </label>
-
-                            <label class="quiz-option flex items-center gap-2.5 p-2.5 bg-slate-50/70 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700">
-                                <input type="radio" name="duhoc_muctieu" value="saudaihoc" class="text-brand-blue focus:ring-0">
-                                <span>Sau đại học</span>
-                            </label>
-
-                            <label class="quiz-option flex items-center gap-2.5 p-2.5 bg-slate-50/70 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700">
-                                <input type="radio" name="duhoc_muctieu" value="vieclam" class="text-brand-blue focus:ring-0">
-                                <span>Kết hợp học và làm việc</span>
-                            </label>
-
-                            <label class="quiz-option flex items-center gap-2.5 p-2.5 bg-slate-50/70 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700">
-                                <input type="radio" name="duhoc_muctieu" value="chuaxacdinh" class="text-brand-blue focus:ring-0">
-                                <span>Chưa xác định</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Next Button -->
-                    <div class="pt-4 flex justify-end border-t border-slate-100 mt-4">
-                        <a href="/dang-ky-tu-van/" class="inline-flex items-center gap-1.5 bg-brand-blue hover:bg-sky-600 text-white font-bold text-xs sm:text-sm px-5 py-2 rounded-full shadow-xs transition-colors">
-                            <span>Tiếp theo</span>
-                            <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right Column: Suggested Results Callout Box with Clipboard Illustration -->
-                <div class="lg:col-span-3 bg-gradient-to-b from-blue-50/80 to-indigo-50/40 p-5 rounded-2xl border border-blue-100 flex flex-col justify-between">
-                    <div class="space-y-3.5">
-                        <div class="flex items-center gap-1.5 text-brand-red text-xs font-bold uppercase tracking-wider">
-                            <span class="w-1 h-3.5 bg-brand-red rounded-full"></span>
-                            <span>Kết quả gợi ý</span>
-                        </div>
-
-                        <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug">
-                            Nhận đề xuất chương trình phù hợp với bạn
-                        </h4>
-
-                        <!-- Checklist -->
-                        <div class="space-y-2 text-xs text-slate-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-check text-brand-red text-xs"></i>
-                                <span>Gợi ý quốc gia phù hợp</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-check text-brand-red text-xs"></i>
-                                <span>Chương trình nên tìm hiểu</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-check text-brand-red text-xs"></i>
-                                <span>Các điều kiện cần chuẩn bị</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-check text-brand-red text-xs"></i>
-                                <span>Nhận tư vấn chi tiết từ KIPA</span>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
 
             </div>
         </div>
+
+        <!-- SCRIPT: Study Abroad Cost Calculator (Vanilla JS, All Countries, Elementor-safe) -->
+        <script>
+            (function() {
+                var costData = {
+                    'kr-d4': {
+                        title: 'Du học Hàn Quốc – Hệ tiếng D4-1',
+                        country: 'han-quoc',
+                        program: 'd4-1',
+                        dossier: 25000000,
+                        tuitionByRegion: { center: 105000000, suburb: 85000000, province: 75000000 },
+                        housingByOption: { ktx: 26000000, ngoai: 38000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 10000000,
+                        earning: '22 - 30 triệu VNĐ/tháng',
+                        earningDesc: 'Sau 6 tháng học tiếng tại Hàn, học viên được phép làm thêm 20h/tuần và toàn thời gian các kỳ nghỉ lễ.',
+                        subtext: 'Đã bao gồm học phí 1 năm bên trường, hồ sơ, ký túc xá và vé máy bay.'
+                    },
+                    'kr-d4-3': {
+                        title: 'Du học Hàn Quốc – Hệ Cấp 3 D4-3',
+                        country: 'han-quoc',
+                        program: 'd4-3',
+                        dossier: 25000000,
+                        tuitionByRegion: { center: 110000000, suburb: 90000000, province: 80000000 },
+                        housingByOption: { ktx: 28000000, ngoai: 40000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 10000000,
+                        earning: 'Học bổng lên đến 100%',
+                        earningDesc: 'Chương trình du học THPT độc quyền tại KIPA kết hợp chính phủ Hàn Quốc, được hỗ trợ ký túc xá và quản lý nội trú an toàn.',
+                        subtext: 'Đã bao gồm học phí, quản trị hồ sơ và ký túc xá nội trú.'
+                    },
+                    'kr-d2-1': {
+                        title: 'Du học Hàn Quốc – Hệ Cao đẳng D2-1',
+                        country: 'han-quoc',
+                        program: 'd2-1',
+                        dossier: 25000000,
+                        tuitionByRegion: { center: 95000000, suburb: 75000000, province: 65000000 },
+                        housingByOption: { ktx: 24000000, ngoai: 36000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 10000000,
+                        earning: '24 - 32 triệu VNĐ/tháng',
+                        earningDesc: 'Lịch học linh hoạt, thực hành chuyên sâu và cơ hội thực tập hưởng lương ngay tại các doanh nghiệp liên kết.',
+                        subtext: 'Đã bao gồm học phí 1 năm cao đẳng, bảo hiểm, hồ sơ và vé máy bay.'
+                    },
+                    'kr-d2-2': {
+                        title: 'Du học Hàn Quốc – Hệ Đại học D2-2',
+                        country: 'han-quoc',
+                        program: 'd2-2',
+                        dossier: 28000000,
+                        tuitionByRegion: { center: 120000000, suburb: 95000000, province: 80000000 },
+                        housingByOption: { ktx: 28000000, ngoai: 40000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 10000000,
+                        earning: '25 - 35 triệu VNĐ/tháng',
+                        earningDesc: 'Sinh viên đại học được làm thêm đến 25h/tuần. Dễ dàng đạt học bổng 30% - 100% dựa vào TOPIK từ kỳ 2.',
+                        subtext: 'Đã bao gồm học phí 1 năm đại học, hồ sơ, ký túc xá và vé máy bay.'
+                    },
+                    'kr-d2-3': {
+                        title: 'Du học Hàn Quốc – Hệ Sau đại học D2-3',
+                        country: 'han-quoc',
+                        program: 'd2-3',
+                        dossier: 30000000,
+                        tuitionByRegion: { center: 135000000, suburb: 105000000, province: 90000000 },
+                        housingByOption: { ktx: 30000000, ngoai: 42000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 10000000,
+                        earning: '28 - 38 triệu VNĐ/tháng',
+                        earningDesc: 'Học viên cao học thường nhận trợ cấp giáo sư tại phòng Lab từ 500.000 - 1.200.000 KRW/tháng.',
+                        subtext: 'Đã bao gồm học phí, phí xét duyệt đề tài và hồ sơ trọn gói.'
+                    },
+                    'au-thpt': {
+                        title: 'Du học Úc – Phổ thông THPT',
+                        country: 'uc',
+                        program: 'thpt',
+                        dossier: 35000000,
+                        tuitionByRegion: { center: 290000000, suburb: 260000000, province: 220000000 },
+                        housingByOption: { ktx: 120000000, ngoai: 150000000, 'nguoi-than': 0 },
+                        langCost: { full: 15000000, basic: 8000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: 'Giám hộ dưới 18 tuổi',
+                        earningDesc: 'Học sinh phổ thông ở tại Homestay gia đình bản xứ có người giám hộ, tập trung 100% vào việc học tập.',
+                        subtext: 'Bao gồm học phí 1 năm trường công/tư thục Úc, homestay và bảo hiểm OSHC.'
+                    },
+                    'au-vet': {
+                        title: 'Du học Úc – Cao đẳng nghề VET & TAFE',
+                        country: 'uc',
+                        program: 'vet-tafe',
+                        dossier: 35000000,
+                        tuitionByRegion: { center: 210000000, suburb: 180000000, province: 155000000 },
+                        housingByOption: { ktx: 60000000, ngoai: 80000000, 'nguoi-than': 0 },
+                        langCost: { full: 15000000, basic: 8000000, none: 0 },
+                        visaAir: 22000000,
+                        earning: '40 - 55 triệu VNĐ/tháng',
+                        earningDesc: 'Quy định Úc cho phép làm thêm 48h/2 tuần với mức lương tối thiểu 23.23 AUD/giờ (~380.000đ/giờ).',
+                        subtext: 'Bao gồm học phí năm đầu trường nghề, bảo hiểm OSHC và hồ sơ visa.'
+                    },
+                    'au-uni': {
+                        title: 'Du học Úc – Hệ Cử nhân Đại học',
+                        country: 'uc',
+                        program: 'dai-hoc',
+                        dossier: 35000000,
+                        tuitionByRegion: { center: 380000000, suburb: 320000000, province: 280000000 },
+                        housingByOption: { ktx: 80000000, ngoai: 110000000, 'nguoi-than': 0 },
+                        langCost: { full: 15000000, basic: 8000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: '45 - 60 triệu VNĐ/tháng',
+                        earningDesc: 'Cơ hội học bổng giá trị cao từ 20% - 100% tại Go8 và cơ hội xin Visa 485 ở lại làm việc sau tốt nghiệp.',
+                        subtext: 'Bao gồm học phí năm đầu, bảo hiểm y tế quốc tế OSHC và hồ sơ GTE.'
+                    },
+                    'au-master': {
+                        title: 'Du học Úc – Hệ Thạc sĩ Sau đại học',
+                        country: 'uc',
+                        program: 'thac-si',
+                        dossier: 35000000,
+                        tuitionByRegion: { center: 420000000, suburb: 360000000, province: 310000000 },
+                        housingByOption: { ktx: 85000000, ngoai: 120000000, 'nguoi-than': 0 },
+                        langCost: { full: 15000000, basic: 8000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: '50 - 70 triệu VNĐ/tháng',
+                        earningDesc: 'Vợ/chồng đi cùng được phép làm việc toàn thời gian không giới hạn giờ tại Úc.',
+                        subtext: 'Bao gồm học phí thạc sĩ năm đầu, bảo hiểm OSHC và hồ sơ Subclass 500.'
+                    },
+                    'jp-tieng': {
+                        title: 'Du học Nhật Bản – Trường Nhật ngữ',
+                        country: 'nhat-ban',
+                        program: 'truong-tieng',
+                        dossier: 28000000,
+                        tuitionByRegion: { center: 125000000, suburb: 110000000, province: 98000000 },
+                        housingByOption: { ktx: 30000000, ngoai: 42000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 12000000,
+                        earning: '25 - 35 triệu VNĐ/tháng',
+                        earningDesc: 'Được cấp giấy phép làm thêm 28h/tuần ngay tại sân bay với mức lương 1.050 - 1.300 Yên/giờ.',
+                        subtext: 'Bao gồm 1 năm học phí trường tiếng, 6 tháng ký túc xá và hồ sơ COE.'
+                    },
+                    'jp-senmon': {
+                        title: 'Du học Nhật Bản – Cao đẳng nghề Senmon',
+                        country: 'nhat-ban',
+                        program: 'senmon',
+                        dossier: 28000000,
+                        tuitionByRegion: { center: 140000000, suburb: 125000000, province: 110000000 },
+                        housingByOption: { ktx: 32000000, ngoai: 44000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 12000000,
+                        earning: '28 - 36 triệu VNĐ/tháng',
+                        earningDesc: 'Đào tạo kỹ năng thực tiễn theo đặt hàng của doanh nghiệp Nhật Bản, tỷ lệ có việc làm trên 95%.',
+                        subtext: 'Bao gồm học phí năm đầu trường chuyên môn, bảo hiểm và hồ sơ COE.'
+                    },
+                    'jp-uni': {
+                        title: 'Du học Nhật Bản – Hệ Đại học chính quy',
+                        country: 'nhat-ban',
+                        program: 'dai-hoc',
+                        dossier: 28000000,
+                        tuitionByRegion: { center: 155000000, suburb: 135000000, province: 120000000 },
+                        housingByOption: { ktx: 35000000, ngoai: 46000000, 'nguoi-than': 0 },
+                        langCost: { full: 10000000, basic: 5000000, none: 0 },
+                        visaAir: 12000000,
+                        earning: '28 - 38 triệu VNĐ/tháng',
+                        earningDesc: 'Cơ hội nhận học bổng MEXT, JASSO và miễn giảm 30% - 50% học phí cho du học sinh quốc tế.',
+                        subtext: 'Bao gồm học phí đại học năm đầu, lệ phí thi tuyển và bảo hiểm y tế quốc dân.'
+                    },
+                    'jp-tokutei': {
+                        title: 'Nhật Bản – Kỹ năng đặc định Tokutei',
+                        country: 'nhat-ban',
+                        program: 'tokutei',
+                        dossier: 35000000,
+                        tuitionByRegion: { center: 35000000, suburb: 30000000, province: 25000000 },
+                        housingByOption: { ktx: 20000000, ngoai: 28000000, 'nguoi-than': 0 },
+                        langCost: { full: 12000000, basic: 6000000, none: 0 },
+                        visaAir: 15000000,
+                        earning: '32 - 45 triệu VNĐ/tháng',
+                        earningDesc: 'Hưởng mức lương cơ bản và chế độ bảo hiểm tương đương người Nhật, có thể gia hạn 5 năm và xin vĩnh trú.',
+                        subtext: 'Chi phí đào tạo tay nghề, hồ sơ chuyển đổi tư cách lưu trú và vé máy bay.'
+                    },
+                    'eu-ausbildung': {
+                        title: 'Du học nghề Đức Ausbildung – Miễn 100% học phí',
+                        country: 'chau-au',
+                        program: 'ausbildung',
+                        dossier: 55000000,
+                        tuitionByRegion: { center: 0, suburb: 0, province: 0 },
+                        housingByOption: { ktx: 18000000, ngoai: 25000000, 'nguoi-than': 0 },
+                        langCost: { full: 25000000, basic: 15000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: '28 - 38 triệu VNĐ/tháng (Lương thực hành ngay)',
+                        earningDesc: 'Chính phủ Đức miễn 100% học phí, nhận trợ cấp từ 950 - 1.300 EUR/tháng trong suốt 3 năm đào tạo.',
+                        subtext: 'Miễn 100% học phí tại Đức, bao gồm đào tạo tiếng B1/B2 và xử lý hợp đồng nghề.'
+                    },
+                    'eu-uni': {
+                        title: 'Đại học Công lập Đức & EU – Miễn học phí',
+                        country: 'chau-au',
+                        program: 'dai-hoc',
+                        dossier: 45000000,
+                        tuitionByRegion: { center: 20000000, suburb: 15000000, province: 10000000 },
+                        housingByOption: { ktx: 40000000, ngoai: 60000000, 'nguoi-than': 0 },
+                        langCost: { full: 20000000, basic: 10000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: '30 - 40 triệu VNĐ/tháng',
+                        earningDesc: 'Được làm thêm 120 ngày trọn ngày hoặc 240 nửa ngày mỗi năm với mức lương tối thiểu 12.41 EUR/giờ.',
+                        subtext: 'Hầu hết các trường công lập Đức miễn học phí (chỉ đóng phí dịch vụ sinh viên ~300 EUR/kỳ).'
+                    },
+                    'eu-master': {
+                        title: 'Thạc sĩ Châu Âu & Erasmus – 100% tiếng Anh',
+                        country: 'chau-au',
+                        program: 'thac-si',
+                        dossier: 45000000,
+                        tuitionByRegion: { center: 50000000, suburb: 35000000, province: 20000000 },
+                        housingByOption: { ktx: 45000000, ngoai: 65000000, 'nguoi-than': 0 },
+                        langCost: { full: 15000000, basic: 8000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: '32 - 45 triệu VNĐ/tháng',
+                        earningDesc: 'Cơ hội nhận học bổng toàn phần Erasmus Mundus danh giá bao gồm học phí và sinh hoạt phí.',
+                        subtext: 'Bao gồm xử lý hồ sơ APS, thẩm định hồ sơ uni-assist và vé máy bay.'
+                    },
+                    'eu-pre': {
+                        title: 'Khóa tiếng & Dự bị Đại học (Studienkolleg Đức)',
+                        country: 'chau-au',
+                        program: 'du-bi',
+                        dossier: 45000000,
+                        tuitionByRegion: { center: 85000000, suburb: 75000000, province: 65000000 },
+                        housingByOption: { ktx: 40000000, ngoai: 55000000, 'nguoi-than': 0 },
+                        langCost: { full: 20000000, basic: 10000000, none: 0 },
+                        visaAir: 25000000,
+                        earning: '25 - 35 triệu VNĐ/tháng',
+                        earningDesc: 'Vừa học dự bị vừa làm thêm để trang trải chi phí sinh hoạt tại Đức.',
+                        subtext: 'Bao gồm học phí dự bị 1 năm, tài khoản phong tỏa và hồ sơ visa Đức.'
+                    }
+                };
+
+                window.setCalcCountryGroup = function(code) {
+                    var pills = document.querySelectorAll('.calc-country-pill');
+                    pills.forEach(function(pill) {
+                        pill.classList.remove('active', 'bg-brand-blue', 'text-white', 'shadow-xs');
+                        pill.classList.add('bg-slate-100', 'text-slate-700');
+                    });
+                    if (window.event && window.event.currentTarget) {
+                        window.event.currentTarget.classList.remove('bg-slate-100', 'text-slate-700');
+                        window.event.currentTarget.classList.add('active', 'bg-brand-blue', 'text-white', 'shadow-xs');
+                    }
+
+                    var sel = document.getElementById('duhoc-cost-country');
+                    if (!sel) return;
+
+                    var mapFirst = {
+                        'kr': 'kr-d4',
+                        'au': 'au-vet',
+                        'jp': 'jp-tieng',
+                        'eu': 'eu-ausbildung',
+                        'all': 'kr-d4'
+                    };
+
+                    if (mapFirst[code]) {
+                        sel.value = mapFirst[code];
+                        calculateDuhocCost();
+                    }
+                };
+
+                window.calculateDuhocCost = function() {
+                    var selCountry = document.getElementById('duhoc-cost-country');
+                    var selRegion = document.getElementById('duhoc-cost-region');
+                    var selHousing = document.getElementById('duhoc-cost-housing');
+                    var selScholarship = document.getElementById('duhoc-cost-scholarship');
+                    var selLang = document.getElementById('duhoc-cost-vn-lang');
+
+                    if (!selCountry || !selRegion || !selHousing || !selScholarship || !selLang) return;
+
+                    var cKey = selCountry.value;
+                    var data = costData[cKey] || costData['kr-d4'];
+
+                    var regKey = selRegion.value;
+                    var houseKey = selHousing.value;
+                    var scholPercent = parseInt(selScholarship.value) || 0;
+                    var langKey = selLang.value;
+
+                    var dossier = data.dossier;
+                    var tuition = (data.tuitionByRegion && data.tuitionByRegion[regKey] !== undefined) ? data.tuitionByRegion[regKey] : 85000000;
+                    var housing = (data.housingByOption && data.housingByOption[houseKey] !== undefined) ? data.housingByOption[houseKey] : 26000000;
+                    var lang = (data.langCost && data.langCost[langKey] !== undefined) ? data.langCost[langKey] : 10000000;
+                    var visaAir = data.visaAir || 10000000;
+
+                    var discount = 0;
+                    if (scholPercent > 0 && tuition > 0) {
+                        discount = Math.round(tuition * (scholPercent / 100));
+                    }
+
+                    var total = dossier + tuition + housing + lang + visaAir - discount;
+
+                    function formatVND(n) {
+                        return Number(n).toLocaleString('vi-VN');
+                    }
+
+                    // Update DOM
+                    var elTitle = document.getElementById('duhoc-cost-title');
+                    var elTotal = document.getElementById('duhoc-cost-total');
+                    var elSubtext = document.getElementById('duhoc-cost-subtext');
+                    var elDossier = document.getElementById('duhoc-item-dossier');
+                    var elTuition = document.getElementById('duhoc-item-tuition');
+                    var elHousing = document.getElementById('duhoc-item-housing');
+                    var elLang = document.getElementById('duhoc-item-lang');
+                    var elVisa = document.getElementById('duhoc-item-visa');
+                    var elScholRow = document.getElementById('duhoc-scholarship-row');
+                    var elScholVal = document.getElementById('duhoc-item-scholarship');
+                    var elEarning = document.getElementById('duhoc-earning-rate');
+                    var elEarningDesc = document.getElementById('duhoc-earning-desc');
+                    var elBtnApply = document.getElementById('duhoc-btn-apply');
+                    var elLabelTuition = document.getElementById('duhoc-label-tuition');
+
+                    if (elTitle) elTitle.textContent = data.title;
+                    if (elTotal) elTotal.textContent = formatVND(total);
+                    if (elSubtext) elSubtext.textContent = data.subtext;
+                    if (elDossier) elDossier.textContent = formatVND(dossier) + ' VNĐ';
+
+                    if (elLabelTuition) {
+                        if (tuition === 0) {
+                            elLabelTuition.textContent = 'Học phí tại Đức (Miễn 100% học phí):';
+                        } else {
+                            elLabelTuition.textContent = 'Học phí chính quy 1 năm nộp trường:';
+                        }
+                    }
+                    if (elTuition) {
+                        elTuition.textContent = (tuition === 0 ? '0 VNĐ (Miễn 100% học phí)' : formatVND(tuition) + ' VNĐ');
+                    }
+
+                    if (elHousing) elHousing.textContent = formatVND(housing) + ' VNĐ';
+                    if (elLang) elLang.textContent = formatVND(lang) + ' VNĐ';
+                    if (elVisa) elVisa.textContent = formatVND(visaAir) + ' VNĐ';
+
+                    if (elScholRow && elScholVal) {
+                        if (discount > 0) {
+                            elScholRow.classList.remove('hidden');
+                            elScholVal.textContent = '- ' + formatVND(discount) + ' VNĐ';
+                        } else {
+                            elScholRow.classList.add('hidden');
+                        }
+                    }
+
+                    if (elEarning) elEarning.textContent = data.earning;
+                    if (elEarningDesc) elEarningDesc.textContent = data.earningDesc;
+
+                    if (elBtnApply) {
+                        elBtnApply.href = '/dang-ky-tu-van/?country=' + data.country + '&program=' + data.program;
+                    }
+                };
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', calculateDuhocCost);
+                } else {
+                    calculateDuhocCost();
+                }
+            })();
+        </script>
     </section>
 
     <!-- ========================================== -->
@@ -1690,29 +2192,6 @@
     </section>
 
 </div>
-
-<!-- SCRIPT: Quiz Interaction (Safe, pure vanilla JS, WAF compatible) -->
-<script>
-    (function() {
-        var group = document.getElementById('quiz-options-group');
-        if (!group) return;
-        var options = group.querySelectorAll('.quiz-option');
-        options.forEach(function(opt) {
-            opt.addEventListener('click', function() {
-                options.forEach(function(o) { 
-                    o.classList.remove('active');
-                    var radio = o.querySelector('input[type="radio"]');
-                    if (radio) radio.checked = false;
-                });
-                opt.classList.add('active');
-                var currentRadio = opt.querySelector('input[type="radio"]');
-                if (currentRadio) currentRadio.checked = true;
-                var next = document.querySelector('#quiz-tu-van a[href^="/dang-ky-tu-van/"]');
-                if (next) next.href = '/dang-ky-tu-van/?notes=' + encodeURIComponent('Định hướng du học: ' + opt.textContent.trim());
-            });
-        });
-    })();
-</script>
     </main>
 
     <!-- SITE FOOTER -->
