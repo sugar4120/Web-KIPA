@@ -93,9 +93,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    
+    <link rel="stylesheet" href="/assets/css/kipa.css?v=20261112-1">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -128,20 +126,38 @@
 
     <!-- SITE HEADER -->
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="/assets/js/kipa-forms.js?v=20261103-3" defer></script>
 <script src="/assets/js/kipa-site.js?v=20261103-1" defer></script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Phudu:wght@600;700;800;900&display=swap');
-    
     .font-phudu { font-family: 'Phudu', sans-serif !important; }
     .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
     .kipa-blue { color: #0274BD !important; }
     .kipa-bg-blue { background-color: #0274BD !important; }
     .kipa-bg-navy { background-color: #081D36 !important; }
     .kipa-border-blue { border-color: #0274BD !important; }
+
+    @media (max-width: 359px) {
+        #kipa-header .kipa-header-search {
+            display: none !important;
+        }
+
+        #kipa-header .kipa-admin-login-label {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        #kipa-header .kipa-header-actions {
+            gap: 0.25rem !important;
+        }
+    }
 
     /* TRIET DE CHONG XUNG DOT THE VUA WORDPRESS / ELEMENTOR */
     #kipa-header,
@@ -252,7 +268,7 @@
         <div class="flex items-center justify-between h-[74px] gap-2 lg:gap-4">
             
             <!-- 1. Brand Logo (Ben trai) -->
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
+            <a href="/" class="kipa-header-brand flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
                 <img src="/Logo.jpg" alt="Logo KIPA Việt Hàn" class="w-11 h-11 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform border border-slate-100 shrink-0">
                 <div class="flex flex-col">
                     <span class="font-phudu text-lg sm:text-[21px] font-bold tracking-tight text-slate-900 group-hover:text-[#0274BD] transition-colors leading-none flex items-center gap-1.5 whitespace-nowrap">
@@ -463,13 +479,17 @@
             </nav>
 
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
-            <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
-                <a href="/api/admin.php" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập quản trị">
-                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
-                    <span>Đăng nhập</span>
+            <div class="kipa-header-actions flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+                <a href="/dang-ky-tai-khoan/" class="inline-flex items-center gap-2 text-slate-600 hover:text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng ký tài khoản học viên">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                    <span class="hidden xl:inline">Đăng ký tài khoản</span>
+                </a>
+                <a href="/dang-nhap/" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập tài khoản học viên">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span class="kipa-admin-login-label">Đăng nhập</span>
                 </a>
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
-                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="kipa-header-search w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </a>
 
@@ -535,6 +555,11 @@
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
+        <div class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tài khoản học viên</div>
+            <a href="/dang-nhap/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🔑 Đăng nhập</a>
+            <a href="/dang-ky-tai-khoan/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📝 Đăng ký tài khoản</a>
+        </div>
         <div class="pt-3">
             <a href="/dang-ky-tu-van/" class="w-full inline-flex items-center justify-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-sm font-semibold py-3 rounded-full shadow-md transition-colors">
                 <span>Đăng ký tư vấn ngay</span>
@@ -580,7 +605,7 @@
                         <div class="bg-white p-2 rounded-2xl sm:rounded-full border border-slate-200/90 shadow-md shadow-blue-900/5 flex flex-col sm:flex-row items-center gap-2">
                             <div class="flex items-center gap-3 px-4 w-full">
                                 <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm"></i>
-                                <input type="text" id="faq-search-input" placeholder="Nhập từ khóa cần tìm (ví dụ: điều kiện du học, chi phí, hồ sơ...)" class="w-full text-xs sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none py-2">
+                                <input type="text" id="faq-search-input" aria-label="Tìm kiếm câu hỏi thường gặp" placeholder="Nhập từ khóa cần tìm (ví dụ: điều kiện du học, chi phí, hồ sơ...)" class="w-full text-xs sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent outline-none py-2">
                             </div>
                             <button id="faq-search-btn" class="w-full sm:w-auto px-6 py-3 rounded-full bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shrink-0 transition-all shadow-sm">
                                 Tìm câu hỏi
@@ -715,7 +740,7 @@
                                 <i class="fa-solid fa-graduation-cap"></i>
                                 <span>1. Học vấn cao nhất</span>
                             </label>
-                            <select id="calc-edu" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
+                            <select id="calc-edu" aria-label="Trình độ học vấn hiện tại" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
                                 <option value="thpt">Tốt nghiệp THPT (Mới tốt nghiệp)</option>
                                 <option value="thpt-gap">Tốt nghiệp THPT (Năm trống > 2 năm)</option>
                                 <option value="cd-dh">Tốt nghiệp Cao đẳng / Đại học</option>
@@ -729,7 +754,7 @@
                                 <i class="fa-solid fa-chart-line"></i>
                                 <span>2. Điểm GPA trung bình</span>
                             </label>
-                            <select id="calc-gpa" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
+                            <select id="calc-gpa" aria-label="Điểm GPA trung bình" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
                                 <option value="gpa-high">GPA từ 7.5 trở lên (Học lực Khá - Giỏi)</option>
                                 <option value="gpa-mid" selected>GPA từ 6.5 đến 7.4 (Học lực Khá)</option>
                                 <option value="gpa-low">GPA từ 6.0 đến 6.4 (Trung bình khá)</option>
@@ -743,7 +768,7 @@
                                 <i class="fa-solid fa-coins"></i>
                                 <span>3. Tài chính ban đầu</span>
                             </label>
-                            <select id="calc-fin" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
+                            <select id="calc-fin" aria-label="Khả năng tài chính ban đầu" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
                                 <option value="fin-standard" selected>160 - 220 triệu (Trọn gói tiêu chuẩn)</option>
                                 <option value="fin-premium">Trên 220 triệu (Trường TOP 1 / Học bổng)</option>
                                 <option value="fin-economy">Dưới 150 triệu (Cần tối ưu / Hỗ trợ vay vốn)</option>
@@ -756,7 +781,7 @@
                                 <i class="fa-solid fa-language"></i>
                                 <span>4. Trình độ ngoại ngữ</span>
                             </label>
-                            <select id="calc-lang" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
+                            <select id="calc-lang" aria-label="Trình độ ngoại ngữ hiện tại" onchange="runEligibilityCalc()" class="w-full bg-white text-slate-900 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer shadow-sm">
                                 <option value="lang-none" selected>Chưa biết gì / Mới bắt đầu</option>
                                 <option value="lang-basic">Đang học sơ cấp (Biết bảng chữ cái)</option>
                                 <option value="lang-topik">Đã có chứng chỉ TOPIK 2+ hoặc JLPT N4+</option>
@@ -1220,7 +1245,7 @@
                                     </span>
                                     <span class="text-[11px] text-brand-blue font-semibold">Bắt buộc</span>
                                 </label>
-                                <select id="cost-country" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                                <select id="cost-country" aria-label="Quốc gia du học để tính chi phí" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
                                     <option value="kr-d4" selected>Du học Hàn Quốc – Hệ tiếng D4-1 (Phổ biến nhất)</option>
                                     <option value="kr-d2">Du học Hàn Quốc – Hệ Đại học D2 (Học bổng cao)</option>
                                     <option value="jp-tieng">Du học Nhật Bản – Trường Nhật ngữ (Vừa học vừa làm)</option>
@@ -1238,7 +1263,7 @@
                                     </span>
                                     <span class="text-[11px] text-slate-500">Ảnh hưởng sinh hoạt phí</span>
                                 </label>
-                                <select id="cost-region" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                                <select id="cost-region" aria-label="Khu vực trường học để tính chi phí" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
                                     <option value="center">Thủ đô / Trung tâm sầm uất (Seoul / Tokyo / Sydney)</option>
                                     <option value="suburb" selected>Thành phố lớn trực thuộc (Busan / Daegu / Osaka / Melbourne)</option>
                                     <option value="province">Khu vực ngoại ô / Tỉnh lân cận (Chi phí tiết kiệm nhất)</option>
@@ -1254,7 +1279,7 @@
                                     </span>
                                     <span class="text-[11px] text-slate-500">Ký túc xá / Trọ</span>
                                 </label>
-                                <select id="cost-housing" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                                <select id="cost-housing" aria-label="Hình thức lưu trú trong 6 tháng đầu" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
                                     <option value="ktx" selected>Ký túc xá trường (Phòng 2 - 4 người an toàn, tiện nghi)</option>
                                     <option value="ngoai">Thuê phòng đơn ngoài (Gosiwon / One-room riêng tư)</option>
                                     <option value="nguoi-than">Ở cùng người thân / bạn bè (Miễn tiền trọ)</option>
@@ -1268,7 +1293,7 @@
                                         <i class="fa-solid fa-award text-purple-600"></i>
                                         <span>4. Mức học bổng</span>
                                     </label>
-                                    <select id="cost-scholarship" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
+                                    <select id="cost-scholarship" aria-label="Mức học bổng dự kiến" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
                                         <option value="0" selected>Chưa có học bổng (0%)</option>
                                         <option value="30">Học bổng 30% học phí</option>
                                         <option value="50">Học bổng 50% học phí</option>
@@ -1282,7 +1307,7 @@
                                         <i class="fa-solid fa-graduation-cap text-rose-500"></i>
                                         <span>5. Học tiếng tại KIPA</span>
                                     </label>
-                                    <select id="cost-vn-lang" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
+                                    <select id="cost-vn-lang" aria-label="Khóa học tiếng Hàn tại KIPA" onchange="calculateStudyCost()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
                                         <option value="full" selected>Trọn gói cấp tốc + Luyện phỏng vấn</option>
                                         <option value="basic">Khóa học nền tảng</option>
                                         <option value="none">Đã có chứng chỉ (Miễn học)</option>
@@ -1637,18 +1662,18 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Họ và tên *</label>
-                                    <input type="text" id="qf-name" required placeholder="Nguyễn Văn A" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue">
+                                    <input type="text" id="qf-name" aria-label="Họ và tên" required placeholder="Nguyễn Văn A" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Số điện thoại / Zalo *</label>
-                                    <input type="tel" id="qf-phone" required placeholder="0987 654 321" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue">
+                                    <input type="tel" id="qf-phone" aria-label="Số điện thoại" required placeholder="0987 654 321" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Chương trình quan tâm</label>
-                                    <select id="qf-program" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue cursor-pointer">
+                                    <select id="qf-program" aria-label="Chương trình quan tâm" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue cursor-pointer">
                                         <option value="Du học Hàn Quốc">Du học Hàn Quốc (D4-1 / D2 / Thạc sĩ)</option>
                                         <option value="Du học Nhật Bản">Du học Nhật Bản (Kỳ tháng 4, 7, 10)</option>
                                         <option value="Xuất khẩu lao động">Xuất khẩu lao động (Kỹ sư E-7 / Tokutei)</option>
@@ -1658,7 +1683,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Hình thức nhận phản hồi</label>
-                                    <select id="qf-contact-method" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue cursor-pointer">
+                                    <select id="qf-contact-method" aria-label="Hình thức nhận phản hồi" class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue cursor-pointer">
                                         <option value="Zalo">Nhắn tin chi tiết qua Zalo</option>
                                         <option value="Điện thoại">Gọi điện thoại trực tiếp</option>
                                     </select>
@@ -1667,7 +1692,7 @@
 
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Nội dung câu hỏi / Tình trạng hồ sơ của bạn</label>
-                                <textarea id="qf-question" rows="3" required placeholder="Ví dụ: Em sinh năm 2002, GPA cấp 3 được 6.3, gia đình ở Nghệ An thì có thể đi trường nào tại Seoul hoặc Busan?..." class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue resize-none"></textarea>
+                                <textarea id="qf-question" aria-label="Nội dung câu hỏi hoặc tình trạng hồ sơ" rows="3" required placeholder="Ví dụ: Em sinh năm 2002, GPA cấp 3 được 6.3, gia đình ở Nghệ An thì có thể đi trường nào tại Seoul hoặc Busan?..." class="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 outline-none focus:border-brand-blue resize-none"></textarea>
                             </div>
 
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
@@ -2030,12 +2055,7 @@
 
     <!-- SITE FOOTER -->
     <!-- KIPA VIET HAN - FOOTER COMPONENT (Tuong thich 100% Elementor & WordPress - Khong loi WAF/Access Denied) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap');
-    
     #kipa-footer,
     #kipa-footer * {
         box-sizing: border-box !important;

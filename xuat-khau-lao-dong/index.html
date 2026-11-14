@@ -93,9 +93,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    
+    <link rel="stylesheet" href="/assets/css/kipa.css?v=20261112-1">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -128,20 +126,38 @@
 
     <!-- SITE HEADER -->
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="/assets/js/kipa-forms.js?v=20261103-3" defer></script>
 <script src="/assets/js/kipa-site.js?v=20261103-1" defer></script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Phudu:wght@600;700;800;900&display=swap');
-    
     .font-phudu { font-family: 'Phudu', sans-serif !important; }
     .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
     .kipa-blue { color: #0274BD !important; }
     .kipa-bg-blue { background-color: #0274BD !important; }
     .kipa-bg-navy { background-color: #081D36 !important; }
     .kipa-border-blue { border-color: #0274BD !important; }
+
+    @media (max-width: 359px) {
+        #kipa-header .kipa-header-search {
+            display: none !important;
+        }
+
+        #kipa-header .kipa-admin-login-label {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        #kipa-header .kipa-header-actions {
+            gap: 0.25rem !important;
+        }
+    }
 
     /* TRIET DE CHONG XUNG DOT THE VUA WORDPRESS / ELEMENTOR */
     #kipa-header,
@@ -252,7 +268,7 @@
         <div class="flex items-center justify-between h-[74px] gap-2 lg:gap-4">
             
             <!-- 1. Brand Logo (Ben trai) -->
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
+            <a href="/" class="kipa-header-brand flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
                 <img src="/Logo.jpg" alt="Logo KIPA Việt Hàn" class="w-11 h-11 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform border border-slate-100 shrink-0">
                 <div class="flex flex-col">
                     <span class="font-phudu text-lg sm:text-[21px] font-bold tracking-tight text-slate-900 group-hover:text-[#0274BD] transition-colors leading-none flex items-center gap-1.5 whitespace-nowrap">
@@ -463,13 +479,17 @@
             </nav>
 
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
-            <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
-                <a href="/api/admin.php" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập quản trị">
-                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
-                    <span>Đăng nhập</span>
+            <div class="kipa-header-actions flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+                <a href="/dang-ky-tai-khoan/" class="inline-flex items-center gap-2 text-slate-600 hover:text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng ký tài khoản học viên">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                    <span class="hidden xl:inline">Đăng ký tài khoản</span>
+                </a>
+                <a href="/dang-nhap/" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập tài khoản học viên">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span class="kipa-admin-login-label">Đăng nhập</span>
                 </a>
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
-                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="kipa-header-search w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </a>
 
@@ -535,6 +555,11 @@
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
+        <div class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tài khoản học viên</div>
+            <a href="/dang-nhap/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🔑 Đăng nhập</a>
+            <a href="/dang-ky-tai-khoan/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📝 Đăng ký tài khoản</a>
+        </div>
         <div class="pt-3">
             <a href="/dang-ky-tu-van/" class="w-full inline-flex items-center justify-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-sm font-semibold py-3 rounded-full shadow-md transition-colors">
                 <span>Đăng ký tư vấn ngay</span>
@@ -1855,12 +1880,12 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Họ và tên <span class="text-brand-red">*</span></label>
-                                    <input type="text" name="fullname" required maxlength="254" placeholder="Nhập họ và tên"
+                                    <input type="text" name="fullname" required maxlength="254" aria-label="Họ và tên" placeholder="Nhập họ và tên"
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Số điện thoại <span class="text-brand-red">*</span></label>
-                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại"
+                                    <input type="tel" name="phone" required maxlength="32" aria-label="Số điện thoại" placeholder="Nhập số điện thoại"
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                             </div>
@@ -1869,7 +1894,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Năm sinh <span class="text-brand-red">*</span></label>
-                                    <select name="birth_year" required class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
+                                    <select name="birth_year" required aria-label="Năm sinh" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
                                         <option value="">Chọn năm sinh</option>
                                         <option value="2007">2007 (19 tuổi)</option>
                                         <option value="2006">2006 (20 tuổi)</option>
@@ -1894,7 +1919,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Thị trường mong muốn</label>
-                                    <select name="market" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
+                                    <select name="market" aria-label="Thị trường mong muốn" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
                                         <option value="">Chọn thị trường</option>
                                         <option value="HQ">Hàn Quốc (E7 / E9)</option>
                                         <option value="NB">Nhật Bản (TTS / Tokutei)</option>
@@ -1909,7 +1934,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Ngành nghề quan tâm</label>
-                                    <select name="industry" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
+                                    <select name="industry" aria-label="Ngành nghề quan tâm" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs bg-white">
                                         <option value="">Chọn ngành nghề</option>
                                         <option value="san_xuat">Sản xuất – Chế tạo</option>
                                         <option value="co_khi">Cơ khí – Hàn – Kỹ thuật</option>
@@ -1923,7 +1948,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-brand-navy mb-1">Nội dung cần tư vấn</label>
-                                    <input type="text" name="notes" placeholder="Nhập nội dung cần hỗ trợ..." 
+                                    <input type="text" name="notes" aria-label="Nội dung cần tư vấn" placeholder="Nhập nội dung cần hỗ trợ..."
                                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue text-xs">
                                 </div>
                             </div>
@@ -1937,7 +1962,7 @@
                             </div>
 
                             <div class="flex items-start gap-2 text-[11px] text-gray-600">
-                                <input type="checkbox" name="consent" value="yes" required class="mt-0.5">
+                                <input type="checkbox" name="consent" value="yes" required aria-label="Đồng ý với Chính sách bảo mật" class="mt-0.5">
                                 <span>Tôi đồng ý để KIPA Việt Hàn sử dụng thông tin đã cung cấp để liên hệ tư vấn theo <a href="/chinh-sach-bao-mat/" class="underline">Chính sách bảo mật</a>.</span>
                             </div>
                             <p class="text-[11px] text-gray-400 text-center pt-1">
@@ -1991,12 +2016,7 @@
 
     <!-- SITE FOOTER -->
     <!-- KIPA VIET HAN - FOOTER COMPONENT (Tuong thich 100% Elementor & WordPress - Khong loi WAF/Access Denied) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap');
-    
     #kipa-footer,
     #kipa-footer * {
         box-sizing: border-box !important;
