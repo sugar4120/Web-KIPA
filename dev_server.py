@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import json
 import mimetypes
 from urllib.parse import unquote, urlparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -27,9 +28,28 @@ ROUTE_MAP = {
     '/du-hoc-uc': 'du-hoc-uc.html',
     '/du-hoc-uc/': 'du-hoc-uc.html',
     '/du-hoc-uc.html': 'du-hoc-uc.html',
+    '/du-hoc-nhat-ban': 'du-hoc-nhat-ban.html',
+    '/du-hoc-nhat-ban/': 'du-hoc-nhat-ban.html',
+    '/du-hoc-nhat-ban.html': 'du-hoc-nhat-ban.html',
+    '/du-hoc-nhat.html': 'du-hoc-nhat-ban.html',
+    '/du-hoc-chau-au': 'du-hoc-chau-au.html',
+    '/du-hoc-chau-au/': 'du-hoc-chau-au.html',
+    '/du-hoc-chau-au.html': 'du-hoc-chau-au.html',
     '/xuat-khau-lao-dong': 'xuat-khau-lao-dong.html',
     '/xuat-khau-lao-dong/': 'xuat-khau-lao-dong.html',
     '/xuat-khau-lao-dong.html': 'xuat-khau-lao-dong.html',
+    '/xuat-khau-lao-dong-han-quoc': 'xuat-khau-lao-dong-han-quoc.html',
+    '/xuat-khau-lao-dong-han-quoc/': 'xuat-khau-lao-dong-han-quoc.html',
+    '/xuat-khau-lao-dong-han-quoc.html': 'xuat-khau-lao-dong-han-quoc.html',
+    '/xuat-khau-lao-dong-uc': 'xuat-khau-lao-dong-uc.html',
+    '/xuat-khau-lao-dong-uc/': 'xuat-khau-lao-dong-uc.html',
+    '/xuat-khau-lao-dong-uc.html': 'xuat-khau-lao-dong-uc.html',
+    '/xuat-khau-lao-dong-nhat-ban': 'xuat-khau-lao-dong-nhat-ban.html',
+    '/xuat-khau-lao-dong-nhat-ban/': 'xuat-khau-lao-dong-nhat-ban.html',
+    '/xuat-khau-lao-dong-nhat-ban.html': 'xuat-khau-lao-dong-nhat-ban.html',
+    '/xuat-khau-lao-dong-chau-au': 'xuat-khau-lao-dong-chau-au.html',
+    '/xuat-khau-lao-dong-chau-au/': 'xuat-khau-lao-dong-chau-au.html',
+    '/xuat-khau-lao-dong-chau-au.html': 'xuat-khau-lao-dong-chau-au.html',
     '/hop-tac-quoc-te': 'hop-tac-quoc-te.html',
     '/hop-tac-quoc-te/': 'hop-tac-quoc-te.html',
     '/hop-tac-quoc-te.html': 'hop-tac-quoc-te.html',
@@ -60,6 +80,18 @@ ROUTE_MAP = {
     '/hoat-dong-su-kien': 'hoat-dong-su-kien.html',
     '/hoat-dong-su-kien/': 'hoat-dong-su-kien.html',
     '/hoat-dong-su-kien.html': 'hoat-dong-su-kien.html',
+    '/dang-ky-tai-khoan': 'dang-ky-tai-khoan.html',
+    '/dang-ky-tai-khoan/': 'dang-ky-tai-khoan.html',
+    '/dang-ky-tai-khoan.html': 'dang-ky-tai-khoan.html',
+    '/dang-nhap': 'dang-nhap.html',
+    '/dang-nhap/': 'dang-nhap.html',
+    '/dang-nhap.html': 'dang-nhap.html',
+    '/ho-so': 'ho-so.html',
+    '/ho-so/': 'ho-so.html',
+    '/ho-so.html': 'ho-so.html',
+    '/quen-mat-khau': 'quen-mat-khau.html',
+    '/quen-mat-khau/': 'quen-mat-khau.html',
+    '/quen-mat-khau.html': 'quen-mat-khau.html',
     '/cam-on': 'cam-on.html',
     '/cam-on/': 'cam-on.html',
     '/cam-on.html': 'cam-on.html',
@@ -75,7 +107,13 @@ PAGE_TITLES = {
     'du-hoc.html': 'Du Học Quốc Tế KIPA Việt Hàn | Hàn Quốc, Úc, Nhật Bản, Châu Âu',
     'du-hoc-han-quoc.html': 'Du Học Hàn Quốc KIPA Việt Hàn | Lộ Trình Rõ Ràng, Vững Bước Tương Lai',
     'du-hoc-uc.html': 'Du Học Úc Cùng KIPA Việt Hàn | Định Hướng Lộ Trình & Học Bổng Toàn Diện',
+    'du-hoc-nhat-ban.html': 'Du Học Nhật Bản Cùng KIPA Việt Hàn | Lộ Trình Rõ Ràng, Vững Bước Tương Lai',
+    'du-hoc-chau-au.html': 'Du Học Châu Âu Cùng KIPA Việt Hàn | Lộ Trình Rõ Ràng, Vững Bước Tương Lai',
     'xuat-khau-lao-dong.html': 'Xuất Khẩu Lao Động & Việc Làm Quốc Tế | KIPA Việt Hàn',
+    'xuat-khau-lao-dong-han-quoc.html': 'Xuất Khẩu Lao Động Hàn Quốc | KIPA Việt Hàn EPS E-9 & E-7 Chính Ngạch',
+    'xuat-khau-lao-dong-uc.html': 'Xuất Khẩu Lao Động Úc | KIPA Việt Hàn Lao Động Nông Nghiệp & Tay Nghề',
+    'xuat-khau-lao-dong-nhat-ban.html': 'Xuất Khẩu Lao Động Nhật Bản | KIPA Việt Hàn Tokutei & Kỹ Sư Thu Nhập Cao',
+    'xuat-khau-lao-dong-chau-au.html': 'Xuất Khẩu Lao Động Châu Âu | KIPA Việt Hàn Đức, Ba Lan, Hungary, Rumani',
     'hop-tac-quoc-te.html': 'Hợp Tác Quốc Tế & Liên Kết Giáo Dục | KIPA Việt Hàn',
     'dang-ky-tu-van.html': 'Đăng Ký Tư Vấn Du Học & Việc Làm | KIPA Việt Hàn',
     'faq.html': 'Câu Hỏi Thường Gặp (FAQ) | KIPA Việt Hàn',
@@ -86,6 +124,10 @@ PAGE_TITLES = {
     'tin-tuc.html': 'Tin Tức & Cẩm Nang Du Học, Việc Làm Quốc Tế | KIPA Việt Hàn',
     'cau-chuyen-hoc-vien.html': 'Câu Chuyện Học Viên KIPA Việt Hàn | Hành Trình Vươn Xa Quốc Tế',
     'hoat-dong-su-kien.html': 'Hoạt Động & Sự Kiện KIPA Việt Hàn | Kết nối cơ hội, phát triển tương lai',
+    'dang-ky-tai-khoan.html': 'Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn',
+    'dang-nhap.html': 'Đăng Nhập Tài Khoản Học Viên | KIPA Việt Hàn',
+    'ho-so.html': 'Hồ Sơ Học Viên | KIPA Việt Hàn',
+    'quen-mat-khau.html': 'Đặt Lại Mật Khẩu | KIPA Việt Hàn',
     'cam-on.html': 'Cảm Ơn Bạn Đã Đăng Ký | KIPA Việt Hàn',
     '404.html': '404 - Không Tìm Thấy Trang | KIPA Việt Hàn'
 }
@@ -104,6 +146,45 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.handle_request(head_only=False)
+
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        if path == '/api/login.php':
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length) if length > 0 else b'{}'
+            try:
+                data = json.loads(body.decode('utf-8'))
+            except Exception:
+                data = {}
+            action = data.get('action')
+            if action == 'login':
+                email = data.get('email', 'hocvien@kipaviethan.edu.vn')
+                raw_name = email.split('@')[0].replace('.', ' ').replace('_', ' ').title()
+                full_name = raw_name if raw_name else 'Học viên KIPA'
+                response_data = {
+                    'ok': True,
+                    'user': {
+                        'full_name': full_name,
+                        'email': email
+                    }
+                }
+            elif action == 'logout':
+                response_data = {'ok': True}
+            elif action == 'me':
+                response_data = {'ok': True, 'user': None}
+            else:
+                response_data = {'ok': True}
+
+            resp_bytes = json.dumps(response_data).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
+            return
+
+        self.send_error(404, "Endpoint not found.")
 
     def handle_request(self, head_only=False):
         parsed = urlparse(self.path)
@@ -135,6 +216,15 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 return
             if os.path.isfile(file_path):
                 self.serve_static_file(file_path, head_only=head_only)
+                return
+            if os.path.isdir(file_path):
+                index_cand = os.path.join(file_path, 'index.html')
+                if os.path.isfile(index_cand):
+                    self.serve_static_file(index_cand, head_only=head_only)
+                    return
+            html_cand = file_path + '.html'
+            if os.path.isfile(html_cand):
+                self.serve_static_file(html_cand, head_only=head_only)
                 return
             else:
                 target_file = '404.html'
