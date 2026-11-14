@@ -36,22 +36,6 @@ if (!in_array($action, ['login', 'me', 'logout'], true)) {
     kipa_json_response(400, ['error' => 'Yêu cầu không hợp lệ.']);
 }
 
-function kipa_user_session(): void
-{
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        return;
-    }
-    session_name('kipa_user');
-    session_set_cookie_params([
-        'lifetime' => 0,
-        'path' => '/',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Lax',
-    ]);
-    session_start();
-}
-
 kipa_user_session();
 
 if ($action === 'logout') {

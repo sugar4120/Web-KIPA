@@ -104,6 +104,22 @@ function kipa_admin_session(): void
     }
 }
 
+function kipa_user_session(): void
+{
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        return;
+    }
+    session_name('kipa_user');
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    session_start();
+}
+
 function kipa_check_csrf(): void
 {
     $submitted = $_POST['csrf'] ?? '';

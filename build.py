@@ -16,7 +16,7 @@ from xml.sax.saxutils import escape
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = 'https://kipaviethan.edu.vn'
-NOINDEX_SLUGS = {'cam-on', '404'}
+NOINDEX_SLUGS = {'cam-on', '404', 'ho-so'}
 PUBLIC_ASSET_SUFFIXES = {
     '.avif', '.css', '.gif', '.ico', '.jpeg', '.jpg', '.js', '.mp4',
     '.pdf', '.png', '.svg', '.ttf', '.webm', '.webp', '.woff', '.woff2',
@@ -26,6 +26,7 @@ API_FILES = {
     'api/submit.php', 'api/content.php', 'api/content-model.json',
     'api/cms.php', 'api/migrate.php', 'api/publish.php',
     'api/mailer.php', 'api/otp.php', 'api/register.php', 'api/login.php',
+    'api/account.php', 'api/reset-password.php',
 }
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',
@@ -159,6 +160,20 @@ PAGES_CONFIG = [
         'title': 'Đăng Nhập Tài Khoản Học Viên | KIPA Việt Hàn',
         'desc': 'Đăng nhập tài khoản học viên KIPA Việt Hàn để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận hỗ trợ ưu tiên từ đội ngũ tư vấn.',
         'keywords': 'đăng nhập kipa, tài khoản học viên kipa việt hàn'
+    },
+    {
+        'file': 'quen-mat-khau.html',
+        'slug': 'quen-mat-khau',
+        'title': 'Quên Mật Khẩu Tài Khoản Học Viên | KIPA Việt Hàn',
+        'desc': 'Đặt lại mật khẩu tài khoản học viên KIPA Việt Hàn an toàn bằng mã OTP gửi qua email đã xác thực.',
+        'keywords': 'quên mật khẩu kipa, đặt lại mật khẩu tài khoản học viên'
+    },
+    {
+        'file': 'ho-so.html',
+        'slug': 'ho-so',
+        'title': 'Hồ Sơ Học Viên | KIPA Việt Hàn',
+        'desc': 'Xem và cập nhật thông tin tài khoản học viên KIPA Việt Hàn: họ tên, số điện thoại và mật khẩu đăng nhập.',
+        'keywords': 'hồ sơ học viên kipa, tài khoản kipa việt hàn'
     },
     {
         'file': 'faq.html',

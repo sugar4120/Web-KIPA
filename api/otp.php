@@ -25,7 +25,7 @@ try {
 } catch (JsonException) {
     kipa_json_response(400, ['error' => 'Dữ liệu gửi lên không hợp lệ.']);
 }
-if (!is_array($request) || array_diff(array_keys($request), ['action', 'email', 'code', 'website'])) {
+if (!is_array($request) || array_diff(array_keys($request), ['action', 'email', 'code', 'purpose', 'website'])) {
     kipa_json_response(400, ['error' => 'Dữ liệu gửi lên không hợp lệ.']);
 }
 if (isset($request['website']) && (!is_string($request['website']) || $request['website'] !== '')) {
@@ -34,6 +34,10 @@ if (isset($request['website']) && (!is_string($request['website']) || $request['
 
 $action = $request['action'] ?? null;
 if (!in_array($action, ['send', 'verify'], true)) {
+    kipa_json_response(400, ['error' => 'Yêu cầu không hợp lệ.']);
+}
+$purpose = $request['purpose'] ?? 'register';
+if (!in_array($purpose, ['register', 'reset'], true)) {
     kipa_json_response(400, ['error' => 'Yêu cầu không hợp lệ.']);
 }
 try {
@@ -56,9 +60,15 @@ try {
         $db->beginTransaction();
         $registered = $db->prepare('SELECT id FROM kipa_users WHERE email = :email');
         $registered->execute(['email' => $email]);
-        if ($registered->fetchColumn()) {
+        $hasAccount = (bool)$registered->fetchColumn();
+        if ($purpose === 'register' && $hasAccount) {
             $db->rollBack();
             kipa_json_response(409, ['error' => 'Email này đã được đăng ký tài khoản. Vui lòng dùng email khác.']);
+        }
+        if ($purpose === 'reset' && !$hasAccount) {
+            // Generic response so account existence cannot be probed; no code is sent.
+            $db->rollBack();
+            kipa_json_response(200, ['ok' => true]);
         }
         if (kipa_rate_limited($db, 'otp_send', $remoteKey, 5, 15)) {
             $db->rollBack();
@@ -83,13 +93,17 @@ try {
         $id = (int)$db->lastInsertId();
         $db->commit();
         try {
+            $isReset = $purpose === 'reset';
             kipa_send_mail(
                 $smtp,
                 $email,
-                'Mã xác thực OTP đăng ký tài khoản KIPA Việt Hàn',
+                $isReset
+                    ? 'Mã OTP đặt lại mật khẩu tài khoản KIPA Việt Hàn'
+                    : 'Mã xác thực OTP đăng ký tài khoản KIPA Việt Hàn',
                 "Xin chào,\n\n"
                 . "Mã xác thực (OTP) của bạn là: {$otp}\n\n"
-                . 'Mã có hiệu lực trong ' . KIPA_OTP_TTL_MINUTES . " phút và chỉ dùng để đăng ký tài khoản tại kipaviethan.edu.vn.\n"
+                . 'Mã có hiệu lực trong ' . KIPA_OTP_TTL_MINUTES . ' phút và chỉ dùng để '
+                . ($isReset ? 'đặt lại mật khẩu' : 'đăng ký tài khoản') . " tại kipaviethan.edu.vn.\n"
                 . "Nếu bạn không yêu cầu mã này, vui lòng bỏ qua email.\n\n"
                 . "KIPA Việt Hàn\n"
                 . "Hotline: 036 851 3865 | 0889 2222 55\n"

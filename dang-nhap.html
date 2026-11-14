@@ -422,7 +422,10 @@
                         <input type="email" id="login-email" name="email" required maxlength="254" autocomplete="email" placeholder="ban@email.com" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
                     </div>
                     <div>
-                        <label for="login-password" class="block text-sm font-semibold text-brand-navy mb-1.5">Mật khẩu <span class="text-brand-red">*</span></label>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label for="login-password" class="block text-sm font-semibold text-brand-navy">Mật khẩu <span class="text-brand-red">*</span></label>
+                            <a href="/quen-mat-khau/" class="text-xs font-semibold text-brand-blue hover:underline">Quên mật khẩu?</a>
+                        </div>
                         <input type="password" id="login-password" name="password" required maxlength="72" autocomplete="current-password" placeholder="Nhập mật khẩu của bạn" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
                     </div>
                     <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
@@ -440,7 +443,8 @@
                     <p id="login-user-name" class="text-brand-blue font-semibold mb-5"></p>
                     <p class="text-slate-600 mb-6">Bạn đã đăng nhập thành công vào tài khoản học viên KIPA Việt Hàn.</p>
                     <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                        <a href="/" class="inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-[#025e99] text-white font-bold py-3 px-8 rounded-xl transition-colors">Về trang chủ</a>
+                        <a href="/ho-so/" class="inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-[#025e99] text-white font-bold py-3 px-8 rounded-xl transition-colors">Xem hồ sơ của tôi</a>
+                        <a href="/" class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:text-brand-blue hover:border-blue-200 font-bold py-3 px-8 rounded-xl transition-colors">Về trang chủ</a>
                         <button type="button" id="logout-btn" class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:text-brand-red hover:border-red-200 font-bold py-3 px-8 rounded-xl transition-colors">Đăng xuất</button>
                     </div>
                 </div>

@@ -155,7 +155,7 @@ class BuildTests(unittest.TestCase):
         ]
         self.assertCountEqual(urls, expected)
         self.assertEqual(len(urls), len(expected))
-        self.assertEqual(len(urls), 19)
+        self.assertEqual(len(urls), 20)
         for cfg in build.PAGES_CONFIG:
             html = (self.output / cfg['file']).read_text(encoding='utf-8')
             robots = 'noindex, follow' if cfg['slug'] in build.NOINDEX_SLUGS else 'index, follow'
