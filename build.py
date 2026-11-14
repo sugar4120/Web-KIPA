@@ -25,6 +25,7 @@ API_FILES = {
     'api/.htaccess', 'api/admin.php', 'api/bootstrap.php', 'api/cleanup.php',
     'api/submit.php', 'api/content.php', 'api/content-model.json',
     'api/cms.php', 'api/migrate.php', 'api/publish.php',
+    'api/mailer.php', 'api/otp.php', 'api/register.php', 'api/login.php',
 }
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',
@@ -144,6 +145,20 @@ PAGES_CONFIG = [
         'title': 'Đăng Ký Tư Vấn Du Học & Việc Làm Quốc Tế | KIPA Việt Hàn',
         'desc': 'Để lại thông tin nhận tư vấn 1:1 miễn phí lộ trình du học Hàn Quốc, Úc, học tiếng Hàn và việc làm quốc tế phù hợp nhất với nguyện vọng của bạn.',
         'keywords': 'đăng ký tư vấn du học, tư vấn du học miễn phí kipa'
+    },
+    {
+        'file': 'dang-ky-tai-khoan.html',
+        'slug': 'dang-ky-tai-khoan',
+        'title': 'Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn',
+        'desc': 'Tạo tài khoản học viên KIPA Việt Hàn với xác thực email bằng mã OTP để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận thông tin ưu tiên.',
+        'keywords': 'đăng ký tài khoản kipa, tài khoản học viên kipa việt hàn'
+    },
+    {
+        'file': 'dang-nhap.html',
+        'slug': 'dang-nhap',
+        'title': 'Đăng Nhập Tài Khoản Học Viên | KIPA Việt Hàn',
+        'desc': 'Đăng nhập tài khoản học viên KIPA Việt Hàn để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận hỗ trợ ưu tiên từ đội ngũ tư vấn.',
+        'keywords': 'đăng nhập kipa, tài khoản học viên kipa việt hàn'
     },
     {
         'file': 'faq.html',
@@ -321,9 +336,7 @@ def render_full_html(cfg, body_content, header_html, footer_html):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    
+    <link rel="stylesheet" href="/assets/css/kipa.css?v=20261112-1">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -398,6 +411,7 @@ def build_site(output_dir=None):
 
     required = [
         'header.html', 'footer.html', '.htaccess', 'robots.txt', 'Logo.jpg',
+        'assets/css/kipa.css',
     ]
     required.extend(sorted(API_FILES))
     required.extend(cfg['file'] for cfg in PAGES_CONFIG)

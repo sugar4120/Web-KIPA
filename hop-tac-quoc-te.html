@@ -464,6 +464,10 @@
 
             <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
             <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+                <a href="/api/admin.php" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập quản trị">
+                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                    <span>Đăng nhập</span>
+                </a>
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
                 <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
@@ -982,11 +986,11 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Tên trường / tổ chức <span class="text-brand-red">*</span></label>
-                                    <input type="text" name="organization" required maxlength="254" placeholder="Nhập tên trường hoặc tổ chức" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="text" name="organization" required maxlength="254" aria-label="Tên trường hoặc tổ chức" placeholder="Nhập tên trường hoặc tổ chức" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Loại hình đơn vị <span class="text-brand-red">*</span></label>
-                                    <select name="org_type" required class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <select name="org_type" required aria-label="Loại hình đơn vị" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                         <option value="" disabled selected>Chọn loại hình</option>
                                         <option value="thpt">Trường THPT / THCS</option>
                                         <option value="dai-hoc">Trường Đại học / Cao đẳng</option>
@@ -999,28 +1003,28 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Người liên hệ <span class="text-brand-red">*</span></label>
-                                    <input type="text" name="contact_name" required maxlength="254" placeholder="Họ và tên người đại diện" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="text" name="contact_name" required maxlength="254" aria-label="Họ và tên người liên hệ" placeholder="Họ và tên người đại diện" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Chức vụ</label>
-                                    <input type="text" name="position" maxlength="254" placeholder="Ví dụ: Hiệu trưởng, Trưởng khoa, Giám đốc..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="text" name="position" maxlength="254" aria-label="Chức vụ người liên hệ" placeholder="Ví dụ: Hiệu trưởng, Trưởng khoa, Giám đốc..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Số điện thoại <span class="text-brand-red">*</span></label>
-                                    <input type="tel" name="phone" required maxlength="32" placeholder="Nhập số điện thoại liên hệ" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="tel" name="phone" required maxlength="32" aria-label="Số điện thoại" placeholder="Nhập số điện thoại liên hệ" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-slate-700 mb-1">Email <span class="text-brand-red">*</span></label>
-                                    <input type="email" name="email" required maxlength="254" placeholder="Nhập email làm việc" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                    <input type="email" name="email" required maxlength="254" aria-label="Email làm việc" placeholder="Nhập email làm việc" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block font-bold text-slate-700 mb-1">Mô hình hợp tác quan tâm <span class="text-brand-red">*</span></label>
-                                <select name="cooperation_type" required class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
+                                <select name="cooperation_type" required aria-label="Mô hình hợp tác quan tâm" class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue">
                                     <option value="" disabled selected>Chọn mô hình hợp tác</option>
                                     <option value="dao-tao">Hợp tác đào tạo tiếng Hàn</option>
                                     <option value="huong-nghiep">Tư vấn hướng nghiệp & du học</option>
@@ -1032,11 +1036,11 @@
 
                             <div>
                                 <label class="block font-bold text-slate-700 mb-1">Nội dung đề xuất cụ thể</label>
-                                <textarea name="proposal" maxlength="2000" rows="3" placeholder="Mô tả tóm tắt nhu cầu, quy mô hoặc đề xuất hợp tác của quý đơn vị..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue"></textarea>
+                                <textarea name="proposal" maxlength="2000" rows="3" aria-label="Nội dung đề xuất hợp tác" placeholder="Mô tả tóm tắt nhu cầu, quy mô hoặc đề xuất hợp tác của quý đơn vị..." class="w-full p-3 rounded-2xl bg-slate-50 border border-slate-200 outline-none focus:border-brand-blue"></textarea>
                             </div>
 
                             <label class="flex items-start gap-2 text-xs text-slate-600">
-                                <input type="checkbox" name="consent" value="yes" required class="mt-0.5">
+                                <input type="checkbox" name="consent" value="yes" required aria-label="Đồng ý với Chính sách bảo mật" class="mt-0.5">
                                 <span>Tôi đồng ý để KIPA Việt Hàn sử dụng thông tin này nhằm phản hồi đề xuất theo <a href="/chinh-sach-bao-mat/" class="underline">Chính sách bảo mật</a>.</span>
                             </label>
                             <button type="submit" class="w-full py-3.5 rounded-full bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2">

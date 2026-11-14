@@ -2,7 +2,7 @@
 import os
 import sys
 import mimetypes
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 PORT = 3000
@@ -107,15 +107,32 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
     def handle_request(self, head_only=False):
         parsed = urlparse(self.path)
-        clean_path = parsed.path.rstrip('/') if parsed.path != '/' else '/'
+        path = unquote(parsed.path)
+        if path in {'/api/admin.php', '/api/cms.php'}:
+            self.send_response(302)
+            self.send_header('Location', 'https://kipaviethan.edu.vn' + path)
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return
+        clean_path = path.rstrip('/') if path != '/' else '/'
+
+        if '.php' in clean_path.lower().split('/')[-1]:
+            self.send_error(403, "PHP cannot be executed by the static development server.")
+            return
 
         # Check in route map
-        target_file = ROUTE_MAP.get(clean_path) or ROUTE_MAP.get(parsed.path)
+        target_file = ROUTE_MAP.get(clean_path) or ROUTE_MAP.get(path)
 
         if not target_file:
             # Check if file exists relative to BASE_DIR
-            rel_path = parsed.path.lstrip('/')
-            file_path = os.path.join(BASE_DIR, rel_path)
+            rel_path = path.lstrip('/')
+            file_path = os.path.realpath(os.path.join(BASE_DIR, rel_path))
+            if os.path.commonpath([os.path.realpath(BASE_DIR), file_path]) != os.path.realpath(BASE_DIR):
+                self.send_error(403, "Path is outside the development website.")
+                return
+            if file_path.lower().endswith('.php'):
+                self.send_error(403, "PHP source cannot be served.")
+                return
             if os.path.isfile(file_path):
                 self.serve_static_file(file_path, head_only=head_only)
                 return

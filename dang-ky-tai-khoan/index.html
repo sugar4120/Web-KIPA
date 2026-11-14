@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn</title>
+    <meta name="description" content="Tạo tài khoản học viên KIPA Việt Hàn với xác thực email bằng mã OTP để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận thông tin ưu tiên.">
+    <meta name="keywords" content="đăng ký tài khoản kipa, tài khoản học viên kipa việt hàn">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://kipaviethan.edu.vn/dang-ky-tai-khoan/">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": [
+                "Organization",
+                "EducationalOrganization"
+            ],
+            "@id": "https://kipaviethan.edu.vn/#organization",
+            "name": "KIPA Việt Hàn",
+            "url": "https://kipaviethan.edu.vn/",
+            "logo": "https://kipaviethan.edu.vn/Logo.jpg",
+            "email": "duhocquoctekipaviethan@gmail.com",
+            "telephone": "+84368513865",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "135 Bạch Năng Thi, Phường Tân Hưng",
+                "addressLocality": "Hải Phòng",
+                "addressCountry": "VN"
+            },
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "contactType": "Tư vấn tuyển sinh",
+                    "telephone": "+84368513865",
+                    "availableLanguage": [
+                        "vi"
+                    ]
+                },
+                {
+                    "@type": "ContactPoint",
+                    "contactType": "Tư vấn tuyển sinh",
+                    "telephone": "+84889222255",
+                    "availableLanguage": [
+                        "vi"
+                    ]
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://kipaviethan.edu.vn/dang-ky-tai-khoan/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Trang chủ",
+                    "item": "https://kipaviethan.edu.vn/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Đăng Ký Tài Khoản Học Viên",
+                    "item": "https://kipaviethan.edu.vn/dang-ky-tai-khoan/"
+                }
+            ]
+        }
+    ]
+}
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/Logo.jpg">
+    <link rel="apple-touch-icon" href="/Logo.jpg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kipaviethan.edu.vn/dang-ky-tai-khoan/">
+    <meta property="og:title" content="Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn">
+    <meta property="og:description" content="Tạo tài khoản học viên KIPA Việt Hàn với xác thực email bằng mã OTP để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận thông tin ưu tiên.">
+    <meta property="og:image" content="https://kipaviethan.edu.vn/Logo.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kipaviethan.edu.vn/dang-ky-tai-khoan/">
+    <meta property="twitter:title" content="Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn">
+    <meta property="twitter:description" content="Tạo tài khoản học viên KIPA Việt Hàn với xác thực email bằng mã OTP để theo dõi lộ trình du học, khóa học tiếng Hàn và nhận thông tin ưu tiên.">
+    <meta property="twitter:image" content="https://kipaviethan.edu.vn/Logo.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@600;700&family=Phudu:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/kipa.css?v=20261112-1">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Base Styles -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1e293b;
+            background-color: #fafbfc;
+            margin: 0;
+            padding: 0;
+        }
+        .font-phudu { font-family: 'Phudu', sans-serif !important; }
+        .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
+        .font-script { font-family: 'Dancing Script', cursive !important; }
+        .text-brand-blue { color: #0274BD !important; }
+        .bg-brand-blue { background-color: #0274BD !important; }
+        .border-brand-blue { border-color: #0274BD !important; }
+        .text-brand-red { color: #EC1E1B !important; }
+        .bg-brand-red { background-color: #EC1E1B !important; }
+        .border-brand-red { border-color: #EC1E1B !important; }
+        .text-brand-yellow { color: #FFF017 !important; }
+        .bg-brand-yellow { background-color: #FFF017 !important; }
+        .bg-brand-navy { background-color: #081D36 !important; }
+        .text-brand-navy { color: #081D36 !important; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen">
+
+    <!-- SITE HEADER -->
+    <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
+<script src="/assets/js/kipa-forms.js?v=20261103-3" defer></script>
+<script src="/assets/js/kipa-site.js?v=20261103-1" defer></script>
+
+<style>
+    .font-phudu { font-family: 'Phudu', sans-serif !important; }
+    .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
+    .kipa-blue { color: #0274BD !important; }
+    .kipa-bg-blue { background-color: #0274BD !important; }
+    .kipa-bg-navy { background-color: #081D36 !important; }
+    .kipa-border-blue { border-color: #0274BD !important; }
+
+    @media (max-width: 359px) {
+        #kipa-header .kipa-header-search {
+            display: none !important;
+        }
+
+        #kipa-header .kipa-admin-login-label {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        #kipa-header .kipa-header-actions {
+            gap: 0.25rem !important;
+        }
+    }
+
+    /* TRIET DE CHONG XUNG DOT THE VUA WORDPRESS / ELEMENTOR */
+    #kipa-header,
+    #kipa-header * {
+        box-sizing: border-box !important;
+    }
+
+    #kipa-header a {
+        text-decoration: none !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+    }
+
+    /* Xoa bo toan bo border/outline/background mac dinh cua button tu WordPress Theme */
+    #kipa-header button,
+    #kipa-header button:focus,
+    #kipa-header button:hover,
+    #kipa-header button:active {
+        border: none !important;
+        outline: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font: inherit !important;
+        color: inherit !important;
+        cursor: pointer !important;
+    }
+
+    /* Khoa cung white-space nowrap cho tat ca menu items */
+    #kipa-header nav,
+    #kipa-header nav > *,
+    #kipa-header nav a,
+    #kipa-header nav span,
+    #kipa-header nav div {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Hieu ung gach chan active va hover menu */
+    .kipa-nav-item {
+        position: relative;
+        padding: 6px 0;
+        transition: color 0.2s ease;
+    }
+    .kipa-nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2.5px;
+        background-color: #0274BD;
+        border-radius: 9999px;
+        transition: width 0.25s ease;
+    }
+    .kipa-nav-item:hover::after,
+    .kipa-nav-item.active::after {
+        width: 100%;
+    }
+
+    /* Override Elementor widget container padding */
+    .elementor-widget-html .elementor-widget-container {
+        padding: 0 !important;
+    }
+</style>
+
+<!-- HEADER CONTAINER -->
+<header id="kipa-header" translate="no" class="notranslate sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs transition-all duration-300 font-vietnam">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-[74px] gap-2 lg:gap-4">
+            
+            <!-- 1. Brand Logo (Ben trai) -->
+            <a href="/" class="kipa-header-brand flex items-center gap-2.5 sm:gap-3 shrink-0 group py-1">
+                <img src="/Logo.jpg" alt="Logo KIPA Việt Hàn" class="w-11 h-11 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform border border-slate-100 shrink-0">
+                <div class="flex flex-col">
+                    <span class="font-phudu text-lg sm:text-[21px] font-bold tracking-tight text-slate-900 group-hover:text-[#0274BD] transition-colors leading-none flex items-center gap-1.5 whitespace-nowrap">
+                        KIPA <span class="text-[#0274BD]">VIỆT HÀN</span>
+                    </span>
+                    <p class="hidden xl:block text-[10px] text-slate-500 font-medium tracking-wide uppercase mt-1 leading-tight whitespace-nowrap">
+                        Du học • Đào tạo tiếng Hàn • Quốc tế
+                    </p>
+                </div>
+            </a>
+
+            <!-- 2. Desktop Navigation Menu (O giua - Khoa cung 1 dong tuyet doi, tu dong co dan) -->
+            <nav class="hidden lg:flex items-center gap-3.5 xl:gap-5 2xl:gap-7 text-[13.5px] xl:text-[14px] font-semibold text-slate-700 whitespace-nowrap shrink-0">
+                <a href="/" class="kipa-nav-item active text-[#0274BD] font-bold">Trang chủ</a>
+
+                <!-- Dropdown: Về KIPA -->
+                <div class="relative group cursor-pointer shrink-0 py-2">
+                    <div class="flex items-center gap-1.5 text-slate-700 group-hover:text-[#0274BD] transition-colors whitespace-nowrap">
+                        <span>Về KIPA</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-[#0274BD] transition-transform duration-200 group-hover:rotate-180"></i>
+                    </div>
+                    <div class="absolute left-0 top-full -mt-1 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <a href="/gioi-thieu/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0"><i class="fa-solid fa-building"></i></span>
+                            <div>
+                                <div class="font-bold">Giới thiệu chung</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Tầm nhìn & sứ mệnh</div>
+                            </div>
+                        </a>
+                        <a href="/doi-ngu/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50/60 hover:text-emerald-600 transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-users"></i></span>
+                            <div>
+                                <div class="font-bold">Đội ngũ KIPA</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Lãnh đạo & chuyên gia</div>
+                            </div>
+                        </a>
+                        <a href="/hoat-dong-su-kien/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-red-50/60 hover:text-[#EC1E1B] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn"></i></span>
+                            <div>
+                                <div class="font-bold">Hoạt động &amp; Sự kiện</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Hội thảo, ký kết, đào tạo</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dropdown: Chương trình -->
+                <div class="relative group cursor-pointer shrink-0 py-2">
+                    <div class="flex items-center gap-1.5 text-slate-700 group-hover:text-[#0274BD] transition-colors whitespace-nowrap">
+                        <span>Chương trình</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-[#0274BD] transition-transform duration-200 group-hover:rotate-180"></i>
+                    </div>
+                    <!-- Dropdown Content -->
+                    <div class="absolute left-0 top-full -mt-1 w-68 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <a href="/du-hoc/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0"><i class="fa-solid fa-globe"></i></span>
+                            <div>
+                                <div class="font-bold">Du học quốc tế</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Tổng quan tất cả các nước</div>
+                            </div>
+                        </a>
+                        <a href="/du-hoc-han-quoc/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-red-100 text-[#EC1E1B] flex items-center justify-center shrink-0"><i class="fa-solid fa-graduation-cap"></i></span>
+                            <div>
+                                <div class="font-bold text-[#EC1E1B]">Du học Hàn Quốc</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Chương trình trọng điểm KIPA</div>
+                            </div>
+                        </a>
+                        <a href="/du-hoc-uc/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50/60 hover:text-[#0274BD] transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0"><i class="fa-solid fa-plane-departure"></i></span>
+                            <div>
+                                <div class="font-bold text-[#0274BD]">Du học Úc</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Định hướng & Học bổng toàn diện</div>
+                            </div>
+                        </a>
+                        <a href="/xuat-khau-lao-dong/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-amber-50/60 hover:text-amber-600 transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-briefcase"></i></span>
+                            <div>
+                                <div class="font-bold">Xuất khẩu lao động</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Chính ngạch, thu nhập cao</div>
+                            </div>
+                        </a>
+                        <a href="/tieng-han/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50/60 hover:text-emerald-600 transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-book-open"></i></span>
+                            <div>
+                                <div class="font-bold">Đào tạo tiếng Hàn</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Luyện thi TOPIK cấp tốc 3 - 6 tháng</div>
+                            </div>
+                        </a>
+                        <a href="/hop-tac-quoc-te/" class="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50/60 hover:text-indigo-600 transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-handshake"></i></span>
+                            <div>
+                                <div class="font-bold">Hợp tác giáo dục</div>
+                                <div class="text-[10px] text-slate-400 font-normal">Kết nối viện, trường đại học</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/cau-chuyen-hoc-vien/" class="kipa-nav-item hover:text-[#0274BD]">Hành trình học viên</a>
+                <a href="/tin-tuc/" class="kipa-nav-item hover:text-[#0274BD]">Tin tức</a>
+                <a href="/faq/" class="kipa-nav-item hover:text-[#0274BD]">Hỏi đáp</a>
+                <a href="/co-so/" class="kipa-nav-item hover:text-[#0274BD]">Cơ sở</a>
+                <a href="/lien-he/" class="kipa-nav-item hover:text-[#0274BD]">Liên hệ</a>
+            </nav>
+
+            <!-- 3. Actions Right (Icon Search + Button Dang ky tu van) -->
+            <div class="kipa-header-actions flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+                <a href="/dang-ky-tai-khoan/" class="inline-flex items-center gap-2 text-slate-600 hover:text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng ký tài khoản học viên">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                    <span class="hidden xl:inline">Đăng ký tài khoản</span>
+                </a>
+                <a href="/dang-nhap/" class="inline-flex items-center gap-2 text-[#0274BD] text-xs font-semibold px-2 py-2.5 rounded-lg hover:bg-slate-100 whitespace-nowrap" aria-label="Đăng nhập tài khoản học viên">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span class="kipa-admin-login-label">Đăng nhập</span>
+                </a>
+                <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
+                <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" class="kipa-header-search w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </a>
+
+                <!-- Button Dang ky tu van -->
+                <a href="/dang-ky-tu-van/" class="hidden sm:inline-flex items-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-xs xl:text-sm font-semibold px-4 xl:px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all shrink-0 whitespace-nowrap group">
+                    <span>Đăng ký tư vấn</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button type="button" data-mobile-menu-toggle aria-controls="mobile-header-menu" aria-expanded="false" aria-label="Menu điều hướng" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Responsive Menu Drawer -->
+    <div id="mobile-header-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-5 py-4 space-y-3 shadow-xl transition-all font-vietnam">
+        <a href="/" class="block text-[#0274BD] font-bold py-2 border-l-4 border-[#0274BD] pl-3 bg-blue-50/50 rounded-r-lg">Trang chủ</a>
+        <div class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Về KIPA</div>
+            <a href="/gioi-thieu/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🏢 Giới thiệu KIPA</a>
+            <a href="/doi-ngu/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">👥 Đội ngũ KIPA</a>
+            <a href="/hoat-dong-su-kien/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🎉 Hoạt động &amp; Sự kiện</a>
+        </div>
+        <div class="pl-3 py-1 space-y-2 border-l border-slate-100 ml-1">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Chương trình đào tạo</div>
+            <a href="/du-hoc/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🌐 Du học quốc tế (Tổng quan)</a>
+            <a href="/du-hoc-han-quoc/" class="block text-sm text-brand-red font-bold hover:text-[#0274BD]">🇰🇷 Du học Hàn Quốc (Trọng điểm)</a>
+            <a href="/du-hoc-uc/" class="block text-sm text-brand-blue font-bold hover:text-[#0274BD]">🇦🇺 Du học Úc (Chuyên sâu)</a>
+            <a href="/xuat-khau-lao-dong/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">💼 Xuất khẩu lao động & Việc làm</a>
+            <a href="/tieng-han/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📖 Đào tạo tiếng Hàn TOPIK</a>
+            <a href="/hop-tac-quoc-te/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🤝 Hợp tác giáo dục quốc tế</a>
+        </div>
+        <a href="/cau-chuyen-hoc-vien/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hành trình học viên</a>
+        <a href="/tin-tuc/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Tin tức &amp; Cẩm nang</a>
+        <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
+        <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
+        <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
+        <div class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tài khoản học viên</div>
+            <a href="/dang-nhap/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🔑 Đăng nhập</a>
+            <a href="/dang-ky-tai-khoan/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">📝 Đăng ký tài khoản</a>
+        </div>
+        <div class="pt-3">
+            <a href="/dang-ky-tu-van/" class="w-full inline-flex items-center justify-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-sm font-semibold py-3 rounded-full shadow-md transition-colors">
+                <span>Đăng ký tư vấn ngay</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+    <!-- MAIN PAGE CONTENT -->
+    <main class="flex-grow">
+        <section class="py-14 md:py-20 bg-[#F8FAFC]">
+        <div class="max-w-xl mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">Tài khoản học viên</span>
+                <h1 class="font-phudu text-3xl md:text-4xl font-bold text-brand-navy mb-3">Đăng Ký Tài Khoản</h1>
+                <p class="text-slate-600">Tạo tài khoản học viên KIPA Việt Hàn. Chúng tôi sẽ gửi mã OTP tới email của bạn để xác thực trước khi hoàn tất.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8">
+                <form id="account-register-form" class="space-y-4" novalidate>
+                    <div>
+                        <label for="register-full-name" class="block text-sm font-semibold text-brand-navy mb-1.5">Họ và tên <span class="text-brand-red">*</span></label>
+                        <input type="text" id="register-full-name" name="full_name" required maxlength="160" autocomplete="name" placeholder="Nguyễn Văn A" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="register-email" class="block text-sm font-semibold text-brand-navy mb-1.5">Email <span class="text-brand-red">*</span></label>
+                        <input type="email" id="register-email" name="email" required maxlength="254" autocomplete="email" placeholder="ban@email.com" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                        <p class="text-xs text-slate-500 mt-1">Mã OTP xác thực sẽ được gửi tới email này.</p>
+                    </div>
+                    <div>
+                        <label for="register-phone" class="block text-sm font-semibold text-brand-navy mb-1.5">Số điện thoại</label>
+                        <input type="tel" id="register-phone" name="phone" maxlength="32" autocomplete="tel" placeholder="0368 513 865" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="register-password" class="block text-sm font-semibold text-brand-navy mb-1.5">Mật khẩu <span class="text-brand-red">*</span></label>
+                            <input type="password" id="register-password" name="password" required minlength="8" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 8 ký tự" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="register-confirm-password" class="block text-sm font-semibold text-brand-navy mb-1.5">Nhập lại mật khẩu <span class="text-brand-red">*</span></label>
+                            <input type="password" id="register-confirm-password" name="confirm_password" required minlength="8" maxlength="72" autocomplete="new-password" placeholder="Nhập lại mật khẩu" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                        </div>
+                    </div>
+                    <label class="flex items-start gap-2.5 text-sm text-slate-600 cursor-pointer">
+                        <input type="checkbox" name="consent" required class="mt-0.5 h-4 w-4 rounded border-slate-300 text-brand-blue focus:ring-[#0274BD]">
+                        <span>Tôi đồng ý với <a href="/chinh-sach-bao-mat/" class="text-brand-blue font-semibold hover:underline" target="_blank" rel="noopener">chính sách bảo mật</a> của KIPA Việt Hàn.</span>
+                    </label>
+                    <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+
+                    <div id="otp-step" class="hidden rounded-xl border border-blue-100 bg-blue-50/60 p-4 space-y-3">
+                        <label for="register-otp-code" class="block text-sm font-semibold text-brand-navy">Mã OTP đã gửi tới email của bạn <span class="text-brand-red">*</span></label>
+                        <input type="text" id="register-otp-code" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" placeholder="Nhập mã 6 chữ số" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm tracking-[0.3em] font-semibold text-center focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                        <p class="text-xs text-slate-500">Mã có hiệu lực trong 10 phút. Không thấy email? Kiểm tra mục Spam hoặc bấm gửi lại.</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                        <button type="button" id="send-otp-btn" class="flex-1 bg-brand-blue hover:bg-[#025e99] text-white font-bold py-3.5 px-6 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>Gửi mã OTP tới email
+                        </button>
+                        <button type="submit" id="register-submit-btn" class="hidden flex-1 bg-brand-red hover:bg-[#c51714] text-white font-bold py-3.5 px-6 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-user-check mr-2"></i>Hoàn tất đăng ký
+                        </button>
+                    </div>
+                    <p id="register-status" aria-live="polite" role="status" class="text-sm"></p>
+                </form>
+
+                <div id="register-success" class="hidden text-center py-6">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-emerald-100 flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-circle-check text-3xl text-emerald-600"></i>
+                    </div>
+                    <h2 class="font-phudu text-2xl font-bold text-brand-navy mb-2">Tạo tài khoản thành công!</h2>
+                    <p class="text-slate-600 mb-6">Email của bạn đã được xác thực. KIPA Việt Hàn sẽ đồng hành cùng bạn trên hành trình sắp tới.</p>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="/dang-nhap/" class="inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-[#025e99] text-white font-bold py-3 px-8 rounded-xl transition-colors">Đăng nhập ngay</a>
+                        <a href="/" class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:text-brand-blue hover:border-blue-200 font-bold py-3 px-8 rounded-xl transition-colors">Về trang chủ</a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-sm text-slate-500 mt-6">Cần hỗ trợ? Gọi <a href="tel:0368513865" class="font-semibold text-brand-blue hover:underline">036 851 3865</a> hoặc <a href="/lien-he/" class="font-semibold text-brand-blue hover:underline">liên hệ với chúng tôi</a>.</p>
+        </div>
+    </section>
+
+    <script>
+    (function () {
+        var form = document.getElementById('account-register-form');
+        if (!form) return;
+        var statusEl = document.getElementById('register-status');
+        var otpStep = document.getElementById('otp-step');
+        var sendBtn = document.getElementById('send-otp-btn');
+        var submitBtn = document.getElementById('register-submit-btn');
+        var cooldownTimer = null;
+
+        function setStatus(message, isError) {
+            statusEl.textContent = message;
+            statusEl.className = isError ? 'text-sm text-red-700' : 'text-sm text-emerald-700';
+        }
+
+        function fieldValue(name) {
+            var field = form.elements[name];
+            return field ? String(field.value).trim() : '';
+        }
+
+        function validateProfile() {
+            if (fieldValue('full_name').length < 2) return 'Vui lòng nhập họ và tên.';
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue('email'))) return 'Vui lòng nhập địa chỉ email hợp lệ.';
+            var password = form.elements.password.value;
+            if (password.length < 8) return 'Mật khẩu cần tối thiểu 8 ký tự.';
+            if (password !== form.elements.confirm_password.value) return 'Mật khẩu nhập lại chưa khớp.';
+            if (!form.elements.consent.checked) return 'Bạn cần đồng ý với chính sách bảo mật trước khi đăng ký.';
+            return '';
+        }
+
+        async function postJson(url, payload) {
+            var controller = new AbortController();
+            var timeout = setTimeout(function () { controller.abort(); }, 20000);
+            try {
+                var response = await fetch(url, {
+                    method: 'POST',
+                    signal: controller.signal,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!(response.headers.get('Content-Type') || '').includes('application/json')) {
+                    throw new Error('Máy chủ chưa thể xử lý yêu cầu. Vui lòng thử lại sau.');
+                }
+                var result = await response.json();
+                if (!response.ok || !result || result.ok !== true) {
+                    throw new Error(result && result.error || 'Chưa thể xử lý yêu cầu. Vui lòng thử lại.');
+                }
+                return result;
+            } finally {
+                clearTimeout(timeout);
+            }
+        }
+
+        function describeError(error) {
+            if (error && error.name === 'AbortError') return 'Kết nối quá lâu. Vui lòng thử lại.';
+            if (error instanceof TypeError) return 'Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.';
+            return error instanceof Error ? error.message : 'Lỗi kết nối. Vui lòng thử lại.';
+        }
+
+        function startCooldown() {
+            var remaining = 60;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Gửi lại sau ' + remaining + 's';
+            cooldownTimer = setInterval(function () {
+                remaining--;
+                if (remaining <= 0) {
+                    clearInterval(cooldownTimer);
+                    sendBtn.disabled = false;
+                    sendBtn.textContent = 'Gửi lại mã OTP';
+                } else {
+                    sendBtn.textContent = 'Gửi lại sau ' + remaining + 's';
+                }
+            }, 1000);
+        }
+
+        sendBtn.addEventListener('click', async function () {
+            var problem = validateProfile();
+            if (problem) { setStatus(problem, true); return; }
+            var originalText = sendBtn.textContent;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Đang gửi mã...';
+            setStatus('Đang gửi mã OTP tới email của bạn...', false);
+            try {
+                await postJson('/api/otp.php', {
+                    action: 'send',
+                    email: fieldValue('email'),
+                    website: fieldValue('website')
+                });
+                otpStep.classList.remove('hidden');
+                submitBtn.classList.remove('hidden');
+                setStatus('Đã gửi mã OTP. Vui lòng kiểm tra hộp thư (kể cả mục Spam).', false);
+                startCooldown();
+                form.elements.code.focus();
+            } catch (error) {
+                sendBtn.disabled = false;
+                sendBtn.textContent = originalText;
+                setStatus(describeError(error), true);
+            }
+        });
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (form.dataset.submitting === 'true') return;
+            var problem = validateProfile();
+            if (!problem && !/^\d{6}$/.test(fieldValue('code'))) {
+                problem = 'Vui lòng nhập mã OTP gồm 6 chữ số đã gửi tới email.';
+            }
+            if (problem) { setStatus(problem, true); return; }
+            form.dataset.submitting = 'true';
+            submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
+            setStatus('Đang tạo tài khoản của bạn...', false);
+            try {
+                await postJson('/api/register.php', {
+                    full_name: fieldValue('full_name'),
+                    email: fieldValue('email'),
+                    phone: fieldValue('phone'),
+                    password: form.elements.password.value,
+                    code: fieldValue('code'),
+                    website: fieldValue('website')
+                });
+                form.classList.add('hidden');
+                document.getElementById('register-success').classList.remove('hidden');
+            } catch (error) {
+                setStatus(describeError(error), true);
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute('aria-busy');
+            } finally {
+                delete form.dataset.submitting;
+            }
+        });
+    })();
+    </script>
+    </main>
+
+    <!-- SITE FOOTER -->
+    <!-- KIPA VIET HAN - FOOTER COMPONENT (Tuong thich 100% Elementor & WordPress - Khong loi WAF/Access Denied) -->
+<style>
+    #kipa-footer,
+    #kipa-footer * {
+        box-sizing: border-box !important;
+    }
+
+    #kipa-footer {
+        font-family: 'Be Vietnam Pro', sans-serif !important;
+        background-color: #07192e !important;
+        color: #ffffff !important;
+    }
+
+    #kipa-footer .font-phudu { font-family: 'Phudu', sans-serif !important; }
+    #kipa-footer .font-vietnam { font-family: 'Be Vietnam Pro', sans-serif !important; }
+    #kipa-footer .font-script { font-family: 'Dancing Script', cursive !important; }
+    
+    #kipa-footer a {
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+    }
+
+    #kipa-footer .branch-card p {
+        font-size: 13.5px !important;
+        line-height: 1.5 !important;
+    }
+
+    #kipa-footer .branch-card {
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 16px !important;
+        padding: 16px !important;
+        transition: all 0.25s ease !important;
+    }
+    #kipa-footer .branch-card:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: rgba(255, 240, 23, 0.3) !important;
+        transform: translateY(-2px) !important;
+    }
+</style>
+
+<!-- FOOTER CONTAINER -->
+<footer id="kipa-footer" translate="no" class="notranslate text-white pt-14 pb-8 border-t border-blue-900/60 relative z-30 font-vietnam">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <!-- PHAN 1: THONG TIN THUONG HIEU & MENU LIEN KET -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-blue-900/50">
+            
+            <!-- Cột 1: Thông tin thương hiệu KIPA (lg:col-span-5) -->
+            <div class="lg:col-span-5 space-y-4 pr-0 lg:pr-6">
+                <div class="flex items-center gap-3">
+                    <img src="/Logo.jpg" alt="Logo KIPA Việt Hàn" class="w-12 h-12 rounded-full object-cover bg-white shadow-md border border-white/20 shrink-0">
+                    <div>
+                        <span class="font-phudu text-xl sm:text-2xl font-bold tracking-tight text-white block">KIPA VIỆT HÀN</span>
+                        <p class="text-[12.5px] text-amber-300 font-medium italic -mt-0.5">
+                            Kipa Việt Hàn - Đến là bay
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-300 leading-relaxed text-justify">
+                    KIPA Việt Hàn là trung tâm tư vấn du học quốc tế và xuất khẩu lao động với hơn 4 năm kinh nghiệm, chắp cánh cho hàng nghìn học viên và người lao động chạm đến ước mơ Hàn Quốc, Úc, Nhật Bản, Châu Âu, đào tạo tiếng Hàn. Tự hào và biết ơn vì được đồng hành cùng bạn trên hành trình này!
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                    <a href="/du-hoc/" class="inline-flex items-center gap-2 bg-[#0274BD] hover:bg-[#0385d8] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all">
+                        <span>KHÁM PHÁ NGAY</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                    
+                    <!-- Social icons -->
+                    <div class="flex items-center gap-2">
+                        <a href="https://www.facebook.com/kipaviethan/" target="_blank" rel="noopener" aria-label="Facebook KIPA" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#1877f2] flex items-center justify-center text-xs text-white transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@kipaviethan.edu.vn" target="_blank" rel="noopener" aria-label="TikTok KIPA" class="w-8 h-8 rounded-full bg-white/10 hover:bg-black flex items-center justify-center text-xs text-white transition-all">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.instagram.com/kipa.viethan/" target="_blank" rel="noopener" aria-label="Instagram KIPA" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#e1306c] flex items-center justify-center text-xs text-white transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="tel:0368513865" aria-label="Hotline KIPA" class="w-8 h-8 rounded-full bg-white/10 hover:bg-emerald-600 flex items-center justify-center text-xs text-white transition-all">
+                            <i class="fa-solid fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột 2: VỀ KIPA (lg:col-span-2) -->
+            <div class="lg:col-span-2 space-y-3.5">
+                <h4 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wider">Về KIPA</h4>
+                <ul class="space-y-2.5 text-sm text-slate-300">
+                    <li><a href="/gioi-thieu/" class="hover:text-amber-300 transition-colors">Giới thiệu KIPA</a></li>
+                    <li><a href="/doi-ngu/" class="hover:text-amber-300 transition-colors">Đội ngũ KIPA</a></li>
+                    <li><a href="/co-so/" class="hover:text-amber-300 transition-colors">Hệ thống cơ sở</a></li>
+                    <li><a href="/#stories" class="hover:text-amber-300 transition-colors">Hành trình học viên</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 3: KHÁM PHÁ & HỖ TRỢ (lg:col-span-2) -->
+            <div class="lg:col-span-2 space-y-3.5">
+                <h4 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wider">Khám Phá & Hỗ Trợ</h4>
+                <ul class="space-y-2.5 text-sm text-slate-300">
+                    <li><a href="/du-hoc/" class="hover:text-amber-300 transition-colors">Du học quốc tế</a></li>
+                    <li><a href="/xuat-khau-lao-dong/" class="hover:text-amber-300 transition-colors">Xuất khẩu lao động</a></li>
+                    <li><a href="/hop-tac-quoc-te/" class="hover:text-amber-300 transition-colors">Hợp tác giáo dục</a></li>
+                    <li><a href="/faq/" class="hover:text-amber-300 transition-colors">Hỏi đáp thường gặp</a></li>
+                    <li><a href="/chinh-sach-bao-mat/" class="hover:text-amber-300 transition-colors">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 4: LIÊN HỆ & TỔNG ĐÀI (lg:col-span-3) -->
+            <div class="lg:col-span-3 space-y-3.5">
+                <h4 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wider">Liên Hệ</h4>
+                <div class="space-y-3 text-sm text-slate-300">
+                    <p class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-phone"></i></span>
+                        <a href="tel:0368513865" class="text-white hover:text-amber-300 font-bold text-sm tracking-wide">036 851 3865</a>
+                    </p>
+                    <p class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-clock"></i></span>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                    <p class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope"></i></span>
+                        <a href="mailto:duhocquoctekipaviethan@gmail.com" class="hover:text-amber-300 text-slate-300">duhocquoctekipaviethan@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHAN 2: HE THONG CHI NHANH KIPA VIET HAN (7 CO SO & VAN PHONG) -->
+        <div class="space-y-6">
+            <div class="flex items-center gap-3">
+                <span class="w-2.5 h-6 bg-[#FFF017] rounded-full"></span>
+                <h3 class="font-phudu text-lg sm:text-xl font-extrabold text-[#FFF017] tracking-wide uppercase">
+                    Chi Nhánh KIPA Việt Hàn
+                </h3>
+            </div>
+
+            <!-- Grid 7 chi nhánh: 4 chi nhánh hàng 1, 3 chi nhánh hàng 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- 1. TRỤ SỞ CHÍNH -->
+                <div class="branch-card space-y-2.5">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-building-columns text-emerald-400 text-sm"></i>
+                        <span>Trụ Sở Chính</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>135 Bạch Năng Thi, Phường Tân Hưng, TP. Hải Phòng</span>
+                    </p>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                        <a href="tel:0368513865" class="hover:text-amber-300 text-white font-semibold">036 851 3865</a>
+                    </p>
+                    <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                </div>
+
+                <!-- 2. VĂN PHÒNG HẢI PHÒNG -->
+                <div class="branch-card space-y-2.5">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-building text-blue-400 text-sm"></i>
+                        <span>Văn Phòng Hải Phòng</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>16 Bùi Thị Xuân, Phường Lê Thanh Nghị, TP. Hải Phòng</span>
+                    </p>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                        <a href="tel:0368513865" class="hover:text-amber-300 text-white font-semibold">036 851 3865</a>
+                    </p>
+                    <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                </div>
+
+                <!-- 3. CHI NHÁNH NAM SÁCH -->
+                <div class="branch-card space-y-2.5">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-map-location-dot text-amber-400 text-sm"></i>
+                        <span>Chi Nhánh Nam Sách</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>Phố Vận Tải, xã Nam Sách, Thành Phố Hải Phòng</span>
+                    </p>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                        <a href="tel:0368513865" class="hover:text-amber-300 text-white font-semibold">036 851 3865</a>
+                    </p>
+                    <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                </div>
+
+                <!-- 4. CHI NHÁNH QUẢNG NINH -->
+                <div class="branch-card space-y-2.5">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-landmark text-violet-400 text-sm"></i>
+                        <span>Chi Nhánh Quảng Ninh</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>Số 31, ngõ 44 Tô Hiệu, P. Cẩm Trung, Cẩm Phả, Quảng Ninh</span>
+                    </p>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                        <a href="tel:0889222255" class="hover:text-amber-300 text-white font-semibold">0889 2222 55</a>
+                    </p>
+                    <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                </div>
+
+                <!-- 5. VĂN PHÒNG ĐẠI DIỆN TẠI HÀN QUỐC -->
+                <div class="branch-card space-y-2.5">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-plane-arrival text-rose-400 text-sm"></i>
+                        <span>VPĐD Tại Hàn Quốc</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>Seoul, Korea (Hỗ trợ trực tiếp du học sinh tại Hàn)</span>
+                    </p>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                        <a href="tel:0368513865" class="hover:text-amber-300 text-white font-semibold">036 851 3865</a>
+                    </p>
+                    <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                </div>
+
+                <!-- 6. VĂN PHÒNG ĐẠI DIỆN TẠI ÚC -->
+                <div class="branch-card space-y-2.5">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-globe text-cyan-400 text-sm"></i>
+                        <span>VPĐD Tại Úc</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>Sydney, Úc (Đồng hành du học & việc làm Úc)</span>
+                    </p>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                        <a href="tel:0368513865" class="hover:text-amber-300 text-white font-semibold">036 851 3865</a>
+                    </p>
+                    <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                        <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                    </p>
+                </div>
+
+                <!-- 7. CHI NHÁNH TP. HỒ CHÍ MINH (lg:col-span-2) -->
+                <div class="branch-card space-y-2.5 lg:col-span-2">
+                    <h5 class="font-phudu text-sm font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-tree-city text-emerald-400 text-sm"></i>
+                        <span>Chi Nhánh TP. Hồ Chí Minh</span>
+                    </h5>
+                    <p class="text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 mt-1 shrink-0 text-xs"></i>
+                        <span>93 Calmette, Phường Bến Thành, TP. Hồ Chí Minh</span>
+                    </p>
+                    <div class="flex flex-wrap items-center gap-x-6 gap-y-1">
+                        <p class="text-xs text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-amber-400 shrink-0 text-xs"></i>
+                            <a href="tel:0368513865" class="hover:text-amber-300 text-white font-semibold">036 851 3865</a>
+                        </p>
+                        <p class="text-[11px] text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-briefcase text-sky-400 shrink-0 text-xs"></i>
+                            <span>7:00 - 17:00 (Thứ 2 - Thứ 7)</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PHAN 3: BAN QUYEN & LOI CHUC SLOGAN -->
+        <div class="pt-6 border-t border-blue-900/40 flex flex-col sm:flex-row items-center justify-between text-sm text-slate-400 gap-3">
+            <p>© 2026 KIPA Việt Hàn. All Rights Reserved.</p>
+            <p class="font-script text-base sm:text-lg text-[#fed049] tracking-wide">
+                Đồng hành cùng ước mơ vươn ra thế giới
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- FLOATING CTA BUTTONS (Ghim goc phai man hinh) -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <a href="https://zalo.me/0368513865" target="_blank" rel="noopener" aria-label="Chat Zalo KIPA" class="w-12 h-12 rounded-full bg-[#0084ff] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+        <i class="fa-solid fa-comment-dots text-lg"></i>
+    </a>
+    <a href="tel:0368513865" aria-label="Gọi điện thoại KIPA" class="w-12 h-12 rounded-full bg-[#ec1e1b] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform animate-bounce">
+        <i class="fa-solid fa-phone text-base"></i>
+    </a>
+</div>
+
+    <!-- Global Scripts -->
+    <script>
+        // Mobile Navigation Drawer Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('mobile-menu-toggle');
+            const menu = document.getElementById('mobile-header-menu');
+            if (btn && menu) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                        menu.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
