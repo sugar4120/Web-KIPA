@@ -59,6 +59,7 @@ class DevServerTests(unittest.TestCase):
         status, headers, body = self.request('/dang-ky-tu-van/')
         self.assertEqual(status, 200)
         self.assertIn('text/html', headers['Content-Type'])
+        self.assertIn(b'href="/dang-nhap/"', body)
         self.assertIn(b'href="/api/admin.php"', body)
 
 
