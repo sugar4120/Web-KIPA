@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import json
 import mimetypes
 from urllib.parse import unquote, urlparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -137,6 +138,45 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.handle_request(head_only=False)
+
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        if path == '/api/login.php':
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length) if length > 0 else b'{}'
+            try:
+                data = json.loads(body.decode('utf-8'))
+            except Exception:
+                data = {}
+            action = data.get('action')
+            if action == 'login':
+                email = data.get('email', 'hocvien@kipaviethan.edu.vn')
+                raw_name = email.split('@')[0].replace('.', ' ').replace('_', ' ').title()
+                full_name = raw_name if raw_name else 'Học viên KIPA'
+                response_data = {
+                    'ok': True,
+                    'user': {
+                        'full_name': full_name,
+                        'email': email
+                    }
+                }
+            elif action == 'logout':
+                response_data = {'ok': True}
+            elif action == 'me':
+                response_data = {'ok': True, 'user': None}
+            else:
+                response_data = {'ok': True}
+
+            resp_bytes = json.dumps(response_data).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
+            return
+
+        self.send_error(404, "Endpoint not found.")
 
     def handle_request(self, head_only=False):
         parsed = urlparse(self.path)

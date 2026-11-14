@@ -471,13 +471,46 @@
                 <a href="/lien-he/" class="kipa-nav-item hover:text-[#0274BD]">Liên hệ</a>
             </nav>
 
-            <!-- 3. Actions Right (Icon Đăng nhập + Search + Button Đăng ký tư vấn) -->
-            <div class="kipa-header-actions flex items-center gap-2 sm:gap-3 shrink-0">
-                <!-- Nút Đăng nhập (Gộp gọn thành 1 icon tiết kiệm diện tích Header) -->
-                <a href="/dang-nhap/" aria-label="Đăng nhập tài khoản học viên" title="Đăng nhập" class="kipa-header-login w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
-                    <i class="fa-solid fa-right-to-bracket text-sm" aria-hidden="true"></i>
-                    <span class="sr-only">Đăng nhập</span>
-                </a>
+            <!-- 3. Actions Right (Tài khoản / Đăng nhập + Search + Button Đăng ký tư vấn) -->
+            <div class="kipa-header-actions flex items-center gap-2 sm:gap-2.5 shrink-0">
+                <!-- Khu vực tài khoản: Chưa đăng nhập vs Đã đăng nhập -->
+                <div id="kipa-user-auth" class="relative shrink-0 flex items-center">
+                    <!-- Trạng thái 1: Chưa đăng nhập (Hiện icon đăng nhập) -->
+                    <a href="/dang-nhap/" id="kipa-login-btn" aria-label="Đăng nhập tài khoản học viên" title="Đăng nhập" class="kipa-header-login w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
+                        <i class="fa-solid fa-right-to-bracket text-sm" aria-hidden="true"></i>
+                        <span class="sr-only">Đăng nhập</span>
+                    </a>
+
+                    <!-- Trạng thái 2: Đã đăng nhập (Hiện tên người dùng) -->
+                    <div id="kipa-user-profile" class="hidden relative group/user">
+                        <button type="button" id="kipa-user-menu-btn" aria-expanded="false" aria-haspopup="true" aria-label="Tài khoản học viên" class="inline-flex items-center gap-1.5 sm:gap-2 py-1.5 px-2.5 sm:px-3 rounded-full bg-blue-50/80 hover:bg-blue-100/90 border border-blue-200/60 text-slate-800 transition-colors cursor-pointer text-left">
+                            <span class="w-6 h-6 rounded-full bg-[#0274BD] text-white flex items-center justify-center text-[11px] font-bold shrink-0">
+                                <i class="fa-solid fa-user text-[11px]" aria-hidden="true"></i>
+                            </span>
+                            <span id="kipa-user-display-name" class="text-xs sm:text-[13px] font-bold text-slate-800 max-w-[90px] sm:max-w-[130px] truncate leading-tight">
+                                Học viên
+                            </span>
+                            <i class="fa-solid fa-chevron-down text-[9px] text-slate-400 group-hover/user:text-[#0274BD] transition-transform duration-200" aria-hidden="true"></i>
+                        </button>
+
+                        <!-- Dropdown Menu tài khoản -->
+                        <div id="kipa-user-dropdown" class="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover/user:opacity-100 group-hover/user:visible transition-all duration-200 z-50">
+                            <div class="px-4 py-2.5 border-b border-slate-100">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đang đăng nhập</div>
+                                <div id="kipa-dropdown-user-name" class="font-bold text-sm text-slate-800 truncate mt-0.5">Học viên</div>
+                                <div id="kipa-dropdown-user-email" class="text-xs text-slate-500 truncate">user@email.com</div>
+                            </div>
+                            <a href="/dang-nhap/" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0274BD] transition-colors">
+                                <i class="fa-solid fa-id-badge text-slate-400" aria-hidden="true"></i>
+                                <span>Trang tài khoản</span>
+                            </a>
+                            <button type="button" id="kipa-header-logout-btn" class="w-full text-left flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer">
+                                <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                                <span>Đăng xuất</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Search Button (Icon gon gang, hover tron, reset triet de khong vien) -->
                 <a href="/faq/#faq-search-input" aria-label="Tìm kiếm câu hỏi" title="Tìm kiếm" class="kipa-header-search w-9 h-9 rounded-full flex items-center justify-center text-slate-600 hover:text-[#0274BD] hover:bg-slate-100 transition-colors cursor-pointer shrink-0">
@@ -547,9 +580,20 @@
         <a href="/co-so/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hệ thống cơ sở</a>
         <a href="/faq/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Hỏi đáp FAQ</a>
         <a href="/lien-he/" class="block text-slate-700 font-semibold py-2 hover:text-[#0274BD] pl-3">Liên hệ</a>
-        <div class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
+        <div id="mobile-user-auth" class="pl-3 py-1 space-y-1 border-l border-slate-100 ml-1">
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tài khoản học viên</div>
-            <a href="/dang-nhap/" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🔑 Đăng nhập</a>
+            <!-- Khi chưa đăng nhập -->
+            <a href="/dang-nhap/" id="mobile-login-link" class="block text-sm text-slate-700 font-medium hover:text-[#0274BD]">🔑 Đăng nhập</a>
+            
+            <!-- Khi đã đăng nhập -->
+            <div id="mobile-user-logged" class="hidden space-y-1">
+                <div class="flex items-center gap-2 text-sm font-bold text-[#0274BD]">
+                    <i class="fa-solid fa-circle-user text-base" aria-hidden="true"></i>
+                    <span id="mobile-user-display-name" class="truncate">Học viên</span>
+                </div>
+                <a href="/dang-nhap/" class="block text-xs text-slate-600 hover:text-[#0274BD] pl-6">👤 Quản lý tài khoản</a>
+                <button type="button" id="mobile-logout-btn" class="block text-xs text-rose-600 hover:underline pl-6 cursor-pointer">🚪 Đăng xuất</button>
+            </div>
         </div>
         <div class="pt-3">
             <a href="/dang-ky-tu-van/" class="w-full inline-flex items-center justify-center gap-2 bg-[#081D36] hover:bg-[#0274BD] text-white text-sm font-semibold py-3 rounded-full shadow-md transition-colors">
