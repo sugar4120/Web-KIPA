@@ -5,7 +5,7 @@ const vm = require('node:vm');
 
 const root = path.resolve(process.argv[2] || 'dist');
 const files = fs.readdirSync(root).filter(name => name.endsWith('.html') && !['header.html', 'footer.html'].includes(name));
-assert.equal(files.length, 23);
+assert.equal(files.length, 29);
 const pages = Object.fromEntries(files.map(file => [file, fs.readFileSync(path.join(root, file), 'utf8')]));
 
 for (const [file, html] of Object.entries(pages)) {
@@ -48,4 +48,4 @@ assert.match(home, /form_type: 'future_letter'/);
 assert.match(home, /localStorage\.setItem\('kipa_future_letters'/);
 assert.match(home, /fetch\('\/api\/submit\.php'/);
 assert.match(pages['faq.html'], /function applyFaqFilters/);
-console.log('All 23 built pages passed link, anchor, script and form integrity checks.');
+console.log('All 29 built pages passed link, anchor, script and form integrity checks.');
