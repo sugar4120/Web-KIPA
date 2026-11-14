@@ -84,11 +84,53 @@ PAGES_CONFIG = [
         'keywords': 'du học úc, visa 500 úc, học bổng du học úc, kipa việt hàn'
     },
     {
+        'file': 'du-hoc-nhat-ban.html',
+        'slug': 'du-hoc-nhat-ban',
+        'title': 'Du Học Nhật Bản Cùng KIPA Việt Hàn | Lộ Trình Rõ Ràng, Vững Bước Tương Lai',
+        'desc': 'Du học Nhật Bản cùng KIPA Việt Hàn: Mở rộng tri thức - Trải nghiệm văn hóa - Kiến tạo tương lai. Hỗ trợ trọn gói từ tư vấn chọn trường, đào tạo tiếng Nhật đến visa.',
+        'keywords': 'du học nhật bản, du học nhật bản kipa, học bổng nhật bản, kipa việt hàn'
+    },
+    {
+        'file': 'du-hoc-chau-au.html',
+        'slug': 'du-hoc-chau-au',
+        'title': 'Du Học Châu Âu Cùng KIPA Việt Hàn | Lộ Trình Rõ Ràng, Vững Bước Tương Lai',
+        'desc': 'Du học Châu Âu cùng KIPA Việt Hàn: Đức, Pháp, Ý, Hà Lan, Ba Lan, Thụy Điển... Đồng hành toàn diện từ tư vấn chọn trường, săn học bổng đến visa trọn gói.',
+        'keywords': 'du học châu âu, du học đức, du học pháp, du học ý, du học hà lan, du học ba lan'
+    },
+    {
         'file': 'xuat-khau-lao-dong.html',
         'slug': 'xuat-khau-lao-dong',
         'title': 'Xuất Khẩu Lao Động & Việc Làm Quốc Tế | KIPA Việt Hàn Chính Ngạch',
         'desc': 'Chương trình làm việc tại Hàn Quốc (E7/E9), Nhật Bản (Tokutei), Úc và Châu Âu. Thu nhập cao, quy trình chuẩn, hỗ trợ đào tạo ngoại ngữ và tay nghề.',
         'keywords': 'xuất khẩu lao động, xkld hàn quốc, xkld nhật bản, việc làm quốc tế kipa'
+    },
+    {
+        'file': 'xuat-khau-lao-dong-han-quoc.html',
+        'slug': 'xuat-khau-lao-dong-han-quoc',
+        'title': 'Xuất Khẩu Lao Động Hàn Quốc | KIPA Việt Hàn EPS E-9 & E-7 Chính Ngạch',
+        'desc': 'Chương trình xuất khẩu lao động Hàn Quốc chính ngạch cùng KIPA Việt Hàn: Visa EPS E-9 sản xuất, nông nghiệp; Visa kỹ sư E-7; Lao động thời vụ E-8.',
+        'keywords': 'xuất khẩu lao động hàn quốc, xkld hàn quốc, visa e9 hàn quốc, visa e7 hàn quốc'
+    },
+    {
+        'file': 'xuat-khau-lao-dong-uc.html',
+        'slug': 'xuat-khau-lao-dong-uc',
+        'title': 'Xuất Khẩu Lao Động Úc | KIPA Việt Hàn Lao Động Nông Nghiệp & Tay Nghề',
+        'desc': 'Chương trình làm việc và định cư Úc chính ngạch cùng KIPA Việt Hàn: Nông nghiệp, kỹ năng tay nghề cao, visa TSS 482 và đào tạo ngoại ngữ.',
+        'keywords': 'xuất khẩu lao động úc, xkld úc, visa 482 úc, lao động nông nghiệp úc'
+    },
+    {
+        'file': 'xuat-khau-lao-dong-nhat-ban.html',
+        'slug': 'xuat-khau-lao-dong-nhat-ban',
+        'title': 'Xuất Khẩu Lao Động Nhật Bản | KIPA Việt Hàn Tokutei & Kỹ Sư Thu Nhập Cao',
+        'desc': 'Chương trình làm việc Nhật Bản chính ngạch: Kỹ năng đặc định Tokutei Gino, thực tập sinh kỹ năng và kỹ sư công nghệ cao thu nhập hấp dẫn.',
+        'keywords': 'xuất khẩu lao động nhật bản, xkld nhật bản, tokutei gino, thực tập sinh nhật bản'
+    },
+    {
+        'file': 'xuat-khau-lao-dong-chau-au.html',
+        'slug': 'xuat-khau-lao-dong-chau-au',
+        'title': 'Xuất Khẩu Lao Động Châu Âu | KIPA Việt Hàn Đức, Ba Lan, Hungary, Rumani',
+        'desc': 'Chương trình việc làm Châu Âu chính ngạch tại Đức, Ba Lan, Hungary, Rumani với thu nhập hấp dẫn, quy trình minh bạch và hợp đồng lâu dài.',
+        'keywords': 'xuất khẩu lao động châu âu, việc làm đức, việc làm ba lan, xkld hungary, xkld rumani'
     },
     {
         'file': 'tieng-han.html',
