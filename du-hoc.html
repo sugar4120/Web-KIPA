@@ -1033,24 +1033,37 @@
                 </a>
             </div>
 
-            <!-- Country Switch Tabs -->
-            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-                <a href="/du-hoc-han-quoc/" class="bg-brand-blue text-white px-5 py-1.5 rounded-full text-xs sm:text-sm font-bold shrink-0 shadow-xs">
-                    Hàn Quốc
-                </a>
-                <a href="/du-hoc-uc/" class="bg-white text-slate-700 hover:text-brand-blue px-5 py-1.5 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-colors">
-                    Úc
-                </a>
-                <a href="/dang-ky-tu-van/?program=nhat-ban" class="bg-white text-slate-700 hover:text-brand-blue px-5 py-1.5 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-colors">
-                    Nhật Bản
-                </a>
-                <a href="/dang-ky-tu-van/?program=chau-au" class="bg-white text-slate-700 hover:text-brand-blue px-5 py-1.5 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-colors">
-                    Châu Âu
-                </a>
+            <!-- Country Switch Tabs (Interactive) -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="prog-tabs-container">
+                <button type="button" data-country="han-quoc" class="country-prog-tab active bg-brand-blue text-white px-5 py-2 rounded-full text-xs sm:text-sm font-bold shrink-0 shadow-xs transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span>Hàn Quốc</span>
+                </button>
+                <button type="button" data-country="uc" class="country-prog-tab bg-white text-slate-700 hover:text-brand-blue hover:border-brand-blue px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span>Úc</span>
+                </button>
+                <button type="button" data-country="nhat-ban" class="country-prog-tab bg-white text-slate-700 hover:text-brand-blue hover:border-brand-blue px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span>Nhật Bản</span>
+                </button>
+                <button type="button" data-country="chau-au" class="country-prog-tab bg-white text-slate-700 hover:text-brand-blue hover:border-brand-blue px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span>Châu Âu</span>
+                </button>
+                <button type="button" data-country="all" class="country-prog-tab bg-white text-slate-700 hover:text-brand-blue hover:border-brand-blue px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shrink-0 border border-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span>Tất cả quốc gia</span>
+                </button>
             </div>
 
-            <!-- 5 Program Cards under Korea (Matching Demo Layout & Extracted Images) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <!-- PANEL: HÀN QUỐC (5 Cards) -->
+            <div id="panel-han-quoc" class="country-prog-panel grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="col-span-full country-panel-heading hidden flex items-center justify-between pb-2 border-b border-slate-200 mb-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-blue bg-blue-100/70 px-2.5 py-1 rounded-md">🇰🇷 Du học Hàn Quốc</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:inline">• 5 chương trình nổi bật</span>
+                    </div>
+                    <a href="/du-hoc-han-quoc/" class="text-xs font-bold text-brand-blue hover:text-blue-700 flex items-center gap-1">
+                        <span>Chi tiết lộ trình</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
                 
                 <!-- Card 1: D4-1 Học tiếng Hàn -->
                 <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
@@ -1071,7 +1084,7 @@
                         </div>
                     </div>
                     <div class="pt-2.5 border-t border-slate-100 mt-3">
-                        <a href="/dang-ky-tu-van/?program=d4-1" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                        <a href="/dang-ky-tu-van/?country=han-quoc&program=d4-1" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
                             <span>Tìm hiểu</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -1097,7 +1110,7 @@
                         </div>
                     </div>
                     <div class="pt-2.5 border-t border-slate-100 mt-3">
-                        <a href="/dang-ky-tu-van/?program=d4-3" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                        <a href="/dang-ky-tu-van/?country=han-quoc&program=d4-3" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
                             <span>Tìm hiểu</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -1123,7 +1136,7 @@
                         </div>
                     </div>
                     <div class="pt-2.5 border-t border-slate-100 mt-3">
-                        <a href="/dang-ky-tu-van/?program=d2-1" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                        <a href="/dang-ky-tu-van/?country=han-quoc&program=d2-1" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
                             <span>Tìm hiểu</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -1149,7 +1162,7 @@
                         </div>
                     </div>
                     <div class="pt-2.5 border-t border-slate-100 mt-3">
-                        <a href="/dang-ky-tu-van/?program=d2-2" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                        <a href="/dang-ky-tu-van/?country=han-quoc&program=d2-2" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
                             <span>Tìm hiểu</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -1175,7 +1188,364 @@
                         </div>
                     </div>
                     <div class="pt-2.5 border-t border-slate-100 mt-3">
-                        <a href="/dang-ky-tu-van/?program=d2-3" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                        <a href="/dang-ky-tu-van/?country=han-quoc&program=d2-3" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PANEL: ÚC (4 Cards) -->
+            <div id="panel-uc" class="country-prog-panel hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="col-span-full country-panel-heading hidden flex items-center justify-between pb-2 border-b border-slate-200 mb-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-100/70 px-2.5 py-1 rounded-md">🇦🇺 Du học Úc</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:inline">• 4 chương trình nổi bật</span>
+                    </div>
+                    <a href="/du-hoc-uc/" class="text-xs font-bold text-brand-blue hover:text-blue-700 flex items-center gap-1">
+                        <span>Chi tiết lộ trình</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+                
+                <!-- Card 1: THPT Úc -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_uc_thpt.jpg?v=20261114" 
+                                 alt="Du học Phổ thông THPT Úc" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-blue-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                THPT Úc
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Du học Phổ thông (THPT)</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Lộ trình chuyển tiếp từ lớp 10, 11, 12 vào thẳng các trường đại học hàng đầu nước Úc.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/du-hoc-uc/#lo-trinh-du-hoc" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Cao đẳng - Nghề VET/TAFE -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_uc_vet.jpg?v=20261114" 
+                                 alt="Du học nghề VET TAFE Úc" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-blue-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                VET / TAFE
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Cao đẳng - Nghề (VET & TAFE)</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Đào tạo kỹ năng thực tiễn, chi phí tiết kiệm và cơ hội ở lại làm việc sau tốt nghiệp.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=uc&program=vet-tafe" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Đại học Úc -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_uc_uni.jpg?v=20261114" 
+                                 alt="Hệ Đại học Cử nhân Úc" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-blue-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Đại học Úc
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Hệ cử nhân & Đại học</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Top trường thuộc nhóm Group of Eight (Go8) danh giá cùng nhiều học bổng từ 20% - 100%.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=uc&program=dai-hoc" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4: Sau đại học & Thạc sĩ Úc -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_uc_master.jpg?v=20261114" 
+                                 alt="Hệ Thạc sĩ Sau đại học Úc" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-blue-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Thạc sĩ Úc
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Hệ sau đại học & Thạc sĩ</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Chương trình 1 - 2 năm, visa làm việc sau tốt nghiệp (Subclass 485) từ 2 đến 5 năm.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/du-hoc-uc/" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PANEL: NHẬT BẢN (4 Cards) -->
+            <div id="panel-nhat-ban" class="country-prog-panel hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="col-span-full country-panel-heading hidden flex items-center justify-between pb-2 border-b border-slate-200 mb-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-100/70 px-2.5 py-1 rounded-md">🇯🇵 Du học Nhật Bản</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:inline">• 4 chương trình nổi bật</span>
+                    </div>
+                    <a href="/dang-ky-tu-van/?country=nhat-ban" class="text-xs font-bold text-brand-blue hover:text-blue-700 flex items-center gap-1">
+                        <span>Tư vấn ngay</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+                
+                <!-- Card 1: Trường tiếng Nhật -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_jp_lang.jpg?v=20261114" 
+                                 alt="Du học Trường tiếng Nhật Bản" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Trường tiếng
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Du học Trường tiếng Nhật</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Đào tạo tiếng Nhật từ N5 lên N2, N1 và rèn luyện kỹ năng sống, văn hóa Nhật Bản.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=nhat-ban&program=truong-tieng" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Cao đẳng nghề Senmon -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_jp_senmon.jpg?v=20261114" 
+                                 alt="Hệ Cao đẳng nghề Senmon Nhật Bản" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Senmon
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Cao đẳng nghề Senmon</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Đào tạo chuyên ngành thực hành bám sát doanh nghiệp Nhật: IT, khách sạn, cơ khí, điều dưỡng.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=nhat-ban&program=senmon" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Đại học Nhật Bản -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_jp_uni.jpg?v=20261114" 
+                                 alt="Hệ Đại học Nhật Bản" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Đại học Nhật
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Hệ Đại học Nhật Bản</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Chương trình cử nhân chính quy, nhiều gói học bổng chính phủ MEXT và học bổng doanh nghiệp.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=nhat-ban&program=dai-hoc" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4: Kỹ năng đặc định Tokutei -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_jp_tokutei.jpg?v=20261114" 
+                                 alt="Chương trình kỹ năng đặc định Tokutei Nhật Bản" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Kỹ năng ĐĐ
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Kỹ năng đặc định (Tokutei)</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Vừa học vừa làm việc hưởng lương như người bản xứ tại Nhật Bản, cơ hội xin vĩnh trú lâu dài.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=nhat-ban&program=tokutei" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PANEL: CHÂU ÂU (4 Cards) -->
+            <div id="panel-chau-au" class="country-prog-panel hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="col-span-full country-panel-heading hidden flex items-center justify-between pb-2 border-b border-slate-200 mb-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-800 bg-indigo-100/70 px-2.5 py-1 rounded-md">🇪🇺 Du học Châu Âu</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:inline">• 4 chương trình nổi bật</span>
+                    </div>
+                    <a href="/dang-ky-tu-van/?country=chau-au" class="text-xs font-bold text-brand-blue hover:text-blue-700 flex items-center gap-1">
+                        <span>Tư vấn ngay</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+                
+                <!-- Card 1: Du học nghề Đức (Ausbildung) -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_eu_ausbildung.jpg?v=20261114" 
+                                 alt="Du học nghề Đức Ausbildung" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-indigo-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Ausbildung
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Du học nghề Đức (Ausbildung)</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Miễn 100% học phí, nhận trợ cấp hàng tháng từ 900 - 1.300 EUR/tháng trong suốt thời gian học.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=chau-au&program=ausbildung" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Đại học Công lập Châu Âu -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_eu_uni.jpg?v=20261114" 
+                                 alt="Đại học Công lập Đức và Châu Âu" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-indigo-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Đại học EU
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Đại học Công lập Đức & EU</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Miễn 100% học phí tại hầu hết các trường công lập của Đức, môi trường học thuật chất lượng cao.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=chau-au&program=dai-hoc" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Thạc sĩ Châu Âu & Erasmus -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_eu_master.jpg?v=20261114" 
+                                 alt="Thạc sĩ Châu Âu và Học bổng Erasmus" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-indigo-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Thạc sĩ EU
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Thạc sĩ Châu Âu & Erasmus</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Giảng dạy hoàn toàn bằng tiếng Anh, cơ hội học tập và nhận bằng tại 2 - 3 quốc gia Châu Âu.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=chau-au&program=thac-si" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
+                            <span>Tìm hiểu</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4: Khóa tiếng & Dự bị Đại học -->
+                <div class="prog-card rounded-2xl overflow-hidden flex flex-col justify-between p-3 shadow-xs group">
+                    <div class="space-y-2.5">
+                        <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc/real_prog_eu_pre.jpg?v=20261114" 
+                                 alt="Khóa tiếng và Dự bị Đại học Đức" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 left-2 bg-indigo-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs">
+                                Dự bị ĐH
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu text-sm font-bold text-slate-900 leading-tight">Khóa tiếng & Dự bị đại học</h3>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">
+                                Trang bị tiếng Đức B1/B2 và chứng chỉ dự bị Studienkolleg để nhập học thẳng đại học chính quy.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-2.5 border-t border-slate-100 mt-3">
+                        <a href="/dang-ky-tu-van/?country=chau-au&program=du-bi" class="inline-flex items-center justify-between w-full text-xs font-bold text-brand-blue hover:text-blue-700">
                             <span>Tìm hiểu</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -1184,6 +1554,74 @@
 
             </div>
         </div>
+
+        <!-- SCRIPT: Country Program Tabs Interaction (Vanilla JS, Elementor-safe) -->
+        <script>
+            (function() {
+                function initCountryTabs() {
+                    var tabs = document.querySelectorAll('.country-prog-tab');
+                    var panels = document.querySelectorAll('.country-prog-panel');
+                    var headings = document.querySelectorAll('.country-panel-heading');
+                    if (!tabs.length || !panels.length) return;
+
+                    function selectTab(country) {
+                        tabs.forEach(function(tab) {
+                            var target = tab.getAttribute('data-country');
+                            if (target === country) {
+                                tab.classList.add('active', 'bg-brand-blue', 'text-white', 'font-bold', 'shadow-xs');
+                                tab.classList.remove('bg-white', 'text-slate-700', 'font-semibold', 'border', 'border-slate-200');
+                            } else {
+                                tab.classList.remove('active', 'bg-brand-blue', 'text-white', 'font-bold', 'shadow-xs');
+                                tab.classList.add('bg-white', 'text-slate-700', 'font-semibold', 'border', 'border-slate-200');
+                            }
+                        });
+
+                        panels.forEach(function(panel) {
+                            if (country === 'all') {
+                                panel.classList.remove('hidden');
+                            } else {
+                                if (panel.id === 'panel-' + country) {
+                                    panel.classList.remove('hidden');
+                                } else {
+                                    panel.classList.add('hidden');
+                                }
+                            }
+                        });
+
+                        headings.forEach(function(h) {
+                            if (country === 'all') {
+                                h.classList.remove('hidden');
+                            } else {
+                                h.classList.add('hidden');
+                            }
+                        });
+                    }
+
+                    tabs.forEach(function(tab) {
+                        tab.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            var country = this.getAttribute('data-country');
+                            selectTab(country);
+                        });
+                    });
+
+                    // Optional URL query param e.g. ?country=uc
+                    try {
+                        var params = new URLSearchParams(window.location.search);
+                        var qCountry = params.get('country');
+                        if (qCountry && ['han-quoc', 'uc', 'nhat-ban', 'chau-au', 'all'].indexOf(qCountry) !== -1) {
+                            selectTab(qCountry);
+                        }
+                    } catch(e) {}
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initCountryTabs);
+                } else {
+                    initCountryTabs();
+                }
+            })();
+        </script>
     </section>
 
     <!-- ========================================== -->
