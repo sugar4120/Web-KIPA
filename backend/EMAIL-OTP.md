@@ -92,6 +92,24 @@ Trang `/dang-nhap/` dùng endpoint này với các `action`:
 - `me`: trả `{"ok": true, "user": {...}}` hoặc `user: null` nếu chưa đăng nhập.
 - `logout`: hủy phiên.
 
+### Hồ sơ học viên — `POST /api/account.php` (yêu cầu phiên đăng nhập)
+
+Trang `/ho-so/` dùng endpoint này với các `action`:
+
+- `get`: trả hồ sơ hiện tại (họ tên, email, SĐT, ngày tạo).
+- `update` (`full_name`, `phone`): cập nhật thông tin cá nhân; email không đổi.
+- `change_password` (`current_password`, `new_password`): yêu cầu đúng mật khẩu
+  hiện tại, giới hạn 10 lần / 15 phút mỗi IP, làm mới ID phiên sau khi đổi.
+
+### Quên mật khẩu — trang `/quen-mat-khau/`
+
+1. Gửi mã: `POST /api/otp.php` với `purpose: "reset"` — chỉ gửi khi email đã
+   có tài khoản; email lạ vẫn nhận phản hồi chung để không dò được tài khoản.
+   (`purpose: "register"` — mặc định — ngược lại: từ chối email đã đăng ký.)
+2. Đặt lại: `POST /api/reset-password.php` (`email`, `code`, `password`) —
+   kiểm tra OTP và cập nhật mật khẩu trong cùng transaction; giới hạn
+   10 lần / giờ mỗi IP.
+
 ## 4. Bảo mật
 
 - Database chỉ lưu **HMAC-SHA256** của mã (khóa `app_key`), không lưu mã thô.
