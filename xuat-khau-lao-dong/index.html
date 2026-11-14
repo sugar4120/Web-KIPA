@@ -1231,101 +1231,844 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         SECTION 6: SO SÁNH THỊ TRƯỜNG
+        <!-- ==========================================
+         SECTION 6: SO SÁNH THỊ TRƯỜNG & TÍNH CHI PHÍ HÒA VỐN
          ========================================== -->
-    <section class="py-12 sm:py-16 bg-white border-t border-b border-gray-100">
+    <section id="so-sanh-thi-truong" class="py-14 sm:py-20 bg-gradient-to-b from-white via-slate-50/70 to-white border-t border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
-                <!-- Left Title -->
-                <div class="lg:col-span-4 space-y-4">
-                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red">
-                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                        <span>SO SÁNH THỊ TRƯỜNG</span>
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-brand-red font-bold text-xs uppercase tracking-wider">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>SO SÁNH THỊ TRƯỜNG & DỰ TOÁN TÀI CHÍNH</span>
+                </div>
+                <h2 class="font-phudu text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-navy leading-tight">
+                    Bạn Đi Quốc Gia Nào Là Hợp Lý Nhất?
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-vietnam">
+                    Mỗi quốc gia có điều kiện tuyển dụng, chi phí ban đầu, mức thu nhập và thời gian hoàn vốn khác nhau. KIPA cung cấp công cụ đối chiếu minh bạch giúp bạn đưa ra lựa chọn đúng đắn và hiệu quả nhất cho tương lai.
+                </p>
+
+                <!-- Navigation Tabs (Pills) -->
+                <div class="flex items-center justify-center gap-2 pt-4 flex-wrap">
+                    <button type="button" onclick="switchXkldTab('matcher')" id="tab-btn-matcher" aria-label="Xem gợi ý quốc gia phù hợp" class="xkld-tab-btn active px-4 sm:px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-brand-blue text-white shadow-sm cursor-pointer">
+                        <i class="fas fa-user-check mr-1.5"></i>
+                        <span>1. Bạn Hợp Quốc Gia Nào?</span>
+                    </button>
+                    <button type="button" onclick="switchXkldTab('table')" id="tab-btn-table" aria-label="Xem bảng so sánh 4 thị trường" class="xkld-tab-btn px-4 sm:px-5 py-2.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-700 hover:bg-blue-50 border border-slate-200 cursor-pointer">
+                        <i class="fas fa-table-list mr-1.5"></i>
+                        <span>2. Bảng So Sánh Chi Tiết</span>
+                    </button>
+                    <button type="button" onclick="switchXkldTab('calc')" id="tab-btn-calc" aria-label="Tính chi phí và thời gian hòa vốn" class="xkld-tab-btn px-4 sm:px-5 py-2.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-700 hover:bg-blue-50 border border-slate-200 cursor-pointer">
+                        <i class="fas fa-calculator mr-1.5 text-brand-red"></i>
+                        <span>3. Tính Chi Phí & Hòa Vốn (ROI)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 1: PERSONA MATCHER (Bạn Hợp Quốc Gia Nào?) -->
+            <div id="xkld-panel-matcher" class="xkld-tab-panel">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Card 1: Hàn Quốc -->
+                    <div class="bg-white rounded-2xl border-2 border-blue-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group">
+                        <div class="absolute -top-3 left-4 bg-brand-blue text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-xs">
+                            Top 1 Tích Lũy Nhanh
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mt-2">
+                                <div>
+                                    <h3 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-1.5">
+                                        <span>🇰🇷 Hàn Quốc</span>
+                                    </h3>
+                                    <span class="text-[11px] text-slate-500 font-medium">Chương trình E-9 / E-7</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-slate-400 font-semibold">Thực nhận TB</div>
+                                    <div class="text-sm font-extrabold text-brand-blue">38 - 55 tr/th</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 space-y-2 text-xs">
+                                <div>
+                                    <span class="font-bold text-slate-800 block text-[11px] uppercase tracking-wider text-brand-blue">🎯 Phù hợp nhất với ai?</span>
+                                    <p class="text-slate-600 text-[11px] leading-relaxed mt-0.5">
+                                        Nam/nữ tuổi 18–39, sức khỏe tốt, quyết tâm học tiếng Hàn thi EPS hoặc có bằng nghề cơ khí/hàn đi diện kỹ thuật viên E-7. Mục tiêu cày cuốc tích lũy vốn lớn nhanh trong 3–5 năm.
+                                    </p>
+                                </div>
+
+                                <div class="pt-2 border-t border-slate-100 space-y-1.5">
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Chi phí ước tính:</span>
+                                        <span class="font-bold text-slate-900">~85 – 145 triệu</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Thời gian hòa vốn:</span>
+                                        <span class="font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Chỉ ~2.5 – 3.5 tháng</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Tích lũy sau 3 năm:</span>
+                                        <span class="font-extrabold text-brand-blue">1.1 – 1.5 Tỷ VNĐ</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Yêu cầu tiếng:</span>
+                                        <span class="font-medium text-slate-700">EPS-TOPIK / TOPIK 1-2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 mt-4">
+                            <button type="button" onclick="quickSelectMarket('HQ')" aria-label="Tính toán chi phí đi Hàn Quốc" class="w-full py-2.5 px-3 rounded-xl bg-blue-50 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Tính chi phí đi Hàn Quốc</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-navy leading-tight">
-                        Đâu là thị trường phù hợp với mục tiêu của bạn?
-                    </h2>
+                    <!-- Card 2: Nhật Bản -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group">
+                        <div class="absolute -top-3 left-4 bg-emerald-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-xs">
+                            Chi Phí Thấp • Ổn Định
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mt-2">
+                                <div>
+                                    <h3 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-1.5">
+                                        <span>🇯🇵 Nhật Bản</span>
+                                    </h3>
+                                    <span class="text-[11px] text-slate-500 font-medium">TTS & Tokutei Ginou</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-slate-400 font-semibold">Thực nhận TB</div>
+                                    <div class="text-sm font-extrabold text-emerald-600">28 - 42 tr/th</div>
+                                </div>
+                            </div>
 
-                    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed font-vietnam">
-                        So sánh các tiêu chí quan trọng để lựa chọn thị trường phù hợp với điều kiện và định hướng cá nhân.
-                    </p>
+                            <div class="mt-4 space-y-2 text-xs">
+                                <div>
+                                    <span class="font-bold text-slate-800 block text-[11px] uppercase tracking-wider text-emerald-700">🎯 Phù hợp nhất với ai?</span>
+                                    <p class="text-slate-600 text-[11px] leading-relaxed mt-0.5">
+                                        Nam/nữ tuổi 18–35, thích môi trường kỷ luật cao, an toàn tuyệt đối. Phù hợp người muốn chi phí ban đầu hợp lý, nâng cao tay nghề, có thể chuyển Tokutei ở lại 5–10 năm.
+                                    </p>
+                                </div>
 
-                    <div class="pt-2">
-                        <a href="#dang-ky-tu-van" class="inline-flex items-center px-5 py-2.5 rounded-xl border border-gray-300 text-brand-navy hover:bg-gray-50 font-bold text-xs transition">
-                            <span>Xem bảng so sánh chi tiết</span>
-                            <i class="fas fa-arrow-right ml-2 text-[10px] text-gray-400"></i>
-                        </a>
+                                <div class="pt-2 border-t border-slate-100 space-y-1.5">
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Chi phí ước tính:</span>
+                                        <span class="font-bold text-slate-900">~75 – 105 triệu</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Thời gian hòa vốn:</span>
+                                        <span class="font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Chỉ ~3.0 – 4.0 tháng</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Tích lũy sau 3 năm:</span>
+                                        <span class="font-extrabold text-brand-blue">800 Tr – 1.1 Tỷ VNĐ</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Yêu cầu tiếng:</span>
+                                        <span class="font-medium text-slate-700">N5 (TTS) hoặc N4 (Tokutei)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 mt-4">
+                            <button type="button" onclick="quickSelectMarket('NB')" aria-label="Tính toán chi phí đi Nhật Bản" class="w-full py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Tính chi phí đi Nhật Bản</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
                     </div>
+
+                    <!-- Card 3: Úc -->
+                    <div class="bg-white rounded-2xl border-2 border-amber-300 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group">
+                        <div class="absolute -top-3 left-4 bg-amber-500 text-slate-900 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-xs">
+                            Lương Đỉnh Cao • Định Cư
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mt-2">
+                                <div>
+                                    <h3 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-1.5">
+                                        <span>🇦🇺 Nước Úc</span>
+                                    </h3>
+                                    <span class="text-[11px] text-slate-500 font-medium">Visa 482 / 407 / 403</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-slate-400 font-semibold">Thực nhận TB</div>
+                                    <div class="text-sm font-extrabold text-amber-600">60 - 95 tr/th</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 space-y-2 text-xs">
+                                <div>
+                                    <span class="font-bold text-slate-800 block text-[11px] uppercase tracking-wider text-amber-700">🎯 Phù hợp nhất với ai?</span>
+                                    <p class="text-slate-600 text-[11px] leading-relaxed mt-0.5">
+                                        Tuổi 21–40, có kinh nghiệm tay nghề (nông nghiệp công nghệ cao, thợ hàn, cơ khí, bếp, xây dựng) và tiếng Anh giao tiếp (PTE 30+ / IELTS 4.5+). Hướng tới bảo lãnh gia đình và thường trú PR.
+                                    </p>
+                                </div>
+
+                                <div class="pt-2 border-t border-slate-100 space-y-1.5">
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Chi phí ước tính:</span>
+                                        <span class="font-bold text-slate-900">~180 – 260 triệu</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Thời gian hòa vốn:</span>
+                                        <span class="font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Chỉ ~3.5 – 4.5 tháng</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Tích lũy sau 3 năm:</span>
+                                        <span class="font-extrabold text-brand-blue">1.8 – 2.5 Tỷ VNĐ</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Yêu cầu tiếng:</span>
+                                        <span class="font-medium text-slate-700">PTE 30+ hoặc IELTS 4.5+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 mt-4">
+                            <button type="button" onclick="quickSelectMarket('UC')" aria-label="Tính toán chi phí đi Úc" class="w-full py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-500 text-amber-800 hover:text-slate-900 font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Tính chi phí đi Úc</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Châu Âu -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between relative group">
+                        <div class="absolute -top-3 left-4 bg-indigo-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-xs">
+                            Tuổi Đến 45 • Tự Do Schengen
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mt-2">
+                                <div>
+                                    <h3 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-1.5">
+                                        <span>🇪🇺 Châu Âu</span>
+                                    </h3>
+                                    <span class="text-[11px] text-slate-500 font-medium">Ba Lan, Hungary, Đức...</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] text-slate-400 font-semibold">Thực nhận TB</div>
+                                    <div class="text-sm font-extrabold text-indigo-600">32 - 50 tr/th</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 space-y-2 text-xs">
+                                <div>
+                                    <span class="font-bold text-slate-800 block text-[11px] uppercase tracking-wider text-indigo-700">🎯 Phù hợp nhất với ai?</span>
+                                    <p class="text-slate-600 text-[11px] leading-relaxed mt-0.5">
+                                        Tuổi 19–45 (biên độ tuổi rộng nhất), thích cuộc sống thanh bình châu Âu, được bao ăn ở, visa tự do đi lại 29 nước khối Schengen, hợp đồng dài hạn có thể gia hạn liên tục.
+                                    </p>
+                                </div>
+
+                                <div class="pt-2 border-t border-slate-100 space-y-1.5">
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Chi phí ước tính:</span>
+                                        <span class="font-bold text-slate-900">~135 – 175 triệu</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Thời gian hòa vốn:</span>
+                                        <span class="font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Chỉ ~4.0 – 5.0 tháng</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Tích lũy sau 3 năm:</span>
+                                        <span class="font-extrabold text-brand-blue">950 Tr – 1.3 Tỷ VNĐ</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-500">Yêu cầu tiếng:</span>
+                                        <span class="font-medium text-slate-700">Giao tiếp cơ bản / B1 (Đức)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 mt-4">
+                            <button type="button" onclick="quickSelectMarket('CA')" aria-label="Tính toán chi phí đi Châu Âu" class="w-full py-2.5 px-3 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white font-bold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Tính chi phí đi Châu Âu</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 2: DETAILED COMPARISON TABLE (Bảng So Sánh Chi Tiết) -->
+            <div id="xkld-panel-table" class="xkld-tab-panel hidden">
+                <div class="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm bg-white">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-gray-200 text-gray-700 font-bold">
+                                <th class="py-4 px-4 font-bold text-brand-navy min-w-[160px] bg-slate-100/70">Tiêu chí so sánh</th>
+                                <th class="py-4 px-4 text-center min-w-[180px] bg-blue-50/60 text-brand-blue">🇰🇷 Hàn Quốc (E9 / E7)</th>
+                                <th class="py-4 px-4 text-center min-w-[180px]">🇯🇵 Nhật Bản (TTS / Tokutei)</th>
+                                <th class="py-4 px-4 text-center min-w-[180px] bg-amber-50/60 text-amber-800">🇦🇺 Nước Úc (Visa 482 / 407)</th>
+                                <th class="py-4 px-4 text-center min-w-[180px]">🇪🇺 Châu Âu (Ba Lan, Đức...)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Độ tuổi tuyển dụng</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-medium">18 – 39 tuổi</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-medium">18 – 35 tuổi (Tokutei đến 40)</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-medium">21 – 40 tuổi</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-medium font-bold text-indigo-700">19 – 45 tuổi (Rộng nhất)</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Yêu cầu bằng cấp</td>
+                                <td class="py-3 px-4 text-center text-gray-700">THPT (E9) / Trung cấp, CĐ (E7)</td>
+                                <td class="py-3 px-4 text-center text-gray-700">THCS trở lên (TTS) / THPT (Tokutei)</td>
+                                <td class="py-3 px-4 text-center text-gray-700">Trung cấp, CĐ nghề / Chứng chỉ nghề</td>
+                                <td class="py-3 px-4 text-center text-gray-700">THPT trở lên / Ưu tiên có nghề</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Yêu cầu ngoại ngữ</td>
+                                <td class="py-3 px-4 text-center text-gray-700">EPS-TOPIK (Bắt buộc thi đỗ)</td>
+                                <td class="py-3 px-4 text-center text-gray-700">Tiếng Nhật N5 (TTS) hoặc N4</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-semibold text-amber-700">PTE 30+ hoặc IELTS 4.5+</td>
+                                <td class="py-3 px-4 text-center text-gray-700">Giao tiếp cơ bản / Tiếng Đức B1</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Tổng chi phí đi ước tính</td>
+                                <td class="py-3 px-4 text-center font-bold text-slate-800">~87 – 145 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-emerald-700">~75 – 105 triệu VNĐ (Thấp nhất)</td>
+                                <td class="py-3 px-4 text-center font-bold text-amber-700">~180 – 260 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-slate-800">~135 – 175 triệu VNĐ</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Lương thực nhận hàng tháng</td>
+                                <td class="py-3 px-4 text-center font-extrabold text-brand-blue">38 – 55 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-extrabold text-emerald-600">28 – 42 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-extrabold text-amber-600">60 – 95 triệu VNĐ (Cao nhất)</td>
+                                <td class="py-3 px-4 text-center font-extrabold text-indigo-600">32 – 50 triệu VNĐ</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Tiền để ra gửi về hàng tháng</td>
+                                <td class="py-3 px-4 text-center font-bold text-brand-blue">32 – 45 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-emerald-700">22 – 32 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-amber-700">55 – 75 triệu VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-indigo-700">25 – 38 triệu VNĐ (Được bao ăn/ở)</td>
+                            </tr>
+
+                            <tr class="hover:bg-emerald-50/60 bg-emerald-50/30 transition">
+                                <td class="py-3 px-4 font-bold text-emerald-900 bg-emerald-100/60">⚡ THỜI GIAN HOÀ VỐN</td>
+                                <td class="py-3 px-4 text-center font-black text-brand-blue text-sm">~ 2.5 – 3.5 tháng</td>
+                                <td class="py-3 px-4 text-center font-black text-emerald-700 text-sm">~ 3.0 – 4.0 tháng</td>
+                                <td class="py-3 px-4 text-center font-black text-amber-800 text-sm">~ 3.5 – 4.5 tháng</td>
+                                <td class="py-3 px-4 text-center font-black text-indigo-700 text-sm">~ 4.0 – 5.0 tháng</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Tích lũy ròng sau 3 năm</td>
+                                <td class="py-3 px-4 text-center font-bold text-brand-blue">1.1 – 1.5 Tỷ VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-emerald-700">800 Tr – 1.1 Tỷ VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-amber-700">1.8 – 2.5 Tỷ VNĐ</td>
+                                <td class="py-3 px-4 text-center font-bold text-indigo-700">950 Tr – 1.3 Tỷ VNĐ</td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition">
+                                <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Cơ hội gia hạn & Định cư</td>
+                                <td class="py-3 px-4 text-center text-gray-700">Gia hạn 4 năm 10 tháng, chuyển E-7-4</td>
+                                <td class="py-3 px-4 text-center text-gray-700">Gia hạn 5 năm, Tokutei 2 vĩnh trú</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-bold text-amber-700">Bảo lãnh gia đình, xin PR thường trú</td>
+                                <td class="py-3 px-4 text-center text-gray-700 font-bold text-indigo-700">Đi lại 29 nước, cơ hội định cư sau 5 năm</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
 
-                <!-- Right Comparison Table -->
-                <div class="lg:col-span-8">
-                    <div class="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm bg-white">
-                        <table class="w-full text-left border-collapse text-xs">
-                            <thead>
-                                <tr class="bg-gray-50 border-b border-gray-200 text-gray-700 font-bold">
-                                    <th class="py-3.5 px-4 font-bold text-brand-navy">Tiêu chí</th>
-                                    <th class="py-3.5 px-4 text-center">🇰🇷 Hàn Quốc</th>
-                                    <th class="py-3.5 px-4 text-center">🇯🇵 Nhật Bản</th>
-                                    <th class="py-3.5 px-4 text-center">🇦🇺 Úc</th>
-                                    <th class="py-3.5 px-4 text-center">🇪🇺 Châu Âu</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100">
+                <div class="mt-4 p-3.5 bg-blue-50/80 rounded-xl border border-blue-100 flex items-center justify-between text-xs text-slate-700 flex-wrap gap-2">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-info-circle text-brand-blue"></i>
+                        <span>Số liệu trên được tổng hợp từ dữ liệu xuất cảnh thực tế của hơn 5.000 học viên & người lao động KIPA Việt Hàn.</span>
+                    </span>
+                    <button type="button" onclick="switchXkldTab('calc')" class="text-brand-blue font-bold hover:underline cursor-pointer">
+                        Mở công cụ tính chi phí chi tiết &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 3: INTERACTIVE ROI CALCULATOR (Tính Chi Phí & Hòa Vốn) -->
+            <div id="xkld-panel-calc" class="xkld-tab-panel hidden">
+                <div id="xkld-calculator-box" class="bg-white rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden">
+                    
+                    <div class="p-6 sm:p-8 bg-gradient-to-r from-slate-900 via-brand-navy to-[#025a94] text-white">
+                        <div class="flex items-center justify-between flex-wrap gap-4">
+                            <div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-yellow/20 text-brand-yellow font-extrabold text-[11px] uppercase tracking-wider mb-2">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>KIPA ROI Calculator</span>
+                                </span>
+                                <h3 class="font-phudu text-xl sm:text-2xl font-bold text-white">
+                                    Bảng Dự Toán Chi Phí & Tính Thời Gian Hòa Vốn Xuất Khẩu Lao Động
+                                </h3>
+                                <p class="text-xs sm:text-sm text-blue-100 mt-1 max-w-2xl">
+                                    Chọn thị trường và điều kiện cá nhân để hệ thống tự động bóc tách chi tiết từng khoản đầu tư, dòng tiền hàng tháng và chính xác sau bao lâu bạn thu hồi 100% vốn ban đầu.
+                                </p>
+                            </div>
+                            <div class="hidden md:block text-right bg-white/10 backdrop-blur-xs p-3.5 rounded-2xl border border-white/20">
+                                <div class="text-[10px] text-blue-200 uppercase font-semibold">Tỷ lệ hòa vốn TB</div>
+                                <div class="text-2xl font-black text-brand-yellow font-phudu">2.5 – 4.5</div>
+                                <div class="text-[11px] text-white/90 font-medium">Tháng làm việc thực tế</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        
+                        <!-- LEFT INPUTS (5 Cols) -->
+                        <div class="lg:col-span-5 space-y-5">
+                            
+                            <!-- 1. Chương trình & Quốc gia -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <label for="xkld-calc-program" class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center justify-between">
+                                    <span class="flex items-center gap-1.5">
+                                        <i class="fas fa-globe-americas text-brand-blue"></i>
+                                        <span>1. Chọn Quốc Gia & Chương Trình</span>
+                                    </span>
+                                    <span class="text-[10px] text-brand-red font-semibold">*Bắt buộc</span>
+                                </label>
+                                <select id="xkld-calc-program" aria-label="Chọn thị trường và diện visa xuất khẩu lao động" onchange="calculateXkldROI()" class="w-full bg-white text-slate-800 font-semibold text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer">
+                                    <optgroup label="🇰🇷 HÀN QUỐC">
+                                        <option value="kr_e9" selected>Hàn Quốc – Lao động sản xuất / Nông nghiệp (E-9)</option>
+                                        <option value="kr_e7">Hàn Quốc – Kỹ thuật viên / Hàn / Cơ khí (E-7-1 / E-7-4)</option>
+                                    </optgroup>
+                                    <optgroup label="🇯🇵 NHẬT BẢN">
+                                        <option value="jp_tts">Nhật Bản – Thực tập sinh kỹ năng (TTS 3 năm)</option>
+                                        <option value="jp_tokutei">Nhật Bản – Kỹ năng đặc định (Tokutei Ginou 1 & 2)</option>
+                                    </optgroup>
+                                    <optgroup label="🇦🇺 NƯỚC ÚC">
+                                        <option value="au_skill">Úc – Lao động tay nghề & Nông nghiệp (Visa 482 / 407 / 403)</option>
+                                    </optgroup>
+                                    <optgroup label="🇪🇺 CHÂU ÂU">
+                                        <option value="eu_work">Châu Âu – Nhà máy / Nông nghiệp (Ba Lan, Hungary, Rumani)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <!-- 2. Mức độ tăng ca / Làm thêm giờ -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                    <i class="fas fa-clock text-brand-blue"></i>
+                                    <span>2. Mức độ Tăng ca / Làm thêm giờ</span>
+                                </label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="calc_overtime" value="low" aria-label="Mức độ tăng ca ít" onchange="calculateXkldROI()" class="peer sr-only">
+                                        <div class="p-2.5 rounded-xl border border-slate-300 peer-checked:border-brand-blue peer-checked:bg-blue-50 text-center transition">
+                                            <div class="text-[11px] font-bold text-slate-800 peer-checked:text-brand-blue">Tiêu chuẩn</div>
+                                            <div class="text-[10px] text-slate-500">~2-3h/tuần</div>
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="calc_overtime" value="med" aria-label="Mức độ tăng ca vừa phải" checked onchange="calculateXkldROI()" class="peer sr-only">
+                                        <div class="p-2.5 rounded-xl border border-slate-300 peer-checked:border-brand-blue peer-checked:bg-blue-50 text-center transition">
+                                            <div class="text-[11px] font-bold text-slate-800 peer-checked:text-brand-blue">Đều đặn (TB)</div>
+                                            <div class="text-[10px] text-slate-500">~5-6h/tuần</div>
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="calc_overtime" value="high" aria-label="Mức độ tăng ca tối đa" onchange="calculateXkldROI()" class="peer sr-only">
+                                        <div class="p-2.5 rounded-xl border border-slate-300 peer-checked:border-brand-blue peer-checked:bg-blue-50 text-center transition">
+                                            <div class="text-[11px] font-bold text-slate-800 peer-checked:text-brand-blue">Tối đa luật</div>
+                                            <div class="text-[10px] text-slate-500">~8-10h/tuần</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 3. Tình trạng ngoại ngữ & Chi phí đào tạo -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <label for="xkld-calc-lang" class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                    <i class="fas fa-language text-brand-blue"></i>
+                                    <span>3. Tình Trạng Ngoại Ngữ Hiện Tại</span>
+                                </label>
+                                <select id="xkld-calc-lang" aria-label="Tình trạng ngoại ngữ của ứng viên" onchange="calculateXkldROI()" class="w-full bg-white text-slate-800 font-semibold text-xs p-2.5 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
+                                    <option value="none" selected>Bắt đầu từ con số 0 (KIPA đào tạo từ đầu)</option>
+                                    <option value="ready">Đã có chứng chỉ / giao tiếp tốt (Giảm chi phí học tiếng)</option>
+                                </select>
+                            </div>
+
+                            <!-- 4. Chế độ ăn ở tại nước ngoài -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <label for="xkld-calc-housing" class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                    <i class="fas fa-home text-brand-blue"></i>
+                                    <span>4. Chế Độ Nhà Ở & Sinh Hoạt</span>
+                                </label>
+                                <select id="xkld-calc-housing" aria-label="Chế độ nhà ở và sinh hoạt tại nước ngoài" onchange="calculateXkldROI()" class="w-full bg-white text-slate-800 font-semibold text-xs p-2.5 rounded-xl border border-slate-300 focus:border-brand-blue outline-none cursor-pointer">
+                                    <option value="standard" selected>Tiêu chuẩn (Công ty hỗ trợ một phần ký túc xá)</option>
+                                    <option value="free">Được chủ bao trọn gói nhà ở (Phổ biến ở Châu Âu / Nông nghiệp)</option>
+                                    <option value="self">Tự túc hoàn toàn (Thuê phòng ngoài)</option>
+                                </select>
+                            </div>
+
+                            <!-- Trust note -->
+                            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-[11px] text-amber-900 flex items-start gap-2">
+                                <i class="fas fa-shield-alt text-amber-600 mt-0.5"></i>
+                                <span>KIPA cam kết hợp đồng 3 bên minh bạch, 100% không phát sinh phụ phí ẩn ngoài bảng kê chi phí chính thức.</span>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT CALCULATED OUTPUTS (7 Cols) -->
+                        <div class="lg:col-span-7 space-y-6">
+                            
+                            <!-- 2 Main Metric Highlights -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 
-                                <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Ngành nghề</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Đa dạng</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Đa dạng</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo nhu cầu thị trường</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo từng quốc gia</td>
-                                </tr>
+                                <!-- Card: Initial Cost -->
+                                <div class="p-5 rounded-2xl bg-slate-900 text-white relative overflow-hidden shadow-lg border border-slate-800">
+                                    <div class="flex items-center justify-between text-xs text-blue-200 mb-1">
+                                        <span>TỔNG ĐẦU TƯ BAN ĐẦU</span>
+                                        <i class="fas fa-wallet text-brand-yellow"></i>
+                                    </div>
+                                    <div id="xkld-out-total-cost" class="font-phudu text-2xl sm:text-3xl font-extrabold text-white">
+                                        102.000.000 đ
+                                    </div>
+                                    <div class="text-[11px] text-slate-300 mt-1">
+                                        Đã bao gồm học phí + hồ sơ + vé bay + dự phòng
+                                    </div>
+                                </div>
 
-                                <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Yêu cầu ngoại ngữ</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo chương trình</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo chương trình</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo diện visa</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo quốc gia</td>
-                                </tr>
+                                <!-- Card: Monthly Net Savings -->
+                                <div class="p-5 rounded-2xl bg-brand-blue text-white relative overflow-hidden shadow-lg border border-blue-600">
+                                    <div class="flex items-center justify-between text-xs text-blue-100 mb-1">
+                                        <span>TIỀN ĐỂ RA HÀNG THÁNG</span>
+                                        <i class="fas fa-piggy-bank text-amber-300"></i>
+                                    </div>
+                                    <div id="xkld-out-monthly-save" class="font-phudu text-2xl sm:text-3xl font-extrabold text-white">
+                                        35.000.000 đ/tháng
+                                    </div>
+                                    <div class="text-[11px] text-blue-100 mt-1">
+                                        Thực nhận sau khi đã trừ sinh hoạt & ăn ở
+                                    </div>
+                                </div>
 
-                                <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Kinh nghiệm</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Tùy vị trí</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Tùy vị trí</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo nghề</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Tùy chương trình</td>
-                                </tr>
+                            </div>
 
-                                <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Thời gian hợp đồng</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo chương trình</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo chương trình</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo diện</td>
-                                    <td class="py-3 px-4 text-center text-gray-600">Theo quốc gia</td>
-                                </tr>
+                            <!-- ROI & BREAKEVEN HIGHLIGHT BOX (THE HERO OF THE SECTION) -->
+                            <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-amber-500/10 via-red-500/10 to-transparent border-2 border-brand-red/30 relative">
+                                <div class="flex items-start justify-between flex-wrap gap-2 mb-3">
+                                    <div>
+                                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-red text-white">Chỉ số tài chính quan trọng</span>
+                                        <h4 class="font-phudu text-base sm:text-lg font-bold text-brand-navy mt-1">
+                                            Thời Gian Hoàn Vốn Ước Tính:
+                                        </h4>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="xkld-out-breakeven-badge" class="font-phudu text-2xl sm:text-3xl font-black text-brand-red">
+                                            ~ 2.9 Tháng
+                                        </span>
+                                    </div>
+                                </div>
 
-                                <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 font-semibold text-gray-900 bg-gray-50/50">Cơ hội phát triển</td>
-                                    <td class="py-3 px-4 text-center font-bold text-brand-blue">Ổn định</td>
-                                    <td class="py-3 px-4 text-center font-bold text-brand-blue">Chuyên nghiệp</td>
-                                    <td class="py-3 px-4 text-center font-bold text-brand-blue">Đa dạng</td>
-                                    <td class="py-3 px-4 text-center font-bold text-brand-blue">Nhiều lựa chọn</td>
-                                </tr>
+                                <!-- Visual Breakeven Progress Bar -->
+                                <div class="space-y-1.5 pt-1">
+                                    <div class="flex justify-between text-[11px] font-semibold text-slate-600">
+                                        <span>Tháng 0 (Bắt đầu)</span>
+                                        <span id="xkld-out-breakeven-mark" class="text-brand-red font-bold">Tháng 3: Hoàn 100% Vốn</span>
+                                        <span class="text-emerald-600 font-bold">Tháng 36 (Lợi nhuận ròng)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 h-3.5 rounded-full overflow-hidden p-0.5 flex">
+                                        <div id="xkld-progress-breakeven" class="bg-brand-red h-full rounded-l-full transition-all duration-700" style="width: 8.3%;"></div>
+                                        <div id="xkld-progress-profit" class="bg-emerald-500 h-full rounded-r-full transition-all duration-700 flex-1"></div>
+                                    </div>
+                                    <div class="flex justify-between text-[10px] text-slate-400">
+                                        <span>Giai đoạn hoàn vốn gốc</span>
+                                        <span class="text-emerald-700 font-medium">Giai đoạn tích lũy tài chính tự do (Hơn 33 tháng còn lại)</span>
+                                    </div>
+                                </div>
 
-                            </tbody>
-                        </table>
+                                <!-- 3-Year Total Profit Estimation -->
+                                <div class="mt-4 pt-3 border-t border-red-200/60 flex items-center justify-between flex-wrap gap-2">
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-800">TỔNG LÃI TÍCH LŨY SAU 3 NĂM (36 THÁNG):</div>
+                                        <div class="text-[11px] text-slate-500">(Sau khi đã trừ toàn bộ chi phí đi ban đầu và sinh hoạt phí)</div>
+                                    </div>
+                                    <div id="xkld-out-3yr-profit" class="font-phudu text-xl sm:text-2xl font-black text-emerald-600">
+                                        + 1.158.000.000 đ
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detailed Itemized Expense Breakdown (Bóc tách chi tiết) -->
+                            <div class="bg-white rounded-2xl border border-slate-200 p-4 text-xs space-y-2.5">
+                                <div class="font-bold text-slate-800 border-b border-slate-100 pb-2 flex items-center justify-between">
+                                    <span>Bóc tách chi tiết các khoản phí:</span>
+                                    <span class="text-[11px] text-slate-400 font-normal">Minh bạch 100%</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>• Đào tạo ngoại ngữ & rèn luyện tay nghề phỏng vấn:</span>
+                                    <span id="xkld-fee-training" class="font-semibold text-slate-800">10.000.000 đ</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>• Xử lý hồ sơ, dịch thuật công chứng & lý lịch tư pháp:</span>
+                                    <span id="xkld-fee-docs" class="font-semibold text-slate-800">5.000.000 đ</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>• Lệ phí visa, khám sức khỏe & sinh trắc học:</span>
+                                    <span id="xkld-fee-visa" class="font-semibold text-slate-800">12.000.000 đ</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>• Vé máy bay quốc tế & bảo hiểm lao động xuất cảnh:</span>
+                                    <span id="xkld-fee-flight" class="font-semibold text-slate-800">15.000.000 đ</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>• Phí dịch vụ hỗ trợ thủ tục & phái cử trọn gói:</span>
+                                    <span id="xkld-fee-service" class="font-semibold text-slate-800">45.000.000 đ</span>
+                                </div>
+                                <div class="flex justify-between text-amber-700 bg-amber-50/60 p-1.5 rounded-lg font-medium">
+                                    <span>• Chi phí phát sinh dự phòng (Ăn ở thời gian học & tư trang bay):</span>
+                                    <span id="xkld-fee-contingency" class="font-bold">15.000.000 đ</span>
+                                </div>
+                            </div>
+
+                            <!-- CTA Button directly to Form -->
+                            <div class="pt-2">
+                                <button type="button" onclick="applyCalcToRegistration()" aria-label="Đăng ký nhận bảng dự toán tài chính chi tiết" class="w-full py-3.5 px-6 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-sm transition shadow-lg shadow-red-500/25 flex items-center justify-center gap-2 cursor-pointer">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    <span>Nhận Bảng Dự Toán Chi Phí Chi Tiết Hồ Sơ Của Bạn</span>
+                                    <i class="fas fa-arrow-right text-xs ml-1"></i>
+                                </button>
+                                <p class="text-[11px] text-slate-400 text-center mt-2">
+                                    *Số liệu dựa trên mức lương tối thiểu pháp định của nước sở tại và tỷ giá quy đổi tham chiếu hiện hành.
+                                </p>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
-
             </div>
 
         </div>
     </section>
+
+    <!-- SCRIPT: Comparison Tabs & ROI Calculator Logic -->
+    <script>
+        // Data model for countries & programs
+        var xkldCalcData = {
+            'kr_e9': {
+                name: 'Hàn Quốc – Lao động EPS (E-9)',
+                marketKey: 'HQ',
+                fees: { training: 10, docs: 5, visa: 12, flight: 15, service: 45, contingency: 15 },
+                gross: 48,
+                deduct: 13,
+                otBonus: { low: -3, med: 0, high: 6 },
+                freeHousingDiscount: 4
+            },
+            'kr_e7': {
+                name: 'Hàn Quốc – Kỹ thuật viên (E-7)',
+                marketKey: 'HQ',
+                fees: { training: 12, docs: 8, visa: 15, flight: 15, service: 95, contingency: 20 },
+                gross: 60,
+                deduct: 14,
+                otBonus: { low: -4, med: 0, high: 8 },
+                freeHousingDiscount: 4
+            },
+            'jp_tts': {
+                name: 'Nhật Bản – Thực tập sinh (TTS)',
+                marketKey: 'NB',
+                fees: { training: 15, docs: 6, visa: 10, flight: 16, service: 40, contingency: 15 },
+                gross: 36,
+                deduct: 11,
+                otBonus: { low: -3, med: 0, high: 5 },
+                freeHousingDiscount: 3
+            },
+            'jp_tokutei': {
+                name: 'Nhật Bản – Kỹ năng đặc định (Tokutei)',
+                marketKey: 'NB',
+                fees: { training: 12, docs: 6, visa: 10, flight: 15, service: 37, contingency: 15 },
+                gross: 44,
+                deduct: 13,
+                otBonus: { low: -3, med: 0, high: 6 },
+                freeHousingDiscount: 3
+            },
+            'au_skill': {
+                name: 'Úc – Lao động tay nghề & Nông nghiệp (482/407)',
+                marketKey: 'UC',
+                fees: { training: 15, docs: 35, visa: 25, flight: 40, service: 105, contingency: 30 },
+                gross: 92,
+                deduct: 27,
+                otBonus: { low: -6, med: 0, high: 12 },
+                freeHousingDiscount: 8
+            },
+            'eu_work': {
+                name: 'Châu Âu – Nhà máy / Nông nghiệp (Ba Lan/Hungary)',
+                marketKey: 'CA',
+                fees: { training: 8, docs: 30, visa: 15, flight: 22, service: 65, contingency: 15 },
+                gross: 42,
+                deduct: 8,
+                otBonus: { low: -3, med: 0, high: 5 },
+                freeHousingDiscount: 3
+            }
+        };
+
+        function switchXkldTab(tabKey) {
+            var tabs = ['matcher', 'table', 'calc'];
+            tabs.forEach(function(t) {
+                var btn = document.getElementById('tab-btn-' + t);
+                var panel = document.getElementById('xkld-panel-' + t);
+                if (!btn || !panel) return;
+                if (t === tabKey) {
+                    btn.classList.add('active', 'bg-brand-blue', 'text-white', 'font-bold');
+                    btn.classList.remove('bg-white', 'text-slate-700', 'border');
+                    panel.classList.remove('hidden');
+                } else {
+                    btn.classList.remove('active', 'bg-brand-blue', 'text-white', 'font-bold');
+                    btn.classList.add('bg-white', 'text-slate-700', 'border');
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        function quickSelectMarket(marketCode) {
+            switchXkldTab('calc');
+            var select = document.getElementById('xkld-calc-program');
+            if (select) {
+                if (marketCode === 'HQ') select.value = 'kr_e9';
+                else if (marketCode === 'NB') select.value = 'jp_tokutei';
+                else if (marketCode === 'UC') select.value = 'au_skill';
+                else if (marketCode === 'CA') select.value = 'eu_work';
+                calculateXkldROI();
+            }
+            var calcBox = document.getElementById('xkld-calculator-box');
+            if (calcBox) {
+                calcBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function calculateXkldROI() {
+            var progSelect = document.getElementById('xkld-calc-program');
+            if (!progSelect) return;
+            var progKey = progSelect.value || 'kr_e9';
+            var data = xkldCalcData[progKey] || xkldCalcData['kr_e9'];
+
+            // Overtime radio
+            var otRadios = document.getElementsByName('calc_overtime');
+            var otVal = 'med';
+            for (var i = 0; i < otRadios.length; i++) {
+                if (otRadios[i].checked) { otVal = otRadios[i].value; break; }
+            }
+
+            // Language status
+            var langSelect = document.getElementById('xkld-calc-lang');
+            var langDiscount = (langSelect && langSelect.value === 'ready') ? Math.round(data.fees.training * 0.6) : 0;
+
+            // Housing status
+            var housingSelect = document.getElementById('xkld-calc-housing');
+            var housingModifier = 0;
+            if (housingSelect) {
+                if (housingSelect.value === 'free') {
+                    housingModifier = data.freeHousingDiscount;
+                } else if (housingSelect.value === 'self') {
+                    housingModifier = -2;
+                }
+            }
+
+            // Calculate fees in Triệu VNĐ
+            var fTraining = Math.max(0, data.fees.training - langDiscount);
+            var fDocs = data.fees.docs;
+            var fVisa = data.fees.visa;
+            var fFlight = data.fees.flight;
+            var fService = data.fees.service;
+            var fContingency = data.fees.contingency;
+
+            var totalCostM = fTraining + fDocs + fVisa + fFlight + fService + fContingency;
+
+            // Monthly Net Savings in Triệu VNĐ
+            var otBonus = data.otBonus[otVal] || 0;
+            var grossMonthly = data.gross + otBonus;
+            var deductMonthly = Math.max(4, data.deduct - housingModifier);
+            var netMonthly = grossMonthly - deductMonthly;
+
+            // Breakeven Months
+            var breakevenMonths = (totalCostM / netMonthly).toFixed(1);
+
+            // 3-Year Profit (36 months)
+            var profit3Yr = Math.round((netMonthly * 36) - totalCostM);
+
+            // Helper format currency
+            function formatVND(millions) {
+                return (millions * 1000000).toLocaleString('vi-VN') + ' đ';
+            }
+
+            // Update UI elements
+            var elTotal = document.getElementById('xkld-out-total-cost');
+            var elMonthly = document.getElementById('xkld-out-monthly-save');
+            var elBreakeven = document.getElementById('xkld-out-breakeven-badge');
+            var elBreakevenMark = document.getElementById('xkld-out-breakeven-mark');
+            var elProfit = document.getElementById('xkld-out-3yr-profit');
+
+            if (elTotal) elTotal.innerText = formatVND(totalCostM);
+            if (elMonthly) elMonthly.innerText = formatVND(netMonthly) + '/tháng';
+            if (elBreakeven) elBreakeven.innerText = '~ ' + breakevenMonths + ' Tháng';
+            if (elBreakevenMark) elBreakevenMark.innerText = 'Tháng ' + Math.ceil(breakevenMonths) + ': Hoàn 100% Vốn';
+            if (elProfit) elProfit.innerText = '+ ' + formatVND(profit3Yr);
+
+            // Progress bar
+            var barBreakeven = document.getElementById('xkld-progress-breakeven');
+            if (barBreakeven) {
+                var pct = Math.min(60, Math.max(6, (breakevenMonths / 36) * 100));
+                barBreakeven.style.width = pct + '%';
+            }
+
+            // Update itemized fees
+            var feeTraining = document.getElementById('xkld-fee-training');
+            var feeDocs = document.getElementById('xkld-fee-docs');
+            var feeVisa = document.getElementById('xkld-fee-visa');
+            var feeFlight = document.getElementById('xkld-fee-flight');
+            var feeService = document.getElementById('xkld-fee-service');
+            var feeContingency = document.getElementById('xkld-fee-contingency');
+
+            if (feeTraining) feeTraining.innerText = formatVND(fTraining);
+            if (feeDocs) feeDocs.innerText = formatVND(fDocs);
+            if (feeVisa) feeVisa.innerText = formatVND(fVisa);
+            if (feeFlight) feeFlight.innerText = formatVND(fFlight);
+            if (feeService) feeService.innerText = formatVND(fService);
+            if (feeContingency) feeContingency.innerText = formatVND(fContingency);
+        }
+
+        function applyCalcToRegistration() {
+            var progSelect = document.getElementById('xkld-calc-program');
+            var progKey = progSelect ? progSelect.value : 'kr_e9';
+            var data = xkldCalcData[progKey] || xkldCalcData['kr_e9'];
+
+            var marketSelect = document.querySelector('select[name="market"]');
+            if (marketSelect) {
+                marketSelect.value = data.marketKey;
+            }
+
+            var formSection = document.getElementById('dang-ky-tu-van');
+            if (formSection) {
+                formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            setTimeout(function() {
+                var nameInput = document.querySelector('input[name="fullname"]');
+                if (nameInput) nameInput.focus();
+            }, 600);
+        }
+
+        // Initialize calculator on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', calculateXkldROI);
+        } else {
+            calculateXkldROI();
+        }
+    </script>
 
     <!-- ==========================================
          SECTION 7: 4 THẺ THÔNG TIN ĐIỀU KIỆN & LỘ TRÌNH
