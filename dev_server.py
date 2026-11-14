@@ -60,6 +60,12 @@ ROUTE_MAP = {
     '/hoat-dong-su-kien': 'hoat-dong-su-kien.html',
     '/hoat-dong-su-kien/': 'hoat-dong-su-kien.html',
     '/hoat-dong-su-kien.html': 'hoat-dong-su-kien.html',
+    '/dang-ky-tai-khoan': 'dang-ky-tai-khoan.html',
+    '/dang-ky-tai-khoan/': 'dang-ky-tai-khoan.html',
+    '/dang-ky-tai-khoan.html': 'dang-ky-tai-khoan.html',
+    '/dang-nhap': 'dang-nhap.html',
+    '/dang-nhap/': 'dang-nhap.html',
+    '/dang-nhap.html': 'dang-nhap.html',
     '/cam-on': 'cam-on.html',
     '/cam-on/': 'cam-on.html',
     '/cam-on.html': 'cam-on.html',
@@ -86,6 +92,8 @@ PAGE_TITLES = {
     'tin-tuc.html': 'Tin Tức & Cẩm Nang Du Học, Việc Làm Quốc Tế | KIPA Việt Hàn',
     'cau-chuyen-hoc-vien.html': 'Câu Chuyện Học Viên KIPA Việt Hàn | Hành Trình Vươn Xa Quốc Tế',
     'hoat-dong-su-kien.html': 'Hoạt Động & Sự Kiện KIPA Việt Hàn | Kết nối cơ hội, phát triển tương lai',
+    'dang-ky-tai-khoan.html': 'Đăng Ký Tài Khoản Học Viên | KIPA Việt Hàn',
+    'dang-nhap.html': 'Đăng Nhập Tài Khoản Học Viên | KIPA Việt Hàn',
     'cam-on.html': 'Cảm Ơn Bạn Đã Đăng Ký | KIPA Việt Hàn',
     '404.html': '404 - Không Tìm Thấy Trang | KIPA Việt Hàn'
 }
@@ -135,6 +143,15 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 return
             if os.path.isfile(file_path):
                 self.serve_static_file(file_path, head_only=head_only)
+                return
+            if os.path.isdir(file_path):
+                index_cand = os.path.join(file_path, 'index.html')
+                if os.path.isfile(index_cand):
+                    self.serve_static_file(index_cand, head_only=head_only)
+                    return
+            html_cand = file_path + '.html'
+            if os.path.isfile(html_cand):
+                self.serve_static_file(html_cand, head_only=head_only)
                 return
             else:
                 target_file = '404.html'
