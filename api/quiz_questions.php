@@ -14,7 +14,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Xin chào', 'correct' => true],
             ['key' => 'C', 'text' => 'Tạm biệt', 'correct' => false]
         ],
-        'feedback' => 'Chính xác! "안녕하세요" là lời chào lịch sự chuẩn mực nhất của người Hàn Quốc, dùng chào hỏi hàng ngày.'
+        'feedback_correct' => 'Chính xác! "안녕하세요" là lời chào lịch sự chuẩn mực nhất của người Hàn Quốc, dùng chào hỏi hàng ngày.',
+        'feedback_incorrect' => 'Đáp án đúng là B. "안녕하세요" có nghĩa là "Xin chào". "Cảm ơn" là 감사합니다, còn "Tạm biệt" là 안녕히 계세요.'
     ],
     [
         'id' => 'c2',
@@ -26,7 +27,8 @@ $questions = [
             ['key' => 'B', 'text' => '미안해요 (Mi-an-hae-yo)', 'correct' => false],
             ['key' => 'C', 'text' => '사랑해요 (Sa-rang-hae-yo)', 'correct' => false]
         ],
-        'feedback' => 'Rất chuẩn! "감사합니다" là cách cảm ơn trang trọng nhất, dùng trong mọi tình huống giao tiếp và công sở.'
+        'feedback_correct' => 'Rất chuẩn! "감사합니다" là cách cảm ơn trang trọng nhất, dùng trong mọi tình huống giao tiếp và công sở.',
+        'feedback_incorrect' => 'Đáp án đúng là A. "감사합니다" mới là "Cảm ơn". "미안해요" là "Xin lỗi", còn "사랑해요" là "Tôi yêu bạn".'
     ],
     [
         'id' => 'c3',
@@ -38,7 +40,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Oppa (오빠)', 'correct' => true],
             ['key' => 'C', 'text' => 'Noona (누나)', 'correct' => false]
         ],
-        'feedback' => 'Đúng rồi! Nữ gọi anh lớn tuổi là "Oppa" (오빠), còn nam gọi anh lớn tuổi là "Hyung" (형).'
+        'feedback_correct' => 'Đúng rồi! Bạn nữ gọi anh lớn tuổi là "Oppa" (오빠). Nam gọi anh lớn tuổi mới là "Hyung" (형).',
+        'feedback_incorrect' => 'Đáp án đúng là B. Nữ gọi anh lớn tuổi là "Oppa" (오빠). "Hyung" là từ do nam gọi anh, còn "Noona" là nam gọi chị.'
     ],
     [
         'id' => 'c4',
@@ -50,7 +53,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Tokbokki (떡볶이)', 'correct' => false],
             ['key' => 'C', 'text' => 'Kimbap (김밥)', 'correct' => false]
         ],
-        'feedback' => 'Tuyệt vời! Kimchi là linh hồn của ẩm thực Hàn Quốc, xuất hiện trong mọi bữa ăn gia đình.'
+        'feedback_correct' => 'Tuyệt vời! Kimchi là linh hồn của ẩm thực Hàn Quốc, món ăn lên men xuất hiện trong mọi bữa ăn gia đình.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Kimchi mới là món lên men truyền thống biểu tượng. Tokbokki là bánh gạo cay xào, Kimbap là cơm cuộn rong biển.'
     ],
 
     // Tier 2: Hangul & Linguistics
@@ -64,7 +68,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Mặt Trời – Mặt Trăng – Vì Sao', 'correct' => false],
             ['key' => 'C', 'text' => 'Kim – Mộc – Thủy – Hỏa – Thổ', 'correct' => false]
         ],
-        'feedback' => 'Xuất sắc! Vua Sejong sáng tạo Hangul theo 3 nét cơ bản đại diện cho Trời tròn, Đất phẳng và Con người đứng thẳng.'
+        'feedback_correct' => 'Xuất sắc! Vua Sejong sáng tạo Hangul theo 3 nét cơ bản đại diện cho Trời tròn (•), Đất phẳng (ㅡ) và Con người đứng thẳng (ㅣ).',
+        'feedback_incorrect' => 'Đáp án đúng là A. Nguyên âm Hangul được tạo thành từ 3 yếu tố Tam tài: Trời (•), Đất (ㅡ), Người (ㅣ).'
     ],
     [
         'id' => 'l2',
@@ -76,7 +81,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Là dạng chữ tượng hình khắc trên mai rùa cổ', 'correct' => false],
             ['key' => 'C', 'text' => 'Có 6 thanh điệu giống hệt tiếng Việt', 'correct' => false]
         ],
-        'feedback' => 'Chính xác! Các phụ âm Hangul mô phỏng đúng khẩu hình miệng, giúp người mới học nhớ mặt chữ chỉ sau 60 phút!'
+        'feedback_correct' => 'Chính xác! Các phụ âm Hangul mô phỏng đúng khẩu hình miệng và vị trí vòm họng/lưỡi khi phát âm, cực kỳ khoa học và dễ nhớ.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Điểm khoa học độc nhất vô nhị của Hangul là phụ âm mô phỏng khẩu hình miệng khi phát âm. Tiếng Hàn không có thanh điệu như tiếng Việt.'
     ],
     [
         'id' => 'l3',
@@ -88,7 +94,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Bác sĩ', 'correct' => false],
             ['key' => 'C', 'text' => 'Giáo viên', 'correct' => false]
         ],
-        'feedback' => 'Chuẩn xác! "학생" chính là âm Hán "Học sinh". Nhờ sự tương đồng này, người Việt học từ vựng tiếng Hàn cực kỳ nhanh!'
+        'feedback_correct' => 'Chuẩn xác! "학생" chính là âm Hán "Học sinh". Nhờ sự tương đồng Hán-Hàn và Hán-Việt, người Việt học từ vựng tiếng Hàn cực kỳ nhanh!',
+        'feedback_incorrect' => 'Đáp án đúng là A. "학생" (Hak-saeng) là âm Hán của "Học sinh". "Giáo viên" trong tiếng Hàn là 선생님, còn "Bác sĩ" là 의사.'
     ],
     [
         'id' => 'l4',
@@ -98,12 +105,13 @@ $questions = [
         'options' => [
             ['key' => 'A', 'text' => 'Ít nhất 1 Phụ âm + 1 Nguyên âm ghép thành khối vuông', 'correct' => true],
             ['key' => 'B', 'text' => 'Chỉ cần 1 phụ âm đứng một mình', 'correct' => false],
-            ['key' => 'C', 'text' => 'Luôn phải có 3 ký tự trở lên', 'correct' => false]
+            ['key' => 'C', 'text' => 'Luôn bắt buộc phải có từ 4 ký tự trở lên', 'correct' => false]
         ],
-        'feedback' => 'Chính xác! Tiếng Hàn ghép theo khối vuông (âm tiết), luôn gồm phụ âm đầu kết hợp với nguyên âm.'
+        'feedback_correct' => 'Chính xác! Tiếng Hàn ghép theo khối vuông (âm tiết), luôn gồm phụ âm đầu kết hợp với nguyên âm.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Một âm tiết tiếng Hàn không thể đứng 1 mình chỉ có phụ âm, mà luôn bắt buộc phải gồm ít nhất 1 Phụ âm + 1 Nguyên âm.'
     ],
 
-    // Tier 3: Practical Situations & Goals
+    // Tier 3: Practical Situations & Communication
     [
         'id' => 's1',
         'category' => 'situation',
@@ -114,7 +122,8 @@ $questions = [
             ['key' => 'B', 'text' => 'Ajusshi (아저씨 - Chú ơi)', 'correct' => false],
             ['key' => 'C', 'text' => 'Sajang-nim (사장님 - Giám đốc)', 'correct' => false]
         ],
-        'feedback' => 'Rất chuẩn! "이모" (Dì ơi) là cách gọi cực kỳ gần gũi và được các cô chủ quán Hàn Quốc quý mến phục vụ chu đáo.'
+        'feedback_correct' => 'Rất chuẩn! "이모" (Dì ơi) là cách gọi cô chủ quán cực kỳ gần gũi và được người Hàn Quốc quý mến phục vụ chu đáo.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Để gọi cô chủ quán thân thiện, người Hàn hay dùng "Imo" (이모 - Dì ơi). "Ajusshi" là chú ơi (dành cho nam giới lớn tuổi).'
     ],
     [
         'id' => 's2',
@@ -126,7 +135,8 @@ $questions = [
             ['key' => 'B', 'text' => '안녕히 가세요 (An-nyeong-hi ga-se-yo - Đi về bình an)', 'correct' => false],
             ['key' => 'C', 'text' => '또 만나요 (Tto man-na-yo - Hẹn gặp lại)', 'correct' => false]
         ],
-        'feedback' => 'Rất tinh tế! "계세요" là chúc người ở lại bình an, còn "가세요" là chúc người ra về đi đường bình an.'
+        'feedback_correct' => 'Rất chuẩn! "계세요" (Gye-se-yo) nghĩa là chúc người ở lại bình an, còn "가세요" (Ga-se-yo) là chúc người ra về đi đường bình an.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Khi bạn về và đối phương ở lại, phải nói "안녕히 계세요" (Ở lại bình an). "안녕히 가세요" là chúc người ra về đi bình an.'
     ],
     [
         'id' => 's3',
@@ -138,19 +148,21 @@ $questions = [
             ['key' => 'B', 'text' => 'Nhìn thẳng vào mắt và uống hết một hơi', 'correct' => false],
             ['key' => 'C', 'text' => 'Nâng ly cao hơn hẳn ly của người lớn', 'correct' => false]
         ],
-        'feedback' => 'Chính xác! Văn hóa kính ngữ của Hàn Quốc thể hiện qua cử chỉ xoay nhẹ người và dùng hai tay nâng ly tôn kính.'
+        'feedback_correct' => 'Chính xác! Văn hóa kính ngữ của Hàn Quốc thể hiện qua cử chỉ xoay nhẹ người sang một bên và dùng tay che ly khi uống.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Trong văn hóa Hàn Quốc, nhìn thẳng hoặc nâng ly cao hơn người lớn tuổi là thất lễ. Bạn phải xoay người sang một bên và che miệng.'
     ],
     [
         'id' => 's4',
         'category' => 'situation',
         'category_title' => 'Giao tiếp thực tế',
-        'question' => 'Mục tiêu quan trọng nhất bạn muốn đạt được khi học tiếng Hàn tại KIPA là gì?',
+        'question' => 'Khi nhận đồ vật, quà tặng hoặc danh thiếp từ người lớn tuổi ở Hàn Quốc, quy tắc lịch sự chuẩn mực là gì?',
         'options' => [
-            ['key' => 'A', 'text' => 'Đạt TOPIK du học trường TOP & săn học bổng', 'correct' => true],
-            ['key' => 'B', 'text' => 'Giao tiếp phản xạ tự tin để đi làm / XKLD EPS', 'correct' => true],
-            ['key' => 'C', 'text' => 'Thành thạo 4 kỹ năng từ con số 0 trong thời gian nhanh nhất', 'correct' => true]
+            ['key' => 'A', 'text' => 'Dùng cả hai tay để nhận và hơi cúi đầu nhẹ', 'correct' => true],
+            ['key' => 'B', 'text' => 'Chỉ nhận bằng tay trái để thể hiện sự khiêm tốn', 'correct' => false],
+            ['key' => 'C', 'text' => 'Nhận bằng một tay rồi đút ngay vào túi áo', 'correct' => false]
         ],
-        'feedback' => 'Tuyệt vời! Dù mục tiêu của bạn là gì, phương pháp kèm 1:1 tại KIPA sẽ đồng hành cùng bạn đến đích thành công.'
+        'feedback_correct' => 'Xuất sắc! Ở Hàn Quốc, nhận đồ từ người lớn tuổi luôn bắt buộc phải dùng cả hai tay và cúi chào nhẹ để thể hiện sự tôn trọng.',
+        'feedback_incorrect' => 'Đáp án đúng là A. Ở Hàn Quốc, nhận bằng 1 tay hoặc đút vào túi ngay là bất lịch sự. Bạn luôn phải dùng cả 2 tay và hơi cúi đầu đón nhận.'
     ]
 ];
 
