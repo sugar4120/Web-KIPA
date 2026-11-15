@@ -1480,77 +1480,65 @@
                                 Nhập thông tin để tìm kiếm quốc gia và chương trình thích hợp với bạn.
                             </p>
 
-                            <!-- Form Box with Illustration -->
+                            <!-- Form Box -->
                             <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-2xs">
-                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                                    
-                                    <!-- Form Inputs (sm:col-span-8) -->
-                                    <div class="sm:col-span-8 space-y-3.5">
-                                        <!-- Field 1: Quốc gia -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Quốc gia mong muốn</label>
-                                            <select aria-label="Filter country" id="filter-country" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="tat_ca">Tất cả quốc gia Châu Âu</option>
-                                                <option value="duc">CHLB Đức (Kỹ thuật, Điều dưỡng)</option>
-                                                <option value="ba_lan">Ba Lan (Sản xuất, Logistics)</option>
-                                                <option value="hungary">Hungary (Cơ khí, Xây dựng)</option>
-                                                <option value="rumani">Rumani (Công nghiệp, Dịch vụ)</option>
-                                                <option value="sec">Cộng hòa Séc</option>
-                                                <option value="bo_dao_nha">Bồ Đào Nha</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Field 2: Ngành nghề -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Ngành nghề</label>
-                                            <select aria-label="Filter eu job" id="filter-eu-job" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="tat_ca">Tất cả ngành nghề</option>
-                                                <option value="san_xuat">Sản xuất - Chế tạo - Lắp ráp</option>
-                                                <option value="co_khi">Cơ khí - Hàn công nghiệp - Thợ máy</option>
-                                                <option value="xay_dung">Xây dựng - Cốp pha - Giàn giáo</option>
-                                                <option value="thuc_pham">Chế biến thực phẩm - Đóng gói</option>
-                                                <option value="nong_nghiep">Nông nghiệp công nghệ cao</option>
-                                                <option value="dieu_duong">Điều dưỡng - Y tế chăm sóc</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Field 3: Trình độ ngoại ngữ -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Trình độ ngoại ngữ</label>
-                                            <select aria-label="Filter eu lang" id="filter-eu-lang" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="chua_biet">Chưa biết ngoại ngữ (KIPA đào tạo từ đầu)</option>
-                                                <option value="tieng_anh_co_ban">Tiếng Anh cơ bản (Giao tiếp đơn giản)</option>
-                                                <option value="tieng_anh_tot">Tiếng Anh tốt (B1 / B2 / IELTS)</option>
-                                                <option value="tieng_duc">Tiếng Đức (A2 / B1)</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Field 4: Kinh nghiệm làm việc -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Kinh nghiệm làm việc</label>
-                                            <select aria-label="Filter eu exp" id="filter-eu-exp" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="chua_co">Chưa có kinh nghiệm chính thức</option>
-                                                <option value="1_2_nam">1 - 2 năm kinh nghiệm</option>
-                                                <option value="3_nam_plus">Từ 3 năm kinh nghiệm trở lên</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Submit Button -->
-                                        <div class="pt-1">
-                                            <button type="button" onclick="searchEuropeMarkets()" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#FACC15] hover:bg-[#eab308] text-slate-900 font-extrabold text-xs sm:text-sm shadow-sm transition-all transform hover:-translate-y-0.5">
-                                                <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                                                <span>Tìm kết quả phù hợp</span>
-                                            </button>
-                                        </div>
+                                <div class="space-y-3.5">
+                                    <!-- Field 1: Quốc gia -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Quốc gia mong muốn</label>
+                                        <select aria-label="Filter country" id="filter-country" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="tat_ca">Tất cả quốc gia Châu Âu</option>
+                                            <option value="duc">CHLB Đức (Kỹ thuật, Điều dưỡng)</option>
+                                            <option value="ba_lan">Ba Lan (Sản xuất, Logistics)</option>
+                                            <option value="hungary">Hungary (Cơ khí, Xây dựng)</option>
+                                            <option value="rumani">Rumani (Công nghiệp, Dịch vụ)</option>
+                                            <option value="sec">Cộng hòa Séc</option>
+                                            <option value="bo_dao_nha">Bồ Đào Nha</option>
+                                        </select>
                                     </div>
 
-                                    <!-- Right Illustration (sm:col-span-4) -->
-                                    <div class="hidden sm:flex sm:col-span-4 items-center justify-center p-2">
-                                        <img src="/assets/xuat-khau-lao-dong-chau-au/sec3_illustration.png" 
-                                             alt="Tìm thị trường Châu Âu phù hợp" 
-                                             class="max-w-[130px] h-auto object-contain drop-shadow-sm">
+                                    <!-- Field 2: Ngành nghề -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Ngành nghề</label>
+                                        <select aria-label="Filter eu job" id="filter-eu-job" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="tat_ca">Tất cả ngành nghề</option>
+                                            <option value="san_xuat">Sản xuất - Chế tạo - Lắp ráp</option>
+                                            <option value="co_khi">Cơ khí - Hàn công nghiệp - Thợ máy</option>
+                                            <option value="xay_dung">Xây dựng - Cốp pha - Giàn giáo</option>
+                                            <option value="thuc_pham">Chế biến thực phẩm - Đóng gói</option>
+                                            <option value="nong_nghiep">Nông nghiệp công nghệ cao</option>
+                                            <option value="dieu_duong">Điều dưỡng - Y tế chăm sóc</option>
+                                        </select>
                                     </div>
 
+                                    <!-- Field 3: Trình độ ngoại ngữ -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Trình độ ngoại ngữ</label>
+                                        <select aria-label="Filter eu lang" id="filter-eu-lang" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="chua_biet">Chưa biết ngoại ngữ (KIPA đào tạo từ đầu)</option>
+                                            <option value="tieng_anh_co_ban">Tiếng Anh cơ bản (Giao tiếp đơn giản)</option>
+                                            <option value="tieng_anh_tot">Tiếng Anh tốt (B1 / B2 / IELTS)</option>
+                                            <option value="tieng_duc">Tiếng Đức (A2 / B1)</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Field 4: Kinh nghiệm làm việc -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Kinh nghiệm làm việc</label>
+                                        <select aria-label="Filter eu exp" id="filter-eu-exp" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="chua_co">Chưa có kinh nghiệm chính thức</option>
+                                            <option value="1_2_nam">1 - 2 năm kinh nghiệm</option>
+                                            <option value="3_nam_plus">Từ 3 năm kinh nghiệm trở lên</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="pt-1">
+                                        <button type="button" onclick="searchEuropeMarkets()" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#FACC15] hover:bg-[#eab308] text-slate-900 font-extrabold text-xs sm:text-sm shadow-sm transition-all transform hover:-translate-y-0.5">
+                                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                                            <span>Tìm kết quả phù hợp</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2042,11 +2030,10 @@
                         <div class="lg:col-span-6 flex">
                             <div class="w-full bg-gradient-to-br from-[#0153A8] to-[#082a52] rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden flex flex-col justify-between">
                                 
-                                <!-- Background Illustration of European Architecture -->
-                                <div class="absolute right-0 bottom-0 w-52 sm:w-64 h-auto opacity-35 pointer-events-none select-none">
-                                    <img src="/assets/xuat-khau-lao-dong-chau-au/cta_europe_visual.png" 
-                                         alt="Cảnh quan Châu Âu" 
-                                         class="w-full h-auto object-contain">
+                                <!-- Subtle Vector Accents -->
+                                <div class="absolute -right-8 -bottom-8 w-44 h-44 rounded-full bg-white/5 blur-2xl pointer-events-none"></div>
+                                <div class="absolute right-5 bottom-5 opacity-10 pointer-events-none text-white text-7xl">
+                                    <i class="fa-solid fa-earth-europe"></i>
                                 </div>
 
                                 <!-- Top Content -->
