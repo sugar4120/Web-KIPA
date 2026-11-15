@@ -3,6 +3,18 @@
 /* --- Antigravity Custom Utilities & Gradient Fixes --- */
 .grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
 .grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+@media (min-width: 640px) {
+  .sm\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+  .sm\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+}
+@media (min-width: 768px) {
+  .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+  .md\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+  .lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+}
 .to-\[\#D81815\], .to-\[\#d81815\], .to-\[\#d41815\], .to-\[\#b91512\] {
   --tw-gradient-to: #d81815 var(--tw-gradient-to-position) !important;
 }
