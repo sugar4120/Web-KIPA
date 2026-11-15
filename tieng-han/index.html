@@ -1498,18 +1498,67 @@
                         </p>
                     </div>
 
-                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 p-4 rounded-2xl max-w-lg mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
-                        <div>
-                            <div class="text-xs font-bold text-brand-blue flex items-center gap-1.5">
-                                <i class="fa-solid fa-gift text-brand-red"></i>
-                                <span>Quà tặng dành riêng cho bạn</span>
+                    <!-- Form đăng ký nhận quà trực tiếp ngay tại đây -->
+                    <div class="bg-gradient-to-b from-blue-50/90 via-slate-50/80 to-white border border-blue-200/90 rounded-3xl p-5 sm:p-7 max-w-xl mx-auto shadow-md text-left space-y-4 mt-2">
+                        <!-- Gift Banner Header -->
+                        <div class="flex items-start gap-3 pb-3 border-b border-blue-100">
+                            <div class="w-10 h-10 rounded-2xl bg-brand-red text-white flex items-center justify-center flex-shrink-0 text-lg shadow-sm">
+                                <i class="fa-solid fa-gift"></i>
                             </div>
-                            <p class="text-[11px] text-slate-600 mt-0.5">Ebook "Chinh Phục Hangul & 100 Câu Phản Xạ Hàng Ngày" + 01 Buổi học thử miễn phí.</p>
+                            <div>
+                                <h4 class="font-phudu font-bold text-sm sm:text-base text-brand-blue">
+                                    Đăng Ký Nhận Ebook &amp; Buổi Học Thử Miễn Phí
+                                </h4>
+                                <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                                    Điền thông tin bên dưới để KIPA gửi tặng trọn bộ tài liệu <em>"Chinh Phục Hangul &amp; 100 Câu Phản Xạ Hàng Ngày"</em> và xếp lịch 01 buổi học thử phản xạ 1:1 miễn phí.
+                                </p>
+                            </div>
                         </div>
-                        <a href="#dang-ky" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap flex-shrink-0">
-                            <span>Nhận quà ngay</span>
-                            <i class="fa-solid fa-arrow-down text-[10px]"></i>
-                        </a>
+
+                        <!-- Form -->
+                        <form data-kipa-form="korean_gift" data-source-page="/tieng-han/" class="space-y-3">
+                            <input type="hidden" name="course" value="Tiếng Hàn nhập môn (Nhận Ebook &amp; Học thử)">
+                            <input type="hidden" name="level" value="Đã hoàn thành Mini Test 60s">
+                            <input type="hidden" name="timing" value="Càng sớm càng tốt">
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-bold text-slate-700 block">Họ và tên *</label>
+                                    <input type="text" name="name" required maxlength="254" aria-label="Họ và tên" placeholder="Nhập họ và tên của bạn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:border-brand-blue bg-white shadow-2xs">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-bold text-slate-700 block">Số điện thoại / Zalo *</label>
+                                    <input type="tel" name="phone" required maxlength="32" aria-label="Số điện thoại" placeholder="Nhập số điện thoại nhận Zalo" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:border-brand-blue bg-white shadow-2xs">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-bold text-slate-700 block">Email nhận Ebook PDF</label>
+                                    <input type="email" name="email" maxlength="254" aria-label="Email nhận Ebook" placeholder="Nhập email của bạn (không bắt buộc)" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:border-brand-blue bg-white shadow-2xs">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-bold text-slate-700 block">Hình thức học thử mong muốn</label>
+                                    <select name="format" aria-label="Hình thức học thử" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:border-brand-blue bg-white shadow-2xs">
+                                        <option value="Học trực tuyến">Học trực tuyến (Google Meet)</option>
+                                        <option value="Học trực tiếp">Học trực tiếp tại cơ sở KIPA</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-2 pt-1 text-[11px] text-slate-600">
+                                <input type="checkbox" name="consent" value="yes" required aria-label="Đồng ý nhận Ebook và tư vấn từ KIPA" class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
+                                <span>Tôi đồng ý nhận Ebook và tư vấn lộ trình học miễn phí từ KIPA</span>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-red hover:bg-rose-700 text-white font-phudu font-bold text-xs py-3 rounded-full shadow-md transition-all flex items-center justify-center gap-2 mt-2">
+                                <i class="fa-solid fa-gift text-sm"></i>
+                                <span>GỬI THÔNG TIN &amp; NHẬN QUÀ NGAY</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[10000px]">
+                            <p data-form-status aria-live="polite" class="text-sm" role="status"></p>
+                        </form>
                     </div>
                 </div>
             </div>

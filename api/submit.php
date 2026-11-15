@@ -57,7 +57,13 @@ $formTypes = [
     ],
     'korean_course' => [
         'path' => '/tieng-han/',
-        'keys' => ['name', 'phone', 'level', 'format', 'course', 'timing', 'consent'],
+        'keys' => ['name', 'phone', 'email', 'level', 'format', 'course', 'timing', 'consent'],
+        'required' => ['name', 'phone', 'consent'],
+        'contact' => 'name',
+    ],
+    'korean_gift' => [
+        'path' => '/tieng-han/',
+        'keys' => ['name', 'phone', 'email', 'level', 'format', 'course', 'timing', 'consent'],
         'required' => ['name', 'phone', 'consent'],
         'contact' => 'name',
     ],
