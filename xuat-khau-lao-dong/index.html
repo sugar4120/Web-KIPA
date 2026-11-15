@@ -716,18 +716,6 @@
         box-shadow: 0 4px 12px rgba(2, 116, 189, 0.25);
     }
 
-    #kipa-xkld .survey-option {
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    #kipa-xkld .survey-option:hover {
-        border-color: #93c5fd;
-        background-color: #f0f7ff;
-    }
-    #kipa-xkld .survey-option.selected {
-        border-color: #0274BD;
-        background-color: #eff6ff;
-    }
 </style>
 
 <div id="kipa-xkld" class="w-full">
@@ -1349,131 +1337,6 @@
     </section>
 
     <!-- ==========================================
-         SECTION 5: CÔNG CỤ TÌM CHƯƠNG TRÌNH PHÙ HỢP
-         ========================================== -->
-    <section class="py-12 sm:py-16 bg-gradient-to-br from-[#ebf5fb] via-[#f2f8fd] to-[#f8fbfe]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <!-- Left Box -->
-                <div class="lg:col-span-5 space-y-4">
-                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red">
-                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                        <span>CÔNG CỤ TÌM CHƯƠNG TRÌNH PHÙ HỢP</span>
-                    </div>
-
-                    <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-navy leading-tight">
-                        Bạn phù hợp với chương trình làm việc nào?
-                    </h2>
-
-                    <p class="text-gray-600 text-sm leading-relaxed font-vietnam">
-                        Trả lời một vài câu hỏi ngắn để nhận gợi ý thị trường, ngành nghề và lộ trình phù hợp với bạn.
-                    </p>
-
-                    <div class="pt-2">
-                        <a href="#survey-box" class="inline-flex items-center px-6 py-3 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-sm">
-                            <span>Bắt đầu tìm hiểu</span>
-                            <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
-                    </div>
-
-                    <!-- Benefit highlights (no image) -->
-                    <div class="pt-4 space-y-2.5 border-t border-slate-100 mt-4">
-                        <div class="flex items-center gap-2 text-xs text-slate-600">
-                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                            <span>Hoàn toàn miễn phí & nhận kết quả ngay lập tức</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-xs text-slate-600">
-                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                            <span>Định hướng chuẩn xác theo độ tuổi & tay nghề</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-xs text-slate-600">
-                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                            <span>Bảo mật tuyệt đối thông tin ứng viên</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Box: Interactive Questionnaire -->
-                <div id="survey-box" class="lg:col-span-7">
-                    <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
-                        
-                        <!-- Step Navigation Bar -->
-                        <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-6 border-b border-gray-100 text-xs">
-                            <span class="step-btn active px-3 py-1.5 rounded-full font-bold text-xs flex items-center space-x-1 flex-shrink-0">
-                                <span>1</span>
-                                <span>Mục tiêu</span>
-                            </span>
-                            <span class="text-gray-300">›</span>
-                            <span class="px-3 py-1.5 rounded-full font-medium text-gray-500 bg-gray-50 flex-shrink-0">
-                                <span>2</span>
-                                <span>Thị trường</span>
-                            </span>
-                            <span class="text-gray-300">›</span>
-                            <span class="px-3 py-1.5 rounded-full font-medium text-gray-500 bg-gray-50 flex-shrink-0">
-                                <span>3</span>
-                                <span>Kinh nghiệm</span>
-                            </span>
-                            <span class="text-gray-300">›</span>
-                            <span class="px-3 py-1.5 rounded-full font-medium text-gray-500 bg-gray-50 flex-shrink-0">
-                                <span>4</span>
-                                <span>Ngoại ngữ</span>
-                            </span>
-                            <span class="text-gray-300">›</span>
-                            <span class="px-3 py-1.5 rounded-full font-medium text-gray-500 bg-gray-50 flex-shrink-0">
-                                <span>5</span>
-                                <span>Độ tuổi</span>
-                            </span>
-                        </div>
-
-                        <!-- Question title -->
-                        <h3 class="font-phudu text-base sm:text-lg font-bold text-brand-navy mb-4">
-                            Mục tiêu của bạn là gì?
-                        </h3>
-
-                        <!-- 4 Options -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6" id="survey-options-group">
-                            
-                            <label class="survey-option border border-gray-200 rounded-xl p-3.5 flex items-center space-x-3 selected">
-                                <input type="radio" name="goal" value="income" class="text-brand-blue focus:ring-brand-blue h-4 w-4" checked>
-                                <span class="text-xs sm:text-sm font-medium text-gray-700">Thu nhập và tích lũy</span>
-                            </label>
-
-                            <label class="survey-option border border-gray-200 rounded-xl p-3.5 flex items-center space-x-3">
-                                <input type="radio" name="goal" value="career" class="text-brand-blue focus:ring-brand-blue h-4 w-4">
-                                <span class="text-xs sm:text-sm font-medium text-gray-700">Phát triển nghề nghiệp</span>
-                            </label>
-
-                            <label class="survey-option border border-gray-200 rounded-xl p-3.5 flex items-center space-x-3">
-                                <input type="radio" name="goal" value="skills" class="text-brand-blue focus:ring-brand-blue h-4 w-4">
-                                <span class="text-xs sm:text-sm font-medium text-gray-700">Học hỏi kỹ năng mới</span>
-                            </label>
-
-                            <label class="survey-option border border-gray-200 rounded-xl p-3.5 flex items-center space-x-3">
-                                <input type="radio" name="goal" value="experience" class="text-brand-blue focus:ring-brand-blue h-4 w-4">
-                                <span class="text-xs sm:text-sm font-medium text-gray-700">Trải nghiệm môi trường quốc tế</span>
-                            </label>
-
-                        </div>
-
-                        <!-- Action Next Button -->
-                        <div class="flex justify-end pt-2">
-                            <a href="#dang-ky-tu-van" class="inline-flex items-center px-6 py-3 rounded-xl bg-brand-blue text-white font-bold text-xs sm:text-sm hover:bg-blue-700 transition shadow-sm">
-                                <span>Tiếp theo</span>
-                                <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-        <!-- ==========================================
          SECTION 6: SO SÁNH THỊ TRƯỜNG & TÍNH CHI PHÍ HÒA VỐN
          ========================================== -->
     <section id="so-sanh-thi-truong" class="py-14 sm:py-20 bg-gradient-to-b from-white via-slate-50/70 to-white border-t border-b border-gray-100">
@@ -3473,16 +3336,6 @@
             });
         });
 
-        // Survey Options toggle
-        const surveyOptions = document.querySelectorAll('#survey-options-group .survey-option');
-        surveyOptions.forEach(opt => {
-            opt.addEventListener('click', function() {
-                surveyOptions.forEach(o => o.classList.remove('selected'));
-                this.classList.add('selected');
-                const radio = this.querySelector('input[type="radio"]');
-                if (radio) radio.checked = true;
-            });
-        });
     });
 
     // Handle Form Submit
