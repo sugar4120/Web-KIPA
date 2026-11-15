@@ -26,7 +26,7 @@ API_FILES = {
     'api/submit.php', 'api/content.php', 'api/content-model.json',
     'api/cms.php', 'api/migrate.php', 'api/publish.php',
     'api/mailer.php', 'api/otp.php', 'api/register.php', 'api/login.php',
-    'api/account.php', 'api/reset-password.php',
+    'api/account.php', 'api/reset-password.php', 'api/quiz_questions.php',
 }
 KOREAN_COURSES = [
     ('nhap-mon', 'Tiếng Hàn nhập môn',

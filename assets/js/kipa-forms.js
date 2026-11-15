@@ -62,6 +62,38 @@
             if (!response.ok || !result || result.ok !== true) {
                 throw new Error(result && result.error || 'Chưa thể gửi thông tin. Vui lòng thử lại.');
             }
+            if (form.dataset.successModal) {
+                var modal = document.querySelector(form.dataset.successModal);
+                if (modal) {
+                    var nameHolder = modal.querySelector('[data-modal-name]');
+                    if (nameHolder && (result.contact_name || fields.name || fields.fullname)) {
+                        nameHolder.textContent = result.contact_name || fields.name || fields.fullname;
+                    }
+                    var emailHolder = modal.querySelector('[data-modal-email]');
+                    if (emailHolder && fields.email) {
+                        emailHolder.textContent = fields.email;
+                    }
+                    var classHolder = modal.querySelector('[data-modal-class]');
+                    if (classHolder && (fields.class_choice || fields.course)) {
+                        classHolder.textContent = fields.class_choice || fields.course;
+                    }
+                    if (typeof modal.showModal === 'function') {
+                        modal.showModal();
+                    } else {
+                        modal.classList.remove('hidden');
+                    }
+                }
+                showStatus(form, 'Đăng ký thành công! Hãy tham gia nhóm Zalo bên dưới.', false);
+                form.reset();
+                if (button) {
+                    button.disabled = false;
+                    button.removeAttribute('aria-busy');
+                    button.textContent = originalText;
+                }
+                var eventSuccess = new CustomEvent('kipa:form:success', { detail: { form: form, result: result, fields: fields } });
+                document.dispatchEvent(eventSuccess);
+                return;
+            }
             window.location.assign('/cam-on/');
         } catch (error) {
             var message = error && error.name === 'AbortError'

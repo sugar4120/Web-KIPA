@@ -57,8 +57,20 @@ $formTypes = [
     ],
     'korean_course' => [
         'path' => '/tieng-han/',
-        'keys' => ['name', 'phone', 'level', 'format', 'course', 'timing', 'consent'],
+        'keys' => ['name', 'phone', 'email', 'level', 'format', 'course', 'timing', 'consent'],
         'required' => ['name', 'phone', 'consent'],
+        'contact' => 'name',
+    ],
+    'korean_gift' => [
+        'path' => '/tieng-han/',
+        'keys' => ['name', 'phone', 'email', 'level', 'format', 'course', 'timing', 'consent'],
+        'required' => ['name', 'phone', 'email', 'consent'],
+        'contact' => 'name',
+    ],
+    'korean_online_trial' => [
+        'path' => '/tieng-han/',
+        'keys' => ['name', 'phone', 'email', 'class_choice', 'level', 'timing', 'notes', 'quiz_summary', 'consent'],
+        'required' => ['name', 'phone', 'email', 'class_choice', 'consent'],
         'contact' => 'name',
     ],
     'labor' => [
@@ -155,8 +167,8 @@ $email = $cleanFields['email'] ?? null;
 if ($email !== null && $email !== '' && (strlen($email) > 254 || filter_var($email, FILTER_VALIDATE_EMAIL) === false)) {
     kipa_json_response(422, ['error' => 'Vui lòng nhập địa chỉ email hợp lệ.']);
 }
-if ($type === 'partnership' && $email === '') {
-    kipa_json_response(422, ['error' => 'Vui lòng nhập email liên hệ.']);
+if (($type === 'partnership' || $type === 'korean_gift' || $type === 'korean_online_trial') && ($email === null || $email === '')) {
+    kipa_json_response(422, ['error' => 'Vui lòng nhập địa chỉ email để KIPA gửi tài liệu và thông tin lớp học.']);
 }
 if (isset($cleanFields['birth_year']) && $cleanFields['birth_year'] !== 'older') {
     $year = filter_var($cleanFields['birth_year'], FILTER_VALIDATE_INT);
@@ -168,6 +180,7 @@ if (isset($cleanFields['birth_year']) && $cleanFields['birth_year'] !== 'older')
 unset($cleanFields['consent']);
 $program = $cleanFields['program']
     ?? $cleanFields['course']
+    ?? $cleanFields['class_choice']
     ?? $cleanFields['market']
     ?? $cleanFields['cooperation_type']
     ?? ($type === 'future_letter' ? ('Lá thư tương lai' . (isset($cleanFields['receive_date']) && $cleanFields['receive_date'] !== '' ? ' (Dự kiến: ' . $cleanFields['receive_date'] . ')' : (isset($cleanFields['target_year']) && $cleanFields['target_year'] !== '' ? ' (' . $cleanFields['target_year'] . ')' : ''))) : null);
@@ -207,7 +220,48 @@ try {
         kipa_content_capture($db, $stored->fetch());
     }
     $db->commit();
-    kipa_json_response(201, ['ok' => true, 'id' => $id]);
+
+    if (file_exists(__DIR__ . '/mailer.php')) {
+        require_once __DIR__ . '/mailer.php';
+    }
+    if ($email !== null && function_exists('kipa_send_mail') && function_exists('kipa_smtp_config')) {
+        try {
+            if (isset($config['smtp_host']) && is_string($config['smtp_host']) && $config['smtp_host'] !== '') {
+                $smtp = kipa_smtp_config($config);
+                if ($type === 'korean_online_trial') {
+                    $classChoice = $cleanFields['class_choice'] ?? 'Lớp tiếng Hàn Online';
+                    $subject = '[KIPA Việt Hàn] Xác nhận đăng ký Lớp Tiếng Hàn Online Miễn Phí (Google Meet)';
+                    $body = "Xin chào {$name},\n\n"
+                        . "Chúc mừng bạn đã đăng ký thành công Lớp Học Tiếng Hàn Online Miễn Phí qua Google Meet do KIPA Việt Hàn tổ chức!\n\n"
+                        . "THÔNG TIN KHÓA HỌC TRẢI NGHIỆM:\n"
+                        . "- Hình thức: Học trực tuyến 100% qua Google Meet (Tương tác trực tiếp 2 chiều cùng giảng viên)\n"
+                        . "- Mục tiêu khóa học: Hoàn thành lộ trình đạt chuẩn TOPIK 1 (Sơ cấp 1 & 2)\n"
+                        . "- Thời lượng: 7 - 8 tháng (Mỗi tuần 1 buổi duy nhất)\n"
+                        . "- Khung giờ học: 19:00 - 21:00 (7h - 9h tối)\n"
+                        . "- Lớp học đăng ký: {$classChoice}\n"
+                        . "  + Lớp Thứ 4 (19h-21h): Thầy Lê Tấn phụ trách (Cử nhân Ngôn ngữ Hàn, TOPIK 6)\n"
+                        . "  + Lớp Thứ 6 (19h-21h): Cô Trang Hàn phụ trách (Thạc sĩ Ngôn ngữ Hàn Quốc)\n\n"
+                        . "BƯỚC QUAN TRỌNG TIẾP THEO:\n"
+                        . "Để nhận link phòng học Google Meet và tài liệu bài tập trước mỗi buổi học 15 phút, bạn hãy tham gia ngay Nhóm Zalo lớp học tại liên kết bên dưới:\n"
+                        . "👉 Link nhóm Zalo Lớp Online: https://zalo.me/g/ehkt1g0n2qjcbomdlgal\n\n"
+                        . "Hotline hỗ trợ kỹ thuật và giáo vụ KIPA: 036 851 3865 | 0889 2222 55\n"
+                        . "Website: https://kipaviethan.edu.vn\n\n"
+                        . "Trân trọng,\nĐội ngũ KIPA Việt Hàn - Đến là bay\n";
+                    kipa_send_mail($smtp, $email, $subject, $body);
+                }
+            }
+        } catch (Throwable $mailError) {
+            error_log('[kipa-form] Automated mail skipped: ' . $mailError->getMessage());
+        }
+    }
+
+    kipa_json_response(201, [
+        'ok' => true,
+        'id' => $id,
+        'contact_name' => $name,
+        'zalo_link' => 'https://zalo.me/g/ehkt1g0n2qjcbomdlgal',
+        'zalo_qr' => '/assets/tieng-han/qr_zalo_lop_online_kipa.jpg'
+    ]);
 } catch (PDOException $error) {
     if (isset($db) && $db instanceof PDO && $db->inTransaction()) {
         $db->rollBack();
