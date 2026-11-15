@@ -790,7 +790,7 @@
 
     <!-- MAIN PAGE CONTENT -->
     <main class="flex-grow">
-        <!-- KIPA VIET HAN - TRANG DU HOC UC (Chuan 100% thiet ke anhdemo/trangduhocuc.png & Tuong thich Elementor / WordPress) -->
+        <!-- KIPA VIET HAN - TRANG DU HOC UC (Chuan 100% Thong Tin Du Hoc Uc & He Thong Giao Duc CRICOS / Subclass 500) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -859,7 +859,7 @@
         opacity: 0;
     }
     #kipa-du-hoc-uc .faq-item.active .faq-answer {
-        max-height: 300px;
+        max-height: 400px;
         opacity: 1;
         padding-top: 0.5rem;
         padding-bottom: 0.75rem;
@@ -870,6 +870,17 @@
     #kipa-du-hoc-uc .faq-item.active .faq-icon {
         transform: rotate(180deg);
         color: #0274BD !important;
+    }
+
+    /* Video Modal */
+    #kipa-video-modal {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    #kipa-video-modal.active {
+        display: flex;
+        opacity: 1;
     }
 </style>
 
@@ -899,7 +910,7 @@
                     <!-- Label -->
                     <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red">
                         <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                        <span>DU HỌC ÚC</span>
+                        <span>DU HỌC ÚC 2026 • VISA SUBCLASS 500</span>
                     </div>
 
                     <!-- Main Heading -->
@@ -915,7 +926,7 @@
 
                     <!-- Description -->
                     <p class="text-gray-600 text-xs sm:text-sm leading-relaxed font-vietnam max-w-xl">
-                        KIPA Việt Hàn đồng hành cùng bạn từ tư vấn, chọn trường, chuẩn bị hồ sơ đến khi nhập học tại Úc, với lộ trình minh bạch, phù hợp với năng lực và điều kiện của từng học viên.
+                        KIPA Việt Hàn đồng hành cùng bạn trên hành trình du học Úc với giải pháp tư vấn toàn diện: chọn trường Top 8 (Go8), săn học bổng giá trị từ 20% – 100%, định hướng nghề nghiệp theo danh sách tay nghề ưu tiên và bảo bọc học sinh 2 đầu Việt – Úc với Văn phòng đại diện trực tiếp tại Sydney.
                     </p>
 
                     <!-- CTA Buttons -->
@@ -932,13 +943,46 @@
                     </div>
                 </div>
 
-                <!-- Right Visual -->
+                <!-- Right Visual: Authentic Student Photo at Sydney Opera House -->
                 <div class="lg:col-span-6 flex justify-center lg:justify-end relative">
-                    <div class="relative w-full max-w-[620px]">
-                        <img src="/assets/du-hoc-uc/hero_visual.png" 
-                             alt="Du học Úc cùng KIPA Việt Hàn" 
-                             class="w-full h-auto object-contain rounded-2xl drop-shadow-xl"
-                             loading="eager">
+                    <div class="relative w-full max-w-[560px]">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
+                            <img src="/assets/du-hoc-uc/hero_du_hoc_uc_thuc_te.jpg" 
+                                 alt="Học viên KIPA tại Sydney, Úc" 
+                                 class="w-full h-[360px] sm:h-[420px] object-cover object-center transform group-hover:scale-105 transition duration-500"
+                                 loading="eager">
+                            
+                            <!-- Top Left Floating Badge -->
+                            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-slate-100 flex items-center space-x-2">
+                                <span class="text-base">🇦🇺</span>
+                                <span class="text-xs font-bold text-brand-navy">Du học Úc • Subclass 500</span>
+                            </div>
+
+                            <!-- Top Right Badge -->
+                            <div class="absolute top-4 right-4 bg-brand-red/90 text-white backdrop-blur-md px-3 py-1 rounded-full shadow-lg text-[11px] font-bold flex items-center space-x-1">
+                                <i class="fas fa-certificate text-[10px] text-yellow-300"></i>
+                                <span>Visa đỗ 98.6%</span>
+                            </div>
+
+                            <!-- Bottom Floating Card -->
+                            <div class="absolute bottom-4 inset-x-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-white/80 flex items-center space-x-3.5">
+                                <img src="/assets/du-hoc-uc/alumni_minh_duc.jpg" 
+                                     alt="Nguyễn Minh Đức" 
+                                     class="w-12 h-12 rounded-xl object-cover border-2 border-brand-blue flex-shrink-0">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center space-x-1.5">
+                                        <h4 class="text-xs font-extrabold text-brand-navy truncate">Nguyễn Minh Đức</h4>
+                                        <span class="text-[9px] bg-blue-100 text-brand-blue font-bold px-1.5 py-0.5 rounded">Sydney, Úc</span>
+                                    </div>
+                                    <p class="text-[11px] text-gray-600 truncate mt-0.5">Sinh viên ngành CNTT • Săn học bổng 25% • Visa sau 3 tuần</p>
+                                </div>
+                                <div class="flex-shrink-0 text-right hidden sm:block">
+                                    <span class="inline-block text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
+                                        <i class="fas fa-check-circle mr-1"></i>Học viên KIPA
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -955,52 +999,52 @@
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-brand-navy">Nền giáo dục</div>
-                                <div class="text-[11px] text-gray-500">chất lượng cao</div>
+                                <div class="text-xs font-bold text-brand-navy">Nền giáo dục Top đầu</div>
+                                <div class="text-[11px] text-gray-500">Nhóm Go8 danh tiếng</div>
                             </div>
                         </div>
 
                         <!-- Pill 2 -->
                         <div class="flex items-center space-x-3 p-2 pt-3 sm:pt-2">
                             <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-base">
-                                <i class="fas fa-coins"></i>
+                                <i class="fas fa-award"></i>
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-brand-navy">Chi phí</div>
-                                <div class="text-[11px] text-gray-500">hợp lý</div>
+                                <div class="text-xs font-bold text-brand-navy">Học bổng giá trị</div>
+                                <div class="text-[11px] text-gray-500">20% – 100% học phí</div>
                             </div>
                         </div>
 
                         <!-- Pill 3 -->
                         <div class="flex items-center space-x-3 p-2 pt-3 sm:pt-2">
                             <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-base">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-briefcase"></i>
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-brand-navy">Cơ hội việc làm</div>
-                                <div class="text-[11px] text-gray-500">rộng mở</div>
+                                <div class="text-xs font-bold text-brand-navy">Làm thêm 48h/2 tuần</div>
+                                <div class="text-[11px] text-gray-500">Lương min $24.10/h</div>
                             </div>
                         </div>
 
                         <!-- Pill 4 -->
                         <div class="flex items-center space-x-3 p-2 pt-3 sm:pt-2">
                             <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-base">
-                                <i class="fas fa-globe-americas"></i>
+                                <i class="fas fa-passport"></i>
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-brand-navy">Trải nghiệm</div>
-                                <div class="text-[11px] text-gray-500">văn hóa đặc sắc</div>
+                                <div class="text-xs font-bold text-brand-navy">Ở lại 2 – 4+ năm</div>
+                                <div class="text-[11px] text-gray-500">Visa 485 sau tốt nghiệp</div>
                             </div>
                         </div>
 
                         <!-- Pill 5 -->
                         <div class="flex items-center space-x-3 p-2 pt-3 sm:pt-2">
                             <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-base">
-                                <i class="fas fa-users"></i>
+                                <i class="fas fa-building-flag"></i>
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-brand-navy">KIPA đồng hành</div>
-                                <div class="text-[11px] text-gray-500">trọn hành trình</div>
+                                <div class="text-xs font-bold text-brand-navy">VPĐD tại Sydney</div>
+                                <div class="text-[11px] text-gray-500">Bảo bọc 2 đầu Việt - Úc</div>
                             </div>
                         </div>
 
@@ -1032,23 +1076,27 @@
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                        <!-- Video Card -->
+                        <!-- Video Card with Real KIPA Photo & YouTube Modal -->
                         <div class="sm:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 group cursor-pointer h-44">
-                                <img src="/assets/du-hoc-uc/video_thumb.png" 
-                                     alt="Du học Úc - Cơ hội học tập và phát triển toàn diện" 
+                            <div class="relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 group cursor-pointer h-48 bg-slate-900"
+                                 onclick="openVideoModal('ZQO7b-tLbIU')">
+                                <img src="/assets/du-hoc-uc/video_thumb_thuc_te.jpg" 
+                                     alt="Học viên và phụ huynh KIPA Việt Hàn xuất cảnh du học" 
                                      class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
                                      loading="lazy">
-                                <div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/35 transition">
-                                    <div class="w-10 h-10 rounded-full bg-white/90 text-brand-blue flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
-                                        <i class="fas fa-play ml-0.5 text-xs"></i>
+                                <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition">
+                                    <div class="w-12 h-12 rounded-full bg-brand-red text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
+                                        <i class="fas fa-play ml-1 text-sm"></i>
                                     </div>
                                 </div>
-                                <div class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
-                                    <div class="text-[11px] font-bold leading-tight">Du học Úc</div>
+                                <div class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white">
+                                    <div class="text-[11px] font-bold leading-tight flex items-center justify-between">
+                                        <span>Du học Úc cùng KIPA</span>
+                                        <span class="bg-red-600 px-1.5 py-0.5 rounded text-[9px] uppercase font-bold">Video</span>
+                                    </div>
                                     <div class="text-[10px] text-gray-200 flex items-center justify-between mt-0.5">
                                         <span>Cơ hội học tập & phát triển toàn diện</span>
-                                        <span class="bg-black/40 px-1 py-0.5 rounded text-[9px]">03:28</span>
+                                        <span class="bg-black/50 px-1 py-0.5 rounded text-[9px]">03:28</span>
                                     </div>
                                 </div>
                             </div>
@@ -1058,23 +1106,23 @@
                         <div class="sm:col-span-6 space-y-2.5">
                             <div class="flex items-start space-x-2">
                                 <span class="w-2 h-2 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></span>
-                                <span class="text-xs font-medium text-gray-700">Nền giáo dục tiên tiến, bằng cấp quốc tế.</span>
+                                <span class="text-xs font-medium text-gray-700">Hệ thống giáo dục đẳng cấp quốc tế với nhóm trường Group of Eight (Go8).</span>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="w-2 h-2 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></span>
-                                <span class="text-xs font-medium text-gray-700">Nhiều ngành học đa dạng, gắn với nhu cầu thực tế.</span>
+                                <span class="text-xs font-medium text-gray-700">Quyền lợi làm thêm 48h/2 tuần với mức lương tối thiểu $24.10 AUD/giờ.</span>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="w-2 h-2 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></span>
-                                <span class="text-xs font-medium text-gray-700">Môi trường học tập hiện đại, an toàn, thân thiện.</span>
+                                <span class="text-xs font-medium text-gray-700">Ở lại Úc làm việc 2 – 4 năm sau khi tốt nghiệp với Visa Subclass 485.</span>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="w-2 h-2 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></span>
-                                <span class="text-xs font-medium text-gray-700">Cơ hội làm thêm hợp pháp và việc làm sau tốt nghiệp.</span>
+                                <span class="text-xs font-medium text-gray-700">Lộ trình linh hoạt qua học nghề VET, chuyển tiếp Diploma vào thẳng Đại học.</span>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="w-2 h-2 rounded-full bg-brand-red mt-1.5 flex-shrink-0"></span>
-                                <span class="text-xs font-medium text-gray-700">Trải nghiệm văn hóa đa dạng, tiếng Anh bản xứ.</span>
+                                <span class="text-xs font-medium text-gray-700">Môi trường sống an toàn, khí hậu ôn hòa và có VPĐD KIPA tại Sydney hỗ trợ 24/7.</span>
                             </div>
                         </div>
                     </div>
@@ -1093,44 +1141,44 @@
                         </h2>
                     </div>
 
-                    <!-- 6 Program Pills -->
+                    <!-- 6 Program Pills (Australia Education Pathways) -->
                     <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
                         
                         <div class="bg-red-50/80 border border-red-200 rounded-xl p-2.5 text-center shadow-xs">
-                            <div class="text-[11px] font-extrabold text-brand-red">D4-3</div>
-                            <div class="text-[10px] text-gray-600 mt-0.5">Hệ THPT</div>
+                            <div class="text-[11px] font-extrabold text-brand-red">ELICOS</div>
+                            <div class="text-[10px] text-gray-600 mt-0.5">Tiếng Anh</div>
                         </div>
 
                         <div class="bg-white border border-gray-200 rounded-xl p-2.5 text-center shadow-xs">
-                            <div class="text-[11px] font-bold text-brand-navy">D4-1</div>
-                            <div class="text-[10px] text-gray-500 mt-0.5">Học tiếng</div>
+                            <div class="text-[11px] font-bold text-brand-navy">THPT</div>
+                            <div class="text-[10px] text-gray-500 mt-0.5">Lớp 7 - 12</div>
                         </div>
 
                         <div class="bg-white border border-gray-200 rounded-xl p-2.5 text-center shadow-xs">
-                            <div class="text-[11px] font-bold text-brand-navy">D2-1</div>
-                            <div class="text-[10px] text-gray-500 mt-0.5">Cao đẳng</div>
+                            <div class="text-[11px] font-bold text-brand-navy">VET/TAFE</div>
+                            <div class="text-[10px] text-gray-500 mt-0.5">Học nghề</div>
                         </div>
 
                         <div class="bg-white border border-gray-200 rounded-xl p-2.5 text-center shadow-xs">
-                            <div class="text-[11px] font-bold text-brand-navy">D2-2</div>
-                            <div class="text-[10px] text-gray-500 mt-0.5">Đại học</div>
+                            <div class="text-[11px] font-bold text-brand-navy">Bachelor</div>
+                            <div class="text-[10px] text-gray-500 mt-0.5">Cử nhân</div>
                         </div>
 
                         <div class="bg-white border border-gray-200 rounded-xl p-2.5 text-center shadow-xs">
-                            <div class="text-[11px] font-bold text-brand-navy">D2-3</div>
+                            <div class="text-[11px] font-bold text-brand-navy">Master</div>
                             <div class="text-[10px] text-gray-500 mt-0.5">Thạc sĩ</div>
                         </div>
 
-                        <div class="bg-white border border-gray-200 rounded-xl p-2.5 text-center shadow-xs">
-                            <div class="text-[11px] font-bold text-brand-navy">D2-3</div>
-                            <div class="text-[10px] text-gray-500 mt-0.5">Tiến sĩ</div>
+                        <div class="bg-blue-50/80 border border-blue-200 rounded-xl p-2.5 text-center shadow-xs">
+                            <div class="text-[11px] font-bold text-brand-blue">Visa 485</div>
+                            <div class="text-[10px] text-gray-600 mt-0.5">Ở lại làm việc</div>
                         </div>
 
                     </div>
 
                     <div>
                         <a href="#lo-trinh-du-hoc" class="w-full py-2.5 px-4 rounded-xl border border-gray-200 text-brand-blue hover:bg-brand-blue hover:text-white font-bold text-xs flex items-center justify-center transition">
-                            <span>Xem chi tiết từng hệ</span>
+                            <span>Xem chi tiết từng hệ đào tạo</span>
                             <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
                         </a>
                     </div>
@@ -1157,12 +1205,12 @@
                                 <i class="fas fa-compass text-white"></i>
                             </div>
                             <h3 class="font-phudu text-lg sm:text-xl font-bold">
-                                Công cụ định hướng du học cùng KIPA
+                                Công cụ định hướng du học Úc cùng KIPA
                             </h3>
                         </div>
 
                         <p class="text-blue-100 text-xs sm:text-sm leading-relaxed font-vietnam">
-                            Chỉ 2 phút trả lời vài câu hỏi để nhận gợi ý lộ trình, hệ học và mức chi phí phù hợp với bạn.
+                            Chỉ 2 phút để nhận gợi ý lộ trình du học Úc, trường đào tạo và mức học bổng từ 20% – 100% phù hợp nhất với năng lực và tài chính của bạn.
                         </p>
 
                         <div class="pt-2">
@@ -1182,7 +1230,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Ước tính chi phí du học (White Card with Dropdowns) -->
+                <!-- Card 2: Ước tính chi phí du học Úc thông minh (Dynamic Calculator) -->
                 <div class="lg:col-span-6 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 mb-2">
@@ -1191,32 +1239,56 @@
                             </div>
                             <div>
                                 <h3 class="font-phudu text-base sm:text-lg font-bold text-brand-navy">
-                                    Ước tính chi phí du học
+                                    Ước tính chi phí du học Úc thông minh
                                 </h3>
-                                <p class="text-[11px] text-gray-500">Dự trù nhanh tổng chi phí theo hệ học, khu vực và nhu cầu lưu trú.</p>
+                                <p class="text-[11px] text-gray-500">Dự trù nhanh học phí và sinh hoạt phí theo hệ học và thành phố bạn chọn.</p>
                             </div>
                         </div>
 
                         <!-- Dropdowns Row -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
                             <div>
-                                <label class="block text-[11px] font-bold text-gray-600 mb-1">Chọn hệ học</label>
-                                <select aria-label="Chọn hệ học để ước tính chi phí" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
-                                    <option value="D4-1">D4-1 (Học tiếng)</option>
-                                    <option value="D4-3">D4-3 (Hệ THPT)</option>
-                                    <option value="D2-1">D2-1 (Cao đẳng)</option>
-                                    <option value="D2-2">D2-2 (Đại học)</option>
-                                    <option value="D2-3">D2-3 (Thạc sĩ/Tiến sĩ)</option>
+                                <label for="calc-program" class="block text-[11px] font-bold text-gray-600 mb-1">Hệ học</label>
+                                <select id="calc-program" aria-label="Chọn hệ học để ước tính chi phí" onchange="calculateDuhocUcEstimate()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
+                                    <option value="vet">VET / TAFE (Nghề)</option>
+                                    <option value="bachelor" selected>Cử nhân (Đại học)</option>
+                                    <option value="master">Thạc sĩ (Master)</option>
+                                    <option value="highschool">THPT (Lớp 7-12)</option>
+                                    <option value="elicos">Khóa tiếng ELICOS</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-[11px] font-bold text-gray-600 mb-1">Khu vực</label>
-                                <select aria-label="Chọn khu vực để ước tính chi phí" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
-                                    <option value="seoul">Seoul</option>
-                                    <option value="busan">Busan</option>
-                                    <option value="daegu">Daegu / Incheon</option>
-                                    <option value="other">Khu vực khác</option>
+                                <label for="calc-city" class="block text-[11px] font-bold text-gray-600 mb-1">Thành phố</label>
+                                <select id="calc-city" aria-label="Chọn khu vực để ước tính chi phí" onchange="calculateDuhocUcEstimate()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
+                                    <option value="sydney" selected>Sydney (NSW)</option>
+                                    <option value="melbourne">Melbourne (VIC)</option>
+                                    <option value="brisbane">Brisbane (QLD)</option>
+                                    <option value="adelaide">Adelaide (SA - Regional)</option>
+                                    <option value="perth">Perth (WA - Regional)</option>
                                 </select>
+                            </div>
+                            <div>
+                                <label for="calc-housing" class="block text-[11px] font-bold text-gray-600 mb-1">Hình thức ở</label>
+                                <select id="calc-housing" aria-label="Chọn hình thức lưu trú" onchange="calculateDuhocUcEstimate()" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
+                                    <option value="shared" selected>Thuê phòng chung</option>
+                                    <option value="homestay">Homestay bản xứ</option>
+                                    <option value="dorm">Ký túc xá trường</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Output Box -->
+                        <div class="mt-4 p-3 bg-blue-50/60 border border-blue-100 rounded-xl space-y-1.5">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-gray-600">Học phí dự kiến:</span>
+                                <span id="calc-tuition-val" class="font-bold text-brand-navy">~ 28.000 AUD/năm (~ 470 tr VNĐ)</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-gray-600">Sinh hoạt phí dự kiến:</span>
+                                <span id="calc-living-val" class="font-bold text-brand-navy">~ 1.600 AUD/tháng (~ 27 tr VNĐ)</span>
+                            </div>
+                            <div id="calc-regional-badge" class="text-[10px] text-amber-700 bg-amber-100/70 px-2 py-0.5 rounded font-medium hidden">
+                                <i class="fas fa-star mr-1"></i>Vùng Regional: Cộng 5 điểm di trú và thêm 1–2 năm Visa 485 sau tốt nghiệp!
                             </div>
                         </div>
                     </div>
@@ -1224,11 +1296,12 @@
                     <!-- Price Estimate Box & Button -->
                     <div class="mt-4 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3">
                         <div>
-                            <div class="text-[10px] text-gray-400 font-medium">Chi phí tham khảo</div>
-                            <div class="text-sm sm:text-base font-extrabold text-brand-red">~ 180 – 260 triệu/năm</div>
+                            <div class="text-[10px] text-gray-400 font-medium">Tổng chi phí dự kiến năm đầu</div>
+                            <div id="calc-total-val" class="text-base sm:text-lg font-extrabold text-brand-red">~ 580 – 720 triệu/năm</div>
+                            <div class="text-[10px] text-emerald-600 font-semibold">Làm thêm 48h/2 tuần bù đắp 70–100% sinh hoạt phí</div>
                         </div>
-                        <a href="/dang-ky-tu-van/" class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold text-xs flex items-center justify-center transition">
-                            <span>Tính chi phí chi tiết</span>
+                        <a href="/dang-ky-tu-van/" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-brand-blue text-white hover:bg-blue-700 font-bold text-xs flex items-center justify-center transition shadow-sm">
+                            <span>Nhận tư vấn chi tiết</span>
                             <i class="fas fa-arrow-right ml-1.5 text-[10px]"></i>
                         </a>
                     </div>
@@ -1252,7 +1325,7 @@
                     <div>
                         <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-4">
                             <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                            <span>ĐIỀU KIỆN DU HỌC CƠ BẢN</span>
+                            <span>ĐIỀU KIỆN DU HỌC ÚC</span>
                         </div>
 
                         <div class="space-y-4">
@@ -1263,7 +1336,7 @@
                                 </div>
                                 <div>
                                     <span class="text-xs font-bold text-brand-navy">Độ tuổi:</span>
-                                    <span class="text-xs text-gray-600"> Thường từ 18 – 30 tuổi (tùy chương trình).</span>
+                                    <span class="text-xs text-gray-600"> Từ 6 tuổi trở lên (THPT: 12–18 tuổi; VET/Đại học: từ 18 tuổi trở lên, không giới hạn trần).</span>
                                 </div>
                             </div>
 
@@ -1274,7 +1347,7 @@
                                 </div>
                                 <div>
                                     <span class="text-xs font-bold text-brand-navy">Học vấn:</span>
-                                    <span class="text-xs text-gray-600"> Tốt nghiệp THPT trở lên.</span>
+                                    <span class="text-xs text-gray-600"> GPA từ 6.0 trở lên cho hệ VET/TAFE; từ 6.5 – 7.0+ cho hệ Đại học/Thạc sĩ.</span>
                                 </div>
                             </div>
 
@@ -1284,30 +1357,30 @@
                                     <i class="fas fa-language"></i>
                                 </div>
                                 <div>
-                                    <span class="text-xs font-bold text-brand-navy">Tiếng Hàn:</span>
-                                    <span class="text-xs text-gray-600"> Tùy chương trình (thường từ TOPIK 1 – 2 hoặc học tiếng tại Hàn Quốc).</span>
+                                    <span class="text-xs font-bold text-brand-navy">Tiếng Anh:</span>
+                                    <span class="text-xs text-gray-600"> IELTS từ 5.5 – 6.5 hoặc PTE Academic từ 42 – 58 (hoặc làm bài test học khóa bổ trợ ELICOS tại Úc).</span>
                                 </div>
                             </div>
 
                             <!-- Item 4 -->
                             <div class="flex items-start space-x-3">
                                 <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5">
-                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-credit-card"></i>
                                 </div>
                                 <div>
                                     <span class="text-xs font-bold text-brand-navy">Tài chính:</span>
-                                    <span class="text-xs text-gray-600"> Đảm bảo chi phí học tập và sinh hoạt.</span>
+                                    <span class="text-xs text-gray-600"> Đảm bảo học phí năm đầu và sinh hoạt phí theo chuẩn Bộ Di trú Úc (~24.505 AUD/năm).</span>
                                 </div>
                             </div>
 
                             <!-- Item 5 -->
                             <div class="flex items-start space-x-3">
                                 <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5">
-                                    <i class="far fa-id-card"></i>
+                                    <i class="far fa-heart"></i>
                                 </div>
                                 <div>
                                     <span class="text-xs font-bold text-brand-navy">Sức khỏe:</span>
-                                    <span class="text-xs text-gray-600"> Đủ điều kiện theo quy định.</span>
+                                    <span class="text-xs text-gray-600"> Đủ điều kiện sức khỏe (khám tại phòng khám chỉ định IOM/Raffles) và lý lịch tư pháp tốt.</span>
                                 </div>
                             </div>
                         </div>
@@ -1319,7 +1392,7 @@
                     <div>
                         <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-4">
                             <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                            <span>LỘ TRÌNH DU HỌC</span>
+                            <span>LỘ TRÌNH DU HỌC ÚC 6 BƯỚC</span>
                         </div>
 
                         <!-- 6 Steps Vertical List -->
@@ -1330,8 +1403,8 @@
                                     1
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Tư vấn & đánh giá năng lực</div>
-                                    <div class="text-[11px] text-gray-500">Xác định mục tiêu và chọn chương trình.</div>
+                                    <div class="text-xs font-bold text-brand-navy">Tư vấn định hướng ngành & trường</div>
+                                    <div class="text-[11px] text-gray-500">Đánh giá học bạ, mục tiêu nghề nghiệp và học bổng.</div>
                                 </div>
                             </div>
 
@@ -1340,8 +1413,8 @@
                                     2
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Chuẩn bị hồ sơ</div>
-                                    <div class="text-[11px] text-gray-500">Hoàn thiện giấy tờ theo yêu cầu.</div>
+                                    <div class="text-xs font-bold text-brand-navy">Chuẩn bị hồ sơ & luyện tiếng Anh</div>
+                                    <div class="text-[11px] text-gray-500">Thi chứng chỉ IELTS/PTE và viết bản giải trình GS.</div>
                                 </div>
                             </div>
 
@@ -1350,8 +1423,8 @@
                                     3
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Nộp hồ sơ & nhận thư mời</div>
-                                    <div class="text-[11px] text-gray-500">Từ trường tại Hàn Quốc.</div>
+                                    <div class="text-xs font-bold text-brand-navy">Nộp hồ sơ & nhận Thư mời (Offer)</div>
+                                    <div class="text-[11px] text-gray-500">Nhận Letter of Offer từ trường tại Úc.</div>
                                 </div>
                             </div>
 
@@ -1360,8 +1433,8 @@
                                     4
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Xin visa du học</div>
-                                    <div class="text-[11px] text-gray-500">Hoàn tất thủ tục tại Đại sứ quán/Lãnh sự quán.</div>
+                                    <div class="text-xs font-bold text-brand-navy">Đóng học phí & nhận CoE</div>
+                                    <div class="text-[11px] text-gray-500">Hoàn tất học phí kỳ 1 và nhận Confirmation of Enrolment.</div>
                                 </div>
                             </div>
 
@@ -1370,8 +1443,8 @@
                                     5
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Chuẩn bị xuất cảnh</div>
-                                    <div class="text-[11px] text-gray-500">Đào tạo định hướng, sắp xếp chỗ ở.</div>
+                                    <div class="text-xs font-bold text-brand-navy">Nộp hồ sơ Visa Subclass 500</div>
+                                    <div class="text-[11px] text-gray-500">Mua bảo hiểm OSHC, khám sức khỏe và lấy sinh trắc học.</div>
                                 </div>
                             </div>
 
@@ -1380,8 +1453,8 @@
                                     6
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Nhập học tại Hàn Quốc</div>
-                                    <div class="text-[11px] text-gray-500">Ổn định học tập và bắt đầu hành trình mới.</div>
+                                    <div class="text-xs font-bold text-brand-navy">Nhập học & Ổn định tại Úc</div>
+                                    <div class="text-[11px] text-gray-500">VPĐD KIPA Sydney đón sân bay và hỗ trợ mở thẻ ngân hàng, nhà ở.</div>
                                 </div>
                             </div>
 
@@ -1394,43 +1467,47 @@
                     <div class="relative z-10">
                         <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-4">
                             <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                            <span>HỒ SƠ CẦN CHUẨN BỊ</span>
+                            <span>HỒ SƠ CẦN CHUẨN BỊ (VISA 500)</span>
                         </div>
 
                         <ul class="space-y-2.5 text-xs text-gray-600">
                             <li class="flex items-start space-x-2">
                                 <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span>Hộ chiếu (còn hạn theo quy định).</span>
+                                <span>Hộ chiếu (còn hạn tối thiểu 6 tháng).</span>
                             </li>
                             <li class="flex items-start space-x-2">
                                 <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span>Bằng tốt nghiệp, học bạ (THPT/Cao đẳng/Đại học).</span>
+                                <span>Bằng tốt nghiệp, học bạ THPT hoặc bảng điểm Đại học (dịch thuật công chứng).</span>
                             </li>
                             <li class="flex items-start space-x-2">
                                 <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span>Giấy tờ chứng minh tài chính.</span>
+                                <span>Chứng chỉ tiếng Anh quốc tế (IELTS Academic / PTE Academic).</span>
                             </li>
                             <li class="flex items-start space-x-2">
                                 <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span>Ảnh thẻ theo yêu cầu.</span>
+                                <span>Xác nhận nhập học CoE (Confirmation of Enrolment) từ trường Úc.</span>
                             </li>
                             <li class="flex items-start space-x-2">
                                 <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span>Giấy khám sức khỏe.</span>
+                                <span>Bảo hiểm y tế du học sinh OSHC cho toàn khóa học.</span>
                             </li>
                             <li class="flex items-start space-x-2">
                                 <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span>Các giấy tờ khác theo từng chương trình.</span>
+                                <span>Hồ sơ tài chính và Bản giải trình mục đích học tập chân thật (GS).</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="far fa-check-square text-brand-blue mt-0.5 flex-shrink-0 text-xs"></i>
+                                <span>Giấy khám sức khỏe IOM và phiếu sinh trắc học VFS Global.</span>
                             </li>
                         </ul>
                     </div>
 
-                    <!-- Passport graphic at bottom right -->
-                    <div class="relative z-0 flex justify-end -mr-2 -mb-2 mt-4 pointer-events-none">
-                        <img src="/assets/du-hoc-uc/passport_folder.png" 
-                             alt="Hồ sơ du học" 
-                             class="w-24 h-auto object-contain"
-                             loading="lazy">
+                    <!-- Sydney badge at bottom right -->
+                    <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
+                        <span class="flex items-center text-brand-blue font-bold">
+                            <i class="fas fa-shield-alt mr-1.5"></i>KIPA hỗ trợ hoàn thiện 100% hồ sơ
+                        </span>
+                        <a href="/dang-ky-tu-van/" class="text-brand-red font-bold hover:underline">Nhận checklist ›</a>
                     </div>
                 </div>
 
@@ -1451,40 +1528,48 @@
                 <div class="lg:col-span-6 space-y-4">
                     <div class="flex items-center space-x-2 text-brand-navy">
                         <span class="text-xl text-brand-yellow">🪙</span>
-                        <h3 class="font-phudu text-lg sm:text-xl font-bold">Chi phí tham khảo</h3>
+                        <h3 class="font-phudu text-lg sm:text-xl font-bold">Chi phí tham khảo du học Úc</h3>
                     </div>
 
                     <div class="overflow-hidden rounded-2xl border border-gray-200 shadow-sm bg-white">
                         <table class="w-full text-left text-xs border-collapse">
                             <thead>
                                 <tr class="bg-gray-50 border-b border-gray-200 text-brand-navy font-bold">
-                                    <th class="py-3 px-4">Hạng mục</th>
+                                    <th class="py-3 px-4">Hạng mục đào tạo / Lưu trú</th>
                                     <th class="py-3 px-4 text-right">Mức chi phí ước tính</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 text-gray-700">Học phí học tiếng (D4-1)</td>
-                                    <td class="py-3 px-4 text-right font-medium text-brand-blue">~ 4.000 – 6.000 USD/năm</td>
+                                    <td class="py-3 px-4 text-gray-700">Khóa tiếng Anh học thuật (ELICOS)</td>
+                                    <td class="py-3 px-4 text-right font-medium text-brand-blue">~ 320 – 450 AUD/tuần</td>
                                 </tr>
                                 <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 text-gray-700">Học phí chuyên ngành (D2)</td>
-                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 4.000 – 8.000 USD/năm</td>
+                                    <td class="py-3 px-4 text-gray-700">Cao đẳng nghề (VET / TAFE)</td>
+                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 8.000 – 16.000 AUD/năm</td>
                                 </tr>
                                 <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 text-gray-700">Ký túc xá</td>
-                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 800 – 1.500 USD/năm</td>
+                                    <td class="py-3 px-4 text-gray-700">Cử nhân Đại học (Bachelor)</td>
+                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 22.000 – 38.000 AUD/năm</td>
                                 </tr>
                                 <tr class="hover:bg-blue-50/40 transition">
-                                    <td class="py-3 px-4 text-gray-700">Sinh hoạt phí</td>
-                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 300 – 600 USD/tháng</td>
+                                    <td class="py-3 px-4 text-gray-700">Thạc sĩ (Master Degree)</td>
+                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 24.000 – 42.000 AUD/năm</td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/40 transition">
+                                    <td class="py-3 px-4 text-gray-700">Bảo hiểm y tế bắt buộc (OSHC)</td>
+                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 550 – 700 AUD/năm</td>
+                                </tr>
+                                <tr class="hover:bg-blue-50/40 transition">
+                                    <td class="py-3 px-4 text-gray-700">Sinh hoạt phí (nhà ở, ăn uống, đi lại)</td>
+                                    <td class="py-3 px-4 text-right font-medium text-brand-navy">~ 1.400 – 2.000 AUD/tháng</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <p class="text-[11px] text-gray-500 italic">
-                        <span class="text-brand-red font-bold">Lưu ý:</span> Chi phí có thể thay đổi tùy trường, ngành học và khu vực.
+                        <span class="text-brand-red font-bold">Lưu ý:</span> Tỷ giá quy đổi tham khảo 1 AUD ≈ 16.800 VNĐ. Sinh viên được phép làm thêm hợp pháp 48h/2 tuần với mức lương tối thiểu $24.10 AUD/h để bù đắp phần lớn sinh hoạt phí.
                     </p>
                 </div>
 
@@ -1493,36 +1578,36 @@
                     <div class="flex items-center space-x-2 text-brand-navy">
                         <span class="text-xl text-brand-blue">📅</span>
                         <div>
-                            <h3 class="font-phudu text-lg sm:text-xl font-bold">Thời gian nhập học</h3>
-                            <p class="text-[11px] text-gray-500">Các trường tại Hàn Quốc thường có 4 kỳ nhập học chính trong năm:</p>
+                            <h3 class="font-phudu text-lg sm:text-xl font-bold">Thời gian nhập học chính tại Úc</h3>
+                            <p class="text-[11px] text-gray-500">Các trường tại Úc tuyển sinh chính vào 2 kỳ học chính và các kỳ phụ linh hoạt:</p>
                         </div>
                     </div>
 
-                    <!-- 4 Season Pills/Cards -->
+                    <!-- 4 Intakes Cards -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         
-                        <div class="bg-pink-50/80 border border-pink-100 rounded-xl p-3.5 text-center">
-                            <div class="text-lg mb-1">🌸</div>
-                            <div class="text-xs font-bold text-pink-700">Tháng 3</div>
-                            <div class="text-[10px] text-pink-500">(Kỳ xuân)</div>
-                        </div>
-
-                        <div class="bg-emerald-50/80 border border-emerald-100 rounded-xl p-3.5 text-center">
-                            <div class="text-lg mb-1">🍃</div>
-                            <div class="text-xs font-bold text-emerald-700">Tháng 6</div>
-                            <div class="text-[10px] text-emerald-500">(Kỳ hè)</div>
+                        <div class="bg-blue-50/80 border border-blue-100 rounded-xl p-3.5 text-center">
+                            <div class="text-lg mb-1">🎓</div>
+                            <div class="text-xs font-bold text-brand-blue">Tháng 2 – 3</div>
+                            <div class="text-[10px] text-blue-600 font-semibold">(Kỳ 1 - Kỳ chính lớn nhất)</div>
                         </div>
 
                         <div class="bg-amber-50/80 border border-amber-100 rounded-xl p-3.5 text-center">
-                            <div class="text-lg mb-1">🍁</div>
-                            <div class="text-xs font-bold text-amber-700">Tháng 9</div>
-                            <div class="text-[10px] text-amber-500">(Kỳ thu)</div>
+                            <div class="text-lg mb-1">☀️</div>
+                            <div class="text-xs font-bold text-amber-700">Tháng 7 – 8</div>
+                            <div class="text-[10px] text-amber-600 font-semibold">(Kỳ 2 - Kỳ nhập học thứ 2)</div>
                         </div>
 
-                        <div class="bg-sky-50/80 border border-sky-100 rounded-xl p-3.5 text-center">
-                            <div class="text-lg mb-1">❄️</div>
-                            <div class="text-xs font-bold text-sky-700">Tháng 12</div>
-                            <div class="text-[10px] text-sky-500">(Kỳ đông)</div>
+                        <div class="bg-emerald-50/80 border border-emerald-100 rounded-xl p-3.5 text-center">
+                            <div class="text-lg mb-1">🌿</div>
+                            <div class="text-xs font-bold text-emerald-700">Tháng 10 – 11</div>
+                            <div class="text-[10px] text-emerald-600 font-semibold">(Kỳ hè / Trimester 3)</div>
+                        </div>
+
+                        <div class="bg-purple-50/80 border border-purple-100 rounded-xl p-3.5 text-center">
+                            <div class="text-lg mb-1">💬</div>
+                            <div class="text-xs font-bold text-purple-700">Hàng tháng</div>
+                            <div class="text-[10px] text-purple-600 font-semibold">(Khóa tiếng ELICOS)</div>
                         </div>
 
                     </div>
@@ -1530,7 +1615,7 @@
                     <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-3.5 flex items-start space-x-2.5">
                         <i class="fas fa-info-circle text-brand-blue text-xs mt-0.5"></i>
                         <p class="text-[11px] text-gray-600 leading-relaxed">
-                            <span class="font-semibold text-brand-navy">Thời hạn nộp hồ sơ thường trước 2 – 4 tháng</span> so với kỳ nhập học. KIPA sẽ hỗ trợ bạn theo dõi lịch tuyển sinh và chuẩn bị hồ sơ đúng thời gian.
+                            <span class="font-semibold text-brand-navy">Nên nộp hồ sơ trước 3 – 5 tháng</span> để kịp nhận Thư mời (Offer), hoàn tất học phí, lấy CoE và xin Visa 500. KIPA sẽ hỗ trợ bạn theo dõi tiến độ và xử lý hồ sơ nhanh nhất.
                         </p>
                     </div>
                 </div>
@@ -1541,86 +1626,86 @@
     </section>
 
     <!-- ==========================================
-         SECTION 6: MỘT SỐ TRƯỜNG TIÊU BIỂU & KIPA ĐỒNG HÀNH
+         SECTION 6: CÁC TRƯỜNG TIÊU BIỂU TẠI ÚC & KIPA ĐỒNG HÀNH
          ========================================== -->
     <section class="py-12 sm:py-16 bg-white border-t border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- Left: Một số trường tiêu biểu -->
+                <!-- Left: Một số trường tiêu biểu tại Úc -->
                 <div class="lg:col-span-7 space-y-4">
                     <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1">
                         <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                        <span>MỘT SỐ TRƯỜNG TIÊU BIỂU</span>
+                        <span>MỘT SỐ TRƯỜNG ĐỐI TÁC TIÊU BIỂU TẠI ÚC</span>
                     </div>
 
-                    <!-- 4 University Cards -->
+                    <!-- 4 University Cards (Australia Universities) -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         
-                        <!-- Uni 1 -->
+                        <!-- Uni 1: Melbourne -->
                         <div class="uni-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
-                            <div class="h-20 overflow-hidden bg-gray-100">
+                            <div class="h-24 overflow-hidden bg-gray-100">
                                 <img src="/assets/du-hoc-uc/uni_1.png" 
-                                     alt="Đại học Quốc gia Seoul" 
+                                     alt="Đại học Melbourne - The University of Melbourne" 
                                      class="w-full h-full object-cover transform hover:scale-105 transition"
                                      loading="lazy">
                             </div>
                             <div class="p-2.5 flex items-center justify-between">
                                 <div>
-                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">ĐH Quốc gia Seoul</div>
-                                    <div class="text-[9px] text-gray-400">Seoul National Univ</div>
+                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">ĐH Melbourne</div>
+                                    <div class="text-[9px] text-gray-400">#1 Úc • Top 13 TG</div>
                                 </div>
                                 <i class="fas fa-chevron-right text-[10px] text-brand-blue"></i>
                             </div>
                         </div>
 
-                        <!-- Uni 2 -->
+                        <!-- Uni 2: Sydney -->
                         <div class="uni-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
-                            <div class="h-20 overflow-hidden bg-gray-100">
+                            <div class="h-24 overflow-hidden bg-gray-100">
                                 <img src="/assets/du-hoc-uc/uni_2.png" 
-                                     alt="Đại học Yonsei" 
+                                     alt="Đại học Sydney - The University of Sydney" 
                                      class="w-full h-full object-cover transform hover:scale-105 transition"
                                      loading="lazy">
                             </div>
                             <div class="p-2.5 flex items-center justify-between">
                                 <div>
-                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">Đại học Yonsei</div>
-                                    <div class="text-[9px] text-gray-400">Yonsei University</div>
+                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">ĐH Sydney</div>
+                                    <div class="text-[9px] text-gray-400">Top Go8 • Top 18 TG</div>
                                 </div>
                                 <i class="fas fa-chevron-right text-[10px] text-brand-blue"></i>
                             </div>
                         </div>
 
-                        <!-- Uni 3 -->
+                        <!-- Uni 3: Deakin -->
                         <div class="uni-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
-                            <div class="h-20 overflow-hidden bg-gray-100">
+                            <div class="h-24 overflow-hidden bg-gray-100">
                                 <img src="/assets/du-hoc-uc/uni_3.png" 
-                                     alt="Đại học Korea" 
+                                     alt="Đại học Deakin - Deakin University" 
                                      class="w-full h-full object-cover transform hover:scale-105 transition"
                                      loading="lazy">
                             </div>
                             <div class="p-2.5 flex items-center justify-between">
                                 <div>
-                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">Đại học Korea</div>
-                                    <div class="text-[9px] text-gray-400">Korea University</div>
+                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">ĐH Deakin</div>
+                                    <div class="text-[9px] text-gray-400">Học bổng 20–50%</div>
                                 </div>
                                 <i class="fas fa-chevron-right text-[10px] text-brand-blue"></i>
                             </div>
                         </div>
 
-                        <!-- Uni 4 -->
+                        <!-- Uni 4: RMIT -->
                         <div class="uni-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
-                            <div class="h-20 overflow-hidden bg-gray-100">
+                            <div class="h-24 overflow-hidden bg-gray-100">
                                 <img src="/assets/du-hoc-uc/uni_4.png" 
-                                     alt="Đại học Hanyang" 
+                                     alt="Đại học RMIT - RMIT University" 
                                      class="w-full h-full object-cover transform hover:scale-105 transition"
                                      loading="lazy">
                             </div>
                             <div class="p-2.5 flex items-center justify-between">
                                 <div>
-                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">Đại học Hanyang</div>
-                                    <div class="text-[9px] text-gray-400">Hanyang University</div>
+                                    <div class="text-[11px] font-bold text-brand-navy leading-tight">ĐH RMIT</div>
+                                    <div class="text-[9px] text-gray-400">Công nghệ & Thiết kế</div>
                                 </div>
                                 <i class="fas fa-chevron-right text-[10px] text-brand-blue"></i>
                             </div>
@@ -1642,35 +1727,35 @@
                             <div class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-xs mb-1">
                                 <i class="far fa-comments"></i>
                             </div>
-                            <div class="text-[10px] font-bold text-brand-navy">Tư vấn & định hướng</div>
+                            <div class="text-[10px] font-bold text-brand-navy">Tư vấn & chọn ngành</div>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-2.5 text-center">
+                            <div class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-xs mb-1">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="text-[10px] font-bold text-brand-navy">Săn học bổng 20-100%</div>
                         </div>
 
                         <div class="bg-gray-50 border border-gray-100 rounded-xl p-2.5 text-center">
                             <div class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-xs mb-1">
                                 <i class="far fa-file-alt"></i>
                             </div>
-                            <div class="text-[10px] font-bold text-brand-navy">Hỗ trợ hồ sơ</div>
-                        </div>
-
-                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-2.5 text-center">
-                            <div class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-xs mb-1">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <div class="text-[10px] font-bold text-brand-navy">Kết nối trường học</div>
+                            <div class="text-[10px] font-bold text-brand-navy">Xử lý hồ sơ & GS</div>
                         </div>
 
                         <div class="bg-gray-50 border border-gray-100 rounded-xl p-2.5 text-center">
                             <div class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-xs mb-1">
                                 <i class="far fa-id-card"></i>
                             </div>
-                            <div class="text-[10px] font-bold text-brand-navy">Xin visa & xuất cảnh</div>
+                            <div class="text-[10px] font-bold text-brand-navy">Visa 500 & OSHC</div>
                         </div>
 
                         <div class="bg-gray-50 border border-gray-100 rounded-xl p-2.5 text-center">
                             <div class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue mx-auto flex items-center justify-center text-xs mb-1">
-                                <i class="fas fa-user-friends"></i>
+                                <i class="fas fa-home"></i>
                             </div>
-                            <div class="text-[10px] font-bold text-brand-navy">Đồng hành sau nhập học</div>
+                            <div class="text-[10px] font-bold text-brand-navy">Đón tại Sydney</div>
                         </div>
 
                     </div>
@@ -1678,6 +1763,265 @@
 
             </div>
 
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CREATIVE SECTION 1: SO SÁNH MINH BẠCH (KIPA VS THỊ TRƯỜNG)
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-[#fafbfc] border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1">
+                    <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                    <span>TẠI SAO PHỤ HUYNH CHỌN KIPA?</span>
+                </div>
+                <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy">
+                    Sự khác biệt khi Du học Úc cùng KIPA Việt Hàn
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-500 mt-2">
+                    Minh bạch tuyệt đối, đồng hành trách nhiệm từ Việt Nam tới tận nước Úc.
+                </p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-gray-50 text-left border-b border-gray-200">
+                            <th class="py-3.5 px-4 sm:px-6 font-bold text-gray-700 w-1/3">Tiêu chí dịch vụ</th>
+                            <th class="py-3.5 px-4 sm:px-6 font-extrabold text-brand-blue bg-blue-50/50 w-1/3">
+                                <i class="fas fa-check-circle text-brand-blue mr-1.5"></i>KIPA Việt Hàn
+                            </th>
+                            <th class="py-3.5 px-4 sm:px-6 font-bold text-gray-500 w-1/3">Trung tâm đại trà trên thị trường</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-brand-navy">Chi phí & Hợp đồng</td>
+                            <td class="py-3.5 px-4 sm:px-6 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check mr-1.5 text-emerald-600"></i>Minh bạch 100%, không phát sinh bất kỳ phụ phí ẩn nào.
+                            </td>
+                            <td class="py-3.5 px-4 sm:px-6 text-gray-500">
+                                Thường phát sinh các chi phí dịch thuật, công chứng, giải trình ngoài hợp đồng.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-brand-navy">Săn học bổng</td>
+                            <td class="py-3.5 px-4 sm:px-6 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check mr-1.5 text-emerald-600"></i>Chiến lược săn học bổng 20% – 100%, sửa bài luận GS 1:1.
+                            </td>
+                            <td class="py-3.5 px-4 sm:px-6 text-gray-500">
+                                Chủ yếu nộp hồ sơ tự túc hoặc chỉ hỗ trợ các suất học bổng tự động nhỏ.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-brand-navy">Tỷ lệ đỗ Visa 500</td>
+                            <td class="py-3.5 px-4 sm:px-6 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check mr-1.5 text-emerald-600"></i>Tỷ lệ thành công 98.6% nhờ thẩm định hồ sơ theo chuẩn Genuine Student mới nhất.
+                            </td>
+                            <td class="py-3.5 px-4 sm:px-6 text-gray-500">
+                                Rủi ro trượt visa cao do giải trình mục đích học tập sơ sài hoặc tài chính không khớp.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-brand-navy">Mạng lưới trường đối tác</td>
+                            <td class="py-3.5 px-4 sm:px-6 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check mr-1.5 text-emerald-600"></i>Đối tác trực tiếp hàng chục trường Đại học Go8, TAFE và Cao đẳng nghề Úc.
+                            </td>
+                            <td class="py-3.5 px-4 sm:px-6 text-gray-500">
+                                Bị giới hạn vào một số trường cố định có mức chiết khấu cao.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-brand-navy">Đồng hành tại Úc</td>
+                            <td class="py-3.5 px-4 sm:px-6 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check mr-1.5 text-emerald-600"></i>Có Văn phòng đại diện trực tiếp tại Sydney: đón sân bay, hướng dẫn sim thẻ, nhà ở, việc làm.
+                            </td>
+                            <td class="py-3.5 px-4 sm:px-6 text-gray-500">
+                                Kết thúc trách nhiệm ngay khi học sinh lên máy bay, không có người hỗ trợ tại Úc.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CREATIVE SECTION 2: GƯƠNG MẶT CỰU HỌC VIÊN TIÊU BIỂU TẠI ÚC
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1">
+                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                        <span>CÂU CHUYỆN HỌC VIÊN THỰC TẾ</span>
+                    </div>
+                    <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy">
+                        Học viên KIPA tỏa sáng tại nước Úc
+                    </h3>
+                </div>
+                <a href="/cau-chuyen-hoc-vien/" class="mt-3 md:mt-0 text-brand-blue hover:text-blue-700 font-bold text-xs flex items-center transition">
+                    <span>Xem thêm câu chuyện học viên</span>
+                    <i class="fas fa-arrow-right ml-1.5 text-[10px]"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Story Card 1: Nguyễn Minh Đức -->
+                <div class="kipa-card rounded-2xl overflow-hidden flex flex-col justify-between p-5 border border-gray-200">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3.5">
+                            <img src="/assets/du-hoc-uc/alumni_minh_duc.jpg" 
+                                 alt="Nguyễn Minh Đức" 
+                                 class="w-14 h-14 rounded-full object-cover border-2 border-brand-blue flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-brand-navy text-sm">Nguyễn Minh Đức</h4>
+                                <p class="text-[11px] text-brand-blue font-semibold">Ngành CNTT – Sydney, Úc</p>
+                                <div class="text-[10px] text-amber-600 flex items-center mt-0.5">
+                                    <i class="fas fa-star mr-1"></i>Học bổng 25% • Visa 3 tuần
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed italic">
+                            “Chuẩn bị chứng chỉ tiếng Anh từ sớm và chứng minh tài chính minh bạch theo hướng dẫn của KIPA là chìa khóa giúp mình nhận visa Úc chỉ sau 3 tuần nộp hồ sơ. Sang Sydney được VP KIPA đón và hướng dẫn tận tình!”
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                        <span class="text-gray-400">Visa Subclass 500</span>
+                        <span class="text-brand-blue font-bold">Kỳ nhập học 2024</span>
+                    </div>
+                </div>
+
+                <!-- Story Card 2: Trần Mai Anh -->
+                <div class="kipa-card rounded-2xl overflow-hidden flex flex-col justify-between p-5 border border-gray-200">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3.5">
+                            <div class="w-14 h-14 rounded-full bg-blue-100 text-brand-blue flex items-center justify-center font-bold text-lg flex-shrink-0">
+                                MA
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy text-sm">Trần Mai Anh</h4>
+                                <p class="text-[11px] text-brand-blue font-semibold">Cử nhân Kinh doanh – ĐH Deakin (Melbourne)</p>
+                                <div class="text-[10px] text-amber-600 flex items-center mt-0.5">
+                                    <i class="fas fa-star mr-1"></i>Học bổng quốc tế 30%
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed italic">
+                            “Nhờ các thầy cô KIPA hướng dẫn viết bài giải trình Genuine Student rất sát thực tế và luyện phỏng vấn kỹ càng, mình đã xuất sắc giành học bổng 30% của Đại học Deakin ngay trong lần nộp đầu tiên.”
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                        <span class="text-gray-400">Bachelor of Business</span>
+                        <span class="text-brand-blue font-bold">Melbourne, Victoria</span>
+                    </div>
+                </div>
+
+                <!-- Story Card 3: Phụ huynh Hoàng Văn Thắng -->
+                <div class="kipa-card rounded-2xl overflow-hidden flex flex-col justify-between p-5 border border-gray-200">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3.5">
+                            <img src="/assets/du-hoc-uc/alumni_phu_huynh.jpg" 
+                                 alt="Bác Hoàng Văn Thắng" 
+                                 class="w-14 h-14 rounded-full object-cover border-2 border-emerald-500 flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-brand-navy text-sm">Bác Hoàng Văn Thắng</h4>
+                                <p class="text-[11px] text-emerald-700 font-semibold">Phụ huynh học viên (Hải Phòng)</p>
+                                <div class="text-[10px] text-amber-600 flex items-center mt-0.5">
+                                    <i class="fas fa-shield-alt mr-1"></i>An tâm gửi gắm con
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed italic">
+                            “Gia đình tôi rất biết ơn KIPA Việt Hàn. Từ khi cháu bắt đầu học tiếng Anh đến ngày cầm trên tay visa Úc, trung tâm luôn báo cáo tiến độ chi tiết, chi phí không phát sinh 1 đồng nào. Sang Úc có đại diện KIPA hỗ trợ nên chúng tôi vô cùng yên tâm.”
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                        <span class="text-gray-400">Đồng hành trọn vẹn</span>
+                        <span class="text-emerald-700 font-bold">100% Tin tưởng</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CREATIVE SECTION 3: LEAD MAGNET (TẢI CẨM NANG & 50 CÂU HỎI GS)
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-gradient-to-r from-[#0274BD] to-[#081D36] text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-yellow-300">
+                        <i class="fas fa-gift"></i>
+                        <span>TÀI LIỆU DU HỌC ĐỘC QUYỀN MIỄN PHÍ</span>
+                    </div>
+                    <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold leading-tight">
+                        Tải trọn bộ Cẩm nang Du học Úc 2026<br class="hidden sm:inline"> & 50 câu hỏi phỏng vấn Genuine Student (GS)
+                    </h3>
+                    <p class="text-xs sm:text-sm text-blue-100 leading-relaxed max-w-xl">
+                        Tài liệu do đội ngũ chuyên gia di trú KIPA biên soạn chi tiết: Tổng hợp chính sách visa mới nhất, danh sách các ngành nghề ưu tiên định cư và bí quyết giải trình hồ sơ xin visa Subclass 500 thành công 100%.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4 pt-2 text-xs text-blue-200">
+                        <span class="flex items-center"><i class="fas fa-check-circle text-emerald-400 mr-1.5"></i>Định dạng PDF tiện lợi</span>
+                        <span class="flex items-center"><i class="fas fa-check-circle text-emerald-400 mr-1.5"></i>Cập nhật chính sách 2026</span>
+                        <span class="flex items-center"><i class="fas fa-check-circle text-emerald-400 mr-1.5"></i>Hoàn toàn miễn phí</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-white text-gray-900 rounded-2xl p-6 sm:p-7 shadow-2xl">
+                    <h4 class="font-phudu text-base sm:text-lg font-bold text-brand-navy mb-1">
+                        Đăng ký nhận tài liệu qua Email/Zalo
+                    </h4>
+                    <p class="text-xs text-gray-500 mb-4">Hệ thống KIPA sẽ tự động gửi tài liệu trong vòng 2 phút.</p>
+                    
+                    <form action="/api/submit.php" method="POST" class="space-y-3">
+                        <input type="hidden" name="form_type" value="lead_magnet_du_hoc_uc">
+                        
+                        <div>
+                            <label for="lead-uc-name" class="block text-xs font-bold text-gray-700 mb-1">Họ và tên *</label>
+                            <input type="text" id="lead-uc-name" name="name" required placeholder="Ví dụ: Nguyễn Văn A" aria-label="Họ và tên người nhận tài liệu"
+                                   class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label for="lead-uc-phone" class="block text-xs font-bold text-gray-700 mb-1">Số điện thoại / Zalo *</label>
+                                <input type="tel" id="lead-uc-phone" name="phone" required placeholder="0912 345 678" aria-label="Số điện thoại Zalo người nhận tài liệu"
+                                       class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="lead-uc-email" class="block text-xs font-bold text-gray-700 mb-1">Email nhận tài liệu *</label>
+                                <input type="email" id="lead-uc-email" name="email" required placeholder="email@gmail.com" aria-label="Email nhận cẩm nang du học Úc"
+                                       class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="lead-uc-program" class="block text-xs font-bold text-gray-700 mb-1">Chương trình quan tâm</label>
+                            <select id="lead-uc-program" name="program" aria-label="Chương trình du học Úc bạn quan tâm"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white">
+                                <option value="du-hoc-uc-dai-hoc">Cử nhân Đại học (Bachelor)</option>
+                                <option value="du-hoc-uc-thac-si">Thạc sĩ (Master)</option>
+                                <option value="du-hoc-uc-nghe-vet">Cao đẳng nghề (VET / TAFE)</option>
+                                <option value="du-hoc-uc-thpt">Trung học phổ thông (THPT)</option>
+                                <option value="du-hoc-uc-elicos">Khóa tiếng Anh học thuật ELICOS</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-lg shadow-red-500/30 flex items-center justify-center space-x-2 mt-2">
+                            <i class="fas fa-download"></i>
+                            <span>Tải trọn bộ tài liệu ngay</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -1690,14 +2034,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
                 <!-- Left: FAQ Accordion -->
-                <div class="lg:col-span-5 space-y-4">
+                <div class="lg:col-span-6 space-y-4">
                     <div class="pb-2 border-b border-gray-200">
                         <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1">
                             <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
                             <span>CÂU HỎI THƯỜNG GẶP</span>
                         </div>
                         <h2 class="font-phudu text-xl sm:text-2xl font-bold text-brand-navy">
-                            Giải đáp những thắc mắc phổ biến
+                            Giải đáp thắc mắc về Du học Úc
                         </h2>
                     </div>
 
@@ -1709,12 +2053,12 @@
                             <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-brand-navy select-none">
                                 <span class="flex items-center">
                                     <span class="w-5 h-5 rounded-full bg-red-50 text-brand-red text-[11px] flex items-center justify-center mr-2 flex-shrink-0">?</span>
-                                    <span>Tôi chưa biết nên chọn chương trình du học nào, KIPA có thể tư vấn không?</span>
+                                    <span>Du học Úc năm 2026 có bắt buộc chứng minh tài chính không?</span>
                                 </span>
                                 <i class="fas fa-chevron-down faq-icon text-xs text-gray-400 ml-2"></i>
                             </div>
                             <div class="faq-answer text-xs text-gray-500 leading-relaxed pl-7">
-                                Hoàn toàn được! Đội ngũ chuyên viên tư vấn KIPA sẽ đánh giá kỹ lưỡng học bạ, trình độ ngoại ngữ, sở thích ngành nghề và điều kiện tài chính gia đình để xây dựng lộ trình học tập tối ưu và chọn trường phù hợp nhất.
+                                Việt Nam hiện được xếp vào nhóm quốc gia có mức độ rủi ro thấp (Assessment Level 2), nên đối với nhiều trường đại học hàng đầu và hệ thống trường ưu tiên, học sinh không bắt buộc phải nộp giấy tờ chứng minh tài chính phức tạp lên Lãnh sự quán. Tuy nhiên, bạn vẫn cần chuẩn bị bản giải trình mục đích học tập chân thật (GS) và chứng minh đủ khả năng chi trả học phí năm đầu cùng sinh hoạt phí. KIPA sẽ hướng dẫn thẩm định hồ sơ chi tiết để tỷ lệ đậu visa là cao nhất.
                             </div>
                         </div>
 
@@ -1723,12 +2067,12 @@
                             <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-brand-navy select-none">
                                 <span class="flex items-center">
                                     <span class="w-5 h-5 rounded-full bg-red-50 text-brand-red text-[11px] flex items-center justify-center mr-2 flex-shrink-0">?</span>
-                                    <span>Chi phí du học gồm những khoản nào?</span>
+                                    <span>Quy định làm thêm cho du học sinh tại Úc như thế nào?</span>
                                 </span>
                                 <i class="fas fa-chevron-down faq-icon text-xs text-gray-400 ml-2"></i>
                             </div>
                             <div class="faq-answer text-xs text-gray-500 leading-relaxed pl-7">
-                                Chi phí bao gồm: học phí khóa tiếng hoặc chuyên ngành đóng cho trường, phí ký túc xá/nhà ở, bảo hiểm y tế bắt buộc, phí xin visa, vé máy bay và sinh hoạt phí ban đầu. KIPA cam kết minh bạch mọi khoản thu chi ngay từ đầu.
+                                Sinh viên quốc tế sở hữu Visa Subclass 500 được phép làm thêm hợp pháp tối đa <strong>48 giờ / 2 tuần</strong> trong thời gian học kỳ và <strong>100% không giới hạn thời gian</strong> trong các kỳ nghỉ hè/đông. Mức lương tối thiểu theo luật lao động Úc là <strong>$24.10 AUD/giờ</strong> (khoảng 400.000 VNĐ/h), giúp học viên hoàn toàn có thể tự trang trải sinh hoạt phí hàng tháng.
                             </div>
                         </div>
 
@@ -1737,12 +2081,12 @@
                             <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-brand-navy select-none">
                                 <span class="flex items-center">
                                     <span class="w-5 h-5 rounded-full bg-red-50 text-brand-red text-[11px] flex items-center justify-center mr-2 flex-shrink-0">?</span>
-                                    <span>Tôi ở tỉnh khác có thể đăng ký tư vấn không?</span>
+                                    <span>Chưa có bằng IELTS/PTE có đi du học Úc được không?</span>
                                 </span>
                                 <i class="fas fa-chevron-down faq-icon text-xs text-gray-400 ml-2"></i>
                             </div>
                             <div class="faq-answer text-xs text-gray-500 leading-relaxed pl-7">
-                                KIPA hỗ trợ tư vấn trực tuyến 1-1 qua Zoom/Zalo/Điện thoại cho phụ huynh và học sinh trên toàn quốc, hoặc bạn có thể đến các cơ sở của KIPA tại Hải Phòng, Nam Sách, Quảng Ninh và TP. Hồ Chí Minh.
+                                Hoàn toàn được! Bạn có thể làm bài kiểm tra tiếng Anh đầu vào trực tuyến của trường hoặc tham gia khóa đào tạo tiếng Anh cấp tốc tại KIPA. Sau đó, bạn có thể đăng ký khóa tiếng Anh học thuật ELICOS (từ 10 – 30 tuần) tại trường ở Úc trước khi bước vào khóa học chính khóa.
                             </div>
                         </div>
 
@@ -1751,12 +2095,12 @@
                             <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-brand-navy select-none">
                                 <span class="flex items-center">
                                     <span class="w-5 h-5 rounded-full bg-red-50 text-brand-red text-[11px] flex items-center justify-center mr-2 flex-shrink-0">?</span>
-                                    <span>Sau khi nộp hồ sơ, bao lâu có kết quả?</span>
+                                    <span>Sau khi tốt nghiệp ở Úc, tôi được ở lại làm việc bao lâu?</span>
                                 </span>
                                 <i class="fas fa-chevron-down faq-icon text-xs text-gray-400 ml-2"></i>
                             </div>
                             <div class="faq-answer text-xs text-gray-500 leading-relaxed pl-7">
-                                Thời gian xét thư mời từ trường thường mất 2 – 4 tuần, và thời gian xét duyệt visa thường từ 4 – 8 tuần tùy theo quy định và từng kỳ nhập học của nước sở tại.
+                                Sau khi tốt nghiệp chương trình Cử nhân hoặc Thạc sĩ, bạn được nộp hồ sơ Visa 485 (Temporary Graduate Visa) để ở lại làm việc từ <strong>2 – 4 năm</strong>. Đặc biệt, nếu bạn chọn học tập tại các khu vực Regional (như Adelaide, Perth, Geelong, Gold Coast, Wollongong...), bạn sẽ được cộng thêm 1 – 2 năm visa ở lại và được cộng 5 điểm ưu tiên khi xét hồ sơ định cư tay nghề (PR).
                             </div>
                         </div>
 
@@ -1765,51 +2109,67 @@
                             <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-brand-navy select-none">
                                 <span class="flex items-center">
                                     <span class="w-5 h-5 rounded-full bg-red-50 text-brand-red text-[11px] flex items-center justify-center mr-2 flex-shrink-0">?</span>
-                                    <span>Du học sinh có được làm thêm không?</span>
+                                    <span>KIPA có văn phòng đại diện hỗ trợ tại Úc không?</span>
                                 </span>
                                 <i class="fas fa-chevron-down faq-icon text-xs text-gray-400 ml-2"></i>
                             </div>
                             <div class="faq-answer text-xs text-gray-500 leading-relaxed pl-7">
-                                Có. Tùy theo từng quốc gia, sinh viên được phép làm thêm hợp pháp trong thời gian học tập (thường 20 – 24 giờ/tuần trong kỳ học và toàn thời gian trong kỳ nghỉ hè/đông) để trang trải một phần sinh hoạt phí.
+                                Có! KIPA Việt Hàn tự hào có Văn phòng đại diện trực tiếp tại Sydney, Úc. Đội ngũ KIPA tại Úc sẽ đón học viên tận sân bay, hỗ trợ đăng ký SIM điện thoại, mở tài khoản ngân hàng Commonwealth/ANZ, tìm nhà trọ và kết nối cộng đồng cựu du học sinh KIPA để các em nhanh chóng hòa nhập cuộc sống mới.
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Right: CTA Card Banner with Girl Graphic -->
-                <div class="lg:col-span-7">
-                    <div class="relative bg-gradient-to-r from-[#025a94] via-[#0274BD] to-[#0385d8] rounded-2xl p-6 sm:p-8 text-white shadow-xl overflow-hidden min-h-[320px] flex flex-col justify-between">
+                <!-- Right: CTA Card Banner -->
+                <div class="lg:col-span-6">
+                    <div class="relative bg-gradient-to-br from-[#081D36] via-[#025a94] to-[#0274BD] rounded-3xl p-6 sm:p-8 text-white shadow-xl overflow-hidden min-h-[380px] flex flex-col justify-between">
                         
-                        <!-- Left Text Content -->
-                        <div class="relative z-10 max-w-sm space-y-3">
-                            <h3 class="font-phudu text-xl sm:text-2xl font-extrabold leading-tight">
-                                Sẵn sàng viết nên hành trình của bạn cùng KIPA?
+                        <!-- Text Content -->
+                        <div class="relative z-10 space-y-4">
+                            <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-yellow-300">
+                                <span class="w-2 h-2 rounded-full bg-yellow-300"></span>
+                                <span>KIPA VIỆT HÀN • BẢO BỌC 2 ĐẦU VIỆT - ÚC</span>
+                            </div>
+
+                            <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold leading-tight">
+                                Sẵn sàng hiện thực hóa giấc mơ Du học Úc cùng KIPA?
                             </h3>
-                            <p class="text-blue-100 text-xs sm:text-sm leading-relaxed font-vietnam">
-                                Liên hệ KIPA Việt Hàn ngay hôm nay để được tư vấn chi tiết lộ trình, chi phí và trường học phù hợp nhất.
+                            
+                            <p class="text-blue-100 text-xs sm:text-sm leading-relaxed font-vietnam max-w-lg">
+                                Liên hệ ngay với KIPA Việt Hàn để nhận tư vấn lộ trình chọn trường, săn học bổng giá trị và hướng dẫn chuẩn bị hồ sơ Visa 500 chuẩn xác nhất.
                             </p>
+
+                            <!-- Trust highlight pills -->
+                            <div class="grid grid-cols-2 gap-2.5 pt-1 text-xs">
+                                <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm p-2 rounded-xl">
+                                    <i class="fas fa-check-circle text-emerald-400"></i>
+                                    <span>Tư vấn 1:1 Miễn phí 100%</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-white/10 backdrop-blur-sm p-2 rounded-xl">
+                                    <i class="fas fa-check-circle text-emerald-400"></i>
+                                    <span>Hỗ trợ đón tại Sydney</span>
+                                </div>
+                            </div>
 
                             <!-- 2 CTA Buttons -->
                             <div class="flex flex-wrap items-center gap-3 pt-3">
-                                <a href="/dang-ky-tu-van/" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-md">
+                                <a href="/dang-ky-tu-van/" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-lg shadow-red-500/30">
                                     <i class="far fa-calendar-alt mr-2 text-xs"></i>
                                     <span>Đăng ký tư vấn ngay</span>
                                     <i class="fas fa-arrow-right ml-2 text-xs"></i>
                                 </a>
-                                <a href="tel:0368513865" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-white text-brand-blue font-bold text-xs sm:text-sm hover:bg-blue-50 transition shadow-sm">
+                                <a href="tel:0368513865" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-brand-blue font-bold text-xs sm:text-sm hover:bg-blue-50 transition shadow-sm">
                                     <i class="fas fa-phone-alt mr-2 text-xs text-brand-blue"></i>
                                     <span>Gọi 036 851 3865</span>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Right Graphic: Student girl + Landmarks -->
-                        <div class="absolute right-0 bottom-0 top-0 w-1/2 flex items-end justify-end pointer-events-none z-0">
-                            <img src="/assets/du-hoc-uc/bottom_cta_visual.png" 
-                                 alt="Học viên KIPA Việt Hàn" 
-                                 class="h-full w-auto object-contain object-bottom"
-                                 loading="lazy">
+                        <!-- Footer info strip inside card -->
+                        <div class="relative z-10 mt-6 pt-4 border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between text-[11px] text-blue-200 gap-2">
+                            <span><i class="fas fa-map-marker-alt text-red-400 mr-1.5"></i>VP Sydney: Sydney, NSW, Australia</span>
+                            <span><i class="fas fa-clock text-yellow-300 mr-1.5"></i>Hỗ trợ tư vấn 24/7 toàn quốc</span>
                         </div>
 
                     </div>
@@ -1822,8 +2182,21 @@
 
 </div>
 
-<!-- Interactive JS Script for FAQ Accordion -->
+<!-- VIDEO MODAL (POPUP YOUTUBE SHORTS / VIDEO) -->
+<div id="kipa-video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-4" onclick="closeVideoModal(event)">
+    <div class="relative w-full max-w-3xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/20" onclick="event.stopPropagation()">
+        <button onclick="closeVideoModal(null)" aria-label="Đóng video" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="relative pt-[56.25%] w-full">
+            <iframe id="kipa-video-iframe" class="absolute inset-0 w-full h-full" src="" title="KIPA Du học Úc Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- Interactive JS Script for FAQ Accordion, Calculator & Video Modal -->
 <script>
+    // FAQ Accordion
     document.addEventListener('DOMContentLoaded', function() {
         const faqItems = document.querySelectorAll('#dh-uc-faq-accordion .faq-item');
         faqItems.forEach(item => {
@@ -1835,7 +2208,93 @@
                 }
             });
         });
+        
+        // Initial run for calculator
+        calculateDuhocUcEstimate();
     });
+
+    // Video Modal Handlers
+    function openVideoModal(videoId) {
+        const modal = document.getElementById('kipa-video-modal');
+        const iframe = document.getElementById('kipa-video-iframe');
+        if (modal && iframe) {
+            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeVideoModal(e) {
+        if (e && e.target.id !== 'kipa-video-modal' && !e.target.closest('button')) return;
+        const modal = document.getElementById('kipa-video-modal');
+        const iframe = document.getElementById('kipa-video-iframe');
+        if (modal && iframe) {
+            iframe.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Dynamic Cost Calculator for Australia
+    function calculateDuhocUcEstimate() {
+        const programEl = document.getElementById('calc-program');
+        const cityEl = document.getElementById('calc-city');
+        const housingEl = document.getElementById('calc-housing');
+        if (!programEl || !cityEl || !housingEl) return;
+
+        const program = programEl.value;
+        const city = cityEl.value;
+        const housing = housingEl.value;
+
+        // Tuition ranges in AUD / year
+        let tuitionAud = 28000;
+        let tuitionText = '~ 28.000 AUD/năm (~ 470 tr VNĐ)';
+        if (program === 'vet') {
+            tuitionAud = 12000;
+            tuitionText = '~ 8.000 – 14.000 AUD/năm (~ 135 – 235 tr VNĐ)';
+        } else if (program === 'bachelor') {
+            tuitionAud = 28000;
+            tuitionText = '~ 24.000 – 34.000 AUD/năm (~ 400 – 570 tr VNĐ)';
+        } else if (program === 'master') {
+            tuitionAud = 32000;
+            tuitionText = '~ 26.000 – 38.000 AUD/năm (~ 435 – 640 tr VNĐ)';
+        } else if (program === 'highschool') {
+            tuitionAud = 18000;
+            tuitionText = '~ 14.000 – 22.000 AUD/năm (~ 235 – 370 tr VNĐ)';
+        } else if (program === 'elicos') {
+            tuitionAud = 14000;
+            tuitionText = '~ 350 – 420 AUD/tuần (~ 5.8 – 7.0 tr VNĐ/tuần)';
+        }
+
+        // Monthly living cost by city and housing in AUD / month
+        let cityFactor = (city === 'sydney' || city === 'melbourne') ? 1.15 : 0.95;
+        let housingCost = 1400;
+        if (housing === 'homestay') housingCost = 1550;
+        if (housing === 'dorm') housingCost = 1650;
+        if (housing === 'shared') housingCost = 1300;
+
+        let monthlyAud = Math.round(housingCost * cityFactor);
+        let livingText = '~ ' + monthlyAud.toLocaleString() + ' AUD/tháng (~ ' + Math.round(monthlyAud * 16.8 / 1000) + ' tr VNĐ)';
+
+        // Total 1st year VNĐ estimate
+        let yearlyTotalAud = tuitionAud + (monthlyAud * 12) + 600; // +600 OSHC
+        let totalVndMin = Math.round((yearlyTotalAud * 0.9 * 16.8) / 1000000) * 10;
+        let totalVndMax = Math.round((yearlyTotalAud * 1.15 * 16.8) / 1000000) * 10;
+
+        document.getElementById('calc-tuition-val').innerText = tuitionText;
+        document.getElementById('calc-living-val').innerText = livingText;
+        document.getElementById('calc-total-val').innerText = '~ ' + totalVndMin + ' – ' + totalVndMax + ' triệu/năm';
+
+        // Regional badge
+        const regBadge = document.getElementById('calc-regional-badge');
+        if (regBadge) {
+            if (city === 'adelaide' || city === 'perth') {
+                regBadge.classList.remove('hidden');
+            } else {
+                regBadge.classList.add('hidden');
+            }
+        }
+    }
 </script>
     </main>
 
