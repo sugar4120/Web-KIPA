@@ -1298,6 +1298,149 @@
     </section>
 
     <!-- ==========================================
+         SECTION 3.5: CÔNG CỤ TÍNH CHI PHÍ & DỰ ĐOÁN HỌC BỔNG DU HỌC HÀN QUỐC
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-gradient-to-b from-white via-blue-50/30 to-white border-t border-b border-gray-100" id="cong-cu-du-toan">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-10">
+                <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-2">
+                    <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                    <span>CÔNG CỤ TÍNH TOÁN THÔNG MINH</span>
+                </div>
+                <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy leading-tight">
+                    Ước tính Chi phí & Đánh giá Tỉ lệ Học bổng Hàn Quốc
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-600 mt-2 font-vietnam leading-relaxed">
+                    Chỉ với 4 thông tin cơ bản, hệ thống sẽ tự động phân tích lộ trình, tỉ lệ đạt học bổng và dự toán tổng chi phí ban đầu phù hợp nhất với hồ sơ của bạn.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left: Form chọn tiêu chí -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-blue-100 shadow-md flex flex-col justify-between">
+                    <div class="space-y-5">
+                        <!-- Tiêu chí 1: Hệ du học -->
+                        <div>
+                            <label for="calc-he" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
+                                <i class="fas fa-graduation-cap text-brand-blue mr-1.5"></i> 1. Hệ du học bạn quan tâm:
+                            </label>
+                            <select id="calc-he" aria-label="Hệ du học bạn quan tâm" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="d4-3" selected>Du học THPT Cấp 3 (Visa D4-3) - Học bổng 100% độc quyền KIPA</option>
+                                <option value="d4-1">Du học tiếng Hàn (Visa D4-1) - Dự bị Đại học</option>
+                                <option value="d2-2">Du học Đại học chính quy (Visa D2-2)</option>
+                                <option value="d2-3">Du học Thạc sĩ / Tiến sĩ (Visa D2-3)</option>
+                                <option value="d4-6">Du học Cao đẳng Nghề (Visa D4-6)</option>
+                            </select>
+                        </div>
+
+                        <!-- Tiêu chí 2: Điểm GPA -->
+                        <div>
+                            <label for="calc-gpa" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
+                                <i class="fas fa-chart-line text-brand-blue mr-1.5"></i> 2. Điểm trung bình (GPA) gần nhất:
+                            </label>
+                            <select id="calc-gpa" aria-label="Điểm trung bình GPA gần nhất" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="8.5">Xuất sắc (GPA từ 8.5 trở lên) - Ưu tiên học bổng cao nhất</option>
+                                <option value="7.5" selected>Khá - Giỏi (GPA 7.5 – 8.4) - Đạt chuẩn hầu hết các trường Top</option>
+                                <option value="6.5">Trung bình khá (GPA 6.5 – 7.4) - Đạt chuẩn visa & trường đối tác</option>
+                                <option value="6.0">Dưới 6.5 - Cần chuyên gia KIPA thẩm định hồ sơ riêng</option>
+                            </select>
+                        </div>
+
+                        <!-- Tiêu chí 3: Trình độ tiếng Hàn -->
+                        <div>
+                            <label for="calc-topik" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
+                                <i class="fas fa-language text-brand-blue mr-1.5"></i> 3. Trình độ tiếng Hàn hiện tại:
+                            </label>
+                            <select id="calc-topik" aria-label="Trình độ tiếng Hàn hiện tại" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="none" selected>Chưa biết tiếng (Bắt đầu học khóa căn bản tại KIPA)</option>
+                                <option value="topik12">Sơ cấp (Đã học bảng chữ cái / TOPIK 1 - 2)</option>
+                                <option value="topik34">Trung cấp (TOPIK 3 - 4) - Đủ điều kiện vào thẳng chuyên ngành</option>
+                                <option value="topik56">Cao cấp (TOPIK 5 - 6 hoặc IELTS 6.5+)</option>
+                            </select>
+                        </div>
+
+                        <!-- Tiêu chí 4: Khu vực mong muốn -->
+                        <div>
+                            <label for="calc-region" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
+                                <i class="fas fa-map-marker-alt text-brand-blue mr-1.5"></i> 4. Khu vực du học mong muốn:
+                            </label>
+                            <select id="calc-region" aria-label="Khu vực du học mong muốn" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="seoul" selected>Thủ đô Seoul & Vùng đô thị vệ tinh (Incheon, Gyeonggi)</option>
+                                <option value="busan">Thành phố Busan & Miền Trung / Nam (Chi phí sinh hoạt tiết kiệm 30%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-[11px] text-gray-500">
+                        <i class="fas fa-shield-alt text-emerald-500 mr-2 text-sm"></i>
+                        <span>Kết quả dựa trên dữ liệu tuyển sinh và chính sách học bổng mới nhất kỳ tuyển sinh 2026.</span>
+                    </div>
+                </div>
+
+                <!-- Right: Bảng kết quả phân tích tức thì -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-[#0c2340] to-[#025a94] text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-blue-400/10 blur-2xl pointer-events-none"></div>
+                    
+                    <div class="relative z-10 space-y-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-white/15">
+                            <span class="text-xs uppercase tracking-wider font-bold text-blue-200 flex items-center gap-1.5">
+                                <i class="fas fa-bolt text-yellow-300"></i> KẾT QUẢ ĐÁNH GIÁ HỒ SƠ
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-400/30">
+                                Khả thi cao
+                            </span>
+                        </div>
+
+                        <!-- Card 1: Khả năng học bổng -->
+                        <div class="bg-white/10 rounded-2xl p-4 border border-white/15 backdrop-blur-sm">
+                            <div class="text-[11px] text-blue-200 uppercase font-semibold mb-1">Khả năng đạt học bổng:</div>
+                            <div id="res-scholarship" class="text-base sm:text-lg font-phudu font-bold text-yellow-300">
+                                Học bổng 100% học phí (Chương trình độc quyền KIPA)
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Dự toán chi phí ban đầu -->
+                        <div class="bg-white/10 rounded-2xl p-4 border border-white/15 backdrop-blur-sm">
+                            <div class="text-[11px] text-blue-200 uppercase font-semibold mb-1">Dự toán tổng chi phí ban đầu trọn gói:</div>
+                            <div id="res-cost" class="text-lg sm:text-xl font-phudu font-bold text-white">
+                                135 – 160 triệu VNĐ
+                            </div>
+                            <div class="text-[11px] text-blue-200 mt-1">Đã bao gồm học phí, KTX, visa, vé máy bay & dịch vụ trọn gói KIPA.</div>
+                        </div>
+
+                        <!-- Card 3: Thời gian chuẩn bị & Tỉ lệ đạt Visa -->
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                                <span class="text-[10px] text-blue-200 block mb-0.5">Thời gian học tiếng:</span>
+                                <span id="res-preptime" class="font-bold text-white text-xs">3 – 4 tháng (KIPA)</span>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                                <span class="text-[10px] text-blue-200 block mb-0.5">Tỉ lệ đạt Visa KIPA:</span>
+                                <span class="font-bold text-emerald-400 text-xs">99.2% (Cam kết)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 rounded-xl p-3 border border-white/10 text-xs">
+                            <span class="text-[10px] text-blue-200 block mb-0.5">Nhóm trường đối tác phù hợp:</span>
+                            <span id="res-school" class="font-semibold text-blue-100 text-xs">Trường THPT Đối tác KIPA tại Seoul & Incheon</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Action -->
+                    <div class="relative z-10 pt-5 mt-4 border-t border-white/15 space-y-2">
+                        <a href="/dang-ky-tu-van?program=duhoc" class="w-full inline-flex items-center justify-center px-5 py-3.5 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-lg shadow-red-900/40 transform hover:-translate-y-0.5">
+                            <i class="far fa-paper-plane mr-2 text-xs"></i>
+                            <span>Nhận Kế Hoạch Tài Chính & Học Bổng Chi Tiết 1:1</span>
+                            <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                        <p class="text-center text-[10px] text-blue-200">Hoàn toàn MIỄN PHÍ • Không phát sinh bất kỳ khoản phí tư vấn nào</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
          SECTION 4: CHI PHÍ THAM KHẢO & THỜI GIAN NHẬP HỌC
          ========================================== -->
     <section class="py-12 sm:py-16 bg-white border-t border-b border-gray-100">
@@ -1403,6 +1546,263 @@
     </section>
 
     <!-- ==========================================
+         SECTION 4.5: CÁC TRƯỜNG ĐỐI TÁC HÀNG ĐẦU TẠI HÀN QUỐC
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-white border-t border-b border-gray-100" id="truong-doi-tac">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200 gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5">
+                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                        <span>MẠNG LƯỚI ĐỐI TÁC CHIẾN LƯỢC</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy">
+                        Các Trường Đại Học & THPT Đối Tác Hàng Đầu
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-1">
+                        KIPA Việt Hàn ký kết hợp tác tuyển sinh trực tiếp với các trường uy tín, mang lại lợi thế xét học bổng và ra visa nhanh chóng.
+                    </p>
+                </div>
+                
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl self-start md:self-auto text-xs font-semibold" id="school-filter-tabs">
+                    <button type="button" onclick="filterSchools('all', this)" class="school-tab-btn px-3.5 py-1.5 rounded-xl bg-white text-brand-navy shadow-sm transition">Tất cả (6)</button>
+                    <button type="button" onclick="filterSchools('seoul', this)" class="school-tab-btn px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-brand-blue transition">Khu vực Seoul</button>
+                    <button type="button" onclick="filterSchools('busan', this)" class="school-tab-btn px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-brand-blue transition">Khu vực Busan / Tỉnh</button>
+                    <button type="button" onclick="filterSchools('thpt', this)" class="school-tab-btn px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-brand-blue transition">Du học Cấp 3 (D4-3)</button>
+                </div>
+            </div>
+
+            <!-- Schools Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="schools-grid">
+                
+                <!-- School 1: Hanyang -->
+                <div class="school-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between" data-region="seoul">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/partner_hanyang.jpg" alt="Đại học Hanyang" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-brand-navy/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                                📍 Seoul • Top 7 Hàn Quốc
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                                Học bổng 30% - 100%
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-phudu font-bold text-base text-brand-navy">Đại học Hanyang (Hanyang University)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Trường đại học danh tiếng số 1 về kỹ thuật, công nghệ cao và kinh tế tại trung tâm Seoul, tỉ lệ sinh viên có việc làm sau tốt nghiệp đạt top đầu Hàn Quốc.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-[11px]">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Học phí hệ tiếng:</span>
+                                    <span class="font-bold text-brand-navy">~1.700.000 KRW/kỳ</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-brand-blue">Kỹ thuật, IT, Quản trị KD, Truyền thông</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <a href="/dang-ky-tu-van?note=Tu+van+Dai+hoc+Hanyang" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs transition duration-200">
+                            <span>Tư vấn hồ sơ trường Hanyang</span>
+                            <i class="fas fa-chevron-right ml-1.5 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- School 2: Seokyeong -->
+                <div class="school-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between" data-region="seoul">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/students_seoul_thuc_te.jpg" alt="Đại học Seokyeong" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-brand-navy/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                                📍 Seoul • Thánh đường K-Beauty
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                                Học bổng 30% - 60%
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-phudu font-bold text-base text-brand-navy">Đại học Seokyeong (Seokyeong University)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Ngôi trường đào tạo Làm đẹp, Thẩm mỹ (K-Beauty), Nghệ thuật biểu diễn và Thiết kế hàng đầu châu Á. Mức học phí hợp lý ngay trong lòng thủ đô Seoul.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-[11px]">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Học phí hệ tiếng:</span>
+                                    <span class="font-bold text-brand-navy">~1.400.000 KRW/kỳ</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-brand-blue">Làm đẹp K-Beauty, Thiết kế, Kinh tế</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <a href="/dang-ky-tu-van?note=Tu+van+Dai+hoc+Seokyeong" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs transition duration-200">
+                            <span>Tư vấn hồ sơ trường Seokyeong</span>
+                            <i class="fas fa-chevron-right ml-1.5 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- School 3: THPT Đối tác Visa D4-3 -->
+                <div class="school-card bg-white rounded-2xl border-2 border-brand-red/30 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between" data-region="thpt">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/hero_du_hoc_thuc_te.jpg" alt="Chương trình Du học cấp 3 D4-3" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md">
+                                ★ ĐỘC QUYỀN KIPA • VISA D4-3
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                                Học bổng 100% học phí
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-phudu font-bold text-base text-brand-navy">Hệ Thống Trường THPT Đối Tác KIPA (Visa D4-3)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Chương trình vàng dành cho học sinh từ 16 - 18 tuổi tốt nghiệp THCS muốn du học cấp 3 tại Hàn Quốc. Ký túc xá an toàn, quản lý nghiêm ngặt và hỗ trợ học bổng toàn phần.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-[11px]">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Độ tuổi tuyển sinh:</span>
+                                    <span class="font-bold text-brand-navy">15 – 18 tuổi (Học sinh THPT)</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Chính sách:</span>
+                                    <span class="font-semibold text-emerald-600">Học bổng 100% học phí 3 năm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <a href="/dang-ky-tu-van?note=Tu+van+Du+hoc+Cap+3+D4-3" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-red-50 hover:bg-brand-red text-brand-red hover:text-white font-bold text-xs transition duration-200">
+                            <span>Đăng ký xét học bổng 100% Cấp 3</span>
+                            <i class="fas fa-chevron-right ml-1.5 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- School 4: Dong-A University (Busan) -->
+                <div class="school-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between" data-region="busan">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/campus_busan.jpg" alt="Đại học Dong-A Busan" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-brand-navy/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                                📍 Busan • Đại học tư thục Top 1
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                                Học bổng 30% - 70%
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-phudu font-bold text-base text-brand-navy">Đại học Dong-A (Dong-A University)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Tọa lạc tại trung tâm thành phố biển Busan xinh đẹp, Dong-A sở hữu hệ thống cơ sở vật chất hiện đại, môi trường quốc tế năng động và chi phí sinh hoạt cực kỳ dễ chịu.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-[11px]">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Học phí hệ tiếng:</span>
+                                    <span class="font-bold text-brand-navy">~1.200.000 KRW/kỳ</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-brand-blue">Quốc tế học, Du lịch, Logistics, Y Dược</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <a href="/dang-ky-tu-van?note=Tu+van+Dai+hoc+Dong-A" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs transition duration-200">
+                            <span>Tư vấn hồ sơ trường Dong-A</span>
+                            <i class="fas fa-chevron-right ml-1.5 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- School 5: Konkuk University -->
+                <div class="school-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between" data-region="seoul">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/alumni_visa_batch.jpg" alt="Đại học Konkuk" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-brand-navy/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                                📍 Seoul • Đại học tổng hợp Top đầu
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                                Học bổng 30% - 50%
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-phudu font-bold text-base text-brand-navy">Đại học Konkuk (Konkuk University)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Nằm tại khu vực sầm uất bậc nhất Seoul, Đại học Konkuk có hồ nước Ilgam tuyệt đẹp, đào tạo xuất sắc các ngành Kinh doanh, Truyền thông và Thú y.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-[11px]">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Học phí hệ tiếng:</span>
+                                    <span class="font-bold text-brand-navy">~1.600.000 KRW/kỳ</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-brand-blue">Kinh tế, Thương mại, Truyền thông, Nghệ thuật</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <a href="/dang-ky-tu-van?note=Tu+van+Dai+hoc+Konkuk" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs transition duration-200">
+                            <span>Tư vấn hồ sơ trường Konkuk</span>
+                            <i class="fas fa-chevron-right ml-1.5 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- School 6: Yeungnam University -->
+                <div class="school-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between" data-region="busan">
+                    <div>
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/video_thumb_thuc_te.jpg" alt="Đại học Yeungnam" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-brand-navy/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                                📍 Gyeongsan / Daegu • Khuôn viên Top 1
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                                Học bổng 50% - 100%
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <h3 class="font-phudu font-bold text-base text-brand-navy">Đại học Yeungnam (Yeungnam University)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Trường đại học có khuôn viên lớn bậc nhất xứ sở kim chi với ga tàu điện ngầm kết nối trực tiếp, mức học bổng dồi dào và chi phí sinh hoạt vô cùng tiết kiệm.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-[11px]">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Học phí hệ tiếng:</span>
+                                    <span class="font-bold text-brand-navy">~1.150.000 KRW/kỳ</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-brand-blue">Kỹ thuật, Ngôn ngữ Hàn, Quản trị, Nông nghiệp</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <a href="/dang-ky-tu-van?note=Tu+van+Dai+hoc+Yeungnam" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs transition duration-200">
+                            <span>Tư vấn hồ sơ trường Yeungnam</span>
+                            <i class="fas fa-chevron-right ml-1.5 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
          SECTION 5: QUY TRÌNH DU HỌC HÀN QUỐC TẠI KIPA
          ========================================== -->
     <section class="py-12 sm:py-16 bg-[#fafbfc]">
@@ -1489,6 +1889,336 @@
 
             </div>
 
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5.5: VÌ SAO KIPA KHÁC BIỆT? BẢNG SO SÁNH MINH BẠCH
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-white border-t border-b border-gray-100" id="so-sanh-minh-bach">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-10">
+                <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-2">
+                    <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                    <span>TẠI SAO HỌC VIÊN & PHỤ HUYNH CHỌN KIPA?</span>
+                </div>
+                <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy leading-tight">
+                    Minh Bạch Từng Cam Kết – Khác Biệt Hoàn Toàn Với Thị Trường
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-600 mt-2 font-vietnam">
+                    Chúng tôi đặt sự an tâm của gia đình và tương lai của học viên lên hàng đầu với sự đồng hành trọn vẹn tại cả Việt Nam và Hàn Quốc.
+                </p>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm bg-white">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="p-4 sm:p-5 bg-slate-50 text-slate-800 font-bold border-b border-slate-200 w-1/3">Tiêu chí so sánh</th>
+                            <th class="p-4 sm:p-5 bg-blue-50/70 text-brand-blue font-bold border-b border-blue-200 w-1/3 text-center sm:text-left">
+                                <div class="inline-flex items-center gap-1.5 text-brand-navy font-phudu font-bold text-sm sm:text-base">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span> KIPA VIỆT HÀN
+                                </div>
+                                <div class="text-[11px] text-brand-blue font-normal mt-0.5">Đối tác trực tiếp các trường Hàn Quốc</div>
+                            </th>
+                            <th class="p-4 sm:p-5 bg-slate-50 text-slate-500 font-bold border-b border-slate-200 w-1/3 text-center sm:text-left">
+                                <span class="text-slate-600 font-bold text-sm sm:text-base">Trung tâm du học thông thường</span>
+                                <div class="text-[11px] text-slate-400 font-normal mt-0.5">Mô hình trung gian môi giới</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-vietnam">
+                        <tr class="hover:bg-slate-50/50 transition">
+                            <td class="p-4 sm:p-5 font-bold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-file-invoice-dollar text-brand-blue"></i>
+                                    <span>Tính minh bạch chi phí</span>
+                                </div>
+                            </td>
+                            <td class="p-4 sm:p-5 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
+                                <span>Hợp đồng trọn gói rõ ràng, cam kết bằng văn bản KHÔNG phát sinh bất kỳ phụ phí ẩn nào.</span>
+                            </td>
+                            <td class="p-4 sm:p-5 text-slate-500">
+                                <i class="fas fa-times-circle text-rose-400 mr-1.5"></i>
+                                <span>Báo giá ban đầu rất thấp, nhưng phát sinh nhiều khoản dịch vụ, hồ sơ, visa trong quá trình làm.</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50/50 transition">
+                            <td class="p-4 sm:p-5 font-bold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-award text-yellow-500"></i>
+                                    <span>Cơ hội học bổng</span>
+                                </div>
+                            </td>
+                            <td class="p-4 sm:p-5 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
+                                <span>Tiếp cận trực tiếp quỹ học bổng 50% - 100%, độc quyền chương trình học bổng 100% Cấp 3 (D4-3).</span>
+                            </td>
+                            <td class="p-4 sm:p-5 text-slate-500">
+                                <i class="fas fa-times-circle text-rose-400 mr-1.5"></i>
+                                <span>Hạn chế suất học bổng, phần lớn học viên đi theo diện tự túc 100% học phí.</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50/50 transition">
+                            <td class="p-4 sm:p-5 font-bold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-user-graduate text-brand-blue"></i>
+                                    <span>Đào tạo tiếng & Luyện phỏng vấn</span>
+                                </div>
+                            </td>
+                            <td class="p-4 sm:p-5 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
+                                <span>Giảng viên Việt – Hàn giàu kinh nghiệm; luyện phỏng vấn visa 1:1 mô phỏng sát phòng thi Đại sứ quán.</span>
+                            </td>
+                            <td class="p-4 sm:p-5 text-slate-500">
+                                <i class="fas fa-times-circle text-rose-400 mr-1.5"></i>
+                                <span>Lớp học đại trà đông học sinh, ít cơ hội tương tác phản xạ 1:1 cùng giáo viên bản xứ.</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50/50 transition">
+                            <td class="p-4 sm:p-5 font-bold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-building text-brand-blue"></i>
+                                    <span>Hỗ trợ thực tế tại Hàn Quốc</span>
+                                </div>
+                            </td>
+                            <td class="p-4 sm:p-5 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
+                                <span>Có ban đại diện tại Seoul đón sân bay, hướng dẫn đăng ký thẻ cư trú ARC, bảo hiểm và hỗ trợ KTX.</span>
+                            </td>
+                            <td class="p-4 sm:p-5 text-slate-500">
+                                <i class="fas fa-times-circle text-rose-400 mr-1.5"></i>
+                                <span>Hết trách nhiệm khi học sinh lên máy bay, học viên phải tự xoay xở khi sang đến Hàn Quốc.</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50/50 transition">
+                            <td class="p-4 sm:p-5 font-bold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-briefcase text-brand-blue"></i>
+                                    <span>Hỗ trợ việc làm thêm hợp pháp</span>
+                                </div>
+                            </td>
+                            <td class="p-4 sm:p-5 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
+                                <span>Hướng dẫn đăng ký giấy phép làm thêm hợp pháp theo luật xuất nhập cảnh Hàn Quốc, kết nối cộng đồng DHS KIPA.</span>
+                            </td>
+                            <td class="p-4 sm:p-5 text-slate-500">
+                                <i class="fas fa-times-circle text-rose-400 mr-1.5"></i>
+                                <span>Không hỗ trợ hoặc giới thiệu việc làm không an toàn, tiềm ẩn nguy cơ vi phạm luật visa.</span>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50/50 transition">
+                            <td class="p-4 sm:p-5 font-bold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-shield-alt text-emerald-500"></i>
+                                    <span>Cam kết tỉ lệ đỗ visa</span>
+                                </div>
+                            </td>
+                            <td class="p-4 sm:p-5 bg-blue-50/30 text-emerald-700 font-semibold">
+                                <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
+                                <span>Thẩm định hồ sơ nghiêm ngặt, tỉ lệ đỗ visa 99.2%; cam kết hỗ trợ đến cùng.</span>
+                            </td>
+                            <td class="p-4 sm:p-5 text-slate-500">
+                                <i class="fas fa-times-circle text-rose-400 mr-1.5"></i>
+                                <span>Nhận hồ sơ dễ dãi, rủi ro trượt visa cao và học viên phải tự chịu mất các khoản phí.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5.6: GƯƠNG MẶT HỌC VIÊN TIÊU BIỂU & CHIA SẺ THỰC TẾ
+         ========================================== -->
+    <section class="py-12 sm:py-16 bg-[#fafbfc]" id="hoc-vien-tieu-bieu">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200 gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5">
+                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                        <span>NGƯỜI THẬT – VIỆC THẬT</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy">
+                        Hành Trình Chinh Phục Hàn Quốc Của Học Viên KIPA
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-1">
+                        Hàng trăm học viên đã thực hiện ước mơ du học Hàn Quốc thành công cùng sự đồng hành tận tâm của KIPA Việt Hàn.
+                    </p>
+                </div>
+                
+                <a href="/cau-chuyen-hoc-vien" class="inline-flex items-center gap-2 text-xs font-bold text-brand-blue hover:text-blue-800 transition">
+                    <span>Xem thêm câu chuyện khác</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <!-- Alumni Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Alumni 1: Nguyễn Thảo Chi -->
+                <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/alumni_thao_chi.jpg" alt="Nguyễn Thảo Chi - Học viên KIPA" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                🎓 Học bổng 100% Cấp 3 (D4-3)
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-slate-900/80 text-white text-[10px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-sm">
+                                ✈️ Bay kỳ Xuân 2025
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-phudu font-bold text-base text-brand-navy">Nguyễn Thảo Chi</h3>
+                                <div class="flex text-amber-400 text-xs">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed font-vietnam italic">
+                                "Em bắt đầu học tiếng Hàn từ con số 0 tại KIPA. Nhờ sự kèm cặp tận tình của các thầy cô, em không chỉ đạt chuẩn visa mà còn may mắn nhận học bổng toàn phần du học cấp 3 tại Hàn Quốc. Khi sang Seoul, em được các anh chị KIPA đón tận sân bay và hướng dẫn mọi thủ tục nhập học."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button type="button" onclick="openVideoModal('https://youtu.be/zJjAjevrirc')" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-50 hover:bg-brand-red text-brand-red hover:text-white font-bold text-xs transition duration-200 cursor-pointer">
+                            <i class="fab fa-youtube text-sm"></i>
+                            <span>Xem video chia sẻ của Thảo Chi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Alumni 2: Nguyễn Minh Anh -->
+                <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/alumni_minh_anh.jpg" alt="Nguyễn Minh Anh - Học viên KIPA" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-brand-navy/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                                🇰🇷 Du học sinh tại Seoul
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-slate-900/80 text-white text-[10px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-sm">
+                                ✈️ Học bổng toàn phần
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-phudu font-bold text-base text-brand-navy">Nguyễn Minh Anh</h3>
+                                <div class="flex text-amber-400 text-xs">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed font-vietnam italic">
+                                "Điều mình thích nhất ở KIPA là sự rõ ràng về chi phí ngay từ ngày đầu tiên. Các buổi luyện phỏng vấn visa 1-1 giống hệt phỏng vấn thật ở Lãnh sự quán giúp mình vượt qua cực kỳ tự tin. Hiện tại mình đang có trải nghiệm học tập tuyệt vời tại xứ sở kim chi!"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button type="button" onclick="openVideoModal('https://youtu.be/2mlWS1WtS8c')" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-50 hover:bg-brand-red text-brand-red hover:text-white font-bold text-xs transition duration-200 cursor-pointer">
+                            <i class="fab fa-youtube text-sm"></i>
+                            <span>Xem video phỏng vấn Minh Anh</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Alumni 3: Phụ huynh Cao Thùy Lâm -->
+                <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-100">
+                            <img src="/assets/du-hoc-han-quoc/video_thumb_thuc_te.jpg" alt="Phụ huynh Cao Thùy Lâm" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                👨‍👩‍👧 Phụ huynh tin tưởng KIPA
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-slate-900/80 text-white text-[10px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-sm">
+                                ❤️ Đồng hành kỳ Xuân 2025
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-phudu font-bold text-base text-brand-navy">Bác Cao Thùy Lâm (Phụ huynh)</h3>
+                                <div class="flex text-amber-400 text-xs">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed font-vietnam italic">
+                                "Cho con đi du học xa nhà lúc mới 16 tuổi gia đình ban đầu rất lo lắng. Nhưng làm việc cùng KIPA, thấy hợp đồng rõ ràng, chi phí minh bạch và thầy cô chăm lo cho cháu từng bữa ăn giấc ngủ trong thời gian học tiếng nên bố mẹ yên tâm 100%. Cảm ơn trung tâm rất nhiều!"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button type="button" onclick="openVideoModal('https://youtube.com/shorts/ZQO7b-tLbIU')" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-50 hover:bg-brand-red text-brand-red hover:text-white font-bold text-xs transition duration-200 cursor-pointer">
+                            <i class="fab fa-youtube text-sm"></i>
+                            <span>Xem chia sẻ của Bác Lâm</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5.7: LEAD MAGNET - TẢI CẨM NANG DU HỌC HÀN QUỐC 2026 MIỄN PHÍ
+         ========================================== -->
+    <section class="py-10 bg-gradient-to-r from-[#034470] via-[#025a94] to-[#0274BD] text-white relative overflow-hidden" id="tai-tai-lieu">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <div class="lg:col-span-7 space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm text-yellow-300">
+                        <i class="fas fa-gift"></i>
+                        <span>Quà tặng độc quyền từ Ban Chuyên Môn KIPA</span>
+                    </div>
+                    <h2 class="font-phudu text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight">
+                        Tải Ngay: Cẩm Nang Du Học Hàn Quốc 2026 <br class="hidden sm:inline">
+                        <span class="text-yellow-300">& Trọn Bộ 50 Câu Hỏi Phỏng Vấn Visa</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-blue-100 max-w-xl leading-relaxed font-vietnam">
+                        Tài liệu đầy đủ nhất về điều kiện các hệ visa D4-1, D4-3, D2, bảng học phí 50+ trường đại học tại Seoul - Busan và trọn bộ câu hỏi phỏng vấn thực tế tại Đại sứ quán.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-5 bg-white text-slate-900 p-6 sm:p-7 rounded-3xl shadow-2xl">
+                    <form id="lead-magnet-form" onsubmit="handleLeadMagnetSubmit(event)" class="space-y-3">
+                        <h4 class="font-phudu font-bold text-sm text-brand-navy">Điền thông tin để nhận tài liệu miễn phí qua Zalo/Email:</h4>
+                        
+                        <div>
+                            <label for="lm-name" class="block text-xs font-semibold text-slate-700 mb-1">Họ và tên *</label>
+                            <input type="text" id="lm-name" required placeholder="Họ và tên của bạn *" aria-label="Họ và tên của bạn" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label for="lm-phone" class="block text-xs font-semibold text-slate-700 mb-1">Số điện thoại / Zalo *</label>
+                                <input type="tel" id="lm-phone" required placeholder="Số điện thoại / Zalo *" aria-label="Số điện thoại hoặc Zalo" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
+                            </div>
+                            <div>
+                                <label for="lm-email" class="block text-xs font-semibold text-slate-700 mb-1">Địa chỉ Email</label>
+                                <input type="email" id="lm-email" placeholder="Địa chỉ Email" aria-label="Địa chỉ Email nhận cẩm nang" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="lm-submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition duration-200 cursor-pointer">
+                            <i class="fas fa-download"></i>
+                            <span>Gửi Cẩm Nang Cho Tôi Miễn Phí</span>
+                        </button>
+                        
+                        <p class="text-center text-[10px] text-slate-500">KIPA cam kết bảo mật thông tin cá nhân theo đúng chính sách bảo mật.</p>
+                        
+                        <div id="lm-success-msg" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs text-center font-medium">
+                            🎉 Đăng ký thành công! KIPA đã ghi nhận và gửi cẩm nang đến bạn. Chuyên viên sẽ liên hệ hỗ trợ bạn giải đáp mọi thắc mắc.
+                        </div>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -1711,6 +2441,143 @@
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closeVideoModal();
     });
+
+    // Interactive Scholarship & Cost Calculator
+    function calculateDuhocEstimate() {
+        const heEl = document.getElementById('calc-he');
+        const gpaEl = document.getElementById('calc-gpa');
+        const topikEl = document.getElementById('calc-topik');
+        const regionEl = document.getElementById('calc-region');
+        if (!heEl || !gpaEl || !topikEl || !regionEl) return;
+
+        const he = heEl.value;
+        const gpa = parseFloat(gpaEl.value);
+        const topik = topikEl.value;
+        const region = regionEl.value;
+
+        let scholarship = "30% - 50% học phí";
+        let cost = "150 – 180 triệu VNĐ";
+        let preptime = "3 – 4 tháng (KIPA)";
+        let school = "ĐH Seokyeong, ĐH Konkuk, ĐH Dong-A";
+
+        if (he === 'd4-3') {
+            scholarship = "Học bổng 100% học phí (Chương trình độc quyền KIPA)";
+            cost = "135 – 160 triệu VNĐ";
+            preptime = "3 – 4 tháng (tiếng Hàn THPT)";
+            school = "Trường THPT Đối tác KIPA tại Seoul & Incheon";
+        } else if (he === 'd4-1') {
+            if (gpa >= 8.0) {
+                scholarship = "30% - 50% học phí kỳ đầu";
+            } else if (gpa >= 7.0) {
+                scholarship = "20% - 30% học phí kỳ đầu";
+            } else {
+                scholarship = "Hỗ trợ 10% - 20% phí nhập học";
+            }
+            cost = region === 'seoul' ? "170 – 210 triệu VNĐ" : "150 – 180 triệu VNĐ";
+            preptime = "3 – 4 tháng luyện phỏng vấn visa";
+            school = region === 'seoul' ? "ĐH Konkuk, ĐH Seokyeong, ĐH Chung-Ang" : "ĐH Dong-A, ĐH Yeungnam, ĐH Chosun";
+        } else if (he === 'd2-2' || he === 'd2-3') {
+            if (topik === 'topik56') {
+                scholarship = "70% - 100% học phí toàn khóa";
+            } else if (topik === 'topik34') {
+                scholarship = "50% - 70% học phí kỳ đầu";
+            } else {
+                scholarship = "30% - 50% học phí (sau khi đạt TOPIK 3)";
+            }
+            cost = region === 'seoul' ? "180 – 230 triệu VNĐ" : "155 – 195 triệu VNĐ";
+            preptime = topik === 'none' ? "6 – 9 tháng luyện TOPIK 3+" : "1 – 2 tháng xử lý hồ sơ";
+            school = region === 'seoul' ? "ĐH Hanyang, ĐH Chung-Ang, ĐH Konkuk" : "ĐH Dong-A, ĐH Pusan, ĐH Yeungnam";
+        } else if (he === 'd4-6') {
+            scholarship = "Học bổng 30% & Trợ cấp thực tập có lương";
+            cost = "140 – 170 triệu VNĐ";
+            preptime = "3 tháng luyện chứng chỉ nghề & tiếng";
+            school = "Các trường Cao đẳng Nghề hàng đầu Hàn Quốc";
+        }
+
+        const resSch = document.getElementById('res-scholarship');
+        const resCost = document.getElementById('res-cost');
+        const resPrep = document.getElementById('res-preptime');
+        const resSchool = document.getElementById('res-school');
+
+        if (resSch) resSch.textContent = scholarship;
+        if (resCost) resCost.textContent = cost;
+        if (resPrep) resPrep.textContent = preptime;
+        if (resSchool) resSchool.textContent = school;
+    }
+
+    // Filter Partner Schools
+    function filterSchools(region, btn) {
+        const cards = document.querySelectorAll('#schools-grid .school-card');
+        const tabs = document.querySelectorAll('#school-filter-tabs .school-tab-btn');
+        
+        tabs.forEach(t => {
+            t.classList.remove('bg-white', 'text-brand-navy', 'shadow-sm');
+            t.classList.add('text-slate-600');
+        });
+        if (btn) {
+            btn.classList.add('bg-white', 'text-brand-navy', 'shadow-sm');
+            btn.classList.remove('text-slate-600');
+        }
+
+        cards.forEach(card => {
+            const cardRegion = card.getAttribute('data-region');
+            if (region === 'all' || cardRegion === region) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Handle Lead Magnet Form Submit
+    function handleLeadMagnetSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('lm-name').value.trim();
+        const phone = document.getElementById('lm-phone').value.trim();
+        const email = document.getElementById('lm-email').value.trim();
+        const btn = document.getElementById('lm-submit-btn');
+        const msg = document.getElementById('lm-success-msg');
+
+        if (!name || !phone) {
+            alert('Vui lòng điền họ tên và số điện thoại');
+            return;
+        }
+
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Đang xử lý...</span>';
+        }
+
+        const formData = new FormData();
+        formData.append('fullname', name);
+        formData.append('phone', phone);
+        formData.append('email', email || '');
+        formData.append('service', 'duhoc');
+        formData.append('country', 'Hàn Quốc');
+        formData.append('notes', 'Đăng ký tải Cẩm nang Du học Hàn Quốc 2026 + 50 câu hỏi phỏng vấn Visa');
+
+        fetch('/api/submit.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (btn) {
+                btn.classList.add('hidden');
+            }
+            if (msg) {
+                msg.classList.remove('hidden');
+            }
+        })
+        .catch(err => {
+            if (btn) {
+                btn.classList.add('hidden');
+            }
+            if (msg) {
+                msg.classList.remove('hidden');
+            }
+        });
+    }
 </script>
     </main>
 
