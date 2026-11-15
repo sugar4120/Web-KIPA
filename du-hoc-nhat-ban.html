@@ -793,7 +793,7 @@
         <!-- ========================================================
              HERO BANNER & BREADCRUMB
              ======================================================== -->
-        <section class="relative bg-gradient-to-b from-[#F2F8FD] via-[#F8FBFE] to-white pt-4 pb-10 sm:pb-14 border-b border-slate-100 overflow-hidden">
+        <section class="relative pt-4 pb-10 sm:pb-14 border-b border-slate-100 overflow-hidden" style="background: linear-gradient(180deg, #F2F8FD 0%, #F8FBFE 60%, #ffffff 100%);">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 <!-- Breadcrumb -->
@@ -835,7 +835,7 @@
 
                         <!-- CTA Buttons -->
                         <div class="flex flex-wrap items-center gap-3.5 pt-2">
-                            <button type="button" onclick="openConsultationModal()" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#EC1E1B] to-[#D81815] hover:opacity-95 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                            <button type="button" onclick="openConsultationModal()" class="btn-kipa-red inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5" style="background-color: #EC1E1B !important; color: #ffffff !important;">
                                 <i class="fa-solid fa-calendar-days text-sm"></i>
                                 <span>Đăng ký tư vấn ngay</span>
                                 <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -1117,7 +1117,7 @@
         <!-- ========================================================
              SECTION: BỘ CÔNG CỤ HỖ TRỢ TỪ KIPA (4 TOOLS)
              ======================================================== -->
-        <section class="py-10 sm:py-14 bg-gradient-to-b from-[#F7FAFD] to-[#EDF4FA] border-t border-b border-blue-100/60 relative">
+        <section class="py-10 sm:py-14 border-t border-b border-blue-100/60 relative" style="background: linear-gradient(180deg, #F7FAFD 0%, #EDF4FA 100%);">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <!-- Section Header -->
@@ -1739,56 +1739,56 @@
                             <h3>KIPA đồng hành như thế nào?</h3>
                         </div>
 
-                        <!-- 5 Items Grid/List -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2.5 text-xs text-slate-700">
+                        <!-- 5 Items List (Clean responsive layout, no cramped columns) -->
+                        <div class="flex flex-col gap-2.5 text-xs text-slate-700">
                             
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-regular fa-comments"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Tư vấn & định hướng</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Chọn trường & ngành tối ưu</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Tư vấn & định hướng</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Chọn trường & ngành tối ưu</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-regular fa-file-lines"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Hỗ trợ hồ sơ</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Dịch thuật & pháp lý chuẩn chỉ</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Hỗ trợ hồ sơ</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Dịch thuật & pháp lý chuẩn chỉ</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-solid fa-school"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Kết nối trường học</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">100+ đối tác tại Nhật Bản</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Kết nối trường học</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">100+ đối tác tại Nhật Bản</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Hướng dẫn xin visa</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Tỉ lệ đỗ visa &gt; 98%</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Hướng dẫn xin visa</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Tỉ lệ đỗ visa &gt; 98%</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 col-span-2 sm:col-span-1">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-solid fa-users"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Đồng hành sau nhập học</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Hỗ trợ việc làm thêm & cư trú</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Đồng hành sau nhập học</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Hỗ trợ việc làm thêm & cư trú</span>
                                 </div>
                             </div>
 
@@ -1803,7 +1803,7 @@
         <!-- ========================================================
              SECTION: CÂU CHUYỆN HỌC VIÊN & BANNER SẴN SÀNG (BOTTOM ROW)
              ======================================================== -->
-        <section class="py-10 sm:py-14 bg-gradient-to-b from-white to-[#F2F7FC] border-t border-slate-100">
+        <section class="py-10 sm:py-14 border-t border-slate-100" style="background: linear-gradient(180deg, #ffffff 0%, #F2F7FC 100%);">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -1858,30 +1858,38 @@
 
                     <!-- Right: Sẵn sàng bắt đầu hành trình tại Nhật Bản? (lg:col-span-6) -->
                     <div class="lg:col-span-6 flex flex-col justify-end">
-                        <div class="relative rounded-3xl overflow-hidden shadow-lg p-6 sm:p-7 text-white flex flex-col justify-between h-full bg-gradient-to-r from-[#0153A8] to-[#0274BD]">
+                        <div class="cta-japan-card relative rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 text-white flex flex-col justify-between h-full border border-blue-400/20" style="background: linear-gradient(135deg, #07192e 0%, #01458e 50%, #0274BD 100%) !important; color: #ffffff !important;">
                             
-                            <!-- Background Fuji + Pagoda Real Photo Overlay -->
-                            <img src="/assets/tin-tuc/cat-chuong-trinh-nhat-ban.jpg" alt="Núi Phú Sĩ và Chùa Chureito Nhật Bản" class="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay pointer-events-none">
+                            <!-- Subtle decorative glowing light orbs -->
+                            <div class="absolute -right-8 -bottom-8 w-48 h-48 rounded-full bg-white/10 pointer-events-none blur-2xl"></div>
+                            <div class="absolute -left-8 -top-8 w-40 h-40 rounded-full bg-blue-400/20 pointer-events-none blur-xl"></div>
 
-                            <div class="relative z-10 space-y-2 mb-6">
-                                <h3 class="font-phudu text-xl sm:text-2xl font-black leading-tight text-white">
+                            <!-- Background Fuji + Pagoda Real Photo Overlay -->
+                            <img src="/assets/tin-tuc/cat-chuong-trinh-nhat-ban.jpg" alt="Núi Phú Sĩ và Chùa Chureito Nhật Bản" class="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-luminosity pointer-events-none">
+
+                            <div class="relative z-10 space-y-2.5 mb-6">
+                                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-[11px] font-bold text-blue-100">
+                                    <i class="fa-solid fa-paper-plane text-amber-300"></i>
+                                    <span>Tư vấn 1:1 miễn phí cùng chuyên gia KIPA</span>
+                                </div>
+                                <h3 class="font-phudu text-xl sm:text-2xl font-black leading-tight text-white" style="color: #ffffff !important;">
                                     Sẵn sàng <br class="hidden sm:block">
                                     bắt đầu hành trình <br class="hidden sm:block">
                                     tại Nhật Bản?
                                 </h3>
-                                <p class="text-xs sm:text-[13px] text-blue-100 leading-relaxed max-w-md">
+                                <p class="text-xs sm:text-[13px] leading-relaxed max-w-md font-vietnam" style="color: #e0f2fe !important;">
                                     Liên hệ KIPA Việt Hàn ngay hôm nay để được tư vấn chi tiết lộ trình, chương trình và chi phí phù hợp nhất.
                                 </p>
                             </div>
 
                             <!-- 2 CTA Buttons -->
                             <div class="relative z-10 flex flex-wrap items-center gap-3">
-                                <button type="button" onclick="openConsultationModal()" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#EC1E1B] hover:bg-[#d61815] text-white font-bold text-xs sm:text-sm shadow-md transition-all">
+                                <button type="button" onclick="openConsultationModal()" class="btn-kipa-red inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all" style="background-color: #EC1E1B !important; color: #ffffff !important;">
                                     <i class="fa-solid fa-calendar-check text-xs"></i>
                                     <span>Đăng ký tư vấn ngay</span>
                                     <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </button>
-                                <a href="tel:0368513865" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-[#0153A8] font-bold text-xs sm:text-sm shadow-md transition-all">
+                                <a href="tel:0368513865" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all hover:bg-blue-50" style="background-color: #ffffff !important; color: #0274BD !important;">
                                     <i class="fa-solid fa-phone text-xs"></i>
                                     <span>Gọi 036 851 3865</span>
                                 </a>
@@ -1902,8 +1910,8 @@
         <section id="dang-ky-truc-tiep" class="py-10 sm:py-14 bg-white border-t border-slate-100">
             <div class="max-w-[860px] mx-auto px-4 sm:px-6">
                 
-                <div class="bg-gradient-to-b from-[#F8FAFD] to-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md relative overflow-hidden">
-                    <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0274BD] via-[#EC1E1B] to-[#FACC15]"></div>
+                <div class="rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md relative overflow-hidden" style="background: linear-gradient(180deg, #F8FAFD 0%, #ffffff 100%);">
+                    <div class="absolute top-0 left-0 right-0 h-2" style="background: linear-gradient(90deg, #0274BD 0%, #EC1E1B 50%, #FACC15 100%);"></div>
 
                     <div class="text-center space-y-1.5 mb-6">
                         <span class="inline-block px-3 py-1 bg-red-100 text-[#EC1E1B] rounded-full text-[11px] font-bold uppercase tracking-wider">
@@ -2333,7 +2341,7 @@
                         <ul class="space-y-1.5 text-xs text-slate-700">${pointsHtml}</ul>
                     </div>
                     <div class="pt-2">
-                        <button type="button" onclick="closeSchoolDetailModal(); openConsultationModal('${data.name}');" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#EC1E1B] to-[#D81815] text-white font-bold text-xs shadow-md hover:opacity-95 transition-all">
+                        <button type="button" onclick="closeSchoolDetailModal(); openConsultationModal('${data.name}');" class="btn-kipa-red w-full py-2.5 rounded-xl font-bold text-xs shadow-md transition-all" style="background-color: #EC1E1B !important; color: #ffffff !important;">
                             Đăng ký nhận chỉ tiêu & học bổng trường này
                         </button>
                     </div>
