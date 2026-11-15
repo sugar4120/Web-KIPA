@@ -1035,23 +1035,33 @@
                 
                 <!-- Col 1: Video Card -->
                 <div class="lg:col-span-4">
-                    <div class="relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 group cursor-pointer h-full min-h-[220px]">
+                    <div class="relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 group cursor-pointer h-full min-h-[220px]" 
+                         onclick="openVideoModal('https://youtube.com/shorts/ZQO7b-tLbIU')"
+                         role="button"
+                         tabindex="0"
+                         title="Xem video chia sẻ thực tế du học Hàn Quốc">
                         <img src="/assets/du-hoc-han-quoc/video_thumb_thuc_te.jpg" 
-                             alt="Hội thảo K-Campus Roadshow & Du học Hàn Quốc KIPA" 
+                             alt="Chia sẻ thực tế về du học Hàn Quốc cùng KIPA Việt Hàn" 
                              class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
                              loading="lazy">
                         <!-- Play button overlay -->
-                        <div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/35 transition">
-                            <div class="w-12 h-12 rounded-full bg-white/90 text-brand-blue flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
-                                <i class="fas fa-play ml-1 text-sm"></i>
+                        <div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/40 transition">
+                            <div class="w-14 h-14 rounded-full bg-white/95 text-[#EC1E1B] flex items-center justify-center shadow-xl transform group-hover:scale-110 group-hover:bg-[#EC1E1B] group-hover:text-white transition duration-300">
+                                <i class="fas fa-play ml-1 text-base"></i>
                             </div>
                         </div>
                         <!-- Bottom text overlay -->
-                        <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/45 to-transparent text-white">
-                            <div class="text-xs font-bold leading-tight">Hội thảo K-Campus Roadshow</div>
-                            <div class="text-[11px] text-gray-200 flex items-center justify-between mt-0.5">
-                                <span>Gặp gỡ trực tiếp đại diện trường Hàn Quốc</span>
-                                <span class="bg-brand-red px-2 py-0.5 rounded text-[10px] font-bold">Thực tế</span>
+                        <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white">
+                            <div class="text-xs font-bold leading-tight flex items-center gap-1.5">
+                                <i class="fab fa-youtube text-red-500 text-sm"></i>
+                                <span>Chia sẻ thực tế du học Hàn Quốc</span>
+                            </div>
+                            <div class="text-[11px] text-gray-200 flex items-center justify-between mt-1">
+                                <span>Cảm nhận học viên & phụ huynh KIPA</span>
+                                <span class="bg-[#EC1E1B] text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1">
+                                    <i class="fas fa-play text-[8px]"></i>
+                                    <span>Xem video</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1640,7 +1650,35 @@
 
 </div>
 
-<!-- Interactive JS Script for FAQ Accordion -->
+<!-- ========================================================
+     VIDEO MODAL (Hỗ trợ phát video YouTube / Shorts)
+     ======================================================== -->
+<div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-all duration-300" onclick="closeVideoModal(event)">
+    <div class="bg-slate-900 rounded-3xl max-w-sm sm:max-w-md w-full overflow-hidden shadow-2xl relative border border-slate-700/80" onclick="event.stopPropagation()">
+        <!-- Header bar -->
+        <div class="flex items-center justify-between p-3.5 bg-slate-800/90 text-white border-b border-slate-700">
+            <div class="flex items-center gap-2">
+                <i class="fab fa-youtube text-[#EC1E1B] text-lg"></i>
+                <span class="text-xs sm:text-sm font-bold text-slate-100 truncate">Chia sẻ thực tế du học Hàn Quốc</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="https://youtube.com/shorts/ZQO7b-tLbIU?feature=share" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded-lg" title="Mở trên YouTube">
+                    <span>Mở YouTube</span>
+                    <i class="fas fa-external-link-alt text-[10px]"></i>
+                </a>
+                <button type="button" onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors" title="Đóng">
+                    <i class="fas fa-times text-base"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Video Container: Shorts 9:16 aspect ratio -->
+        <div class="w-full bg-black aspect-[9/16] max-h-[78vh] flex items-center justify-center">
+            <iframe id="video-frame" class="w-full h-full" src="" title="Video chia sẻ du học Hàn Quốc KIPA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- Interactive JS Script for FAQ Accordion & Video Modal -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const faqItems = document.querySelectorAll('#dh-korea-faq-accordion .faq-item');
@@ -1653,6 +1691,42 @@
                 }
             });
         });
+    });
+
+    // Video Modal Functions
+    function openVideoModal(videoUrl) {
+        const modal = document.getElementById('video-modal');
+        const frame = document.getElementById('video-frame');
+        if (!modal || !frame) return;
+
+        let embedUrl = "https://www.youtube.com/embed/ZQO7b-tLbIU?autoplay=1&rel=0";
+        if (videoUrl) {
+            let id = 'ZQO7b-tLbIU';
+            if (videoUrl.includes('/shorts/')) {
+                id = videoUrl.split('/shorts/')[1].split(/[?&#]/)[0];
+            } else if (videoUrl.includes('watch?v=')) {
+                id = videoUrl.split('watch?v=')[1].split(/[?&#]/)[0];
+            } else if (videoUrl.includes('youtu.be/')) {
+                id = videoUrl.split('youtu.be/')[1].split(/[?&#]/)[0];
+            }
+            embedUrl = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+        }
+        frame.src = embedUrl;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal(e) {
+        const modal = document.getElementById('video-modal');
+        const frame = document.getElementById('video-frame');
+        if (!modal) return;
+        if (frame) frame.src = "";
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeVideoModal();
     });
 </script>
     </main>
