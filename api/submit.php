@@ -64,7 +64,7 @@ $formTypes = [
     'korean_gift' => [
         'path' => '/tieng-han/',
         'keys' => ['name', 'phone', 'email', 'level', 'format', 'course', 'timing', 'consent'],
-        'required' => ['name', 'phone', 'consent'],
+        'required' => ['name', 'phone', 'email', 'consent'],
         'contact' => 'name',
     ],
     'labor' => [
@@ -161,8 +161,8 @@ $email = $cleanFields['email'] ?? null;
 if ($email !== null && $email !== '' && (strlen($email) > 254 || filter_var($email, FILTER_VALIDATE_EMAIL) === false)) {
     kipa_json_response(422, ['error' => 'Vui lòng nhập địa chỉ email hợp lệ.']);
 }
-if ($type === 'partnership' && $email === '') {
-    kipa_json_response(422, ['error' => 'Vui lòng nhập email liên hệ.']);
+if (($type === 'partnership' || $type === 'korean_gift') && ($email === null || $email === '')) {
+    kipa_json_response(422, ['error' => 'Vui lòng nhập địa chỉ email để KIPA gửi tài liệu.']);
 }
 if (isset($cleanFields['birth_year']) && $cleanFields['birth_year'] !== 'older') {
     $year = filter_var($cleanFields['birth_year'], FILTER_VALIDATE_INT);

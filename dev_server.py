@@ -248,6 +248,19 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             source_page = data.get('source_page', '/tieng-han/')
             fields = data.get('fields', {})
 
+            if form_type == 'korean_gift' and not fields.get('email', '').strip():
+                response_data = {
+                    'ok': False,
+                    'error': 'Vui lòng nhập địa chỉ email để KIPA gửi tài liệu.'
+                }
+                resp_bytes = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
+                self.send_response(422)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+
             try:
                 lead_id, contact_name, phone = save_dev_lead(form_type, source_page, fields)
                 sys.stderr.write(f"[{self.log_date_time_string()}] [DATABASE GHI NHẬN] Lead #{lead_id} ({form_type}): {contact_name} - SDT: {phone} -> Lưu thành công vào {DB_PATH}\n")
