@@ -69,7 +69,7 @@ $formTypes = [
     ],
     'korean_online_trial' => [
         'path' => '/tieng-han/',
-        'keys' => ['name', 'phone', 'email', 'class_choice', 'level', 'timing', 'notes', 'consent'],
+        'keys' => ['name', 'phone', 'email', 'class_choice', 'level', 'timing', 'notes', 'quiz_summary', 'consent'],
         'required' => ['name', 'phone', 'email', 'class_choice', 'consent'],
         'contact' => 'name',
     ],
