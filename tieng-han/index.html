@@ -1282,8 +1282,32 @@
 
                 <!-- Right Video Card -->
                 <div class="lg:col-span-4">
-                    <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-white h-full flex flex-col justify-between">
-                        <img src="/assets/tieng-han/real_roadmap_teacher.jpg" alt="Chương trình đào tạo tiếng Hàn KIPA" class="w-full h-auto object-cover">
+                    <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-white h-full flex flex-col justify-between group">
+                        <!-- Video Thumbnail with Hover Overlay & Play Button -->
+                        <a href="https://youtu.be/hz1X9eAvmV8" target="_blank" rel="noopener noreferrer"
+                            onclick="openVideoModal('Chương trình đào tạo tiếng Hàn KIPA', 'Xem video giới thiệu chương trình đào tạo tiếng Hàn toàn diện từ cơ bản đến nâng cao tại KIPA Việt Hàn.', 'hz1X9eAvmV8'); return false;"
+                            class="relative block overflow-hidden aspect-[16/11] bg-slate-100 cursor-pointer flex-1">
+                            <img src="/assets/tieng-han/real_roadmap_teacher.jpg" alt="Video giới thiệu chương trình đào tạo tiếng Hàn KIPA"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <!-- Overlay & Play Button -->
+                            <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/35 transition-colors flex items-center justify-center">
+                                <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white/95 text-[#0274BD] group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition-all flex items-center justify-center shadow-xl pl-1">
+                                    <i class="fa-solid fa-play text-base sm:text-lg"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Blue Banner at bottom matching design -->
+                        <a href="https://youtu.be/hz1X9eAvmV8" target="_blank" rel="noopener noreferrer"
+                            onclick="openVideoModal('Chương trình đào tạo tiếng Hàn KIPA', 'Xem video giới thiệu chương trình đào tạo tiếng Hàn toàn diện từ cơ bản đến nâng cao tại KIPA Việt Hàn.', 'hz1X9eAvmV8'); return false;"
+                            class="bg-[#0274BD] hover:bg-[#02629f] transition-colors p-4 flex items-center justify-between gap-3 text-white">
+                            <span class="text-xs sm:text-[13px] font-bold leading-snug">
+                                Xem video giới thiệu chương trình đào tạo tiếng Hàn tại KIPA
+                            </span>
+                            <div class="w-9 h-9 rounded-full bg-white text-[#0274BD] hover:scale-105 transition-transform flex items-center justify-center shadow-md flex-shrink-0 pl-0.5">
+                                <i class="fa-solid fa-play text-xs"></i>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
