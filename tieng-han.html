@@ -1342,49 +1342,143 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-1">
                         <div class="space-y-1">
-                            <label class="text-[11px] font-bold text-slate-700 block">Trình độ hiện tại</label>
-                            <select aria-label="Trình độ tiếng Hàn hiện tại" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
-                                <option>Chưa từng học</option>
-                                <option>Đã biết bảng chữ cái</option>
-                                <option>Sơ cấp (TOPIK 1-2)</option>
-                                <option>Trung cấp (TOPIK 3-4)</option>
+                            <label for="finder-level" class="text-[11px] font-bold text-slate-700 block">Trình độ hiện tại</label>
+                            <select id="finder-level" onchange="onFinderOptionChange()" aria-label="Trình độ tiếng Hàn hiện tại" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue font-medium text-slate-800">
+                                <option value="zero">Chưa từng học (Từ số 0)</option>
+                                <option value="alphabet" selected>Đã biết bảng chữ cái</option>
+                                <option value="topik12">Sơ cấp (TOPIK 1-2)</option>
+                                <option value="topik34">Trung cấp (TOPIK 3-4)</option>
                             </select>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="text-[11px] font-bold text-slate-700 block">Mục tiêu học tập</label>
-                            <select aria-label="Mục tiêu học tập tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
-                                <option>Học tiếng Hàn du học</option>
-                                <option>Giao tiếp đời sống</option>
-                                <option>Luyện thi TOPIK</option>
-                                <option>Phục vụ công việc</option>
+                            <label for="finder-goal" class="text-[11px] font-bold text-slate-700 block">Mục tiêu học tập</label>
+                            <select id="finder-goal" onchange="onFinderOptionChange()" aria-label="Mục tiêu học tập tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue font-medium text-slate-800">
+                                <option value="duhoc" selected>Học tiếng Hàn du học</option>
+                                <option value="giaotiep">Giao tiếp đời sống</option>
+                                <option value="topik">Luyện thi TOPIK</option>
+                                <option value="congviec">Phục vụ công việc / Xuất khẩu</option>
                             </select>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="text-[11px] font-bold text-slate-700 block">Hình thức học</label>
-                            <select aria-label="Hình thức học tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
-                                <option>Học trực tiếp</option>
-                                <option>Học trực tuyến (Online)</option>
+                            <label for="finder-format" class="text-[11px] font-bold text-slate-700 block">Hình thức học</label>
+                            <select id="finder-format" onchange="onFinderOptionChange()" aria-label="Hình thức học tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue font-medium text-slate-800">
+                                <option value="offline">Học trực tiếp tại cơ sở KIPA</option>
+                                <option value="online" selected>Học trực tuyến (Online Google Meet)</option>
                             </select>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="text-[11px] font-bold text-slate-700 block">Thời gian mở học</label>
-                            <select aria-label="Thời gian có thể bắt đầu học tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue">
-                                <option>Buổi tối</option>
-                                <option>Buổi sáng</option>
-                                <option>Buổi chiều</option>
-                                <option>Cuối tuần</option>
+                            <label for="finder-shift" class="text-[11px] font-bold text-slate-700 block">Thời gian học</label>
+                            <select id="finder-shift" onchange="onFinderOptionChange()" aria-label="Thời gian có thể bắt đầu học tiếng Hàn" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-white focus:border-brand-blue font-medium text-slate-800">
+                                <option value="toi">Buổi tối (19:00 - 21:00)</option>
+                                <option value="chieu" selected>Buổi chiều (14:00 - 16:30)</option>
+                                <option value="sang">Buổi sáng (08:30 - 11:00)</option>
+                                <option value="cuoituan">Cuối tuần (Thứ 7 &amp; Chủ nhật)</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="pt-2">
-                        <a href="#dang-ky" class="inline-flex items-center gap-2 bg-brand-red hover:bg-rose-700 text-white font-bold text-xs px-6 py-2.5 rounded-full shadow-xs transition-all">
+                    <div class="pt-2 flex flex-wrap items-center gap-3">
+                        <button type="button" id="btn-find-course" onclick="findMatchingCourse()" class="inline-flex items-center gap-2 bg-brand-red hover:bg-rose-700 text-white font-phudu font-bold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer" style="background-color: #e02424; color: #ffffff;">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
                             <span>Tìm khóa học phù hợp</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </a>
+                        </button>
+                        <span class="text-xs text-slate-500 hidden sm:inline-block">Nhấp để xem ngay khóa học được gợi ý tốt nhất cho bạn</span>
+                    </div>
+
+                    <!-- KẾT QUẢ PHÂN TÍCH & ĐỀ XUẤT KHÓA HỌC PHÙ HỢP -->
+                    <div id="course-match-result" class="hidden mt-6 pt-6 border-t border-slate-200 space-y-4">
+                        
+                        <!-- Header Badge -->
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                <span>KẾT QUẢ PHÂN TÍCH LỘ TRÌNH DÀNH RIÊNG CHO BẠN</span>
+                            </div>
+                            <span class="text-xs text-slate-500 font-medium">Độ tương thích: <strong class="text-emerald-600 font-bold">99% Khớp mục tiêu</strong></span>
+                        </div>
+
+                        <!-- Card Đề Xuất Khóa Học Chính -->
+                        <div class="rounded-2xl p-5 sm:p-6 bg-white border-2 border-brand-blue/30 shadow-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                            
+                            <div class="space-y-3 flex-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span id="match-course-badge" class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-blue-100 text-brand-blue">
+                                        Khóa học tối ưu nhất
+                                    </span>
+                                    <span id="match-course-format" class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-slate-100 text-slate-700">
+                                        Học trực tuyến (Online)
+                                    </span>
+                                    <span id="match-course-shift" class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-amber-50 text-amber-800">
+                                        Lịch học: Buổi chiều
+                                    </span>
+                                </div>
+
+                                <h3 id="match-course-title" class="font-phudu text-lg sm:text-xl font-bold text-slate-900 leading-snug">
+                                    Khóa Tiếng Hàn Du Học &amp; Luyện Phỏng Vấn Visa Đại Sứ Quán
+                                </h3>
+
+                                <p id="match-course-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                                    Bỏ qua giai đoạn làm quen bảng chữ cái, tập trung bứt phá 800+ từ vựng du học, luyện đề và mô phỏng 1:1 quy trình phỏng vấn visa với chuyên gia Hàn Quốc.
+                                </p>
+
+                                <!-- 3 Thẻ Thông Tin Nổi Bật -->
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 text-xs">
+                                    <div class="flex items-center gap-2.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                        <div class="w-8 h-8 rounded-lg bg-red-100 text-brand-red flex items-center justify-center flex-shrink-0 text-xs">
+                                            <i class="fa-solid fa-bullseye"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] text-slate-400 block font-medium">Mục tiêu đầu ra</span>
+                                            <strong id="match-course-target" class="font-bold text-slate-900">Đạt TOPIK 2 – 3 vững vàng</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-2.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                        <div class="w-8 h-8 rounded-lg bg-blue-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs">
+                                            <i class="fa-solid fa-clock"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] text-slate-400 block font-medium">Thời lượng lộ trình</span>
+                                            <strong id="match-course-duration" class="font-bold text-slate-900">2.5 – 3 tháng</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-2.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                        <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 text-xs">
+                                            <i class="fa-solid fa-shield-halved"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] text-slate-400 block font-medium">Cam kết đào tạo</span>
+                                            <strong id="match-course-commit" class="font-bold text-slate-900">Kèm 1:1 – Chuẩn đầu ra</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Gợi ý học thử online nếu người học chọn Online -->
+                                <div id="match-online-notice" class="p-3 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-900 text-xs flex items-center gap-2.5">
+                                    <i class="fa-solid fa-video text-brand-blue flex-shrink-0"></i>
+                                    <span><strong>Khuyên bạn trải nghiệm trước:</strong> Bạn có thể đăng ký tham gia lớp học thử tiếng Hàn online <strong>hoàn toàn miễn phí</strong> qua Google Meet (Tối T4 hoặc T6) để cảm nhận phương pháp giảng dạy trước khi quyết định theo học chính thức!</span>
+                                </div>
+                            </div>
+
+                            <!-- Cột nút hành động -->
+                            <div class="w-full lg:w-auto flex flex-col sm:flex-row lg:flex-col gap-2.5 flex-shrink-0 pt-2 lg:pt-0">
+                                <button type="button" onclick="applyCourseToForm()" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-red hover:bg-rose-700 text-white font-phudu font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all text-center cursor-pointer" style="background-color: #e02424; color: #ffffff;">
+                                    <i class="fa-solid fa-user-check"></i>
+                                    <span>ĐĂNG KÝ KHÓA NÀY NGAY</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                                <a href="#khoa-hoc" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors text-center">
+                                    <span>Xem chi tiết danh sách khóa học</span>
+                                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                                </a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
@@ -3301,6 +3395,204 @@
         }
 
         if (result) result.classList.remove('hidden');
+    }
+
+    // ==========================================
+    // CÔNG CỤ TÌM KHÓA HỌC PHÙ HỢP (COURSE MATCHER)
+    // ==========================================
+    window.currentCourseMatch = null;
+
+    function getCourseRecommendation(level, goal, format, shift) {
+        const formatLabel = format === 'online' ? 'Học trực tuyến (Online Google Meet)' : 'Học trực tiếp tại cơ sở KIPA';
+        const shiftLabel = shift === 'toi' ? 'Buổi tối (19:00 - 21:00)' : 
+                           shift === 'chieu' ? 'Buổi chiều (14:00 - 16:30)' : 
+                           shift === 'sang' ? 'Buổi sáng (08:30 - 11:00)' : 'Cuối tuần (T7 & CN)';
+
+        let rec = {
+            title: '',
+            badge: 'Khóa học tối ưu nhất',
+            desc: '',
+            target: '',
+            duration: '',
+            commit: 'Kèm sát 1:1 – Chuẩn đầu ra',
+            formatLabel: formatLabel,
+            shiftLabel: shiftLabel,
+            isOnline: format === 'online'
+        };
+
+        if (goal === 'duhoc') {
+            if (level === 'zero') {
+                rec.title = 'Khóa Tiếng Hàn Du Học Cấp Tốc (Từ Số 0 Đến TOPIK 2 – 3)';
+                rec.desc = 'Lộ trình toàn diện thiết kế chuyên biệt cho học sinh, sinh viên chuẩn bị hồ sơ du học Hàn Quốc (Visa D4-1, D2, D4-3). Đi từ nét chữ Hangul đến rèn phản xạ phỏng vấn Visa Đại sứ quán 1:1.';
+                rec.target = 'Đạt TOPIK 2 – 3 & Đỗ Visa 100%';
+                rec.duration = '3 – 4 tháng (Tập trung)';
+            } else if (level === 'alphabet') {
+                rec.title = 'Khóa Tiếng Hàn Du Học & Luyện Phỏng Vấn Visa Đại Sứ Quán';
+                rec.desc = 'Bỏ qua giai đoạn làm quen bảng chữ cái, tập trung bứt phá 800+ từ vựng du học, luyện đề và mô phỏng 1:1 quy trình phỏng vấn visa với chuyên gia Hàn Quốc.';
+                rec.target = 'Đạt TOPIK 2 – 3 vững vàng';
+                rec.duration = '2.5 – 3 tháng';
+            } else if (level === 'topik12') {
+                rec.title = 'Khóa Tiếng Hàn Du Học Chuyên Sâu & Săn Học Bổng TOPIK 3 - 4';
+                rec.desc = 'Nâng cấp ngữ pháp học thuật, rèn luyện kỹ năng phỏng vấn chuyên ngành trực tiếp với giáo sư trường đại học Hàn Quốc và chuẩn bị hồ sơ săn học bổng 50% - 100%.';
+                rec.target = 'Đạt TOPIK 3 – 4 & Học bổng';
+                rec.duration = '2 – 3 tháng';
+            } else {
+                rec.title = 'Khóa Luyện Thi TOPIK 4 – 6 & Hồ Sơ Du Học Chuyên Ngành';
+                rec.desc = 'Khóa học cao cấp dành cho du học sinh hệ đại học, thạc sĩ chuyển tiếp. Rèn luyện tư duy nghị luận, viết bài luận và giao tiếp học thuật cùng giáo viên TOPIK 6.';
+                rec.target = 'Chinh phục TOPIK 5 – 6';
+                rec.duration = '3 tháng';
+            }
+        } else if (goal === 'topik') {
+            if (level === 'zero' || level === 'alphabet') {
+                rec.title = 'Khóa Tiếng Hàn Nhập Môn & Luyện Thi TOPIK 1 – 2 Cấp Tốc';
+                rec.desc = 'Nắm chắc ngữ âm, từ vựng trọng tâm và cấu trúc đề thi TOPIK I (Nghe & Đọc), mẹo làm bài tránh bẫy giúp bạn tự tin đạt điểm tối đa ngay kỳ thi đầu tiên.';
+                rec.target = 'Đạt chứng chỉ TOPIK 2 quốc tế';
+                rec.duration = '2.5 – 3 tháng';
+            } else if (level === 'topik12') {
+                rec.title = 'Khóa Luyện Thi TOPIK 3 – 4 Bứt Phá Điểm Số';
+                rec.desc = 'Chiến thuật làm bài TOPIK II, làm chủ kỹ năng đọc hiểu nhanh, nghe bắt từ khóa và kỹ thuật viết luận câu 51-54 ăn trọn điểm cùng giảng viên kinh nghiệm.';
+                rec.target = 'Đạt chứng chỉ TOPIK 3 – 4';
+                rec.duration = '3 tháng';
+            } else {
+                rec.title = 'Khóa Luyện Thi TOPIK 5 – 6 Chuyên Nghiệp';
+                rec.desc = 'Luyện giải các bộ đề thi thật các năm, nâng cao vốn từ vựng báo chí, kinh tế, xã hội và hoàn thiện kỹ năng viết bài nghị luận dài câu 54 đạt điểm cao.';
+                rec.target = 'Đạt TOPIK 5 – 6 xuất sắc';
+                rec.duration = '3.5 tháng';
+            }
+        } else if (goal === 'giaotiep') {
+            if (level === 'zero') {
+                rec.title = 'Khóa Tiếng Hàn Nhập Môn & Giao Tiếp Phản Xạ 1:1';
+                rec.desc = 'Bắt đầu từ cách phát âm chuẩn giọng Seoul, ghép vần tự nhiên và thực hành phản xạ giao tiếp các tình huống hàng ngày (chào hỏi, mua sắm, gọi món, chỉ đường).';
+                rec.target = 'Giao tiếp tự nhiên đời sống';
+                rec.duration = '2 – 3 tháng';
+            } else if (level === 'alphabet' || level === 'topik12') {
+                rec.title = 'Khóa Tiếng Hàn Giao Tiếp Phản Xạ Thực Chiến';
+                rec.desc = 'Phương pháp phản xạ 1:1 hỏi – đáp liên tục không cần dịch qua tiếng Việt. Tham gia Speaking Club hàng tuần cùng giáo viên bản xứ để nói trôi chảy và tự tin.';
+                rec.target = 'Bật phản xạ giao tiếp tự nhiên';
+                rec.duration = '2.5 tháng';
+            } else {
+                rec.title = 'Khóa Tiếng Hàn Giao Tiếp Nâng Cao & Thảo Luận Chuyên Đề';
+                rec.desc = 'Nâng cao khả năng biểu đạt cảm xúc, tranh luận, thuyết trình các chủ đề văn hóa, đời sống xã hội Hàn Quốc chuẩn phong thái người bản xứ.';
+                rec.target = 'Giao tiếp lưu loát như người bản xứ';
+                rec.duration = '2.5 tháng';
+            }
+        } else { // congviec
+            if (level === 'zero' || level === 'alphabet') {
+                rec.title = 'Khóa Tiếng Hàn Cấp Tốc Đi Làm & Doanh Nghiệp Hàn Quốc';
+                rec.desc = 'Học nhanh bảng chữ cái và các thuật ngữ, mẫu câu thông dụng trong môi trường nhà máy, văn phòng, quy tắc ứng xử văn hóa công sở của các sếp Hàn Quốc.';
+                rec.target = 'Giao tiếp công việc & Tăng thu nhập';
+                rec.duration = '2.5 – 3 tháng';
+            } else {
+                rec.title = 'Khóa Tiếng Hàn Thương Mại & Giao Tiếp Doanh Nghiệp Chuyên Sâu';
+                rec.desc = 'Kỹ năng soạn thảo email công việc, dịch thuật văn bản hợp đồng, đàm phán thương mại và thuyết trình báo cáo tự tin trước đối tác Hàn Quốc.';
+                rec.target = 'Làm việc chuyên nghiệp tại cty Hàn';
+                rec.duration = '3 tháng';
+            }
+        }
+
+        return rec;
+    }
+
+    function findMatchingCourse() {
+        const levelEl = document.getElementById('finder-level');
+        const goalEl = document.getElementById('finder-goal');
+        const formatEl = document.getElementById('finder-format');
+        const shiftEl = document.getElementById('finder-shift');
+
+        const level = levelEl ? levelEl.value : 'alphabet';
+        const goal = goalEl ? goalEl.value : 'duhoc';
+        const format = formatEl ? formatEl.value : 'online';
+        const shift = shiftEl ? shiftEl.value : 'chieu';
+
+        const rec = getCourseRecommendation(level, goal, format, shift);
+        window.currentCourseMatch = rec;
+
+        const resBox = document.getElementById('course-match-result');
+        const titleEl = document.getElementById('match-course-title');
+        const descEl = document.getElementById('match-course-desc');
+        const targetEl = document.getElementById('match-course-target');
+        const durationEl = document.getElementById('match-course-duration');
+        const commitEl = document.getElementById('match-course-commit');
+        const formatBadgeEl = document.getElementById('match-course-format');
+        const shiftBadgeEl = document.getElementById('match-course-shift');
+        const onlineNoticeEl = document.getElementById('match-online-notice');
+
+        if (titleEl) titleEl.textContent = rec.title;
+        if (descEl) descEl.textContent = rec.desc;
+        if (targetEl) targetEl.textContent = rec.target;
+        if (durationEl) durationEl.textContent = rec.duration;
+        if (commitEl) commitEl.textContent = rec.commit;
+        if (formatBadgeEl) formatBadgeEl.textContent = rec.formatLabel;
+        if (shiftBadgeEl) shiftBadgeEl.textContent = 'Lịch học: ' + rec.shiftLabel;
+
+        if (onlineNoticeEl) {
+            if (rec.isOnline) {
+                onlineNoticeEl.classList.remove('hidden');
+            } else {
+                onlineNoticeEl.classList.add('hidden');
+            }
+        }
+
+        if (resBox) {
+            resBox.classList.remove('hidden');
+            resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function onFinderOptionChange() {
+        const resBox = document.getElementById('course-match-result');
+        if (resBox && !resBox.classList.contains('hidden')) {
+            findMatchingCourse();
+        }
+    }
+
+    function applyCourseToForm() {
+        if (!window.currentCourseMatch) {
+            findMatchingCourse();
+        }
+        const rec = window.currentCourseMatch;
+        if (!rec) return;
+
+        if (rec.isOnline) {
+            const targetSection = document.getElementById('hoc-thu-online');
+            const targetForm = document.getElementById('online-trial-form');
+            const firstInput = document.getElementById('trial-student-name');
+            if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (targetForm) {
+                const formCard = targetForm.closest('.rounded-3xl') || targetForm;
+                formCard.classList.add('ring-4', 'ring-amber-400', 'shadow-2xl');
+                setTimeout(() => formCard.classList.remove('ring-4', 'ring-amber-400'), 2500);
+            }
+            if (firstInput) setTimeout(() => firstInput.focus(), 600);
+        } else {
+            const targetSection = document.getElementById('dang-ky');
+            const formEl = document.querySelector('form[data-kipa-form="korean_course"]');
+            if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (formEl) {
+                const nameInput = formEl.querySelector('input[name="name"]');
+                const levelSelect = formEl.querySelector('select[name="level"]');
+                const formatSelect = formEl.querySelector('select[name="format"]');
+                
+                if (levelSelect) {
+                    const finderLevel = document.getElementById('finder-level');
+                    if (finderLevel) {
+                        const text = finderLevel.options[finderLevel.selectedIndex].text;
+                        for (let opt of levelSelect.options) {
+                            if (opt.text.toLowerCase().includes(text.toLowerCase().slice(0, 5))) {
+                                opt.selected = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (formatSelect) {
+                    formatSelect.value = 'Học trực tiếp';
+                }
+                formEl.classList.add('ring-4', 'ring-brand-blue', 'shadow-2xl');
+                setTimeout(() => formEl.classList.remove('ring-4', 'ring-brand-blue'), 2500);
+                if (nameInput) setTimeout(() => nameInput.focus(), 600);
+            }
+        }
     }
 
     function scrollToTrialForm(e) {
