@@ -1107,8 +1107,8 @@
                             <span><i class="fa-regular fa-clock"></i> 2-3 tháng</span>
                             <span>Trực tiếp/Online</span>
                         </div>
-                        <a href="#dang-ky" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
-                            <span>Xem chi tiết</span>
+                        <a href="#dang-ky" onclick="selectCourseForForm('Tiếng Hàn nhập môn', 'Nhu cầu: Đăng ký tư vấn khóa Tiếng Hàn nhập môn (cho người mới bắt đầu từ số 0)')" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
+                            <span>Xem chi tiết &amp; Đăng ký</span>
                         </a>
                     </div>
                 </div>
@@ -1134,8 +1134,8 @@
                             <span><i class="fa-regular fa-clock"></i> 3-4 tháng</span>
                             <span>Trực tiếp/Online</span>
                         </div>
-                        <a href="#dang-ky" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
-                            <span>Xem chi tiết</span>
+                        <a href="#dang-ky" onclick="selectCourseForForm('Tiếng Hàn sơ cấp', 'Nhu cầu: Đăng ký tư vấn khóa Tiếng Hàn sơ cấp (chuẩn đầu ra TOPIK 1 - 2)')" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
+                            <span>Xem chi tiết &amp; Đăng ký</span>
                         </a>
                     </div>
                 </div>
@@ -1161,8 +1161,8 @@
                             <span><i class="fa-regular fa-clock"></i> 3-4 tháng</span>
                             <span>Trực tiếp/Online</span>
                         </div>
-                        <a href="#dang-ky" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
-                            <span>Xem chi tiết</span>
+                        <a href="#dang-ky" onclick="selectCourseForForm('Tiếng Hàn trung cấp', 'Nhu cầu: Đăng ký tư vấn khóa Tiếng Hàn trung cấp (bứt phá TOPIK 3 - 4)')" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
+                            <span>Xem chi tiết &amp; Đăng ký</span>
                         </a>
                     </div>
                 </div>
@@ -1188,8 +1188,8 @@
                             <span><i class="fa-regular fa-clock"></i> 3-5 tháng</span>
                             <span>Trực tiếp/Online</span>
                         </div>
-                        <a href="#dang-ky" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
-                            <span>Xem chi tiết</span>
+                        <a href="#dang-ky" onclick="selectCourseForForm('Tiếng Hàn du học', 'Nhu cầu: Đăng ký tư vấn khóa Tiếng Hàn du học &amp; Luyện phỏng vấn Visa Đại Sứ Quán (D4-1, D2, D4-3)')" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
+                            <span>Xem chi tiết &amp; Đăng ký</span>
                         </a>
                     </div>
                 </div>
@@ -1215,8 +1215,8 @@
                             <span><i class="fa-regular fa-clock"></i> 3-5 tháng</span>
                             <span>Trực tiếp/Online</span>
                         </div>
-                        <a href="#dang-ky" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
-                            <span>Xem chi tiết</span>
+                        <a href="#dang-ky" onclick="selectCourseForForm('Luyện thi TOPIK', 'Nhu cầu: Đăng ký tư vấn khóa Luyện thi TOPIK bứt phá điểm số (TOPIK 3 - 6)')" class="inline-flex items-center justify-center w-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition-colors">
+                            <span>Xem chi tiết &amp; Đăng ký</span>
                         </a>
                     </div>
                 </div>
@@ -2833,6 +2833,14 @@
                                 </div>
                             </div>
 
+                            <div class="space-y-1">
+                                <label for="korean-course-notes" class="text-[11px] font-bold text-slate-700 flex items-center justify-between">
+                                    <span>Ghi chú / Nhu cầu tư vấn chi tiết</span>
+                                    <span class="text-[10px] text-brand-blue font-semibold" id="notes-auto-indicator">Tự động tổng hợp theo lựa chọn</span>
+                                </label>
+                                <textarea id="korean-course-notes" name="notes" rows="2" maxlength="1000" aria-label="Ghi chú thêm về nhu cầu học tập" placeholder="Ghi chú thêm về mục tiêu, thời gian hoặc yêu cầu đặc biệt của bạn..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:border-brand-blue bg-slate-50 text-slate-800 placeholder-slate-400 font-medium leading-relaxed resize-y"></textarea>
+                            </div>
+
                             <div class="flex items-center gap-2 pt-1 text-[11px] text-slate-600">
                                 <input type="checkbox" name="consent" value="yes" required aria-label="Đồng ý nhận tư vấn và ưu đãi từ KIPA" class="rounded text-brand-blue focus:ring-brand-blue mt-0.5">
                                 <span>Tôi muốn đăng ký nhận tư vấn và ưu đãi từ KIPA</span>
@@ -3507,6 +3515,102 @@
         return rec;
     }
 
+    function syncFinderToRegistrationForm() {
+        const levelEl = document.getElementById('finder-level');
+        const goalEl = document.getElementById('finder-goal');
+        const formatEl = document.getElementById('finder-format');
+        const shiftEl = document.getElementById('finder-shift');
+
+        const level = levelEl ? levelEl.value : 'alphabet';
+        const goal = goalEl ? goalEl.value : 'duhoc';
+        const format = formatEl ? formatEl.value : 'online';
+        const shift = shiftEl ? shiftEl.value : 'chieu';
+
+        const rec = window.currentCourseMatch || getCourseRecommendation(level, goal, format, shift);
+
+        const formEl = document.querySelector('form[data-kipa-form="korean_course"]');
+        if (!formEl) return;
+
+        const levelSelect = formEl.querySelector('select[name="level"]');
+        const formatSelect = formEl.querySelector('select[name="format"]');
+        const courseSelect = formEl.querySelector('select[name="course"]');
+        const notesTextarea = formEl.querySelector('textarea[name="notes"]');
+
+        const levelText = levelEl ? levelEl.options[levelEl.selectedIndex].text : '';
+        const goalText = goalEl ? goalEl.options[goalEl.selectedIndex].text : '';
+        const formatText = formatEl ? formatEl.options[formatEl.selectedIndex].text : '';
+        const shiftText = shiftEl ? shiftEl.options[shiftEl.selectedIndex].text : '';
+
+        // Tự động tổng hợp nhu cầu của khách vào ô Notes
+        if (notesTextarea) {
+            notesTextarea.value = `Khóa học đề xuất: ${rec.title}
+• Trình độ hiện tại: ${levelText}
+• Mục tiêu: ${goalText}
+• Hình thức mong muốn: ${formatText}
+• Lịch học: ${shiftText}`;
+        }
+
+        // Tự động chọn trình độ
+        if (levelSelect) {
+            if (level === 'zero') {
+                levelSelect.value = 'Chưa từng học';
+            } else if (level === 'alphabet') {
+                levelSelect.value = 'Đã biết bảng chữ cái';
+            } else if (level === 'topik12') {
+                levelSelect.value = 'Đã biết sơ cấp';
+            } else if (level === 'topik34' || goal === 'topik') {
+                levelSelect.value = 'Muốn luyện thi TOPIK';
+            }
+        }
+
+        // Tự động chọn hình thức
+        if (formatSelect) {
+            formatSelect.value = (format === 'online') ? 'Học trực tuyến' : 'Học trực tiếp';
+        }
+
+        // Tự động chọn khóa học quan tâm
+        if (courseSelect) {
+            if (goal === 'duhoc') {
+                courseSelect.value = 'Tiếng Hàn du học';
+            } else if (goal === 'topik') {
+                courseSelect.value = 'Luyện thi TOPIK';
+            } else if (level === 'zero') {
+                courseSelect.value = 'Tiếng Hàn nhập môn';
+            } else if (level === 'topik12') {
+                courseSelect.value = 'Tiếng Hàn sơ cấp';
+            } else if (level === 'topik34') {
+                courseSelect.value = 'Tiếng Hàn trung cấp';
+            }
+        }
+    }
+
+    function selectCourseForForm(courseName, noteDetail) {
+        const formEl = document.querySelector('form[data-kipa-form="korean_course"]');
+        if (formEl) {
+            const courseSelect = formEl.querySelector('select[name="course"]');
+            const notesTextarea = formEl.querySelector('textarea[name="notes"]');
+            if (courseSelect) {
+                for (let opt of courseSelect.options) {
+                    if (opt.text.toLowerCase().includes(courseName.toLowerCase())) {
+                        opt.selected = true;
+                        break;
+                    }
+                }
+            }
+            if (notesTextarea) {
+                notesTextarea.value = noteDetail || `Nhu cầu tư vấn: Khóa học ${courseName}`;
+            }
+        }
+        const targetSection = document.getElementById('dang-ky');
+        if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (formEl) {
+            const nameInput = formEl.querySelector('input[name="name"]');
+            formEl.classList.add('ring-4', 'ring-brand-blue', 'shadow-2xl');
+            setTimeout(() => formEl.classList.remove('ring-4', 'ring-brand-blue'), 2500);
+            if (nameInput) setTimeout(() => nameInput.focus(), 600);
+        }
+    }
+
     function findMatchingCourse() {
         const levelEl = document.getElementById('finder-level');
         const goalEl = document.getElementById('finder-goal');
@@ -3520,6 +3624,9 @@
 
         const rec = getCourseRecommendation(level, goal, format, shift);
         window.currentCourseMatch = rec;
+
+        // Đồng bộ ngay sang Form Đăng Ký ở Section 10
+        syncFinderToRegistrationForm();
 
         const resBox = document.getElementById('course-match-result');
         const titleEl = document.getElementById('match-course-title');
@@ -3554,6 +3661,7 @@
     }
 
     function onFinderOptionChange() {
+        syncFinderToRegistrationForm();
         const resBox = document.getElementById('course-match-result');
         if (resBox && !resBox.classList.contains('hidden')) {
             findMatchingCourse();
@@ -3564,6 +3672,7 @@
         if (!window.currentCourseMatch) {
             findMatchingCourse();
         }
+        syncFinderToRegistrationForm();
         const rec = window.currentCourseMatch;
         if (!rec) return;
 
@@ -3584,24 +3693,6 @@
             if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             if (formEl) {
                 const nameInput = formEl.querySelector('input[name="name"]');
-                const levelSelect = formEl.querySelector('select[name="level"]');
-                const formatSelect = formEl.querySelector('select[name="format"]');
-                
-                if (levelSelect) {
-                    const finderLevel = document.getElementById('finder-level');
-                    if (finderLevel) {
-                        const text = finderLevel.options[finderLevel.selectedIndex].text;
-                        for (let opt of levelSelect.options) {
-                            if (opt.text.toLowerCase().includes(text.toLowerCase().slice(0, 5))) {
-                                opt.selected = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                if (formatSelect) {
-                    formatSelect.value = 'Học trực tiếp';
-                }
                 formEl.classList.add('ring-4', 'ring-brand-blue', 'shadow-2xl');
                 setTimeout(() => formEl.classList.remove('ring-4', 'ring-brand-blue'), 2500);
                 if (nameInput) setTimeout(() => nameInput.focus(), 600);
@@ -3643,7 +3734,7 @@
 
     // Auto-init on page load
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMiniQuiz);
+        document.addEventListener('DOMContentLoaded', () => { initMiniQuiz(); syncFinderToRegistrationForm(); });
     } else {
         initMiniQuiz();
     }
