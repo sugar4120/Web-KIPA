@@ -1383,6 +1383,140 @@
     </section>
 
     <!-- ========================================== -->
+    <!-- SECTION 6B: THỬ TÀI TIẾNG HÀN 60 GIÂY (MINI QUIZ TƯƠNG TÁC) -->
+    <!-- ========================================== -->
+    <section class="py-10 lg:py-14 bg-gradient-to-br from-[#081D36] via-[#024072] to-[#0274BD] text-white relative overflow-hidden" id="mini-test">
+        <!-- Background Glow -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-cyan-400/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-brand-red/15 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 sm:space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-amber-300 text-xs font-bold uppercase tracking-wider border border-white/15">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                    <span>Tương tác 60 giây</span>
+                </div>
+                <h2 class="font-phudu text-xl sm:text-3xl font-extrabold text-white leading-tight">
+                    Bạn có tố chất học tiếng Hàn không?
+                </h2>
+                <p class="text-xs sm:text-sm text-blue-100 font-normal">
+                    Trả lời 3 câu hỏi nhanh dưới đây để khám phá độ nhạy bén với ngôn ngữ Hàn và nhận ngay bộ tài liệu độc quyền từ KIPA!
+                </p>
+            </div>
+
+            <!-- Quiz Container Card -->
+            <div class="max-w-3xl mx-auto bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 text-slate-800 shadow-2xl border border-white/40">
+                <!-- Progress Bar -->
+                <div class="flex items-center justify-between mb-4 text-xs font-bold text-slate-500">
+                    <span id="quiz-step-label">Câu hỏi 1 / 3</span>
+                    <div class="w-32 h-2 rounded-full bg-slate-100 overflow-hidden">
+                        <div id="quiz-progress-bar" class="h-full bg-brand-blue rounded-full transition-all duration-500 w-1/3"></div>
+                    </div>
+                </div>
+
+                <!-- Question 1 -->
+                <div id="quiz-q1" class="quiz-step space-y-4">
+                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                        1. Câu nói phổ biến nhất trong phim Hàn <span class="text-brand-blue">"안녕하세요" (An-nyeong-ha-se-yo)</span> có nghĩa là gì?
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button type="button" onclick="answerQuiz(1, 'A', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">A</span>
+                            <span>Cảm ơn bạn</span>
+                        </button>
+                        <button type="button" onclick="answerQuiz(1, 'B', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">B</span>
+                            <span>Xin chào</span>
+                        </button>
+                        <button type="button" onclick="answerQuiz(1, 'C', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">C</span>
+                            <span>Tạm biệt</span>
+                        </button>
+                    </div>
+                    <div id="quiz-feedback-1" class="hidden text-xs p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>
+                        <strong>Chính xác!</strong> "안녕하세요" là lời chào lịch sự nhất của người Hàn Quốc, dùng chào hỏi hàng ngày.
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div id="quiz-q2" class="quiz-step hidden space-y-4">
+                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                        2. Bảng chữ cái tiếng Hàn (Hangul) được thiết kế dựa trên 3 yếu tố triết lý phương Đông nào?
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button type="button" onclick="answerQuiz(2, 'A', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">A</span>
+                            <span>Trời (•) – Đất (ㅡ) – Người (ㅣ)</span>
+                        </button>
+                        <button type="button" onclick="answerQuiz(2, 'B', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">B</span>
+                            <span>Mặt Trời – Mặt Trăng – Vì Sao</span>
+                        </button>
+                        <button type="button" onclick="answerQuiz(2, 'C', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">C</span>
+                            <span>Kim – Mộc – Thủy – Hỏa – Thổ</span>
+                        </button>
+                    </div>
+                    <div id="quiz-feedback-2" class="hidden text-xs p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>
+                        <strong>Xuất sắc!</strong> Vua Sejong sáng tạo Hangul theo 3 nét cơ bản đại diện cho Trời tròn, Đất phẳng và Con người đứng thẳng.
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div id="quiz-q3" class="quiz-step hidden space-y-4">
+                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                        3. Động lực lớn nhất thúc đẩy bạn quyết định chinh phục tiếng Hàn hôm nay là gì?
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button type="button" onclick="answerQuiz(3, 'A', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">A</span>
+                            <span>Du học trường TOP tại Hàn</span>
+                        </button>
+                        <button type="button" onclick="answerQuiz(3, 'B', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">B</span>
+                            <span>Đi làm XKLD EPS E-9 / E-7</span>
+                        </button>
+                        <button type="button" onclick="answerQuiz(3, 'C', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">C</span>
+                            <span>Giao tiếp & Đam mê văn hóa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Box -->
+                <div id="quiz-result" class="hidden text-center space-y-4 pt-2">
+                    <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto text-2xl shadow-inner">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 inline-block px-3 py-1 rounded-full">Chỉ số tiếp thu: 98% Xuất sắc</div>
+                        <h4 class="font-phudu text-lg sm:text-xl font-bold text-slate-900">Bạn có phản xạ ngôn ngữ Hàn Quốc cực kỳ tiềm năng!</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                            Với phương pháp phản xạ 1:1 và giáo trình chuẩn tại KIPA, bạn hoàn toàn có thể tự tin đạt TOPIK 2 – 3 và giao tiếp tự nhiên chỉ sau 3 tháng học tập.
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/80 p-4 rounded-2xl max-w-lg mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+                        <div>
+                            <div class="text-xs font-bold text-brand-blue flex items-center gap-1.5">
+                                <i class="fa-solid fa-gift text-brand-red"></i>
+                                <span>Quà tặng dành riêng cho bạn</span>
+                            </div>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Ebook "Chinh Phục Hangul & 100 Câu Phản Xạ Hàng Ngày" + 01 Buổi học thử miễn phí.</p>
+                        </div>
+                        <a href="#dang-ky" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-brand-red hover:bg-rose-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap flex-shrink-0">
+                            <span>Nhận quà ngay</span>
+                            <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
     <!-- 7. SECTION 7: PHƯƠNG PHÁP ĐÀO TẠO TẠI KIPA -->
     <!-- ========================================== -->
     <section class="py-10 lg:py-14 bg-[#fafbfc] border-b border-slate-200/60" id="phuong-phap">
@@ -1448,6 +1582,144 @@
                     </div>
                 </div>
 
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 7B: VÌ SAO CHỌN KIPA? BẢNG SO SÁNH ĐỐI LẬP -->
+    <!-- ========================================== -->
+    <section class="py-10 lg:py-14 bg-white border-b border-slate-100" id="so-sanh-kipa">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            
+            <div class="text-center max-w-2xl mx-auto space-y-1.5">
+                <div class="flex items-center justify-center gap-2 text-xs font-bold text-brand-red uppercase tracking-wider">
+                    <span class="w-1 h-4 bg-brand-red rounded-full inline-block"></span>
+                    <span>SỰ KHÁC BIỆT VƯỢT TRỘI</span>
+                    <span class="w-1 h-4 bg-brand-red rounded-full inline-block"></span>
+                </div>
+                <h2 class="font-phudu text-xl sm:text-2xl lg:text-3xl font-bold text-brand-blue leading-tight">
+                    Vì sao học viên chọn KIPA Việt Hàn?
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 font-normal">
+                    Chúng tôi không chỉ dạy ngôn ngữ – Chúng tôi kiến tạo bệ phóng trọn vẹn để bạn bay sang Hàn Quốc an toàn và vững chắc.
+                </p>
+            </div>
+
+            <!-- Comparison Table Container -->
+            <div class="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-200/90 shadow-md bg-white">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="p-4 sm:p-5 w-1/3 text-xs sm:text-sm font-bold text-slate-700 bg-slate-50/80">
+                                    Tiêu chí đào tạo & đồng hành
+                                </th>
+                                <th class="p-4 sm:p-5 w-1/3 text-xs sm:text-sm font-bold text-slate-500 bg-slate-100/60 text-center">
+                                    <span class="line-through decoration-slate-400">Trung tâm thông thường</span>
+                                </th>
+                                <th class="p-4 sm:p-5 w-1/3 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#0274BD] to-[#02629f] text-center shadow-inner">
+                                    <div class="flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-crown text-amber-300 text-xs"></i>
+                                        <span>KIPA VIỆT HÀN</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs sm:text-[13px]">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="p-4 sm:p-5 font-bold text-slate-900 bg-slate-50/30">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-award text-brand-blue text-sm"></i>
+                                        <span>Cam kết đầu ra TOPIK</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-slate-500 text-center bg-slate-50/20">
+                                    <span class="inline-flex items-center gap-1 text-slate-500"><i class="fa-solid fa-xmark text-red-500"></i> Chỉ dạy hết số buổi giáo trình</span>
+                                </td>
+                                <td class="p-4 sm:p-5 font-bold text-brand-blue text-center bg-blue-50/30">
+                                    <span class="inline-flex items-center gap-1.5 text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full"><i class="fa-solid fa-check text-emerald-600"></i> Cam kết bằng văn bản – Học lại 0đ</span>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="p-4 sm:p-5 font-bold text-slate-900 bg-slate-50/30">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-comments text-brand-blue text-sm"></i>
+                                        <span>Luyện phỏng vấn Visa ĐSQ</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-slate-500 text-center bg-slate-50/20">
+                                    <span class="inline-flex items-center gap-1 text-slate-500"><i class="fa-solid fa-xmark text-red-500"></i> Dạy ngữ pháp lý thuyết chung</span>
+                                </td>
+                                <td class="p-4 sm:p-5 font-bold text-brand-blue text-center bg-blue-50/30">
+                                    <span class="inline-flex items-center gap-1.5 text-brand-blue"><i class="fa-solid fa-check text-emerald-600"></i> Mô phỏng 1:1 kịch bản thật của ĐSQ</span>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="p-4 sm:p-5 font-bold text-slate-900 bg-slate-50/30">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-diagram-project text-brand-blue text-sm"></i>
+                                        <span>Hệ sinh thái liên kết</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-slate-500 text-center bg-slate-50/20">
+                                    <span class="inline-flex items-center gap-1 text-slate-500"><i class="fa-solid fa-xmark text-red-500"></i> Học xong tự tìm nơi làm visa</span>
+                                </td>
+                                <td class="p-4 sm:p-5 font-bold text-brand-blue text-center bg-blue-50/30">
+                                    <span class="inline-flex items-center gap-1.5 text-brand-blue"><i class="fa-solid fa-check text-emerald-600"></i> Hệ sinh thái 3 trong 1: Tiếng + Visa + Đón tại Hàn</span>
+                                </td>
+                            </tr>
+
+                            <!-- Row 4 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="p-4 sm:p-5 font-bold text-slate-900 bg-slate-50/30">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-hotel text-brand-blue text-sm"></i>
+                                        <span>Ký túc xá & Môi trường nội trú</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-slate-500 text-center bg-slate-50/20">
+                                    <span class="inline-flex items-center gap-1 text-slate-500"><i class="fa-solid fa-xmark text-red-500"></i> Học viên tự túc thuê trọ bên ngoài</span>
+                                </td>
+                                <td class="p-4 sm:p-5 font-bold text-brand-blue text-center bg-blue-50/30">
+                                    <span class="inline-flex items-center gap-1.5 text-brand-blue"><i class="fa-solid fa-check text-emerald-600"></i> KTX khép kín tiện nghi ngay tại cơ sở</span>
+                                </td>
+                            </tr>
+
+                            <!-- Row 5 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="p-4 sm:p-5 font-bold text-slate-900 bg-slate-50/30">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-handshake-angle text-brand-blue text-sm"></i>
+                                        <span>Bảo trợ thực tế tại Hàn Quốc</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-slate-500 text-center bg-slate-50/20">
+                                    <span class="inline-flex items-center gap-1 text-slate-500"><i class="fa-solid fa-xmark text-red-500"></i> Hết trách nhiệm khi xuất cảnh</span>
+                                </td>
+                                <td class="p-4 sm:p-5 font-bold text-brand-blue text-center bg-blue-50/30">
+                                    <span class="inline-flex items-center gap-1.5 text-brand-blue"><i class="fa-solid fa-check text-emerald-600"></i> Văn phòng đại diện KIPA tại Hàn hỗ trợ 24/7</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-slate-50 p-4 sm:p-5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+                    <p class="text-xs text-slate-600 font-medium">
+                        Bạn muốn được tư vấn lộ trình học phù hợp nhất với điều kiện của mình?
+                    </p>
+                    <a href="#dang-ky" class="inline-flex items-center gap-2 bg-brand-red hover:bg-rose-700 text-white font-bold text-xs px-6 py-2.5 rounded-full shadow-xs transition-all whitespace-nowrap">
+                        <span>Đăng ký nhận tư vấn lộ trình 1:1</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -1568,6 +1840,146 @@
                     <div class="pt-2 border-t border-slate-100">
                         <a href="/doi-ngu/" class="inline-flex items-center justify-between w-full text-xs font-bold text-slate-800 hover:text-brand-blue transition-colors">
                             <span>Xem hồ sơ</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 8B: BẢNG VÀNG THÀNH TÍCH & TRẢI NGHIỆM VĂN HÓA K-CULTURE -->
+    <!-- ========================================== -->
+    <section class="py-10 lg:py-14 bg-gradient-to-b from-[#f8fafc] to-white border-b border-slate-200/70" id="hoat-dong-thanh-tich">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="space-y-1.5">
+                    <div class="flex items-center gap-2 text-xs font-bold text-brand-red uppercase tracking-wider">
+                        <span class="w-1 h-4 bg-brand-red rounded-full inline-block"></span>
+                        <span>HỌC THẬT – ĐIỂM THẬT – BAY THẬT</span>
+                    </div>
+                    <h2 class="font-phudu text-xl sm:text-2xl lg:text-3xl font-bold text-brand-blue leading-tight">
+                        Thành tích học viên & Trải nghiệm văn hóa
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 font-normal">
+                        Môi trường học tập sôi nổi, kết hợp rèn luyện thực chiến và hòa nhập văn hóa xứ sở Kim Chi.
+                    </p>
+                </div>
+                
+                <!-- Stats Pill -->
+                <div class="flex items-center gap-4 sm:gap-6 bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/90 shadow-xs flex-shrink-0">
+                    <div class="text-center">
+                        <div class="font-phudu text-lg sm:text-2xl font-black text-brand-red">98.6%</div>
+                        <div class="text-[10px] text-slate-500 font-semibold uppercase">Đỗ TOPIK lần 1</div>
+                    </div>
+                    <div class="w-px h-8 bg-slate-200"></div>
+                    <div class="text-center">
+                        <div class="font-phudu text-lg sm:text-2xl font-black text-brand-blue">100%</div>
+                        <div class="text-[10px] text-slate-500 font-semibold uppercase">Tự tin phỏng vấn</div>
+                    </div>
+                    <div class="w-px h-8 bg-slate-200"></div>
+                    <div class="text-center">
+                        <div class="font-phudu text-lg sm:text-2xl font-black text-emerald-600">1.000+</div>
+                        <div class="text-[10px] text-slate-500 font-semibold uppercase">Học viên xuất cảnh</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Visual Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                
+                <!-- Card 1: Mô phỏng phỏng vấn Visa -->
+                <div class="kipa-card rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-video w-full overflow-hidden bg-slate-100">
+                            <img src="/assets/tieng-han/real_mock_interview.jpg" alt="Mô phỏng phỏng vấn Visa tiếng Hàn" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 sm:p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-brand-red bg-red-50 px-2 py-0.5 rounded-full inline-block">Phỏng vấn thực chiến</span>
+                            <h4 class="font-phudu font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                Mô phỏng 1:1 phòng phỏng vấn Đại sứ quán
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Học viên được làm quen với áp lực thực tế, rèn phản xạ xử lý câu hỏi khó và tác phong giao tiếp chuẩn mực của người Hàn.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 pt-0">
+                        <span class="text-[11px] font-semibold text-brand-blue flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Tự tin đạt Visa 100%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Workshop K-Culture -->
+                <div class="kipa-card rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-video w-full overflow-hidden bg-slate-100">
+                            <img src="/assets/tieng-han/real_culture_class.jpg" alt="Workshop văn hóa Hàn Quốc KIPA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 sm:p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-brand-blue bg-blue-50 px-2 py-0.5 rounded-full inline-block">Văn hóa & Đời sống</span>
+                            <h4 class="font-phudu font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                Workshop văn hóa & Ẩm thực K-Culture
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Trải nghiệm làm Kimbap, mặc trang phục Hanbok và tìm hiểu phong tục giao tiếp giúp học viên không bị sốc văn hóa khi sang Hàn.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 pt-0">
+                        <span class="text-[11px] font-semibold text-brand-blue flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Hòa nhập nhanh chóng
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Speaking Club -->
+                <div class="kipa-card rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-video w-full overflow-hidden bg-slate-100">
+                            <img src="/assets/tieng-han/real_culture_club.jpg" alt="Speaking Club tiếng Hàn Thứ 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 sm:p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">CLB Ngoại khóa</span>
+                            <h4 class="font-phudu font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                KIPA Speaking Club mỗi tối Thứ 6
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Không gian luyện nói tự do cùng giáo viên và trợ giảng, nơi học viên phá vỡ rào cản sợ sai và biến tiếng Hàn thành phản xạ tự nhiên.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 pt-0">
+                        <span class="text-[11px] font-semibold text-brand-blue flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Miễn phí 100% cho học viên
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Bảng vàng thành tích -->
+                <div class="kipa-card rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-xs hover:shadow-lg transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-video w-full overflow-hidden bg-slate-100">
+                            <img src="/assets/tieng-han/real_achievement_visa.jpg" alt="Bảng vàng học viên nhận Visa KIPA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 sm:p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full inline-block">Bảng vàng vinh danh</span>
+                            <h4 class="font-phudu font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                Nhận Visa du học thẳng & Học bổng TOP
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Hàng trăm học viên KIPA mỗi năm tự hào cầm trên tay tấm visa D4-3, D2 và những suất học bổng danh giá từ các trường đại học Hàn Quốc.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5 pt-0">
+                        <a href="/cau-chuyen-hoc-vien/" class="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:text-brand-red transition-colors">
+                            <span>Xem câu chuyện học viên</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
@@ -1877,7 +2289,46 @@
 
 </div>
 
-<!-- SCRIPT: Form handler & FAQ accordion -->
+<!-- Video Modal -->
+    <dialog id="video-modal" aria-labelledby="modal-video-title"
+        class="rounded-3xl p-5 sm:p-6 max-w-3xl w-full shadow-2xl backdrop:bg-slate-900/70 border border-slate-100 m-auto">
+        <div class="flex items-start justify-between gap-4 pb-3 border-b border-slate-100">
+            <div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-red-50 text-brand-red mb-1.5">
+                    <i class="fa-brands fa-youtube text-xs"></i> Video Đào Tạo Tiếng Hàn
+                </span>
+                <h3 id="modal-video-title" class="text-base sm:text-lg font-bold text-slate-900">Chương trình đào tạo tiếng Hàn KIPA</h3>
+                <p id="modal-video-desc" class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Giới thiệu chi tiết lộ trình học tiếng Hàn từ số 0 đến TOPIK tại KIPA Việt Hàn.</p>
+            </div>
+            <button type="button" onclick="closeVideoModal()" aria-label="Đóng video"
+                class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors flex-shrink-0 cursor-pointer">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Video Player -->
+        <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-inner my-4">
+            <iframe id="video-iframe" class="w-full h-full" src="" title="Video đào tạo tiếng Hàn KIPA" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs">
+            <a href="https://youtu.be/hz1X9eAvmV8" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-red-600 hover:text-red-700 font-bold transition-colors">
+                <i class="fa-brands fa-youtube text-base"></i>
+                <span>Xem trên YouTube</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+            <a href="#dang-ky" onclick="closeVideoModal()"
+                class="w-full sm:w-auto px-4 py-2 rounded-xl bg-brand-red hover:bg-rose-700 text-white font-bold text-center shadow-sm transition-all flex items-center justify-center gap-1.5">
+                <span>Đăng ký tư vấn lộ trình</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+        </div>
+    </dialog>
+
+<!-- SCRIPT: Form handler, FAQ accordion, Video Modal & Interactive Quiz -->
 <script>
     function toggleFaq(el) {
         var allFaqs = document.querySelectorAll('.faq-item');
@@ -1887,6 +2338,71 @@
         el.classList.toggle('active');
     }
 
+    // Video Modal Controls
+    function openVideoModal(title, desc, youtubeId) {
+        const modal = document.getElementById('video-modal');
+        if (!modal) return;
+        const titleEl = document.getElementById('modal-video-title');
+        const descEl = document.getElementById('modal-video-desc');
+        const iframe = document.getElementById('video-iframe');
+
+        if (titleEl && title) titleEl.textContent = title;
+        if (descEl && desc) descEl.textContent = desc;
+        if (iframe && youtubeId) {
+            iframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&rel=0';
+        }
+        modal.showModal();
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('video-modal');
+        if (!modal) return;
+        const iframe = document.getElementById('video-iframe');
+        if (iframe) {
+            iframe.src = '';
+        }
+        modal.close();
+    }
+
+    // Close on backdrop click
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('video-modal');
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                const rect = modal.getBoundingClientRect();
+                const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                                  rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+                if (!isInDialog) {
+                    closeVideoModal();
+                }
+            });
+        }
+    });
+
+    // Interactive Mini Quiz Handler
+    function answerQuiz(questionNum, option, isCorrect) {
+        const currentQ = document.getElementById('quiz-q' + questionNum);
+        const feedback = document.getElementById('quiz-feedback-' + questionNum);
+        const progressBar = document.getElementById('quiz-progress-bar');
+        const stepLabel = document.getElementById('quiz-step-label');
+
+        if (feedback) feedback.classList.remove('hidden');
+
+        setTimeout(() => {
+            if (currentQ) currentQ.classList.add('hidden');
+            const nextQ = document.getElementById('quiz-q' + (questionNum + 1));
+            if (nextQ) {
+                nextQ.classList.remove('hidden');
+                if (progressBar) progressBar.style.width = ((questionNum + 1) / 3 * 100) + '%';
+                if (stepLabel) stepLabel.textContent = 'Câu hỏi ' + (questionNum + 1) + ' / 3';
+            } else {
+                const result = document.getElementById('quiz-result');
+                if (result) result.classList.remove('hidden');
+                if (progressBar) progressBar.style.width = '100%';
+                if (stepLabel) stepLabel.textContent = 'Hoàn thành!';
+            }
+        }, 600);
+    }
 </script>
     </main>
 
