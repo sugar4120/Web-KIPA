@@ -797,6 +797,13 @@
 
     <main class="flex-grow">
         <div id="kipa-xkld-han" class="w-full">
+            <style>
+                /* FAQ Accordion & Page Specific Styles */
+                .xkld-faq-answer { display: none; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #e2e8f0; }
+                .xkld-faq-item.active .xkld-faq-answer { display: block; }
+                .xkld-faq-item.active .xkld-faq-chevron { transform: rotate(90deg); }
+                .xkld-faq-item.active { background-color: #f8fafc; border-color: #bfdbfe; }
+            </style>
 
             <!-- ========================================================
                  BREADCRUMB BAR (Thanh điều hướng phân cấp chuẩn SEO)
@@ -819,7 +826,7 @@
             <!-- ========================================================
                  HERO BANNER: Chuẩn 100% mẫu thiết kế anhdemo
                  ======================================================== -->
-            <section class="relative bg-gradient-to-r from-[#01549d] via-[#026cb5] to-[#0284cf] text-white overflow-hidden shadow-sm">
+            <section class="relative bg-gradient-to-r from-[#01549d] via-[#026cb5] to-[#0284cf] text-white overflow-hidden shadow-sm" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #014f86 100%) !important;">
                 <!-- Background decorative subtle elements -->
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
 
@@ -830,7 +837,7 @@
                         <div class="lg:col-span-7 space-y-4">
                             <!-- Badge Đỏ Bo Tròn -->
                             <div class="inline-block">
-                                <span class="bg-[#e11d48] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm">
+                                <span class="bg-[#e11d48] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm" style="background: #EC1E1B !important;">
                                     XUẤT KHẨU LAO ĐỘNG
                                 </span>
                             </div>
@@ -885,13 +892,25 @@
                             </div>
                         </div>
 
-                        <!-- Right Hero Visual: Hình ảnh công nhân KIPA + tháp Namsan & hoàng cung Hàn Quốc -->
+                        <!-- Right Hero Visual: Hình ảnh thực tế học viên KIPA xuất cảnh tại sân bay -->
                         <div class="lg:col-span-5 flex justify-center lg:justify-end">
-                            <div class="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20">
-                                <img src="/assets/xuat-khau-lao-dong-han/hero_visual.png?v=20261105-logo" 
-                                     alt="Xuất khẩu lao động Hàn Quốc cùng KIPA Việt Hàn" 
-                                     class="w-full h-auto object-cover transform hover:scale-102 transition duration-500"
+                            <div class="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 group">
+                                <img src="/assets/xuat-khau-lao-dong-han/hero_xkld_thuc_te.jpg" 
+                                     alt="Đoàn lao động và học viên KIPA Việt Hàn xuất cảnh tại sân bay Nội Bài" 
+                                     class="w-full h-auto object-cover transform group-hover:scale-102 transition duration-500"
                                      loading="eager">
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-black/65 backdrop-blur-md rounded-xl p-2.5 text-white flex items-center justify-between text-xs border border-white/10">
+                                    <div>
+                                        <div class="font-bold text-[#facc15] flex items-center gap-1.5">
+                                            <i class="fa-solid fa-plane-departure text-xs"></i>
+                                            <span>Đoàn XKLĐ Hàn Quốc KIPA</span>
+                                        </div>
+                                        <p class="text-[10.5px] text-slate-200">Đồng hành từ phòng học đến cửa máy bay</p>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500 text-[10px] font-bold text-white shrink-0 shadow-2xs">
+                                        100% Đúng Hẹn
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -961,12 +980,16 @@
                 <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                         
-                        <!-- Left Thumbnail: Namsan Tower mùa thu -->
+                        <!-- Left Thumbnail: Đoàn nhập cảnh thực tế tại Incheon -->
                         <div class="lg:col-span-4">
-                            <div class="rounded-xl overflow-hidden shadow-sm border border-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-han/sec1_photo.png" 
-                                     alt="Toàn cảnh Seoul Hàn Quốc" 
-                                     class="w-full h-48 sm:h-52 object-cover hover:scale-105 transition duration-500">
+                            <div class="relative rounded-xl overflow-hidden shadow-sm border border-slate-100 group">
+                                <img src="/assets/xuat-khau-lao-dong-han/sec1_thuc_te_nhap_canh.jpg" 
+                                     alt="Đoàn lao động KIPA Việt Hàn nhập cảnh tại sân bay Hàn Quốc" 
+                                     class="w-full h-48 sm:h-52 object-cover group-hover:scale-105 transition duration-500">
+                                <div class="absolute bottom-2 left-2 bg-black/65 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/10">
+                                    <i class="fa-solid fa-plane-arrival text-[#facc15]"></i>
+                                    <span>Đoàn nhập cảnh tại Hàn Quốc</span>
+                                </div>
                             </div>
                         </div>
 
@@ -1107,8 +1130,8 @@
                     <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 flex flex-col justify-between shadow-xs">
                         <div class="space-y-3">
                             <div class="relative rounded-xl overflow-hidden border border-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-han/card_photo_thoi_vu.png?v=20261105-hd" 
-                                     alt="Lao động thời vụ Hàn Quốc" 
+                                <img src="/assets/xuat-khau-lao-dong-han/card_thoi_vu_thuc_te.jpg" 
+                                     alt="Đoàn lao động thời vụ KIPA Việt Hàn nhập cảnh Hàn Quốc" 
                                      class="w-full h-40 sm:h-44 object-cover hover:scale-105 transition duration-300">
                             </div>
                             
@@ -1222,8 +1245,17 @@
                             </div>
                         </div>
 
-                        <!-- Button Xem kết quả sơ bộ -->
-                        <div class="mt-4 pt-1">
+                        <!-- Criteria summary & Button Xem kết quả sơ bộ -->
+                        <div class="mt-3.5 space-y-2.5">
+                            <div class="p-2.5 bg-blue-50/60 rounded-xl border border-blue-100 flex items-center justify-between text-[11px] text-[#0274BD]">
+                                <span class="flex items-center gap-1.5 font-medium">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                    <span>Độ tuổi 18 – 39 • Đạt chuẩn sức khỏe • Không tiền án</span>
+                                </span>
+                                <span class="font-bold text-slate-700 bg-white px-2 py-0.5 rounded-md shadow-2xs border border-slate-200/60">
+                                    Miễn Phí 100%
+                                </span>
+                            </div>
                             <button type="button" id="btn-eval-submit" onclick="evaluateLaborProfile()" class="w-full bg-[#facc15] hover:bg-[#eab308] text-slate-900 font-bold text-xs sm:text-sm py-2.5 rounded-xl shadow-xs transition flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
                                 <span>Xem kết quả sơ bộ</span>
@@ -1243,7 +1275,7 @@
 
                             <!-- 6 Steps Roadmap Flowchart -->
                             <div class="py-2 my-auto overflow-x-auto">
-                                <div class="grid grid-cols-6 gap-1 min-w-[420px] sm:min-w-0 items-start">
+                                <div class="grid gap-1 min-w-[420px] sm:min-w-0 items-start" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)) !important;">
                                     
                                     <!-- Step 01 -->
                                     <div class="flex flex-col items-center relative group">
@@ -1257,7 +1289,7 @@
                                             Tư vấn &amp;<br>tìm hiểu
                                         </h5>
                                         <!-- Arrow 01 -> 02 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1277,7 +1309,7 @@
                                             Đối chiếu<br>điều kiện
                                         </h5>
                                         <!-- Arrow 02 -> 03 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1297,7 +1329,7 @@
                                             Chuẩn bị<br>hồ sơ
                                         </h5>
                                         <!-- Arrow 03 -> 04 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1317,7 +1349,7 @@
                                             Đào tạo &amp;<br>thi tuyển
                                         </h5>
                                         <!-- Arrow 04 -> 05 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1337,7 +1369,7 @@
                                             Hoàn thiện<br>thủ tục
                                         </h5>
                                         <!-- Arrow 05 -> 06 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1829,6 +1861,22 @@
                                 </a>
                             </div>
 
+                            <!-- Training Success Metric Banner -->
+                            <div class="mt-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50/60 rounded-xl border border-blue-100 flex items-center justify-between gap-3 text-xs">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-8 h-8 rounded-lg bg-[#0274BD] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs">
+                                        <i class="fa-solid fa-award"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-bold text-slate-900 text-xs">Tỷ Lệ Đỗ EPS-TOPIK 95.8%</div>
+                                        <p class="text-[10.5px] text-slate-500">Kỳ thi đánh giá năng lực gần nhất tại KIPA Việt Hàn</p>
+                                    </div>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10.5px] border border-emerald-200 shrink-0 shadow-2xs">
+                                    Cam Kết Chuẩn Đầu Ra
+                                </span>
+                            </div>
+
                         </div>
 
                         <!-- Bottom spacer / alignment padding -->
@@ -1848,8 +1896,8 @@
                             <!-- Accordion Items List (8 câu đầy đủ, hữu ích) -->
                             <div class="space-y-1.5">
                                 
-                                <!-- FAQ 1 -->
-                                <div class="xkld-faq-item border border-slate-200/80 rounded-xl px-3.5 py-2 cursor-pointer">
+                                <!-- FAQ 1 (Active by default) -->
+                                <div class="xkld-faq-item active border border-slate-200/80 rounded-xl px-3.5 py-2 cursor-pointer bg-slate-50/50">
                                     <div class="flex items-center justify-between gap-2 font-bold text-xs sm:text-[13px] text-slate-800" onclick="toggleFaq(this)">
                                         <span>Xuất khẩu lao động Hàn Quốc cần điều kiện gì?</span>
                                         <i class="fa-solid fa-chevron-right text-[11px] text-slate-400 xkld-faq-chevron transition-transform shrink-0"></i>
@@ -1960,7 +2008,7 @@
                  (Khối form đăng ký nền xanh đậm)
                  ======================================================== -->
             <section id="dang-ky-tu-van" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-8">
-                <div class="relative bg-gradient-to-r from-[#034479] via-[#025a9e] to-[#0274bd] rounded-3xl p-6 sm:p-9 text-white overflow-hidden shadow-xl">
+                <div class="relative bg-gradient-to-r from-[#034479] via-[#025a9e] to-[#0274bd] rounded-3xl p-6 sm:p-9 text-white overflow-hidden shadow-xl" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #014f86 100%) !important;">
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                         
@@ -2031,7 +2079,7 @@
 
                                 <!-- Button Submit -->
                                 <div class="pt-1 flex flex-col sm:flex-row items-center gap-3">
-                                    <button type="submit" id="btn-submit-lead" class="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#facc15] hover:bg-[#eab308] text-slate-900 font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 whitespace-nowrap">
+                                    <button type="submit" id="btn-submit-lead" class="w-full sm:w-auto px-7 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 whitespace-nowrap hover:opacity-95" style="background: #FACC15 !important; color: #081D36 !important;">
                                         <span>Gửi yêu cầu tư vấn</span>
                                         <i class="fa-solid fa-arrow-right text-xs"></i>
                                     </button>
