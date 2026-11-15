@@ -949,19 +949,19 @@
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                         
-                        <!-- Col 1: Video Thumbnail Núi Phú Sĩ & Nhà máy Nhật -->
+                        <!-- Col 1: Video Thumbnail KIPA Việt Hàn -->
                         <div class="lg:col-span-4">
-                            <div class="relative rounded-2xl overflow-hidden shadow-sm group cursor-pointer border border-slate-100" onclick="openVideoModal()">
+                            <div class="relative rounded-2xl overflow-hidden shadow-sm group cursor-pointer border border-slate-100" onclick="openVideoModal()" title="Xem video KIPA Việt Hàn: Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế">
                                 <img src="/assets/xuat-khau-lao-dong-nhat/sec1_video_thumb_hd.png" 
-                                     alt="Video giới thiệu cuộc sống và làm việc tại Nhật Bản" 
+                                     alt="KIPA Việt Hàn – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế" 
                                      class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                    <div class="w-12 h-12 rounded-full bg-white/90 text-[#0274BD] shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                                <div class="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors flex items-center justify-center">
+                                    <div class="w-12 h-12 rounded-full bg-white/95 text-[#EC1E1B] shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
                                         <i class="fa-solid fa-play text-lg ml-1"></i>
                                     </div>
                                 </div>
                                 <div class="absolute bottom-2 right-2.5 bg-black/70 backdrop-blur-xs text-white text-[11px] font-mono px-2 py-0.5 rounded">
-                                    03:45
+                                    03:28
                                 </div>
                             </div>
                         </div>
@@ -1912,6 +1912,61 @@
             </section>
 
         </div>
+
+        <!-- ========================================================
+             VIDEO MODAL
+             ======================================================== -->
+        <div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="closeVideoModal(event)">
+            <div class="bg-black rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between p-3 bg-slate-900 text-white">
+                    <div class="flex items-center gap-2 min-w-0 pr-2">
+                        <i class="fa-brands fa-youtube text-red-500 text-lg shrink-0"></i>
+                        <span class="text-xs font-bold text-slate-200 truncate">KIPA Việt Hàn – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế</span>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <a href="https://youtu.be/CGz_FpIwjNk" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-300 hover:text-white hover:underline flex items-center gap-1.5 transition-colors bg-white/10 px-2.5 py-1 rounded-md">
+                            <span>Mở YouTube</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                        <button type="button" onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-1 transition-colors" title="Đóng">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="aspect-video w-full bg-black flex items-center justify-center">
+                    <iframe id="video-frame" class="w-full h-full" src="" title="KIPA Việt Hàn Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Modal Helper Scripts -->
+        <script>
+            function openVideoModal() {
+                const modal = document.getElementById('video-modal');
+                const frame = document.getElementById('video-frame');
+                if (modal && frame) {
+                    frame.src = "https://www.youtube.com/embed/CGz_FpIwjNk?autoplay=1";
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeVideoModal(e) {
+                const modal = document.getElementById('video-modal');
+                const frame = document.getElementById('video-frame');
+                if (modal && frame) {
+                    frame.src = "";
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeVideoModal();
+                }
+            });
+        </script>
     </main>
 
     <!-- SITE FOOTER -->
