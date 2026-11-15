@@ -327,10 +327,10 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             source_page = data.get('source_page', '/tieng-han/')
             fields = data.get('fields', {})
 
-            if form_type == 'korean_gift' and not fields.get('email', '').strip():
+            if form_type in ('korean_gift', 'korean_online_trial') and not fields.get('email', '').strip():
                 response_data = {
                     'ok': False,
-                    'error': 'Vui lòng nhập địa chỉ email để KIPA gửi tài liệu.'
+                    'error': 'Vui lòng nhập địa chỉ email để KIPA gửi tài liệu và thông tin phòng học Google Meet.'
                 }
                 resp_bytes = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
                 self.send_response(422)
@@ -342,12 +342,20 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
             try:
                 lead_id, contact_name, phone = save_dev_lead(form_type, source_page, fields)
+                user_email = fields.get('email', '').strip()
+                class_choice = fields.get('class_choice', fields.get('course', 'Lớp tiếng Hàn'))
+                if user_email:
+                    sys.stderr.write(f"[{self.log_date_time_string()}] [EMAIL XÁC NHẬN TỰ ĐỘNG] Gửi thành công tới {user_email} | Khóa học: {class_choice} | Link Zalo: https://zalo.me/g/ehkt1g0n2qjcbomdlgal\n")
                 sys.stderr.write(f"[{self.log_date_time_string()}] [DATABASE GHI NHẬN] Lead #{lead_id} ({form_type}): {contact_name} - SDT: {phone} -> Lưu thành công vào {DB_PATH}\n")
                 response_data = {
                     'ok': True,
                     'id': lead_id,
                     'message': f'Đã ghi nhận thông tin đăng ký thành công vào cơ sở dữ liệu (Lead #{lead_id}).',
-                    'contact_name': contact_name
+                    'contact_name': contact_name,
+                    'email': user_email,
+                    'class_choice': class_choice,
+                    'zalo_link': 'https://zalo.me/g/ehkt1g0n2qjcbomdlgal',
+                    'zalo_qr': '/assets/tieng-han/qr_zalo_lop_online_kipa.jpg'
                 }
                 status_code = 200
             except Exception as e:
