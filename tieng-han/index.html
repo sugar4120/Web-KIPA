@@ -1414,75 +1414,9 @@
                     </div>
                 </div>
 
-                <!-- Question 1 -->
-                <div id="quiz-q1" class="quiz-step space-y-4">
-                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
-                        1. Câu nói phổ biến nhất trong phim Hàn <span class="text-brand-blue">"안녕하세요" (An-nyeong-ha-se-yo)</span> có nghĩa là gì?
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <button type="button" onclick="answerQuiz(1, 'A', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">A</span>
-                            <span>Cảm ơn bạn</span>
-                        </button>
-                        <button type="button" onclick="answerQuiz(1, 'B', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">B</span>
-                            <span>Xin chào</span>
-                        </button>
-                        <button type="button" onclick="answerQuiz(1, 'C', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">C</span>
-                            <span>Tạm biệt</span>
-                        </button>
-                    </div>
-                    <div id="quiz-feedback-1" class="hidden text-xs p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>
-                        <strong>Chính xác!</strong> "안녕하세요" là lời chào lịch sự nhất của người Hàn Quốc, dùng chào hỏi hàng ngày.
-                    </div>
-                </div>
-
-                <!-- Question 2 -->
-                <div id="quiz-q2" class="quiz-step hidden space-y-4">
-                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
-                        2. Bảng chữ cái tiếng Hàn (Hangul) được thiết kế dựa trên 3 yếu tố triết lý phương Đông nào?
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <button type="button" onclick="answerQuiz(2, 'A', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">A</span>
-                            <span>Trời (•) – Đất (ㅡ) – Người (ㅣ)</span>
-                        </button>
-                        <button type="button" onclick="answerQuiz(2, 'B', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">B</span>
-                            <span>Mặt Trời – Mặt Trăng – Vì Sao</span>
-                        </button>
-                        <button type="button" onclick="answerQuiz(2, 'C', false)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">C</span>
-                            <span>Kim – Mộc – Thủy – Hỏa – Thổ</span>
-                        </button>
-                    </div>
-                    <div id="quiz-feedback-2" class="hidden text-xs p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>
-                        <strong>Xuất sắc!</strong> Vua Sejong sáng tạo Hangul theo 3 nét cơ bản đại diện cho Trời tròn, Đất phẳng và Con người đứng thẳng.
-                    </div>
-                </div>
-
-                <!-- Question 3 -->
-                <div id="quiz-q3" class="quiz-step hidden space-y-4">
-                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
-                        3. Động lực lớn nhất thúc đẩy bạn quyết định chinh phục tiếng Hàn hôm nay là gì?
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <button type="button" onclick="answerQuiz(3, 'A', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">A</span>
-                            <span>Du học trường TOP tại Hàn</span>
-                        </button>
-                        <button type="button" onclick="answerQuiz(3, 'B', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">B</span>
-                            <span>Đi làm XKLD EPS E-9 / E-7</span>
-                        </button>
-                        <button type="button" onclick="answerQuiz(3, 'C', true)" class="quiz-opt p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">C</span>
-                            <span>Giao tiếp & Đam mê văn hóa</span>
-                        </button>
-                    </div>
+                <!-- Dynamic Questions Container -->
+                <div id="quiz-questions-wrapper" class="space-y-4">
+                    <!-- Dynamic questions generated by JavaScript -->
                 </div>
 
                 <!-- Result Box -->
@@ -1491,11 +1425,17 @@
                         <i class="fa-solid fa-trophy"></i>
                     </div>
                     <div class="space-y-1">
-                        <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 inline-block px-3 py-1 rounded-full">Chỉ số tiếp thu: 98% Xuất sắc</div>
-                        <h4 class="font-phudu text-lg sm:text-xl font-bold text-slate-900">Bạn có phản xạ ngôn ngữ Hàn Quốc cực kỳ tiềm năng!</h4>
-                        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                        <div id="quiz-result-badge" class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 inline-block px-3 py-1 rounded-full">Chỉ số tiếp thu: 100% Xuất sắc</div>
+                        <h4 id="quiz-result-title" class="font-phudu text-lg sm:text-xl font-bold text-slate-900">Bạn có phản xạ ngôn ngữ Hàn Quốc cực kỳ tiềm năng!</h4>
+                        <p id="quiz-result-desc" class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
                             Với phương pháp phản xạ 1:1 và giáo trình chuẩn tại KIPA, bạn hoàn toàn có thể tự tin đạt TOPIK 2 – 3 và giao tiếp tự nhiên chỉ sau 3 tháng học tập.
                         </p>
+                        <div class="pt-2">
+                            <button type="button" onclick="restartQuizWithNewQuestions()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 hover:bg-blue-100 text-brand-blue font-bold text-xs transition-colors shadow-2xs">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                                <span>Thử lại với bộ 3 câu hỏi mới khác</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Form đăng ký nhận quà trực tiếp ngay tại đây -->
@@ -1520,6 +1460,7 @@
                             <input type="hidden" name="course" value="Tiếng Hàn nhập môn (Nhận Ebook &amp; Học thử)">
                             <input type="hidden" name="level" value="Đã hoàn thành Mini Test 60s">
                             <input type="hidden" name="timing" value="Càng sớm càng tốt">
+                            <input type="hidden" name="quiz_summary" id="quiz_summary" value="">
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div class="space-y-1">
@@ -2449,29 +2390,362 @@
         }
     });
 
-    // Interactive Mini Quiz Handler
-    function answerQuiz(questionNum, option, isCorrect) {
-        const currentQ = document.getElementById('quiz-q' + questionNum);
-        const feedback = document.getElementById('quiz-feedback-' + questionNum);
+    // ==========================================
+    // DYNAMIC ROTATING MINI QUIZ WITH DATABASE INTEGRATION
+    // ==========================================
+    const KIPA_DEFAULT_QUIZ_POOL = [
+        // Nhóm 1: Văn hóa & K-Culture
+        {
+            id: 'c1',
+            category: 'culture',
+            category_title: 'Văn hóa & Phim ảnh',
+            question: 'Câu nói phổ biến nhất trong phim Hàn <span class="text-brand-blue font-bold">"안녕하세요" (An-nyeong-ha-se-yo)</span> có nghĩa là gì?',
+            options: [
+                { key: 'A', text: 'Cảm ơn bạn', correct: false },
+                { key: 'B', text: 'Xin chào', correct: true },
+                { key: 'C', text: 'Tạm biệt', correct: false }
+            ],
+            feedback: 'Chính xác! "안녕하세요" là lời chào lịch sự chuẩn mực nhất của người Hàn Quốc, dùng chào hỏi hàng ngày.'
+        },
+        {
+            id: 'c2',
+            category: 'culture',
+            category_title: 'Văn hóa & Phim ảnh',
+            question: 'Khi muốn nói lời cảm ơn lịch sự và trang trọng nhất trong tiếng Hàn, người ta dùng câu nào?',
+            options: [
+                { key: 'A', text: '감사합니다 (Gam-sa-ham-ni-da)', correct: true },
+                { key: 'B', text: '미안해요 (Mi-an-hae-yo)', correct: false },
+                { key: 'C', text: '사랑해요 (Sa-rang-hae-yo)', correct: false }
+            ],
+            feedback: 'Rất chuẩn! "감사합니다" là cách cảm ơn trang trọng nhất, dùng trong mọi tình huống giao tiếp và công sở.'
+        },
+        {
+            id: 'c3',
+            category: 'culture',
+            category_title: 'Văn hóa & Phim ảnh',
+            question: 'Trong văn hóa Hàn Quốc, một bạn nữ gọi người anh trai hoặc bạn nam thân thiết lớn tuổi hơn là gì?',
+            options: [
+                { key: 'A', text: 'Hyung (형)', correct: false },
+                { key: 'B', text: 'Oppa (오빠)', correct: true },
+                { key: 'C', text: 'Noona (누나)', correct: false }
+            ],
+            feedback: 'Đúng rồi! Nữ gọi anh lớn tuổi là "Oppa" (오빠), còn nam gọi anh lớn tuổi là "Hyung" (형).'
+        },
+        {
+            id: 'c4',
+            category: 'culture',
+            category_title: 'Văn hóa & Phim ảnh',
+            question: 'Món ăn truyền thống lên men cay nồng mang tính biểu tượng văn hóa của Hàn Quốc là gì?',
+            options: [
+                { key: 'A', text: 'Kimchi (김치)', correct: true },
+                { key: 'B', text: 'Tokbokki (떡볶이)', correct: false },
+                { key: 'C', text: 'Kimbap (김밥)', correct: false }
+            ],
+            feedback: 'Tuyệt vời! Kimchi là linh hồn của ẩm thực Hàn Quốc, xuất hiện trong mọi bữa ăn gia đình.'
+        },
+
+        // Nhóm 2: Chữ cái Hangul & Ngữ âm
+        {
+            id: 'l1',
+            category: 'language',
+            category_title: 'Chữ cái & Ngữ âm Hangul',
+            question: 'Bảng chữ cái tiếng Hàn (Hangul) được Vua Sejong sáng tạo dựa trên 3 yếu tố triết lý phương Đông nào?',
+            options: [
+                { key: 'A', text: 'Trời (•) – Đất (ㅡ) – Người (ㅣ)', correct: true },
+                { key: 'B', text: 'Mặt Trời – Mặt Trăng – Vì Sao', correct: false },
+                { key: 'C', text: 'Kim – Mộc – Thủy – Hỏa – Thổ', correct: false }
+            ],
+            feedback: 'Xuất sắc! Vua Sejong sáng tạo Hangul theo 3 nét cơ bản đại diện cho Trời tròn, Đất phẳng và Con người đứng thẳng.'
+        },
+        {
+            id: 'l2',
+            category: 'language',
+            category_title: 'Chữ cái & Ngữ âm Hangul',
+            question: 'Bảng chữ cái Hangul được UNESCO công nhận di sản vì đặc điểm khoa học độc đáo nào?',
+            options: [
+                { key: 'A', text: 'Hình dạng phụ âm mô phỏng khẩu hình miệng và vị trí lưỡi khi phát âm', correct: true },
+                { key: 'B', text: 'Là dạng chữ tượng hình khắc trên mai rùa cổ', correct: false },
+                { key: 'C', text: 'Có 6 thanh điệu giống hệt tiếng Việt', correct: false }
+            ],
+            feedback: 'Chính xác! Các phụ âm Hangul mô phỏng đúng khẩu hình miệng, giúp người mới học nhớ mặt chữ chỉ sau 60 phút!'
+        },
+        {
+            id: 'l3',
+            category: 'language',
+            category_title: 'Chữ cái & Ngữ âm Hangul',
+            question: 'Khoảng 60% từ vựng tiếng Hàn là gốc Hán - Hàn (rất gần gũi với âm Hán - Việt). Từ <span class="text-brand-blue font-bold">"학생" (Hak-saeng)</span> có nghĩa là gì?',
+            options: [
+                { key: 'A', text: 'Học sinh', correct: true },
+                { key: 'B', text: 'Bác sĩ', correct: false },
+                { key: 'C', text: 'Giáo viên', correct: false }
+            ],
+            feedback: 'Chuẩn xác! "학생" chính là âm Hán "Học sinh". Nhờ sự tương đồng này, người Việt học từ vựng tiếng Hàn cực kỳ nhanh!'
+        },
+        {
+            id: 'l4',
+            category: 'language',
+            category_title: 'Chữ cái & Ngữ âm Hangul',
+            question: 'Trong tiếng Hàn, một âm tiết tối thiểu luôn được tạo thành từ cấu trúc nào?',
+            options: [
+                { key: 'A', text: 'Ít nhất 1 Phụ âm + 1 Nguyên âm ghép thành khối vuông', correct: true },
+                { key: 'B', text: 'Chỉ cần 1 phụ âm đứng một mình', correct: false },
+                { key: 'C', text: 'Luôn phải có 3 ký tự trở lên', correct: false }
+            ],
+            feedback: 'Chính xác! Tiếng Hàn ghép theo khối vuông (âm tiết), luôn gồm phụ âm đầu kết hợp với nguyên âm.'
+        },
+
+        // Nhóm 3: Giao tiếp & Tình huống thực tế
+        {
+            id: 's1',
+            category: 'situation',
+            category_title: 'Giao tiếp thực tế',
+            question: 'Khi vào một quán ăn truyền thống tại Seoul, cách gọi cô chủ quán thân thiện và tự nhiên nhất là gì?',
+            options: [
+                { key: 'A', text: 'Imo (이모) / Imo-nim (Dì ơi)', correct: true },
+                { key: 'B', text: 'Ajusshi (아저씨 - Chú ơi)', correct: false },
+                { key: 'C', text: 'Sajang-nim (사장님 - Giám đốc)', correct: false }
+            ],
+            feedback: 'Rất chuẩn! "이모" (Dì ơi) là cách gọi cực kỳ gần gũi và được các cô chủ quán Hàn Quốc quý mến phục vụ chu đáo.'
+        },
+        {
+            id: 's2',
+            category: 'situation',
+            category_title: 'Giao tiếp thực tế',
+            question: 'Khi bạn ra về và người kia ở lại, câu chào tạm biệt lịch sự nhất là gì?',
+            options: [
+                { key: 'A', text: '안녕히 계세요 (An-nyeong-hi gye-se-yo - Ở lại bình an)', correct: true },
+                { key: 'B', text: '안녕히 가세요 (An-nyeong-hi ga-se-yo - Đi về bình an)', correct: false },
+                { key: 'C', text: '또 만나요 (Tto man-na-yo - Hẹn gặp lại)', correct: false }
+            ],
+            feedback: 'Rất tinh tế! "계세요" là chúc người ở lại bình an, còn "가세요" là chúc người ra về đi đường bình an.'
+        },
+        {
+            id: 's3',
+            category: 'situation',
+            category_title: 'Giao tiếp thực tế',
+            question: 'Khi nâng ly chúc mừng trước người lớn tuổi hoặc thầy cô giáo Hàn Quốc, nét văn hóa lịch sự chuẩn mực là gì?',
+            options: [
+                { key: 'A', text: 'Xoay người sang một bên và dùng tay che ly khi uống', correct: true },
+                { key: 'B', text: 'Nhìn thẳng vào mắt và uống hết một hơi', correct: false },
+                { key: 'C', text: 'Nâng ly cao hơn hẳn ly của người lớn', correct: false }
+            ],
+            feedback: 'Chính xác! Văn hóa kính ngữ của Hàn Quốc thể hiện qua cử chỉ xoay nhẹ người và dùng hai tay nâng ly tôn kính.'
+        },
+        {
+            id: 's4',
+            category: 'situation',
+            category_title: 'Giao tiếp thực tế',
+            question: 'Mục tiêu quan trọng nhất bạn muốn đạt được khi học tiếng Hàn tại KIPA là gì?',
+            options: [
+                { key: 'A', text: 'Đạt TOPIK du học trường TOP & săn học bổng', correct: true },
+                { key: 'B', text: 'Giao tiếp phản xạ tự tin để đi làm / XKLD EPS', correct: true },
+                { key: 'C', text: 'Thành thạo 4 kỹ năng từ con số 0 trong thời gian nhanh nhất', correct: true }
+            ],
+            feedback: 'Tuyệt vời! Dù mục tiêu của bạn là gì, phương pháp kèm 1:1 tại KIPA sẽ đồng hành cùng bạn đến đích thành công.'
+        }
+    ];
+
+    let kipaActiveQuizPool = KIPA_DEFAULT_QUIZ_POOL;
+    let currentQuizSet = [];
+    let currentQuizScore = 0;
+    let userAnswersRecord = [];
+
+    function pickRandomItem(arr, excludeIds) {
+        const candidates = arr.filter(item => !excludeIds.includes(item.id));
+        const list = candidates.length > 0 ? candidates : arr;
+        return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function initMiniQuiz() {
+        fetch('/api/quiz_questions.php')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.ok && Array.isArray(data.questions) && data.questions.length >= 3) {
+                    kipaActiveQuizPool = data.questions;
+                }
+                prepareQuizSession();
+            })
+            .catch(() => {
+                prepareQuizSession();
+            });
+    }
+
+    function prepareQuizSession() {
+        let seenIds = [];
+        try {
+            const raw = sessionStorage.getItem('kipa_seen_quiz_ids');
+            if (raw) seenIds = JSON.parse(raw);
+        } catch (e) {}
+
+        const pool = kipaActiveQuizPool;
+        const cultureList = pool.filter(q => q.category === 'culture');
+        const langList = pool.filter(q => q.category === 'language');
+        const sitList = pool.filter(q => q.category === 'situation');
+
+        const q1 = pickRandomItem(cultureList.length ? cultureList : pool, seenIds);
+        const q2 = pickRandomItem(langList.length ? langList : pool, seenIds.concat([q1.id]));
+        const q3 = pickRandomItem(sitList.length ? sitList : pool, seenIds.concat([q1.id, q2.id]));
+
+        currentQuizSet = [q1, q2, q3];
+        currentQuizScore = 0;
+        userAnswersRecord = [];
+
+        // Update seen IDs
+        const updatedSeen = Array.from(new Set([...seenIds, q1.id, q2.id, q3.id]));
+        if (updatedSeen.length >= pool.length) {
+            sessionStorage.removeItem('kipa_seen_quiz_ids');
+        } else {
+            sessionStorage.setItem('kipa_seen_quiz_ids', JSON.stringify(updatedSeen));
+        }
+
+        renderQuizDOM();
+    }
+
+    function renderQuizDOM() {
+        const wrapper = document.getElementById('quiz-questions-wrapper');
+        const result = document.getElementById('quiz-result');
         const progressBar = document.getElementById('quiz-progress-bar');
         const stepLabel = document.getElementById('quiz-step-label');
+
+        if (!wrapper) return;
+        if (result) result.classList.add('hidden');
+        if (progressBar) progressBar.style.width = '33.3%';
+        if (stepLabel) stepLabel.textContent = 'Câu hỏi 1 / 3';
+
+        wrapper.innerHTML = '';
+
+        currentQuizSet.forEach((q, idx) => {
+            const qNum = idx + 1;
+            const isHidden = idx !== 0 ? 'hidden' : '';
+
+            const optionsHtml = q.options.map((opt) => `
+                <button type="button" 
+                        onclick="handleUserAnswer(${qNum}, '${opt.key}', ${opt.correct ? 'true' : 'false'}, '${opt.text.replace(/'/g, "\\'")}')" 
+                        class="quiz-opt-${qNum} p-3.5 rounded-2xl border-2 border-slate-200 hover:border-brand-blue hover:bg-blue-50/50 text-left transition-all font-semibold text-xs sm:text-sm flex items-center gap-2.5">
+                    <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">${opt.key}</span>
+                    <span>${opt.text}</span>
+                </button>
+            `).join('');
+
+            const feedbackHtml = `
+                <div id="quiz-feedback-${qNum}" class="hidden text-xs p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>
+                    ${q.feedback}
+                </div>
+            `;
+
+            const block = document.createElement('div');
+            block.id = 'quiz-step-' + qNum;
+            block.className = `quiz-step ${isHidden} space-y-4`;
+            block.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-bold text-brand-blue bg-blue-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider">${q.category_title || 'Thử thách'}</span>
+                </div>
+                <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                    ${qNum}. ${q.question}
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    ${optionsHtml}
+                </div>
+                ${feedbackHtml}
+            `;
+            wrapper.appendChild(block);
+        });
+    }
+
+    function handleUserAnswer(qNum, selectedKey, isCorrect, optText) {
+        const qIndex = qNum - 1;
+        const currentStep = document.getElementById('quiz-step-' + qNum);
+        const feedback = document.getElementById('quiz-feedback-' + qNum);
+        const progressBar = document.getElementById('quiz-progress-bar');
+        const stepLabel = document.getElementById('quiz-step-label');
+
+        // Disable options in current step
+        const buttons = currentStep ? currentStep.querySelectorAll('button') : [];
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.classList.add('opacity-90');
+        });
+
+        if (isCorrect) currentQuizScore++;
+        userAnswersRecord.push({
+            qId: currentQuizSet[qIndex].id,
+            qText: currentQuizSet[qIndex].question.replace(/<[^>]*>/g, ''),
+            chosen: selectedKey + ': ' + optText,
+            isCorrect: isCorrect
+        });
 
         if (feedback) feedback.classList.remove('hidden');
 
         setTimeout(() => {
-            if (currentQ) currentQ.classList.add('hidden');
-            const nextQ = document.getElementById('quiz-q' + (questionNum + 1));
-            if (nextQ) {
-                nextQ.classList.remove('hidden');
-                if (progressBar) progressBar.style.width = ((questionNum + 1) / 3 * 100) + '%';
-                if (stepLabel) stepLabel.textContent = 'Câu hỏi ' + (questionNum + 1) + ' / 3';
+            if (currentStep) currentStep.classList.add('hidden');
+            const nextStep = document.getElementById('quiz-step-' + (qNum + 1));
+            if (nextStep) {
+                nextStep.classList.remove('hidden');
+                if (progressBar) progressBar.style.width = ((qNum + 1) / 3 * 100) + '%';
+                if (stepLabel) stepLabel.textContent = 'Câu hỏi ' + (qNum + 1) + ' / 3';
             } else {
-                const result = document.getElementById('quiz-result');
-                if (result) result.classList.remove('hidden');
-                if (progressBar) progressBar.style.width = '100%';
-                if (stepLabel) stepLabel.textContent = 'Hoàn thành!';
+                showQuizResult();
             }
-        }, 600);
+        }, 650);
+    }
+
+    function showQuizResult() {
+        const result = document.getElementById('quiz-result');
+        const progressBar = document.getElementById('quiz-progress-bar');
+        const stepLabel = document.getElementById('quiz-step-label');
+        const badge = document.getElementById('quiz-result-badge');
+        const title = document.getElementById('quiz-result-title');
+        const desc = document.getElementById('quiz-result-desc');
+        const summaryInput = document.getElementById('quiz_summary');
+
+        if (progressBar) progressBar.style.width = '100%';
+        if (stepLabel) stepLabel.textContent = 'Hoàn thành!';
+
+        let pct = '100%';
+        let badgeText = 'Chỉ số tiếp thu: 100% Xuất sắc';
+        let titleText = 'Bạn có phản xạ ngôn ngữ Hàn Quốc cực kỳ tiềm năng!';
+        let descText = 'Với phương pháp phản xạ 1:1 và giáo trình chuẩn tại KIPA, bạn hoàn toàn có thể tự tin đạt TOPIK 2 – 3 và giao tiếp tự nhiên chỉ sau 3 tháng học tập.';
+
+        if (currentQuizScore === 2) {
+            pct = '85%';
+            badgeText = 'Chỉ số tiếp thu: 85% Rất tốt';
+            titleText = 'Bạn có độ nhạy bén với phát âm và cấu trúc tiếng Hàn!';
+            descText = 'Nền tảng cảm âm của bạn rất tốt. Khi được thầy cô KIPA hướng dẫn bài bản phương pháp ghép âm và phản xạ, bạn sẽ tiến bộ vượt bậc.';
+        } else if (currentQuizScore <= 1) {
+            pct = '70%';
+            badgeText = 'Tiềm năng phát triển: Đầy hứa hẹn';
+            titleText = 'Khởi đầu từ con số 0 – Bứt phá cùng giáo trình KIPA!';
+            descText = 'Đừng lo lắng nếu chưa biết tiếng Hàn. Hơn 80% học viên KIPA bắt đầu từ con số 0 và đã tự tin giao tiếp, đỗ visa chỉ sau một lộ trình!';
+        }
+
+        if (badge) badge.textContent = badgeText;
+        if (title) title.textContent = titleText;
+        if (desc) desc.textContent = descText;
+
+        // Prepare summary for Database Lead submission
+        if (summaryInput) {
+            const summaryStr = `Điểm: ${currentQuizScore}/3 (${pct}) | Chi tiết: ` + 
+                userAnswersRecord.map(a => `[${a.chosen} (${a.isCorrect ? 'Đúng' : 'Sai'})]`).join(' ; ');
+            summaryInput.value = summaryStr;
+        }
+
+        if (result) result.classList.remove('hidden');
+    }
+
+    function restartQuizWithNewQuestions() {
+        prepareQuizSession();
+        const testSection = document.getElementById('mini-test');
+        if (testSection) {
+            testSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Auto-init on page load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMiniQuiz);
+    } else {
+        initMiniQuiz();
     }
 </script>
     </main>

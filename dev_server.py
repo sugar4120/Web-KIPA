@@ -30,7 +30,86 @@ def init_dev_db():
                 created_at TEXT NOT NULL
             )
         ''')
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS kipa_quiz_questions (
+                id TEXT PRIMARY KEY,
+                category TEXT NOT NULL,
+                category_title TEXT NOT NULL,
+                question TEXT NOT NULL,
+                options_json TEXT NOT NULL,
+                feedback TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            )
+        ''')
+        # Check if quiz questions are seeded
+        cursor = conn.cursor()
+        cursor.execute('SELECT COUNT(*) FROM kipa_quiz_questions')
+        if cursor.fetchone()[0] == 0:
+            seed_questions = [
+                ("c1", "culture", "Văn hóa & Phim ảnh", "Câu nói phổ biến nhất trong phim Hàn \"안녕하세요\" (An-nyeong-ha-se-yo) có nghĩa là gì?",
+                 json.dumps([{"key": "A", "text": "Cảm ơn bạn", "correct": False}, {"key": "B", "text": "Xin chào", "correct": True}, {"key": "C", "text": "Tạm biệt", "correct": False}], ensure_ascii=False),
+                 "Chính xác! \"안녕하세요\" là lời chào lịch sự chuẩn mực nhất của người Hàn Quốc, dùng chào hỏi hàng ngày."),
+                ("c2", "culture", "Văn hóa & Phim ảnh", "Khi muốn nói lời cảm ơn lịch sự và trang trọng nhất trong tiếng Hàn, người ta dùng câu nào?",
+                 json.dumps([{"key": "A", "text": "감사합니다 (Gam-sa-ham-ni-da)", "correct": True}, {"key": "B", "text": "미안해요 (Mi-an-hae-yo)", "correct": False}, {"key": "C", "text": "사랑해요 (Sa-rang-hae-yo)", "correct": False}], ensure_ascii=False),
+                 "Rất chuẩn! \"감사합니다\" là cách cảm ơn trang trọng nhất, dùng trong mọi tình huống giao tiếp và công sở."),
+                ("c3", "culture", "Văn hóa & Phim ảnh", "Trong văn hóa Hàn Quốc, một bạn nữ gọi người anh trai hoặc bạn nam thân thiết lớn tuổi hơn là gì?",
+                 json.dumps([{"key": "A", "text": "Hyung (형)", "correct": False}, {"key": "B", "text": "Oppa (오빠)", "correct": True}, {"key": "C", "text": "Noona (누나)", "correct": False}], ensure_ascii=False),
+                 "Đúng rồi! Nữ gọi anh lớn tuổi là \"Oppa\" (오빠), còn nam gọi anh lớn tuổi là \"Hyung\" (형)."),
+                ("c4", "culture", "Văn hóa & Phim ảnh", "Món ăn truyền thống lên men cay nồng mang tính biểu tượng văn hóa của Hàn Quốc là gì?",
+                 json.dumps([{"key": "A", "text": "Kimchi (김치)", "correct": True}, {"key": "B", "text": "Tokbokki (떡볶이)", "correct": False}, {"key": "C", "text": "Kimbap (김밥)", "correct": False}], ensure_ascii=False),
+                 "Tuyệt vời! Kimchi là linh hồn của ẩm thực Hàn Quốc, xuất hiện trong mọi bữa ăn gia đình."),
+                ("l1", "language", "Chữ cái & Ngữ âm Hangul", "Bảng chữ cái tiếng Hàn (Hangul) được Vua Sejong sáng tạo dựa trên 3 yếu tố triết lý phương Đông nào?",
+                 json.dumps([{"key": "A", "text": "Trời (•) – Đất (ㅡ) – Người (ㅣ)", "correct": True}, {"key": "B", "text": "Mặt Trời – Mặt Trăng – Vì Sao", "correct": False}, {"key": "C", "text": "Kim – Mộc – Thủy – Hỏa – Thổ", "correct": False}], ensure_ascii=False),
+                 "Xuất sắc! Vua Sejong sáng tạo Hangul theo 3 nét cơ bản đại diện cho Trời tròn, Đất phẳng và Con người đứng thẳng."),
+                ("l2", "language", "Chữ cái & Ngữ âm Hangul", "Bảng chữ cái Hangul được UNESCO công nhận di sản vì đặc điểm khoa học độc đáo nào?",
+                 json.dumps([{"key": "A", "text": "Hình dạng phụ âm mô phỏng khẩu hình miệng và vị trí lưỡi khi phát âm", "correct": True}, {"key": "B", "text": "Là dạng chữ tượng hình khắc trên mai rùa cổ", "correct": False}, {"key": "C", "text": "Có 6 thanh điệu giống hệt tiếng Việt", "correct": False}], ensure_ascii=False),
+                 "Chính xác! Các phụ âm Hangul mô phỏng đúng khẩu hình miệng, giúp người mới học nhớ mặt chữ chỉ sau 60 phút!"),
+                ("l3", "language", "Chữ cái & Ngữ âm Hangul", "Khoảng 60% từ vựng tiếng Hàn là gốc Hán - Hàn (rất gần gũi với âm Hán - Việt). Từ \"학생\" (Hak-saeng) có nghĩa là gì?",
+                 json.dumps([{"key": "A", "text": "Học sinh", "correct": True}, {"key": "B", "text": "Bác sĩ", "correct": False}, {"key": "C", "text": "Giáo viên", "correct": False}], ensure_ascii=False),
+                 "Chuẩn xác! \"학생\" chính là âm Hán \"Học sinh\". Nhờ sự tương đồng này, người Việt học từ vựng tiếng Hàn cực kỳ nhanh!"),
+                ("l4", "language", "Chữ cái & Ngữ âm Hangul", "Trong tiếng Hàn, một âm tiết tối thiểu luôn được tạo thành từ cấu trúc nào?",
+                 json.dumps([{"key": "A", "text": "Ít nhất 1 Phụ âm + 1 Nguyên âm ghép thành khối vuông", "correct": True}, {"key": "B", "text": "Chỉ cần 1 phụ âm đứng một mình", "correct": False}, {"key": "C", "text": "Luôn phải có 3 ký tự trở lên", "correct": False}], ensure_ascii=False),
+                 "Chính xác! Tiếng Hàn ghép theo khối vuông (âm tiết), luôn gồm phụ âm đầu kết hợp với nguyên âm."),
+                ("s1", "situation", "Giao tiếp thực tế", "Khi vào một quán ăn truyền thống tại Seoul, cách gọi cô chủ quán thân thiện và tự nhiên nhất là gì?",
+                 json.dumps([{"key": "A", "text": "Imo (이모) / Imo-nim (Dì ơi)", "correct": True}, {"key": "B", "text": "Ajusshi (아저씨 - Chú ơi)", "correct": False}, {"key": "C", "text": "Sajang-nim (사장님 - Giám đốc)", "correct": False}], ensure_ascii=False),
+                 "Rất chuẩn! \"이모\" (Dì ơi) là cách gọi cực kỳ gần gũi và được các cô chủ quán Hàn Quốc quý mến phục vụ chu đáo."),
+                ("s2", "situation", "Giao tiếp thực tế", "Khi bạn ra về và người kia ở lại, câu chào tạm biệt lịch sự nhất là gì?",
+                 json.dumps([{"key": "A", "text": "안녕히 계세요 (An-nyeong-hi gye-se-yo - Ở lại bình an)", "correct": True}, {"key": "B", "text": "안녕히 가세요 (An-nyeong-hi ga-se-yo - Đi về bình an)", "correct": False}, {"key": "C", "text": "또 만나요 (Tto man-na-yo - Hẹn gặp lại)", "correct": False}], ensure_ascii=False),
+                 "Rất tinh tế! \"계세요\" là chúc người ở lại bình an, còn \"가세요\" là chúc người ra về đi đường bình an."),
+                ("s3", "situation", "Giao tiếp thực tế", "Khi nâng ly chúc mừng trước người lớn tuổi hoặc thầy cô giáo Hàn Quốc, nét văn hóa lịch sự chuẩn mực là gì?",
+                 json.dumps([{"key": "A", "text": "Xoay người sang một bên và dùng tay che ly khi uống", "correct": True}, {"key": "B", "text": "Nhìn thẳng vào mắt và uống hết một hơi", "correct": False}, {"key": "C", "text": "Nâng ly cao hơn hẳn ly của người lớn", "correct": False}], ensure_ascii=False),
+                 "Chính xác! Văn hóa kính ngữ của Hàn Quốc thể hiện qua cử chỉ xoay nhẹ người và dùng hai tay nâng ly tôn kính."),
+                ("s4", "situation", "Giao tiếp thực tế", "Mục tiêu quan trọng nhất bạn muốn đạt được khi học tiếng Hàn tại KIPA là gì?",
+                 json.dumps([{"key": "A", "text": "Đạt TOPIK du học trường TOP & săn học bổng", "correct": True}, {"key": "B", "text": "Giao tiếp phản xạ tự tin để đi làm / XKLD EPS", "correct": True}, {"key": "C", "text": "Thành thạo 4 kỹ năng từ con số 0 trong thời gian nhanh nhất", "correct": True}], ensure_ascii=False),
+                 "Tuyệt vời! Dù mục tiêu của bạn là gì, phương pháp kèm 1:1 tại KIPA sẽ đồng hành cùng bạn đến đích thành công.")
+            ]
+            now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+            for q in seed_questions:
+                conn.execute('''
+                    INSERT INTO kipa_quiz_questions (id, category, category_title, question, options_json, feedback, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                ''', (q[0], q[1], q[2], q[3], q[4], q[5], now_iso))
         conn.commit()
+
+
+def get_quiz_questions():
+    init_dev_db()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM kipa_quiz_questions')
+        rows = cursor.fetchall()
+        result = []
+        for r in rows:
+            result.append({
+                "id": r["id"],
+                "category": r["category"],
+                "category_title": r["category_title"],
+                "question": r["question"],
+                "options": json.loads(r["options_json"]),
+                "feedback": r["feedback"]
+            })
+        return result
 
 
 def save_dev_lead(form_type, source_page, fields):
@@ -297,6 +376,17 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             self.send_header('Location', 'https://kipaviethan.edu.vn' + path)
             self.send_header('Content-Length', '0')
             self.end_headers()
+            return
+
+        if path in {'/api/quiz_questions.php', '/api/quiz_questions'}:
+            questions = get_quiz_questions()
+            resp_bytes = json.dumps({'ok': True, 'total': len(questions), 'questions': questions}, ensure_ascii=False).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
             return
 
         if path in {'/api/dev_leads', '/api/leads'}:
