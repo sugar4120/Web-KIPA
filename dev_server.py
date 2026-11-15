@@ -2,12 +2,64 @@
 import os
 import sys
 import json
+import sqlite3
+import datetime
 import mimetypes
 from urllib.parse import unquote, urlparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 PORT = 3000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'backend', 'dev_leads.sqlite')
+
+
+def init_dev_db():
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS kipa_leads (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                form_type TEXT NOT NULL,
+                contact_name TEXT NOT NULL,
+                phone TEXT NOT NULL,
+                email TEXT,
+                program TEXT,
+                source_page TEXT NOT NULL,
+                details_json TEXT NOT NULL,
+                consented_at TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            )
+        ''')
+        conn.commit()
+
+
+def save_dev_lead(form_type, source_page, fields):
+    init_dev_db()
+    contact_name = fields.get('fullname') or fields.get('name') or fields.get('contact_name') or fields.get('author') or 'Khách hàng'
+    phone = str(fields.get('phone', ''))
+    email = str(fields.get('email', ''))
+    program = str(fields.get('program') or fields.get('course') or '')
+    now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+    details_str = json.dumps(fields, ensure_ascii=False)
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO kipa_leads (form_type, contact_name, phone, email, program, source_page, details_json, consented_at, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (form_type, contact_name, phone, email, program, source_page, details_str, now_iso, now_iso))
+        lead_id = cursor.lastrowid
+        conn.commit()
+    return lead_id, contact_name, phone
+
+
+def get_dev_leads(limit=50):
+    init_dev_db()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM kipa_leads ORDER BY id DESC LIMIT ?', (limit,))
+        return [dict(row) for row in cursor.fetchall()]
 
 ROUTE_MAP = {
     '/': 'index.html',
@@ -193,17 +245,29 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 data = {}
 
             form_type = data.get('form_type', 'unknown')
+            source_page = data.get('source_page', '/tieng-han/')
             fields = data.get('fields', {})
-            contact_name = fields.get('fullname') or fields.get('name') or fields.get('contact_name') or fields.get('author') or 'Khách hàng'
-            phone = fields.get('phone', 'N/A')
-            sys.stderr.write(f"[{self.log_date_time_string()}] [DEV FORM MOCK] Nhan thong tin ({form_type}): {contact_name} - SDT: {phone}\n")
 
-            response_data = {
-                'ok': True,
-                'message': 'Đã nhận thông tin đăng ký thành công (Môi trường phát triển cục bộ).'
-            }
+            try:
+                lead_id, contact_name, phone = save_dev_lead(form_type, source_page, fields)
+                sys.stderr.write(f"[{self.log_date_time_string()}] [DATABASE GHI NHẬN] Lead #{lead_id} ({form_type}): {contact_name} - SDT: {phone} -> Lưu thành công vào {DB_PATH}\n")
+                response_data = {
+                    'ok': True,
+                    'id': lead_id,
+                    'message': f'Đã ghi nhận thông tin đăng ký thành công vào cơ sở dữ liệu (Lead #{lead_id}).',
+                    'contact_name': contact_name
+                }
+                status_code = 200
+            except Exception as e:
+                sys.stderr.write(f"[{self.log_date_time_string()}] [DATABASE ERROR] {e}\n")
+                response_data = {
+                    'ok': False,
+                    'error': f'Lỗi ghi nhận database: {str(e)}'
+                }
+                status_code = 500
+
             resp_bytes = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
-            self.send_response(200)
+            self.send_response(status_code)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Content-Length', str(len(resp_bytes)))
             self.end_headers()
@@ -220,6 +284,75 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             self.send_header('Location', 'https://kipaviethan.edu.vn' + path)
             self.send_header('Content-Length', '0')
             self.end_headers()
+            return
+
+        if path in {'/api/dev_leads', '/api/leads'}:
+            leads = get_dev_leads(100)
+            accept = self.headers.get('Accept', '')
+            if 'application/json' in accept and 'text/html' not in accept:
+                resp_bytes = json.dumps({'ok': True, 'count': len(leads), 'leads': leads}, ensure_ascii=False).encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+
+            rows_html = "".join([
+                f"""<tr style='border-bottom:1px solid #e2e8f0;'>
+                    <td style='padding:10px 14px;font-weight:bold;'>#{l['id']}</td>
+                    <td style='padding:10px 14px;white-space:nowrap;font-size:12px;color:#64748b;'>{l['created_at']}</td>
+                    <td style='padding:10px 14px;font-weight:bold;color:#0274bd;'>{l['contact_name']}</td>
+                    <td style='padding:10px 14px;font-weight:600;'>{l['phone']}</td>
+                    <td style='padding:10px 14px;'><span style='background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:bold;'>{l['form_type']}</span></td>
+                    <td style='padding:10px 14px;font-size:12px;'><a href='{l['source_page']}' style='color:#0274bd;'>{l['source_page']}</a></td>
+                    <td style='padding:10px 14px;font-family:monospace;font-size:11px;color:#334155;'>{l['details_json']}</td>
+                </tr>""" for l in leads
+            ])
+            html = f"""<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cơ sở dữ liệu Leads Đã Thu Thập | KIPA Dev Server</title>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 24px; background: #f8fafc; color: #1e293b; }}
+        .container {{ max-width: 1200px; margin: 0 auto; }}
+        .header {{ background: #0274bd; color: #fff; padding: 20px 24px; border-radius: 16px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }}
+        .card {{ background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }}
+        table {{ width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }}
+        th {{ background: #f1f5f9; color: #475569; font-weight: 700; padding: 12px 14px; border-bottom: 1px solid #e2e8f0; text-transform: uppercase; font-size: 11px; }}
+        .badge {{ background: #ec1e1b; color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }}
+        .btn {{ display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #0274bd; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 12px; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 style="margin:0 0 6px 0;font-size:22px;">KIPA Việt Hàn - Cơ Sở Dữ Liệu Leads Đã Ghi Nhận</h1>
+            <p style="margin:0;font-size:13px;opacity:0.9;">Lưu trữ cục bộ SQLite: <code>backend/dev_leads.sqlite</code> &bull; Tổng cộng: <strong>{len(leads)}</strong> yêu cầu tư vấn</p>
+        </div>
+        <div style="margin-bottom: 16px; display:flex; justify-content:space-between; align-items:center;">
+            <a href="/tieng-han/#dang-ky" class="btn">&larr; Quay lại form tiếng Hàn</a>
+            <span style="font-size:12px;color:#64748b;">Dữ liệu tự động đồng bộ thời gian thực</span>
+        </div>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Thời gian</th><th>Họ và tên</th><th>Số điện thoại</th><th>Biểu mẫu</th><th>Nguồn trang</th><th>Chi tiết form</th></tr>
+                </thead>
+                <tbody>{rows_html if rows_html else "<tr><td colspan='7' style='padding:32px;text-align:center;color:#94a3b8;'>Chưa có lead nào trong cơ sở dữ liệu. Hãy điền form tại website và gửi thử!</td></tr>"}</tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>"""
+            body_bytes = html.encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(body_bytes)))
+            self.end_headers()
+            self.wfile.write(body_bytes)
             return
         clean_path = path.rstrip('/') if path != '/' else '/'
 
