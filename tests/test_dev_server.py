@@ -1,4 +1,5 @@
 import http.client
+import json
 import threading
 import unittest
 from http.server import HTTPServer
@@ -19,10 +20,10 @@ class DevServerTests(unittest.TestCase):
         cls.thread.join()
         cls.server.server_close()
 
-    def request(self, path, method='GET'):
+    def request(self, path, method='GET', body=None, headers=None):
         connection = http.client.HTTPConnection(*self.server.server_address, timeout=5)
         try:
-            connection.request(method, path)
+            connection.request(method, path, body=body, headers=headers or {})
             response = connection.getresponse()
             return response.status, dict(response.getheaders()), response.read()
         finally:
@@ -61,6 +62,24 @@ class DevServerTests(unittest.TestCase):
         self.assertIn('text/html', headers['Content-Type'])
         self.assertIn(b'href="/dang-nhap/"', body)
         self.assertIn(b'href="/api/admin.php"', body)
+
+    def test_form_submission_mock_on_dev_server(self):
+        payload = json.dumps({
+            'form_type': 'labor',
+            'source_page': '/xuat-khau-lao-dong/',
+            'fields': {'fullname': 'Phương', 'phone': '0868082746', 'consent': 'yes'},
+            'website': ''
+        }).encode('utf-8')
+        status, headers, body = self.request(
+            '/api/submit.php',
+            method='POST',
+            body=payload,
+            headers={'Content-Type': 'application/json', 'Content-Length': str(len(payload))}
+        )
+        self.assertEqual(status, 200)
+        self.assertIn('application/json', headers.get('Content-Type', ''))
+        result = json.loads(body.decode('utf-8'))
+        self.assertTrue(result.get('ok'))
 
 
 if __name__ == '__main__':
