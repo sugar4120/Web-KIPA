@@ -184,6 +184,32 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             self.wfile.write(resp_bytes)
             return
 
+        if path == '/api/submit.php':
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length) if length > 0 else b'{}'
+            try:
+                data = json.loads(body.decode('utf-8'))
+            except Exception:
+                data = {}
+
+            form_type = data.get('form_type', 'unknown')
+            fields = data.get('fields', {})
+            contact_name = fields.get('fullname') or fields.get('name') or fields.get('contact_name') or fields.get('author') or 'Khách hàng'
+            phone = fields.get('phone', 'N/A')
+            sys.stderr.write(f"[{self.log_date_time_string()}] [DEV FORM MOCK] Nhan thong tin ({form_type}): {contact_name} - SDT: {phone}\n")
+
+            response_data = {
+                'ok': True,
+                'message': 'Đã nhận thông tin đăng ký thành công (Môi trường phát triển cục bộ).'
+            }
+            resp_bytes = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
+            return
+
         self.send_error(404, "Endpoint not found.")
 
     def handle_request(self, head_only=False):
