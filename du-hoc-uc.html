@@ -1199,7 +1199,7 @@
                 
                 <!-- Card 1: Công cụ định hướng du học cùng KIPA (Blue Card) -->
                 <div class="lg:col-span-6 bg-gradient-to-br from-[#0274BD] to-[#015387] rounded-2xl p-6 sm:p-8 text-white shadow-md relative overflow-hidden flex flex-col justify-between">
-                    <div class="relative z-10 max-w-md space-y-3">
+                    <div class="relative z-10 space-y-3.5">
                         <div class="flex items-center space-x-2">
                             <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center text-sm">
                                 <i class="fas fa-compass text-white"></i>
@@ -1209,9 +1209,29 @@
                             </h3>
                         </div>
 
-                        <p class="text-blue-100 text-xs sm:text-sm leading-relaxed font-vietnam">
+                        <p class="text-blue-100 text-xs sm:text-sm leading-relaxed font-vietnam max-w-md">
                             Chỉ 2 phút để nhận gợi ý lộ trình du học Úc, trường đào tạo và mức học bổng từ 20% – 100% phù hợp nhất với năng lực và tài chính của bạn.
                         </p>
+
+                        <!-- Quick Checklist Highlights -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-blue-100 pt-1">
+                            <div class="flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl">
+                                <i class="fas fa-check-circle text-emerald-300"></i>
+                                <span>Đánh giá học bạ & tiếng Anh</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl">
+                                <i class="fas fa-check-circle text-emerald-300"></i>
+                                <span>Dự toán học phí & sinh hoạt phí</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl">
+                                <i class="fas fa-check-circle text-emerald-300"></i>
+                                <span>Săn học bổng 20% – 100%</span>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl">
+                                <i class="fas fa-check-circle text-emerald-300"></i>
+                                <span>Tư vấn định cư tay nghề Úc</span>
+                            </div>
+                        </div>
 
                         <div class="pt-2">
                             <a href="/dang-ky-tu-van/" class="inline-flex items-center px-5 py-2.5 rounded-full bg-white text-brand-blue font-bold text-xs hover:bg-blue-50 transition shadow-sm">
@@ -1221,12 +1241,9 @@
                         </div>
                     </div>
 
-                    <!-- Checklist graphic -->
-                    <div class="absolute right-4 bottom-2 w-36 sm:w-44 opacity-90 pointer-events-none z-0">
-                        <img src="/assets/du-hoc-uc/checklist_illus.png" 
-                             alt="Định hướng lộ trình KIPA" 
-                             class="w-full h-auto object-contain"
-                             loading="lazy">
+                    <!-- Subtle watermark icon (pure CSS/FontAwesome, no image file) -->
+                    <div class="absolute -right-6 -bottom-6 text-white/10 pointer-events-none z-0">
+                        <i class="fas fa-compass text-9xl"></i>
                     </div>
                 </div>
 
