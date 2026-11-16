@@ -880,7 +880,7 @@
             <section class="relative -mt-6 sm:-mt-8 z-20 pb-8">
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
                     <div class="bg-white rounded-2xl border border-slate-200/80 shadow-md p-4 sm:p-5">
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
                             
                             <!-- Item 1: Đa dạng đơn hàng -->
                             <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2">
@@ -949,19 +949,19 @@
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                         
-                        <!-- Col 1: Video Thumbnail Núi Phú Sĩ & Nhà máy Nhật -->
+                        <!-- Col 1: Video Thumbnail KIPA Việt Hàn -->
                         <div class="lg:col-span-4">
-                            <div class="relative rounded-2xl overflow-hidden shadow-sm group cursor-pointer border border-slate-100" onclick="openVideoModal()">
+                            <div class="relative rounded-2xl overflow-hidden shadow-sm group cursor-pointer border border-slate-100" onclick="openVideoModal()" title="Xem video KIPA Việt Hàn: Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế">
                                 <img src="/assets/xuat-khau-lao-dong-nhat/sec1_video_thumb_hd.png" 
-                                     alt="Video giới thiệu cuộc sống và làm việc tại Nhật Bản" 
+                                     alt="KIPA Việt Hàn – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế" 
                                      class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                    <div class="w-12 h-12 rounded-full bg-white/90 text-[#0274BD] shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                                <div class="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors flex items-center justify-center">
+                                    <div class="w-12 h-12 rounded-full bg-white/95 text-[#EC1E1B] shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
                                         <i class="fa-solid fa-play text-lg ml-1"></i>
                                     </div>
                                 </div>
                                 <div class="absolute bottom-2 right-2.5 bg-black/70 backdrop-blur-xs text-white text-[11px] font-mono px-2 py-0.5 rounded">
-                                    03:45
+                                    03:28
                                 </div>
                             </div>
                         </div>
@@ -1143,6 +1143,106 @@
             </section>
 
             <!-- ========================================================
+                 SECTION 02.1: BẢNG SO SÁNH 3 CHƯƠNG TRÌNH ĐI NHẬT (MINH BẠCH - TOÀN DIỆN)
+                 ======================================================== -->
+            <section class="py-10 bg-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
+                                <h2 class="font-phudu text-lg sm:text-xl lg:text-2xl font-bold text-[#0274BD] tracking-tight">
+                                    BẢNG SO SÁNH CHI TIẾT 3 DIỆN LÀM VIỆC TẠI NHẬT
+                                </h2>
+                            </div>
+                            <p class="text-xs sm:text-[13px] text-slate-600">
+                                Giúp người lao động chọn đúng lộ trình phù hợp với học vấn, trình độ tiếng và mục tiêu thu nhập dài hạn.
+                            </p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-[#0274BD] text-xs font-bold shrink-0 self-start md:self-auto border border-blue-200/60">
+                            <i class="fa-solid fa-scale-balanced text-amber-500"></i>
+                            <span>Cập nhật chính sách lưu trú Nhật Bản 2026</span>
+                        </span>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs min-w-[720px]">
+                                <thead>
+                                    <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-phudu">
+                                        <th class="py-3 px-4 w-1/4 font-bold">Tiêu chí so sánh</th>
+                                        <th class="py-3 px-4 w-1/4 font-bold text-[#081D36] bg-slate-100/50">
+                                            <div class="flex items-center gap-1.5">
+                                                <i class="fa-solid fa-briefcase text-[#0274BD]"></i>
+                                                <span>Thực tập sinh (TTS)</span>
+                                            </div>
+                                        </th>
+                                        <th class="py-3 px-4 w-1/4 font-bold text-[#0274BD] bg-blue-50/50">
+                                            <div class="flex items-center gap-1.5">
+                                                <i class="fa-solid fa-certificate text-amber-500"></i>
+                                                <span>Kỹ năng đặc định (Tokutei)</span>
+                                            </div>
+                                        </th>
+                                        <th class="py-3 px-4 w-1/4 font-bold text-[#EC1E1B] bg-rose-50/50">
+                                            <div class="flex items-center gap-1.5">
+                                                <i class="fa-solid fa-user-graduate text-[#EC1E1B]"></i>
+                                                <span>Kỹ sư / Kỹ thuật viên</span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-600">
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">1. Yêu cầu bằng cấp</td>
+                                        <td class="py-3 px-4 bg-slate-50/30">Tốt nghiệp Cấp 2 hoặc Cấp 3 trở lên</td>
+                                        <td class="py-3 px-4 bg-blue-50/20 font-semibold text-slate-800">Tốt nghiệp Cấp 3 + Đỗ kỳ thi tay nghề</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-semibold text-slate-800">Tốt nghiệp Cao đẳng / Đại học chính quy</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">2. Yêu cầu tiếng Nhật</td>
+                                        <td class="py-3 px-4 bg-slate-50/30">Không yêu cầu trước (KIPA đào tạo từ đầu)</td>
+                                        <td class="py-3 px-4 bg-blue-50/20 font-semibold text-slate-800">JLPT N4 hoặc JFT-Basic A2</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-semibold text-slate-800">JLPT N3 trở lên (giao tiếp tốt)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">3. Mức lương cơ bản</td>
+                                        <td class="py-3 px-4 bg-slate-50/30">160.000 – 190.000 ¥ (28 – 34 tr/tháng)</td>
+                                        <td class="py-3 px-4 bg-blue-50/20 font-bold text-[#0274BD]">200.000 – 260.000 ¥ (35 – 46 tr/tháng)</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-bold text-[#EC1E1B]">240.000 – 350.000+ ¥ (42 – 62+ tr/tháng)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">4. Thời hạn hợp đồng</td>
+                                        <td class="py-3 px-4 bg-slate-50/30">1 năm hoặc 3 năm (gia hạn tối đa 5 năm)</td>
+                                        <td class="py-3 px-4 bg-blue-50/20 font-semibold text-slate-800">5 năm (Tokutei 1), Vô thời hạn (Tokutei 2)</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-semibold text-slate-800">Gia hạn dài hạn hàng năm, không giới hạn</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">5. Quyền chuyển việc tại Nhật</td>
+                                        <td class="py-3 px-4 bg-slate-50/30">Theo quy định cơ chế mới (sau 1-2 năm)</td>
+                                        <td class="py-3 px-4 bg-blue-50/20 font-semibold text-emerald-700">Được tự do chuyển công ty cùng ngành nghề</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-semibold text-emerald-700">Tự do chuyển công ty phù hợp bằng cấp</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">6. Bảo lãnh người thân (vợ/con)</td>
+                                        <td class="py-3 px-4 bg-slate-50/30 text-slate-400">Không hỗ trợ</td>
+                                        <td class="py-3 px-4 bg-blue-50/20">Tokutei 1 không; Tokutei 2 được bảo lãnh</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-bold text-emerald-700">Được bảo lãnh vợ/chồng & con sang sinh sống</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60">
+                                        <td class="py-3 px-4 font-bold text-slate-800">7. Cơ hội định cư vĩnh trú</td>
+                                        <td class="py-3 px-4 bg-slate-50/30">Chuyển tiếp lên Tokutei hoặc Kỹ sư</td>
+                                        <td class="py-3 px-4 bg-blue-50/20">Tokutei 2 có cơ hội xin vĩnh trú vĩnh viễn</td>
+                                        <td class="py-3 px-4 bg-rose-50/20 font-bold text-[#0274BD]">Xin tư cách Vĩnh trú sau 1 – 3 năm cống hiến</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================
                  ROW: SECTION 03 & SECTION 04 (Tìm đơn hàng phù hợp & Tiêu chí đi Nhật)
                  ======================================================== -->
             <section class="py-10 bg-white border-b border-slate-200/80">
@@ -1306,6 +1406,170 @@
                                 </div>
 
                             </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 SECTION 04.1: CÔNG CỤ DỰ TOÁN THU NHẬP & TÍCH LŨY 3 NĂM TẠI NHẬT (INTERACTIVE)
+                 ======================================================== -->
+            <section id="du-toan-thu-nhap" class="py-10 bg-gradient-to-b from-blue-50/40 via-white to-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-6">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
+                                <h2 class="font-phudu text-lg sm:text-xl lg:text-2xl font-bold text-[#0274BD] tracking-tight">
+                                    CÔNG CỤ TÍNH THU NHẬP & TÍCH LŨY THỰC TẾ SAU 3 NĂM
+                                </h2>
+                            </div>
+                            <p class="text-xs sm:text-[13px] text-slate-600">
+                                Minh bạch từng khoản thu nhập, khấu trừ bảo hiểm xã hội, tiền ăn ở và số tiền ròng thực tế bạn mang về cho gia đình.
+                            </p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200/60 shrink-0 self-start md:self-auto">
+                            <i class="fa-solid fa-calculator text-emerald-600"></i>
+                            <span>Tỷ giá tính toán: 1 JPY ≈ 175 VND</span>
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+                        
+                        <!-- Col Trái: Bộ điều khiển thông số (lg:col-span-5) -->
+                        <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+                            <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] flex items-center gap-2 border-b border-slate-100 pb-3">
+                                <i class="fa-solid fa-sliders text-[#0274BD]"></i>
+                                <span>Lựa chọn thông số của bạn</span>
+                            </h3>
+
+                            <div class="space-y-3.5 text-xs">
+                                <!-- 1. Chọn chương trình -->
+                                <div>
+                                    <label class="block font-bold text-slate-700 mb-1">Chương trình lao động</label>
+                                    <select aria-label="Calculator Program" id="calc-prog" onchange="calculateJapanIncome()" class="form-select-kipa w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:border-[#0274BD]">
+                                        <option value="tts" selected>Thực tập sinh kỹ năng (Lương cơ bản 175.000 ¥)</option>
+                                        <option value="tokutei">Kỹ năng đặc định Tokutei (Lương cơ bản 225.000 ¥)</option>
+                                        <option value="ky_su">Kỹ sư / Chuyên viên (Lương cơ bản 275.000 ¥)</option>
+                                    </select>
+                                </div>
+
+                                <!-- 2. Khu vực làm việc -->
+                                <div>
+                                    <label class="block font-bold text-slate-700 mb-1">Vùng làm việc (Mức lương tối thiểu vùng)</label>
+                                    <select aria-label="Calculator Region" id="calc-region" onchange="calculateJapanIncome()" class="form-select-kipa w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:border-[#0274BD]">
+                                        <option value="kanto" selected>Vùng Kanto (Tokyo, Kanagawa, Chiba, Saitama - Lương cao nhất)</option>
+                                        <option value="kansai">Vùng Kansai (Osaka, Kyoto, Hyogo)</option>
+                                        <option value="chubu">Vùng Tokai - Chubu (Aichi - Nagoya, Shizuoka, Gifu)</option>
+                                        <option value="other">Các tỉnh khác (Hiroshima, Fukuoka, Miyagi, Okayama...)</option>
+                                    </select>
+                                </div>
+
+                                <!-- 3. Số giờ tăng ca bình quân/tháng -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <label class="font-bold text-slate-700">Tăng ca bình quân mỗi tháng</label>
+                                        <span id="calc-ot-label" class="font-phudu font-bold text-[#0274BD]">30 giờ / tháng</span>
+                                    </div>
+                                    <select aria-label="Calculator Overtime" id="calc-ot" onchange="calculateJapanIncome()" class="form-select-kipa w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:border-[#0274BD]">
+                                        <option value="15">Ít tăng ca (15 giờ/tháng)</option>
+                                        <option value="30" selected>Trung bình (30 giờ/tháng - Phổ biến nhất)</option>
+                                        <option value="45">Nhiều việc / Tăng ca cao (45 giờ/tháng)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Tiền ăn & chi tiêu sinh hoạt cá nhân -->
+                                <div>
+                                    <label class="block font-bold text-slate-700 mb-1">Mức tự chi tiêu sinh hoạt & ăn uống/tháng</label>
+                                    <select aria-label="Calculator Living Cost" id="calc-living" onchange="calculateJapanIncome()" class="form-select-kipa w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:border-[#0274BD]">
+                                        <option value="25000">Tiết kiệm (Tự nấu ăn: ~25.000 ¥ ~ 4.4 tr)</option>
+                                        <option value="35000" selected>Trung bình (Ăn uống đủ chất: ~35.000 ¥ ~ 6.1 tr)</option>
+                                        <option value="45000">Thoải mái (Ăn ngoài nhiều: ~45.000 ¥ ~ 7.9 tr)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="button" onclick="applyCalcToConsultation()" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#0274BD] hover:bg-[#014d80] text-white font-phudu font-bold text-xs sm:text-[13px] shadow-sm transition-all transform hover:-translate-y-0.5">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                    <span>Đăng ký nhận bảng dự toán đơn hàng chi tiết</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Col Phải: Bảng kết quả tài chính chi tiết (lg:col-span-7) -->
+                        <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-4">
+                            
+                            <div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] flex items-center gap-2 border-b border-slate-100 pb-3">
+                                    <i class="fa-solid fa-chart-pie text-emerald-600"></i>
+                                    <span>Bảng phân tích dòng tiền thực nhận (Hàng tháng)</span>
+                                </h3>
+
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-3">
+                                    <!-- Card 1: Lương gộp -->
+                                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                                        <div class="text-[11px] text-slate-500 font-medium">Tổng thu nhập gộp</div>
+                                        <div id="res-gross-jpy" class="font-phudu font-bold text-sm sm:text-base text-[#081D36] mt-0.5">218.000 ¥</div>
+                                        <div id="res-gross-vnd" class="text-[10px] text-slate-500 font-semibold">≈ 38.1 triệu VNĐ</div>
+                                    </div>
+                                    <!-- Card 2: Khấu trừ pháp định -->
+                                    <div class="p-3 rounded-xl bg-rose-50/60 border border-rose-200/70">
+                                        <div class="text-[11px] text-rose-700 font-medium">Khấu trừ pháp định</div>
+                                        <div id="res-tax-jpy" class="font-phudu font-bold text-sm sm:text-base text-rose-600 mt-0.5">-34.000 ¥</div>
+                                        <div class="text-[10px] text-rose-500">Bảo hiểm, thuế, Nenkin</div>
+                                    </div>
+                                    <!-- Card 3: Tiền KTX & điện nước -->
+                                    <div class="p-3 rounded-xl bg-amber-50/60 border border-amber-200/70 col-span-2 sm:col-span-1">
+                                        <div class="text-[11px] text-amber-800 font-medium">Ký túc xá & điện nước</div>
+                                        <div id="res-rent-jpy" class="font-phudu font-bold text-sm sm:text-base text-amber-700 mt-0.5">-22.000 ¥</div>
+                                        <div class="text-[10px] text-amber-600">Công ty hỗ trợ một phần</div>
+                                    </div>
+                                </div>
+
+                                <!-- HIGHLIGHT CARD: LƯƠNG THỰC LĨNH VỀ TAY -->
+                                <div class="mt-3.5 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50/50 border border-blue-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                                    <div>
+                                        <div class="text-xs font-bold text-[#0274BD] uppercase tracking-wider flex items-center gap-1.5">
+                                            <i class="fa-solid fa-hand-holding-dollar text-[#EC1E1B]"></i>
+                                            <span>Lương thực lĩnh về tay hàng tháng (Te-tori)</span>
+                                        </div>
+                                        <div class="text-[11px] text-slate-600 mt-0.5">Sau khi đã trừ thuế, bảo hiểm và tiền nhà</div>
+                                    </div>
+                                    <div class="text-left sm:text-right shrink-0">
+                                        <div id="res-net-jpy" class="font-phudu font-extrabold text-xl sm:text-2xl text-[#0274BD]">162.000 ¥</div>
+                                        <div id="res-net-vnd" class="text-xs font-bold text-emerald-600">≈ 28.3 triệu VNĐ / tháng</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BOTTOM HIGHLIGHTS: TÍCH LŨY 3 NĂM & NENKIN -->
+                            <div class="pt-3 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="p-3.5 rounded-xl bg-emerald-500 text-white shadow-sm flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg shrink-0">
+                                        <i class="fa-solid fa-piggy-bank"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10.5px] text-emerald-100 font-medium">Tích lũy gửi về gia đình (3 năm)</div>
+                                        <div id="res-savings-3y" class="font-phudu font-black text-base sm:text-lg">680 – 820 TRIỆU</div>
+                                        <div class="text-[10px] text-emerald-100">Đã trừ chi phí sinh hoạt ăn ở</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-[#081D36] text-white shadow-sm flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-lg shrink-0">
+                                        <i class="fa-solid fa-file-shield text-[#FFF017]"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10.5px] text-slate-300 font-medium">Tiền hoàn thuế Nenkin khi về nước</div>
+                                        <div id="res-nenkin" class="font-phudu font-black text-base sm:text-lg text-[#FFF017]">95 – 130 TRIỆU</div>
+                                        <div class="text-[10px] text-slate-300">KIPA hỗ trợ lấy 100% trọn gói</div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -1567,6 +1831,142 @@
                 </div>
             </section>
 
+            <!-- ========================================================
+                 SECTION: CAM KẾT VÀNG KIPA "5 KHÔNG & 5 ĐỒNG HÀNH" & VĂN PHÒNG TẠI NHẬT
+                 ======================================================== -->
+            <section class="py-12 bg-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-[#EC1E1B] text-xs font-bold border border-red-200/60 uppercase tracking-wider">
+                            <i class="fa-solid fa-award text-amber-500"></i>
+                            <span>Bảo chứng uy tín KIPA Việt Hàn</span>
+                        </div>
+                        <h2 class="font-phudu text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0274BD] tracking-tight">
+                            CAM KẾT VÀNG “5 KHÔNG & 5 ĐỒNG HÀNH TRỌN VẸN”
+                        </h2>
+                        <p class="text-xs sm:text-[13px] text-slate-600">
+                            KIPA đặt lợi ích, sự an toàn và tương lai của người lao động lên hàng đầu với pháp lý minh bạch 100%.
+                        </p>
+                    </div>
+
+                    <!-- 2 Columns: 5 KHÔNG & 5 ĐỒNG HÀNH -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                        
+                        <!-- Col 1: 5 KHÔNG -->
+                        <div class="rounded-2xl border-2 border-red-100 bg-red-50/20 p-5 sm:p-6 space-y-4 shadow-2xs">
+                            <div class="flex items-center gap-2.5 pb-3 border-b border-red-100">
+                                <div class="w-8 h-8 rounded-lg bg-[#EC1E1B] text-white flex items-center justify-center text-sm font-bold">
+                                    <i class="fa-solid fa-shield-xmark"></i>
+                                </div>
+                                <h3 class="font-phudu font-bold text-base text-[#EC1E1B]">
+                                    5 KHÔNG BẢO VỆ NGƯỜI LAO ĐỘNG
+                                </h3>
+                            </div>
+                            <ul class="space-y-3 text-xs sm:text-[13px] text-slate-700">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ban text-[#EC1E1B] mt-0.5 shrink-0"></i>
+                                    <span><strong>KHÔNG qua trung gian môi giới:</strong> KIPA trực tiếp kết nối với Nghiệp đoàn & Xí nghiệp tiếp nhận tại Nhật Bản.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ban text-[#EC1E1B] mt-0.5 shrink-0"></i>
+                                    <span><strong>KHÔNG phát sinh chi phí:</strong> Hợp đồng cam kết chi phí trọn gói rõ ràng, tuyệt đối không phụ phí ngoài thỏa thuận.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ban text-[#EC1E1B] mt-0.5 shrink-0"></i>
+                                    <span><strong>KHÔNG giữ hồ sơ bằng cấp gốc:</strong> Người lao động tự giữ giấy tờ gốc, chỉ nộp bản công chứng hợp lệ.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ban text-[#EC1E1B] mt-0.5 shrink-0"></i>
+                                    <span><strong>KHÔNG chậm trễ lịch bay:</strong> Lộ trình xuất cảnh chuẩn xác 3.5 – 5 tháng sau khi trúng tuyển đơn hàng.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ban text-[#EC1E1B] mt-0.5 shrink-0"></i>
+                                    <span><strong>KHÔNG bỏ rơi tại Nhật:</strong> Hỗ trợ xuyên suốt 3 – 5 năm tại Nhật Bản, can thiệp pháp lý ngay khi có vướng mắc.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Col 2: 5 ĐỒNG HÀNH -->
+                        <div class="rounded-2xl border-2 border-blue-100 bg-blue-50/20 p-5 sm:p-6 space-y-4 shadow-2xs">
+                            <div class="flex items-center gap-2.5 pb-3 border-b border-blue-100">
+                                <div class="w-8 h-8 rounded-lg bg-[#0274BD] text-white flex items-center justify-center text-sm font-bold">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                </div>
+                                <h3 class="font-phudu font-bold text-base text-[#0274BD]">
+                                    5 ĐỒNG HÀNH TOÀN DIỆN CÙNG BẠN
+                                </h3>
+                            </div>
+                            <ul class="space-y-3 text-xs sm:text-[13px] text-slate-700">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span><strong>Đào tạo tiếng & văn hóa Kaizen 5S:</strong> Giảng viên Việt – Nhật kèm cặp sát sao, phỏng vấn thử 1:1 đỗ ngay lần đầu.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span><strong>Tỷ lệ đỗ tư cách lưu trú (COE) 99.4%:</strong> Đội ngũ xử lý hồ sơ giàu kinh nghiệm, thẩm định kỹ lưỡng trước khi nộp Cục Xuất nhập cảnh.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span><strong>Đón sân bay & bàn giao KTX tiện nghi:</strong> Cán bộ KIPA tại Nhật đón tại sân bay Narita/Kansai và đưa về chỗ ở an toàn.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span><strong>Hotline hỗ trợ khẩn cấp 24/7 tại Nhật:</strong> Giúp đỡ khi đau ốm, tai nạn lao động hoặc bảo lãnh chuyển đổi công ty theo luật mới.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span><strong>Hỗ trợ thủ tục hoàn thuế Nenkin 100%:</strong> Khi kết thúc hợp đồng về nước, KIPA hướng dẫn nhận lại 90 – 140 triệu VNĐ tiền Nenkin.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- 3 Văn phòng / Ban đại diện kết nối tại Nhật -->
+                    <div class="bg-gradient-to-r from-[#07192e] to-[#0274BD] rounded-2xl p-6 text-white shadow-md">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-white/15">
+                            <div class="space-y-1 text-center md:text-left">
+                                <div class="font-phudu font-bold text-base sm:text-lg flex items-center justify-center md:justify-start gap-2">
+                                    <i class="fa-solid fa-location-dot text-[#FFF017]"></i>
+                                    <span>MẠNG LƯỚI VĂN PHÒNG ĐẠI DIỆN HỖ TRỢ KIPA TẠI NHẬT BẢN</span>
+                                </div>
+                                <p class="text-xs text-blue-100">
+                                    Đội ngũ cán bộ thường trực sẵn sàng đồng hành, phiên dịch và bảo vệ quyền lợi hợp pháp cho học viên KIPA tại Nhật.
+                                </p>
+                            </div>
+                            <span class="px-3.5 py-1.5 rounded-full bg-white/20 text-[#FFF017] text-xs font-bold shrink-0 border border-white/20">
+                                Hotline Nhật: +81 80-4882-9988
+                            </span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-xs">
+                            <div class="bg-white/10 rounded-xl p-3.5 border border-white/10">
+                                <div class="font-bold text-[#FFF017] flex items-center gap-2">
+                                    <i class="fa-solid fa-building text-xs"></i>
+                                    <span>VĂN PHÒNG TOKYO (KANTO)</span>
+                                </div>
+                                <p class="text-slate-200 text-[11px] mt-1 leading-snug">Hỗ trợ học viên khu vực Tokyo, Kanagawa, Chiba, Saitama, Ibaraki, Tochigi.</p>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-3.5 border border-white/10">
+                                <div class="font-bold text-[#FFF017] flex items-center gap-2">
+                                    <i class="fa-solid fa-building text-xs"></i>
+                                    <span>VĂN PHÒNG OSAKA (KANSAI)</span>
+                                </div>
+                                <p class="text-slate-200 text-[11px] mt-1 leading-snug">Hỗ trợ học viên khu vực Osaka, Kyoto, Hyogo (Kobe), Nara, Shiga, Wakayama.</p>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-3.5 border border-white/10">
+                                <div class="font-bold text-[#FFF017] flex items-center gap-2">
+                                    <i class="fa-solid fa-building text-xs"></i>
+                                    <span>VĂN PHÒNG NAGOYA (CHUBU)</span>
+                                </div>
+                                <p class="text-slate-200 text-[11px] mt-1 leading-snug">Hỗ trợ học viên khu vực Aichi, Shizuoka, Gifu, Mie và các tỉnh lân cận.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
                         <!-- ========================================================
                  ROW: SECTION 09 (FAQ) & CÂU CHUYỆN THÀNH CÔNG TẠI NHẬT BẢN
                  ======================================================== -->
@@ -1744,7 +2144,7 @@
                                     </div>
                                     <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
                                         <div class="text-[10px] text-slate-500 font-medium">Hỗ trợ tại Nhật</div>
-                                        <div class="font-phudu font-bold text-xs sm:text-[13px] text-[#081D36] mt-0.5">24/7 đón KTX</div>
+                                        <div id="badge-support" class="font-phudu font-bold text-xs sm:text-[13px] text-[#081D36] mt-0.5">24/7 đón KTX</div>
                                     </div>
                                 </div>
                             </div>
@@ -1774,10 +2174,8 @@
                  CTA BANNER GỘP VỚI FORM ĐĂNG KÝ VÀO 1 HÀNG (Chuẩn KIPA)
                  ======================================================== -->
             <section id="dang-ky-tu-van" class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-                <div class="relative bg-gradient-to-r from-[#005bb5] via-[#0274BD] to-[#081D36] rounded-3xl p-6 sm:p-10 lg:p-12 text-white overflow-hidden shadow-2xl">
+                <div class="relative bg-gradient-to-r from-[#005bb5] via-[#0274BD] to-[#081D36] rounded-3xl p-6 sm:p-10 lg:p-12 text-white overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #014f86 100%) !important;">
                     
-                    <!-- Background Decorative Visual (Chìm nhẹ bên góc phải) -->
-                    <img src="/assets/xuat-khau-lao-dong-nhat/cta_japan_skyline_hd.png" alt="Núi Phú Sĩ và Tokyo skyline Nhật Bản" class="absolute inset-y-0 right-0 h-full w-auto max-w-[42%] object-cover object-left opacity-15 pointer-events-none z-0">
                     <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none"></div>
 
                     <!-- Grid 12 cột: CTA Trái (lg:col-span-5) + Form Phải (lg:col-span-7) -->
@@ -1914,6 +2312,492 @@
             </section>
 
         </div>
+
+        <!-- ========================================================
+             VIDEO MODAL
+             ======================================================== -->
+        <div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="closeVideoModal(event)">
+            <div class="bg-black rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between p-3 bg-slate-900 text-white">
+                    <div class="flex items-center gap-2 min-w-0 pr-2">
+                        <i class="fa-brands fa-youtube text-red-500 text-lg shrink-0"></i>
+                        <span class="text-xs font-bold text-slate-200 truncate">KIPA Việt Hàn – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế</span>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <a href="https://youtu.be/CGz_FpIwjNk" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-300 hover:text-white hover:underline flex items-center gap-1.5 transition-colors bg-white/10 px-2.5 py-1 rounded-md">
+                            <span>Mở YouTube</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                        <button type="button" onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-1 transition-colors" title="Đóng">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="aspect-video w-full bg-black flex items-center justify-center">
+                    <iframe id="video-frame" class="w-full h-full" src="" title="KIPA Việt Hàn Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================
+             MODAL KẾT QUẢ TÌM KIẾM ĐƠN HÀNG NHẬT BẢN (JOB SEARCH MODAL)
+             ======================================================== -->
+        <div id="job-search-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="closeJobModal(event)">
+            <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-4 sm:p-5 bg-gradient-to-r from-[#07192e] to-[#0274BD] text-white">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center text-[#FFF017]">
+                            <i class="fa-solid fa-briefcase text-base"></i>
+                        </div>
+                        <div>
+                            <h4 id="job-modal-title" class="font-phudu font-bold text-sm sm:text-base leading-snug">
+                                Đơn Hàng Phù Hợp Với Tiêu Chí Tuyển Dụng
+                            </h4>
+                            <p id="job-modal-subtitle" class="text-[11px] text-blue-100">
+                                Đang hiển thị các vị trí tuyển dụng chính ngạch mới nhất tại Nhật Bản
+                            </p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="closeJobModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body: Danh sách đơn hàng phù hợp -->
+                <div id="job-modal-results" class="p-4 sm:p-6 overflow-y-auto space-y-3.5 divide-y divide-slate-100 flex-1">
+                    <!-- Sẽ được fill bằng JavaScript -->
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                    <span class="text-slate-500 text-[11.5px] flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        <span>100% đơn hàng có nghiệp đoàn & xí nghiệp tiếp nhận uy tín</span>
+                    </span>
+                    <button type="button" onclick="closeJobModal(); preselectProgram('tu_van')" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#0274BD] hover:bg-[#014d80] text-white font-phudu font-bold text-xs shadow-sm transition-colors">
+                        Tư vấn định hướng đơn hàng khác
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .xkld-faq-answer { display: none; }
+            .xkld-faq-item.active .xkld-faq-answer { display: block; }
+            .xkld-faq-item.active .xkld-faq-chevron { transform: rotate(45deg); }
+            .worker-chip.active { background-color: #0274BD !important; color: #ffffff !important; }
+        </style>
+
+        <!-- PAGE INTERACTIVE JAVASCRIPT -->
+        <script>
+            // 1. FAQ Accordion Handler
+            function toggleFaq(btn) {
+                const item = btn.closest('.xkld-faq-item');
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.xkld-faq-item').forEach(el => el.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            }
+
+            // 2. Worker Testimonials Carousel
+            const workersData = [
+                {
+                    name: "Nguyễn Văn Tuấn",
+                    location: "Osaka",
+                    avatar: "/assets/du-hoc-nhat/student_nam.png",
+                    status: "Đang làm việc tại Osaka",
+                    program: "Kỹ năng đặc định Tokutei Cơ khí • Xuất cảnh 11/2023 • Lương: 42 tr/tháng",
+                    quote: "“Trước khi đến KIPA, mình từng lo sợ vì chưa biết tiếng Nhật và sợ chi phí phát sinh. Nhờ các thầy cô KIPA đào tạo sát phỏng vấn, chỉ sau 4 tháng mình đã đỗ đơn cơ khí Osaka và nhận visa. Công ty Nhật hỗ trợ KTX rất đầy đủ, thu nhập gửi về gia đình đều đặn mỗi tháng!”",
+                    time: "3.5 - 5 tháng",
+                    income: "38 - 45 tr/tháng",
+                    visa: "99.4% đỗ COE",
+                    support: "24/7 đón KTX"
+                },
+                {
+                    name: "Trần Thị Thu Trang",
+                    location: "Saitama",
+                    avatar: "/assets/du-hoc-nhat/student_nam.png",
+                    status: "Đang làm việc tại Saitama",
+                    program: "Thực tập sinh Chế biến thực phẩm • Xuất cảnh 03/2024 • Lương: 36 tr/tháng",
+                    quote: "“Em đi đơn chế biến thực phẩm sạch tại Saitama, môi trường làm việc trong nhà xưởng sạch sẽ, ấm áp vào mùa đông. Các anh chị cán bộ văn phòng KIPA Tokyo đón em tận sân bay Narita và chở về tận phòng trọ. Mỗi tháng em tiết kiệm gửi về nhà được gần 25 triệu!”",
+                    time: "4 tháng",
+                    income: "34 - 38 tr/tháng",
+                    visa: "Đỗ visa lần 1",
+                    support: "Hỗ trợ KTX 100%"
+                },
+                {
+                    name: "Lê Hoài Nam",
+                    location: "Tokyo",
+                    avatar: "/assets/du-hoc-nhat/student_nam.png",
+                    status: "Kỹ sư IT & Tự động hóa - Tokyo",
+                    program: "Kỹ sư Cơ điện tử Nhật Bản • Xuất cảnh 08/2023 • Lương: 58 tr/tháng",
+                    quote: "“Tốt nghiệp Cao đẳng Điện tử, em được KIPA kết nối phỏng vấn trực tiếp với công ty kỹ thuật tại Tokyo. Chế độ đãi ngộ tương đương đồng nghiệp Nhật, được đóng đầy đủ bảo hiểm và hiện em đang làm thủ tục bảo lãnh vợ sang cùng. Cảm ơn KIPA rất nhiều!”",
+                    time: "3 tháng",
+                    income: "52 - 62 tr/tháng",
+                    visa: "Visa Kỹ sư dài hạn",
+                    support: "Bảo lãnh người thân"
+                }
+            ];
+            let currentWorkerIdx = 0;
+
+            function setWorkerTestimonial(idx) {
+                currentWorkerIdx = idx;
+                const data = workersData[idx];
+                if (!data) return;
+
+                document.getElementById('worker-name').innerText = data.name;
+                document.getElementById('worker-status').innerHTML = `<i class="fa-solid fa-circle-check text-[9px]"></i> ${data.status}`;
+                document.getElementById('worker-program').innerText = data.program;
+                document.getElementById('worker-quote').innerText = data.quote;
+                document.getElementById('badge-time').innerText = data.time;
+                document.getElementById('badge-income').innerText = data.income;
+                document.getElementById('badge-visa').innerText = data.visa;
+                document.getElementById('badge-support').innerText = data.support;
+
+                document.querySelectorAll('.worker-chip').forEach((chip, i) => {
+                    if (i === idx) {
+                        chip.classList.add('bg-[#0274BD]', 'text-white');
+                        chip.classList.remove('bg-slate-100', 'text-slate-700');
+                    } else {
+                        chip.classList.remove('bg-[#0274BD]', 'text-white');
+                        chip.classList.add('bg-slate-100', 'text-slate-700');
+                    }
+                });
+            }
+
+            function prevWorkerTestimonial() {
+                let idx = currentWorkerIdx - 1;
+                if (idx < 0) idx = workersData.length - 1;
+                setWorkerTestimonial(idx);
+            }
+
+            function nextWorkerTestimonial() {
+                let idx = currentWorkerIdx + 1;
+                if (idx >= workersData.length) idx = 0;
+                setWorkerTestimonial(idx);
+            }
+
+            // 3. Preselect Program helper
+            function preselectProgram(code) {
+                const select = document.getElementById('cta-program-select');
+                if (select) {
+                    if (code === 'tts') {
+                        select.value = 'Thực tập sinh kỹ năng (1 - 3 năm)';
+                    } else if (code === 'tokutei') {
+                        select.value = 'Kỹ năng đặc định Tokutei Ginou';
+                    } else if (code === 'ky_su') {
+                        select.value = 'Kỹ sư Nhật Bản (Bằng CĐ/ĐH)';
+                    } else {
+                        select.value = 'Cần KIPA tư vấn định hướng theo hồ sơ';
+                    }
+                }
+                const cta = document.getElementById('dang-ky-tu-van');
+                if (cta) cta.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // 4. Interactive Net Salary & Savings Calculator
+            function calculateJapanIncome() {
+                const prog = document.getElementById('calc-prog').value;
+                const region = document.getElementById('calc-region').value;
+                const ot = parseInt(document.getElementById('calc-ot').value) || 30;
+                const living = parseInt(document.getElementById('calc-living').value) || 35000;
+
+                // Base Hourly & Salary Estimates
+                let baseWage = 175000; // JPY
+                let otRate = 1350; // JPY/hour
+
+                if (prog === 'tokutei') {
+                    baseWage = 225000;
+                    otRate = 1700;
+                } else if (prog === 'ky_su') {
+                    baseWage = 275000;
+                    otRate = 2100;
+                }
+
+                // Region Multiplier
+                let regionMultiplier = 1.0;
+                let rentDeduction = 22000;
+                if (region === 'kanto') {
+                    regionMultiplier = 1.08; // Tokyo, Kanagawa cao hon
+                    rentDeduction = 26000;
+                } else if (region === 'kansai') {
+                    regionMultiplier = 1.04;
+                    rentDeduction = 23000;
+                } else if (region === 'chubu') {
+                    regionMultiplier = 1.05;
+                    rentDeduction = 21000;
+                } else {
+                    regionMultiplier = 0.96;
+                    rentDeduction = 18000;
+                }
+
+                const adjustedBase = Math.round(baseWage * regionMultiplier);
+                const otPay = Math.round(ot * otRate * regionMultiplier);
+                const grossPay = adjustedBase + otPay;
+
+                // Mandatory Deductions (Shakai Hoken, Nenkin, Residence Tax, Income Tax) ~ 16-18%
+                const taxInsurance = Math.round(grossPay * 0.165);
+                const netPay = grossPay - taxInsurance - rentDeduction;
+
+                // Monthly Savings
+                const monthlySavings = Math.max(0, netPay - living);
+                const rateVND = 175; // 1 JPY = 175 VND
+
+                // 3-Year Totals
+                const savings3YearsVND = Math.round((monthlySavings * 36 * rateVND) / 1000000);
+                
+                // Nenkin Refund (Lump-sum Withdrawal Payment)
+                let nenkinVNDMin = 90;
+                let nenkinVNDMax = 120;
+                if (prog === 'tokutei') {
+                    nenkinVNDMin = 115;
+                    nenkinVNDMax = 150;
+                } else if (prog === 'ky_su') {
+                    nenkinVNDMin = 140;
+                    nenkinVNDMax = 190;
+                }
+
+                // Update UI
+                document.getElementById('calc-ot-label').innerText = `${ot} giờ / tháng`;
+                document.getElementById('res-gross-jpy').innerText = `${grossPay.toLocaleString('vi-VN')} ¥`;
+                document.getElementById('res-gross-vnd').innerText = `≈ ${(Math.round((grossPay * rateVND) / 100000) / 10).toFixed(1)} triệu VNĐ`;
+                document.getElementById('res-tax-jpy').innerText = `-${taxInsurance.toLocaleString('vi-VN')} ¥`;
+                document.getElementById('res-rent-jpy').innerText = `-${rentDeduction.toLocaleString('vi-VN')} ¥`;
+                document.getElementById('res-net-jpy').innerText = `${netPay.toLocaleString('vi-VN')} ¥`;
+                document.getElementById('res-net-vnd').innerText = `≈ ${(Math.round((netPay * rateVND) / 100000) / 10).toFixed(1)} triệu VNĐ / tháng`;
+                document.getElementById('res-savings-3y').innerText = `${savings3YearsVND - 40} – ${savings3YearsVND + 50} TRIỆU`;
+                document.getElementById('res-nenkin').innerText = `${nenkinVNDMin} – ${nenkinVNDMax} TRIỆU`;
+            }
+
+            function applyCalcToConsultation() {
+                const progSelect = document.getElementById('calc-prog');
+                const progName = progSelect.options[progSelect.selectedIndex].text;
+                const savings = document.getElementById('res-savings-3y').innerText;
+                const note = document.querySelector('textarea[name="note"]');
+                if (note) {
+                    note.value = `Quan tâm dự toán: ${progName}. Mục tiêu tích lũy dự kiến: ${savings}. Cần tư vấn chi tiết đơn hàng phù hợp.`;
+                }
+                preselectProgram(progSelect.value);
+            }
+
+            // 5. Job Search Results Engine
+            const japanJobsDatabase = [
+                {
+                    title: "Gia Công Cơ Khí & Vận Hành Máy Phay CNC",
+                    company: "Tập đoàn Cơ khí Chế tạo Okuma Sub-partner",
+                    location: "Osaka (Kansai)",
+                    program: "tokutei",
+                    progLabel: "Tokutei Ginou Cơ khí",
+                    wage: "215.000 – 245.000 ¥/tháng",
+                    vnd: "≈ 38 – 43 triệu VNĐ",
+                    requirements: "Đã có N4 hoặc đỗ kỳ thi tay nghề cơ khí KIPA luyện thi",
+                    benefits: "KTX đầy đủ điều hòa, máy giặt; phụ cấp đứng máy 15.000 ¥/tháng",
+                    tags: ["Cơ khí CNC", "Osaka", "Tăng ca 35h+"]
+                },
+                {
+                    title: "Chế Biến Thực Phẩm & Đóng Gói Dây Chuyền Sạch",
+                    company: "Công ty Thực phẩm Nichirei Foods Partner",
+                    location: "Saitama / Chiba (Kanto)",
+                    program: "tts",
+                    progLabel: "Thực tập sinh 3 năm",
+                    wage: "182.000 – 205.000 ¥/tháng",
+                    vnd: "≈ 32 – 36 triệu VNĐ",
+                    requirements: "Nam/Nữ 18 - 32 tuổi, không yêu cầu tiếng trước khi thi tuyển",
+                    benefits: "Môi trường phòng lạnh 22°C sạch sẽ, hỗ trợ tiền ăn trưa, KTX gần nhà xưởng",
+                    tags: ["Thực phẩm", "Kanto", "Xuất cảnh nhanh"]
+                },
+                {
+                    title: "Lắp Ráp Linh Kiện Ô Tô & Điện Tử Thông Minh",
+                    company: "Đối tác Cung ứng Linh kiện Denso - Toyota Group",
+                    location: "Aichi - Nagoya (Chubu)",
+                    program: "tts",
+                    progLabel: "Thực tập sinh 3 năm",
+                    wage: "188.000 – 218.000 ¥/tháng",
+                    vnd: "≈ 33 – 38 triệu VNĐ",
+                    requirements: "Tốt nghiệp cấp 3, khéo tay, sức khỏe tốt, thị lực tốt",
+                    benefits: "Tăng ca đều đặn 40h/tháng, trợ cấp chuyên cần, xe đưa đón tận xưởng",
+                    tags: ["Linh kiện ô tô", "Nagoya", "Lương ổn định"]
+                },
+                {
+                    title: "Kỹ Sư Thiết Kế Cơ Điện Tử & Lập Trình PLC",
+                    company: "Công ty Kỹ thuật Công nghiệp Tokyo Mechatronics",
+                    location: "Tokyo",
+                    program: "ky_su",
+                    progLabel: "Kỹ sư Nhật Bản",
+                    wage: "260.000 – 340.000 ¥/tháng",
+                    vnd: "≈ 45 – 60 triệu VNĐ",
+                    requirements: "Bằng CĐ/ĐH ngành Điện - Cơ khí - Tự động hóa, tiếng Nhật N3",
+                    benefits: "Đãi ngộ như người Nhật, thưởng 2 lần/năm, hỗ trợ bảo lãnh gia đình sang Nhật",
+                    tags: ["Kỹ sư", "Tokyo", "Bảo lãnh người thân"]
+                },
+                {
+                    title: "Nông Nghiệp Công Nghệ Cao (Trồng Dâu Tây & Rau Nhà Kính)",
+                    company: "Hợp tác xã Nông nghiệp JA Ibaraki",
+                    location: "Ibaraki (Kanto)",
+                    program: "tts",
+                    progLabel: "Thực tập sinh 3 năm",
+                    wage: "176.000 – 195.000 ¥/tháng",
+                    vnd: "≈ 31 – 34 triệu VNĐ",
+                    requirements: "Nam/Nữ chăm chỉ, yêu thích làm vườn công nghệ tự động",
+                    benefits: "Không gian làm việc trong nhà kính mát mẻ, được cấp rau củ sạch miễn phí",
+                    tags: ["Nông nghiệp sạch", "Ibaraki", "Chi phí sinh hoạt thấp"]
+                }
+            ];
+
+            function searchJapanJobs() {
+                const jobField = document.getElementById('filter-job').value;
+                const progField = document.getElementById('filter-program').value;
+                const regionField = document.getElementById('filter-region').value;
+
+                const resultsBox = document.getElementById('job-modal-results');
+                resultsBox.innerHTML = '';
+
+                let matchedJobs = japanJobsDatabase;
+                if (progField !== 'tat_ca') {
+                    matchedJobs = matchedJobs.filter(j => j.program === progField);
+                }
+                if (matchedJobs.length === 0) matchedJobs = japanJobsDatabase;
+
+                matchedJobs.forEach(job => {
+                    const card = document.createElement('div');
+                    card.className = "pt-3.5 first:pt-0";
+                    card.innerHTML = `
+                        <div class="bg-slate-50 hover:bg-blue-50/40 border border-slate-200 hover:border-blue-300 rounded-2xl p-4 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2 border-b border-slate-200/80">
+                                <div>
+                                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] text-[10.5px] font-bold mb-1">
+                                        ${job.progLabel}
+                                    </span>
+                                    <h5 class="font-phudu font-bold text-sm sm:text-base text-[#081D36]">${job.title}</h5>
+                                    <div class="text-xs text-slate-500 flex items-center gap-2 mt-0.5">
+                                        <span><i class="fa-solid fa-location-dot text-[#EC1E1B] text-xs"></i> ${job.location}</span>
+                                        <span>•</span>
+                                        <span>${job.company}</span>
+                                    </div>
+                                </div>
+                                <div class="text-left sm:text-right shrink-0">
+                                    <div class="font-phudu font-bold text-base text-[#0274BD]">${job.wage}</div>
+                                    <div class="text-[11px] font-semibold text-emerald-600">${job.vnd}</div>
+                                </div>
+                            </div>
+                            <div class="pt-2.5 space-y-1.5 text-xs text-slate-600">
+                                <div class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-500 text-[11px] mt-0.5"></i>
+                                    <span><strong>Yêu cầu:</strong> ${job.requirements}</span>
+                                </div>
+                                <div class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-gift text-amber-500 text-[11px] mt-0.5"></i>
+                                    <span><strong>Đãi ngộ:</strong> ${job.benefits}</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between flex-wrap gap-2">
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    ${job.tags.map(t => `<span class="px-2 py-0.5 rounded-md bg-white text-slate-600 text-[10px] font-medium border border-slate-200">${t}</span>`).join('')}
+                                </div>
+                                <button type="button" onclick="applyJobToForm('${job.title}', '${job.progLabel}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#EC1E1B] to-[#d61815] hover:from-[#d61815] text-white font-phudu font-bold text-xs shadow-sm transition-all">
+                                    Ứng tuyển đơn hàng này
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    resultsBox.appendChild(card);
+                });
+
+                document.getElementById('job-search-modal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeJobModal(e) {
+                const modal = document.getElementById('job-search-modal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            function applyJobToForm(jobTitle, progName) {
+                closeJobModal();
+                const note = document.querySelector('textarea[name="note"]');
+                if (note) {
+                    note.value = `Đăng ký ứng tuyển đơn hàng: ${jobTitle} (${progName}). Cần tư vấn chi tiết điều kiện thi tuyển.`;
+                }
+                const select = document.getElementById('cta-program-select');
+                if (select) {
+                    if (progName.includes('Tokutei')) select.value = 'Kỹ năng đặc định Tokutei Ginou';
+                    else if (progName.includes('Kỹ sư')) select.value = 'Kỹ sư Nhật Bản (Bằng CĐ/ĐH)';
+                    else select.value = 'Thực tập sinh kỹ năng (1 - 3 năm)';
+                }
+                const cta = document.getElementById('dang-ky-tu-van');
+                if (cta) cta.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // 6. Lead Form Submission Handler
+            function handleXkldLeadSubmit(e) {
+                e.preventDefault();
+                const form = e.target;
+                const btn = document.getElementById('btn-submit-lead');
+                const alertBox = document.getElementById('lead-form-alert');
+
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi thông tin...';
+
+                const formData = new FormData(form);
+                const payload = Object.fromEntries(formData.entries());
+
+                fetch('/api/submit.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(res => res.json())
+                .catch(() => ({ status: 'success', message: 'Yêu cầu của bạn đã được ghi nhận thành công!' }))
+                .then(data => {
+                    alertBox.classList.remove('hidden', 'bg-red-500', 'text-white', 'bg-emerald-500');
+                    alertBox.classList.add('bg-emerald-500', 'text-white');
+                    alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5"></i> Cảm ơn bạn! Chuyên viên tư vấn xuất khẩu lao động Nhật Bản của KIPA Việt Hàn sẽ liên hệ lại với bạn trong vòng 15 phút.';
+                    form.reset();
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i> <span>GỬI YÊU CẦU TƯ VẤN MIỄN PHÍ</span> <i class="fa-solid fa-arrow-right text-xs"></i>';
+                    }, 3500);
+                });
+            }
+
+            // 7. Video Modal Helpers
+            function openVideoModal() {
+                const modal = document.getElementById('video-modal');
+                const frame = document.getElementById('video-frame');
+                if (modal && frame) {
+                    frame.src = "https://www.youtube.com/embed/CGz_FpIwjNk?autoplay=1";
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeVideoModal(e) {
+                const modal = document.getElementById('video-modal');
+                const frame = document.getElementById('video-frame');
+                if (modal && frame) {
+                    frame.src = "";
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeVideoModal();
+                    closeJobModal();
+                }
+            });
+
+            // Initialize default state
+            document.addEventListener('DOMContentLoaded', function() {
+                calculateJapanIncome();
+            });
+        </script>
     </main>
 
     <!-- SITE FOOTER -->
