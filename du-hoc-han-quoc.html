@@ -1310,113 +1310,147 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                <!-- Left: Form chọn tiêu chí -->
-                <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-blue-100 shadow-md flex flex-col justify-between">
-                    <div class="space-y-5">
+                <!-- Left: Form chọn tiêu chí (5 cột cân đối, không khoảng trống) -->
+                <div class="lg:col-span-5 bg-white p-6 sm:p-7 rounded-3xl border border-blue-100 shadow-md flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-blue flex items-center gap-1.5">
+                                <i class="fas fa-sliders-h"></i> Chọn tiêu chí hồ sơ
+                            </span>
+                            <span class="text-[11px] text-slate-500 font-medium">Bước 1/2</span>
+                        </div>
+
                         <!-- Tiêu chí 1: Hệ du học -->
                         <div>
-                            <label for="calc-he" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
-                                <i class="fas fa-graduation-cap text-brand-blue mr-1.5"></i> 1. Hệ du học bạn quan tâm:
+                            <label for="calc-he" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                                <i class="fas fa-graduation-cap text-brand-blue mr-1"></i> 1. Hệ du học quan tâm:
                             </label>
-                            <select id="calc-he" aria-label="Hệ du học bạn quan tâm" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="d4-3" selected>Du học THPT Cấp 3 (Visa D4-3) - Học bổng 100% độc quyền KIPA</option>
-                                <option value="d4-1">Du học tiếng Hàn (Visa D4-1) - Dự bị Đại học</option>
-                                <option value="d2-2">Du học Đại học chính quy (Visa D2-2)</option>
-                                <option value="d2-3">Du học Thạc sĩ / Tiến sĩ (Visa D2-3)</option>
-                                <option value="d4-6">Du học Cao đẳng Nghề (Visa D4-6)</option>
+                            <select id="calc-he" aria-label="Hệ du học bạn quan tâm" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="d4-3" selected>Du học THPT Cấp 3 (D4-3) - Học bổng 100%</option>
+                                <option value="d4-1">Du học tiếng Hàn (D4-1) - Dự bị ĐH</option>
+                                <option value="d2-2">Du học Đại học chính quy (D2-2)</option>
+                                <option value="d2-3">Du học Thạc sĩ / Tiến sĩ (D2-3)</option>
+                                <option value="d4-6">Du học Cao đẳng Nghề (D4-6)</option>
                             </select>
                         </div>
 
                         <!-- Tiêu chí 2: Điểm GPA -->
                         <div>
-                            <label for="calc-gpa" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
-                                <i class="fas fa-chart-line text-brand-blue mr-1.5"></i> 2. Điểm trung bình (GPA) gần nhất:
+                            <label for="calc-gpa" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                                <i class="fas fa-chart-line text-brand-blue mr-1"></i> 2. Điểm GPA gần nhất:
                             </label>
-                            <select id="calc-gpa" aria-label="Điểm trung bình GPA gần nhất" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="8.5">Xuất sắc (GPA từ 8.5 trở lên) - Ưu tiên học bổng cao nhất</option>
-                                <option value="7.5" selected>Khá - Giỏi (GPA 7.5 – 8.4) - Đạt chuẩn hầu hết các trường Top</option>
-                                <option value="6.5">Trung bình khá (GPA 6.5 – 7.4) - Đạt chuẩn visa & trường đối tác</option>
-                                <option value="6.0">Dưới 6.5 - Cần chuyên gia KIPA thẩm định hồ sơ riêng</option>
+                            <select id="calc-gpa" aria-label="Điểm trung bình GPA gần nhất" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="8.5">Xuất sắc (GPA &ge; 8.5) - Ưu tiên học bổng cao</option>
+                                <option value="7.5" selected>Khá - Giỏi (GPA 7.5 – 8.4) - Đạt chuẩn Top</option>
+                                <option value="6.5">Trung bình khá (GPA 6.5 – 7.4) - Đạt visa</option>
+                                <option value="6.0">Dưới 6.5 - Chuyên gia thẩm định riêng</option>
                             </select>
                         </div>
 
                         <!-- Tiêu chí 3: Trình độ tiếng Hàn -->
                         <div>
-                            <label for="calc-topik" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
-                                <i class="fas fa-language text-brand-blue mr-1.5"></i> 3. Trình độ tiếng Hàn hiện tại:
+                            <label for="calc-topik" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                                <i class="fas fa-language text-brand-blue mr-1"></i> 3. Trình độ tiếng Hàn:
                             </label>
-                            <select id="calc-topik" aria-label="Trình độ tiếng Hàn hiện tại" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="none" selected>Chưa biết tiếng (Bắt đầu học khóa căn bản tại KIPA)</option>
-                                <option value="topik12">Sơ cấp (Đã học bảng chữ cái / TOPIK 1 - 2)</option>
-                                <option value="topik34">Trung cấp (TOPIK 3 - 4) - Đủ điều kiện vào thẳng chuyên ngành</option>
+                            <select id="calc-topik" aria-label="Trình độ tiếng Hàn hiện tại" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="none" selected>Chưa biết tiếng (Học căn bản tại KIPA)</option>
+                                <option value="topik12">Sơ cấp (Học bảng chữ / TOPIK 1 - 2)</option>
+                                <option value="topik34">Trung cấp (TOPIK 3 - 4) - Vào chuyên ngành</option>
                                 <option value="topik56">Cao cấp (TOPIK 5 - 6 hoặc IELTS 6.5+)</option>
                             </select>
                         </div>
 
                         <!-- Tiêu chí 4: Khu vực mong muốn -->
                         <div>
-                            <label for="calc-region" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">
-                                <i class="fas fa-map-marker-alt text-brand-blue mr-1.5"></i> 4. Khu vực du học mong muốn:
+                            <label for="calc-region" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                                <i class="fas fa-map-marker-alt text-brand-blue mr-1"></i> 4. Khu vực mong muốn:
                             </label>
-                            <select id="calc-region" aria-label="Khu vực du học mong muốn" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="seoul" selected>Thủ đô Seoul & Vùng đô thị vệ tinh (Incheon, Gyeonggi)</option>
-                                <option value="busan">Thành phố Busan & Miền Trung / Nam (Chi phí sinh hoạt tiết kiệm 30%)</option>
+                            <select id="calc-region" aria-label="Khu vực du học mong muốn" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                                <option value="seoul" selected>Thủ đô Seoul &amp; Vùng đô thị vệ tinh (Incheon, Gyeonggi)</option>
+                                <option value="busan">Thành phố Busan &amp; Miền Trung/Nam (Tiết kiệm 30%)</option>
                             </select>
+                        </div>
+
+                        <!-- Helpful Note Box to fill vertical gap seamlessly -->
+                        <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs text-brand-navy flex items-start gap-2.5">
+                            <i class="fas fa-lightbulb text-amber-500 text-sm mt-0.5 shrink-0"></i>
+                            <span class="text-[11.5px] leading-relaxed text-slate-600">
+                                <strong class="text-brand-navy">Mẹo từ KIPA:</strong> Hãy chọn tiêu chí sát nhất với học bạ của bạn để hệ thống tự động đề xuất trường và mức học bổng chính xác nhất.
+                            </span>
                         </div>
                     </div>
 
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs text-gray-500">
-                        <i class="fas fa-shield-alt text-emerald-500 mr-2 text-sm"></i>
-                        <span>Kết quả dựa trên dữ liệu tuyển sinh và chính sách học bổng mới nhất kỳ tuyển sinh 2026.</span>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-gray-500">
+                        <i class="fas fa-shield-alt text-emerald-500 mr-2 text-sm shrink-0"></i>
+                        <span>Dữ liệu tuyển sinh &amp; chính sách học bổng chuẩn kỳ 2026.</span>
                     </div>
                 </div>
 
-                <!-- Right: Bảng kết quả phân tích tức thì -->
-                <div class="lg:col-span-5 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between relative overflow-hidden" style="background: linear-gradient(135deg, #081D36 0%, #01458e 55%, #0274BD 100%) !important;">
+                <!-- Right: Bảng kết quả phân tích tức thì (Mở rộng 7 cột) -->
+                <div class="lg:col-span-7 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between relative overflow-hidden" style="background: linear-gradient(135deg, #081D36 0%, #01458e 55%, #0274BD 100%) !important;">
                     <div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-blue-400/10 blur-2xl pointer-events-none"></div>
                     
                     <div class="relative z-10 space-y-4">
                         <div class="flex items-center justify-between pb-3 border-b border-white/15">
                             <span class="text-xs uppercase tracking-wider font-bold text-blue-200 flex items-center gap-1.5">
-                                <i class="fas fa-bolt text-yellow-300"></i> KẾT QUẢ ĐÁNH GIÁ HỒ SƠ
+                                <i class="fas fa-bolt text-yellow-300"></i> KẾT QUẢ ĐÁNH GIÁ HỒ SƠ TỨC THÌ
                             </span>
-                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-400/30">
-                                Khả thi cao
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>Khả thi cao • Ưu tiên</span>
                             </span>
                         </div>
 
-                        <!-- Card 1: Khả năng học bổng -->
-                        <div class="rounded-2xl p-4 border border-white/20 backdrop-blur-sm" style="background: rgba(255, 255, 255, 0.12);">
-                            <div class="text-xs text-blue-200 uppercase font-semibold mb-1">Khả năng đạt học bổng:</div>
-                            <div id="res-scholarship" class="text-base sm:text-lg font-phudu font-bold text-yellow-300">
-                                Học bổng 100% học phí (Chương trình độc quyền KIPA)
+                        <!-- Row 1: Khả năng học bổng & Dự toán chi phí (2 Cột rộng rãi) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <!-- Card 1: Khả năng học bổng -->
+                            <div class="rounded-2xl p-4 border border-white/20 backdrop-blur-sm flex flex-col justify-between" style="background: rgba(255, 255, 255, 0.12);">
+                                <div>
+                                    <div class="text-xs text-blue-200 uppercase font-semibold mb-1.5 flex items-center gap-1.5">
+                                        <i class="fas fa-award text-yellow-300"></i>
+                                        <span>Khả năng đạt học bổng:</span>
+                                    </div>
+                                    <div id="res-scholarship" class="text-base sm:text-lg font-phudu font-bold text-yellow-300 leading-snug">
+                                        Học bổng 100% học phí (Chương trình độc quyền KIPA)
+                                    </div>
+                                </div>
+                                <div class="text-[11px] text-emerald-300 font-medium mt-2 pt-2 border-t border-white/10 flex items-center gap-1">
+                                    <i class="fas fa-check-circle text-xs"></i>
+                                    <span>Đạt chuẩn xét duyệt thẳng</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Dự toán chi phí ban đầu -->
+                            <div class="rounded-2xl p-4 border border-white/20 backdrop-blur-sm flex flex-col justify-between" style="background: rgba(255, 255, 255, 0.12);">
+                                <div>
+                                    <div class="text-xs text-blue-200 uppercase font-semibold mb-1.5 flex items-center gap-1.5">
+                                        <i class="fas fa-coins text-yellow-300"></i>
+                                        <span>Dự toán tổng chi phí ban đầu:</span>
+                                    </div>
+                                    <div id="res-cost" class="text-lg sm:text-xl font-phudu font-bold text-white leading-tight">
+                                        135 – 160 triệu VNĐ
+                                    </div>
+                                </div>
+                                <div class="text-[11px] text-blue-200 mt-2 pt-2 border-t border-white/10">
+                                    Đã gồm học phí, KTX, visa, vé máy bay &amp; dịch vụ trọn gói KIPA.
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Card 2: Dự toán chi phí ban đầu -->
-                        <div class="rounded-2xl p-4 border border-white/20 backdrop-blur-sm" style="background: rgba(255, 255, 255, 0.12);">
-                            <div class="text-xs text-blue-200 uppercase font-semibold mb-1">Dự toán tổng chi phí ban đầu trọn gói:</div>
-                            <div id="res-cost" class="text-lg sm:text-xl font-phudu font-bold text-white">
-                                135 – 160 triệu VNĐ
+                        <!-- Row 2: 3 Thông số nhanh (Thời gian học tiếng, Tỉ lệ Visa, Nhóm trường) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                            <div class="rounded-xl p-3 border border-white/15 flex flex-col justify-between" style="background: rgba(255, 255, 255, 0.08);">
+                                <span class="text-xs text-blue-200 block mb-1">Thời gian học tiếng:</span>
+                                <span id="res-preptime" class="font-bold text-white text-xs sm:text-sm">3 – 4 tháng (KIPA)</span>
                             </div>
-                            <div class="text-xs text-blue-200 mt-1">Đã bao gồm học phí, KTX, visa, vé máy bay & dịch vụ trọn gói KIPA.</div>
-                        </div>
-
-                        <!-- Card 3: Thời gian chuẩn bị & Tỉ lệ đạt Visa -->
-                        <div class="grid grid-cols-2 gap-3 text-xs">
-                            <div class="rounded-xl p-3 border border-white/15" style="background: rgba(255, 255, 255, 0.08);">
-                                <span class="text-xs text-blue-200 block mb-0.5">Thời gian học tiếng:</span>
-                                <span id="res-preptime" class="font-bold text-white text-xs">3 – 4 tháng (KIPA)</span>
+                            <div class="rounded-xl p-3 border border-white/15 flex flex-col justify-between" style="background: rgba(255, 255, 255, 0.08);">
+                                <span class="text-xs text-blue-200 block mb-1">Tỉ lệ đạt Visa KIPA:</span>
+                                <span class="font-bold text-emerald-400 text-xs sm:text-sm">99.2% (Cam kết)</span>
                             </div>
-                            <div class="rounded-xl p-3 border border-white/15" style="background: rgba(255, 255, 255, 0.08);">
-                                <span class="text-xs text-blue-200 block mb-0.5">Tỉ lệ đạt Visa KIPA:</span>
-                                <span class="font-bold text-emerald-400 text-xs">99.2% (Cam kết)</span>
+                            <div class="rounded-xl p-3 border border-white/15 flex flex-col justify-between" style="background: rgba(255, 255, 255, 0.08);">
+                                <span class="text-xs text-blue-200 block mb-1">Nhóm trường đối tác:</span>
+                                <span id="res-school" class="font-semibold text-blue-100 text-xs truncate" title="Trường THPT Đối tác KIPA tại Seoul & Incheon">Trường THPT KIPA (Seoul, Incheon)</span>
                             </div>
-                        </div>
-
-                        <div class="rounded-xl p-3 border border-white/15 text-xs" style="background: rgba(255, 255, 255, 0.08);">
-                            <span class="text-xs text-blue-200 block mb-0.5">Nhóm trường đối tác phù hợp:</span>
-                            <span id="res-school" class="font-semibold text-blue-100 text-xs">Trường THPT Đối tác KIPA tại Seoul & Incheon</span>
                         </div>
                     </div>
 
@@ -1424,7 +1458,7 @@
                     <div class="relative z-10 pt-5 mt-4 border-t border-white/15 space-y-2">
                         <a href="/dang-ky-tu-van?program=duhoc" class="w-full inline-flex items-center justify-center px-5 py-3.5 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-lg shadow-red-900/40 transform hover:-translate-y-0.5">
                             <i class="far fa-paper-plane mr-2 text-xs"></i>
-                            <span>Nhận Kế Hoạch Tài Chính & Học Bổng Chi Tiết 1:1</span>
+                            <span>Nhận Kế Hoạch Tài Chính &amp; Học Bổng Chi Tiết 1:1</span>
                             <i class="fas fa-arrow-right ml-2 text-xs"></i>
                         </a>
                         <p class="text-center text-xs text-blue-200">Hoàn toàn MIỄN PHÍ • Không phát sinh bất kỳ khoản phí tư vấn nào</p>
