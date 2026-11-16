@@ -2414,67 +2414,9 @@
     </section>
 
     <!-- ==========================================
-         SECTION 5.7: LEAD MAGNET - TẢI CẨM NANG DU HỌC HÀN QUỐC 2026 MIỄN PHÍ
+         SECTION 6: CÂU HỎI THƯỜNG GẶP & TẢI CẨM NANG DU HỌC (TÍCH HỢP TƯ VẤN 1:1)
          ========================================== -->
-    <section class="py-10 text-white relative overflow-hidden" id="tai-tai-lieu" style="background: linear-gradient(135deg, #081D36 0%, #01458e 50%, #0274BD 100%) !important;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <div class="lg:col-span-7 space-y-3">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm text-yellow-300">
-                        <i class="fas fa-gift"></i>
-                        <span>Quà tặng độc quyền từ Ban Chuyên Môn KIPA</span>
-                    </div>
-                    <h2 class="font-phudu text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight">
-                        Tải Ngay: Cẩm Nang Du Học Hàn Quốc 2026 <br class="hidden sm:inline">
-                        <span class="text-yellow-300">& Trọn Bộ 50 Câu Hỏi Phỏng Vấn Visa</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-blue-100 max-w-xl leading-relaxed font-vietnam">
-                        Tài liệu đầy đủ nhất về điều kiện các hệ visa D4-1, D4-3, D2, bảng học phí 50+ trường đại học tại Seoul - Busan và trọn bộ câu hỏi phỏng vấn thực tế tại Đại sứ quán.
-                    </p>
-                </div>
-
-                <div class="lg:col-span-5 bg-white text-slate-900 p-6 sm:p-7 rounded-3xl shadow-2xl">
-                    <form id="lead-magnet-form" onsubmit="handleLeadMagnetSubmit(event)" class="space-y-3">
-                        <h4 class="font-phudu font-bold text-sm text-brand-navy">Điền thông tin để nhận tài liệu miễn phí qua Zalo/Email:</h4>
-                        
-                        <div>
-                            <label for="lm-name" class="block text-xs font-semibold text-slate-700 mb-1">Họ và tên *</label>
-                            <input type="text" id="lm-name" required placeholder="Họ và tên của bạn *" aria-label="Họ và tên của bạn" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label for="lm-phone" class="block text-xs font-semibold text-slate-700 mb-1">Số điện thoại / Zalo *</label>
-                                <input type="tel" id="lm-phone" required placeholder="Số điện thoại / Zalo *" aria-label="Số điện thoại hoặc Zalo" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
-                            </div>
-                            <div>
-                                <label for="lm-email" class="block text-xs font-semibold text-slate-700 mb-1">Địa chỉ Email</label>
-                                <input type="email" id="lm-email" placeholder="Địa chỉ Email" aria-label="Địa chỉ Email nhận cẩm nang" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
-                            </div>
-                        </div>
-
-                        <button type="submit" id="lm-submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition duration-200 cursor-pointer">
-                            <i class="fas fa-download"></i>
-                            <span>Gửi Cẩm Nang Cho Tôi Miễn Phí</span>
-                        </button>
-                        
-                        <p class="text-center text-xs text-slate-500">KIPA cam kết bảo mật thông tin cá nhân theo đúng chính sách bảo mật.</p>
-                        
-                        <div id="lm-success-msg" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs text-center font-medium">
-                            🎉 Đăng ký thành công! KIPA đã ghi nhận và gửi cẩm nang đến bạn. Chuyên viên sẽ liên hệ hỗ trợ bạn giải đáp mọi thắc mắc.
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 6: CÂU HỎI THƯỜNG GẶP & CTA BANNER
-         ========================================== -->
-    <section class="py-12 sm:py-16 bg-white border-t border-gray-100">
+    <section class="py-12 sm:py-16 bg-white border-t border-gray-100" id="tai-tai-lieu">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -2567,43 +2509,98 @@
                     </div>
                 </div>
 
-                <!-- Right: CTA Card Banner -->
+                <!-- Right: Merged Lead Magnet & Consultation Hub -->
                 <div class="lg:col-span-7">
-                    <div class="relative rounded-2xl p-6 sm:p-8 text-white shadow-xl overflow-hidden flex flex-col justify-between" style="background: linear-gradient(135deg, #01458e 0%, #0274BD 60%, #0385d8 100%) !important;">
+                    <div class="relative rounded-3xl p-6 sm:p-8 text-white shadow-xl overflow-hidden" style="background: linear-gradient(135deg, #081D36 0%, #01458e 55%, #0274BD 100%) !important;">
                         
-                        <!-- Subtle decorative background light blurs -->
+                        <!-- Subtle decorative background blurs -->
                         <div class="absolute -right-10 -bottom-10 w-60 h-60 rounded-full bg-white/5 pointer-events-none"></div>
                         <div class="absolute right-12 top-4 w-32 h-32 rounded-full bg-blue-300/10 blur-xl pointer-events-none"></div>
-                        
-                        <!-- Text Content -->
-                        <div class="relative z-10 max-w-lg space-y-3.5">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm">
-                                <i class="fas fa-paper-plane text-xs text-yellow-300"></i>
-                                <span>Tư vấn 1:1 miễn phí cùng chuyên gia KIPA</span>
-                            </div>
-                            <h3 class="font-phudu text-xl sm:text-2xl font-extrabold leading-tight">
-                                Sẵn sàng bắt đầu hành trình du học Hàn Quốc?
-                            </h3>
-                            <p class="text-blue-100 text-xs sm:text-sm leading-relaxed font-vietnam">
-                                Liên hệ KIPA Việt Hàn ngay hôm nay để được tư vấn chi tiết, xây dựng lộ trình phù hợp và nhận hỗ trợ trọn gói từ A-Z.
-                            </p>
 
-                            <!-- 2 CTA Buttons -->
-                            <div class="flex flex-wrap items-center gap-3 pt-2">
-                                <a href="/dang-ky-tu-van" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-brand-red text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition shadow-lg shadow-red-950/20">
-                                    <i class="far fa-calendar-alt mr-2 text-xs"></i>
-                                    <span>Đăng ký tư vấn ngay</span>
-                                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        <!-- Top Header & Badges -->
+                        <div class="relative z-10 space-y-2.5 mb-5">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm text-yellow-300">
+                                    <i class="fas fa-gift"></i>
+                                    <span>Quà tặng độc quyền KIPA</span>
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm text-blue-100">
+                                    <i class="fas fa-paper-plane text-yellow-300"></i>
+                                    <span>Tư vấn 1:1 miễn phí</span>
+                                </span>
+                            </div>
+
+                            <h3 class="font-phudu text-xl sm:text-2xl font-extrabold text-white leading-tight">
+                                Tải Ngay: Cẩm Nang Du Học Hàn Quốc 2026 <br class="hidden sm:inline">
+                                <span class="text-yellow-300">&amp; Trọn Bộ 50 Câu Hỏi Phỏng Vấn Visa</span>
+                            </h3>
+
+                            <p class="text-xs sm:text-sm text-blue-100 leading-relaxed font-vietnam">
+                                Tài liệu đầy đủ nhất về điều kiện các hệ visa D4-1, D4-3, D2, bảng học phí 50+ trường đại học tại Seoul – Busan và trọn bộ câu hỏi phỏng vấn thực tế tại Đại sứ quán.
+                            </p>
+                        </div>
+
+                        <!-- Form Card -->
+                        <div class="relative z-10 bg-white text-slate-900 p-5 sm:p-6 rounded-2xl shadow-xl">
+                            <form id="lead-magnet-form" onsubmit="handleLeadMagnetSubmit(event)" class="space-y-3">
+                                <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                                    <h4 class="font-phudu font-bold text-xs sm:text-sm text-brand-navy">Điền thông tin để nhận tài liệu miễn phí qua Zalo/Email:</h4>
+                                    <span class="text-[11px] font-bold text-brand-red bg-red-50 px-2.5 py-0.5 rounded-full shrink-0">100% Miễn phí</span>
+                                </div>
+                                
+                                <div>
+                                    <label for="lm-name" class="block text-xs font-semibold text-slate-700 mb-1">Họ và tên *</label>
+                                    <input type="text" id="lm-name" required placeholder="Họ và tên của bạn *" aria-label="Họ và tên của bạn" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label for="lm-phone" class="block text-xs font-semibold text-slate-700 mb-1">Số điện thoại / Zalo *</label>
+                                        <input type="tel" id="lm-phone" required placeholder="Số điện thoại / Zalo *" aria-label="Số điện thoại hoặc Zalo" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
+                                    </div>
+                                    <div>
+                                        <label for="lm-email" class="block text-xs font-semibold text-slate-700 mb-1">Địa chỉ Email</label>
+                                        <input type="email" id="lm-email" placeholder="Địa chỉ Email" aria-label="Địa chỉ Email nhận cẩm nang" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
+                                    </div>
+                                </div>
+
+                                <button type="submit" id="lm-submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition duration-200 cursor-pointer">
+                                    <i class="fas fa-download"></i>
+                                    <span>Gửi Cẩm Nang Cho Tôi Miễn Phí</span>
+                                </button>
+                                
+                                <p class="text-center text-[11px] text-slate-500">KIPA cam kết bảo mật thông tin cá nhân theo đúng chính sách bảo mật.</p>
+                                
+                                <div id="lm-success-msg" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs text-center font-medium">
+                                    🎉 Đăng ký thành công! KIPA đã ghi nhận và gửi cẩm nang đến bạn. Chuyên viên sẽ liên hệ hỗ trợ bạn giải đáp mọi thắc mắc.
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Direct Hotline & CTA Action Footer -->
+                        <div class="relative z-10 pt-4 mt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-3 text-xs text-blue-100">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-headset text-yellow-300"></i>
+                                <span>Cần tư vấn trực tiếp ngay? Hotline 24/7:</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="tel:0368513865" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white text-brand-navy font-bold hover:bg-blue-50 transition shadow-sm">
+                                    <i class="fas fa-phone-alt text-brand-red text-xs"></i>
+                                    <span>036 851 3865</span>
                                 </a>
-                                <a href="tel:0368513865" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-brand-blue font-bold text-xs sm:text-sm hover:bg-blue-50 transition shadow-sm">
-                                    <i class="fas fa-phone-alt mr-2 text-xs text-brand-blue"></i>
-                                    <span>Gọi 036 851 3865</span>
+                                <a href="/dang-ky-tu-van" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold transition">
+                                    <span>Đăng ký hẹn lịch &rarr;</span>
                                 </a>
                             </div>
                         </div>
 
                     </div>
                 </div>
+
+            </div>
+
+        </div>
+    </section>
 
             </div>
 
@@ -2735,6 +2732,137 @@
         if (frame) frame.src = "";
         modal.classList.add('hidden');
         document.body.style.overflow = '';
+    }
+
+    // Calculate Du Hoc Estimate
+    function calculateDuhocEstimate() {
+        const he = document.getElementById('calc-he')?.value || 'd4-3';
+        const gpa = parseFloat(document.getElementById('calc-gpa')?.value || '8.0');
+        const topik = document.getElementById('calc-topik')?.value || 'none';
+        const region = document.getElementById('calc-region')?.value || 'seoul';
+
+        let scholarship = "Học bổng 100% học phí (Chương trình độc quyền KIPA)";
+        let cost = "Trọn gói ~135 triệu VNĐ";
+        let preptime = "3 – 5 tháng";
+        let school = "Trường THPT Đối tác KIPA tại Seoul & Incheon";
+
+        if (he === 'd4-3') {
+            scholarship = "Học bổng 100% học phí (Chương trình độc quyền KIPA)";
+            cost = "Trọn gói ~135 triệu VNĐ";
+            preptime = "3 – 5 tháng (học tiếng căn bản)";
+            school = "Trường THPT Đối tác KIPA tại Seoul & Incheon";
+        } else if (he === 'd4-1') {
+            if (gpa >= 8.0) {
+                scholarship = "30% - 50% học phí kỳ đầu";
+            } else if (gpa >= 7.0) {
+                scholarship = "20% - 30% học phí kỳ đầu";
+            } else {
+                scholarship = "Hỗ trợ 10% - 20% phí nhập học";
+            }
+            cost = region === 'seoul' ? "170 – 210 triệu VNĐ" : "150 – 180 triệu VNĐ";
+            preptime = "3 – 4 tháng luyện phỏng vấn visa";
+            school = region === 'seoul' ? "ĐH Konkuk, ĐH Seokyeong, ĐH Chung-Ang" : "ĐH Dong-A, ĐH Yeungnam, ĐH Chosun";
+        } else if (he === 'd2-2' || he === 'd2-3') {
+            if (topik === 'topik56') {
+                scholarship = "70% - 100% học phí toàn khóa";
+            } else if (topik === 'topik34') {
+                scholarship = "50% - 70% học phí kỳ đầu";
+            } else {
+                scholarship = "30% - 50% học phí (sau khi đạt TOPIK 3)";
+            }
+            cost = region === 'seoul' ? "180 – 230 triệu VNĐ" : "155 – 195 triệu VNĐ";
+            preptime = topik === 'none' ? "6 – 9 tháng luyện TOPIK 3+" : "1 – 2 tháng xử lý hồ sơ";
+            school = region === 'seoul' ? "ĐH Hanyang, ĐH Chung-Ang, ĐH Konkuk" : "ĐH Dong-A, ĐH Pusan, ĐH Yeungnam";
+        } else if (he === 'd4-6') {
+            scholarship = "Học bổng 30% & Trợ cấp thực tập có lương";
+            cost = "140 – 170 triệu VNĐ";
+            preptime = "3 tháng luyện chứng chỉ nghề & tiếng";
+            school = "Các trường Cao đẳng Nghề hàng đầu Hàn Quốc";
+        }
+
+        const resSch = document.getElementById('res-scholarship');
+        const resCost = document.getElementById('res-cost');
+        const resPrep = document.getElementById('res-preptime');
+        const resSchool = document.getElementById('res-school');
+
+        if (resSch) resSch.textContent = scholarship;
+        if (resCost) resCost.textContent = cost;
+        if (resPrep) resPrep.textContent = preptime;
+        if (resSchool) resSchool.textContent = school;
+    }
+
+    // Filter Partner Schools
+    function filterSchools(region, btn) {
+        const cards = document.querySelectorAll('#schools-grid .school-card');
+        const tabs = document.querySelectorAll('#school-filter-tabs .school-tab-btn');
+        
+        tabs.forEach(t => {
+            t.classList.remove('bg-white', 'text-brand-navy', 'shadow-sm');
+            t.classList.add('text-slate-600');
+        });
+        if (btn) {
+            btn.classList.add('bg-white', 'text-brand-navy', 'shadow-sm');
+            btn.classList.remove('text-slate-600');
+        }
+
+        cards.forEach(card => {
+            const cardRegion = card.getAttribute('data-region');
+            if (region === 'all' || cardRegion === region) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Handle Lead Magnet Form Submit
+    function handleLeadMagnetSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('lm-name').value.trim();
+        const phone = document.getElementById('lm-phone').value.trim();
+        const email = document.getElementById('lm-email').value.trim();
+        const btn = document.getElementById('lm-submit-btn');
+        const msg = document.getElementById('lm-success-msg');
+
+        if (!name || !phone) {
+            alert('Vui lòng điền họ tên và số điện thoại');
+            return;
+        }
+
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Đang xử lý...</span>';
+        }
+
+        const formData = new FormData();
+        formData.append('fullname', name);
+        formData.append('phone', phone);
+        formData.append('email', email || '');
+        formData.append('service', 'duhoc');
+        formData.append('country', 'Hàn Quốc');
+        formData.append('notes', 'Đăng ký tải Cẩm nang Du học Hàn Quốc 2026 + 50 câu hỏi phỏng vấn Visa & Tư vấn 1:1');
+
+        fetch('/api/submit.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (btn) {
+                btn.classList.add('hidden');
+            }
+            if (msg) {
+                msg.classList.remove('hidden');
+            }
+        })
+        .catch(err => {
+            if (btn) {
+                btn.classList.add('hidden');
+            }
+            if (msg) {
+                msg.classList.remove('hidden');
+            }
+        });
     }
 </script>
     </main>
