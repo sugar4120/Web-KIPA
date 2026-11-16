@@ -44,3 +44,30 @@
   --tw-gradient-to: rgb(3 68 121 / 0) var(--tw-gradient-to-position) !important;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
+
+/* --- Antigravity Promo & Voucher Color Overrides --- */
+.text-cyan-300 { color: #67e8f9 !important; }
+.text-cyan-400 { color: #22d3ee !important; }
+.bg-cyan-400\/20 { background-color: rgba(34, 211, 238, 0.2) !important; }
+.border-cyan-400\/30 { border-color: rgba(34, 211, 238, 0.3) !important; }
+
+.text-rose-300 { color: #fda4af !important; }
+.text-rose-400 { color: #fb7185 !important; }
+.bg-rose-400\/20 { background-color: rgba(251, 113, 133, 0.2) !important; }
+.border-rose-400\/30 { border-color: rgba(251, 113, 133, 0.3) !important; }
+.border-rose-400\/40 { border-color: rgba(251, 113, 133, 0.4) !important; }
+
+.text-red-300 { color: #fca5a5 !important; }
+.bg-red-600\/30 { background-color: rgba(220, 38, 38, 0.3) !important; }
+.border-red-500\/50 { border-color: rgba(239, 68, 68, 0.5) !important; }
+
+.from-amber-400 {
+  --tw-gradient-from: #fbbf24 var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(251 191 36 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+.via-rose-500 {
+  --tw-gradient-to: rgb(244 63 94 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #f43f5e var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
