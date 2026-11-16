@@ -2551,6 +2551,140 @@
     </section>
 
     <!-- ==========================================
+         SECTION 5.7: TẶNG KHÓA HỌC ONLINE TIẾNG HÀN MIỄN PHÍ - ĐÍCH ĐẾN TOPIK 1 (ƯU ĐÃI 30 PHÚT)
+         ========================================== -->
+    <section class="py-12 sm:py-16 relative overflow-hidden bg-gradient-to-b from-slate-50 via-amber-50/40 to-white border-t border-amber-200/70" id="khoa-hoc-tieng-han-free">
+        <!-- Ambient decorative blurs -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-amber-400/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <!-- Main Promotional Card -->
+            <div class="rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden" 
+                 style="background: linear-gradient(135deg, #061c33 0%, #08284d 40%, #01458e 80%, #0274bd 100%) !important;">
+                
+                <!-- Glowing Orb Accents -->
+                <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-amber-400/15 blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-rose-500/15 blur-2xl pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+                    
+                    <!-- Top Badges -->
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-400 text-slate-900 text-xs font-extrabold uppercase tracking-wide shadow-md">
+                            <i class="fas fa-gift text-red-600"></i>
+                            <span>QUÀ TẶNG ĐẶC BIỆT TRỊ GIÁ 3.500.000Đ</span>
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/30 text-rose-200 border border-red-400/40 text-xs font-semibold backdrop-blur-sm animate-pulse">
+                            <i class="fas fa-bolt text-amber-300"></i>
+                            <span>ƯU ĐÃI CÓ HẠN CHỈ TRONG 30 PHÚT</span>
+                        </span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+                        TẶNG KHÓA HỌC ONLINE TIẾNG HÀN MIỄN PHÍ <br class="hidden sm:inline">
+                        <span class="text-amber-300">ĐÍCH ĐẾN TOPIK 1 NGAY KHI ĐĂNG KÝ</span>
+                    </h2>
+
+                    <p class="text-xs sm:text-sm text-blue-100 max-w-2xl mx-auto leading-relaxed font-vietnam">
+                        Đăng ký nhận tư vấn du học Hàn Quốc ngay hôm nay để nhận trọn vẹn <strong>Khóa học tiếng Hàn Online tương tác trực tiếp</strong> cùng giảng viên KIPA. Nắm chắc bảng chữ cái, phát âm chuẩn ngữ điệu Seoul và 800+ từ vựng cốt lõi, tự tin vượt qua phỏng vấn visa và săn học bổng trường Top!
+                    </p>
+
+                    <!-- Realtime 30-Minute Countdown Timer Widget -->
+                    <div class="py-3.5 px-5 sm:px-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 inline-block max-w-xl mx-auto my-2 shadow-lg">
+                        <div class="text-[11px] sm:text-xs text-amber-200 font-semibold mb-2.5 flex items-center justify-center gap-1.5">
+                            <i class="fas fa-stopwatch animate-spin" style="animation-duration: 4s;"></i>
+                            <span>Thời hạn ưu đãi giữ suất học online miễn phí chỉ còn:</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-center gap-2 sm:gap-3 text-white">
+                            <!-- Minutes -->
+                            <div class="flex flex-col items-center">
+                                <span id="cd-minutes" class="w-14 sm:w-16 h-12 sm:h-14 bg-slate-900/85 rounded-xl flex items-center justify-center font-phudu text-2xl sm:text-3xl font-extrabold text-amber-300 shadow-inner border border-amber-400/40">29</span>
+                                <span class="text-[10px] text-blue-200 uppercase mt-1 font-semibold">Phút</span>
+                            </div>
+                            <span class="font-phudu text-2xl font-bold text-amber-300 mb-4">:</span>
+                            <!-- Seconds -->
+                            <div class="flex flex-col items-center">
+                                <span id="cd-seconds" class="w-14 sm:w-16 h-12 sm:h-14 bg-slate-900/85 rounded-xl flex items-center justify-center font-phudu text-2xl sm:text-3xl font-extrabold text-white shadow-inner border border-white/25">59</span>
+                                <span class="text-[10px] text-blue-200 uppercase mt-1 font-semibold">Giây</span>
+                            </div>
+                            <span class="font-phudu text-2xl font-bold text-amber-300 mb-4">:</span>
+                            <!-- Milliseconds -->
+                            <div class="flex flex-col items-center">
+                                <span id="cd-millis" class="w-14 sm:w-16 h-12 sm:h-14 bg-slate-900/85 rounded-xl flex items-center justify-center font-phudu text-2xl sm:text-3xl font-extrabold text-rose-300 shadow-inner border border-rose-400/40">99</span>
+                                <span class="text-[10px] text-blue-200 uppercase mt-1 font-semibold">Mili-giây</span>
+                            </div>
+                        </div>
+
+                        <div class="text-[11px] text-blue-100 mt-2.5 font-medium flex items-center justify-center gap-1.5">
+                            <i class="fas fa-fire text-amber-400"></i>
+                            <span>Đã có <strong>48 học viên</strong> đăng ký giữ suất học miễn phí thành công hôm nay</span>
+                        </div>
+                    </div>
+
+                    <!-- 3 Core Value Pillars -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2 text-left">
+                        
+                        <div class="p-3.5 sm:p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/15 transition">
+                            <div class="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-base mb-2.5">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h4 class="font-phudu font-bold text-sm text-white">Đích Đến TOPIK 1</h4>
+                            <p class="text-[11.5px] text-blue-100 mt-1 leading-snug">
+                                Làm chủ bảng chữ cái Hangul, cách ghép âm chuẩn ngữ âm Seoul, 800+ từ vựng &amp; phản xạ trả lời phỏng vấn visa.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 sm:p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/15 transition">
+                            <div class="w-9 h-9 rounded-xl bg-cyan-400/20 text-cyan-300 flex items-center justify-center text-base mb-2.5">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h4 class="font-phudu font-bold text-sm text-white">Lớp Online Tương Tác 1:1</h4>
+                            <p class="text-[11.5px] text-blue-100 mt-1 leading-snug">
+                                Học qua Google Meet cùng Giảng viên KIPA, được chỉnh sửa phát âm từng âm tiết, không lo học dồn hay áp lực.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 sm:p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/15 transition">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-400/20 text-emerald-300 flex items-center justify-center text-base mb-2.5">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h4 class="font-phudu font-bold text-sm text-white">Tặng Trọn Bộ Ebook &amp; Audio</h4>
+                            <p class="text-[11.5px] text-blue-100 mt-1 leading-snug">
+                                Tặng giáo trình PDF chuẩn quốc tế, file nghe bản xứ và bộ 50 câu hỏi luyện phỏng vấn visa Hàn Quốc thực chiến.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Direct CTA Action -->
+                    <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="#section-dang-ky-tu-van" onclick="scrollToConsultationWithGift(event)" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-brand-red hover:bg-red-700 text-white font-bold text-sm shadow-xl shadow-red-600/30 transform hover:-translate-y-0.5 transition duration-200">
+                            <i class="fas fa-gift text-amber-300 text-base"></i>
+                            <span>ĐĂNG KÝ NGAY ĐỂ NHẬN KHÓA HỌC MIỄN PHÍ</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="https://zalo.me/g/ehkt1g0n2qjcbomdlgal" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm border border-white/30 backdrop-blur-sm transition">
+                            <i class="fab fa-telegram-plane text-[#0084ff]"></i>
+                            <span>Tham gia nhóm Zalo Lớp Online</span>
+                        </a>
+                    </div>
+
+                    <p class="text-[11px] text-amber-200/90 font-medium">
+                        * Suất học miễn phí 100% được giữ chỗ và kích hoạt tự động ngay sau khi bạn điền thông tin đăng ký bên dưới.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
          SECTION 6: CÂU HỎI THƯỜNG GẶP & TẢI CẨM NANG DU HỌC (TÍCH HỢP TƯ VẤN 1:1)
          ========================================== -->
     <section class="py-12 sm:py-16 bg-white border-t border-gray-100" id="tai-tai-lieu">
@@ -2671,23 +2805,23 @@
                         <!-- Top Header & Badges -->
                         <div class="relative z-10 space-y-2.5 mb-5">
                             <div class="flex flex-wrap items-center gap-2">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm text-yellow-300">
-                                    <i class="fas fa-gift"></i>
-                                    <span>Quà tặng độc quyền KIPA</span>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-slate-900 text-xs font-extrabold uppercase tracking-wide shadow-xs">
+                                    <i class="fas fa-gift text-red-600"></i>
+                                    <span>Tặng Khóa Học Online TOPIK 1</span>
                                 </span>
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold backdrop-blur-sm text-blue-100">
-                                    <i class="fas fa-paper-plane text-yellow-300"></i>
-                                    <span>Tư vấn 1:1 miễn phí</span>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/30 text-rose-200 border border-red-400/40 text-xs font-semibold backdrop-blur-sm animate-pulse">
+                                    <i class="fas fa-clock text-amber-300"></i>
+                                    <span>Ưu đãi giữ chỗ còn: <strong id="form-cd-minutes">29</strong>:<strong id="form-cd-seconds">59</strong></span>
                                 </span>
                             </div>
 
                             <h3 class="font-phudu text-xl sm:text-2xl font-extrabold text-white leading-tight">
                                 Đăng Ký Tư Vấn Du Học Hàn Quốc 1:1 <br class="hidden sm:inline">
-                                <span class="text-yellow-300">&amp; Nhận Trọn Bộ Cẩm Nang 2026 Miễn Phí</span>
+                                <span class="text-yellow-300">&amp; Nhận Khóa Học Online Tiếng Hàn TOPIK 1 Miễn Phí!</span>
                             </h3>
 
                             <p class="text-xs sm:text-sm text-blue-100 leading-relaxed font-vietnam">
-                                Đăng ký nhận lộ trình học bổng tối ưu, dự toán chi phí minh bạch và nhận ngay cẩm nang 50+ trường đại học Hàn Quốc kèm bộ 50 câu hỏi phỏng vấn visa thực tế.
+                                Đăng ký nhận lộ trình học bổng tối ưu, dự toán chi phí minh bạch và <strong>nhận ngay Khóa học Online Tiếng Hàn (Mục tiêu đạt TOPIK 1)</strong> kèm trọn bộ cẩm nang 50+ trường &amp; 50 câu hỏi phỏng vấn visa thực tế.
                             </p>
                         </div>
 
@@ -2733,16 +2867,43 @@
                                     <input type="text" id="lm-notes" placeholder="VD: Sinh năm 2007, GPA 8.2, muốn tư vấn trường tại Seoul..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue">
                                 </div>
 
+                                <!-- Gift Course Promotion Option -->
+                                <div class="p-3 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300/90 rounded-xl">
+                                    <label class="flex items-start gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="lm-gift-course" checked class="mt-0.5 rounded text-brand-red focus:ring-brand-red w-4 h-4 cursor-pointer accent-brand-red shrink-0">
+                                        <div class="text-xs text-slate-800 leading-snug">
+                                            <span class="font-bold text-brand-red inline-flex items-center gap-1">
+                                                <i class="fas fa-gift"></i> TẶNG KÈM MIỄN PHÍ:
+                                            </span>
+                                            <strong class="text-slate-900">Khóa học Online Tiếng Hàn (Mục tiêu đạt TOPIK 1)</strong>
+                                            <span class="block text-[11px] text-amber-800 font-bold mt-0.5">
+                                                ⚡ Đăng ký ngay không bỏ lỡ – Suất học miễn phí chỉ giữ trong 30 phút!
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+
                                 <button type="submit" id="lm-submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-brand-red hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition duration-200 cursor-pointer">
                                     <i class="far fa-paper-plane"></i>
-                                    <span>ĐĂNG KÝ TƯ VẤN DU HỌC &amp; NHẬN CẨM NANG MIỄN PHÍ</span>
+                                    <span>ĐĂNG KÝ TƯ VẤN &amp; NHẬN KHÓA HỌC ONLINE TOPIK 1 MIỄN PHÍ</span>
                                     <i class="fas fa-arrow-right text-xs"></i>
                                 </button>
                                 
                                 <p class="text-center text-[11px] text-slate-500">KIPA cam kết bảo mật thông tin cá nhân và 0% phí phát sinh ngoài hợp đồng.</p>
                                 
-                                <div id="lm-success-msg" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs text-center font-medium">
-                                    🎉 <strong>Đăng ký thành công!</strong> KIPA đã ghi nhận và gửi cẩm nang đến bạn. Chuyên viên sẽ liên hệ qua SĐT/Zalo trong vòng 15 phút để hỗ trợ tư vấn 1:1 hoàn toàn miễn phí.
+                                <div id="lm-success-msg" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs text-center font-medium space-y-2">
+                                    <p class="font-bold text-sm text-emerald-800">
+                                        🎉 Đăng ký thành công! KIPA đã giữ suất học Online miễn phí cho bạn.
+                                    </p>
+                                    <p class="leading-relaxed">
+                                        Chuyên viên KIPA sẽ liên hệ qua SĐT/Zalo trong vòng 15 phút để hướng dẫn nhận tài liệu và kích hoạt tham gia lớp học Online tiếng Hàn chuẩn TOPIK 1 miễn phí.
+                                    </p>
+                                    <div class="pt-1">
+                                        <a href="https://zalo.me/g/ehkt1g0n2qjcbomdlgal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#0068FF] text-white font-bold text-xs shadow-sm hover:bg-[#0052cc] transition">
+                                            <i class="fab fa-telegram-plane"></i>
+                                            <span>Vào nhóm Zalo lớp học Online ngay</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -3073,6 +3234,61 @@
         });
     }
 
+    // Scroll to consultation with gift course pre-checked
+    function scrollToConsultationWithGift(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const giftBox = document.getElementById('lm-gift-course');
+        if (giftBox) giftBox.checked = true;
+        scrollToConsultation(e, 'Du học tiếng Hàn (D4-1)');
+    }
+
+    // 30-minute Realtime Countdown Timer (with persistent sessionStorage & auto-reset)
+    (function init30MinCountdown() {
+        const STORAGE_KEY = 'kipa_dh_timer_end_v2';
+        const DURATION = 30 * 60 * 1000; // 30 minutes
+        let endTime = parseInt(sessionStorage.getItem(STORAGE_KEY), 10);
+
+        if (!endTime || isNaN(endTime) || Date.now() >= endTime) {
+            endTime = Date.now() + DURATION;
+            sessionStorage.setItem(STORAGE_KEY, endTime.toString());
+        }
+
+        function tick() {
+            const now = Date.now();
+            let remaining = endTime - now;
+
+            if (remaining <= 0) {
+                endTime = Date.now() + DURATION;
+                sessionStorage.setItem(STORAGE_KEY, endTime.toString());
+                remaining = DURATION;
+            }
+
+            const totalSec = Math.floor(remaining / 1000);
+            const m = Math.floor(totalSec / 60);
+            const s = totalSec % 60;
+            const ms = Math.floor((remaining % 1000) / 10);
+
+            const mStr = m < 10 ? '0' + m : String(m);
+            const sStr = s < 10 ? '0' + s : String(s);
+            const msStr = ms < 10 ? '0' + ms : String(ms);
+
+            const elMin = document.getElementById('cd-minutes');
+            const elSec = document.getElementById('cd-seconds');
+            const elMs = document.getElementById('cd-millis');
+            const elFormMin = document.getElementById('form-cd-minutes');
+            const elFormSec = document.getElementById('form-cd-seconds');
+
+            if (elMin) elMin.textContent = mStr;
+            if (elSec) elSec.textContent = sStr;
+            if (elMs) elMs.textContent = msStr;
+            if (elFormMin) elFormMin.textContent = mStr;
+            if (elFormSec) elFormSec.textContent = sStr;
+        }
+
+        tick();
+        setInterval(tick, 50);
+    })();
+
     // Handle Lead Magnet / Full Section Consultation Form Submit
     function handleLeadMagnetSubmit(e) {
         e.preventDefault();
@@ -3081,6 +3297,7 @@
         const email = document.getElementById('lm-email')?.value.trim() || '';
         const program = document.getElementById('lm-program')?.value || 'Du học Hàn Quốc';
         const notesVal = document.getElementById('lm-notes')?.value.trim() || '';
+        const giftCourseChecked = document.getElementById('lm-gift-course')?.checked !== false;
         const btn = document.getElementById('lm-submit-btn');
         const msg = document.getElementById('lm-success-msg');
 
@@ -3094,7 +3311,14 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Đang gửi thông tin...</span>';
         }
 
-        const fullNotes = 'Đăng ký tư vấn du học 1:1 & nhận Cẩm nang 2026' + (notesVal ? ('. Ghi chú: ' + notesVal) : '');
+        let fullNotes = 'Đăng ký tư vấn du học 1:1 & nhận Cẩm nang 2026';
+        if (giftCourseChecked) {
+            fullNotes += ' | Đăng ký nhận Khóa học Online Tiếng Hàn miễn phí (Mục tiêu TOPIK 1)';
+        }
+        if (notesVal) {
+            fullNotes += '. Ghi chú: ' + notesVal;
+        }
+
         const payload = {
             form_type: 'duhoc_consultation',
             source_page: '/du-hoc-han-quoc/',
