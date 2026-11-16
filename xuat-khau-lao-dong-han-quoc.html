@@ -864,19 +864,19 @@
                             <!-- 3 Bullet Checklist với biểu tượng dấu tick vàng -->
                             <div class="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs sm:text-sm font-semibold text-white pt-1">
                                 <div class="flex items-center gap-2">
-                                    <span class="w-5 h-5 rounded-full bg-[#facc15] text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                    <span class="w-5 h-5 rounded-full bg-[#facc15] text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0" style="background-color: #facc15; color: #0f172a;">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <span>Thông tin rõ ràng</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="w-5 h-5 rounded-full bg-[#facc15] text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                    <span class="w-5 h-5 rounded-full bg-[#facc15] text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0" style="background-color: #facc15; color: #0f172a;">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <span>Lộ trình minh bạch</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="w-5 h-5 rounded-full bg-[#facc15] text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                    <span class="w-5 h-5 rounded-full bg-[#facc15] text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0" style="background-color: #facc15; color: #0f172a;">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <span>Tư vấn theo hồ sơ</span>
@@ -885,11 +885,11 @@
 
                             <!-- 2 Action Buttons -->
                             <div class="flex flex-wrap items-center gap-3 pt-3">
-                                <a href="#cac-chuong-trinh" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#facc15] hover:bg-[#eab308] text-slate-900 font-bold text-xs sm:text-sm shadow-md transition-all transform hover:-translate-y-0.5">
+                                <a href="#cac-chuong-trinh" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#facc15] hover:bg-[#eab308] text-slate-900 font-bold text-xs sm:text-sm shadow-md transition-all transform hover:-translate-y-0.5" style="background-color: #facc15; color: #0f172a;">
                                     <span>Tìm hiểu chương trình</span>
                                     <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </a>
-                                <a href="#dang-ky-tu-van" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-slate-50 text-[#0274BD] font-bold text-xs sm:text-sm shadow-md transition-all transform hover:-translate-y-0.5">
+                                <a href="#dang-ky-tu-van" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-slate-50 text-[#0274BD] font-bold text-xs sm:text-sm shadow-md transition-all transform hover:-translate-y-0.5" style="color: #0274BD;">
                                     <i class="fa-solid fa-headphones text-sm"></i>
                                     <span>Đăng ký tư vấn ngay</span>
                                 </a>
@@ -1518,69 +1518,55 @@
                                 </p>
                             </div>
 
-                            <!-- Grid Form Inputs + Clipboard Image -->
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
+                            <!-- Form Inputs -->
+                            <div class="space-y-2.5">
                                 
-                                <!-- 4 Dropdown Fields (sm:col-span-8) -->
-                                <div class="sm:col-span-8 space-y-2.5">
-                                    
-                                    <!-- Field 1: Độ tuổi -->
-                                    <div class="space-y-0.5">
-                                        <label for="eval-age" class="text-xs font-bold text-slate-700">Độ tuổi</label>
-                                        <select aria-label="Eval age" id="eval-age" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
-                                            <option value="">Chọn độ tuổi</option>
-                                            <option value="18-25">18 - 25 tuổi</option>
-                                            <option value="26-30">26 - 30 tuổi</option>
-                                            <option value="31-39">31 - 39 tuổi</option>
-                                            <option value="40+">Trên 39 tuổi</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Field 2: Trình độ học vấn -->
-                                    <div class="space-y-0.5">
-                                        <label for="eval-edu" class="text-xs font-bold text-slate-700">Trình độ học vấn</label>
-                                        <select aria-label="Eval edu" id="eval-edu" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
-                                            <option value="">Chọn trình độ</option>
-                                            <option value="thcs">Tốt nghiệp THCS (Cấp 2)</option>
-                                            <option value="thpt">Tốt nghiệp THPT (Cấp 3)</option>
-                                            <option value="trungcap_caodang">Trung cấp / Cao đẳng nghề kỹ thuật</option>
-                                            <option value="daihoc">Đại học chính quy trở lên</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Field 3: Trình độ tiếng Hàn -->
-                                    <div class="space-y-0.5">
-                                        <label for="eval-lang" class="text-xs font-bold text-slate-700">Trình độ tiếng Hàn</label>
-                                        <select aria-label="Eval lang" id="eval-lang" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
-                                            <option value="">Chọn trình độ</option>
-                                            <option value="chua_biet">Chưa biết tiếng Hàn (Học từ đầu)</option>
-                                            <option value="co_ban">Đang học cơ bản (Chưa thi chứng chỉ)</option>
-                                            <option value="eps_topik">Đã có chứng chỉ EPS-TOPIK</option>
-                                            <option value="topik_2_plus">Có chứng chỉ TOPIK 2, 3 trở lên</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Field 4: Kinh nghiệm làm việc -->
-                                    <div class="space-y-0.5">
-                                        <label for="eval-exp" class="text-xs font-bold text-slate-700">Kinh nghiệm làm việc</label>
-                                        <select aria-label="Eval exp" id="eval-exp" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
-                                            <option value="">Chọn kinh nghiệm</option>
-                                            <option value="none">Chưa có kinh nghiệm</option>
-                                            <option value="1_year">Dưới 1 năm kinh nghiệm</option>
-                                            <option value="1_3_year">1 - 3 năm kinh nghiệm</option>
-                                            <option value="3_plus">Trên 3 năm (có bảo hiểm / chứng nhận)</option>
-                                        </select>
-                                    </div>
-
+                                <!-- Field 1: Độ tuổi -->
+                                <div class="space-y-0.5">
+                                    <label for="eval-age" class="text-xs font-bold text-slate-700">Độ tuổi</label>
+                                    <select aria-label="Eval age" id="eval-age" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
+                                        <option value="">Chọn độ tuổi</option>
+                                        <option value="18-25">18 - 25 tuổi</option>
+                                        <option value="26-30">26 - 30 tuổi</option>
+                                        <option value="31-39">31 - 39 tuổi</option>
+                                        <option value="40+">Trên 39 tuổi</option>
+                                    </select>
                                 </div>
 
-                                <!-- Right Graphic: Clipboard checklist (sm:col-span-4) -->
-                                <div class="hidden sm:flex sm:col-span-4 justify-center items-center">
-                                    <div class="relative w-24 h-28 flex items-center justify-center p-1">
-                                        <img src="/assets/xuat-khau-lao-dong-han/clipboard_check.png" 
-                                             alt="Kiểm tra điều kiện xuất khẩu lao động" 
-                                             class="max-w-full max-h-full object-contain drop-shadow-md">
-                                    </div>
+                                <!-- Field 2: Trình độ học vấn -->
+                                <div class="space-y-0.5">
+                                    <label for="eval-edu" class="text-xs font-bold text-slate-700">Trình độ học vấn</label>
+                                    <select aria-label="Eval edu" id="eval-edu" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
+                                        <option value="">Chọn trình độ</option>
+                                        <option value="thcs">Tốt nghiệp THCS (Cấp 2)</option>
+                                        <option value="thpt">Tốt nghiệp THPT (Cấp 3)</option>
+                                        <option value="trungcap_caodang">Trung cấp / Cao đẳng nghề kỹ thuật</option>
+                                        <option value="daihoc">Đại học chính quy trở lên</option>
+                                    </select>
+                                </div>
+
+                                <!-- Field 3: Trình độ tiếng Hàn -->
+                                <div class="space-y-0.5">
+                                    <label for="eval-lang" class="text-xs font-bold text-slate-700">Trình độ tiếng Hàn</label>
+                                    <select aria-label="Eval lang" id="eval-lang" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
+                                        <option value="">Chọn trình độ</option>
+                                        <option value="chua_biet">Chưa biết tiếng Hàn (Học từ đầu)</option>
+                                        <option value="co_ban">Đang học cơ bản (Chưa thi chứng chỉ)</option>
+                                        <option value="eps_topik">Đã có chứng chỉ EPS-TOPIK</option>
+                                        <option value="topik_2_plus">Có chứng chỉ TOPIK 2, 3 trở lên</option>
+                                    </select>
+                                </div>
+
+                                <!-- Field 4: Kinh nghiệm làm việc -->
+                                <div class="space-y-0.5">
+                                    <label for="eval-exp" class="text-xs font-bold text-slate-700">Kinh nghiệm làm việc</label>
+                                    <select aria-label="Eval exp" id="eval-exp" class="w-full text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#0274BD] focus:bg-white transition">
+                                        <option value="">Chọn kinh nghiệm</option>
+                                        <option value="none">Chưa có kinh nghiệm</option>
+                                        <option value="1_year">Dưới 1 năm kinh nghiệm</option>
+                                        <option value="1_3_year">1 - 3 năm kinh nghiệm</option>
+                                        <option value="3_plus">Trên 3 năm (có bảo hiểm / chứng nhận)</option>
+                                    </select>
                                 </div>
 
                             </div>
