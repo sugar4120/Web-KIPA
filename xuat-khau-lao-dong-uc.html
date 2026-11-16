@@ -119,10 +119,14 @@
         .bg-brand-yellow { background-color: #FFF017 !important; }
         .bg-brand-navy { background-color: #081D36 !important; }
         .text-brand-navy { color: #081D36 !important; }
-        html { scroll-behavior: smooth; }
+        html, body {
+            scroll-behavior: smooth;
+            overflow-x: hidden !important;
+            max-width: 100vw;
+        }
     </style>
 </head>
-<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen">
+<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- SITE HEADER -->
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
@@ -864,7 +868,7 @@
                         <!-- Right Hero Visual: Hình ảnh công nhân KIPA + Nhà hát con sò Opera House & Cầu cảng Sydney Úc -->
                         <div class="lg:col-span-6 flex justify-center lg:justify-end">
                             <div class="relative w-full max-w-[550px] transform hover:scale-[1.01] transition-transform duration-300">
-                                <img src="/assets/xuat-khau-lao-dong-uc/hero_visual_worker.png" 
+                                <img src="/assets/xuat-khau-lao-dong-uc/hero_visual_worker.png?v=20261115-clean" 
                                      alt="Xuất khẩu lao động Úc cùng KIPA Việt Hàn - Làm việc tại Úc mở rộng cơ hội phát triển" 
                                      class="w-full h-auto object-contain rounded-2xl"
                                      loading="eager">
@@ -881,7 +885,7 @@
             <section class="relative -mt-6 sm:-mt-8 z-20 pb-8">
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
                     <div class="bg-white rounded-2xl border border-slate-200/80 shadow-md p-4 sm:p-5">
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="kipa-5-stat-grid grid grid-cols-2 sm:grid-cols-5 md:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
                             
                             <!-- Item 1: Đa dạng cơ hội việc làm -->
                             <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2">
@@ -928,7 +932,7 @@
                             </div>
 
                             <!-- Item 5: KIPA đồng hành từ vấn đến chuẩn bị -->
-                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2 col-span-2 md:col-span-1">
+                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2 col-span-2 sm:col-span-1 md:col-span-1">
                                 <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
                                     <i class="fa-solid fa-headset"></i>
                                 </div>
@@ -1052,8 +1056,8 @@
                         <!-- Card 1: Visa lao động có tay nghề -->
                         <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col group">
                             <div class="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-uc/card_tay_nghe_hd.jpg" 
-                                     alt="Visa lao động có tay nghề Úc" 
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_co_khi.jpg" 
+                                     alt="Visa lao động có tay nghề Úc - Kỹ thuật viên cơ khí chính xác" 
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute bottom-3 left-3 z-10 pointer-events-none">
                                     <span class="inline-flex items-center px-3.5 py-1 bg-[#FACC15] text-[#081D36] font-extrabold text-xs sm:text-[13px] rounded-full shadow-md font-vietnam tracking-tight">
@@ -1082,7 +1086,7 @@
                         <!-- Card 2: Visa lao động doanh nghiệp bảo lãnh -->
                         <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col group">
                             <div class="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-uc/card_doanh_nghiep_hd.jpg" 
+                                <img src="/assets/xuat-khau-lao-dong/real_market_au_worker.jpg" 
                                      alt="Visa lao động doanh nghiệp bảo lãnh Úc subclass 482" 
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute bottom-3 left-3 z-10 pointer-events-none">
@@ -1112,8 +1116,8 @@
                         <!-- Card 3: Các chương trình làm việc khác -->
                         <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col group">
                             <div class="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-uc/card_khac_hd.jpg" 
-                                     alt="Các chương trình làm việc nông nghiệp và thời vụ Úc" 
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_nganh_khac.jpg" 
+                                     alt="Các chương trình làm việc và dịch vụ kỹ thuật khác tại Úc" 
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute bottom-3 left-3 z-10 pointer-events-none">
                                     <span class="inline-flex items-center px-3.5 py-1 bg-[#FACC15] text-[#081D36] font-extrabold text-xs sm:text-[13px] rounded-full shadow-md font-vietnam tracking-tight">
@@ -1143,7 +1147,305 @@
                 </div>
             </section>
 
+            
             <!-- ========================================================
+                 SECTION 02.1: MA TRẬN SO SÁNH CÁC DIỆN VISA LÀM VIỆC TẠI ÚC
+                 (Độc quyền KIPA: Minh bạch 100% điều kiện, quyền lợi và cơ hội định cư PR)
+                 ======================================================== -->
+            <section class="py-10 bg-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-6">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0274BD] text-xs font-bold uppercase tracking-wider mb-2">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                                <span>MINH BẠCH PHÁP LÝ • BẢO VỆ NGƯỜI LAO ĐỘNG</span>
+                            </div>
+                            <h2 class="font-phudu text-xl sm:text-2xl font-bold text-brand-blue tracking-tight">
+                                SO SÁNH CHI TIẾT CÁC DIỆN VISA LÀM VIỆC TẠI ÚC
+                            </h2>
+                            <p class="text-xs sm:text-[13px] text-slate-600 mt-1 max-w-3xl">
+                                KIPA chỉ tư vấn các diện visa chính ngạch được Bộ Di trú Úc cấp phép. Hiểu rõ sự khác biệt giúp bạn lựa chọn đúng lộ trình, tránh xa các bẫy visa du lịch hoặc nông nghiệp ảo.
+                            </p>
+                        </div>
+                        <div class="shrink-0">
+                            <a href="#dang-ky-tu-van" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#EC1E1B] hover:bg-[#d61815] text-white text-xs font-bold shadow-xs hover:shadow-md transition-all">
+                                <i class="fa-solid fa-user-check"></i>
+                                <span>Tư vấn diện visa phù hợp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table Container -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs min-w-[760px]">
+                                <thead>
+                                    <tr class="bg-slate-50 border-b border-slate-200 text-slate-800">
+                                        <th class="py-3.5 px-4 font-phudu font-bold w-1/5 text-slate-900">Tiêu chí so sánh</th>
+                                        <th class="py-3.5 px-4 font-phudu font-bold w-1/5 bg-blue-50/70 text-[#0274BD] border-x border-blue-100">
+                                            <div class="flex items-center gap-1.5">
+                                                <i class="fa-solid fa-star text-amber-500"></i>
+                                                <span>Visa 482 (Skills in Demand)</span>
+                                            </div>
+                                            <div class="text-[10.5px] font-vietnam font-normal text-slate-500 mt-0.5">Doanh nghiệp bảo lãnh (Chính ngạch)</div>
+                                        </th>
+                                        <th class="py-3.5 px-4 font-phudu font-bold w-1/5 text-slate-800">
+                                            <div>Visa 407 (Training)</div>
+                                            <div class="text-[10.5px] font-vietnam font-normal text-slate-500 mt-0.5">Thực tập & Nâng cao tay nghề</div>
+                                        </th>
+                                        <th class="py-3.5 px-4 font-phudu font-bold w-1/5 text-slate-800">
+                                            <div>Visa 462 (Work & Holiday)</div>
+                                            <div class="text-[10.5px] font-vietnam font-normal text-slate-500 mt-0.5">Lao động kết hợp kỳ nghỉ</div>
+                                        </th>
+                                        <th class="py-3.5 px-4 font-phudu font-bold w-1/5 text-slate-800 bg-amber-50/50 border-l border-amber-100">
+                                            <div>Visa 491 / 186 (PR)</div>
+                                            <div class="text-[10.5px] font-vietnam font-normal text-amber-700 mt-0.5">Thường trú nhân Úc lâu dài</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-700">
+                                    <tr class="hover:bg-slate-50/40">
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-slate-50/50">Thời hạn visa</td>
+                                        <td class="py-3 px-4 font-bold text-[#0274BD] bg-blue-50/30 border-x border-blue-100">Từ 2 đến 4 năm (Gia hạn được)</td>
+                                        <td class="py-3 px-4">Tối đa 2 năm</td>
+                                        <td class="py-3 px-4">1 năm (Tối đa 3 năm nếu gia hạn)</td>
+                                        <td class="py-3 px-4 font-bold text-emerald-700 bg-amber-50/20 border-l border-amber-100">Vĩnh viễn (Thường trú nhân)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/40">
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-slate-50/50">Mức lương tối thiểu</td>
+                                        <td class="py-3 px-4 font-bold text-[#0274BD] bg-blue-50/30 border-x border-blue-100">
+                                            <span>AUD $73,150/năm (~1.23 tỷ VNĐ)</span>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Chuẩn mức lương TSMIT bắt buộc</div>
+                                        </td>
+                                        <td class="py-3 px-4">Theo lương thỏa thuận thực tập (~$50k - $65k AUD)</td>
+                                        <td class="py-3 px-4">Lương tối thiểu theo giờ ($24.10 AUD/h)</td>
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-amber-50/20 border-l border-amber-100">Lương công dân Úc ($75k - $120k+ AUD)</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/40">
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-slate-50/50">Yêu cầu tiếng Anh</td>
+                                        <td class="py-3 px-4 font-semibold text-slate-800 bg-blue-50/30 border-x border-blue-100">
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[11px]">PTE 36+ / IELTS 5.0</span>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">KIPA luyện thi cấp tốc 2 - 3 tháng</div>
+                                        </td>
+                                        <td class="py-3 px-4">PTE 30+ / IELTS 4.5</td>
+                                        <td class="py-3 px-4">PTE 30+ / IELTS 4.5</td>
+                                        <td class="py-3 px-4 font-semibold text-slate-800 bg-amber-50/20 border-l border-amber-100">PTE 50+ / IELTS 6.0</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/40">
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-slate-50/50">Bảo lãnh vợ/chồng & con</td>
+                                        <td class="py-3 px-4 font-bold text-emerald-700 bg-blue-50/30 border-x border-blue-100 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                            <span>Có – Vợ/chồng làm việc full-time</span>
+                                        </td>
+                                        <td class="py-3 px-4 text-slate-600">Được đi cùng (Bị giới hạn giờ làm)</td>
+                                        <td class="py-3 px-4 text-slate-500">Không được đi kèm người phụ thuộc</td>
+                                        <td class="py-3 px-4 font-bold text-emerald-700 bg-amber-50/20 border-l border-amber-100">
+                                            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                            <span>Cả gia đình nhận thẻ xanh PR</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/40">
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-slate-50/50">Cơ hội định cư lâu dài (PR)</td>
+                                        <td class="py-3 px-4 font-bold text-[#0274BD] bg-blue-50/30 border-x border-blue-100">
+                                            <span>RẤT CAO – Lộ trình chuyển tiếp PR 186 sau 2 năm</span>
+                                        </td>
+                                        <td class="py-3 px-4">Cần chuyển đổi sang Visa 482 trước</td>
+                                        <td class="py-3 px-4">Khó trực tiếp – Phải chuyển đổi visa</td>
+                                        <td class="py-3 px-4 font-bold text-emerald-700 bg-amber-50/20 border-l border-amber-100">Đã là thường trú nhân vĩnh viễn</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/40">
+                                        <td class="py-3 px-4 font-bold text-slate-900 bg-slate-50/50">Hỗ trợ từ KIPA Việt Hàn</td>
+                                        <td class="py-3 px-4 font-bold text-[#EC1E1B] bg-blue-50/30 border-x border-blue-100">
+                                            Trọn gói: Đào tạo PTE + Thẩm định TRA/VETASSESS + Kết nối chủ bảo lãnh Úc
+                                        </td>
+                                        <td class="py-3 px-4 text-slate-700">Đào tạo tiếng Anh + Kế hoạch thực tập</td>
+                                        <td class="py-3 px-4 text-slate-700">Hướng dẫn hồ sơ & Thư giới thiệu</td>
+                                        <td class="py-3 px-4 text-slate-700 bg-amber-50/20 border-l border-amber-100">Luật sư MARA trực tiếp đại diện hồ sơ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Advice Strip -->
+                    <div class="bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 rounded-2xl p-4 sm:p-5 border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[#0274BD] text-white flex items-center justify-center shrink-0 text-base shadow-xs">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                            <div class="text-xs text-slate-700">
+                                <strong class="text-slate-900 text-xs sm:text-sm">Lời khuyên từ Cố vấn Di trú KIPA:</strong> Nếu bạn có tay nghề và muốn vừa kiếm thu nhập cao, vừa có cơ hội định cư cho cả gia đình, diện <strong>Visa 482</strong> hoặc <strong>DAMA</strong> là con đường tối ưu và an toàn nhất hiện nay.
+                            </div>
+                        </div>
+                        <button type="button" onclick="preselectVisa('bao_lanh')" class="shrink-0 px-4 py-2 rounded-xl bg-[#0274BD] hover:bg-[#015891] text-white font-bold text-xs shadow-xs transition-colors">
+                            Đánh giá hồ sơ Visa 482
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+<!-- ========================================================
+     SECTION 02.2: LỘ TRÌNH ĐỊNH CƯ THƯỜNG TRÚ NHÂN (PR) & BẢO LÃNH CẢ GIA ĐÌNH
+     (Giá trị đột phá thuyết phục khách hàng - Khác biệt hoàn toàn so với đối thủ)
+     ======================================================== -->
+<section class="py-12 bg-gradient-to-b from-white via-blue-50/40 to-white border-b border-slate-200/80">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-extrabold uppercase tracking-wider rounded-full">
+                <i class="fa-solid fa-house-chimney-user text-emerald-600"></i>
+                <span>Tương Lai Vững Bền Cùng Gia Đình</span>
+            </span>
+            <h2 class="font-phudu text-2xl sm:text-3xl lg:text-[32px] font-bold text-brand-blue tracking-tight leading-tight">
+                LỘ TRÌNH TỪ LAO ĐỘNG HỢP PHÁP ĐẾN ĐỊNH CƯ (PR)<br>
+                <span class="text-[#081D36]">&amp; BẢO LÃNH </span><span class="text-brand-red">CẢ GIA ĐÌNH TẠI ÚC</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Khác biệt lớn nhất khi làm việc tại Úc: Bạn không chỉ có thu nhập cao mà còn có cơ hội nhận <strong>Thẻ Xanh Thường Trú Nhân (PR)</strong>, bảo lãnh vợ/chồng con sang học tập và sinh sống trọn đời.
+            </p>
+        </div>
+
+        <!-- 3-Phase Interactive Pathway Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+            
+            <!-- Phase 1: Năm 1 - 2 -->
+            <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between">
+                <div class="absolute -top-3.5 left-6 bg-[#0274BD] text-white px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm">
+                    Giai đoạn 1 • Năm 1 - 2
+                </div>
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0274BD] flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-plane-arrival"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu font-bold text-base text-slate-900">Làm Việc &amp; Đón Gia Đình</h3>
+                            <p class="text-[11px] text-slate-500 font-medium">Visa 482 / 407 (Chính ngạch)</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 shrink-0"></i>
+                            <span>Lương cam kết từ <strong>$70,000+ AUD/năm</strong> (khoảng 1.15 tỷ VNĐ/năm theo chuẩn TSMIT).</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 shrink-0"></i>
+                            <span><strong>Bảo lãnh vợ/chồng đi cùng:</strong> Được cấp quyền đi làm việc Full-time hợp pháp toàn bộ thời gian.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 shrink-0"></i>
+                            <span><strong>Con nhỏ theo cùng:</strong> Được nhập học tại hệ thống trường công lập của chính phủ Úc.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-[#0274BD] font-bold">
+                    <span>Mục tiêu: Ổn định công việc &amp; sinh sống</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Phase 2: Năm 2 - 3 -->
+            <div class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-[#0274BD] shadow-md hover:shadow-lg transition-shadow relative flex flex-col justify-between">
+                <div class="absolute -top-3.5 left-6 bg-[#EC1E1B] text-white px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm">
+                    Giai đoạn 2 • Năm 2 - 3
+                </div>
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#EC1E1B] flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu font-bold text-base text-slate-900">Tích Lũy Kinh Nghiệm &amp; PTE</h3>
+                            <p class="text-[11px] text-slate-500 font-medium">Thẩm định hồ sơ chuyển tiếp PR</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 shrink-0"></i>
+                            <span>Đạt đủ 2 năm kinh nghiệm làm việc thực tế cùng chủ bảo lãnh tại Úc.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 shrink-0"></i>
+                            <span>KIPA hỗ trợ khóa luyện thi <strong>PTE 50+</strong> (tương đương IELTS 6.0) trực tuyến linh hoạt buổi tối.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 shrink-0"></i>
+                            <span>Doanh nghiệp Úc ký hợp đồng dài hạn và lập hồ sơ đề cử chuyển tiếp Thường trú nhân (Nomination).</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-brand-red font-bold">
+                    <span>Mục tiêu: Đạt chuẩn điều kiện PR</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Phase 3: Từ năm 3 trở đi -->
+            <div class="bg-gradient-to-br from-white to-amber-50/50 rounded-3xl p-6 sm:p-7 border border-amber-200 shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between">
+                <div class="absolute -top-3.5 left-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm">
+                    Giai đoạn 3 • Từ năm 3+
+                </div>
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-phudu font-bold text-base text-slate-900">Nhận Thẻ Xanh Thường Trú (PR)</h3>
+                            <p class="text-[11px] text-slate-500 font-medium">Visa 186 ENS hoặc Visa 191</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-star text-amber-500 text-xs mt-0.5 shrink-0"></i>
+                            <span><strong>Hưởng 100% Medicare:</strong> Khám chữa bệnh miễn phí cho cả gia đình tại các bệnh viện công của Úc.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-star text-amber-500 text-xs mt-0.5 shrink-0"></i>
+                            <span><strong>Con cái học miễn phí 100%</strong> từ tiểu học đến hết phổ thông trung học lớp 12.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-star text-amber-500 text-xs mt-0.5 shrink-0"></i>
+                            <span>Được vay mua nhà với lãi suất ưu đãi công dân, tự do sinh sống tại bất kỳ bang nào ở Úc.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-star text-amber-500 text-xs mt-0.5 shrink-0"></i>
+                            <span>Đủ điều kiện thi <strong>nhập quốc tịch Úc</strong> sau 12 tháng giữ thẻ PR.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-6 pt-4 border-t border-amber-200/60 flex items-center justify-between text-[11px] text-amber-800 font-bold">
+                    <span>Định cư trọn vẹn tại Úc</span>
+                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Banner cam kết lộ trình KIPA -->
+        <div class="mt-8 bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3 text-center sm:text-left">
+                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-shield-halved text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Cam Kết Đồng Hành Định Cư Trọn Đời</h4>
+                    <p class="text-[11px] text-slate-500">KIPA Việt Hàn phối hợp với Luật sư Di trú Úc (MARA) xây dựng lộ trình pháp lý chuẩn xác ngay từ ngày đầu làm hồ sơ.</p>
+                </div>
+            </div>
+            <a href="#dang-ky-tu-van" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0274BD] hover:bg-[#014d80] text-white text-xs font-bold transition-all shadow-xs whitespace-nowrap shrink-0">
+                <i class="fa-solid fa-user-check"></i>
+                <span>Thẩm định lộ trình gia đình miễn phí</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================
                  ROW: SECTION 03 & SECTION 04 (Kiểm tra điều kiện & Điều kiện tham gia)
                  ======================================================== -->
             <section class="py-10 bg-white border-b border-slate-200/80">
@@ -1313,7 +1615,177 @@
                 </div>
             </section>
 
+            
             <!-- ========================================================
+                 SECTION 04.1: BẢNG DỰ TOÁN THU NHẬP RÒNG & TÍCH LŨY 2 - 4 NĂM TẠI ÚC
+                 (Interactive Australia Income & Savings Calculator)
+                 ======================================================== -->
+            <section id="du-toan-thu-nhap" class="py-12 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200/80 scroll-mt-20">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto space-y-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span>MINH BẠCH TÀI CHÍNH • DỰ TOÁN THỰC TẾ 100%</span>
+                        </div>
+                        <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-blue tracking-tight">
+                            BẢNG TÍNH THU NHẬP THỰC TẾ & TÍCH LŨY TẠI ÚC
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Mức lương tối thiểu của Úc hiện đạt <strong class="text-slate-800">$24.10 AUD/giờ (~400.000đ/giờ)</strong>, cao nhất trong tất cả các quốc gia phát triển. Hãy tùy chọn ngành nghề để xem mức tiền bạn có thể tích lũy gửi về nhà sau khi trừ mọi chi phí sinh hoạt!
+                        </p>
+                    </div>
+
+                    <!-- Calculator Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        
+                        <!-- Col 1: Bộ Điều Khiển Tương Tác (5 cols) -->
+                        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-5">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                                <h3 class="font-phudu font-bold text-sm sm:text-base text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-sliders text-[#0274BD]"></i>
+                                    <span>Tùy chỉnh thông số</span>
+                                </h3>
+                                <span class="text-[11px] text-slate-500 font-mono">Tỷ giá: 1 AUD ≈ 16.800 đ</span>
+                            </div>
+
+                            <!-- Ngành nghề -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Ngành nghề dự kiến làm việc tại Úc</label>
+                                <select aria-label="Australia calculator job" id="calc-job" onchange="calculateAustraliaIncome()" class="form-select-kipa w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]">
+                                    <option value="co_khi" selected>Cơ khí – Thợ hàn 6G / Chế tạo kim loại ($38.50 AUD/h)</option>
+                                    <option value="xay_dung">Xây dựng – Thợ mộc / Ốp lát / Sơn ($40.00 AUD/h)</option>
+                                    <option value="dau_bep">Đầu bếp Á – Âu / Làm bánh ($36.00 AUD/h)</option>
+                                    <option value="nong_nghiep">Nông nghiệp công nghệ cao / Quản lý trang trại ($35.00 AUD/h)</option>
+                                    <option value="dieu_duong">Chăm sóc người cao tuổi – Aged Care ($35.50 AUD/h)</option>
+                                    <option value="nha_hang">Nhà hàng – Khách sạn – Dịch vụ ($34.00 AUD/h)</option>
+                                </select>
+                            </div>
+
+                            <!-- Số giờ làm thêm mỗi tuần -->
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <label class="text-xs font-bold text-slate-700">Giờ làm thêm (Overtime) mỗi tuần</label>
+                                    <span id="calc-ot-label" class="text-xs font-bold text-[#0274BD]">5 giờ / tuần (Lương x1.5)</span>
+                                </div>
+                                <input aria-label="Overtime slider" type="range" id="calc-ot" min="0" max="15" step="5" value="5" oninput="calculateAustraliaIncome()" class="w-full accent-[#0274BD] cursor-pointer">
+                                <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1 mt-1">
+                                    <span>0 giờ</span>
+                                    <span>5 giờ</span>
+                                    <span>10 giờ</span>
+                                    <span>15 giờ (Tối đa)</span>
+                                </div>
+                            </div>
+
+                            <!-- Khu vực làm việc -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Khu vực làm việc tại Úc</label>
+                                <div class="grid grid-cols-2 gap-2.5">
+                                    <label class="flex items-center gap-2 p-3 rounded-xl border border-blue-200 bg-blue-50/50 cursor-pointer hover:border-[#0274BD]">
+                                        <input type="radio" name="calc-region" value="regional" checked onchange="calculateAustraliaIncome()" class="text-[#0274BD] focus:ring-[#0274BD]">
+                                        <div class="text-left">
+                                            <div class="text-xs font-bold text-slate-800">Regional Area</div>
+                                            <div class="text-[10px] text-slate-500">Thuê nhà rẻ, cộng điểm PR</div>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:border-[#0274BD]">
+                                        <input type="radio" name="calc-region" value="metro" onchange="calculateAustraliaIncome()" class="text-[#0274BD] focus:ring-[#0274BD]">
+                                        <div class="text-left">
+                                            <div class="text-xs font-bold text-slate-800">Metro City</div>
+                                            <div class="text-[10px] text-slate-500">Sydney, Melbourne</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Chế độ bảo hiểm Superannuation note -->
+                            <div class="bg-amber-50 rounded-xl p-3 border border-amber-200/80 text-[11px] text-amber-800 flex items-start gap-2">
+                                <i class="fa-solid fa-piggy-bank text-amber-600 text-sm mt-0.5 shrink-0"></i>
+                                <span><strong>Quyền lợi độc quyền tại Úc:</strong> Doanh nghiệp bắt buộc đóng thêm <strong>11.5% Quỹ hưu trí (Superannuation)</strong> ngoài lương. Bạn sẽ được rút trọn gói khoản tiền này (DASP) khi hoàn thành hợp đồng về nước!</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Col 2: Kết Quả Phân Tích Thu Nhập & Tích Lũy (7 cols) -->
+                        <div class="lg:col-span-7 bg-gradient-to-br from-[#081D36] via-[#0d2847] to-[#0274BD] rounded-3xl p-6 sm:p-8 text-white shadow-xl space-y-6">
+                            
+                            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+                                <div>
+                                    <span class="text-xs font-bold text-amber-300 uppercase tracking-wider">KẾT QUẢ DỰ BÁO TÀI CHÍNH</span>
+                                    <h4 class="font-phudu text-lg sm:text-xl font-bold text-white mt-0.5" id="calc-job-title">Thợ hàn 6G / Cơ khí chế tạo</h4>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>Hợp đồng chuẩn 38h/tuần + Tăng ca</span>
+                                </span>
+                            </div>
+
+                            <!-- 3 Main Highlight Metric Cards -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 text-center">
+                                    <div class="text-[11px] text-slate-300 uppercase tracking-wider">Lương gộp hàng tháng</div>
+                                    <div id="res-gross-salary" class="font-phudu font-bold text-xl sm:text-2xl text-white mt-1">78.500.000 đ</div>
+                                    <div id="res-gross-aud" class="text-[11px] text-amber-300 font-mono mt-0.5">~ $4,670 AUD</div>
+                                </div>
+                                <div class="bg-emerald-500/20 backdrop-blur-md rounded-2xl p-4 border border-emerald-400/30 text-center">
+                                    <div class="text-[11px] text-emerald-200 uppercase tracking-wider">Thực nhận gửi về/tháng</div>
+                                    <div id="res-net-saving" class="font-phudu font-bold text-xl sm:text-2xl text-emerald-300 mt-1">54.200.000 đ</div>
+                                    <div id="res-net-aud" class="text-[11px] text-emerald-100 font-mono mt-0.5">~ $3,225 AUD</div>
+                                </div>
+                                <div class="bg-amber-500/20 backdrop-blur-md rounded-2xl p-4 border border-amber-400/30 text-center">
+                                    <div class="text-[11px] text-amber-200 uppercase tracking-wider">Tích lũy trọn 3 năm</div>
+                                    <div id="res-total-3y" class="font-phudu font-bold text-xl sm:text-2xl text-amber-300 mt-1">1.950.000.000 đ</div>
+                                    <div class="text-[10px] text-amber-100 mt-0.5">Đã bao gồm hoàn Super</div>
+                                </div>
+                            </div>
+
+                            <!-- Chi tiết khấu trừ & Chi phí sinh hoạt -->
+                            <div class="bg-slate-900/60 rounded-2xl p-4 sm:p-5 border border-white/10 space-y-2.5 text-xs">
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Lương cơ bản (38 giờ/tuần):</span>
+                                    <span id="detail-base-pay" class="font-mono font-bold text-white">65.200.000 đ ($3,880 AUD)</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Tiền làm thêm (Overtime x1.5):</span>
+                                    <span id="detail-ot-pay" class="font-mono font-bold text-emerald-400">+ 13.300.000 đ ($790 AUD)</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Thuế thu nhập cá nhân Úc (ATO tạm tính):</span>
+                                    <span id="detail-tax" class="font-mono text-rose-400">- 9.800.000 đ</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-300">
+                                    <span>Chi phí thuê phòng + Ăn uống sinh hoạt:</span>
+                                    <span id="detail-living" class="font-mono text-rose-400">- 14.500.000 đ</span>
+                                </div>
+                                <div class="border-t border-white/10 pt-2 flex justify-between items-center font-bold text-amber-300">
+                                    <span class="flex items-center gap-1.5">
+                                        <i class="fa-solid fa-gift"></i>
+                                        <span>Quỹ hưu trí Superannuation tích lũy thêm:</span>
+                                    </span>
+                                    <span id="detail-super" class="font-mono">+ 9.000.000 đ/tháng</span>
+                                </div>
+                            </div>
+
+                            <!-- CTA Button -->
+                            <div class="pt-1 flex flex-col sm:flex-row items-center gap-3">
+                                <button type="button" onclick="applyIncomeCalculationToForm()" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#EC1E1B] hover:bg-[#d61815] text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                    <span>Nhận bảng dự toán chi tiết & tư vấn hồ sơ</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
+                                <a href="https://zalo.me/0368513865" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs transition-colors">
+                                    <i class="fa-solid fa-comment-dots"></i>
+                                    <span>Chat Zalo tư vấn</span>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+<!-- ========================================================
                  ROW: SECTION 05 & SECTION 06 (Chi phí tham khảo & Ngành nghề tiêu biểu)
                  ======================================================== -->
             <section class="py-10 bg-[#f8fafc] border-b border-slate-200/80">
@@ -1428,7 +1900,7 @@
                                 <!-- 1. Xây dựng - kỹ thuật -->
                                 <div class="kipa-feature-card bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xs group flex flex-col">
                                     <div class="h-28 overflow-hidden bg-slate-100">
-                                        <img src="/assets/xuat-khau-lao-dong-uc/sec6_xay_dung.png" 
+                                        <img src="/assets/xuat-khau-lao-dong/real_ind_xay_dung.jpg" 
                                              alt="Ngành Xây dựng kỹ thuật tại Úc" 
                                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                     </div>
@@ -1440,7 +1912,7 @@
                                 <!-- 2. Nhà hàng - khách sạn -->
                                 <div class="kipa-feature-card bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xs group flex flex-col">
                                     <div class="h-28 overflow-hidden bg-slate-100">
-                                        <img src="/assets/xuat-khau-lao-dong-uc/sec6_nha_hang.png" 
+                                        <img src="/assets/xuat-khau-lao-dong/real_ind_nha_hang_ks.jpg" 
                                              alt="Ngành Nhà hàng khách sạn ẩm thực tại Úc" 
                                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                     </div>
@@ -1452,7 +1924,7 @@
                                 <!-- 3. Nông nghiệp -->
                                 <div class="kipa-feature-card bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xs group flex flex-col">
                                     <div class="h-28 overflow-hidden bg-slate-100">
-                                        <img src="/assets/xuat-khau-lao-dong-uc/sec6_nong_nghiep.png" 
+                                        <img src="/assets/xuat-khau-lao-dong/real_ind_nong_nghiep.jpg" 
                                              alt="Ngành Nông nghiệp trang trại tại Úc" 
                                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                     </div>
@@ -1464,7 +1936,7 @@
                                 <!-- 4. Chăm sóc - dịch vụ -->
                                 <div class="kipa-feature-card bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xs group flex flex-col">
                                     <div class="h-28 overflow-hidden bg-slate-100">
-                                        <img src="/assets/xuat-khau-lao-dong-uc/sec6_cham_soc.png" 
+                                        <img src="/assets/xuat-khau-lao-dong/real_ind_cham_soc.jpg" 
                                              alt="Ngành Chăm sóc dịch vụ y tế tại Úc" 
                                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                     </div>
@@ -1542,7 +2014,341 @@
                 </div>
             </section>
 
+            
             <!-- ========================================================
+                 SECTION 06.1: SÀN ĐƠN HÀNG LÀM VIỆC TẠI ÚC MỚI NHẤT
+                 (Kết nối trực tiếp doanh nghiệp & chủ bảo lãnh Úc)
+                 ======================================================== -->
+            <section id="san-don-hang-uc" class="py-12 bg-white border-b border-slate-200/80 scroll-mt-20">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#EC1E1B] text-xs font-bold uppercase tracking-wider mb-2">
+                                <span class="w-2 h-2 rounded-full bg-[#EC1E1B] animate-ping"></span>
+                                <span>TUYỂN DỤNG CHÍNH NGẠCH • TIẾP NHẬN HỒ SƠ 2026</span>
+                            </div>
+                            <h2 class="font-phudu text-xl sm:text-2xl font-bold text-brand-blue tracking-tight">
+                                ĐƠN HÀNG LÀM VIỆC TẠI ÚC ĐANG TUYỂN DỤNG
+                            </h2>
+                            <p class="text-xs sm:text-[13px] text-slate-600 mt-1 max-w-3xl">
+                                Tất cả đơn hàng đều có hợp đồng lao động trực tiếp với chủ sử dụng tại Úc, bảo lãnh visa 482 / DAMA hợp pháp và đảm bảo mức lương theo chuẩn TSMIT.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold">
+                                <i class="fa-solid fa-briefcase text-[#0274BD]"></i>
+                                <span>23 vị trí đang mở</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 4 Job Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        
+                        <!-- Đơn hàng 1: Thợ hàn 6G / Cơ khí -->
+                        <div class="bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] text-[11px] font-bold">Visa 482 / DAMA</span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 6 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Thợ hàn công nghệ 6G & Cơ khí
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Perth, Tây Úc (WA)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">$75k - $88k AUD/năm</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 65 - 75 triệu/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Tiếng Anh:</span>
+                                        <span class="font-semibold text-slate-700">PTE 36+ (KIPA đào tạo)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Phúc lợi:</span>
+                                        <span class="font-semibold text-emerald-600">Bao 1 tháng KTX + OT x1.5</span>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="applyJobOrder('Thợ hàn 6G & Cơ khí - Perth')" class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0274BD] hover:bg-[#015891] text-white font-bold text-xs shadow-xs transition-colors">
+                                    <span>Ứng tuyển ngay</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 2: Đầu bếp Á - Âu -->
+                        <div class="bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] text-[11px] font-bold">Visa 482 / 407</span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 4 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Đầu bếp Á – Âu / Commercial Cook
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Melbourne, Victoria (VIC)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">$73,150 - $82k AUD</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 62 - 70 triệu/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Tiếng Anh:</span>
+                                        <span class="font-semibold text-slate-700">PTE 36+ / IELTS 5.0</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Phúc lợi:</span>
+                                        <span class="font-semibold text-emerald-600">Bao ăn ca + Xét bảo lãnh PR</span>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="applyJobOrder('Đầu bếp Á – Âu - Melbourne')" class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0274BD] hover:bg-[#015891] text-white font-bold text-xs shadow-xs transition-colors">
+                                    <span>Ứng tuyển ngay</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 3: Thợ mộc & Hoàn thiện xây dựng -->
+                        <div class="bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] text-[11px] font-bold">Visa 482 TSS</span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 5 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Thợ mộc & Hoàn thiện xây dựng
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Brisbane & Gold Coast (QLD)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">$78k - $92k AUD/năm</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 68 - 80 triệu/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Tiếng Anh:</span>
+                                        <span class="font-semibold text-slate-700">PTE 36+ (Có lớp buổi tối)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Phúc lợi:</span>
+                                        <span class="font-semibold text-emerald-600">Bảo hiểm SafeWork + Xe đi lại</span>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="applyJobOrder('Thợ mộc & Xây dựng - Brisbane')" class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0274BD] hover:bg-[#015891] text-white font-bold text-xs shadow-xs transition-colors">
+                                    <span>Ứng tuyển ngay</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 4: Chăm sóc người cao tuổi Aged Care -->
+                        <div class="bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">Aged Care Agreement</span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 8 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Chăm sóc sức khỏe – Aged Care
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Adelaide, Nam Úc (SA)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">$70k - $76k AUD/năm</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 60 - 66 triệu/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Tiếng Anh:</span>
+                                        <span class="font-semibold text-slate-700">PTE 36+ / IELTS 5.0</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Phúc lợi:</span>
+                                        <span class="font-semibold text-emerald-600">Ưu tiên xét PR Thường trú</span>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="applyJobOrder('Chăm sóc người cao tuổi Aged Care - Adelaide')" class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0274BD] hover:bg-[#015891] text-white font-bold text-xs shadow-xs transition-colors">
+                                    <span>Ứng tuyển ngay</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+<!-- ========================================================
+     SECTION 06.2: ĐẶC QUYỀN KHU VỰC VÙNG REGIONAL AUSTRALIA
+     (Đòn bẩy đột phá: Lương cao, chi phí rẻ, ưu tiên xét duyệt Visa thần tốc & Điểm cộng PR)
+     ======================================================== -->
+<section class="py-12 bg-white border-b border-slate-200/80">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
+                    <span class="font-phudu text-xs font-bold text-brand-blue uppercase tracking-wider">CHIẾN LƯỢC THÔNG MINH</span>
+                </div>
+                <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-blue tracking-tight">
+                    TẠI SAO NÊN CHỌN KHU VỰC <span class="text-brand-red">REGIONAL AUSTRALIA?</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 max-w-2xl">
+                    Chính phủ Úc đang tập trung nguồn lực phát triển các vùng ngoài Sydney và Melbourne với các ưu đãi vượt trội về thời gian duyệt visa, phụ cấp nhà ở và điểm cộng định cư.
+                </p>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 px-4 flex items-center gap-3 shrink-0">
+                <i class="fa-solid fa-bolt text-amber-500 text-xl"></i>
+                <div class="text-xs">
+                    <span class="font-bold text-amber-900 block">Xét duyệt Visa nhanh gấp 2 lần</span>
+                    <span class="text-amber-700 text-[11px]">Chỉ từ 4 - 8 tuần tại các bang Regional</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Regional Hubs Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            
+            <!-- Hub 1: Western Australia (Perth) -->
+            <div class="bg-gradient-to-b from-slate-50 to-white rounded-3xl p-5 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] font-bold text-[10px] uppercase">Tây Úc • WA</span>
+                        <span class="text-xs font-extrabold text-emerald-600">$85K - $110K/năm</span>
+                    </div>
+                    <h3 class="font-phudu font-bold text-base text-slate-900">Perth &amp; Vùng Mỏ Tây Úc</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Thủ phủ khoáng sản và kỹ thuật nặng. Mức lương cho thợ hàn 6G, cơ khí và lái máy công trình cao hàng đầu nước Úc.
+                    </p>
+                    <div class="pt-1 space-y-1.5 text-[11px] text-slate-500">
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Ngành hot: Cơ khí, Hàn, Xây dựng</div>
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Hỗ trợ nhà ở công trường</div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-[#0274BD] font-bold">
+                    <span>Học viên KIPA: 45+ người</span>
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </div>
+            </div>
+
+            <!-- Hub 2: South Australia (Adelaide) -->
+            <div class="bg-gradient-to-b from-slate-50 to-white rounded-3xl p-5 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-full bg-red-100 text-[#EC1E1B] font-bold text-[10px] uppercase">Nam Úc • SA</span>
+                        <span class="text-xs font-extrabold text-emerald-600">$75K - $95K/năm</span>
+                    </div>
+                    <h3 class="font-phudu font-bold text-base text-slate-900">Adelaide &amp; Vùng Nông Sản</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Thành phố có chi phí sinh hoạt dễ chịu nhất nước Úc (rẻ hơn Sydney 40%). Chính sách bảo lãnh mở rộng cho Điều dưỡng và Đầu bếp.
+                    </p>
+                    <div class="pt-1 space-y-1.5 text-[11px] text-slate-500">
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Ngành hot: Chăm sóc người cao tuổi, Bếp</div>
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Cộng 15 điểm ưu tiên Visa 491</div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-[#0274BD] font-bold">
+                    <span>Học viên KIPA: 30+ người</span>
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </div>
+            </div>
+
+            <!-- Hub 3: Queensland (Brisbane Suburbs & Cairns) -->
+            <div class="bg-gradient-to-b from-slate-50 to-white rounded-3xl p-5 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[10px] uppercase">Queensland • QLD</span>
+                        <span class="text-xs font-extrabold text-emerald-600">$70K - $90K/năm</span>
+                    </div>
+                    <h3 class="font-phudu font-bold text-base text-slate-900">Queensland Nắng Ấm</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Khí hậu nhiệt đới tương đồng Việt Nam. Nổi bật với trang trại nông nghiệp công nghệ cao, khách sạn du lịch và chế biến thịt bò.
+                    </p>
+                    <div class="pt-1 space-y-1.5 text-[11px] text-slate-500">
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Ngành hot: Nông nghiệp, Chế biến thịt, Mộc</div>
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Dễ thích nghi thời tiết</div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-[#0274BD] font-bold">
+                    <span>Học viên KIPA: 50+ người</span>
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </div>
+            </div>
+
+            <!-- Hub 4: Northern Territory & Tasmania -->
+            <div class="bg-gradient-to-b from-slate-50 to-white rounded-3xl p-5 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px] uppercase">Bắc Úc &amp; TAS</span>
+                        <span class="text-xs font-extrabold text-emerald-600">$80K - $105K/năm</span>
+                    </div>
+                    <h3 class="font-phudu font-bold text-base text-slate-900">Darwin &amp; Hobart (DAMA)</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Áp dụng thỏa thuận DAMA đặc biệt: Hạ chuẩn tiếng Anh và hạ độ tuổi xét duyệt, hỗ trợ tối đa cho lao động tay nghề phổ thông.
+                    </p>
+                    <div class="pt-1 space-y-1.5 text-[11px] text-slate-500">
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Miễn giảm chuẩn tiếng Anh (PTE 30)</div>
+                        <div class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Lộ trình chuyển PR ngắn nhất (3 năm)</div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-[#0274BD] font-bold">
+                    <span>Học viên KIPA: 25+ người</span>
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================
                  ROW: SECTION 07 & SECTION 08 (Lộ trình KIPA & Hồ sơ cần chuẩn bị)
                  ======================================================== -->
             <section id="lo-trinh-tham-gia" class="py-10 bg-white border-b border-slate-200/80">
@@ -1716,7 +2522,261 @@
                 </div>
             </section>
 
+            
             <!-- ========================================================
+                 SECTION 08.1: KHIÊN NIỀM TIN KIPA "5 KHÔNG & 5 ĐỒNG HÀNH" & VĂN PHÒNG TẠI ÚC
+                 (Bảo chứng an tâm tuyệt đối cho người lao động và gia đình)
+                 ======================================================== -->
+            <section class="py-12 bg-slate-50 border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto space-y-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-100 text-[#0274BD] text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>TIÊU CHUẨN BẢO VỆ PHÁP LÝ TOÀN DIỆN</span>
+                        </div>
+                        <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-blue tracking-tight">
+                            CAM KẾT "5 KHÔNG & 5 ĐỒNG HÀNH" TỪ KIPA VIỆT HÀN
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            KIPA đặt quyền lợi và tương lai của người lao động lên hàng đầu, cam kết làm việc chính ngạch theo luật pháp của Nhà nước Việt Nam và Bộ Di trú Úc.
+                        </p>
+                    </div>
+
+                    <!-- 2 Columns: 5 KHÔNG vs 5 ĐỒNG HÀNH -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Box 1: 5 KHÔNG (Đỏ) -->
+                        <div class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-red-200 shadow-sm space-y-4">
+                            <div class="flex items-center gap-3 border-b border-red-100 pb-3">
+                                <div class="w-10 h-10 rounded-2xl bg-red-100 text-[#EC1E1B] flex items-center justify-center text-lg shrink-0">
+                                    <i class="fa-solid fa-ban"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 uppercase">5 KHÔNG TUYỆT ĐỐI</h3>
+                                    <p class="text-[11px] text-slate-500">Nguyên tắc sắt bảo vệ sự an toàn của ứng viên</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG tư vấn visa du lịch (600) hoặc visa nông nghiệp ảo</strong> để lao động chui bất hợp pháp.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG phát sinh chi phí ngoài hợp đồng</strong> – Mọi khoản thu đều có phiếu thu, hóa đơn minh bạch.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG giữ giấy tờ tùy thân gốc</strong> (Hộ chiếu, CCCD, bằng cấp) của người lao động.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG qua trung gian môi giới cò mồi</strong> – Làm việc trực tiếp với doanh nghiệp & Luật sư di trú Úc.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG bỏ rơi người lao động sau khi bay</strong> – Đồng hành và hỗ trợ xử lý mọi vướng mắc tại Úc.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Box 2: 5 ĐỒNG HÀNH (Xanh) -->
+                        <div class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-blue-200 shadow-sm space-y-4">
+                            <div class="flex items-center gap-3 border-b border-blue-100 pb-3">
+                                <div class="w-10 h-10 rounded-2xl bg-blue-100 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 uppercase">5 ĐỒNG HÀNH TRỌN VẸN</h3>
+                                    <p class="text-[11px] text-slate-500">Đồng hành từ ngày đầu học tiếng đến định cư Úc</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đào tạo tiếng Anh PTE cấp tốc cam kết đầu ra</strong> – Luyện kỹ năng phỏng vấn tuyển dụng 1:1.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Hỗ trợ thẩm định tay nghề (Skill Assessment)</strong> chuẩn chỉnh theo quy định của TRA/VETASSESS.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đón tại sân bay quốc tế Sydney/Melbourne</strong> – Bố trí chỗ ở tiện nghi, mở thẻ ngân hàng & TFN thuế.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Bảo vệ quyền lợi lao động</strong> theo chuẩn mực của Fair Work Ombudsman (Lương tối thiểu, giờ làm, hưu trí).</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Hỗ trợ thủ tục bảo lãnh vợ/chồng & con cái</strong> sang Úc và lộ trình nộp hồ sơ Thường trú nhân (PR).</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Australia Representative Office Card -->
+                    <div class="bg-gradient-to-r from-[#081D36] via-[#0d2847] to-[#0274BD] rounded-3xl p-6 sm:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="space-y-2 text-center md:text-left">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-earth-oceania"></i>
+                                <span>VĂN PHÒNG ĐẠI DIỆN KIPA TẠI AUSTRALIA</span>
+                            </div>
+                            <h3 class="font-phudu text-lg sm:text-xl font-bold text-white">
+                                KIPA Sydney Office – Điểm Tựa Trực Tiếp Tại Đất Nước Úc
+                            </h3>
+                            <p class="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                                Địa chỉ: Level 12, George St, Sydney NSW 2000, Australia.<br>
+                                Hotline hỗ trợ khẩn cấp 24/7 cho lao động tại Úc: <strong class="text-amber-300">+61 2 8000 6868</strong> / Zalo: <strong class="text-white">036 851 3865</strong>.
+                            </p>
+                        </div>
+                        <div class="shrink-0">
+                            <a href="tel:0368513865" class="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-xs sm:text-sm shadow-md transition-all">
+                                <i class="fa-solid fa-phone-volume"></i>
+                                <span>Hotline tư vấn di trú</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+<!-- ========================================================
+     SECTION 08.2: BẢO VỆ NGƯỜI LAO ĐỘNG - CẢNH BÁO BẪY LỪA ĐẢO & GÓI KIPA SETTLE-IN 360
+     (Vũ khí thuyết phục cốt lõi: Đập tan nỗi sợ mất tiền, khẳng định pháp lý tuyệt đối)
+     ======================================================== -->
+<section class="py-12 bg-slate-900 text-white relative overflow-hidden">
+    <!-- Subtle Background Glow -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#0274BD]/30 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-[#EC1E1B]/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- LEFT: CẢNH BÁO 4 BẪY LỪA ĐẢO PHỔ BIẾN HIỆN NAY (lg:col-span-7) -->
+            <div class="lg:col-span-7 space-y-6">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-500/20 border border-red-500/30 text-red-300 text-[11px] font-bold uppercase tracking-wider rounded-full">
+                        <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                        <span>CẢNH BÁO AN TOÀN TỪ KIPA VIỆT HÀN</span>
+                    </span>
+                    <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-white tracking-tight mt-2">
+                        4 CẠM BẪY LỪA ĐẢO ĐI ÚC<br>
+                        <span class="text-amber-400">&amp; SỰ THẬT BẠN CẦN BIẾT</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-2">
+                        Hiện nay rất nhiều cá nhân/môi giới lợi dụng ước mơ đi Úc để lừa đảo hàng trăm triệu đồng. KIPA công khai sự thật để bảo vệ bạn và gia đình:
+                    </p>
+                </div>
+
+                <div class="space-y-3.5">
+                    
+                    <!-- Trap 1 -->
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-red-400/40 transition-colors">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+                                1
+                            </div>
+                            <div class="space-y-1">
+                                <h4 class="font-bold text-xs sm:text-sm text-red-300">Bẫy "Đi Visa Du Lịch rồi ở lại đổi sang Visa Lao Động"</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    <strong class="text-white">Sự thật:</strong> Visa du lịch Úc (subclass 600) mang điều khoản 8503 (No Further Stay) – <strong>Tuyệt đối không được chuyển đổi visa</strong> trong nước Úc. Làm chui sẽ bị bắt giữ, trục xuất và cấm nhập cảnh vĩnh viễn. KIPA chỉ làm visa lao động chính thức cấp từ Việt Nam.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trap 2 -->
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-red-400/40 transition-colors">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+                                2
+                            </div>
+                            <div class="space-y-1">
+                                <h4 class="font-bold text-xs sm:text-sm text-red-300">Bẫy "Visa Nông Nghiệp không cần tiếng Anh, bao đỗ 100%"</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    <strong class="text-white">Sự thật:</strong> Mọi visa lao động Úc chính ngạch (482, 407, 462) <strong>đều bắt buộc phải có chứng chỉ tiếng Anh tối thiểu (PTE 30+ hoặc IELTS 4.5+)</strong>. Bất kỳ ai nói "không cần học tiếng Anh" đều là lừa đảo. KIPA có lò luyện thi PTE cam kết đầu ra cho học viên.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trap 3 -->
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-red-400/40 transition-colors">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+                                3
+                            </div>
+                            <div class="space-y-1">
+                                <h4 class="font-bold text-xs sm:text-sm text-red-300">Bẫy "Đóng cọc lớn khi chưa có Hợp đồng &amp; Thư bảo lãnh"</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    <strong class="text-white">Sự thật:</strong> Quy trình chuẩn tại KIPA: Chỉ đóng phí sau khi ký hợp đồng dịch vụ pháp lý minh bạch; học viên được cầm xem Thư bảo lãnh (Nomination Approval) chính thức từ Bộ Nội vụ Úc trước khi xuất cảnh.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT: GÓI ĐÓN TIẾP & HỖ TRỢ KIPA SETTLE-IN 360 TẠI ÚC (lg:col-span-5) -->
+            <div class="lg:col-span-5 bg-gradient-to-br from-blue-900/60 via-[#0274BD]/40 to-slate-800/80 rounded-3xl p-6 sm:p-7 border border-blue-400/30 flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <span>ĐỘC QUYỀN KIPA TẠI NƯỚC ÚC</span>
+                    </div>
+                    <h3 class="font-phudu text-xl sm:text-2xl font-bold text-white leading-snug">
+                        Gói Hỗ Trợ Ổn Định<br>
+                        <span class="text-amber-400">"KIPA Settle-in 360"</span>
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Bạn không bao giờ phải cô đơn khi đặt chân đến nước Úc. Đội ngũ đại diện KIPA tại Sydney, Perth và Melbourne sẽ trực tiếp đồng hành:
+                    </p>
+
+                    <!-- 5 Bước Đón Tiếp -->
+                    <div class="space-y-3 pt-1 text-xs text-slate-200">
+                        <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                            <span class="w-7 h-7 rounded-lg bg-blue-500/30 text-blue-300 flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                            <span><strong>Đón tại sân bay Úc:</strong> Xe riêng đón về nơi lưu trú an toàn đã thuê trước.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                            <span class="w-7 h-7 rounded-lg bg-blue-500/30 text-blue-300 flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                            <span><strong>Đăng ký TFN &amp; Ngân hàng:</strong> Mở mã số thuế, tài khoản ngân hàng Úc và SIM 4G trong 48h.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                            <span class="w-7 h-7 rounded-lg bg-blue-500/30 text-blue-300 flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                            <span><strong>Kích hoạt bảo hiểm y tế:</strong> Đảm bảo thẻ bảo hiểm khám chữa bệnh hiệu lực ngay lập tức.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                            <span class="w-7 h-7 rounded-lg bg-blue-500/30 text-blue-300 flex items-center justify-center text-xs font-bold shrink-0">4</span>
+                            <span><strong>Đồng hành ngày đầu đi làm:</strong> Cán bộ KIPA dẫn đến tận doanh nghiệp và làm việc cùng quản lý.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-xl border border-white/5">
+                            <span class="w-7 h-7 rounded-lg bg-blue-500/30 text-blue-300 flex items-center justify-center text-xs font-bold shrink-0">5</span>
+                            <span><strong>Hotline bảo vệ quyền lợi 24/7:</strong> Can thiệp pháp lý nếu có tranh chấp về tiền lương và bảo hiểm.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <a href="#dang-ky-tu-van" class="w-full py-3 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-xs sm:text-sm text-center shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Đăng ký tham gia chương trình chính ngạch</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================
                  ROW: SECTION 09 (FAQ) & SECTION 10 (ĐÀO TẠO TIẾNG ANH & CAM KẾT VÀNG)
                  ======================================================== -->
             <section class="py-10 bg-[#f8fafc] border-b border-slate-200/80">
@@ -1899,7 +2959,104 @@
                 </div>
             </section>
 
+            
             <!-- ========================================================
+                 SECTION 10.1: CÂU CHUYỆN HỌC VIÊN KIPA ĐANG LÀM VIỆC TẠI ÚC
+                 (Bằng chứng xã hội thực tế, gia tăng niềm tin và tỷ lệ đăng ký)
+                 ======================================================== -->
+            <section class="py-12 bg-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto space-y-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0274BD] text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <span>NGƯỜI THẬT • VIỆC THẬT • THÀNH CÔNG THẬT</span>
+                        </div>
+                        <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-blue tracking-tight">
+                            HỌC VIÊN KIPA CHIA SẺ VỀ CUỘC SỐNG VÀ THU NHẬP TẠI ÚC
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Lắng nghe cảm nhận chân thực từ những người lao động đã vượt qua rào cản tiếng Anh, được KIPA hỗ trợ hồ sơ và hiện đang có cuộc sống ổn định, thu nhập vững vàng tại Úc.
+                        </p>
+                    </div>
+
+                    <!-- 3 Testimonial Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Story 1: Thợ cơ khí Perth -->
+                        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-700 italic leading-relaxed">
+                                    "Tôi 31 tuổi, trước ở Hải Phòng làm xưởng cơ khí lương 12 triệu. Nhờ thầy cô KIPA luyện thi PTE cấp tốc trong 2 tháng rưỡi và hướng dẫn hồ sơ tay nghề TRA. Hiện tại ở Perth, thu nhập ròng sau thuế và tiền phòng là hơn 4.200 AUD/tháng (gần 70 triệu). Tháng tới tôi đang làm thủ tục bảo lãnh vợ con sang!"
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200/80 flex items-center gap-3">
+                                <img src="/assets/xuat-khau-lao-dong/real_market_au_worker.jpg" alt="Anh Đặng Hoàng Long - Thợ cơ khí Úc" class="w-12 h-12 rounded-full object-cover border-2 border-[#0274BD]">
+                                <div>
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Anh Đặng Hoàng Long</div>
+                                    <div class="text-[11px] text-slate-500">Quê Hải Phòng • Thợ hàn 6G tại Perth (Visa 482)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Story 2: Aged Care Adelaide -->
+                        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-700 italic leading-relaxed">
+                                    "Đi Úc ngành chăm sóc sức khỏe người già thực sự là quyết định đúng đắn nhất đời mình. Môi trường tại Adelaide rất văn minh, lương mỗi tuần 1.350 AUD, chủ lo bảo hiểm và đóng 11.5% hưu trí đều đặn. KIPA theo sát từ lúc mình chưa biết chữ tiếng Anh nào đến tận lúc đón tại sân bay."
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200/80 flex items-center gap-3">
+                                <img src="/assets/cau-chuyen-hoc-vien/story-du-hoc-uc.jpg" alt="Chị Nguyễn Thị Thu Trang - Aged Care Úc" class="w-12 h-12 rounded-full object-cover border-2 border-emerald-600">
+                                <div>
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Chị Nguyễn Thị Thu Trang</div>
+                                    <div class="text-[11px] text-slate-500">Quê Nghệ An • Aged Care tại Adelaide (SA)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Story 3: Đầu bếp Melbourne -->
+                        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-700 italic leading-relaxed">
+                                    "Thị trường Úc thẩm định hồ sơ rất gắt gao. Nhờ sự hỗ trợ của KIPA về chứng chỉ tiếng Anh và phỏng vấn trực tiếp với chủ nhà hàng bên Melbourne nên hồ sơ ra visa rất nhanh. Sau hơn 1 năm làm việc, tôi đã được chủ cam kết bảo lãnh diện thường trú nhân PR 186."
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200/80 flex items-center gap-3">
+                                <img src="/assets/tin-tuc/student-quang-minh.jpg" alt="Anh Trần Minh Tuấn - Đầu bếp Melbourne" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500">
+                                <div>
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Anh Trần Minh Tuấn</div>
+                                    <div class="text-[11px] text-slate-500">Quê Hà Nội • Đầu bếp tại Melbourne (Victoria)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+<!-- ========================================================
                  SECTION: GỘP CTA BANNER & FORM ĐĂNG KÝ TƯ VẤN XUẤT KHẨU LAO ĐỘNG ÚC
                  (Thiết kế 2 cột hiện đại, chuyển đổi cao chuẩn thương hiệu KIPA)
                  ======================================================== -->
@@ -1915,13 +3072,6 @@
                             <!-- CỘT TRÁI: KHỐI CTA XANH SẴN SÀNG TÌM HIỂU CƠ HỘI (lg:col-span-5) -->
                             <div class="lg:col-span-5 p-6 sm:p-8 lg:p-10 text-white flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10">
                                 
-                                <!-- Background Illustration: Cầu cảng và nhà hát Opera Sydney -->
-                                <div class="absolute right-0 bottom-0 w-64 sm:w-80 h-auto opacity-20 pointer-events-none select-none">
-                                    <img src="/assets/xuat-khau-lao-dong-uc/cta_sydney_bridge.png" 
-                                         alt="Cầu cảng và nhà hát Opera Sydney" 
-                                         class="w-full h-auto object-contain">
-                                </div>
-
                                 <div class="relative z-10 space-y-4">
                                     <!-- Badge -->
                                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-[11px] font-bold uppercase tracking-wider rounded-full">
@@ -2002,6 +3152,30 @@
                                 <div id="lead-form-alert" class="hidden mb-4 p-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all"></div>
 
                                 <!-- Main Form -->
+                                
+                                <!-- Exclusive Online Registration Gift Box -->
+                                <div class="mb-4 bg-gradient-to-r from-amber-500/15 via-red-500/10 to-amber-500/15 border border-amber-400/40 rounded-2xl p-3.5 space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full">
+                                            <i class="fa-solid fa-gift text-red-500"></i>
+                                            <span>ƯU ĐÃI ĐĂNG KÝ HÔM NAY</span>
+                                        </span>
+                                        <span class="text-[11px] font-bold text-red-600 flex items-center gap-1">
+                                            <i class="fa-solid fa-bolt"></i> Phản hồi trong 15 phút
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11.5px] text-slate-700 font-medium">
+                                        <div class="flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
+                                            <span>Tặng Khóa học cấp tốc PTE 3.000.000đ</span>
+                                        </div>
+                                        <div class="flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
+                                            <span>Tặng Cẩm nang Việc làm Úc 2026</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <form id="xkld-lead-form" onsubmit="handleXkldLeadSubmit(event)" class="space-y-3.5">
                                     <!-- Hidden context fields for Lead CMS -->
                                     <input aria-label="Source page" type="hidden" name="source_page" value="XKLĐ Úc - KIPA Việt Hàn">
@@ -2105,10 +3279,10 @@
             <div class="flex items-center justify-between p-3 bg-slate-900 text-white">
                 <div class="flex items-center gap-2">
                     <i class="fa-brands fa-youtube text-red-500 text-lg"></i>
-                    <span class="text-xs font-bold text-slate-200">Trải nghiệm môi trường làm việc & cuộc sống tại Úc</span>
+                    <span class="text-xs font-bold text-slate-200">KIPA Việt Hàn – Đến là bay</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="https://youtu.be/1zehiW1ufag?si=1njalm5E6jaGNLrE" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-300 hover:text-white hover:underline flex items-center gap-1.5 transition-colors bg-white/10 px-2.5 py-1 rounded-md">
+                    <a href="https://youtu.be/CGz_FpIwjNk" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-300 hover:text-white hover:underline flex items-center gap-1.5 transition-colors bg-white/10 px-2.5 py-1 rounded-md">
                         <span>Mở YouTube</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                     </a>
@@ -2118,7 +3292,7 @@
                 </div>
             </div>
             <div class="aspect-video w-full bg-black flex items-center justify-center">
-                <iframe id="video-frame" class="w-full h-full" src="" title="Video làm việc tại Úc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="video-frame" class="w-full h-full" src="" title="KIPA Việt Hàn – Đến là bay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -2127,6 +3301,140 @@
          PAGE INTERACTION JAVASCRIPT
          ======================================================== -->
     <script>
+        
+        // Australian Income & Savings Calculator
+        function calculateAustraliaIncome() {
+            const jobSelect = document.getElementById('calc-job');
+            if (!jobSelect) return;
+            
+            const job = jobSelect.value;
+            const otInput = document.getElementById('calc-ot');
+            const otHours = otInput ? parseInt(otInput.value, 10) : 5;
+            const otLabel = document.getElementById('calc-ot-label');
+            if (otLabel) {
+                otLabel.innerText = otHours === 0 ? '0 giờ / tuần (Không tăng ca)' : `${otHours} giờ / tuần (Lương x1.5)`;
+            }
+
+            const region = document.querySelector('input[name="calc-region"]:checked')?.value || 'regional';
+
+            // Rates in AUD per hour
+            const baseRates = {
+                'co_khi': { rate: 38.5, title: 'Thợ hàn 6G / Cơ khí chế tạo' },
+                'xay_dung': { rate: 40.0, title: 'Thợ mộc / Hoàn thiện xây dựng' },
+                'dau_bep': { rate: 36.0, title: 'Đầu bếp Á – Âu / Làm bánh' },
+                'nong_nghiep': { rate: 35.0, title: 'Nông nghiệp công nghệ cao' },
+                'dieu_duong': { rate: 35.5, title: 'Chăm sóc người cao tuổi (Aged Care)' },
+                'nha_hang': { rate: 34.0, title: 'Nhà hàng – Khách sạn – Dịch vụ' }
+            };
+
+            const jobData = baseRates[job] || baseRates['co_khi'];
+            const hourlyRate = jobData.rate;
+            const rateVND = 16800; // 1 AUD = 16,800 VND
+
+            // Weekly calculations (38h base + OT at 1.5x)
+            const weeklyBase = 38 * hourlyRate;
+            const weeklyOT = otHours * hourlyRate * 1.5;
+            const weeklyTotal = weeklyBase + weeklyOT;
+
+            // Monthly calculations (approx 4.33 weeks per month)
+            const monthlyGrossAUD = weeklyTotal * 4.33;
+            const monthlyGrossVND = monthlyGrossAUD * rateVND;
+
+            // Base and OT monthly breakdown
+            const monthlyBaseVND = weeklyBase * 4.33 * rateVND;
+            const monthlyOTVND = weeklyOT * 4.33 * rateVND;
+
+            // Estimated ATO Tax (approx 12-14% effective rate)
+            const taxAUD = monthlyGrossAUD * 0.13;
+            const taxVND = taxAUD * rateVND;
+
+            // Superannuation (+11.5% paid by employer on top)
+            const superAUD = monthlyGrossAUD * 0.115;
+            const superVND = superAUD * rateVND;
+
+            // Living costs (regional vs metro)
+            const livingCostVND = region === 'regional' ? 14500000 : 19000000;
+
+            // Net Take-home savings sent to Vietnam
+            const netSavingVND = Math.max(0, monthlyGrossVND - taxVND - livingCostVND);
+            const netSavingAUD = netSavingVND / rateVND;
+
+            // Total 3-year savings + DASP Superannuation refund upon departure
+            const total3yVND = (netSavingVND * 36) + (superVND * 36 * 0.65); // approx after DASP tax
+
+            // Update UI
+            const fmt = (num) => Math.round(num).toLocaleString('vi-VN') + ' đ';
+            const fmtAUD = (num) => '~ $' + Math.round(num).toLocaleString('en-US') + ' AUD';
+
+            const jobTitleEl = document.getElementById('calc-job-title');
+            if (jobTitleEl) jobTitleEl.innerText = jobData.title;
+
+            const resGrossSalary = document.getElementById('res-gross-salary');
+            if (resGrossSalary) resGrossSalary.innerText = fmt(monthlyGrossVND);
+
+            const resGrossAud = document.getElementById('res-gross-aud');
+            if (resGrossAud) resGrossAud.innerText = fmtAUD(monthlyGrossAUD);
+
+            const resNetSaving = document.getElementById('res-net-saving');
+            if (resNetSaving) resNetSaving.innerText = fmt(netSavingVND);
+
+            const resNetAud = document.getElementById('res-net-aud');
+            if (resNetAud) resNetAud.innerText = fmtAUD(netSavingAUD);
+
+            const resTotal3y = document.getElementById('res-total-3y');
+            if (resTotal3y) resTotal3y.innerText = fmt(total3yVND);
+
+            const dBase = document.getElementById('detail-base-pay');
+            if (dBase) dBase.innerText = `${fmt(monthlyBaseVND)} (${fmtAUD(weeklyBase * 4.33)})`;
+
+            const dOT = document.getElementById('detail-ot-pay');
+            if (dOT) dOT.innerText = `+ ${fmt(monthlyOTVND)} (${fmtAUD(weeklyOT * 4.33)})`;
+
+            const dTax = document.getElementById('detail-tax');
+            if (dTax) dTax.innerText = `- ${fmt(taxVND)}`;
+
+            const dLiving = document.getElementById('detail-living');
+            if (dLiving) dLiving.innerText = `- ${fmt(livingCostVND)}`;
+
+            const dSuper = document.getElementById('detail-super');
+            if (dSuper) dSuper.innerText = `+ ${fmt(superVND)}/tháng`;
+        }
+
+        function applyIncomeCalculationToForm() {
+            const jobSelect = document.getElementById('calc-job');
+            const jobTitle = jobSelect ? jobSelect.options[jobSelect.selectedIndex].text : '';
+            const ctaSection = document.getElementById('dang-ky-tu-van');
+            const noteTextarea = document.querySelector('#xkld-lead-form textarea[name="note"]');
+            
+            if (noteTextarea) {
+                noteTextarea.value = `Muốn nhận bảng dự toán chi tiết ngành: ${jobTitle}. Đề nghị tư vấn lộ trình làm việc tại Úc.`;
+            }
+            if (ctaSection) {
+                ctaSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function applyJobOrder(jobName) {
+            const ctaSection = document.getElementById('dang-ky-tu-van');
+            const noteTextarea = document.querySelector('#xkld-lead-form textarea[name="note"]');
+            const programSelect = document.getElementById('cta-program-select');
+            
+            if (programSelect) {
+                programSelect.value = "Visa doanh nghiệp bảo lãnh (482)";
+            }
+            if (noteTextarea) {
+                noteTextarea.value = `Quan tâm ứng tuyển đơn hàng: ${jobName}. Xin hướng dẫn quy trình phỏng vấn và nộp hồ sơ.`;
+            }
+            if (ctaSection) {
+                ctaSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Run calculator on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateAustraliaIncome();
+        });
+
         // Toggle FAQ Accordion
         function toggleFaq(button) {
             const parent = button.closest('.xkld-faq-item');
@@ -2248,7 +3556,7 @@
         function openVideoModal() {
             const modal = document.getElementById('video-modal');
             const frame = document.getElementById('video-frame');
-            frame.src = "https://www.youtube.com/embed/1zehiW1ufag?autoplay=1";
+            frame.src = "https://www.youtube.com/embed/CGz_FpIwjNk?autoplay=1";
             modal.classList.remove('hidden');
         }
 

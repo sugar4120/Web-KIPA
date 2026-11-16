@@ -419,10 +419,14 @@ def render_full_html(cfg, body_content, header_html, footer_html):
         .bg-brand-yellow {{ background-color: #FFF017 !important; }}
         .bg-brand-navy {{ background-color: #081D36 !important; }}
         .text-brand-navy {{ color: #081D36 !important; }}
-        html {{ scroll-behavior: smooth; }}
+        html, body {{
+            scroll-behavior: smooth;
+            overflow-x: hidden !important;
+            max-width: 100vw;
+        }}
     </style>
 </head>
-<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen">
+<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- SITE HEADER -->
     {header_html}

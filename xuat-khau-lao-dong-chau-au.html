@@ -119,10 +119,14 @@
         .bg-brand-yellow { background-color: #FFF017 !important; }
         .bg-brand-navy { background-color: #081D36 !important; }
         .text-brand-navy { color: #081D36 !important; }
-        html { scroll-behavior: smooth; }
+        html, body {
+            scroll-behavior: smooth;
+            overflow-x: hidden !important;
+            max-width: 100vw;
+        }
     </style>
 </head>
-<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen">
+<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- SITE HEADER -->
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
@@ -795,7 +799,7 @@
          ======================================================== -->
     
 
-    <main class="flex-grow">
+    <main class="flex-grow overflow-x-hidden">
         <div id="kipa-xkld-chau-au" class="w-full">
 
             <!-- ========================================================
@@ -836,9 +840,9 @@
 
                             <!-- Main Title: Xuất khẩu lao động Châu Âu cùng KIPA Việt Hàn -->
                             <div class="space-y-1">
-                                <h1 class="text-3xl sm:text-4xl lg:text-[44px] font-black tracking-tight leading-[1.18] text-[#0153A8]">
-                                    Xuất khẩu lao động<br>
-                                    Châu Âu <span class="text-[#081D36]">cùng </span><span class="text-[#EC1E1B]">KIPA Việt Hàn</span>
+                                <h1 class="font-phudu text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight leading-[1.18]">
+                                    <span class="text-[#0274BD]">Xuất khẩu lao động Châu Âu</span><br>
+                                    <span class="text-[#081D36]">cùng </span><span class="text-[#EC1E1B]">KIPA Việt Hàn</span>
                                 </h1>
                             </div>
 
@@ -869,7 +873,7 @@
                         <!-- Right Hero Visual: Hình ảnh công nhân KIPA + Tháp Eiffel, Big Ben, Đấu trường Colosseum & Cờ EU -->
                         <div class="lg:col-span-6 flex justify-center lg:justify-end">
                             <div class="relative w-full max-w-[550px] transform hover:scale-[1.01] transition-transform duration-300">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/hero_visual_worker.png" 
+                                <img src="/assets/xuat-khau-lao-dong-chau-au/hero_visual_worker.png?v=20261116-clean" 
                                      alt="Xuất khẩu lao động Châu Âu cùng KIPA Việt Hàn - Mở rộng cơ hội phát triển" 
                                      class="w-full h-auto object-contain rounded-2xl"
                                      loading="eager">
@@ -886,59 +890,59 @@
             <section class="relative -mt-6 sm:-mt-8 z-20 pb-8">
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
                     <div class="bg-white rounded-2xl border border-slate-200/80 shadow-md p-4 sm:p-5">
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="kipa-5-stat-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 divide-y sm:divide-y-0 lg:divide-x divide-slate-100">
                             
                             <!-- Item 1: Đa dạng quốc gia tuyển dụng -->
-                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2">
-                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0153A8] flex items-center justify-center text-lg shrink-0">
+                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 sm:pt-0 lg:px-2">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
                                     <i class="fa-solid fa-globe"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Đa dạng</div>
+                                    <div class="font-phudu font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Đa dạng</div>
                                     <div class="text-[11px] sm:text-xs text-slate-500">quốc gia tuyển dụng</div>
                                 </div>
                             </div>
 
                             <!-- Item 2: Rõ ràng hợp đồng minh bạch -->
-                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2">
-                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0153A8] flex items-center justify-center text-lg shrink-0">
+                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 sm:pt-0 lg:px-2">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
                                     <i class="fa-solid fa-file-contract"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Rõ ràng</div>
+                                    <div class="font-phudu font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Rõ ràng</div>
                                     <div class="text-[11px] sm:text-xs text-slate-500">hợp đồng minh bạch</div>
                                 </div>
                             </div>
 
                             <!-- Item 3: Chi phí công khai -->
-                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2">
-                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0153A8] flex items-center justify-center text-lg shrink-0">
+                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 sm:pt-0 lg:px-2">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
                                     <i class="fa-solid fa-coins"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Chi phí</div>
-                                    <div class="text-[11px] sm:text-xs text-slate-500">công khai</div>
+                                    <div class="font-phudu font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Chi phí</div>
+                                    <div class="text-[11px] sm:text-xs text-slate-500">công khai minh bạch</div>
                                 </div>
                             </div>
 
                             <!-- Item 4: Lộ trình rõ ràng -->
-                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2">
-                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0153A8] flex items-center justify-center text-lg shrink-0">
+                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 sm:pt-0 lg:px-2">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
                                     <i class="fa-solid fa-route"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Lộ trình</div>
-                                    <div class="text-[11px] sm:text-xs text-slate-500">rõ ràng</div>
+                                    <div class="font-phudu font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">Lộ trình</div>
+                                    <div class="text-[11px] sm:text-xs text-slate-500">rõ ràng, an tâm</div>
                                 </div>
                             </div>
 
                             <!-- Item 5: KIPA đồng hành từ tư vấn đến xuất cảnh -->
-                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 md:pt-0 md:px-2 col-span-2 md:col-span-1">
-                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0153A8] flex items-center justify-center text-lg shrink-0">
+                            <div class="flex items-center gap-3 sm:gap-3.5 pt-2 sm:pt-0 lg:px-2 col-span-2 sm:col-span-1 lg:col-span-1">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
                                     <i class="fa-solid fa-headset"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">KIPA đồng hành</div>
+                                    <div class="font-phudu font-bold text-xs sm:text-[14px] text-slate-800 leading-tight">KIPA đồng hành</div>
                                     <div class="text-[11px] sm:text-xs text-slate-500">từ tư vấn đến xuất cảnh</div>
                                 </div>
                             </div>
@@ -958,8 +962,8 @@
                         <!-- Col 1: Video Thumbnail Châu Âu & Nhà máy hiện đại -->
                         <div class="lg:col-span-4">
                             <div class="relative rounded-2xl overflow-hidden shadow-sm group cursor-pointer border border-slate-100" onclick="openVideoModal()">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/sec1_video_thumb.png" 
-                                     alt="Video giới thiệu cơ hội làm việc và định cư tại Châu Âu" 
+                                <img src="/assets/xuat-khau-lao-dong-chau-au/sec1_video_thumb_hd.jpg?v=20261116-v2" 
+                                     alt="Video KIPA VIỆT HÀN – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế" 
                                      class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                                     <div class="w-12 h-12 rounded-full bg-white/90 text-[#0153A8] shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
@@ -974,11 +978,12 @@
 
                         <!-- Col 2: Nội dung Tổng quan -->
                         <div class="lg:col-span-4 space-y-3">
-                            <div class="text-xs font-bold text-[#0153A8] uppercase tracking-wider">
-                                01. TỔNG QUAN
+                            <div class="text-xs font-bold text-[#EC1E1B] uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="w-1.5 h-3.5 bg-[#EC1E1B] rounded-full inline-block"></span>
+                                <span>01. TỔNG QUAN</span>
                             </div>
-                            <h2 class="text-xl sm:text-2xl font-black text-[#081D36] tracking-tight">
-                                Tổng quan về Xuất khẩu lao động Châu Âu
+                            <h2 class="font-phudu text-xl sm:text-2xl font-bold text-brand-blue tracking-tight">
+                                Tổng quan về Xuất khẩu lao động <span class="text-[#081D36]">Châu Âu</span>
                             </h2>
                             <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed text-justify">
                                 Là hình thức người lao động Việt Nam làm việc tại các quốc gia Châu Âu theo hợp đồng hợp pháp được Chính phủ phê chuẩn.
@@ -1047,7 +1052,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
-                            <h2 class="text-lg sm:text-xl font-extrabold text-[#081D36] tracking-tight">
+                            <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
                                 02. KHÁM PHÁ CÁC QUỐC GIA LÀM VIỆC TẠI CHÂU ÂU
                             </h2>
                         </div>
@@ -1061,19 +1066,31 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
                         
                         <!-- 1. Cộng hòa Liên bang Đức -->
-                        <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col">
-                            <div class="relative w-full h-40 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/card_duc.png" 
-                                     alt="Làm việc tại CHLB Đức" 
-                                     class="w-full h-full object-cover">
+                        <div class="group kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col transition-all">
+                            <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_co_khi.jpg" 
+                                     alt="Lao động cơ khí kỹ thuật tại CHLB Đức" 
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                        <span class="text-sm">🇩🇪</span> CHLB Đức
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 bg-blue-600/90 backdrop-blur-xs text-white rounded-full text-[11px] font-semibold shadow-xs">
+                                        Cơ khí & Kỹ thuật
+                                    </span>
+                                </div>
                             </div>
                             <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
                                 <div>
-                                    <h3 class="font-extrabold text-sm sm:text-base text-[#081D36] leading-snug">
+                                    <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] group-hover:text-brand-blue leading-snug transition-colors">
                                         Cộng hòa Liên bang Đức
                                     </h3>
                                     <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                        Nhu cầu nhân lực lớn, đa dạng ngành nghề và chế độ đãi ngộ hàng đầu Châu Âu.
+                                        Nhu cầu nhân lực lớn trong cơ khí, điều dưỡng, chế tạo và dịch vụ; chế độ đãi ngộ hàng đầu khối EU.
                                     </p>
                                 </div>
                                 <div class="pt-1">
@@ -1086,19 +1103,31 @@
                         </div>
 
                         <!-- 2. Ba Lan -->
-                        <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col">
-                            <div class="relative w-full h-40 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/card_ba_lan.png" 
-                                     alt="Làm việc tại Ba Lan" 
-                                     class="w-full h-full object-cover">
+                        <div class="group kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col transition-all">
+                            <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_che_bien_tp.jpg" 
+                                     alt="Lao động chế biến thực phẩm tại Ba Lan" 
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                        <span class="text-sm">🇵🇱</span> Ba Lan
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 bg-emerald-600/90 backdrop-blur-xs text-white rounded-full text-[11px] font-semibold shadow-xs">
+                                        Thực phẩm & Đóng gói
+                                    </span>
+                                </div>
                             </div>
                             <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
                                 <div>
-                                    <h3 class="font-extrabold text-sm sm:text-base text-[#081D36] leading-snug">
+                                    <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] group-hover:text-brand-blue leading-snug transition-colors">
                                         Ba Lan
                                     </h3>
                                     <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                        Cơ hội việc làm trong sản xuất, logistics, chế tạo và chế biến thực phẩm.
+                                        Cơ hội việc làm ổn định trong sản xuất công nghiệp, logistics, kho vận và chế biến thực phẩm chuẩn EU.
                                     </p>
                                 </div>
                                 <div class="pt-1">
@@ -1111,19 +1140,31 @@
                         </div>
 
                         <!-- 3. Hungary -->
-                        <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col">
-                            <div class="relative w-full h-40 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/card_hungary.png" 
-                                     alt="Làm việc tại Hungary" 
-                                     class="w-full h-full object-cover">
+                        <div class="group kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col transition-all">
+                            <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_san_xuat.jpg" 
+                                     alt="Lao động lắp ráp điện tử tại Hungary" 
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                        <span class="text-sm">🇭🇺</span> Hungary
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 bg-indigo-600/90 backdrop-blur-xs text-white rounded-full text-[11px] font-semibold shadow-xs">
+                                        Lắp ráp & Điện tử
+                                    </span>
+                                </div>
                             </div>
                             <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
                                 <div>
-                                    <h3 class="font-extrabold text-sm sm:text-base text-[#081D36] leading-snug">
+                                    <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] group-hover:text-brand-blue leading-snug transition-colors">
                                         Hungary
                                     </h3>
                                     <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                        Thị trường tiềm năng với đơn hàng ổn định, thủ tục xuất cảnh thuận lợi.
+                                        Thị trường phát triển mạnh về sản xuất pin xe điện, linh kiện và thiết bị cơ điện tử; thủ tục nhanh gọn.
                                     </p>
                                 </div>
                                 <div class="pt-1">
@@ -1136,19 +1177,31 @@
                         </div>
 
                         <!-- 4. Rumani -->
-                        <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col">
-                            <div class="relative w-full h-40 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/card_rumani.png" 
-                                     alt="Làm việc tại Rumani" 
-                                     class="w-full h-full object-cover">
+                        <div class="group kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col transition-all">
+                            <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_xay_dung.jpg" 
+                                     alt="Lao động xây dựng cơ sở hạ tầng tại Rumani" 
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                        <span class="text-sm">🇷🇴</span> Rumani
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 bg-amber-600/90 backdrop-blur-xs text-white rounded-full text-[11px] font-semibold shadow-xs">
+                                        Xây dựng & Hạ tầng
+                                    </span>
+                                </div>
                             </div>
                             <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
                                 <div>
-                                    <h3 class="font-extrabold text-sm sm:text-base text-[#081D36] leading-snug">
+                                    <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] group-hover:text-brand-blue leading-snug transition-colors">
                                         Rumani
                                     </h3>
                                     <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                        Nhiều vị trí trong công nghiệp, chế tạo, xây dựng cơ sở hạ tầng và dịch vụ.
+                                        Đơn hàng đa dạng trong xây dựng, cơ khí hàn xì, may mặc và đóng tàu; chủ sử dụng lo toàn bộ ăn ở.
                                     </p>
                                 </div>
                                 <div class="pt-1">
@@ -1161,19 +1214,31 @@
                         </div>
 
                         <!-- 5. Cộng hòa Séc -->
-                        <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col">
-                            <div class="relative w-full h-40 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/card_sec.png" 
-                                     alt="Làm việc tại Cộng hòa Séc" 
-                                     class="w-full h-full object-cover">
+                        <div class="group kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col transition-all">
+                            <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_nganh_khac.jpg" 
+                                     alt="Lao động kho vận logistics tại Cộng hòa Séc" 
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                        <span class="text-sm">🇨🇿</span> Cộng hòa Séc
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 bg-teal-600/90 backdrop-blur-xs text-white rounded-full text-[11px] font-semibold shadow-xs">
+                                        Kho vận & Chế tạo
+                                    </span>
+                                </div>
                             </div>
                             <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
                                 <div>
-                                    <h3 class="font-extrabold text-sm sm:text-base text-[#081D36] leading-snug">
+                                    <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] group-hover:text-brand-blue leading-snug transition-colors">
                                         Cộng hòa Séc
                                     </h3>
                                     <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                        Môi trường làm việc ổn định, chi phí sinh hoạt hợp lý, phúc lợi đầy đủ.
+                                        Môi trường sống hiện đại, công việc ổn định trong lắp ráp tự động hóa, kho bãi và công nghiệp chế biến.
                                     </p>
                                 </div>
                                 <div class="pt-1">
@@ -1186,19 +1251,31 @@
                         </div>
 
                         <!-- 6. Bồ Đào Nha -->
-                        <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col">
-                            <div class="relative w-full h-40 overflow-hidden bg-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-chau-au/card_bo_dao_nha.png" 
-                                     alt="Làm việc tại Bồ Đào Nha" 
-                                     class="w-full h-full object-cover">
+                        <div class="group kipa-feature-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md flex flex-col transition-all">
+                            <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong/real_ind_nong_nghiep.jpg" 
+                                     alt="Lao động nông nghiệp công nghệ cao tại Bồ Đào Nha" 
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none"></div>
+                                <div class="absolute top-3 left-3">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                        <span class="text-sm">🇵🇹</span> Bồ Đào Nha
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 bg-lime-700/90 backdrop-blur-xs text-white rounded-full text-[11px] font-semibold shadow-xs">
+                                        Nông nghiệp CNC & Du lịch
+                                    </span>
+                                </div>
                             </div>
                             <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
                                 <div>
-                                    <h3 class="font-extrabold text-sm sm:text-base text-[#081D36] leading-snug">
+                                    <h3 class="font-phudu font-bold text-sm sm:text-base text-[#081D36] group-hover:text-brand-blue leading-snug transition-colors">
                                         Bồ Đào Nha
                                     </h3>
                                     <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                        Cơ hội trong nông nghiệp công nghệ cao, dịch vụ du lịch và xây dựng.
+                                        Khí hậu ôn hòa, nhu cầu tuyển dụng lớn trong trang trại nhà kính công nghệ cao, dịch vụ nhà hàng và xây dựng.
                                     </p>
                                 </div>
                                 <div class="pt-1">
@@ -1215,13 +1292,113 @@
             </section>
 
             <!-- ========================================================
+                 SECTION 02.2: ĐẶC QUYỀN KHỐI SCHENGEN & THẺ CƯ TRÚ (TRC)
+                 ======================================================== -->
+            <section class="py-12 bg-gradient-to-b from-white via-blue-50/40 to-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <!-- Section Header -->
+                    <div class="text-center max-w-3xl mx-auto space-y-2">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-100 text-[#0153A8] text-xs font-bold tracking-wide uppercase">
+                            <i class="fa-solid fa-passport"></i>
+                            <span>Giá trị gia tăng khác biệt tại KIPA</span>
+                        </div>
+                        <h2 class="font-phudu text-xl sm:text-2xl md:text-3xl font-bold text-brand-blue tracking-tight">
+                            Đặc Quyền Khối Schengen & Cơ Hội Định Cư Hợp Pháp
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Làm việc tại Châu Âu cùng KIPA Việt Hàn không chỉ là kiếm thu nhập cao hàng tháng, mà còn mở ra cánh cửa tương lai cho cả gia đình với tấm thẻ cư trú hợp pháp (TRC).
+                        </p>
+                    </div>
+
+                    <!-- 4 Pillars Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        
+                        <!-- Pillar 1 -->
+                        <div class="bg-white rounded-2xl border border-blue-100/80 p-5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
+                            <div class="w-11 h-11 rounded-xl bg-blue-50 text-[#0153A8] flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <h3 class="font-phudu font-bold text-slate-800 text-sm sm:text-base mb-1.5">Tự do đi lại 29 nước Schengen</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Sở hữu Visa D hoặc Thẻ cư trú (TRC), bạn thoải mái đi lại, du lịch, thăm người thân khắp Đức, Pháp, Ý, Thụy Điển... mà không cần xin visa nội khối.
+                            </p>
+                            <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] font-semibold text-[#0153A8] flex items-center gap-1">
+                                <i class="fa-solid fa-check text-emerald-500"></i> Miễn thị thực 29 quốc gia
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2 -->
+                        <div class="bg-white rounded-2xl border border-emerald-100/80 p-5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h3 class="font-phudu font-bold text-slate-800 text-sm sm:text-base mb-1.5">Bảo hộ lao động chuẩn EU</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Hưởng trọn vẹn chế độ bảo hiểm y tế toàn diện (chi trả 80-100%), bảo hiểm thất nghiệp, tai nạn và tối thiểu 20-25 ngày nghỉ phép hưởng nguyên lương/năm.
+                            </p>
+                            <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] font-semibold text-emerald-700 flex items-center gap-1">
+                                <i class="fa-solid fa-check text-emerald-500"></i> Luật công đoàn EU bảo vệ
+                            </div>
+                        </div>
+
+                        <!-- Pillar 3 -->
+                        <div class="bg-white rounded-2xl border border-amber-100/80 p-5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
+                            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-people-roof"></i>
+                            </div>
+                            <h3 class="font-phudu font-bold text-slate-800 text-sm sm:text-base mb-1.5">Quyền bảo lãnh vợ/chồng & con</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Sau khi hoàn thành gia hạn hợp đồng hoặc chuyển sang diện tay nghề/chính thức, người lao động có quyền làm thủ tục bảo lãnh gia đình sang sinh sống cùng.
+                            </p>
+                            <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] font-semibold text-amber-700 flex items-center gap-1">
+                                <i class="fa-solid fa-check text-emerald-500"></i> Đoàn tụ gia đình hợp pháp
+                            </div>
+                        </div>
+
+                        <!-- Pillar 4 -->
+                        <div class="bg-white rounded-2xl border border-purple-100/80 p-5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
+                            <div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h3 class="font-phudu font-bold text-slate-800 text-sm sm:text-base mb-1.5">Lộ trình xin Thường trú nhân (PR)</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Cơ hội chuyển tiếp xin thẻ cư trú vĩnh viễn (Permanent Residence) hoặc Thẻ Xanh EU sau 3 - 5 năm đóng thuế và đáp ứng chứng chỉ ngoại ngữ cơ bản.
+                            </p>
+                            <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] font-semibold text-purple-700 flex items-center gap-1">
+                                <i class="fa-solid fa-check text-emerald-500"></i> Định cư dài hạn bền vững
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Callout Strip -->
+                    <div class="bg-blue-600 rounded-2xl p-5 sm:p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white shrink-0 text-lg">
+                                <i class="fa-solid fa-id-card"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base">KIPA cam kết 100% hồ sơ xin cấp Thẻ cư trú (TRC) hợp pháp</h4>
+                                <p class="text-xs text-blue-100 mt-0.5">Tuyệt đối không sử dụng visa du lịch trốn ở lại. Đảm bảo tư cách pháp nhân bảo hộ trọn đời.</p>
+                            </div>
+                        </div>
+                        <a href="#dang-ky-tu-van" class="shrink-0 px-5 py-2.5 rounded-xl bg-[#FACC15] hover:bg-[#eab308] text-slate-900 font-extrabold text-xs shadow-sm transition-all">
+                            Tư vấn lộ trình định cư
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================
                  CÁC CHƯƠNG TRÌNH LÀM VIỆC TẠI CHÂU ÂU (3 Diện)
                  ======================================================== -->
             <section class="py-10 bg-white border-b border-slate-200/80">
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-6">
                     <div class="flex items-center gap-2">
                         <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
-                        <h2 class="text-lg sm:text-xl font-extrabold text-[#081D36] tracking-tight">
+                        <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
                             CÁC CHƯƠNG TRÌNH LÀM VIỆC TẠI CHÂU ÂU
                         </h2>
                     </div>
@@ -1234,7 +1411,7 @@
                                 <div class="w-10 h-10 rounded-xl bg-blue-100 text-[#0153A8] flex items-center justify-center text-lg font-bold">
                                     <i class="fa-solid fa-industry"></i>
                                 </div>
-                                <h3 class="font-bold text-base text-slate-800">Lao động phổ thông</h3>
+                                <h3 class="font-phudu font-bold text-base text-slate-800">Lao động phổ thông</h3>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Làm việc tại doanh nghiệp theo hợp đồng, tuân thủ quy định của từng quốc gia tiếp nhận.
                                 </p>
@@ -1253,7 +1430,7 @@
                                 <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-bold">
                                     <i class="fa-solid fa-calendar-days"></i>
                                 </div>
-                                <h3 class="font-bold text-base text-slate-800">Lao động thời vụ</h3>
+                                <h3 class="font-phudu font-bold text-base text-slate-800">Lao động thời vụ</h3>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Các công việc theo mùa vụ trong nông nghiệp, thu hoạch, chế biến thực phẩm và dịch vụ.
                                 </p>
@@ -1272,7 +1449,7 @@
                                 <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
                                     <i class="fa-solid fa-user-gear"></i>
                                 </div>
-                                <h3 class="font-bold text-base text-slate-800">Lao động chuyên môn</h3>
+                                <h3 class="font-phudu font-bold text-base text-slate-800">Lao động chuyên môn</h3>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Dành cho người có bằng cấp, tay nghề và kinh nghiệm phù hợp với vị trí tuyển dụng kỹ thuật cao.
                                 </p>
@@ -1300,7 +1477,7 @@
                         <div id="tim-thi-truong" class="lg:col-span-6 space-y-4">
                             <div class="flex items-center gap-2">
                                 <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
-                                <h2 class="text-lg sm:text-xl font-extrabold text-[#081D36] tracking-tight">
+                                <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
                                     03. TÌM THỊ TRƯỜNG PHÙ HỢP VỚI BẠN
                                 </h2>
                             </div>
@@ -1308,77 +1485,65 @@
                                 Nhập thông tin để tìm kiếm quốc gia và chương trình thích hợp với bạn.
                             </p>
 
-                            <!-- Form Box with Illustration -->
+                            <!-- Form Box -->
                             <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-2xs">
-                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                                    
-                                    <!-- Form Inputs (sm:col-span-8) -->
-                                    <div class="sm:col-span-8 space-y-3.5">
-                                        <!-- Field 1: Quốc gia -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Quốc gia mong muốn</label>
-                                            <select aria-label="Filter country" id="filter-country" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="tat_ca">Tất cả quốc gia Châu Âu</option>
-                                                <option value="duc">CHLB Đức (Kỹ thuật, Điều dưỡng)</option>
-                                                <option value="ba_lan">Ba Lan (Sản xuất, Logistics)</option>
-                                                <option value="hungary">Hungary (Cơ khí, Xây dựng)</option>
-                                                <option value="rumani">Rumani (Công nghiệp, Dịch vụ)</option>
-                                                <option value="sec">Cộng hòa Séc</option>
-                                                <option value="bo_dao_nha">Bồ Đào Nha</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Field 2: Ngành nghề -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Ngành nghề</label>
-                                            <select aria-label="Filter eu job" id="filter-eu-job" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="tat_ca">Tất cả ngành nghề</option>
-                                                <option value="san_xuat">Sản xuất - Chế tạo - Lắp ráp</option>
-                                                <option value="co_khi">Cơ khí - Hàn công nghiệp - Thợ máy</option>
-                                                <option value="xay_dung">Xây dựng - Cốp pha - Giàn giáo</option>
-                                                <option value="thuc_pham">Chế biến thực phẩm - Đóng gói</option>
-                                                <option value="nong_nghiep">Nông nghiệp công nghệ cao</option>
-                                                <option value="dieu_duong">Điều dưỡng - Y tế chăm sóc</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Field 3: Trình độ ngoại ngữ -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Trình độ ngoại ngữ</label>
-                                            <select aria-label="Filter eu lang" id="filter-eu-lang" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="chua_biet">Chưa biết ngoại ngữ (KIPA đào tạo từ đầu)</option>
-                                                <option value="tieng_anh_co_ban">Tiếng Anh cơ bản (Giao tiếp đơn giản)</option>
-                                                <option value="tieng_anh_tot">Tiếng Anh tốt (B1 / B2 / IELTS)</option>
-                                                <option value="tieng_duc">Tiếng Đức (A2 / B1)</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Field 4: Kinh nghiệm làm việc -->
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">Kinh nghiệm làm việc</label>
-                                            <select aria-label="Filter eu exp" id="filter-eu-exp" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                                <option value="chua_co">Chưa có kinh nghiệm chính thức</option>
-                                                <option value="1_2_nam">1 - 2 năm kinh nghiệm</option>
-                                                <option value="3_nam_plus">Từ 3 năm kinh nghiệm trở lên</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Submit Button -->
-                                        <div class="pt-1">
-                                            <button type="button" onclick="searchEuropeMarkets()" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#FACC15] hover:bg-[#eab308] text-slate-900 font-extrabold text-xs sm:text-sm shadow-sm transition-all transform hover:-translate-y-0.5">
-                                                <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                                                <span>Tìm kết quả phù hợp</span>
-                                            </button>
-                                        </div>
+                                <div class="space-y-3.5">
+                                    <!-- Field 1: Quốc gia -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Quốc gia mong muốn</label>
+                                        <select aria-label="Filter country" id="filter-country" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="tat_ca">Tất cả quốc gia Châu Âu</option>
+                                            <option value="duc">CHLB Đức (Kỹ thuật, Điều dưỡng)</option>
+                                            <option value="ba_lan">Ba Lan (Sản xuất, Logistics)</option>
+                                            <option value="hungary">Hungary (Cơ khí, Xây dựng)</option>
+                                            <option value="rumani">Rumani (Công nghiệp, Dịch vụ)</option>
+                                            <option value="sec">Cộng hòa Séc</option>
+                                            <option value="bo_dao_nha">Bồ Đào Nha</option>
+                                        </select>
                                     </div>
 
-                                    <!-- Right Illustration (sm:col-span-4) -->
-                                    <div class="hidden sm:flex sm:col-span-4 items-center justify-center p-2">
-                                        <img src="/assets/xuat-khau-lao-dong-chau-au/sec3_illustration.png" 
-                                             alt="Tìm thị trường Châu Âu phù hợp" 
-                                             class="max-w-[130px] h-auto object-contain drop-shadow-sm">
+                                    <!-- Field 2: Ngành nghề -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Ngành nghề</label>
+                                        <select aria-label="Filter eu job" id="filter-eu-job" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="tat_ca">Tất cả ngành nghề</option>
+                                            <option value="san_xuat">Sản xuất - Chế tạo - Lắp ráp</option>
+                                            <option value="co_khi">Cơ khí - Hàn công nghiệp - Thợ máy</option>
+                                            <option value="xay_dung">Xây dựng - Cốp pha - Giàn giáo</option>
+                                            <option value="thuc_pham">Chế biến thực phẩm - Đóng gói</option>
+                                            <option value="nong_nghiep">Nông nghiệp công nghệ cao</option>
+                                            <option value="dieu_duong">Điều dưỡng - Y tế chăm sóc</option>
+                                        </select>
                                     </div>
 
+                                    <!-- Field 3: Trình độ ngoại ngữ -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Trình độ ngoại ngữ</label>
+                                        <select aria-label="Filter eu lang" id="filter-eu-lang" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="chua_biet">Chưa biết ngoại ngữ (KIPA đào tạo từ đầu)</option>
+                                            <option value="tieng_anh_co_ban">Tiếng Anh cơ bản (Giao tiếp đơn giản)</option>
+                                            <option value="tieng_anh_tot">Tiếng Anh tốt (B1 / B2 / IELTS)</option>
+                                            <option value="tieng_duc">Tiếng Đức (A2 / B1)</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Field 4: Kinh nghiệm làm việc -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Kinh nghiệm làm việc</label>
+                                        <select aria-label="Filter eu exp" id="filter-eu-exp" class="form-select-kipa w-full text-xs font-medium bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                            <option value="chua_co">Chưa có kinh nghiệm chính thức</option>
+                                            <option value="1_2_nam">1 - 2 năm kinh nghiệm</option>
+                                            <option value="3_nam_plus">Từ 3 năm kinh nghiệm trở lên</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="pt-1">
+                                        <button type="button" onclick="searchEuropeMarkets()" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#FACC15] hover:bg-[#eab308] text-slate-900 font-extrabold text-xs sm:text-sm shadow-sm transition-all transform hover:-translate-y-0.5">
+                                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                                            <span>Tìm kết quả phù hợp</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1387,8 +1552,8 @@
                         <div id="so-sanh-thi-truong" class="lg:col-span-6 space-y-4">
                             <div class="flex items-center gap-2">
                                 <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
-                                <h2 class="text-lg sm:text-xl font-extrabold text-[#081D36] tracking-tight">
-                                    04. SO SÁNH THỊ TRƯỜNG TIÊU BIỂU <span class="text-xs text-slate-500 font-normal">(tham khảo)</span>
+                                <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
+                                    04. SO SÁNH THỊ TRƯỜNG TIÊU BIỂU <span class="text-xs text-slate-500 font-normal font-sans">(tham khảo)</span>
                                 </h2>
                             </div>
                             <p class="text-xs sm:text-[13px] text-slate-600">
@@ -1453,14 +1618,497 @@
             </section>
 
             <!-- ========================================================
+                 SECTION 04.2: MINH BẠCH TÀI CHÍNH & TÍCH LŨY THỰC TẾ
+                 ======================================================== -->
+            <section class="py-12 bg-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-6">
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
+                                <h2 class="font-phudu text-lg sm:text-xl md:text-2xl font-bold text-brand-blue tracking-tight">
+                                    04.2. MINH BẠCH TÀI CHÍNH: BẢNG SO SÁNH TÍCH LŨY THỰC TẾ
+                                </h2>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                                Thu nhập ròng sau khi trừ thuế, bảo hiểm và chi phí sinh hoạt tại từng quốc gia Châu Âu.
+                            </p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200 shrink-0">
+                            <i class="fa-solid fa-calculator"></i> Tính toán thực tế 2026
+                        </span>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-2xs">
+                        <table class="w-full text-left text-xs sm:text-sm">
+                            <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 text-xs uppercase tracking-wider">
+                                <tr>
+                                    <th class="py-3.5 px-4">Thị trường</th>
+                                    <th class="py-3.5 px-4">Thu nhập gộp (Gross)</th>
+                                    <th class="py-3.5 px-4">Thuế & Bảo hiểm</th>
+                                    <th class="py-3.5 px-4">Hỗ trợ ăn ở từ chủ</th>
+                                    <th class="py-3.5 px-4 bg-emerald-50 text-emerald-800 font-extrabold">Tích lũy thực gửi về/tháng</th>
+                                    <th class="py-3.5 px-4 text-center">Yêu cầu ngoại ngữ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700 font-medium text-xs sm:text-[13px]">
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-bold text-slate-900 flex items-center gap-2">
+                                            <span class="text-base">🇩🇪</span> CHLB Đức
+                                        </div>
+                                        <span class="text-[11px] text-slate-500">Cơ khí, điều dưỡng, nhà hàng</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-blue-700">55 - 75 triệu (2.100 - 2.800€)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">~25 - 30% (An sinh đỉnh cao)</td>
+                                    <td class="py-3.5 px-4">Tự túc thuê (300 - 450€)</td>
+                                    <td class="py-3.5 px-4 bg-emerald-50 font-bold text-emerald-700 text-sm">35 - 50 triệu VNĐ</td>
+                                    <td class="py-3.5 px-4 text-center"><span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold">Tiếng Đức A2 / B1</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-bold text-slate-900 flex items-center gap-2">
+                                            <span class="text-base">🇵🇱</span> Ba Lan
+                                        </div>
+                                        <span class="text-[11px] text-slate-500">Chế biến thực phẩm, đóng gói</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-blue-700">35 - 48 triệu (5.500 - 7.500 PLN)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">~18 - 20% (BHYT đầy đủ)</td>
+                                    <td class="py-3.5 px-4 text-emerald-600 font-semibold">Chủ hỗ trợ ký túc xá / phụ cấp</td>
+                                    <td class="py-3.5 px-4 bg-emerald-50 font-bold text-emerald-700 text-sm">26 - 36 triệu VNĐ</td>
+                                    <td class="py-3.5 px-4 text-center"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px]">Không yêu cầu</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-bold text-slate-900 flex items-center gap-2">
+                                            <span class="text-base">🇭🇺</span> Hungary
+                                        </div>
+                                        <span class="text-[11px] text-slate-500">Điện tử, lắp ráp máy, sản xuất</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-blue-700">32 - 45 triệu (450k - 650k HUF)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">~18% theo luật</td>
+                                    <td class="py-3.5 px-4 text-emerald-600 font-semibold">Doanh nghiệp đài thọ ở 100%</td>
+                                    <td class="py-3.5 px-4 bg-emerald-50 font-bold text-emerald-700 text-sm">25 - 35 triệu VNĐ</td>
+                                    <td class="py-3.5 px-4 text-center"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px]">Không yêu cầu</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-bold text-slate-900 flex items-center gap-2">
+                                            <span class="text-base">🇷🇴</span> Rumani
+                                        </div>
+                                        <span class="text-[11px] text-slate-500">Xây dựng, hàn cơ khí, may mặc</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-blue-700">28 - 40 triệu (900 - 1.400$)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">Đã trừ thuế tại nguồn</td>
+                                    <td class="py-3.5 px-4 text-emerald-600 font-semibold">Bao ăn 3 bữa + Ký túc xá miễn phí</td>
+                                    <td class="py-3.5 px-4 bg-emerald-50 font-bold text-emerald-700 text-sm">22 - 32 triệu VNĐ</td>
+                                    <td class="py-3.5 px-4 text-center"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px]">Không yêu cầu</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-bold text-slate-900 flex items-center gap-2">
+                                            <span class="text-base">🇨🇿</span> Cộng hòa Séc
+                                        </div>
+                                        <span class="text-[11px] text-slate-500">Logistics, linh kiện phụ tùng xe</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-blue-700">38 - 52 triệu (35k - 48k CZK)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">~22% (Chế độ phúc lợi cao)</td>
+                                    <td class="py-3.5 px-4">Hỗ trợ phụ cấp nhà ở</td>
+                                    <td class="py-3.5 px-4 bg-emerald-50 font-bold text-emerald-700 text-sm">28 - 40 triệu VNĐ</td>
+                                    <td class="py-3.5 px-4 text-center"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px]">Tiếng Anh/Séc giao tiếp</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-bold text-slate-900 flex items-center gap-2">
+                                            <span class="text-base">🇵🇹</span> Bồ Đào Nha
+                                        </div>
+                                        <span class="text-[11px] text-slate-500">Nông nghiệp công nghệ cao, dịch vụ</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-blue-700">32 - 45 triệu (1.200 - 1.700€)</td>
+                                    <td class="py-3.5 px-4 text-slate-600">~15 - 18%</td>
+                                    <td class="py-3.5 px-4">Ký túc xá trang trại / trợ cấp</td>
+                                    <td class="py-3.5 px-4 bg-emerald-50 font-bold text-emerald-700 text-sm">24 - 34 triệu VNĐ</td>
+                                    <td class="py-3.5 px-4 text-center"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px]">Tiếng Anh cơ bản</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-amber-50 border border-amber-200/80 flex items-start gap-3 text-xs text-amber-900 leading-relaxed">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 shrink-0 text-sm"></i>
+                        <div>
+                            <span class="font-bold">Lưu ý minh bạch từ KIPA:</span> Mức tích lũy trên là con số thực tế trung bình từ các học viên đang làm việc tại Châu Âu, chưa bao gồm tiền tăng ca làm thêm (overtime x1.5 hoặc x2.0 vào ngày nghỉ/lễ theo luật lao động Châu Âu). KIPA cam kết tư vấn đúng thực tế, không "thổi phồng" thu nhập ảo.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 SECTION 04.3: SÀN ĐƠN HÀNG LÀM VIỆC TẠI CHÂU ÂU ĐANG TUYỂN DỤNG
+                 (Kết nối trực tiếp doanh nghiệp bản địa & cơ hội việc làm 2026)
+                 ======================================================== -->
+            <section id="san-don-hang-chau-au" class="py-12 bg-slate-50 border-b border-slate-200/80 scroll-mt-20">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-[#EC1E1B] text-xs font-bold uppercase tracking-wider mb-2">
+                                <span class="w-2 h-2 rounded-full bg-[#EC1E1B] animate-ping"></span>
+                                <span>TUYỂN DỤNG CHÍNH NGẠCH • TIẾP NHẬN HỒ SƠ 2026</span>
+                            </div>
+                            <h2 class="font-phudu text-xl sm:text-2xl font-bold text-brand-blue tracking-tight">
+                                ĐƠN HÀNG LÀM VIỆC TẠI CHÂU ÂU ĐANG TUYỂN DỤNG
+                            </h2>
+                            <p class="text-xs sm:text-[13px] text-slate-600 mt-1 max-w-3xl">
+                                Toàn bộ đơn hàng đều có hợp đồng lao động trực tiếp với doanh nghiệp Châu Âu, tiếp nhận chính ngạch theo giấy phép (Work Permit) và bảo đảm mức lương chuẩn pháp luật EU.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs font-bold shadow-2xs">
+                                <i class="fa-solid fa-briefcase text-[#0274BD]"></i>
+                                <span>35 vị trí đang tiếp nhận</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter Tabs -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-semibold">
+                        <button type="button" onclick="filterEuJobs('all', this)" class="eu-job-tab active px-4 py-2 rounded-full bg-[#0274BD] text-white shadow-xs whitespace-nowrap transition-all">
+                            Tất cả quốc gia
+                        </button>
+                        <button type="button" onclick="filterEuJobs('duc', this)" class="eu-job-tab px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition-all">
+                            🇩🇪 CHLB Đức
+                        </button>
+                        <button type="button" onclick="filterEuJobs('balan', this)" class="eu-job-tab px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition-all">
+                            🇵🇱 Ba Lan
+                        </button>
+                        <button type="button" onclick="filterEuJobs('hungary', this)" class="eu-job-tab px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition-all">
+                            🇭🇺 Hungary
+                        </button>
+                        <button type="button" onclick="filterEuJobs('rumani', this)" class="eu-job-tab px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition-all">
+                            🇷🇴 Rumani
+                        </button>
+                    </div>
+
+                    <!-- 6 Job Cards Grid -->
+                    <div id="eu-jobs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        
+                        <!-- Đơn hàng 1: Đức - Cơ khí CNC & Hàn -->
+                        <div class="eu-job-item bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group" data-country="duc">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] text-[11px] font-bold">
+                                        <span>🇩🇪</span> CHLB Đức
+                                    </span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 8 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Kỹ thuật viên Cơ khí CNC & Hàn Mig/Mag
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Munich & Nuremberg (Bang Bavaria)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">2.400 - 2.800 EUR/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 63 - 74 triệu VNĐ/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Ngoại ngữ:</span>
+                                        <span class="font-semibold text-slate-700">Tiếng Đức B1 (KIPA đào tạo cấp tốc)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Đặc quyền:</span>
+                                        <span class="font-semibold text-emerald-600">Bảo hiểm 100% + Bảo lãnh gia đình</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="button" onclick="applyJobOrder('Kỹ thuật viên Cơ khí CNC - CHLB Đức')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0274BD] text-slate-800 hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-2xs">
+                                        <span>Ứng tuyển đơn này</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 2: Đức - Trợ lý Điều dưỡng -->
+                        <div class="eu-job-item bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group" data-country="duc">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0274BD] text-[11px] font-bold">
+                                        <span>🇩🇪</span> CHLB Đức
+                                    </span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 12 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Trợ lý Điều dưỡng & Chăm sóc Y tế
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Frankfurt & Stuttgart</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">2.300 - 3.000 EUR/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 60 - 80 triệu VNĐ/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Ngoại ngữ:</span>
+                                        <span class="font-semibold text-slate-700">Đài thọ học B2 tiếng Đức tại viện</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Đặc quyền:</span>
+                                        <span class="font-semibold text-emerald-600">Trợ cấp chỗ ở + Cơ hội PR sau 3 năm</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="button" onclick="applyJobOrder('Trợ lý Điều dưỡng - CHLB Đức')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0274BD] text-slate-800 hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-2xs">
+                                        <span>Ứng tuyển đơn này</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 3: Ba Lan - Đóng gói Thực phẩm & Kho lạnh -->
+                        <div class="eu-job-item bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group" data-country="balan">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                                        <span>🇵🇱</span> Ba Lan
+                                    </span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 15 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Đóng gói Thực phẩm & Quản lý Kho bãi
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Warsaw & Krakow</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">4.500 - 5.500 PLN/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 28 - 35 triệu VNĐ/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Ngoại ngữ:</span>
+                                        <span class="font-semibold text-slate-700">Không yêu cầu (KIPA đào tạo giao tiếp)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Đặc quyền:</span>
+                                        <span class="font-semibold text-emerald-600">Đài thọ ký túc xá + Ăn ca miễn phí</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="button" onclick="applyJobOrder('Đóng gói Thực phẩm & Kho bãi - Ba Lan')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0274BD] text-slate-800 hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-2xs">
+                                        <span>Ứng tuyển đơn này</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 4: Hungary - Lắp ráp Linh kiện Điện tử -->
+                        <div class="eu-job-item bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group" data-country="hungary">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
+                                        <span>🇭🇺</span> Hungary
+                                    </span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 20 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Lắp ráp Linh kiện Điện tử & Tự động hóa
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Budapest & Debrecen</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">380k - 480k HUF/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 25 - 32 triệu VNĐ/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Ngoại ngữ:</span>
+                                        <span class="font-semibold text-slate-700">Chưa biết được KIPA đào tạo từ đầu</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Đặc quyền:</span>
+                                        <span class="font-semibold text-emerald-600">Xe đưa đón + Thưởng chuyên cần</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="button" onclick="applyJobOrder('Lắp ráp Linh kiện Điện tử - Hungary')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0274BD] text-slate-800 hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-2xs">
+                                        <span>Ứng tuyển đơn này</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 5: Rumani - Xây dựng & Cơ khí hoàn thiện -->
+                        <div class="eu-job-item bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group" data-country="rumani">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[11px] font-bold">
+                                        <span>🇷🇴</span> Rumani
+                                    </span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 10 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Thợ Xây dựng Hạ tầng & Cốt thép
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Thủ đô Bucharest</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">950 - 1.250 USD/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 24 - 31 triệu VNĐ/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Ngoại ngữ:</span>
+                                        <span class="font-semibold text-slate-700">Tiếng Anh giao tiếp cơ bản</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Đặc quyền:</span>
+                                        <span class="font-semibold text-emerald-600">Bao ăn 3 bữa + Ở miễn phí 100%</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="button" onclick="applyJobOrder('Thợ Xây dựng Hạ tầng - Rumani')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0274BD] text-slate-800 hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-2xs">
+                                        <span>Ứng tuyển đơn này</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đơn hàng 6: Ba Lan - Cơ khí chế tạo & Hàn xưởng -->
+                        <div class="eu-job-item bg-white rounded-2xl border border-slate-200 hover:border-[#0274BD] overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col group" data-country="balan">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50/70">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                                        <span>🇵🇱</span> Ba Lan
+                                    </span>
+                                    <span class="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-users text-[10px]"></i> Tuyển 6 người
+                                    </span>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-[15px] text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">
+                                    Thợ Hàn Mig/Mag & Lắp ráp Cơ khí xưởng
+                                </h3>
+                                <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-rose-500"></i>
+                                    <span>Poznan & Gdansk</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Mức lương:</span>
+                                        <span class="font-bold text-[#EC1E1B] font-phudu text-sm">5.200 - 6.200 PLN/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Quy đổi:</span>
+                                        <span class="font-bold text-slate-800">~ 33 - 39 triệu VNĐ/tháng</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                                        <span class="text-slate-500">Kinh nghiệm:</span>
+                                        <span class="font-semibold text-slate-700">Có chứng chỉ hàn 1 năm trở lên</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-1">
+                                        <span class="text-slate-500">Đặc quyền:</span>
+                                        <span class="font-semibold text-emerald-600">Tăng ca x1.5 + Đóng bảo hiểm ZUS</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="button" onclick="applyJobOrder('Thợ Hàn Mig/Mag & Lắp ráp Cơ khí - Ba Lan')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-[#0274BD] text-slate-800 hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-2xs">
+                                        <span>Ứng tuyển đơn này</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Callout footer of Jobs Board -->
+                    <div class="bg-blue-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[#0274BD] text-white flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-file-signature"></i>
+                            </div>
+                            <div class="text-xs sm:text-[13px] text-slate-700">
+                                <span class="font-bold text-slate-900">Không tìm thấy ngành nghề phù hợp với bạn?</span>
+                                <p class="text-slate-500">KIPA còn hơn 50+ vị trí tiếp nhận liên tục theo đợt tuyển dụng của các tập đoàn Châu Âu.</p>
+                            </div>
+                        </div>
+                        <a href="#dang-ky-tu-van" class="shrink-0 px-5 py-2.5 rounded-full bg-[#0274BD] hover:bg-[#014d80] text-white font-bold text-xs shadow-xs hover:shadow-md transition-all whitespace-nowrap">
+                            <span>Gửi hồ sơ nhận tư vấn đơn riêng</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] ml-1.5"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================
                  LỘ TRÌNH THAM GIA TẠI KIPA (6 Bước)
                  ======================================================== -->
             <section id="lo-trinh-tham-gia" class="py-10 bg-white border-b border-slate-200/80">
                 <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-6">
                     <div class="flex items-center gap-2">
                         <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
-                        <h2 class="text-lg sm:text-xl font-extrabold text-[#081D36] tracking-tight">
-                            LỘ TRÌNH THAM GIA TẠI KIPA
+                        <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
+                            LỘ TRÌNH THAM GIA TẠI KIPA (6 BƯỚC)
                         </h2>
                     </div>
 
@@ -1515,6 +2163,263 @@
             </section>
 
             <!-- ========================================================
+                 SECTION 05.2: BẢO VỆ NGƯỜI LAO ĐỘNG - 4 BẪY LỪA ĐẢO & GÓI KIPA EU CARE 360
+                 ======================================================== -->
+            <section class="py-12 bg-slate-900 text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(#1e3a8a_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none"></div>
+
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 space-y-8">
+                    
+                    <!-- Section Header -->
+                    <div class="text-center max-w-3xl mx-auto space-y-2">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold tracking-wide uppercase">
+                            <i class="fa-solid fa-shield-virus"></i>
+                            <span>Radar Cảnh Báo An Toàn Lao Động</span>
+                        </div>
+                        <h2 class="font-phudu text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight">
+                            4 Bẫy Lừa Đảo XKLĐ Châu Âu Cần Tránh & Lá Chắn Bảo Vệ KIPA
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Thị trường Châu Âu tiềm năng lớn nhưng cũng tồn tại nhiều đối tượng môi giới chui, lừa đảo visa du lịch hoặc hợp đồng giả. Hãy trang bị kiến thức để tự bảo vệ mình!
+                        </p>
+                    </div>
+
+                    <!-- 2 Columns: 4 Traps vs KIPA EU Care 360 Solution -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        
+                        <!-- Left: 4 Common Traps (lg:col-span-6) -->
+                        <div class="lg:col-span-6 bg-slate-800/80 border border-red-500/30 rounded-2xl p-5 sm:p-6 space-y-4">
+                            <div class="flex items-center gap-2 text-red-400 font-bold text-sm sm:text-base border-b border-slate-700 pb-3">
+                                <i class="fa-solid fa-circle-xmark text-lg"></i>
+                                <span>4 Chiêu Trò Môi Giới Lừa Đảo Phổ Biến</span>
+                            </div>
+
+                            <div class="space-y-3.5 text-xs">
+                                <div class="flex items-start gap-3 bg-red-950/40 border border-red-900/40 p-3 rounded-xl">
+                                    <span class="w-6 h-6 rounded-full bg-red-500 text-white font-black flex items-center justify-center shrink-0 text-xs">1</span>
+                                    <div>
+                                        <h4 class="font-bold text-red-200">Bẫy "Bao đỗ 100% không cần phỏng vấn Sứ quán"</h4>
+                                        <p class="text-slate-300 mt-1 leading-relaxed">Visa lao động Châu Âu bắt buộc người đi phải lấy dấu vân tay và đối chiếu hồ sơ tại Đại sứ quán hoặc VFS. Mọi lời hứa "chạy chọt hồ sơ vắng mặt" đều là lừa đảo cọc tiền.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3 bg-red-950/40 border border-red-900/40 p-3 rounded-xl">
+                                    <span class="w-6 h-6 rounded-full bg-red-500 text-white font-black flex items-center justify-center shrink-0 text-xs">2</span>
+                                    <div>
+                                        <h4 class="font-bold text-red-200">Bẫy Visa Du lịch / Thương mại trốn ở lại</h4>
+                                        <p class="text-slate-300 mt-1 leading-relaxed">Lừa người lao động bay diện visa du lịch C (Schengen) rồi hứa hẹn "sang đó đổi thẻ cư trú". Hậu quả: cư trú bất hợp pháp, bị cảnh sát bắt trục xuất và cấm nhập cảnh Châu Âu 5-10 năm.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3 bg-red-950/40 border border-red-900/40 p-3 rounded-xl">
+                                    <span class="w-6 h-6 rounded-full bg-red-500 text-white font-black flex items-center justify-center shrink-0 text-xs">3</span>
+                                    <div>
+                                        <h4 class="font-bold text-red-200">Giấy phép lao động (Work Permit) giả mạo</h4>
+                                        <p class="text-slate-300 mt-1 leading-relaxed">Làm giả file scan thư mời và Work Permit của Bộ Lao động nước sở tại để thu tiền đợt 2, đợt 3. Đến khi nộp vào sứ quán thì bị phát hiện giả mạo và từ chối cấp visa vĩnh viễn.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3 bg-red-950/40 border border-red-900/40 p-3 rounded-xl">
+                                    <span class="w-6 h-6 rounded-full bg-red-500 text-white font-black flex items-center justify-center shrink-0 text-xs">4</span>
+                                    <div>
+                                        <h4 class="font-bold text-red-200">"Đem con bỏ chợ" tại sân bay Châu Âu</h4>
+                                        <p class="text-slate-300 mt-1 leading-relaxed">Sau khi nhận đủ tiền xuất cảnh, môi giới cắt đứt liên lạc, không có người đón tại sân bay, đẩy người lao động vào các xưởng chui, bị bóc lột lương và giữ giấy tờ tùy thân.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: KIPA EU Care 360 Shield (lg:col-span-6) -->
+                        <div class="lg:col-span-6 bg-gradient-to-br from-blue-900/90 to-slate-800 border border-blue-500/40 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm sm:text-base border-b border-blue-700/60 pb-3">
+                                    <i class="fa-solid fa-shield-heart text-lg"></i>
+                                    <span>Gói Bảo Hộ Toàn Diện: KIPA EU Care 360</span>
+                                </div>
+
+                                <div class="space-y-3.5 text-xs mt-3.5">
+                                    <div class="flex items-start gap-3 bg-white/5 border border-white/10 p-3 rounded-xl">
+                                        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-sm">
+                                            <i class="fa-solid fa-file-signature"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-white">100% Work Permit Chính Thức & Hợp Đồng 3 Bên</h4>
+                                            <p class="text-slate-300 mt-0.5 leading-relaxed">Có mã định danh tra cứu trực tiếp trên hệ thống Cục Di trú nước sở tại. Hợp đồng lao động rõ ràng, tuân thủ nghiêm ngặt Luật Lao động Châu Âu.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-3 bg-white/5 border border-white/10 p-3 rounded-xl">
+                                        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-sm">
+                                            <i class="fa-solid fa-van-shuttle"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-white">Đại diện KIPA đón tại sân bay Châu Âu</h4>
+                                            <p class="text-slate-300 mt-0.5 leading-relaxed">Có cán bộ phụ trách hoặc đối tác KIPA tại Đức, Ba Lan, Rumani đón tại sân bay, đưa về tận nơi ở và bàn giao cho quản lý nhà máy.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-3 bg-white/5 border border-white/10 p-3 rounded-xl">
+                                        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-sm">
+                                            <i class="fa-solid fa-address-card"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-white">Hỗ trợ trọn gói thủ tục hòa nhập ban đầu</h4>
+                                            <p class="text-slate-300 mt-0.5 leading-relaxed">Hướng dẫn đăng ký cư trú (Anmeldung), mở tài khoản ngân hàng Châu Âu, mua SIM 4G và khám sức khỏe định kỳ theo quy định.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-3 bg-white/5 border border-white/10 p-3 rounded-xl">
+                                        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-sm">
+                                            <i class="fa-solid fa-headset"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-white">Đồng hành pháp lý 24/7 suốt thời gian làm việc</h4>
+                                            <p class="text-slate-300 mt-0.5 leading-relaxed">Có mạng lưới phiên dịch viên và luật sư hỗ trợ khi có phát sinh về hợp đồng, bảo hiểm hay gia hạn thẻ cư trú (TRC).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2">
+                                <a href="#dang-ky-tu-van" class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#EC1E1B] hover:bg-[#c91512] text-white font-extrabold text-xs shadow-md transition-all">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                    <span>Đăng ký thẩm định hồ sơ chính ngạch miễn phí</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 SECTION 05.3: KHIÊN NIỀM TIN KIPA "5 KHÔNG & 5 ĐỒNG HÀNH" & MẠNG LƯỚI TẠI CHÂU ÂU
+                 (Bảo chứng an tâm tuyệt đối cho người lao động và gia đình)
+                 ======================================================== -->
+            <section class="py-12 bg-slate-50 border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto space-y-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-100 text-[#0274BD] text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>TIÊU CHUẨN AN TOÀN PHÁP LÝ TOÀN DIỆN</span>
+                        </div>
+                        <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-blue tracking-tight">
+                            CAM KẾT "5 KHÔNG & 5 ĐỒNG HÀNH" TỪ KIPA VIỆT HÀN
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            KIPA đặt quyền lợi và sự an toàn của người lao động lên hàng đầu, cam kết làm việc chính ngạch theo pháp luật của Nhà nước Việt Nam và quy định tiếp nhận lao động của Liên minh Châu Âu (EU).
+                        </p>
+                    </div>
+
+                    <!-- 2 Columns: 5 KHÔNG vs 5 ĐỒNG HÀNH -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Box 1: 5 KHÔNG (Đỏ) -->
+                        <div class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-red-200 shadow-sm space-y-4">
+                            <div class="flex items-center gap-3 border-b border-red-100 pb-3">
+                                <div class="w-10 h-10 rounded-2xl bg-red-100 text-[#EC1E1B] flex items-center justify-center text-lg shrink-0">
+                                    <i class="fa-solid fa-ban"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 uppercase">5 KHÔNG TUYỆT ĐỐI</h3>
+                                    <p class="text-[11px] text-slate-500">Nguyên tắc sắt bảo vệ sự an toàn của ứng viên</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG tư vấn visa du lịch (Schengen C) hoặc giấy tờ giả</strong> để đưa người sang Châu Âu lao động chui bất hợp pháp.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG phát sinh chi phí ngoài hợp đồng;</strong> toàn bộ lộ trình đóng phí được niêm yết rõ ràng theo từng đợt, có biên lai tài chính minh bạch.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG giữ bản gốc giấy tờ tùy thân</strong> (CCCD, Hộ chiếu, bằng tốt nghiệp) của học viên; KIPA chỉ lưu bản sao công chứng để làm hồ sơ.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG thông tin sai lệch về mức lương hoặc điều kiện công việc;</strong> cam kết hợp đồng dịch thuật song ngữ chuẩn xác 100%.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-xmark text-[#EC1E1B] text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>KHÔNG bỏ rơi học viên sau khi xuất cảnh;</strong> nếu hồ sơ bị từ chối do lỗi thẩm định từ KIPA, hoàn trả 100% phí dịch vụ theo hợp đồng.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Box 2: 5 ĐỒNG HÀNH (Xanh thương hiệu) -->
+                        <div class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-blue-200 shadow-sm space-y-4">
+                            <div class="flex items-center gap-3 border-b border-blue-100 pb-3">
+                                <div class="w-10 h-10 rounded-2xl bg-blue-100 text-[#0274BD] flex items-center justify-center text-lg shrink-0">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-phudu font-bold text-base sm:text-lg text-slate-900 uppercase">5 ĐỒNG HÀNH TRỌN VẸN</h3>
+                                    <p class="text-[11px] text-slate-500">KIPA đồng hành xuyên suốt từ ngày đầu đến định cư</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đồng hành thẩm định:</strong> Phân tích hồ sơ, đánh giá sức khỏe và tư vấn chọn đúng thị trường Châu Âu phù hợp năng lực hoàn toàn miễn phí.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đồng hành đào tạo:</strong> Huấn luyện ngoại ngữ (tiếng Đức A2/B1, tiếng Anh giao tiếp) và kỹ năng nghề trực tiếp tại trung tâm đào tạo KIPA.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đồng hành pháp lý:</strong> Trực tiếp làm việc với doanh nghiệp tiếp nhận tại Châu Âu để xin Giấy phép lao động (Work Permit) và xin Visa Đại sứ quán.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đồng hành đón tiếp bản địa:</strong> Cán bộ đối tác KIPA tại Đức, Ba Lan, Hungary đón trực tiếp tại sân bay, hướng dẫn nhận nhà trọ, mở tài khoản IBAN và mua sim 4G.</div>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+                                    <div><strong>Đồng hành định cư & bảo lãnh:</strong> Hỗ trợ thủ tục làm thẻ cư trú (TRC), gia hạn visa khi hết hợp đồng và bảo lãnh người thân sang Châu Âu.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Mạng lưới hỗ trợ lao động tại Châu Âu -->
+                    <div class="bg-gradient-to-br from-[#0274BD] via-[#0262a0] to-[#081D36] text-white rounded-3xl p-6 sm:p-8 lg:p-9 shadow-lg border border-white/10 relative overflow-hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                            <div class="lg:col-span-8 space-y-3">
+                                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                                    <i class="fa-solid fa-earth-europe"></i>
+                                    <span>KIPA EUROPE SUPPORT DESK</span>
+                                </div>
+                                <h3 class="font-phudu text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug">
+                                    Mạng Lưới Đón Tiếp & Bảo Trợ Người Lao Động KIPA Tại Châu Âu
+                                </h3>
+                                <p class="text-xs sm:text-sm text-blue-100 leading-relaxed">
+                                    Người lao động xuất cảnh qua KIPA luôn có đầu mối liên hệ bằng tiếng Việt tại Frankfurt (Đức) và Warsaw (Ba Lan). Đội ngũ hỗ trợ kịp thời mọi vấn đề về nơi ăn chốn ở, chuyển đổi nơi làm việc hoặc chăm sóc y tế khẩn cấp 24/7.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
+                                <a href="tel:0368513865" class="w-full px-5 py-3 rounded-full bg-white hover:bg-slate-100 text-[#081D36] font-bold text-xs shadow-md transition-all text-center flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-phone text-[#0274BD]"></i>
+                                    <span>Tổng đài bảo trợ: 036 851 3865</span>
+                                </a>
+                                <a href="https://zalo.me/0368513865" target="_blank" class="w-full px-5 py-3 rounded-full bg-blue-600/40 hover:bg-blue-600/60 text-white font-bold text-xs border border-white/20 transition-all text-center flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-comments text-amber-300"></i>
+                                    <span>Zalo Hỗ Trợ 24/7</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================
                  ROW: SECTION 09 (FAQ) & CTA BANNER HÀNH TRÌNH CHÂU ÂU
                  ======================================================== -->
             <section class="py-10 bg-[#f8fafc] border-b border-slate-200/80">
@@ -1525,7 +2430,7 @@
                         <div class="lg:col-span-6 space-y-4">
                             <div class="flex items-center gap-2">
                                 <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
-                                <h2 class="text-lg sm:text-xl font-extrabold text-[#081D36] tracking-tight">
+                                <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
                                     09. CÂU HỎI THƯỜNG GẶP (FAQ)
                                 </h2>
                             </div>
@@ -1606,41 +2511,98 @@
                             </div>
                         </div>
 
-                        <!-- RIGHT: SẴN SÀNG TÌM HIỂU CƠ HỘI LÀM VIỆC TẠI CHÂU ÂU? (lg:col-span-6) -->
-                        <div class="lg:col-span-6 flex">
-                            <div class="w-full bg-gradient-to-br from-[#0153A8] to-[#082a52] rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden flex flex-col justify-between">
-                                
-                                <!-- Background Illustration of European Architecture -->
-                                <div class="absolute right-0 bottom-0 w-52 sm:w-64 h-auto opacity-35 pointer-events-none select-none">
-                                    <img src="/assets/xuat-khau-lao-dong-chau-au/cta_europe_visual.png" 
-                                         alt="Cảnh quan Châu Âu" 
-                                         class="w-full h-auto object-contain">
+                        <!-- RIGHT: 10. ĐÀO TẠO NGOẠI NGỮ & CAM KẾT VÀNG TỪ KIPA (lg:col-span-6) -->
+                        <div class="lg:col-span-6 space-y-4 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-1.5 h-6 bg-[#EC1E1B] rounded-full inline-block"></span>
+                                    <h2 class="font-phudu text-lg sm:text-xl font-bold text-brand-blue tracking-tight">
+                                        10. ĐÀO TẠO NGOẠI NGỮ & CAM KẾT VÀNG TỪ KIPA
+                                    </h2>
                                 </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 mb-4">
+                                    KIPA đồng hành trọn vẹn từ lúc đào tạo chứng chỉ tiếng Đức/tiếng Anh, hoàn tất hồ sơ đến khi xuất cảnh và làm việc ổn định tại Châu Âu.
+                                </p>
 
-                                <!-- Top Content -->
-                                <div class="relative z-10 space-y-3">
-                                    <h3 class="text-xl sm:text-2xl font-black tracking-tight leading-snug">
-                                        Sẵn sàng tìm hiểu cơ hội<br>
-                                        làm việc tại <span class="text-[#FACC15]">Châu Âu?</span>
-                                    </h3>
-                                    <p class="text-xs sm:text-[13px] text-blue-100/90 leading-relaxed max-w-md">
-                                        Đăng ký để KIPA Việt Hàn tư vấn chi tiết chương trình, đơn hàng và lộ trình phù hợp với hồ sơ của bạn.
-                                    </p>
+                                <!-- Card Container: Photo + 4 Commitments -->
+                                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-4">
+                                    
+                                    <!-- Photo Banner: Lớp học đào tạo KIPA -->
+                                    <div class="relative w-full h-36 sm:h-40 rounded-xl overflow-hidden bg-slate-100 border border-slate-100">
+                                        <img src="/assets/xuat-khau-lao-dong/hocsinhkipa2.jpg" 
+                                             alt="Trung tâm đào tạo ngoại ngữ và kỹ năng xuất khẩu lao động KIPA" 
+                                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent flex items-end p-3">
+                                            <span class="bg-[#0153A8] text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow-xs flex items-center gap-1.5">
+                                                <i class="fa-solid fa-graduation-cap"></i>
+                                                <span>Trung Tâm Đào Tạo Ngoại Ngữ Chuẩn Xuất Khẩu Châu Âu</span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 4 Key Points -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                        
+                                        <!-- Point 1 -->
+                                        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-100 space-y-1">
+                                            <div class="font-phudu font-bold text-[#0153A8] flex items-center gap-1.5 text-[12.5px]">
+                                                <i class="fa-solid fa-bolt text-[#EC1E1B]"></i>
+                                                <span>Đào Tạo Ngoại Ngữ Cấp Tốc</span>
+                                            </div>
+                                            <p class="text-slate-600 text-[11.5px] leading-relaxed">
+                                                Lộ trình tinh gọn tiếng Đức (A2/B1) và tiếng Anh giao tiếp chuyên ngành, cam kết chuẩn bị kỹ lưỡng trước khi xuất cảnh.
+                                            </p>
+                                        </div>
+
+                                        <!-- Point 2 -->
+                                        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-100 space-y-1">
+                                            <div class="font-phudu font-bold text-[#0153A8] flex items-center gap-1.5 text-[12.5px]">
+                                                <i class="fa-solid fa-file-shield text-emerald-600"></i>
+                                                <span>Work Permit Chính Ngạch</span>
+                                            </div>
+                                            <p class="text-slate-600 text-[11.5px] leading-relaxed">
+                                                100% giấy phép lao động chính thức có mã định danh do Bộ Lao động nước sở tại cấp, pháp lý minh bạch tuyệt đối.
+                                            </p>
+                                        </div>
+
+                                        <!-- Point 3 -->
+                                        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-100 space-y-1">
+                                            <div class="font-phudu font-bold text-[#0153A8] flex items-center gap-1.5 text-[12.5px]">
+                                                <i class="fa-solid fa-hand-holding-dollar text-amber-600"></i>
+                                                <span>Minh Bạch Tài Chính Từng Kỳ</span>
+                                            </div>
+                                            <p class="text-slate-600 text-[11.5px] leading-relaxed">
+                                                Thu phí theo đúng tiến độ hồ sơ, có hợp đồng bảo đảm quyền lợi tài chính rõ ràng cho người lao động.
+                                            </p>
+                                        </div>
+
+                                        <!-- Point 4 -->
+                                        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-100 space-y-1">
+                                            <div class="font-phudu font-bold text-[#0153A8] flex items-center gap-1.5 text-[12.5px]">
+                                                <i class="fa-solid fa-plane-arrival text-blue-600"></i>
+                                                <span>Đón Sân Bay & Hỗ Trợ Tại EU</span>
+                                            </div>
+                                            <p class="text-slate-600 text-[11.5px] leading-relaxed">
+                                                Cán bộ KIPA đón tận sân bay Đức, Ba Lan, Rumani, hỗ trợ đăng ký tạm trú, mở thẻ ngân hàng và đồng hành pháp lý suốt hợp đồng.
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Bottom Action Strip -->
+                                    <div class="pt-1 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100">
+                                        <a href="#dang-ky-tu-van" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#EC1E1B] hover:bg-[#c91512] text-white font-extrabold text-xs shadow-sm transition-all">
+                                            <i class="fa-solid fa-user-check"></i>
+                                            <span>Đăng ký kiểm tra điều kiện hồ sơ</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </a>
+                                        <a href="tel:0368513865" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0153A8] hover:text-[#013f82]">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <span>Hotline: 036 851 3865</span>
+                                        </a>
+                                    </div>
+
                                 </div>
-
-                                <!-- Bottom CTAs -->
-                                <div class="relative z-10 flex flex-wrap items-center gap-3 pt-6">
-                                    <a href="#dang-ky-tu-van" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#EC1E1B] hover:bg-[#d61815] text-white font-bold text-xs shadow-md transition-all">
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>Đăng ký tư vấn ngay</span>
-                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                                    </a>
-                                    <a href="tel:0368513865" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#081D36] font-bold text-xs shadow-sm transition-all">
-                                        <i class="fa-solid fa-phone text-[#0153A8]"></i>
-                                        <span>Gọi 036 851 3865</span>
-                                    </a>
-                                </div>
-
                             </div>
                         </div>
 
@@ -1649,87 +2611,283 @@
             </section>
 
             <!-- ========================================================
-                 FORM ĐĂNG KÝ TƯ VẤN XUẤT KHẨU LAO ĐỘNG CHÂU ÂU CHÍNH NGẠCH
+                 SECTION 10.1: CÂU CHUYỆN HỌC VIÊN KIPA ĐANG LÀM VIỆC TẠI CHÂU ÂU
+                 (Bằng chứng xã hội thực tế, gia tăng niềm tin và thúc đẩy chuyển đổi)
                  ======================================================== -->
-            <section id="dang-ky-tu-van" class="py-12 bg-white border-t border-slate-100">
-                <div class="max-w-[800px] mx-auto px-4 sm:px-6">
-                    <div class="bg-gradient-to-b from-[#f8fafc] to-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg relative overflow-hidden">
-                        
-                        <!-- Top Accent Bar -->
-                        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0153A8] via-[#EC1E1B] to-[#FACC15]"></div>
+            <section class="py-12 bg-white border-b border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto space-y-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0274BD] text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <span>NGƯỜI THẬT • VIỆC THẬT • THÀNH CÔNG THẬT</span>
+                        </div>
+                        <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-blue tracking-tight">
+                            HỌC VIÊN KIPA CHIA SẺ VỀ CUỘC SỐNG VÀ THU NHẬP TẠI CHÂU ÂU
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Lắng nghe chia sẻ chân thực từ những người lao động đã tin tưởng KIPA, vượt qua rào cản ngoại ngữ và hiện đang có công việc ổn định, tích lũy vững vàng tại các quốc gia Châu Âu.
+                        </p>
+                    </div>
 
-                        <div class="text-center space-y-2 mb-8">
-                            <span class="inline-block px-3 py-1 bg-red-100 text-[#EC1E1B] rounded-full text-xs font-bold uppercase tracking-wider">
-                                Tư Vấn Miễn Phí 100%
-                            </span>
-                            <h2 class="text-2xl sm:text-3xl font-black text-[#081D36] tracking-tight">
-                                Đăng Ký Tư Vấn Xuất Khẩu Lao Động Châu Âu
-                            </h2>
-                            <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
-                                Chuyên viên tuyển dụng KIPA Việt Hàn sẽ phân tích hồ sơ và liên hệ định hướng quốc gia, đơn hàng thích hợp nhất cho bạn.
-                            </p>
+                    <!-- 3 Testimonial Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Story 1: Thợ tiện CNC tại Stuttgart, Đức -->
+                        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-700 italic leading-relaxed">
+                                    "Tôi 31 tuổi, trước ở quê làm xưởng cơ khí thu nhập bấp bênh. Được KIPA tư vấn lộ trình sang Đức và luyện thi tiếng Đức A2 cấp tốc trong 3 tháng. Hiện tại ở Stuttgart, lương thực nhận sau thuế là hơn 2.350 EUR/tháng (~62 triệu). Môi trường làm việc cực kỳ an toàn, máy móc tối tân. Tháng vừa rồi tôi đã hoàn tất thủ tục đón vợ sang!"
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200/80 flex items-center gap-3">
+                                <img src="/assets/cau-chuyen-hoc-vien/story-du-hoc-duc.jpg" alt="Anh Nguyễn Văn Nam - Kỹ thuật viên CNC tại Đức" class="w-12 h-12 rounded-full object-cover border-2 border-[#0274BD]">
+                                <div>
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Anh Nguyễn Văn Nam</div>
+                                    <div class="text-[11px] text-slate-500">Quê Nam Định • Kỹ thuật viên CNC tại Stuttgart (CHLB Đức)</div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Feedback Alert -->
-                        <div id="lead-form-alert" class="hidden mb-6 p-4 rounded-xl text-xs sm:text-sm font-semibold transition-all"></div>
-
-                        <!-- Main Form -->
-                        <form id="xkld-lead-form" onsubmit="handleXkldLeadSubmit(event)" class="space-y-4">
-                            <!-- Hidden context fields for Lead CMS -->
-                            <input aria-label="Source page" type="hidden" name="source_page" value="XKLĐ Châu Âu - KIPA Việt Hàn">
-                            <input aria-label="Form type" type="hidden" name="form_type" value="xkld_chau_au_consultation">
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">Họ và tên của bạn <span class="text-red-500">*</span></label>
-                                    <input aria-label="Hoàng Văn Tuấn" type="text" name="name" required placeholder="Ví dụ: Hoàng Văn Tuấn" class="w-full text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                        <!-- Story 2: Đóng gói thực phẩm tại Ba Lan -->
+                        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại / Zalo <span class="text-red-500">*</span></label>
-                                    <input aria-label="0912 345 678" type="tel" name="phone" required placeholder="Ví dụ: 0912 345 678" class="w-full text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                </div>
+                                <p class="text-xs text-slate-700 italic leading-relaxed">
+                                    "Sang Ba Lan làm chế biến thực phẩm qua KIPA từ đầu năm 2024, mình cảm thấy rất may mắn. Nhà máy nhiệt độ ổn định, sạch sẽ, công việc nhàn hơn ở quê nhiều. Ký túc xá đầy đủ tiện nghi, wifi, máy sưởi. Lương cơ bản kèm tăng ca được 28 - 34 triệu/tháng. Mình gửi về cho gia đình đều đặn 22 triệu/tháng."
+                                </p>
                             </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="pt-3 border-t border-slate-200/80 flex items-center gap-3">
+                                <img src="/assets/tieng-han/feedback_student_1.jpg" alt="Chị Lê Thị Mai - Công nhân thực phẩm Ba Lan" class="w-12 h-12 rounded-full object-cover border-2 border-emerald-600">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">Năm sinh / Độ tuổi</label>
-                                    <input aria-label="1995 (29 tuổi)" type="text" name="birth_year" placeholder="Ví dụ: 1995 (29 tuổi)" class="w-full text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">Tỉnh / Thành phố hiện tại</label>
-                                    <input aria-label="Hải Phòng, Hà Nội, Nghệ An..." type="text" name="location" placeholder="Ví dụ: Hải Phòng, Hà Nội, Nghệ An..." class="w-full text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Chị Lê Thị Mai</div>
+                                    <div class="text-[11px] text-slate-500">Quê Nghệ An • Đóng gói thực phẩm tại Warsaw (Ba Lan)</div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Quốc gia bạn đang quan tâm</label>
-                                <select aria-label="Interested program" id="cta-country-select" name="interested_program" class="form-select-kipa w-full text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]">
-                                    <option value="Đức">Cộng hòa Liên bang Đức (Kỹ thuật, Điều dưỡng)</option>
-                                    <option value="Ba Lan">Ba Lan (Sản xuất, Logistics, Chế biến)</option>
-                                    <option value="Hungary">Hungary (Cơ khí, Xây dựng, Nông nghiệp)</option>
-                                    <option value="Rumani">Rumani (Công nghiệp, Dịch vụ)</option>
-                                    <option value="Cộng hòa Séc">Cộng hòa Séc</option>
-                                    <option value="Bồ Đào Nha">Bồ Đào Nha</option>
-                                    <option value="Cần KIPA tư vấn định hướng theo hồ sơ">Cần KIPA kiểm tra và định hướng quốc gia phù hợp</option>
-                                </select>
+                        <!-- Story 3: Lắp ráp điện tử tại Hungary -->
+                        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-1 text-amber-400 text-xs">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-700 italic leading-relaxed">
+                                    "Đi Hungary lắp ráp linh kiện là quyết định đúng đắn nhất của mình. Lúc đầu rất sợ tiếng Anh kém, nhưng được thầy cô KIPA dạy giao tiếp cơ bản nên sang hòa nhập rất nhanh. Chi phí ăn uống ở Hungary rẻ, công ty có xe đưa đón tận cửa. Mỗi tháng mình tích lũy được gần như trọn vẹn 26 triệu đồng."
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200/80 flex items-center gap-3">
+                                <img src="/assets/tieng-han/feedback_student_3.jpg" alt="Anh Phạm Quốc Hùng - Lao động Hungary" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500">
+                                <div>
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-slate-900">Anh Phạm Quốc Hùng</div>
+                                    <div class="text-[11px] text-slate-500">Quê Hải Dương • Lắp ráp linh kiện tại Budapest (Hungary)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 SECTION: GỘP CTA BANNER & FORM ĐĂNG KÝ TƯ VẤN XUẤT KHẨU LAO ĐỘNG CHÂU ÂU
+                 (Thiết kế 2 cột hiện đại, chuyển đổi cao chuẩn thương hiệu KIPA)
+                 ======================================================== -->
+            <section id="dang-ky-tu-van" class="py-12 bg-white border-t border-slate-200/80">
+                <div class="max-w-[1240px] mx-auto px-4 sm:px-6">
+                    <div class="bg-gradient-to-br from-[#0274BD] via-[#0262a0] to-[#081D36] rounded-3xl overflow-hidden shadow-xl border border-blue-900/40 relative">
+                        
+                        <!-- Top Gradient Accent Line -->
+                        <div class="h-2 w-full bg-gradient-to-r from-[#FACC15] via-[#EC1E1B] to-[#FACC15]"></div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                            
+                            <!-- CỘT TRÁI: KHỐI CTA XANH SẴN SÀNG TÌM HIỂU CƠ HỘI (lg:col-span-5) -->
+                            <div class="lg:col-span-5 p-6 sm:p-7 lg:p-8 text-white flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10">
+                                
+                                <div class="relative z-10 space-y-4">
+                                    <!-- Badge -->
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-[11px] font-bold uppercase tracking-wider rounded-full">
+                                        <i class="fa-solid fa-star text-amber-300"></i>
+                                        <span>Cơ Hội Làm Việc Tại Châu Âu</span>
+                                    </span>
+
+                                    <!-- Heading -->
+                                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight leading-tight">
+                                        SẴN SÀNG TÌM HIỂU CƠ HỘI<br>
+                                        LÀM VIỆC TẠI <span class="text-amber-300">CHÂU ÂU?</span>
+                                    </h2>
+
+                                    <!-- Description -->
+                                    <p class="text-xs sm:text-sm text-blue-100/95 leading-relaxed">
+                                        Liên hệ KIPA Việt Hàn ngay hôm nay để được tư vấn chi tiết, xây dựng lộ trình và định hướng quốc gia phù hợp nhất với hồ sơ của bạn.
+                                    </p>
+
+                                    <!-- 4 Cam kết chính -->
+                                    <div class="space-y-2.5 pt-2 text-xs text-blue-50/90">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-5 h-5 rounded-full bg-emerald-400 text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                                <i class="fa-solid fa-check"></i>
+                                            </span>
+                                            <span>Thẩm định năng lực và điều kiện hồ sơ <strong>hoàn toàn miễn phí</strong>.</span>
+                                        </div>
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-5 h-5 rounded-full bg-emerald-400 text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                                <i class="fa-solid fa-check"></i>
+                                            </span>
+                                            <span>Định hướng đơn hàng chuẩn thị trường (Đức, Ba Lan, Hungary, Rumani).</span>
+                                        </div>
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-5 h-5 rounded-full bg-emerald-400 text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                                <i class="fa-solid fa-check"></i>
+                                            </span>
+                                            <span>Lộ trình đào tạo ngoại ngữ cấp tốc đạt chuẩn xin visa Châu Âu.</span>
+                                        </div>
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-5 h-5 rounded-full bg-emerald-400 text-slate-900 flex items-center justify-center text-[10px] font-black shrink-0">
+                                                <i class="fa-solid fa-check"></i>
+                                            </span>
+                                            <span>Chi phí minh bạch từng đợt, hợp đồng bảo đảm quyền lợi pháp lý.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Call & Contact Bar -->
+                                <div class="relative z-10 pt-6 mt-4 border-t border-white/10 flex flex-wrap items-center gap-3">
+                                    <a href="tel:0368513865" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#081D36] font-bold text-xs shadow-md transition-all transform hover:-translate-y-0.5">
+                                        <i class="fa-solid fa-phone text-[#0274BD]"></i>
+                                        <span>Gọi 036 851 3865</span>
+                                    </a>
+                                    <a href="https://zalo.me/0368513865" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600/40 hover:bg-blue-600/60 text-white font-bold text-xs border border-white/20 transition-all">
+                                        <i class="fa-solid fa-comments text-amber-300"></i>
+                                        <span>Zalo Tư Vấn 24/7</span>
+                                    </a>
+                                </div>
+
                             </div>
 
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Ghi chú thêm (kinh nghiệm, trình độ ngoại ngữ, câu hỏi...)</label>
-                                <textarea aria-label="Đã có chứng chỉ hàn 3 năm kinh nghiệm, tiếng Anh giao tiếp cơ bản..." name="note" rows="3" placeholder="Ví dụ: Đã có chứng chỉ hàn 3 năm kinh nghiệm, tiếng Anh giao tiếp cơ bản..." class="w-full text-xs sm:text-sm bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-[#0153A8] focus:ring-1 focus:ring-[#0153A8]"></textarea>
+                            <!-- CỘT PHẢI: FORM ĐĂNG KÝ TƯ VẤN TRỰC TIẾP (lg:col-span-7) -->
+                            <div class="lg:col-span-7 p-6 sm:p-7 lg:p-8 bg-white flex flex-col justify-center">
+                                
+                                <div class="space-y-1 mb-3.5">
+                                    <span class="inline-block px-3 py-1 bg-red-100 text-[#EC1E1B] rounded-full text-xs font-bold uppercase tracking-wider">
+                                        TƯ VẤN MIỄN PHÍ 100%
+                                    </span>
+                                    <h3 class="font-phudu text-xl sm:text-2xl font-bold text-brand-blue tracking-tight">
+                                        ĐĂNG KÝ TƯ VẤN XUẤT KHẨU LAO ĐỘNG CHÂU ÂU
+                                    </h3>
+                                    <p class="text-xs sm:text-[13px] text-slate-600">
+                                        Chuyên viên tuyển dụng KIPA Việt Hàn sẽ phân tích hồ sơ và liên hệ định hướng quốc gia, đơn hàng thích hợp nhất cho bạn.
+                                    </p>
+                                </div>
+
+                                <!-- Feedback Alert -->
+                                <div id="lead-form-alert" class="hidden mb-3 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all"></div>
+
+                                <!-- Exclusive Online Registration Gift Box -->
+                                <div class="mb-3.5 bg-gradient-to-r from-amber-50 via-orange-50/50 to-amber-50 border border-amber-300/80 rounded-2xl p-3 sm:p-3.5 space-y-2 shadow-xs">
+                                    <div class="flex items-center justify-between">
+                                        <span class="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase text-amber-800 bg-amber-100/90 px-2.5 py-0.5 rounded-full border border-amber-300/40">
+                                            <i class="fa-solid fa-gift text-red-500"></i>
+                                            <span>ƯU ĐÃI ĐĂNG KÝ HÔM NAY</span>
+                                        </span>
+                                        <span class="text-[11px] font-bold text-red-600 flex items-center gap-1">
+                                            <i class="fa-solid fa-bolt"></i> Phản hồi trong 15 phút
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11.5px] text-slate-800 font-semibold">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[9px] shrink-0 font-bold">
+                                                <i class="fa-solid fa-check"></i>
+                                            </span>
+                                            <span>Tặng Khóa học ngoại ngữ 3.000.000đ</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[9px] shrink-0 font-bold">
+                                                <i class="fa-solid fa-check"></i>
+                                            </span>
+                                            <span>Tặng Cẩm nang Làm việc Châu Âu 2026</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Main Form -->
+                                <form id="xkld-lead-form" onsubmit="handleXkldLeadSubmit(event)" class="space-y-3">
+                                    <!-- Hidden context fields for Lead CMS -->
+                                    <input aria-label="Source page" type="hidden" name="source_page" value="XKLĐ Châu Âu - KIPA Việt Hàn">
+                                    <input aria-label="Form type" type="hidden" name="form_type" value="xkld_chau_au_consultation">
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 mb-1">Họ và tên của bạn <span class="text-red-500">*</span></label>
+                                            <input aria-label="Hoàng Văn Tuấn" type="text" name="name" required placeholder="Ví dụ: Hoàng Văn Tuấn" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại / Zalo <span class="text-red-500">*</span></label>
+                                            <input aria-label="0912 345 678" type="tel" name="phone" required placeholder="Ví dụ: 0912 345 678" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]">
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 mb-1">Năm sinh / Độ tuổi</label>
+                                            <input aria-label="1995 (29 tuổi)" type="text" name="birth_year" placeholder="Ví dụ: 1995 (29 tuổi)" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 mb-1">Tỉnh / Thành phố hiện tại</label>
+                                            <input aria-label="Hải Phòng, Hà Nội, Nghệ An..." type="text" name="location" placeholder="Ví dụ: Hải Phòng, Hà Nội, Nghệ An..." class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Quốc gia bạn đang quan tâm</label>
+                                        <select aria-label="Interested program" id="cta-country-select" name="interested_program" class="form-select-kipa w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]">
+                                            <option value="Đức">Cộng hòa Liên bang Đức (Kỹ thuật, Điều dưỡng)</option>
+                                            <option value="Ba Lan">Ba Lan (Sản xuất, Logistics, Chế biến)</option>
+                                            <option value="Hungary">Hungary (Cơ khí, Xây dựng, Nông nghiệp)</option>
+                                            <option value="Rumani">Rumani (Công nghiệp, Dịch vụ)</option>
+                                            <option value="Cộng hòa Séc">Cộng hòa Séc</option>
+                                            <option value="Bồ Đào Nha">Bồ Đào Nha</option>
+                                            <option value="Cần KIPA tư vấn định hướng theo hồ sơ">Cần KIPA kiểm tra và định hướng quốc gia phù hợp</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Ghi chú thêm (kinh nghiệm, trình độ ngoại ngữ, câu hỏi...)</label>
+                                        <textarea aria-label="Đã có chứng chỉ hàn 3 năm kinh nghiệm, tiếng Anh giao tiếp cơ bản..." name="note" rows="2" placeholder="Ví dụ: Đã có chứng chỉ hàn 3 năm kinh nghiệm, tiếng Anh giao tiếp cơ bản..." class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-[#0274BD] focus:bg-white focus:ring-1 focus:ring-[#0274BD]"></textarea>
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button id="btn-submit-lead" type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#EC1E1B] hover:bg-[#d61815] text-white font-black text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 tracking-wide">
+                                            <span>GỬI YÊU CẦU TƯ VẤN MIỄN PHÍ NGAY</span>
+                                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </button>
+                                    </div>
+
+                                    <p class="text-[11px] text-center text-slate-400 mt-2">
+                                        <i class="fa-solid fa-lock text-[10px] mr-1"></i> Thông tin của bạn được cam kết bảo mật 100% theo chính sách quyền riêng tư KIPA Việt Hàn.
+                                    </p>
+                                </form>
                             </div>
 
-                            <div class="pt-2">
-                                <button id="btn-submit-lead" type="submit" class="w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#EC1E1B] hover:bg-[#d61815] text-white font-black text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
-                                    <span>Gửi yêu cầu tư vấn miễn phí</span>
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                                </button>
-                            </div>
-
-                            <p class="text-[11px] text-center text-slate-400 mt-2">
-                                <i class="fa-solid fa-lock text-[10px] mr-1"></i> Thông tin của bạn được cam kết bảo mật 100% theo chính sách quyền riêng tư KIPA Việt Hàn.
-                            </p>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1764,7 +2922,7 @@
                     <span class="w-8 h-8 rounded-full bg-blue-100 text-[#0153A8] flex items-center justify-center font-bold text-sm">
                         <i class="fa-solid fa-globe"></i>
                     </span>
-                    <h3 class="font-extrabold text-base text-slate-800">Thị Trường Châu Âu Phù Hợp</h3>
+                    <h3 class="font-phudu font-bold text-base text-brand-blue">Thị Trường Châu Âu Phù Hợp</h3>
                 </div>
                 <button type="button" onclick="closeSearchModal()" class="text-slate-400 hover:text-slate-600 p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
@@ -1792,13 +2950,22 @@
     <div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="closeVideoModal(event)">
         <div class="bg-black rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between p-3 bg-slate-900 text-white">
-                <span class="text-xs font-bold text-slate-200">Trải nghiệm môi trường làm việc & cuộc sống tại Châu Âu</span>
-                <button type="button" onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-base"></i>
-                </button>
+                <div class="flex items-center gap-2">
+                    <i class="fa-brands fa-youtube text-red-500 text-lg"></i>
+                    <span class="text-xs font-bold text-slate-200">KIPA VIỆT HÀN – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="https://youtu.be/CGz_FpIwjNk" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-300 hover:text-white hover:underline flex items-center gap-1.5 transition-colors bg-white/10 px-2.5 py-1 rounded-md">
+                        <span>Mở YouTube</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                    <button type="button" onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-1 transition-colors" title="Đóng">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
             </div>
             <div class="aspect-video w-full bg-black flex items-center justify-center">
-                <iframe id="video-frame" class="w-full h-full" src="" title="Video làm việc tại Châu Âu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="video-frame" class="w-full h-full" src="" title="KIPA VIỆT HÀN – Khai trương cơ sở mới, lan tỏa giá trị giáo dục quốc tế" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -1904,7 +3071,7 @@
         function openVideoModal() {
             const modal = document.getElementById('video-modal');
             const frame = document.getElementById('video-frame');
-            frame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; // default preview
+            frame.src = "https://www.youtube.com/embed/CGz_FpIwjNk?autoplay=1";
             modal.classList.remove('hidden');
         }
 
@@ -1913,6 +3080,49 @@
             const frame = document.getElementById('video-frame');
             frame.src = "";
             modal.classList.add('hidden');
+        }
+
+        // Filter European Jobs by Country Tab
+        function filterEuJobs(country, btn) {
+            // Update Tab styles
+            document.querySelectorAll('.eu-job-tab').forEach(tab => {
+                tab.classList.remove('bg-[#0274BD]', 'text-white', 'shadow-xs');
+                tab.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+            });
+            btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+            btn.classList.add('bg-[#0274BD]', 'text-white', 'shadow-xs');
+
+            // Filter cards
+            const cards = document.querySelectorAll('.eu-job-item');
+            cards.forEach(card => {
+                if (country === 'all' || card.getAttribute('data-country') === country) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Apply Job Order helper (auto-populate form note and smooth scroll)
+        function applyJobOrder(jobTitle) {
+            const ctaSection = document.getElementById('dang-ky-tu-van');
+            const noteTextarea = document.querySelector('#xkld-lead-form textarea[name="note"]');
+            const countrySelect = document.getElementById('cta-country-select');
+
+            if (noteTextarea) {
+                noteTextarea.value = `Muốn nhận thông tin chi tiết và nộp hồ sơ ứng tuyển đơn: ${jobTitle}. Đề nghị KIPA liên hệ hỗ trợ.`;
+            }
+
+            if (countrySelect) {
+                if (jobTitle.includes('Đức')) countrySelect.value = 'Đức';
+                else if (jobTitle.includes('Ba Lan')) countrySelect.value = 'Ba Lan';
+                else if (jobTitle.includes('Hungary')) countrySelect.value = 'Hungary';
+                else if (jobTitle.includes('Rumani')) countrySelect.value = 'Rumani';
+            }
+
+            if (ctaSection) {
+                ctaSection.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
         // Form Submit Handler

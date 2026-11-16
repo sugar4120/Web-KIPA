@@ -119,10 +119,14 @@
         .bg-brand-yellow { background-color: #FFF017 !important; }
         .bg-brand-navy { background-color: #081D36 !important; }
         .text-brand-navy { color: #081D36 !important; }
-        html { scroll-behavior: smooth; }
+        html, body {
+            scroll-behavior: smooth;
+            overflow-x: hidden !important;
+            max-width: 100vw;
+        }
     </style>
 </head>
-<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen">
+<body class="antialiased bg-[#fafbfc] text-[#1e293b] flex flex-col min-h-screen overflow-x-hidden">
 
     <!-- SITE HEADER -->
     <!-- KIPA VIET HAN - HEADER COMPONENT (Tuong thich 100% Elementor & WordPress) -->
@@ -795,7 +799,7 @@
         <!-- ========================================================
              1. BREADCRUMBS & HERO SECTION (Full-bleed Organic European Banner)
              ======================================================== -->
-        <section class="relative bg-gradient-to-r from-[#eef6fc] via-[#f5f9fd] to-[#e4f0fa] pt-4 pb-12 sm:pb-16 border-b border-slate-100/80 overflow-hidden">
+        <section class="relative pt-4 pb-12 sm:pb-16 border-b border-slate-100/80 overflow-hidden" style="background: linear-gradient(180deg, #f0f7fd 0%, #fafbfc 100%) !important;">
             <!-- Subtle atmospheric glow -->
             <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute top-1/2 -right-24 w-96 h-96 bg-sky-100/40 rounded-full blur-3xl pointer-events-none"></div>
@@ -842,7 +846,7 @@
 
                         <!-- CTA Actions -->
                         <div class="flex flex-wrap items-center gap-3.5 pt-1">
-                            <a href="#kham-pha-quoc-gia" class="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 rounded-xl bg-gradient-to-r from-[#EC1E1B] to-[#d41815] hover:from-[#d41815] hover:to-[#b91512] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                            <a href="#kham-pha-quoc-gia" style="background: #EC1E1B !important; color: #ffffff !important;" class="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 rounded-xl bg-[#EC1E1B] hover:bg-[#c71714] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
                                 <span>Khám phá các quốc gia</span>
                                 <i class="fa-solid fa-arrow-right text-xs"></i>
                             </a>
@@ -873,10 +877,21 @@
                         </div>
                     </div>
 
-                    <!-- Right Hero Visual: Trộn mềm tự nhiên với nền, không bị viền hộp cứng -->
+                    <!-- Right Hero Visual: Thẻ ảnh thực tế đoàn học viên KIPA xuất cảnh du học Châu Âu -->
                     <div class="lg:col-span-6 flex justify-center lg:justify-end">
                         <div class="relative w-full max-w-[620px] transform hover:scale-[1.01] transition-all duration-300">
-                            <img src="/assets/du-hoc-chau-au/hero_student_blended.png" alt="Du học Châu Âu cùng KIPA Việt Hàn - Nữ sinh viên trước Tháp Eiffel" class="w-full h-auto object-contain block drop-shadow-sm">
+                            <div class="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-white">
+                                <img src="/assets/du-hoc-chau-au/hero_du_hoc_chau_au_thuc_te.jpg" alt="Đoàn học viên KIPA Việt Hàn xuất cảnh du học Châu Âu" class="w-full h-auto object-cover block">
+                                <div class="absolute bottom-3 left-3 right-3 sm:right-auto bg-slate-900/85 backdrop-blur-md text-white px-3.5 py-2 rounded-xl text-xs flex items-center gap-2.5 shadow-md border border-white/10">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-500 text-white flex items-center justify-center text-[11px] font-bold shrink-0">
+                                        <i class="fa-solid fa-passport"></i>
+                                    </span>
+                                    <div class="leading-tight">
+                                        <p class="font-bold text-[11.5px] text-white">Đoàn học viên KIPA xuất cảnh</p>
+                                        <p class="text-[9.5px] text-slate-300">Visa Schengen & Đồng hành trọn vẹn tại Châu Âu</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1138,6 +1153,7 @@
                         <div>
                             <div class="h-32 overflow-hidden relative">
                                 <img src="/assets/du-hoc-chau-au/country_duc.png" alt="Du học Đức" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-white/90 backdrop-blur-xs shadow-xs flex items-center justify-center text-xs">🇩🇪</span>
                             </div>
                             <div class="p-3.5 space-y-1.5">
                                 <h3 class="font-phudu font-bold text-[#081D36] group-hover:text-[#0274BD] text-base flex items-center gap-1.5 transition-colors">
@@ -1161,6 +1177,7 @@
                         <div>
                             <div class="h-32 overflow-hidden relative">
                                 <img src="/assets/du-hoc-chau-au/country_phap.png" alt="Du học Pháp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-white/90 backdrop-blur-xs shadow-xs flex items-center justify-center text-xs">🇫🇷</span>
                             </div>
                             <div class="p-3.5 space-y-1.5">
                                 <h3 class="font-phudu font-bold text-[#081D36] group-hover:text-[#0274BD] text-base flex items-center gap-1.5 transition-colors">
@@ -1184,6 +1201,7 @@
                         <div>
                             <div class="h-32 overflow-hidden relative">
                                 <img src="/assets/du-hoc-chau-au/country_y.png" alt="Du học Ý" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-white/90 backdrop-blur-xs shadow-xs flex items-center justify-center text-xs">🇮🇹</span>
                             </div>
                             <div class="p-3.5 space-y-1.5">
                                 <h3 class="font-phudu font-bold text-[#081D36] group-hover:text-[#0274BD] text-base flex items-center gap-1.5 transition-colors">
@@ -1207,6 +1225,7 @@
                         <div>
                             <div class="h-32 overflow-hidden relative">
                                 <img src="/assets/du-hoc-chau-au/country_halan.png" alt="Du học Hà Lan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-white/90 backdrop-blur-xs shadow-xs flex items-center justify-center text-xs">🇳🇱</span>
                             </div>
                             <div class="p-3.5 space-y-1.5">
                                 <h3 class="font-phudu font-bold text-[#081D36] group-hover:text-[#0274BD] text-base flex items-center gap-1.5 transition-colors">
@@ -1230,6 +1249,7 @@
                         <div>
                             <div class="h-32 overflow-hidden relative">
                                 <img src="/assets/du-hoc-chau-au/country_balan.png" alt="Du học Ba Lan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-white/90 backdrop-blur-xs shadow-xs flex items-center justify-center text-xs">🇵🇱</span>
                             </div>
                             <div class="p-3.5 space-y-1.5">
                                 <h3 class="font-phudu font-bold text-[#081D36] group-hover:text-[#0274BD] text-base flex items-center gap-1.5 transition-colors">
@@ -1253,6 +1273,7 @@
                         <div>
                             <div class="h-32 overflow-hidden relative">
                                 <img src="/assets/du-hoc-chau-au/country_thuydien.png" alt="Du học Thụy Điển" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2.5 left-2.5 w-6 h-6 rounded-full bg-white/90 backdrop-blur-xs shadow-xs flex items-center justify-center text-xs">🇸🇪</span>
                             </div>
                             <div class="p-3.5 space-y-1.5">
                                 <h3 class="font-phudu font-bold text-[#081D36] group-hover:text-[#0274BD] text-base flex items-center gap-1.5 transition-colors">
@@ -1457,25 +1478,25 @@
                         </div>
 
                         <!-- Dải Đặc Quyền Thẻ Cư Trú & Visa Schengen Toàn Châu Âu -->
-                        <div class="rounded-2xl bg-gradient-to-r from-[#081D36] via-[#0274BD] to-[#015285] text-white p-3.5 sm:px-4 sm:py-3.5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-amber-300 text-sm shrink-0">
+                        <div class="rounded-2xl text-white p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3.5 border border-blue-900/40" style="background: linear-gradient(135deg, #081D36 0%, #0274BD 100%) !important;">
+                            <div class="flex items-center gap-3 shrink-0">
+                                <span class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-amber-300 text-base shrink-0 shadow-xs">
                                     <i class="fa-solid fa-passport"></i>
                                 </span>
                                 <div>
-                                    <div class="font-phudu font-bold text-xs text-white">Đặc quyền Thẻ cư trú & Visa Schengen</div>
-                                    <div class="text-[10.5px] text-blue-100/80">Áp dụng chung cho du học sinh KIPA tại 29 quốc gia Châu Âu</div>
+                                    <div class="font-phudu font-bold text-xs sm:text-sm text-white">Đặc quyền Thẻ cư trú & Visa Schengen</div>
+                                    <div class="text-[11px] text-blue-100/90">Áp dụng chung cho du học sinh KIPA tại 29 quốc gia Châu Âu</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap items-center gap-2 text-[11px] text-white/95 shrink-0">
-                                <span class="inline-flex items-center gap-1 bg-white/10 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-white/10">
-                                    <i class="fa-solid fa-train text-amber-300 text-[10px]"></i> 29 nước tự do
+                            <div class="flex flex-wrap items-center gap-2 text-xs text-white/95 shrink-0">
+                                <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/15 font-medium">
+                                    <i class="fa-solid fa-train text-amber-300 text-[11px]"></i> 29 nước tự do
                                 </span>
-                                <span class="inline-flex items-center gap-1 bg-white/10 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-white/10">
-                                    <i class="fa-solid fa-briefcase text-emerald-300 text-[10px]"></i> Làm thêm 20h/tuần
+                                <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/15 font-medium">
+                                    <i class="fa-solid fa-briefcase text-emerald-300 text-[11px]"></i> Làm thêm 20h/tuần
                                 </span>
-                                <span class="inline-flex items-center gap-1 bg-white/10 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-white/10">
-                                    <i class="fa-solid fa-graduation-cap text-sky-300 text-[10px]"></i> Chuẩn Bologna ECTS
+                                <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/15 font-medium">
+                                    <i class="fa-solid fa-graduation-cap text-sky-300 text-[11px]"></i> Chuẩn Bologna ECTS
                                 </span>
                             </div>
                         </div>
@@ -1558,7 +1579,7 @@
 
                                     <!-- Submit Button -->
                                     <div class="pt-2">
-                                        <button type="button" onclick="calculateEuPath()" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#F59E0B] via-[#EAB308] to-[#D97706] hover:brightness-105 text-white font-extrabold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                                        <button type="button" onclick="calculateEuPath()" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important; color: #ffffff !important;" class="w-full py-3 rounded-xl bg-[#F59E0B] hover:brightness-105 text-white font-extrabold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
                                             <i class="fa-solid fa-magnifying-glass text-xs"></i>
                                             <span>Tìm quốc gia phù hợp</span>
                                         </button>
@@ -1751,6 +1772,344 @@
                         </div>
                     </div>
 
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========================================================
+             6B. HỆ THỐNG TRƯỜNG ĐẠI HỌC DANH TIẾNG & HỌC BỔNG CHÂU ÂU
+             (Sáng tạo & Khác biệt: Bộ lọc quốc gia, thông tin ngành học & học bổng minh bạch)
+             ======================================================== -->
+        <section id="truong-dai-hoc" class="py-12 sm:py-16 bg-gradient-to-b from-white via-slate-50/70 to-white border-y border-slate-100">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold text-[#0274BD] bg-blue-50 border border-blue-100">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>HỆ THỐNG ĐẠI HỌC HÀNG ĐẦU CHÂU ÂU</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-4xl font-bold text-[#081D36]">
+                        Top Trường Đại Học Dẫn Đầu & Học Bổng Toàn Phần
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                        KIPA liên kết và hướng dẫn ứng tuyển vào các trường đại học công lập uy tín hàng đầu – Cơ hội miễn <strong class="text-[#0274BD]">100% học phí</strong>, nhận học bổng sinh hoạt phí và chương trình giảng dạy hoàn toàn bằng <strong class="text-[#081D36]">Tiếng Anh</strong>.
+                    </p>
+                </div>
+
+                <!-- Country Filter Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+                    <button type="button" onclick="filterUnis('all', this)" class="uni-tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0274BD] text-white shadow-sm transition-all hover:opacity-95">
+                        🌍 Tất cả trường
+                    </button>
+                    <button type="button" onclick="filterUnis('duc', this)" class="uni-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-blue-300 hover:text-[#0274BD] transition-all">
+                        🇩🇪 Đức (Miễn 100% học phí)
+                    </button>
+                    <button type="button" onclick="filterUnis('halan', this)" class="uni-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-blue-300 hover:text-[#0274BD] transition-all">
+                        🇳🇱 Hà Lan (100% Tiếng Anh)
+                    </button>
+                    <button type="button" onclick="filterUnis('phap', this)" class="uni-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-blue-300 hover:text-[#0274BD] transition-all">
+                        🇫🇷 Pháp (Trợ cấp CAF 50%)
+                    </button>
+                    <button type="button" onclick="filterUnis('y', this)" class="uni-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-blue-300 hover:text-[#0274BD] transition-all">
+                        🇮🇹 Ý (Học bổng Vùng DSU)
+                    </button>
+                </div>
+
+                <!-- Universities Grid (6 Cards) -->
+                <div id="uni-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1: TUM (Đức) -->
+                    <div class="uni-card bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-lg transition-all p-5 sm:p-6 flex flex-col justify-between space-y-4 group" data-country="duc">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-award text-amber-600"></i> QS #28 Thế Giới • #1 Đức
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                    🇩🇪 Đức
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-lg font-bold text-[#081D36] group-hover:text-[#0274BD] transition-colors">
+                                    Đại học Kỹ thuật Munich (TUM)
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">Technical University of Munich • Munich, Bavaria</p>
+                            </div>
+                            <div class="space-y-2 pt-1 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học phí:</span>
+                                    <span class="font-bold text-emerald-600">Miễn 100% học phí (~152€/kỳ)</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Chương trình:</span>
+                                    <span class="font-semibold text-slate-800">Cử nhân & Thạc sĩ Tiếng Anh</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-slate-800">CNTT, AI, Robot, Ô tô tự hành</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Visa ở lại:</span>
+                                    <span class="font-bold text-[#0274BD]">18 tháng sau tốt nghiệp</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-medium">Lương Kỹ sư: 52k - 68k €/năm</span>
+                            <a href="#tu-van" class="inline-flex items-center gap-1 text-xs font-bold text-[#0274BD] hover:text-[#081D36] group-hover:translate-x-0.5 transition-all">
+                                <span>Tư vấn hồ sơ</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: UvA (Hà Lan) -->
+                    <div class="uni-card bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-lg transition-all p-5 sm:p-6 flex flex-col justify-between space-y-4 group" data-country="halan">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-award text-amber-600"></i> QS #53 Thế Giới • #1 Hà Lan
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-50 text-orange-700 border border-orange-100">
+                                    🇳🇱 Hà Lan
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-lg font-bold text-[#081D36] group-hover:text-[#0274BD] transition-colors">
+                                    Đại học Amsterdam (UvA)
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">University of Amsterdam • Amsterdam</p>
+                            </div>
+                            <div class="space-y-2 pt-1 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học phí:</span>
+                                    <span class="font-bold text-slate-800">~9.000 - 13.500 €/năm</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học bổng:</span>
+                                    <span class="font-bold text-emerald-600">Holland Scholarship tới 5.000€</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngôn ngữ:</span>
+                                    <span class="font-semibold text-slate-800">100% Tiếng Anh toàn bộ ngành</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Visa ở lại:</span>
+                                    <span class="font-bold text-[#0274BD]">Orientation Year 12 tháng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-medium">Kinh doanh, Tài chính, AI</span>
+                            <a href="#tu-van" class="inline-flex items-center gap-1 text-xs font-bold text-[#0274BD] hover:text-[#081D36] group-hover:translate-x-0.5 transition-all">
+                                <span>Tư vấn hồ sơ</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Sorbonne (Pháp) -->
+                    <div class="uni-card bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-lg transition-all p-5 sm:p-6 flex flex-col justify-between space-y-4 group" data-country="phap">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-blue-800 border border-blue-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-award text-blue-600"></i> QS #59 Toàn Cầu • Top Pháp
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                                    🇫🇷 Pháp
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-lg font-bold text-[#081D36] group-hover:text-[#0274BD] transition-colors">
+                                    Đại học Sorbonne Paris
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">Sorbonne Université • Paris</p>
+                            </div>
+                            <div class="space-y-2 pt-1 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học phí:</span>
+                                    <span class="font-bold text-emerald-600">Nhà nước hỗ trợ 2/3 (~2.850€/năm)</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Trợ cấp nhà ở:</span>
+                                    <span class="font-bold text-[#0274BD]">Hưởng quỹ CAF 150-250€/tháng</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-slate-800">Toán tin, Y sinh, Quản trị văn hóa</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Visa ở lại:</span>
+                                    <span class="font-bold text-[#0274BD]">Thẻ RECE 12 - 24 tháng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-medium">Chi phí sinh hoạt tối ưu</span>
+                            <a href="#tu-van" class="inline-flex items-center gap-1 text-xs font-bold text-[#0274BD] hover:text-[#081D36] group-hover:translate-x-0.5 transition-all">
+                                <span>Tư vấn hồ sơ</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: UniBo (Ý) -->
+                    <div class="uni-card bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-lg transition-all p-5 sm:p-6 flex flex-col justify-between space-y-4 group" data-country="y">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-crown text-amber-600"></i> ĐH Lâu Đời Nhất TG (1088)
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                    🇮🇹 Ý
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-lg font-bold text-[#081D36] group-hover:text-[#0274BD] transition-colors">
+                                    Đại học Bologna (UniBo)
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">Alma Mater Studiorum - UniBo • Bologna</p>
+                            </div>
+                            <div class="space-y-2 pt-1 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học phí theo ISEE:</span>
+                                    <span class="font-bold text-emerald-600">Chỉ từ 1.000 - 3.000 €/năm</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học bổng Vùng DSU:</span>
+                                    <span class="font-bold text-[#0274BD]">Miễn 100% HP + Cấp 7.000€/năm</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-slate-800">Thời trang, Kiến trúc, Kinh tế</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngôn ngữ:</span>
+                                    <span class="font-semibold text-slate-800">Chương trình Tiếng Anh đa dạng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-medium">Học bổng vùng hỗ trợ SV Việt Nam</span>
+                            <a href="#tu-van" class="inline-flex items-center gap-1 text-xs font-bold text-[#0274BD] hover:text-[#081D36] group-hover:translate-x-0.5 transition-all">
+                                <span>Tư vấn hồ sơ</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Heidelberg (Đức) -->
+                    <div class="uni-card bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-lg transition-all p-5 sm:p-6 flex flex-col justify-between space-y-4 group" data-country="duc">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-purple-50 text-purple-800 border border-purple-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-microscope text-purple-600"></i> Top 3 Đức • Y Sinh #1 Châu Âu
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                    🇩🇪 Đức
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-lg font-bold text-[#081D36] group-hover:text-[#0274BD] transition-colors">
+                                    Đại học Heidelberg (Uni Heidelberg)
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">Universität Heidelberg • Heidelberg</p>
+                            </div>
+                            <div class="space-y-2 pt-1 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học phí:</span>
+                                    <span class="font-bold text-slate-800">1.500 €/kỳ cho SV ngoài EU</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Cơ hội Thẻ Xanh:</span>
+                                    <span class="font-bold text-emerald-600">EU Blue Card sau 21 tháng đi làm</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-slate-800">Y khoa, Dược học, Vật lý lượng tử</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Việc làm sau TN:</span>
+                                    <span class="font-bold text-[#0274BD]">Lương Y khoa: 60k - 85k €/năm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-medium">Bằng cấp y dược giá trị toàn cầu</span>
+                            <a href="#tu-van" class="inline-flex items-center gap-1 text-xs font-bold text-[#0274BD] hover:text-[#081D36] group-hover:translate-x-0.5 transition-all">
+                                <span>Tư vấn hồ sơ</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: TU Delft (Hà Lan) -->
+                    <div class="uni-card bg-white rounded-2xl border border-slate-200 hover:border-blue-300 shadow-xs hover:shadow-lg transition-all p-5 sm:p-6 flex flex-col justify-between space-y-4 group" data-country="halan">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-award text-amber-600"></i> QS #10 Kỹ Thuật Toàn Cầu
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-50 text-orange-700 border border-orange-100">
+                                    🇳🇱 Hà Lan
+                                </span>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-lg font-bold text-[#081D36] group-hover:text-[#0274BD] transition-colors">
+                                    Đại học Công nghệ Delft (TU Delft)
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">Delft University of Technology • Delft</p>
+                            </div>
+                            <div class="space-y-2 pt-1 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học phí:</span>
+                                    <span class="font-bold text-slate-800">~15.000 €/năm</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Học bổng:</span>
+                                    <span class="font-bold text-emerald-600">Delft Excellence tới 100% HP</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Ngành thế mạnh:</span>
+                                    <span class="font-semibold text-slate-800">Hàng không vũ trụ, Năng lượng, Chip</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Cơ hội làm việc:</span>
+                                    <span class="font-bold text-[#0274BD]">Thung lũng ASML & Brainport</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-500 font-medium">96% có việc làm trong 3 tháng</span>
+                            <a href="#tu-van" class="inline-flex items-center gap-1 text-xs font-bold text-[#0274BD] hover:text-[#081D36] group-hover:translate-x-0.5 transition-all">
+                                <span>Tư vấn hồ sơ</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Callout Banner with CTA -->
+                <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-blue-900 via-[#0274BD] to-[#081D36] text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-5" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #081D36 100%) !important;">
+                    <div class="space-y-1.5 text-center md:text-left">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FED049] text-[#081D36]">
+                            <i class="fa-solid fa-bolt"></i> CƠ HỘI HỌC BỔNG KỲ 2026 - 2027
+                        </div>
+                        <h4 class="font-phudu text-lg sm:text-xl font-bold">
+                            Chưa biết trường nào và ngành nào phù hợp nhất với GPA & IELTS hiện tại của bạn?
+                        </h4>
+                        <p class="text-xs sm:text-sm text-blue-100 max-w-2xl">
+                            Đội ngũ cố vấn KIPA sẽ phân tích hồ sơ học bạ 1:1, đánh giá năng lực ngoại ngữ và gửi cho bạn danh sách 3 trường có tỷ lệ đỗ học bổng cao nhất hoàn toàn miễn phí.
+                        </p>
+                    </div>
+                    <a href="#tu-van" class="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white shadow-md hover:scale-105 transition-all text-xs sm:text-sm whitespace-nowrap" style="background: #EC1E1B !important; color: #ffffff !important;">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Đánh Giá Hồ Sơ & Săn Học Bổng 1:1</span>
+                    </a>
                 </div>
 
             </div>
@@ -1952,13 +2311,333 @@
                             <!-- Right Photo (sm:col-span-5) -->
                             <div class="sm:col-span-5">
                                 <div class="rounded-2xl overflow-hidden shadow-xs border border-slate-100">
-                                    <img src="/assets/du-hoc-chau-au/campus_students.png" alt="Học viên KIPA tại khuôn viên trường đại học Châu Âu" class="w-full h-auto object-cover block">
+                                    <img src="/assets/du-hoc-chau-au/campus_students.png" alt="Cán bộ giáo viên và học viên tại văn phòng tuyển sinh du học KIPA Việt Hàn" class="w-full h-auto object-cover block">
                                 </div>
                             </div>
 
                         </div>
                     </div>
 
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========================================================
+             7B. ĐỘC QUYỀN KIPA CARE 360° & 6 CAM KẾT VÀNG + BẢNG SO SÁNH
+             (Khác biệt tuyệt đối với đối thủ - Tăng tối đa tỷ lệ chuyển đổi)
+             ======================================================== -->
+        <section id="kipa-care-360" class="py-12 sm:py-16 bg-white border-t border-slate-100">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold text-[#EC1E1B] bg-red-50 border border-red-100">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>ĐỘC QUYỀN BẢO HỘ TẠI CHÂU ÂU</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-4xl font-bold text-[#081D36]">
+                        KIPA Care 360° – Hệ Sinh Thái Đồng Hành Độc Quyền Tại Châu Âu
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                        Khác biệt lớn nhất của KIPA Việt Hàn: Chúng tôi không dừng lại khi bạn nhận được Visa. KIPA bảo hộ toàn diện suốt <strong class="text-[#0274BD]">4 chặng hành trình</strong> từ Việt Nam đến tận giảng đường và công việc định cư tại Châu Âu.
+                    </p>
+                </div>
+
+                <!-- 4 Chặng Đồng Hành Thực Tế (Visual 4-Stage Cards) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    
+                    <!-- Chặng 1 -->
+                    <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-100 shadow-2xs hover:shadow-md hover:border-blue-200 transition-all flex flex-col justify-between space-y-3">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="w-8 h-8 rounded-xl bg-[#0274BD] text-white flex items-center justify-center font-bold text-xs">01</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100/70 text-[#0274BD]">Tại Việt Nam</span>
+                            </div>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36]">Chiến Lược Hồ Sơ & Đào Tạo</h3>
+                            <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Đánh giá năng lực 1:1, lên lộ trình chọn trường & ngành tối ưu tỷ lệ việc làm.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Luyện phỏng vấn APS/Đại sứ quán cùng cố vấn có kinh nghiệm du học Châu Âu.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Mở tài khoản phong tỏa Sperrkonto / chứng minh tài chính chuẩn chỉ 100%.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chặng 2 -->
+                    <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-100 shadow-2xs hover:shadow-md hover:border-blue-200 transition-all flex flex-col justify-between space-y-3">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="w-8 h-8 rounded-xl bg-[#0274BD] text-white flex items-center justify-center font-bold text-xs">02</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-sky-100/70 text-sky-700">Trước Khi Bay</span>
+                            </div>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36]">Hành Trang & An Tâm Cất Cánh</h3>
+                            <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Pre-departure Briefing: quy định hành lý, quá cảnh, thủ tục nhập cảnh Schengen.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>SIM 4G Châu Âu cài sẵn kích hoạt ngay khi hạ cánh, kết nối nhóm bay cùng kỳ.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Đặt vé máy bay giá ưu đãi du học sinh (được thêm kiện hành lý 40kg).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chặng 3 -->
+                    <div class="bg-blue-50/50 rounded-2xl p-5 border border-blue-100 shadow-2xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col justify-between space-y-3 relative overflow-hidden">
+                        <div class="absolute -top-3 -right-3 w-12 h-12 bg-amber-400/20 rounded-full blur-md"></div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="w-8 h-8 rounded-xl bg-[#0274BD] text-white flex items-center justify-center font-bold text-xs">03</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">Đặc Quyền KIPA</span>
+                            </div>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36]">Đón Sân Bay & Đảm Bảo KTX</h3>
+                            <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span><strong class="text-[#081D36]">Đảm bảo 100% chỗ ở/KTX</strong> trước khi bay – giải tỏa nỗi lo lớn nhất của phụ huynh.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Cán bộ KIPA / KIPA Club đón tại sân bay Châu Âu và đưa về nơi ở an toàn.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Hỗ trợ đăng ký tạm trú (Anmeldung), mở thẻ ngân hàng, kích hoạt BHYT.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chặng 4 -->
+                    <div class="bg-slate-50/80 rounded-2xl p-5 border border-slate-100 shadow-2xs hover:shadow-md hover:border-blue-200 transition-all flex flex-col justify-between space-y-3">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="w-8 h-8 rounded-xl bg-[#0274BD] text-white flex items-center justify-center font-bold text-xs">04</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">Tương Lai EU</span>
+                            </div>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36]">Học Tập, Việc Làm & Định Cư</h3>
+                            <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Hướng dẫn tìm việc làm thêm hợp pháp (20h/tuần) mức lương 12 - 15 €/giờ.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Kết nối cộng đồng KIPA Alumni chia sẻ cơ hội thực tập và tuyển dụng tại EU.</span>
+                                </li>
+                                <li class="flex items-start gap-1.5">
+                                    <i class="fa-solid fa-check text-emerald-600 mt-0.5 shrink-0"></i>
+                                    <span>Tư vấn chuyển đổi Visa tìm việc 18 tháng & Thẻ xanh Châu Âu (EU Blue Card).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 6 Cam Kết Vàng KIPA (Bảo Vệ Quyền Lợi Khách Hàng) -->
+                <div class="rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden" style="background: linear-gradient(135deg, #07192e 0%, #081D36 45%, #0274BD 100%) !important;">
+                    <div class="relative z-10 space-y-6">
+                        <div class="text-center max-w-2xl mx-auto space-y-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold text-[#FED049] bg-white/10 border border-white/15">
+                                BẢO ĐẢM PHÁP LÝ & TÀI CHÍNH
+                            </span>
+                            <h3 class="font-phudu text-2xl sm:text-3xl font-bold">
+                                6 Cam Kết Vàng – An Tâm Tuyệt Đối Khi Chọn KIPA
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-200">
+                                Cam kết bằng hợp đồng pháp lý minh bạch – Bảo vệ quyền lợi của học sinh và gia đình ở mức cao nhất.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                            <!-- Cam kết 1 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-amber-400 text-[#081D36] flex items-center justify-center font-bold text-lg mb-3">
+                                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                                </div>
+                                <h4 class="font-phudu text-sm sm:text-base font-bold text-amber-300 mb-1">1. Hoàn 100% Phí Nếu Lỗi Hồ Sơ</h4>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    Hoàn lại 100% phí dịch vụ theo đúng điều khoản hợp đồng nếu hồ sơ bị từ chối Visa do lỗi từ phía KIPA.
+                                </p>
+                            </div>
+
+                            <!-- Cam kết 2 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-400 text-[#081D36] flex items-center justify-center font-bold text-lg mb-3">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                </div>
+                                <h4 class="font-phudu text-sm sm:text-base font-bold text-emerald-300 mb-1">2. Chi Phí Minh Bạch – 0đ Phí Ẩn</h4>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    Báo giá trọn gói chi tiết từng hạng mục ngay từ đầu. Tuyệt đối không phát sinh phụ phí vô lý trong quá trình xử lý.
+                                </p>
+                            </div>
+
+                            <!-- Cam kết 3 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-sky-400 text-[#081D36] flex items-center justify-center font-bold text-lg mb-3">
+                                    <i class="fa-solid fa-stamp"></i>
+                                </div>
+                                <h4 class="font-phudu text-sm sm:text-base font-bold text-sky-300 mb-1">3. Tỷ Lệ Đỗ Visa Dẫn Đầu 99.2%</h4>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    Quy trình thẩm định hồ sơ 3 vòng nghiêm ngặt bởi ban chuyên gia có trên 8 năm kinh nghiệm du học các nước EU.
+                                </p>
+                            </div>
+
+                            <!-- Cam kết 4 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-rose-400 text-white flex items-center justify-center font-bold text-lg mb-3">
+                                    <i class="fa-solid fa-house-circle-check"></i>
+                                </div>
+                                <h4 class="font-phudu text-sm sm:text-base font-bold text-rose-300 mb-1">4. Đảm Bảo Ký Túc Xá / Nhà Ở</h4>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    KIPA ký hợp tác cùng hệ thống nhà ở sinh viên tại Đức, Pháp, Hà Lan, cam kết 100% học viên có hợp đồng thuê nhà hợp pháp trước khi bay.
+                                </p>
+                            </div>
+
+                            <!-- Cam kết 5 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-purple-400 text-white flex items-center justify-center font-bold text-lg mb-3">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <h4 class="font-phudu text-sm sm:text-base font-bold text-purple-300 mb-1">5. Cố Vấn Chuyên Sâu 1:1</h4>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    Mỗi học viên có một chuyên viên cố vấn riêng biệt, đồng hành từ xây dựng bài luận, phỏng vấn học bổng đến khi hòa nhập tại Châu Âu.
+                                </p>
+                            </div>
+
+                            <!-- Cam kết 6 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-[#FED049] text-[#081D36] flex items-center justify-center font-bold text-lg mb-3">
+                                    <i class="fa-solid fa-headset"></i>
+                                </div>
+                                <h4 class="font-phudu text-sm sm:text-base font-bold text-amber-300 mb-1">6. Kênh Bảo Hộ Phụ Huynh 24/7</h4>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    Đường dây nóng kết nối trực tiếp gia đình với ban đại diện tại Việt Nam và Châu Âu, hỗ trợ kịp thời trong mọi tình huống khẩn cấp.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bảng So Sánh Minh Bạch: KIPA vs TT Truyền Thống vs Tự Làm DIY -->
+                <div class="space-y-4">
+                    <div class="text-center max-w-2xl mx-auto space-y-1">
+                        <h3 class="font-phudu text-xl sm:text-2xl font-bold text-[#081D36]">
+                            Bảng So Sánh Minh Bạch: Vì Sao Nên Chọn KIPA Việt Hàn?
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            Thấy rõ sự khác biệt giữa dịch vụ tiêu chuẩn quốc tế tại KIPA so với các phương án thông thường.
+                        </p>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-xs bg-white">
+                        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200">
+                                    <th class="py-3.5 px-4 font-bold text-slate-700 w-1/4">Tiêu chí so sánh</th>
+                                    <th class="py-3.5 px-4 font-bold text-white bg-[#0274BD] w-1/3 text-center rounded-t-lg">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            <i class="fa-solid fa-crown text-[#FED049]"></i>
+                                            <span>KIPA VIỆT HÀN</span>
+                                        </div>
+                                    </th>
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 text-center w-1/5">Trung tâm truyền thống</th>
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 text-center w-1/5">Tự làm hồ sơ (DIY)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="py-3 px-4 font-semibold text-slate-800">
+                                        1. Lộ trình chọn trường & ngành
+                                    </td>
+                                    <td class="py-3 px-4 bg-blue-50/40 text-[#081D36] font-bold text-center">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>
+                                        Cá nhân hóa theo năng lực & cơ hội định cư
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Chỉ hướng vào trường liên kết có hoa hồng</td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Quá tải thông tin, dễ chọn sai ngành</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="py-3 px-4 font-semibold text-slate-800">
+                                        2. Tỷ lệ đỗ Visa Châu Âu
+                                    </td>
+                                    <td class="py-3 px-4 bg-blue-50/40 text-[#0274BD] font-extrabold text-center">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>
+                                        99.2% (Thẩm định hồ sơ 3 lớp độc quyền)
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Khoảng 75 - 85% (không cam kết)</td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Rủi ro cao do thiếu kinh nghiệm APS/ĐSQ</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="py-3 px-4 font-semibold text-slate-800">
+                                        3. Đảm bảo KTX & Đón sân bay tại EU
+                                    </td>
+                                    <td class="py-3 px-4 bg-blue-50/40 text-[#081D36] font-bold text-center">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>
+                                        Cam kết 100% có nhà ở + Cán bộ đón tận nơi
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Hầu như không hỗ trợ sau khi bay</td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Tự tìm nhà rất khó, dễ bị lừa cọc</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="py-3 px-4 font-semibold text-slate-800">
+                                        4. Cam kết tài chính & Hoàn tiền
+                                    </td>
+                                    <td class="py-3 px-4 bg-blue-50/40 text-[#081D36] font-bold text-center">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>
+                                        Hợp đồng rõ ràng, hoàn 100% nếu lỗi hồ sơ
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Phức tạp, trừ nhiều chi phí không hoàn lại</td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Tốn kém chi phí thử sai và nộp lại hồ sơ</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="py-3 px-4 font-semibold text-slate-800">
+                                        5. Hỗ trợ việc làm thêm & Thẻ xanh EU
+                                    </td>
+                                    <td class="py-3 px-4 bg-blue-50/40 text-[#081D36] font-bold text-center">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>
+                                        Đồng hành suốt 18 tháng ở lại & đổi EU Blue Card
+                                    </td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Kết thúc trách nhiệm sau khi học sinh nhập học</td>
+                                    <td class="py-3 px-4 text-slate-500 text-center">Tự bơi tìm việc và thủ tục pháp lý</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Call to action pill box inside Section 7B -->
+                <div class="rounded-2xl p-6 sm:p-8 text-center bg-gradient-to-r from-blue-50 via-white to-blue-50 border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left space-y-1">
+                        <div class="font-phudu text-base sm:text-lg font-bold text-[#081D36]">
+                            Chỉ còn 15 suất ưu đãi đồng hành trọn gói KIPA Care 360° kỳ này!
+                        </div>
+                        <p class="text-xs text-slate-600">
+                            Đăng ký ngay hôm nay để nhận trọn gói dịch vụ đón sân bay, cam kết KTX và bộ cẩm nang xin học bổng Châu Âu 2026.
+                        </p>
+                    </div>
+                    <a href="#tu-van" class="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white shadow-md hover:shadow-lg hover:scale-105 transition-all text-xs sm:text-sm" style="background: #EC1E1B !important; color: #ffffff !important;">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Giữ Suất Tư Vấn Miễn Phí</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
                 </div>
 
             </div>
@@ -2109,7 +2788,7 @@
                             <div class="divide-y divide-slate-100 text-xs sm:text-[13px]">
                                 
                                 <!-- FAQ 1 -->
-                                <div class="faq-item">
+                                <div class="faq-item active">
                                     <button type="button" onclick="toggleFaq(this)" class="w-full text-left py-2.5 font-semibold text-slate-800 hover:text-[#0274BD] flex items-center justify-between gap-3 transition-colors">
                                         <span class="flex items-center gap-2.5">
                                             <i class="fa-regular fa-circle-question text-[#EC1E1B] text-sm shrink-0"></i>
@@ -2192,11 +2871,11 @@
              9. CTA BANNER GỘP VỚI FORM ĐĂNG KÝ VÀO 1 HÀNG (Chuẩn KIPA)
              ======================================================== -->
         <section id="dang-ky-tu-van" class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-            <div class="relative bg-gradient-to-r from-[#005bb5] via-[#0274BD] to-[#0170b9] rounded-3xl p-6 sm:p-10 lg:p-12 text-white overflow-hidden shadow-2xl">
+            <div class="relative rounded-3xl p-6 sm:p-10 lg:p-12 text-white overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #014f86 100%) !important;">
                 
-                <!-- Background Decorative Visual (Chìm nhẹ bên góc phải) -->
-                <img src="/assets/du-hoc-chau-au/cta_scenery.png" alt="Du học Châu Âu" class="absolute inset-y-0 right-0 h-full w-auto max-w-[38%] object-cover object-left opacity-20 pointer-events-none z-0">
+                <!-- Background Decorative Glow -->
                 <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <!-- Grid 12 cột: CTA Trái (lg:col-span-5) + Form Phải (lg:col-span-7) -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
@@ -2330,7 +3009,7 @@
                             </div>
 
                             <!-- Submit Button -->
-                            <button type="submit" id="lead-submit-btn" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#EC1E1B] to-[#d41815] hover:from-[#d41815] hover:to-[#b91512] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <button type="submit" id="lead-submit-btn" style="background: #EC1E1B !important; color: #ffffff !important;" class="w-full py-3.5 px-6 rounded-xl bg-[#EC1E1B] hover:bg-[#c71714] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-paper-plane text-xs"></i>
                                 <span>Gửi Thông Tin Cho Cố Vấn KIPA</span>
                                 <i class="fa-solid fa-arrow-right text-xs"></i>
