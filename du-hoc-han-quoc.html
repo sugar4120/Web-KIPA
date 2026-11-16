@@ -1008,25 +1008,27 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Section Title -->
-            <div class="mb-8">
+            <div class="max-w-3xl mb-8">
                 <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5">
                     <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
                     <span>LỢI THẾ VƯỢT TRỘI</span>
                 </div>
-                <h2 class="font-phudu text-2xl sm:text-3xl font-bold text-brand-navy">
-                    Vì sao nên chọn du học Hàn Quốc cùng KIPA?
+                <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-brand-navy leading-tight">
+                    Vì Sao Nên Chọn Du Học Hàn Quốc Cùng KIPA?
                 </h2>
-                <p class="text-xs sm:text-sm text-gray-600 mt-1 max-w-2xl font-vietnam">
+                <p class="text-xs sm:text-sm text-gray-600 mt-1 max-w-2xl font-vietnam leading-relaxed">
                     Khám phá 5 đặc quyền khác biệt giúp du học sinh KIPA vững vàng học tập, tự lập tài chính và mở rộng cánh cửa định cư tương lai.
                 </p>
             </div>
 
-            <!-- 3 Columns Layout -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <!-- 2-Column Balanced Layout (5 Cols Video & Cam Kết + 7 Cols 5 Đặc Quyền) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- Col 1: Video Card -->
-                <div class="lg:col-span-4">
-                    <div class="relative rounded-2xl overflow-hidden shadow-sm border border-gray-200 group cursor-pointer h-full min-h-[220px]" 
+                <!-- Left: Video Card & Trust Box (5 Columns) -->
+                <div class="lg:col-span-5 space-y-4">
+                    
+                    <!-- Video Card -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 group cursor-pointer aspect-[4/3] sm:aspect-[16/11]" 
                          onclick="openVideoModal('https://youtube.com/shorts/ZQO7b-tLbIU')"
                          role="button"
                          tabindex="0"
@@ -1035,20 +1037,30 @@
                              alt="Chia sẻ thực tế về du học Hàn Quốc cùng KIPA Việt Hàn" 
                              class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
                              loading="lazy">
-                        <!-- Play button overlay -->
+                        
+                        <!-- Top Badge -->
+                        <div class="absolute top-3 left-3 z-10">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold">
+                                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                                <span>VIDEO THỰC TẾ</span>
+                            </span>
+                        </div>
+
+                        <!-- Center Play Button Overlay -->
                         <div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/40 transition">
                             <div class="w-14 h-14 rounded-full bg-white/95 text-[#EC1E1B] flex items-center justify-center shadow-xl transform group-hover:scale-110 group-hover:bg-[#EC1E1B] group-hover:text-white transition duration-300">
                                 <i class="fas fa-play ml-1 text-base"></i>
                             </div>
                         </div>
+
                         <!-- Bottom text overlay -->
                         <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white">
-                            <div class="text-xs font-bold leading-tight flex items-center gap-1.5">
+                            <div class="text-xs font-bold leading-tight flex items-center gap-1.5 font-phudu">
                                 <i class="fab fa-youtube text-red-500 text-sm"></i>
                                 <span>Chia sẻ thực tế du học Hàn Quốc</span>
                             </div>
-                            <div class="text-xs text-gray-200 flex items-center justify-between mt-1">
-                                <span>Cảm nhận học viên & phụ huynh KIPA</span>
+                            <div class="text-[11px] text-gray-200 flex items-center justify-between mt-1 font-vietnam">
+                                <span>Cảm nhận học viên &amp; phụ huynh KIPA</span>
                                 <span class="bg-[#EC1E1B] text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1">
                                     <i class="fas fa-play text-[8px]"></i>
                                     <span>Xem video</span>
@@ -1056,93 +1068,104 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Trust Box: Cam Kết "3 KHÔNG" Minh Bạch -->
+                    <div class="rounded-2xl p-4 sm:p-5 bg-gradient-to-br from-blue-50/80 via-white to-blue-50/40 border border-blue-200/70 shadow-sm font-vietnam">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-lg bg-brand-blue text-white flex items-center justify-center text-sm shadow-sm shrink-0">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-phudu text-xs sm:text-sm font-bold text-brand-navy">
+                                    Cam Kết "3 KHÔNG" Từ KIPA Việt Hàn
+                                </h3>
+                                <p class="text-[11px] text-slate-500">Bảo vệ quyền lợi tối đa cho gia đình &amp; học viên</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2 text-xs text-slate-700">
+                            <div class="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-blue-100/60">
+                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 shrink-0 text-xs"></i>
+                                <span><strong>KHÔNG chi phí ẩn:</strong> Hợp đồng trọn gói minh bạch 100%.</span>
+                            </div>
+                            <div class="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-blue-100/60">
+                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 shrink-0 text-xs"></i>
+                                <span><strong>KHÔNG giữ giấy tờ gốc:</strong> Trả lại bản gốc ngay sau khi đối chiếu.</span>
+                            </div>
+                            <div class="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-blue-100/60">
+                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 shrink-0 text-xs"></i>
+                                <span><strong>KHÔNG bỏ rơi học viên:</strong> Ban đại diện Seoul hỗ trợ suốt 4 năm học.</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 mt-3 border-t border-blue-100">
+                            <a href="#section-dang-ky-tu-van" onclick="scrollToConsultation(event, 'Du học Hàn Quốc')" class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-red hover:bg-red-700 text-white text-xs font-bold transition shadow-sm">
+                                <span>Tư vấn lộ trình 1:1 miễn phí</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Col 2: 5 Key Benefits Checklist -->
-                <div class="lg:col-span-5 flex flex-col justify-center space-y-3 py-2 font-vietnam">
-                    <div class="flex items-start space-x-3 p-2 rounded-xl hover:bg-slate-50 transition">
-                        <span class="w-7 h-7 rounded-lg bg-red-100 text-brand-red flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">
+                <!-- Right: 5 Key Benefits Cards (7 Columns) -->
+                <div class="lg:col-span-7 space-y-3 font-vietnam">
+                    
+                    <!-- Benefit 1 -->
+                    <div class="flex items-start gap-3.5 p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/80 hover:border-blue-300 hover:shadow-sm transition-all duration-200">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 text-brand-red flex items-center justify-center flex-shrink-0 text-sm font-bold shadow-sm">
                             <i class="fas fa-graduation-cap"></i>
-                        </span>
-                        <div>
+                        </div>
+                        <div class="flex-1">
                             <h4 class="text-xs sm:text-sm font-bold text-brand-navy">Giáo dục Top 10 thế giới – Bằng cấp công nhận toàn cầu</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">Cơ hội thực tập và tuyển dụng trực tiếp vào các tập đoàn đa quốc gia: Samsung, LG, Hyundai, Lotte.</p>
+                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">Cơ hội thực tập và tuyển dụng trực tiếp vào các tập đoàn đa quốc gia hàng đầu: Samsung, LG, Hyundai, Lotte, CJ.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-3 p-2 rounded-xl hover:bg-slate-50 transition">
-                        <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">
+                    <!-- Benefit 2 -->
+                    <div class="flex items-start gap-3.5 p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/80 hover:border-emerald-300 hover:shadow-sm transition-all duration-200">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 text-sm font-bold shadow-sm">
                             <i class="fas fa-wallet"></i>
-                        </span>
-                        <div>
+                        </div>
+                        <div class="flex-1">
                             <h4 class="text-xs sm:text-sm font-bold text-brand-navy">Thu nhập làm thêm từ 25 – 45 triệu VNĐ/tháng</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">Làm thêm hợp pháp 20-25h/tuần; học viên KIPA tự lập 100% sinh hoạt phí, không phụ thuộc tài chính gia đình.</p>
+                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">Làm thêm hợp pháp 20 – 25h/tuần; học viên KIPA hoàn toàn tự lập 100% sinh hoạt phí, không phụ thuộc tài chính gia đình.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-3 p-2 rounded-xl hover:bg-slate-50 transition">
-                        <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">
+                    <!-- Benefit 3 -->
+                    <div class="flex items-start gap-3.5 p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/80 hover:border-amber-300 hover:shadow-sm transition-all duration-200">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 text-sm font-bold shadow-sm">
                             <i class="fas fa-gift"></i>
-                        </span>
-                        <div>
+                        </div>
+                        <div class="flex-1">
                             <h4 class="text-xs sm:text-sm font-bold text-brand-navy">Học bổng dồi dào từ 30% – 100% ngay kỳ đầu</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">KIPA là đại diện tuyển sinh trực tiếp, tối ưu hồ sơ săn học bổng giảm tối đa gánh nặng học phí cho học viên.</p>
+                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">KIPA là đại diện tuyển sinh trực tiếp, tối ưu hóa hồ sơ săn học bổng giảm tối đa gánh nặng tài chính ban đầu cho học viên.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-3 p-2 rounded-xl hover:bg-slate-50 transition">
-                        <span class="w-7 h-7 rounded-lg bg-blue-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">
+                    <!-- Benefit 4 -->
+                    <div class="flex items-start gap-3.5 p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/80 hover:border-blue-300 hover:shadow-sm transition-all duration-200">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm font-bold shadow-sm">
                             <i class="fas fa-id-card-alt"></i>
-                        </span>
-                        <div>
+                        </div>
+                        <div class="flex-1">
                             <h4 class="text-xs sm:text-sm font-bold text-brand-navy">Chính sách chuyển đổi Visa (E-7, F-2) &amp; Định cư rộng mở</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">Hàn Quốc đang thiếu hụt nguồn nhân lực trẻ, mở rộng chính sách cấp visa làm việc dài hạn cho du học sinh.</p>
+                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">Hàn Quốc đang thiếu hụt nguồn nhân lực trẻ, mở rộng chính sách cấp visa làm việc dài hạn và định cư bền vững sau tốt nghiệp.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-3 p-2 rounded-xl hover:bg-slate-50 transition">
-                        <span class="w-7 h-7 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">
+                    <!-- Benefit 5 -->
+                    <div class="flex items-start gap-3.5 p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/80 hover:border-purple-300 hover:shadow-sm transition-all duration-200">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 text-sm font-bold shadow-sm">
                             <i class="fas fa-shield-alt"></i>
-                        </span>
-                        <div>
+                        </div>
+                        <div class="flex-1">
                             <h4 class="text-xs sm:text-sm font-bold text-brand-navy">Môi trường sống an toàn, văn hóa tương đồng</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">An ninh số 1 Châu Á, khoảng cách bay chỉ hơn 4 tiếng, học sinh dễ dàng hòa nhập và phụ huynh yên tâm tuyệt đối.</p>
+                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">An ninh số 1 Châu Á, khoảng cách bay chỉ hơn 4 tiếng, học sinh dễ dàng hòa nhập nhanh chóng và phụ huynh yên tâm tuyệt đối.</p>
                         </div>
                     </div>
-                </div>
 
-                <!-- Col 3: Companion Callout Box -->
-                <div class="lg:col-span-3">
-                    <div class="relative border-2 border-brand-blue/30 rounded-2xl p-5 flex flex-col justify-between h-full overflow-hidden shadow-sm bg-gradient-to-br from-blue-50/90 via-white to-blue-50/60 font-vietnam">
-                        <div class="relative z-10 space-y-3">
-                            <div class="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center text-lg mb-2 shadow-sm">
-                                <i class="fas fa-shield-check"></i>
-                            </div>
-                            <h3 class="font-phudu text-base font-bold text-brand-navy leading-snug">
-                                Cam Kết "3 KHÔNG" Từ KIPA Việt Hàn
-                            </h3>
-                            <ul class="space-y-2 text-xs text-gray-700">
-                                <li class="flex items-start gap-2">
-                                    <i class="fas fa-check-circle text-emerald-600 mt-0.5 shrink-0"></i>
-                                    <span><strong>KHÔNG chi phí ẩn:</strong> Hợp đồng trọn gói rõ ràng 100%.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fas fa-check-circle text-emerald-600 mt-0.5 shrink-0"></i>
-                                    <span><strong>KHÔNG giữ giấy tờ gốc:</strong> Minh bạch hồ sơ pháp lý.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fas fa-check-circle text-emerald-600 mt-0.5 shrink-0"></i>
-                                    <span><strong>KHÔNG bỏ rơi học viên:</strong> Đồng hành bảo trợ suốt 4 năm tại Hàn.</span>
-                                </li>
-                            </ul>
-                            <div class="pt-3 border-t border-blue-100">
-                                <a href="#section-dang-ky-tu-van" onclick="scrollToConsultation(event, 'Du học Hàn Quốc')" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-brand-red text-white text-xs font-bold hover:bg-red-700 transition shadow-sm">
-                                    <span>Tư vấn lộ trình 1:1 miễn phí</span>
-                                    <i class="fas fa-arrow-right ml-1.5 text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -1153,130 +1176,155 @@
     <!-- ==========================================
          SECTION 3: ĐIỀU KIỆN, LỘ TRÌNH & HỒ SƠ (3 COLUMNS)
          ========================================== -->
-    <section id="lo-trinh-du-hoc" class="py-12 sm:py-16 bg-[#fafbfc]">
+    <section id="lo-trinh-du-hoc" class="py-12 sm:py-16 bg-[#fafbfc] border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
+            <!-- Section Header -->
+            <div class="max-w-3xl mx-auto text-center mb-10">
+                <div class="inline-flex items-center space-x-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-red mb-1.5">
+                    <span class="w-1.5 h-3.5 bg-brand-red rounded-sm"></span>
+                    <span>CHUẨN BỊ TOÀN DIỆN</span>
+                </div>
+                <h2 class="font-phudu text-xl sm:text-2xl font-extrabold text-brand-navy leading-snug">
+                    Điều Kiện, Lộ Trình &amp; Hồ Sơ Du Học Hàn Quốc 2026
+                </h2>
+                <p class="text-xs text-gray-500 mt-1.5 font-vietnam max-w-xl mx-auto leading-relaxed">
+                    KIPA Việt Hàn tối giản mọi thủ tục, đồng hành chuẩn bị từng bước giúp bạn nắm chắc visa và tự tin xuất cảnh.
+                </p>
+            </div>
+
+            <!-- 3 Modern Feature Cards -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                 
                 <!-- Col 1: Điều kiện du học Hàn Quốc -->
-                <div class="kipa-card p-6 rounded-2xl flex flex-col justify-between">
+                <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 border-t-4 border-t-brand-blue shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                     <div>
-                        <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-4">
-                            <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                            <span>ĐIỀU KIỆN DU HỌC HÀN QUỐC</span>
+                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center text-sm font-bold">
+                                    <i class="fas fa-user-check"></i>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-base text-brand-navy">Điều Kiện Tuyển Sinh</h3>
+                            </div>
+                            <span class="text-[11px] font-bold text-brand-blue bg-blue-50 px-2.5 py-0.5 rounded-full">Linh hoạt</span>
                         </div>
 
-                        <div class="space-y-3.5 font-vietnam">
+                        <div class="space-y-3 font-vietnam text-xs">
                             <!-- Item 1 -->
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5 font-bold">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-6 h-6 rounded-md bg-slate-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs mt-0.5">
                                     <i class="far fa-calendar-alt"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Độ tuổi linh hoạt 15 – 30+ tuổi:</div>
-                                    <div class="text-xs text-gray-600 leading-snug">Hệ THPT D4-3 nhận từ 15–18 tuổi; Hệ tiếng &amp; Đại học nhận đến 30+ tuổi.</div>
+                                    <span class="font-bold text-slate-800">Độ tuổi linh hoạt 15 – 30+ tuổi:</span>
+                                    <p class="text-slate-600 mt-0.5 leading-snug">Hệ THPT D4-3 nhận từ 15–18 tuổi; Hệ tiếng &amp; Đại học nhận đến 30+ tuổi.</p>
                                 </div>
                             </div>
 
                             <!-- Item 2 -->
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5 font-bold">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-6 h-6 rounded-md bg-slate-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs mt-0.5">
                                     <i class="fas fa-graduation-cap"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Học vấn &amp; Điểm GPA từ 6.0:</div>
-                                    <div class="text-xs text-gray-600 leading-snug">GPA 7.5+ vào trường Top 1% &amp; săn học bổng cao; GPA 6.0–7.0 KIPA có phương án xử lý đỗ visa 100%.</div>
+                                    <span class="font-bold text-slate-800">Học vấn &amp; Điểm GPA từ 6.0:</span>
+                                    <p class="text-slate-600 mt-0.5 leading-snug">GPA 7.5+ vào trường Top 1% &amp; săn học bổng cao; GPA 6.0–7.0 có lộ trình đỗ visa 100%.</p>
                                 </div>
                             </div>
 
                             <!-- Item 3 -->
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5 font-bold">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-6 h-6 rounded-md bg-slate-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs mt-0.5">
                                     <i class="fas fa-language"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Chưa biết tiếng vẫn du học bình thường:</div>
-                                    <div class="text-xs text-gray-600 leading-snug">KIPA đào tạo từ bảng chữ cái, luyện phỏng vấn 1:1 trúng tủ câu hỏi Đại sứ quán.</div>
+                                    <span class="font-bold text-slate-800">Chưa biết tiếng vẫn du học được:</span>
+                                    <p class="text-slate-600 mt-0.5 leading-snug">KIPA đào tạo từ bảng chữ cái, luyện phỏng vấn 1:1 trúng tủ Đại sứ quán.</p>
                                 </div>
                             </div>
 
                             <!-- Item 4 -->
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5 font-bold">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-6 h-6 rounded-md bg-slate-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs mt-0.5">
                                     <i class="far fa-heart"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Sức khỏe &amp; Pháp lý chuẩn mực:</div>
-                                    <div class="text-xs text-gray-600 leading-snug">Không mắc bệnh lao phổi, không tiền án tiền sự và không bị cấm xuất nhập cảnh.</div>
+                                    <span class="font-bold text-slate-800">Sức khỏe &amp; Pháp lý chuẩn mực:</span>
+                                    <p class="text-slate-600 mt-0.5 leading-snug">Không mắc bệnh lao phổi, không tiền án tiền sự và không bị cấm xuất nhập cảnh.</p>
                                 </div>
                             </div>
 
                             <!-- Item 5 -->
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-sm mt-0.5 font-bold">
-                                    <i class="fas fa-shield-alt"></i>
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-6 h-6 rounded-md bg-slate-100 text-brand-blue flex items-center justify-center flex-shrink-0 text-xs mt-0.5">
+                                    <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-brand-navy">Giải pháp vùng miền &amp; Năm trống:</div>
-                                    <div class="text-xs text-gray-600 leading-snug">KIPA có quy trình giải trình minh bạch cho hồ sơ vùng khó, năm trống sau tốt nghiệp.</div>
+                                    <span class="font-bold text-slate-800">Giải pháp vùng miền &amp; Năm trống:</span>
+                                    <p class="text-slate-600 mt-0.5 leading-snug">Quy trình giải trình minh bạch cho hồ sơ vùng khó và năm trống sau tốt nghiệp.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Col 2: Lộ trình du học phổ biến -->
-                <div class="kipa-card p-6 rounded-2xl flex flex-col justify-between">
+                <!-- Col 2: Lộ trình 4 giai đoạn -->
+                <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 border-t-4 border-t-brand-red shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                     <div>
-                        <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-5">
-                            <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                            <span>LỘ TRÌNH 4 GIAI ĐOẠN VỮNG CHẮC</span>
+                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-red-50 text-brand-red flex items-center justify-center text-sm font-bold">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-base text-brand-navy">Lộ Trình 4 Giai Đoạn</h3>
+                            </div>
+                            <span class="text-[11px] font-bold text-brand-red bg-red-50 px-2.5 py-0.5 rounded-full">Chuẩn hóa</span>
                         </div>
 
-                        <!-- Vertical Timeline with Safe Flex Spacing -->
-                        <div class="relative space-y-4 before:absolute before:top-3 before:bottom-3 before:left-[15px] before:w-0.5 before:bg-blue-200 font-vietnam">
+                        <!-- Vertical Timeline with Clean Dashed Line -->
+                        <div class="relative space-y-3.5 before:absolute before:top-2 before:bottom-2 before:left-[13px] before:w-0.5 before:bg-blue-100 font-vietnam text-xs">
                             
                             <!-- Step 1 -->
-                            <div class="relative flex items-start space-x-3.5">
-                                <div class="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
+                            <div class="relative flex items-start gap-3">
+                                <div class="w-7 h-7 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
                                     1
                                 </div>
                                 <div class="pt-0.5">
-                                    <h4 class="text-sm font-bold text-brand-navy">Đào tạo tiếng &amp; Luyện phỏng vấn 1:1</h4>
-                                    <p class="text-xs text-gray-500 mt-0.5 leading-snug">3 – 5 tháng tại KIPA; nắm chắc TOPIK, tự tin phản xạ và cầm chắc visa trong tay.</p>
+                                    <h4 class="font-bold text-brand-navy">Đào tạo tiếng &amp; Luyện phỏng vấn 1:1</h4>
+                                    <p class="text-slate-500 mt-0.5 leading-snug">3 – 5 tháng tại KIPA; nắm chắc TOPIK, tự tin phản xạ và cầm chắc visa trong tay.</p>
                                 </div>
                             </div>
 
                             <!-- Step 2 -->
-                            <div class="relative flex items-start space-x-3.5">
-                                <div class="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
+                            <div class="relative flex items-start gap-3">
+                                <div class="w-7 h-7 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
                                     2
                                 </div>
                                 <div class="pt-0.5">
-                                    <h4 class="text-sm font-bold text-brand-navy">Xuất cảnh &amp; Nhập học tại Hàn Quốc</h4>
-                                    <p class="text-xs text-gray-500 mt-0.5 leading-snug">Đón tại sân bay, nhận phòng KTX, mở thẻ cư trú ARC và bắt đầu đi làm thêm hợp pháp.</p>
+                                    <h4 class="font-bold text-brand-navy">Xuất cảnh &amp; Nhập học tại Hàn Quốc</h4>
+                                    <p class="text-slate-500 mt-0.5 leading-snug">Đón tại sân bay, nhận phòng KTX, mở thẻ cư trú ARC và bắt đầu đi làm thêm hợp pháp.</p>
                                 </div>
                             </div>
 
                             <!-- Step 3 -->
-                            <div class="relative flex items-start space-x-3.5">
-                                <div class="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
+                            <div class="relative flex items-start gap-3">
+                                <div class="w-7 h-7 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
                                     3
                                 </div>
                                 <div class="pt-0.5">
-                                    <h4 class="text-sm font-bold text-brand-navy">Chuyên ngành &amp; Thực tập có lương</h4>
-                                    <p class="text-xs text-gray-500 mt-0.5 leading-snug">2 – 4 năm Đại học/Cao đẳng; săn học bổng 30%–100%, thực tập hưởng lương theo ngành.</p>
+                                    <h4 class="font-bold text-brand-navy">Chuyên ngành &amp; Thực tập có lương</h4>
+                                    <p class="text-slate-500 mt-0.5 leading-snug">2 – 4 năm Đại học/Cao đẳng; săn học bổng 30%–100%, thực tập hưởng lương theo ngành.</p>
                                 </div>
                             </div>
 
                             <!-- Step 4 -->
-                            <div class="relative flex items-start space-x-3.5">
-                                <div class="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
+                            <div class="relative flex items-start gap-3">
+                                <div class="w-7 h-7 rounded-full bg-brand-blue text-white flex items-center justify-center text-xs flex-shrink-0 shadow-sm ring-4 ring-white z-10 font-bold">
                                     4
                                 </div>
                                 <div class="pt-0.5">
-                                    <h4 class="text-sm font-bold text-brand-navy">Đổi Visa việc làm (E-7) &amp; Định cư</h4>
-                                    <p class="text-xs text-gray-500 mt-0.5 leading-snug">Chuyển đổi visa kỹ sư E-7 hoặc visa cư trú dài hạn F-2 với mức thu nhập 50 – 80 tr/tháng.</p>
+                                    <h4 class="font-bold text-brand-navy">Đổi Visa việc làm (E-7) &amp; Định cư</h4>
+                                    <p class="text-slate-500 mt-0.5 leading-snug">Chuyển đổi visa kỹ sư E-7 hoặc visa cư trú dài hạn F-2 với mức thu nhập 50 – 80 tr/tháng.</p>
                                 </div>
                             </div>
 
@@ -1285,43 +1333,48 @@
                 </div>
 
                 <!-- Col 3: Hồ sơ cần chuẩn bị -->
-                <div class="kipa-card p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden font-vietnam">
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-4">
-                            <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
-                            <span>HỒ SƠ TINH GỌN • KIPA LO TỪ A – Z</span>
+                <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 border-t-4 border-t-emerald-500 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between font-vietnam">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm font-bold">
+                                    <i class="fas fa-file-shield"></i>
+                                </div>
+                                <h3 class="font-phudu font-bold text-sm sm:text-base text-brand-navy">Hồ Sơ Tinh Gọn</h3>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full">KIPA lo A–Z</span>
                         </div>
 
-                        <ul class="space-y-2.5 text-xs text-gray-700">
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>
+                        <ul class="space-y-2 text-xs text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0 text-xs"></i>
                                 <span><strong>Giấy tờ học tập:</strong> Học bạ, bằng tốt nghiệp (KIPA dịch thuật công chứng &amp; hợp pháp hóa lãnh sự).</span>
                             </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0 text-xs"></i>
                                 <span><strong>Giấy tờ nhân thân:</strong> Hộ chiếu, CCCD, sổ hộ khẩu (hướng dẫn scan chuẩn quy cách).</span>
                             </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>
-                                <span><strong>Kế hoạch học tập &amp; Giới thiệu bản thân:</strong> Chuyên gia biên soạn tiếng Hàn chuẩn mực.</span>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0 text-xs"></i>
+                                <span><strong>Kế hoạch học tập &amp; Giới thiệu:</strong> Chuyên gia biên soạn tiếng Hàn chuẩn mực.</span>
                             </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0 text-xs"></i>
                                 <span><strong>Chứng minh tài chính:</strong> Hướng dẫn mở sổ đóng băng K-Study chuẩn quy định Đại sứ quán.</span>
                             </li>
-                            <li class="flex items-start space-x-2">
-                                <i class="fas fa-check-circle text-emerald-600 mt-0.5 flex-shrink-0 text-xs"></i>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0 text-xs"></i>
                                 <span><strong>Cam kết KIPA:</strong> KHÔNG giữ hồ sơ gốc, không phát sinh chi phí, hợp đồng pháp lý minh bạch.</span>
                             </li>
                         </ul>
+                    </div>
 
-                        <div class="mt-5 pt-4 border-t border-slate-100">
-                            <a href="#section-dang-ky-tu-van" onclick="scrollToConsultation(event, 'Du học Hàn Quốc')" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-blue-800 text-white font-bold text-xs transition duration-200 shadow-sm">
-                                <i class="far fa-file-check mr-2"></i>
-                                <span>Thẩm định hồ sơ miễn phí ngay</span>
-                                <i class="fas fa-arrow-right ml-1.5 text-[10px]"></i>
-                            </a>
-                        </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100">
+                        <a href="#section-dang-ky-tu-van" onclick="scrollToConsultation(event, 'Du học Hàn Quốc')" class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-brand-blue hover:bg-blue-800 text-white font-bold text-xs transition duration-200 shadow-sm">
+                            <i class="far fa-file-check mr-1 text-xs"></i>
+                            <span>Thẩm định hồ sơ miễn phí ngay</span>
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
                 </div>
 
