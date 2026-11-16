@@ -71,3 +71,20 @@
   --tw-gradient-stops: var(--tw-gradient-from), #f43f5e var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
 }
 
+/* Golden Yellow Brand & Accent Helpers (#facc15 / #eab308) */
+.bg-\[\#facc15\], .bg-\[\#FACC15\] { background-color: #facc15 !important; }
+.hover\:bg-\[\#eab308\]:hover { background-color: #eab308 !important; }
+.bg-\[\#eab308\] { background-color: #eab308 !important; }
+.text-\[\#facc15\], .text-\[\#FACC15\] { color: #facc15 !important; }
+.border-\[\#facc15\], .border-\[\#FACC15\] { border-color: #facc15 !important; }
+
+/* Blue & Slate Accent Helpers */
+.text-\[\#0153A8\] { color: #0153A8 !important; }
+.bg-\[\#0153A8\] { background-color: #0153A8 !important; }
+.text-\[\#93c5fd\] { color: #93c5fd !important; }
+.bg-\[\#93c5fd\] { background-color: #93c5fd !important; }
+.border-\[\#bae6fd\] { border-color: #bae6fd !important; }
+.bg-\[\#e11d48\] { background-color: #e11d48 !important; }
+.bg-\[\#f0f7fe\] { background-color: #f0f7fe !important; }
+
+
