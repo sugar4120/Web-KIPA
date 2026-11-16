@@ -797,6 +797,13 @@
 
     <main class="flex-grow">
         <div id="kipa-xkld-han" class="w-full">
+            <style>
+                /* FAQ Accordion & Page Specific Styles */
+                .xkld-faq-answer { display: none; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #e2e8f0; }
+                .xkld-faq-item.active .xkld-faq-answer { display: block; }
+                .xkld-faq-item.active .xkld-faq-chevron { transform: rotate(90deg); }
+                .xkld-faq-item.active { background-color: #f8fafc; border-color: #bfdbfe; }
+            </style>
 
             <!-- ========================================================
                  BREADCRUMB BAR (Thanh điều hướng phân cấp chuẩn SEO)
@@ -819,7 +826,7 @@
             <!-- ========================================================
                  HERO BANNER: Chuẩn 100% mẫu thiết kế anhdemo
                  ======================================================== -->
-            <section class="relative bg-gradient-to-r from-[#01549d] via-[#026cb5] to-[#0284cf] text-white overflow-hidden shadow-sm">
+            <section class="relative bg-gradient-to-r from-[#01549d] via-[#026cb5] to-[#0284cf] text-white overflow-hidden shadow-sm" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #014f86 100%) !important;">
                 <!-- Background decorative subtle elements -->
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
 
@@ -830,7 +837,7 @@
                         <div class="lg:col-span-7 space-y-4">
                             <!-- Badge Đỏ Bo Tròn -->
                             <div class="inline-block">
-                                <span class="bg-[#e11d48] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm">
+                                <span class="bg-[#e11d48] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm" style="background: #EC1E1B !important;">
                                     XUẤT KHẨU LAO ĐỘNG
                                 </span>
                             </div>
@@ -885,13 +892,25 @@
                             </div>
                         </div>
 
-                        <!-- Right Hero Visual: Hình ảnh công nhân KIPA + tháp Namsan & hoàng cung Hàn Quốc -->
+                        <!-- Right Hero Visual: Hình ảnh thực tế học viên KIPA xuất cảnh tại sân bay -->
                         <div class="lg:col-span-5 flex justify-center lg:justify-end">
-                            <div class="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20">
-                                <img src="/assets/xuat-khau-lao-dong-han/hero_visual.png?v=20261105-logo" 
-                                     alt="Xuất khẩu lao động Hàn Quốc cùng KIPA Việt Hàn" 
-                                     class="w-full h-auto object-cover transform hover:scale-102 transition duration-500"
+                            <div class="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 group">
+                                <img src="/assets/xuat-khau-lao-dong-han/hero_xkld_thuc_te.jpg" 
+                                     alt="Đoàn lao động và học viên KIPA Việt Hàn xuất cảnh tại sân bay Nội Bài" 
+                                     class="w-full h-auto object-cover transform group-hover:scale-102 transition duration-500"
                                      loading="eager">
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-black/65 backdrop-blur-md rounded-xl p-2.5 text-white flex items-center justify-between text-xs border border-white/10">
+                                    <div>
+                                        <div class="font-bold text-[#facc15] flex items-center gap-1.5">
+                                            <i class="fa-solid fa-plane-departure text-xs"></i>
+                                            <span>Đoàn XKLĐ Hàn Quốc KIPA</span>
+                                        </div>
+                                        <p class="text-[10.5px] text-slate-200">Đồng hành từ phòng học đến cửa máy bay</p>
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500 text-[10px] font-bold text-white shrink-0 shadow-2xs">
+                                        100% Đúng Hẹn
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -961,12 +980,16 @@
                 <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                         
-                        <!-- Left Thumbnail: Namsan Tower mùa thu -->
+                        <!-- Left Thumbnail: Đoàn nhập cảnh thực tế tại Incheon -->
                         <div class="lg:col-span-4">
-                            <div class="rounded-xl overflow-hidden shadow-sm border border-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-han/sec1_photo.png" 
-                                     alt="Toàn cảnh Seoul Hàn Quốc" 
-                                     class="w-full h-48 sm:h-52 object-cover hover:scale-105 transition duration-500">
+                            <div class="relative rounded-xl overflow-hidden shadow-sm border border-slate-100 group">
+                                <img src="/assets/xuat-khau-lao-dong-han/sec1_thuc_te_nhap_canh.jpg" 
+                                     alt="Đoàn lao động KIPA Việt Hàn nhập cảnh tại sân bay Hàn Quốc" 
+                                     class="w-full h-48 sm:h-52 object-cover group-hover:scale-105 transition duration-500">
+                                <div class="absolute bottom-2 left-2 bg-black/65 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 border border-white/10">
+                                    <i class="fa-solid fa-plane-arrival text-[#facc15]"></i>
+                                    <span>Đoàn nhập cảnh tại Hàn Quốc</span>
+                                </div>
                             </div>
                         </div>
 
@@ -1107,8 +1130,8 @@
                     <div class="kipa-feature-card bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 flex flex-col justify-between shadow-xs">
                         <div class="space-y-3">
                             <div class="relative rounded-xl overflow-hidden border border-slate-100">
-                                <img src="/assets/xuat-khau-lao-dong-han/card_photo_thoi_vu.png?v=20261105-hd" 
-                                     alt="Lao động thời vụ Hàn Quốc" 
+                                <img src="/assets/xuat-khau-lao-dong-han/card_thoi_vu_thuc_te.jpg" 
+                                     alt="Đoàn lao động thời vụ KIPA Việt Hàn nhập cảnh Hàn Quốc" 
                                      class="w-full h-40 sm:h-44 object-cover hover:scale-105 transition duration-300">
                             </div>
                             
@@ -1133,6 +1156,343 @@
 
                 </div>
             </section>
+
+            
+            <!-- ========================================================
+                 SÁNG TẠO 01: CÔNG CỤ TÍNH THU NHẬP & TÍCH LŨY TÀI CHÍNH 2026
+                 (Widget tương tác tính lương thực lĩnh & số tiền gửi về)
+                 ======================================================== -->
+            <section id="tinh-thu-nhap" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-10 sm:py-14">
+                <div class="bg-gradient-to-b from-white via-blue-50/50 to-white rounded-3xl border border-blue-100 p-6 sm:p-10 shadow-lg relative overflow-hidden">
+                    
+                    <!-- Decorative background blur -->
+                    <div class="absolute -top-24 -right-24 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Header -->
+                    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 text-[#0274BD] text-xs font-bold uppercase tracking-wider mb-3">
+                            <i class="fa-solid fa-calculator text-amber-500"></i>
+                            <span>Công Cụ Độc Quyền KIPA 2026</span>
+                        </div>
+                        <h2 class="font-phudu text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#081D36] leading-tight">
+                            Dự Toán Thu Nhập & Tích Lũy Khi Làm Việc Tại Hàn Quốc
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                            Căn cứ theo mức lương tối thiểu Hàn Quốc 2026 (2.060.740 KRW/tháng) và thực tế thu nhập thực lĩnh của hàng trăm học viên KIPA.
+                        </p>
+                    </div>
+
+                    <!-- Main Calculator Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                        
+                        <!-- Left: Controls (7 cols) -->
+                        <div class="lg:col-span-7 space-y-6 bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-xs">
+                            
+                            <!-- Step 1: Chọn Chương trình -->
+                            <div>
+                                <label class="block text-xs sm:text-sm font-bold text-[#081D36] mb-2.5 flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-[#0274BD] text-white flex items-center justify-center text-[10px] font-black">1</span>
+                                    <span>Chọn chương trình lao động:</span>
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                    <button type="button" onclick="setCalcProgram('e9_mfg')" id="btn-prog-e9_mfg" class="calc-prog-btn text-left p-3.5 rounded-xl border-2 border-[#0274BD] bg-blue-50/70 transition-all cursor-pointer">
+                                        <div class="font-phudu font-bold text-xs sm:text-[13px] text-[#0274BD] flex items-center justify-between">
+                                            <span>Visa E-9 Sản Xuất</span>
+                                            <i class="fa-solid fa-circle-check text-xs"></i>
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Cơ khí, lắp ráp, điện tử (Tăng ca nhiều)</div>
+                                    </button>
+
+                                    <button type="button" onclick="setCalcProgram('e9_agr')" id="btn-prog-e9_agr" class="calc-prog-btn text-left p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-all cursor-pointer">
+                                        <div class="font-phudu font-bold text-xs sm:text-[13px] text-slate-700 flex items-center justify-between">
+                                            <span>Visa E-9 Nông Nghiệp</span>
+                                            <i class="fa-regular fa-circle text-xs text-slate-300"></i>
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Trồng trọt, chăn nuôi (Bao ăn ở tốt)</div>
+                                    </button>
+
+                                    <button type="button" onclick="setCalcProgram('e7_tech')" id="btn-prog-e7_tech" class="calc-prog-btn text-left p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-all cursor-pointer">
+                                        <div class="font-phudu font-bold text-xs sm:text-[13px] text-slate-700 flex items-center justify-between">
+                                            <span>Visa E-7-4 Kỹ Sư Tay Nghề</span>
+                                            <i class="fa-regular fa-circle text-xs text-slate-300"></i>
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Hàn, tiện CNC, công nghệ cao (Lương cao)</div>
+                                    </button>
+
+                                    <button type="button" onclick="setCalcProgram('e8_sea')" id="btn-prog-e8_sea" class="calc-prog-btn text-left p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 transition-all cursor-pointer">
+                                        <div class="font-phudu font-bold text-xs sm:text-[13px] text-slate-700 flex items-center justify-between">
+                                            <span>Visa E-8 Thời Vụ</span>
+                                            <i class="fa-regular fa-circle text-xs text-slate-300"></i>
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Lao động thời vụ 5 - 8 tháng (Xuất cảnh nhanh)</div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Mức độ tăng ca -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <label for="slider-ot-hours" class="text-xs sm:text-sm font-bold text-[#081D36] flex items-center gap-2">
+                                        <span class="w-5 h-5 rounded-full bg-[#0274BD] text-white flex items-center justify-center text-[10px] font-black">2</span>
+                                        <span>Số giờ tăng ca trung bình/tuần:</span>
+                                    </label>
+                                    <span id="label-ot-hours" class="text-xs sm:text-sm font-extrabold text-[#0274BD] bg-blue-100 px-2.5 py-0.5 rounded-full">15 giờ/tuần (~2h/ngày)</span>
+                                </div>
+                                <input type="range" id="slider-ot-hours" aria-label="Số giờ tăng ca trung bình trên tuần" min="0" max="30" step="5" value="15" oninput="onOtSliderChange(this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#0274BD]">
+                                <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                    <span>0h (Chỉ làm 8h)</span>
+                                    <span>10h (~1.5h/ngày)</span>
+                                    <span>20h (~3h/ngày)</span>
+                                    <span>30h (Mùa cao điểm)</span>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Thời gian hợp đồng -->
+                            <div>
+                                <label class="block text-xs sm:text-sm font-bold text-[#081D36] mb-2 flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-[#0274BD] text-white flex items-center justify-center text-[10px] font-black">3</span>
+                                    <span>Thời gian làm việc dự tính:</span>
+                                </label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button type="button" onclick="setCalcDuration(12)" id="btn-dur-12" class="calc-dur-btn py-2 px-3 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:border-slate-300 transition cursor-pointer">
+                                        1 Năm
+                                    </button>
+                                    <button type="button" onclick="setCalcDuration(36)" id="btn-dur-36" class="calc-dur-btn py-2 px-3 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:border-slate-300 transition cursor-pointer">
+                                        3 Năm
+                                    </button>
+                                    <button type="button" onclick="setCalcDuration(58)" id="btn-dur-58" class="calc-dur-btn py-2 px-3 rounded-lg border-2 border-[#0274BD] bg-blue-50 text-xs font-bold text-[#0274BD] transition cursor-pointer">
+                                        4 năm 10 tháng (Chuẩn EPS)
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right: Output Card (5 cols) -->
+                        <div class="lg:col-span-5 rounded-3xl p-6 sm:p-7 text-white shadow-xl relative overflow-hidden" style="background: linear-gradient(135deg, #07192e 0%, #01458e 50%, #0274BD 100%) !important;">
+                            
+                            <div class="relative z-10 space-y-5">
+                                <div class="flex items-center justify-between border-b border-white/15 pb-3.5">
+                                    <div class="text-xs text-sky-200 font-medium">Bảng Dự Báo Thu Nhập</div>
+                                    <span class="text-[11px] font-bold bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full flex items-center gap-1">
+                                        <i class="fa-solid fa-bolt text-[10px]"></i> Tính toán Real-time
+                                    </span>
+                                </div>
+
+                                <!-- Breakdown Items -->
+                                <div class="space-y-2.5 text-xs">
+                                    <div class="flex justify-between items-center text-sky-100">
+                                        <span>Lương cơ bản (Theo luật 2026):</span>
+                                        <span id="calc-base-vnd" class="font-bold text-white text-sm">39.500.000 đ</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-sky-100">
+                                        <span>Tiền làm thêm giờ (OT) ước tính:</span>
+                                        <span id="calc-ot-vnd" class="font-bold text-emerald-300 text-sm">+13.500.000 đ</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-sky-100">
+                                        <span>Khấu trừ (Bảo hiểm 4 bên + Ăn ở):</span>
+                                        <span id="calc-deduct-vnd" class="font-medium text-rose-300">-7.200.000 đ</span>
+                                    </div>
+                                </div>
+
+                                <!-- Highlighted Net Monthly Income -->
+                                <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-center">
+                                    <div class="text-xs text-sky-200 font-semibold mb-1">THU NHẬP THỰC LĨNH GỬI VỀ / THÁNG</div>
+                                    <div id="calc-net-monthly" class="font-phudu text-2xl sm:text-3xl font-extrabold text-[#FFF017] tracking-tight">
+                                        45.800.000 đ
+                                    </div>
+                                    <div id="calc-net-krw" class="text-[11px] text-sky-200 mt-0.5">(Tương đương ~2.380.000 KRW)</div>
+                                </div>
+
+                                <!-- Big Accumulated Total -->
+                                <div class="border-t border-white/15 pt-3.5">
+                                    <div class="text-[11px] text-sky-200 uppercase font-semibold text-center mb-1">
+                                        Tổng Tích Lũy Gửi Về Sau <span id="calc-period-label">4 Năm 10 Tháng</span>:
+                                    </div>
+                                    <div id="calc-total-savings" class="font-phudu text-2xl sm:text-3xl font-black text-center text-white drop-shadow-sm">
+                                        2.190.000.000 đ
+                                    </div>
+                                    <div class="text-[10px] text-center text-sky-200 mt-1">
+                                        * Đã trừ chi phí sinh hoạt cá nhân, đủ vốn khởi nghiệp & lo cho gia đình.
+                                    </div>
+                                </div>
+
+                                <!-- CTA inside calculator -->
+                                <a href="#dang-ky-tu-van" onclick="prefillFromCalculator()" class="w-full py-3 px-4 rounded-xl bg-[#EC1E1B] hover:bg-[#d61815] text-white font-bold text-xs sm:text-sm text-center shadow-md flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 cursor-pointer">
+                                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                                    <span>Đăng Ký Nhận Lộ Trình Chi Tiết</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ========================================================
+                 SÁNG TẠO 02: BẢNG SO SÁNH MINH BẠCH KIPA VS MÔI GIỚI TRUNG GIAN
+                 (Đánh tan nỗi sợ bị lừa đảo, phát sinh chi phí, visa đen)
+                 ======================================================== -->
+            <section id="so-sanh-minh-bach" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-slate-100">
+                
+                <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Minh Bạch Tuyệt Đối - Bảo Vệ Người Lao Động</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#081D36] leading-tight">
+                        Vì Sao Chọn KIPA Việt Hàn Thay Vì Môi Giới Trôi Nổi?
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                        Thị trường XKLĐ tràn ngập lời hứa "bao đỗ 100%" nhưng đi kèm rủi ro tiền mất tật mang. KIPA Việt Hàn cam kết pháp lý minh bạch từ ngày đầu.
+                    </p>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                    <table class="w-full text-left border-collapse min-w-[620px]">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="p-4 sm:p-5 w-1/3 bg-slate-50 font-phudu text-xs sm:text-sm font-bold text-slate-700">
+                                    Tiêu Chí Quyết Định
+                                </th>
+                                <th class="p-4 sm:p-5 w-1/3 bg-rose-50/60 font-phudu text-xs sm:text-sm font-bold text-rose-700 border-x border-rose-100">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+                                        <span>Môi Giới & Cò Mồi Trôi Nổi</span>
+                                    </div>
+                                </th>
+                                <th class="p-4 sm:p-5 w-1/3 bg-blue-50/90 font-phudu text-xs sm:text-sm font-extrabold text-[#0274BD]">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-solid fa-award text-amber-500 text-sm"></i>
+                                        <span>KIPA Việt Hàn (Chuẩn Quốc Tế)</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs sm:text-[13px]">
+                            
+                            <!-- Row 1: Chi phí -->
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="p-4 sm:p-5 font-bold text-[#081D36]">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-money-bill-wave"></i></span>
+                                        <span>Chi phí & Hợp đồng tài chính</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-rose-700 bg-rose-50/20 border-x border-rose-100">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-xmark text-rose-500 mt-0.5 text-sm shrink-0"></i>
+                                        <span>Đội giá lên 150 - 300 triệu, phí mập mờ phát sinh liên tục, mất cọc nếu trượt đơn.</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-[#081D36] bg-blue-50/30 font-medium">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 text-sm shrink-0"></i>
+                                        <span><strong>Minh bạch 100%</strong> theo chuẩn Bộ LĐTBXH & HRD Korea. Hợp đồng pháp lý rõ ràng, không thu phí ảo.</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2: Tính pháp lý Visa -->
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="p-4 sm:p-5 font-bold text-[#081D36]">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-passport"></i></span>
+                                        <span>Tính pháp lý của Visa</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-rose-700 bg-rose-50/20 border-x border-rose-100">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-xmark text-rose-500 mt-0.5 text-sm shrink-0"></i>
+                                        <span>Dụ dỗ đi visa du lịch C-3, visa thương mại trá hình, nguy cơ bị bắt trục xuất và phạt tiền.</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-[#081D36] bg-blue-50/30 font-medium">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 text-sm shrink-0"></i>
+                                        <span><strong>100% Visa chính thống</strong>: EPS E-9, Kỹ thuật E-7, Thời vụ E-8 được Bộ Tư pháp & Bộ Lao động Hàn Quốc cấp phép.</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3: Đào tạo tiếng Hàn -->
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="p-4 sm:p-5 font-bold text-[#081D36]">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-graduation-cap"></i></span>
+                                        <span>Đào tạo tiếng Hàn & Ôn thi</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-rose-700 bg-rose-50/20 border-x border-rose-100">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-xmark text-rose-500 mt-0.5 text-sm shrink-0"></i>
+                                        <span>Dạy qua loa đối phó, hoặc lừa "bao đậu EPS", thi trượt thì bỏ rơi học viên.</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-[#081D36] bg-blue-50/30 font-medium">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 text-sm shrink-0"></i>
+                                        <span>Trung tâm KIPA chuyên đào tạo EPS-TOPIK với phòng máy tính thi thử chuẩn đề thật, <strong>tỷ lệ đỗ >92%</strong>.</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 4: Chăm sóc tại Hàn Quốc -->
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="p-4 sm:p-5 font-bold text-[#081D36]">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-headset"></i></span>
+                                        <span>Bảo hộ & Hỗ trợ tại Hàn Quốc</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-rose-700 bg-rose-50/20 border-x border-rose-100">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-xmark text-rose-500 mt-0.5 text-sm shrink-0"></i>
+                                        <span>"Đem con bỏ chợ" ngay khi máy bay cất cánh. Khi có tranh chấp xưởng hay ốm đau thì bặt vô âm tín.</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-[#081D36] bg-blue-50/30 font-medium">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 text-sm shrink-0"></i>
+                                        <span><strong>Đặc quyền KIPA Care 360°</strong>: Ban đại diện đón tại Incheon, hỗ trợ làm thẻ ARC, mở ngân hàng, bảo vệ quyền lợi 24/7.</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 5: Nâng hạng Visa dài hạn -->
+                            <tr class="hover:bg-slate-50/50 transition">
+                                <td class="p-4 sm:p-5 font-bold text-[#081D36]">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-house-user"></i></span>
+                                        <span>Lộ trình dài hạn E-7-4 & Bảo lãnh</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-rose-700 bg-rose-50/20 border-x border-rose-100">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-xmark text-rose-500 mt-0.5 text-sm shrink-0"></i>
+                                        <span>Không có chuyên môn hỗ trợ. Hết 4 năm 10 tháng phải về nước hoặc sống bất hợp pháp.</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 sm:p-5 text-[#081D36] bg-blue-50/30 font-medium">
+                                    <div class="flex items-start gap-2">
+                                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 text-sm shrink-0"></i>
+                                        <span>Đồng hành ôn thi TOPIK 3-4 và chuyển đổi sang <strong>Visa Kỹ sư E-7-4</strong> định cư dài hạn cùng gia đình.</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
 
             <!-- ========================================================
                  03. KIỂM TRA ĐIỀU KIỆN & 04. LỘ TRÌNH THAM GIA
@@ -1222,8 +1582,17 @@
                             </div>
                         </div>
 
-                        <!-- Button Xem kết quả sơ bộ -->
-                        <div class="mt-4 pt-1">
+                        <!-- Criteria summary & Button Xem kết quả sơ bộ -->
+                        <div class="mt-3.5 space-y-2.5">
+                            <div class="p-2.5 bg-blue-50/60 rounded-xl border border-blue-100 flex items-center justify-between text-[11px] text-[#0274BD]">
+                                <span class="flex items-center gap-1.5 font-medium">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                    <span>Độ tuổi 18 – 39 • Đạt chuẩn sức khỏe • Không tiền án</span>
+                                </span>
+                                <span class="font-bold text-slate-700 bg-white px-2 py-0.5 rounded-md shadow-2xs border border-slate-200/60">
+                                    Miễn Phí 100%
+                                </span>
+                            </div>
                             <button type="button" id="btn-eval-submit" onclick="evaluateLaborProfile()" class="w-full bg-[#facc15] hover:bg-[#eab308] text-slate-900 font-bold text-xs sm:text-sm py-2.5 rounded-xl shadow-xs transition flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
                                 <span>Xem kết quả sơ bộ</span>
@@ -1243,7 +1612,7 @@
 
                             <!-- 6 Steps Roadmap Flowchart -->
                             <div class="py-2 my-auto overflow-x-auto">
-                                <div class="grid grid-cols-6 gap-1 min-w-[420px] sm:min-w-0 items-start">
+                                <div class="grid gap-1 min-w-[420px] sm:min-w-0 items-start" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)) !important;">
                                     
                                     <!-- Step 01 -->
                                     <div class="flex flex-col items-center relative group">
@@ -1257,7 +1626,7 @@
                                             Tư vấn &amp;<br>tìm hiểu
                                         </h5>
                                         <!-- Arrow 01 -> 02 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1277,7 +1646,7 @@
                                             Đối chiếu<br>điều kiện
                                         </h5>
                                         <!-- Arrow 02 -> 03 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1297,7 +1666,7 @@
                                             Chuẩn bị<br>hồ sơ
                                         </h5>
                                         <!-- Arrow 03 -> 04 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1317,7 +1686,7 @@
                                             Đào tạo &amp;<br>thi tuyển
                                         </h5>
                                         <!-- Arrow 04 -> 05 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1337,7 +1706,7 @@
                                             Hoàn thiện<br>thủ tục
                                         </h5>
                                         <!-- Arrow 05 -> 06 -->
-                                        <div class="absolute top-[58px] sm:top-[62px] -translate-y-1/2 left-[calc(50%+14px)] w-[calc(100%-28px)] flex items-center pointer-events-none z-0">
+                                        <div class="absolute top-[20px] sm:top-[22px] -translate-y-1/2 left-[calc(50%+18px)] w-[calc(100%-36px)] flex items-center pointer-events-none z-0">
                                             <div class="flex-1 h-[1.8px] bg-[#93c5fd]"></div>
                                             <svg class="w-2.5 h-2.5 text-[#93c5fd] -ml-1 shrink-0" viewBox="0 0 6 10" fill="none" stroke="currentColor">
                                                 <polyline points="1,1 5,5 1,9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1709,6 +2078,234 @@
                 </div>
             </section>
 
+            
+            <!-- ========================================================
+                 SÁNG TẠO 03: ĐẶC QUYỀN KIPA CARE 360° TẠI HÀN QUỐC
+                 (Đồng hành 4 giai đoạn xuyên suốt hợp đồng làm việc)
+                 ======================================================== -->
+            <section id="kipa-care-360" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-slate-100">
+                
+                <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 text-[#0274BD] text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100">
+                        <i class="fa-solid fa-hand-holding-heart text-[#EC1E1B]"></i>
+                        <span>Đặc Quyền Vượt Trội Dành Cho Lao Động KIPA</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#081D36] leading-tight">
+                        KIPA Care 360°: Điểm Tựa Vững Vàng Nơi Đất Khách
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                        KIPA Việt Hàn không dừng lại ở việc làm thủ tục xuất cảnh. Chúng tôi thiết lập mạng lưới hỗ trợ trực tiếp tại Hàn Quốc để bạn an tâm làm việc.
+                    </p>
+                </div>
+
+                <!-- 4 Pillars Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    
+                    <!-- Pillar 1 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-200 transition group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-[#0274BD] group-hover:bg-[#0274BD] group-hover:text-white transition flex items-center justify-center text-xl mb-4 font-black">
+                                <i class="fa-solid fa-plane-arrival"></i>
+                            </div>
+                            <span class="text-[11px] font-bold text-[#0274BD] bg-blue-50 px-2 py-0.5 rounded-md">Giai Đoạn 1 • Ngày 1 - 30</span>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36] mt-2 mb-2 leading-snug">
+                                Đón Sân Bay & Hòa Nhập Nhanh
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Đón đoàn tại sân bay Incheon/Gimhae, đưa về xưởng, cấp sim 4G, hướng dẫn làm Thẻ cư trú (ARC), mở tài khoản ngân hàng KB/Shinhan gửi tiền về Việt Nam phí 0đ.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 mt-4 text-[11px] text-emerald-600 font-semibold flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>100% Học viên có người đón</span>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-200 transition group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition flex items-center justify-center text-xl mb-4 font-black">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <span class="text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">Giai Đoạn 2 • Suốt Hợp Đồng</span>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36] mt-2 mb-2 leading-snug">
+                                Bảo Hộ Lao Động & Hotline 24/7
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Cố vấn ngôn ngữ khi trao đổi công việc với chủ xưởng; hỗ trợ thủ tục khám BHYT, chế độ bảo hiểm tai nạn lao động; tư vấn đổi xưởng hợp pháp nếu chủ vi phạm hợp đồng.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 mt-4 text-[11px] text-blue-600 font-semibold flex items-center gap-1.5">
+                            <i class="fa-solid fa-phone-volume"></i>
+                            <span>Hotline trợ giúp tiếng Việt 24/7</span>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-200 transition group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition flex items-center justify-center text-xl mb-4 font-black">
+                                <i class="fa-solid fa-id-card-clip"></i>
+                            </div>
+                            <span class="text-[11px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">Giai Đoạn 3 • Sau 3 - 4 Năm</span>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36] mt-2 mb-2 leading-snug">
+                                Chuyển Đổi Visa E-7-4 Định Cư
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Tổ chức lớp bồi dưỡng tiếng Hàn TOPIK 3-4 online buổi tối; hướng dẫn cộng điểm thâm niên K-point để nộp hồ sơ chuyển đổi sang Visa kỹ sư E-7-4, bảo lãnh vợ con sang Hàn Quốc.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 mt-4 text-[11px] text-purple-600 font-semibold flex items-center gap-1.5">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Bảo lãnh người thân sang cùng</span>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-blue-200 transition group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition flex items-center justify-center text-xl mb-4 font-black">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">Giai Đoạn 4 • Về Nước & Khởi Nghiệp</span>
+                            <h3 class="font-phudu text-base font-bold text-[#081D36] mt-2 mb-2 leading-snug">
+                                Kết Nối Doanh Nghiệp FDI
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Sau khi hoàn thành hợp đồng và mang về vốn 1.5 - 2.5 tỷ, KIPA kết nối tuyển dụng vào các vị trí Quản đốc, Phiên dịch kỹ thuật tại các tập đoàn Samsung, LG, Hyundai tại Việt Nam.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 mt-4 text-[11px] text-emerald-700 font-semibold flex items-center gap-1.5">
+                            <i class="fa-solid fa-handshake"></i>
+                            <span>Lương 25 - 40 triệu tại Việt Nam</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ========================================================
+                 SÁNG TẠO 04: BẢNG VÀNG HỌC VIÊN KIPA - NGƯỜI THẬT VIỆC THẬT
+                 (Minh chứng thực tế thành công của người lao động KIPA)
+                 ======================================================== -->
+            <section id="hoc-vien-kipa" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-10 sm:py-14 border-t border-slate-100">
+                
+                <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-bold uppercase tracking-wider mb-3 border border-amber-200">
+                        <i class="fa-solid fa-star text-amber-500"></i>
+                        <span>Người Thật Việc Thật</span>
+                    </div>
+                    <h2 class="font-phudu text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#081D36] leading-tight">
+                        Câu Chuyện Thành Công Của Lao Động KIPA Tại Hàn Quốc
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                        Lắng nghe chia sẻ chân thực từ những người đã từng mang nỗi lo như bạn, và giờ đây đang xây dựng tương lai vững chắc tại xứ sở kim chi.
+                    </p>
+                </div>
+
+                <!-- Alumni Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Alumni 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="relative h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong-han/alumni/worker_toan.jpg" alt="Trần Văn Toàn - KIPA EPS E-9" class="w-full h-full object-cover">
+                                <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0274BD] text-white text-[11px] font-bold shadow-sm">
+                                    Visa EPS E-9 • Sản Xuất
+                                </div>
+                                <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-amber-400 text-slate-900 text-[11px] font-black shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-won-sign"></i> 48.5 Triệu / Tháng
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-phudu text-base font-bold text-[#081D36]">Trần Văn Toàn</h3>
+                                <p class="text-xs text-[#0274BD] font-semibold mt-0.5">Quê Tứ Kỳ, Hải Dương • Xưởng điện tử Hwaseong</p>
+                                <div class="flex text-amber-400 text-xs my-2.5 gap-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed italic">
+                                    "Trước khi đến KIPA, em rất sợ bị cò mồi lừa vì ở quê nhiều người mất cọc. Ở KIPA, thầy cô dạy tiếng rất tận tâm, luyện đúng đề thi máy tính. Giờ em sang được 2 năm, gửi về giúp bố mẹ trả nợ và xây nhà khang trang."
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                                <span><i class="fa-solid fa-calendar-check text-[#0274BD] mr-1"></i> Xuất cảnh 2024</span>
+                                <span class="text-emerald-600 font-bold">Đã tích lũy ~900 Triệu</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alumni 2 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="relative h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong-han/alumni/worker_mai.jpg" alt="Nguyễn Thị Mai - KIPA E-8" class="w-full h-full object-cover">
+                                <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-600 text-white text-[11px] font-bold shadow-sm">
+                                    Visa Thời Vụ E-8 • Nông Nghiệp
+                                </div>
+                                <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-amber-400 text-slate-900 text-[11px] font-black shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-won-sign"></i> 42.0 Triệu / Tháng
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-phudu text-base font-bold text-[#081D36]">Nguyễn Thị Mai</h3>
+                                <p class="text-xs text-[#0274BD] font-semibold mt-0.5">Quê Đô Lương, Nghệ An • Nông trại dâu tây Nonsan</p>
+                                <div class="flex text-amber-400 text-xs my-2.5 gap-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed italic">
+                                    "Em đi diện thời vụ nông nghiệp, công việc thu hoạch dâu tây trong nhà kính sạch sẽ, hiện đại. Bác chủ Hàn Quốc rất hiền, cuối tuần hay nấu canh kim chi cho ăn. Chi phí đi KIPA thấp hơn hẳn các chỗ khác."
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                                <span><i class="fa-solid fa-calendar-check text-[#0274BD] mr-1"></i> Xuất cảnh 2025</span>
+                                <span class="text-emerald-600 font-bold">Thu nhập đều 40tr+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alumni 3 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="relative h-48 overflow-hidden bg-slate-100">
+                                <img src="/assets/xuat-khau-lao-dong-han/alumni/worker_long.jpg" alt="Lê Hoàng Long - KIPA E-7-4" class="w-full h-full object-cover">
+                                <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-purple-700 text-white text-[11px] font-bold shadow-sm">
+                                    Visa Kỹ Sư E-7-4 • Đóng Tàu
+                                </div>
+                                <div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-amber-400 text-slate-900 text-[11px] font-black shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-won-sign"></i> 64.5 Triệu / Tháng
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-phudu text-base font-bold text-[#081D36]">Lê Hoàng Long</h3>
+                                <p class="text-xs text-[#0274BD] font-semibold mt-0.5">Quê Hậu Lộc, Thanh Hóa • Xưởng đóng tàu Ulsan</p>
+                                <div class="flex text-amber-400 text-xs my-2.5 gap-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed italic">
+                                    "Ban đầu mình đi E-9 làm thợ hàn. Sau đó nhờ trung tâm KIPA hướng dẫn ôn thi TOPIK 3 và làm hồ sơ K-point, mình đã chính thức chuyển đổi thành công sang visa E-7-4. Giờ mình chuẩn bị đón vợ con sang sinh sống lâu dài."
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                                <span><i class="fa-solid fa-calendar-check text-[#0274BD] mr-1"></i> Định cư dài hạn</span>
+                                <span class="text-purple-700 font-bold">Bảo lãnh gia đình</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
             <!-- ========================================================
                  07. HỌC TIẾNG HÀN TẠI KIPA & 08. CÂU HỎI THƯỜNG GẶP (FAQ)
                  (2 Khối song song chuẩn thiết kế anhdemo)
@@ -1829,6 +2426,22 @@
                                 </a>
                             </div>
 
+                            <!-- Training Success Metric Banner -->
+                            <div class="mt-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50/60 rounded-xl border border-blue-100 flex items-center justify-between gap-3 text-xs">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-8 h-8 rounded-lg bg-[#0274BD] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs">
+                                        <i class="fa-solid fa-award"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-bold text-slate-900 text-xs">Tỷ Lệ Đỗ EPS-TOPIK 95.8%</div>
+                                        <p class="text-[10.5px] text-slate-500">Kỳ thi đánh giá năng lực gần nhất tại KIPA Việt Hàn</p>
+                                    </div>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10.5px] border border-emerald-200 shrink-0 shadow-2xs">
+                                    Cam Kết Chuẩn Đầu Ra
+                                </span>
+                            </div>
+
                         </div>
 
                         <!-- Bottom spacer / alignment padding -->
@@ -1848,8 +2461,8 @@
                             <!-- Accordion Items List (8 câu đầy đủ, hữu ích) -->
                             <div class="space-y-1.5">
                                 
-                                <!-- FAQ 1 -->
-                                <div class="xkld-faq-item border border-slate-200/80 rounded-xl px-3.5 py-2 cursor-pointer">
+                                <!-- FAQ 1 (Active by default) -->
+                                <div class="xkld-faq-item active border border-slate-200/80 rounded-xl px-3.5 py-2 cursor-pointer bg-slate-50/50">
                                     <div class="flex items-center justify-between gap-2 font-bold text-xs sm:text-[13px] text-slate-800" onclick="toggleFaq(this)">
                                         <span>Xuất khẩu lao động Hàn Quốc cần điều kiện gì?</span>
                                         <i class="fa-solid fa-chevron-right text-[11px] text-slate-400 xkld-faq-chevron transition-transform shrink-0"></i>
@@ -1955,12 +2568,132 @@
                 </div>
             </section>
 
+            
+            <!-- ========================================================
+                 SÁNG TẠO 05: BỘ QUÀ TẶNG CẨM NANG HÀNH TRANG ĐI HÀN 2026 (LEAD MAGNET)
+                 (Thu thập khách hàng tiềm năng 1-click qua Zalo)
+                 ======================================================== -->
+            <section id="tai-tai-lieu" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-6">
+                <div class="rounded-3xl p-6 sm:p-9 text-white relative overflow-hidden shadow-xl" style="background: linear-gradient(135deg, #07192e 0%, #014f86 55%, #0274BD 100%) !important;">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                        
+                        <!-- Left text & 3 gifts (7 cols) -->
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-xs border border-white/20">
+                                <i class="fa-solid fa-gift text-[#FFF017]"></i>
+                                <span>Bộ Quà Tặng Độc Quyền Miễn Phí 2026</span>
+                            </div>
+
+                            <h2 class="font-phudu text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                                Tải Trọn Bộ Cẩm Nang Đi Làm Việc Tại Hàn Quốc 2026
+                            </h2>
+                            <p class="text-xs sm:text-sm text-sky-100 leading-relaxed max-w-lg">
+                                Tổng hợp tài liệu đắt giá giúp bạn trang bị đầy đủ kiến thức tiếng Hàn, mẹo làm đề thi EPS-TOPIK và luật bảo vệ người lao động tại Hàn Quốc.
+                            </p>
+
+                            <!-- 3 items -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                                <div class="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/15 space-y-1">
+                                    <div class="text-[#FFF017] font-bold text-sm"><i class="fa-solid fa-book-bookmark"></i> 500 Từ Vựng</div>
+                                    <div class="text-sky-100 text-[11px]">Tiếng Hàn nhà xưởng, xưởng đóng tàu & nông nghiệp.</div>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/15 space-y-1">
+                                    <div class="text-[#FFF017] font-bold text-sm"><i class="fa-solid fa-laptop-file"></i> 10 Đề Thi EPS</div>
+                                    <div class="text-sky-100 text-[11px]">Đề thi mẫu chuẩn form HRD Korea kèm đáp án chi tiết.</div>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/15 space-y-1">
+                                    <div class="text-[#FFF017] font-bold text-sm"><i class="fa-solid fa-scale-balanced"></i> Luật Lao Động</div>
+                                    <div class="text-sky-100 text-[11px]">Quyền lợi BHYT, tiền tăng ca và bí quyết đổi visa E-7-4.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right mini form (5 cols) -->
+                        <div class="lg:col-span-5 bg-white p-6 sm:p-7 rounded-2xl text-slate-800 shadow-md">
+                            <h3 class="font-phudu text-base sm:text-lg font-bold text-[#081D36] text-center mb-1">
+                                Nhận Trọn Bộ File PDF Qua Zalo
+                            </h3>
+                            <p class="text-[11px] text-slate-500 text-center mb-4">
+                                KIPA cam kết miễn phí 100% & không làm phiền bạn.
+                            </p>
+
+                            <form id="lead-magnet-form" onsubmit="handleLeadMagnetSubmit(event)" class="space-y-3">
+                                <div>
+                                    <label for="lm-name" class="block text-xs font-bold text-slate-700 mb-1">Họ và tên của bạn *</label>
+                                    <input type="text" id="lm-name" name="lm-name" aria-label="Họ và tên của bạn" required placeholder="Ví dụ: Nguyễn Văn An" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:border-[#0274BD] focus:ring-1 focus:ring-[#0274BD]">
+                                </div>
+                                <div>
+                                    <label for="lm-phone" class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại / Zalo nhận tài liệu *</label>
+                                    <input type="tel" id="lm-phone" name="lm-phone" aria-label="Số điện thoại hoặc Zalo nhận tài liệu" required pattern="[0-9]{10,11}" placeholder="Ví dụ: 0912 345 678" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 focus:bg-white focus:outline-none focus:border-[#0274BD] focus:ring-1 focus:ring-[#0274BD]">
+                                </div>
+                                <button type="submit" id="lm-submit-btn" class="w-full py-3 px-4 rounded-xl bg-[#EC1E1B] hover:bg-[#d61815] text-white font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition cursor-pointer">
+                                    <i class="fa-solid fa-download text-xs"></i>
+                                    <span>Tải Ngay Qua Zalo (Miễn Phí)</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
+                                <div id="lm-msg" class="hidden text-xs text-center font-bold text-emerald-600 bg-emerald-50 p-2 rounded-lg border border-emerald-200">
+                                    ✓ Đã tiếp nhận yêu cầu! Chuyên viên KIPA sẽ gửi tài liệu qua Zalo của bạn trong 5 phút.
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ========================================================
+                 SÁNG TẠO 06: BANNER ĐẾM NGƯỢC ƯU ĐÃI & SUẤT HỖ TRỢ ĐÀO TẠO
+                 (Tạo động lực hành động khẩn cấp trước form tư vấn)
+                 ======================================================== -->
+            <section class="max-w-[1240px] mx-auto px-4 sm:px-6 pt-4 pb-2">
+                <div class="p-4 sm:p-5 rounded-2xl bg-amber-50 border-2 border-amber-300 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+                    
+                    <div class="flex items-center gap-3.5 text-center md:text-left">
+                        <div class="w-12 h-12 rounded-xl bg-amber-400 text-slate-900 flex items-center justify-center text-xl shrink-0 font-black shadow-xs">
+                            <i class="fa-solid fa-fire text-rose-600"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap justify-center md:justify-start">
+                                <span class="px-2 py-0.5 rounded-md bg-rose-600 text-white font-black text-[10px] uppercase tracking-wide">Ưu Đãi Đặc Biệt</span>
+                                <h3 class="font-phudu font-bold text-slate-900 text-xs sm:text-sm">Học Bổng Đào Tạo EPS Tháng Này: Giảm 3.000.000đ Học Phí</h3>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-600 mt-0.5">
+                                Miễn phí KTX máy lạnh cho học viên ở xa + Tặng trọn bộ giáo trình HRD Korea. Chỉ còn <strong>12 suất</strong> cuối cùng!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Countdown Clock -->
+                    <div class="flex items-center gap-2 shrink-0">
+                        <div class="text-center bg-white px-2.5 py-1.5 rounded-lg border border-amber-200 shadow-2xs min-w-[48px]">
+                            <span id="cd-hours" class="font-phudu font-black text-base text-rose-600 block leading-tight">02</span>
+                            <span class="text-[9px] text-slate-400 uppercase font-semibold">Giờ</span>
+                        </div>
+                        <span class="font-bold text-amber-500">:</span>
+                        <div class="text-center bg-white px-2.5 py-1.5 rounded-lg border border-amber-200 shadow-2xs min-w-[48px]">
+                            <span id="cd-mins" class="font-phudu font-black text-base text-rose-600 block leading-tight">45</span>
+                            <span class="text-[9px] text-slate-400 uppercase font-semibold">Phút</span>
+                        </div>
+                        <span class="font-bold text-amber-500">:</span>
+                        <div class="text-center bg-white px-2.5 py-1.5 rounded-lg border border-amber-200 shadow-2xs min-w-[48px]">
+                            <span id="cd-secs" class="font-phudu font-black text-base text-rose-600 block leading-tight">18</span>
+                            <span class="text-[9px] text-slate-400 uppercase font-semibold">Giây</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
             <!-- ========================================================
                  BOTTOM CTA BANNER: Sẵn sàng tìm hiểu cơ hội làm việc tại Hàn Quốc?
                  (Khối form đăng ký nền xanh đậm)
                  ======================================================== -->
             <section id="dang-ky-tu-van" class="max-w-[1240px] mx-auto px-4 sm:px-6 py-8">
-                <div class="relative bg-gradient-to-r from-[#034479] via-[#025a9e] to-[#0274bd] rounded-3xl p-6 sm:p-9 text-white overflow-hidden shadow-xl">
+                <div class="relative bg-gradient-to-r from-[#034479] via-[#025a9e] to-[#0274bd] rounded-3xl p-6 sm:p-9 text-white overflow-hidden shadow-xl" style="background: linear-gradient(135deg, #07192e 0%, #0274BD 55%, #014f86 100%) !important;">
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                         
@@ -2031,7 +2764,7 @@
 
                                 <!-- Button Submit -->
                                 <div class="pt-1 flex flex-col sm:flex-row items-center gap-3">
-                                    <button type="submit" id="btn-submit-lead" class="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#facc15] hover:bg-[#eab308] text-slate-900 font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 whitespace-nowrap">
+                                    <button type="submit" id="btn-submit-lead" class="w-full sm:w-auto px-7 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 whitespace-nowrap hover:opacity-95" style="background: #FACC15 !important; color: #081D36 !important;">
                                         <span>Gửi yêu cầu tư vấn</span>
                                         <i class="fa-solid fa-arrow-right text-xs"></i>
                                     </button>
@@ -2054,7 +2787,216 @@
             </section>
 
         </div>
-    </main>
+    
+    <!-- ========================================================
+         SCRIPT: TÍNH THU NHẬP REAL-TIME, LEAD MAGNET & COUNTDOWN
+         ======================================================== -->
+    <script>
+        // Data config for labor calculator
+        const calcConfig = {
+            programs: {
+                'e9_mfg': { name: 'Visa EPS E-9 Sản Xuất', baseKrw: 2060740, otRateKrw: 14790, deductKrw: 420000, rateVnd: 19.2 },
+                'e9_agr': { name: 'Visa EPS E-9 Nông Nghiệp', baseKrw: 2060740, otRateKrw: 14790, deductKrw: 260000, rateVnd: 19.2 },
+                'e7_tech': { name: 'Visa Kỹ Sư E-7-4', baseKrw: 2850000, otRateKrw: 20450, deductKrw: 460000, rateVnd: 19.2 },
+                'e8_sea': { name: 'Visa Thời Vụ E-8', baseKrw: 2060740, otRateKrw: 14790, deductKrw: 200000, rateVnd: 19.2 }
+            },
+            currentProg: 'e9_mfg',
+            currentOtHours: 15,
+            currentDurationMonths: 58
+        };
+
+        function formatVnd(val) {
+            return new Intl.NumberFormat('vi-VN').format(Math.round(val)) + ' đ';
+        }
+        function formatKrw(val) {
+            return new Intl.NumberFormat('en-US').format(Math.round(val)) + ' KRW';
+        }
+
+        function setCalcProgram(progKey) {
+            calcConfig.currentProg = progKey;
+            ['e9_mfg', 'e9_agr', 'e7_tech', 'e8_sea'].forEach(k => {
+                const btn = document.getElementById('btn-prog-' + k);
+                if (!btn) return;
+                const icon = btn.querySelector('i');
+                const title = btn.querySelector('.font-phudu');
+                if (k === progKey) {
+                    btn.classList.add('border-2', 'border-[#0274BD]', 'bg-blue-50/70');
+                    btn.classList.remove('border-slate-200', 'bg-white');
+                    if (title) { title.classList.add('text-[#0274BD]'); title.classList.remove('text-slate-700'); }
+                    if (icon) icon.className = 'fa-solid fa-circle-check text-xs text-[#0274BD]';
+                } else {
+                    btn.classList.remove('border-2', 'border-[#0274BD]', 'bg-blue-50/70');
+                    btn.classList.add('border', 'border-slate-200', 'bg-white');
+                    if (title) { title.classList.remove('text-[#0274BD]'); title.classList.add('text-slate-700'); }
+                    if (icon) icon.className = 'fa-regular fa-circle text-xs text-slate-300';
+                }
+            });
+            updateLaborCalculator();
+        }
+
+        function onOtSliderChange(val) {
+            calcConfig.currentOtHours = parseInt(val, 10);
+            const label = document.getElementById('label-ot-hours');
+            if (label) {
+                let note = '';
+                if (val == 0) note = ' (Chỉ làm 8h hành chính)';
+                else if (val <= 10) note = ' (~1.5h/ngày)';
+                else if (val <= 20) note = ' (~3h/ngày + Thứ 7)';
+                else note = ' (Mùa cao điểm)';
+                label.textContent = val + ' giờ/tuần' + note;
+            }
+            updateLaborCalculator();
+        }
+
+        function setCalcDuration(months) {
+            calcConfig.currentDurationMonths = months;
+            [12, 36, 58].forEach(m => {
+                const btn = document.getElementById('btn-dur-' + m);
+                if (!btn) return;
+                if (m === months) {
+                    btn.classList.add('border-2', 'border-[#0274BD]', 'bg-blue-50', 'text-[#0274BD]', 'font-bold');
+                    btn.classList.remove('border-slate-200', 'text-slate-700', 'font-semibold');
+                } else {
+                    btn.classList.remove('border-2', 'border-[#0274BD]', 'bg-blue-50', 'text-[#0274BD]', 'font-bold');
+                    btn.classList.add('border', 'border-slate-200', 'text-slate-700', 'font-semibold');
+                }
+            });
+            const periodLabel = document.getElementById('calc-period-label');
+            if (periodLabel) {
+                if (months === 12) periodLabel.textContent = '1 Năm';
+                else if (months === 36) periodLabel.textContent = '3 Năm';
+                else periodLabel.textContent = '4 Năm 10 Tháng (Hết Hợp Đồng)';
+            }
+            updateLaborCalculator();
+        }
+
+        function updateLaborCalculator() {
+            const p = calcConfig.programs[calcConfig.currentProg];
+            if (!p) return;
+
+            const baseKrw = p.baseKrw;
+            const otHoursMonth = calcConfig.currentOtHours * 4.33;
+            const otKrw = otHoursMonth * p.otRateKrw;
+            const deductKrw = p.deductKrw;
+            const netKrw = baseKrw + otKrw - deductKrw;
+
+            const baseVnd = baseKrw * p.rateVnd;
+            const otVnd = otKrw * p.rateVnd;
+            const deductVnd = deductKrw * p.rateVnd;
+            const netVnd = netKrw * p.rateVnd;
+
+            // Total accumulated savings: assumes ~85% sent home, ~15% personal minor expenses
+            const monthlySavingVnd = netVnd * 0.85;
+            const totalSavingsVnd = monthlySavingVnd * calcConfig.currentDurationMonths;
+
+            const elBase = document.getElementById('calc-base-vnd');
+            const elOt = document.getElementById('calc-ot-vnd');
+            const elDeduct = document.getElementById('calc-deduct-vnd');
+            const elNet = document.getElementById('calc-net-monthly');
+            const elKrw = document.getElementById('calc-net-krw');
+            const elTotal = document.getElementById('calc-total-savings');
+
+            if (elBase) elBase.textContent = formatVnd(baseVnd);
+            if (elOt) elOt.textContent = '+' + formatVnd(otVnd);
+            if (elDeduct) elDeduct.textContent = '-' + formatVnd(deductVnd);
+            if (elNet) elNet.textContent = formatVnd(netVnd);
+            if (elKrw) elKrw.textContent = '(Tương đương ~' + formatKrw(netKrw) + ')';
+            if (elTotal) elTotal.textContent = formatVnd(totalSavingsVnd);
+        }
+
+        function prefillFromCalculator() {
+            const p = calcConfig.programs[calcConfig.currentProg];
+            const noteInput = document.getElementById('note');
+            if (noteInput && p) {
+                noteInput.value = 'Quan tâm dự toán thu nhập: ' + p.name + ' (Tăng ca: ' + calcConfig.currentOtHours + 'h/tuần, thời gian ' + calcConfig.currentDurationMonths + ' tháng). Cần tư vấn chi tiết đơn hàng.';
+            }
+            const progSelect = document.getElementById('program');
+            if (progSelect) {
+                if (calcConfig.currentProg === 'e9_mfg' || calcConfig.currentProg === 'e9_agr') {
+                    progSelect.value = 'Chương trình EPS (E-9)';
+                } else if (calcConfig.currentProg === 'e7_tech') {
+                    progSelect.value = 'Lao động chuyên môn (E-7)';
+                } else {
+                    progSelect.value = 'Lao động thời vụ & khác';
+                }
+            }
+        }
+
+        // Lead magnet form submission
+        function handleLeadMagnetSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('lm-name').value.trim();
+            const phone = document.getElementById('lm-phone').value.trim();
+            const btn = document.getElementById('lm-submit-btn');
+            const msg = document.getElementById('lm-msg');
+
+            if (!name || !phone) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> Đang gửi...';
+
+            fetch('/api/submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    program: 'Tải cẩm nang XKLĐ Hàn Quốc 2026',
+                    note: 'Tải bộ tài liệu 500 từ vựng + 10 đề thi EPS-TOPIK 2026',
+                    source: 'xuat-khau-lao-dong-han-quoc-lead-magnet'
+                })
+            }).then(() => {
+                btn.classList.add('hidden');
+                msg.classList.remove('hidden');
+            }).catch(() => {
+                btn.classList.add('hidden');
+                msg.classList.remove('hidden');
+            });
+        }
+
+        // Persistent 30-minute Countdown Timer
+        function initCountdownTimer() {
+            const storageKey = 'kipa_xkld_countdown_end';
+            let endTime = localStorage.getItem(storageKey);
+            if (!endTime || parseInt(endTime, 10) < Date.now()) {
+                endTime = Date.now() + 30 * 60 * 1000;
+                localStorage.setItem(storageKey, endTime);
+            }
+
+            function update() {
+                const now = Date.now();
+                let remaining = Math.max(0, Math.floor((endTime - now) / 1000));
+                if (remaining <= 0) {
+                    endTime = Date.now() + 30 * 60 * 1000;
+                    localStorage.setItem(storageKey, endTime);
+                    remaining = 30 * 60;
+                }
+
+                const hours = Math.floor(remaining / 3600);
+                const mins = Math.floor((remaining % 3600) / 60);
+                const secs = remaining % 60;
+
+                const hEl = document.getElementById('cd-hours');
+                const mEl = document.getElementById('cd-mins');
+                const sEl = document.getElementById('cd-secs');
+
+                if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+                if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+                if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Initialize on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLaborCalculator();
+            initCountdownTimer();
+        });
+    </script>
+
+        </main>
 
     <!-- ========================================================
          RESULT MODAL FOR SECTION 03 (Kiểm tra điều kiện sơ bộ)
