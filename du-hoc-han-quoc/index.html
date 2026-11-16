@@ -1403,8 +1403,8 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                 <!-- Left: Form chọn tiêu chí (5 cột cân đối, không khoảng trống) -->
-                <div class="lg:col-span-5 bg-white p-6 sm:p-7 rounded-3xl border border-blue-100 shadow-md flex flex-col justify-between">
-                    <div class="space-y-4">
+                <div class="lg:col-span-5 bg-white p-5 sm:p-6 rounded-3xl border border-blue-100 shadow-md flex flex-col justify-between">
+                    <div class="space-y-3.5">
                         <div class="flex items-center justify-between pb-2 border-b border-slate-100">
                             <span class="text-xs font-bold uppercase tracking-wider text-brand-blue flex items-center gap-1.5">
                                 <i class="fas fa-sliders-h"></i> Chọn tiêu chí hồ sơ
@@ -1414,10 +1414,10 @@
 
                         <!-- Tiêu chí 1: Hệ du học -->
                         <div>
-                            <label for="calc-he" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                            <label for="calc-he" class="block text-[11px] sm:text-xs font-bold text-brand-navy uppercase tracking-wide mb-1">
                                 <i class="fas fa-graduation-cap text-brand-blue mr-1"></i> 1. Hệ du học quan tâm:
                             </label>
-                            <select id="calc-he" aria-label="Hệ du học bạn quan tâm" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
+                            <select id="calc-he" aria-label="Hệ du học bạn quan tâm" onchange="calculateDuhocEstimate()" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 sm:py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800 transition">
                                 <option value="d4-3" selected>Du học THPT Cấp 3 (D4-3) - Học bổng 100%</option>
                                 <option value="d4-1">Du học tiếng Hàn (D4-1) - Dự bị ĐH</option>
                                 <option value="d2-2">Du học Đại học chính quy (D2-2)</option>
@@ -1428,38 +1428,38 @@
 
                         <!-- Tiêu chí 2: Điểm GPA -->
                         <div>
-                            <label for="calc-gpa" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                            <label for="calc-gpa" class="block text-[11px] sm:text-xs font-bold text-brand-navy uppercase tracking-wide mb-1">
                                 <i class="fas fa-chart-line text-brand-blue mr-1"></i> 2. Điểm GPA gần nhất:
                             </label>
-                            <select id="calc-gpa" aria-label="Điểm trung bình GPA gần nhất" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="8.5">Xuất sắc (GPA &ge; 8.5) - Ưu tiên học bổng cao</option>
-                                <option value="7.5" selected>Khá - Giỏi (GPA 7.5 – 8.4) - Đạt chuẩn Top</option>
-                                <option value="6.5">Trung bình khá (GPA 6.5 – 7.4) - Đạt visa</option>
-                                <option value="6.0">Dưới 6.5 - Chuyên gia thẩm định riêng</option>
+                            <select id="calc-gpa" aria-label="Điểm trung bình GPA gần nhất" onchange="calculateDuhocEstimate()" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 sm:py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800 transition">
+                                <option value="8.5">Xuất sắc (GPA &ge; 8.5) - Học bổng cao</option>
+                                <option value="7.5" selected>Khá - Giỏi (GPA 7.5 – 8.4) - Chuẩn Top</option>
+                                <option value="6.5">Trung bình khá (GPA 6.5 – 7.4) - Đạt Visa</option>
+                                <option value="6.0">Dưới 6.5 - Thẩm định riêng</option>
                             </select>
                         </div>
 
                         <!-- Tiêu chí 3: Trình độ tiếng Hàn -->
                         <div>
-                            <label for="calc-topik" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                            <label for="calc-topik" class="block text-[11px] sm:text-xs font-bold text-brand-navy uppercase tracking-wide mb-1">
                                 <i class="fas fa-language text-brand-blue mr-1"></i> 3. Trình độ tiếng Hàn:
                             </label>
-                            <select id="calc-topik" aria-label="Trình độ tiếng Hàn hiện tại" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="none" selected>Chưa biết tiếng (Học căn bản tại KIPA)</option>
-                                <option value="topik12">Sơ cấp (Học bảng chữ / TOPIK 1 - 2)</option>
+                            <select id="calc-topik" aria-label="Trình độ tiếng Hàn hiện tại" onchange="calculateDuhocEstimate()" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 sm:py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800 transition">
+                                <option value="none" selected>Chưa biết tiếng (Học nền tảng tại KIPA)</option>
+                                <option value="topik12">Sơ cấp (Bảng chữ / TOPIK 1 - 2)</option>
                                 <option value="topik34">Trung cấp (TOPIK 3 - 4) - Vào chuyên ngành</option>
-                                <option value="topik56">Cao cấp (TOPIK 5 - 6 hoặc IELTS 6.5+)</option>
+                                <option value="topik56">Cao cấp (TOPIK 5 - 6 / IELTS 6.5+)</option>
                             </select>
                         </div>
 
                         <!-- Tiêu chí 4: Khu vực mong muốn -->
                         <div>
-                            <label for="calc-region" class="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                            <label for="calc-region" class="block text-[11px] sm:text-xs font-bold text-brand-navy uppercase tracking-wide mb-1">
                                 <i class="fas fa-map-marker-alt text-brand-blue mr-1"></i> 4. Khu vực mong muốn:
                             </label>
-                            <select id="calc-region" aria-label="Khu vực du học mong muốn" onchange="calculateDuhocEstimate()" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800">
-                                <option value="seoul" selected>Thủ đô Seoul &amp; Vùng đô thị vệ tinh (Incheon, Gyeonggi)</option>
-                                <option value="busan">Thành phố Busan &amp; Miền Trung/Nam (Tiết kiệm 30%)</option>
+                            <select id="calc-region" aria-label="Khu vực du học mong muốn" onchange="calculateDuhocEstimate()" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 sm:py-2.5 focus:outline-none focus:border-brand-blue font-medium text-slate-800 transition">
+                                <option value="seoul" selected>Thủ đô Seoul &amp; Lân cận (Incheon, Gyeonggi)</option>
+                                <option value="busan">TP. Busan &amp; Miền Trung/Nam (-30% chi phí)</option>
                             </select>
                         </div>
 
@@ -2382,11 +2382,11 @@
                     </div>
                 </div>
 
-                <!-- Video Card 3: Phụ huynh em Cao Thùy Lâm -->
-                <div class="story-video-card bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-category="parent all" onclick="openVideoModal('Phụ huynh em Cao Thùy Lâm', 'Cảm nhận tin tưởng và đồng hành cùng KIPA Việt Hàn khi con đạt học bổng 100% kỳ Xuân 2025.', 'ZQO7b-tLbIU')">
+                <!-- Video Card 3: Phụ huynh Bác Cao Thùy Lâm -->
+                <div class="story-video-card bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-category="parent all" onclick="openVideoModal('Phụ huynh Cao Thùy Lâm', 'Cảm nhận tin tưởng và đồng hành cùng KIPA Việt Hàn khi con đạt học bổng 100% kỳ Xuân 2025.', 'ZQO7b-tLbIU')">
                     <div>
                         <div class="relative h-48 overflow-hidden bg-slate-900">
-                            <img src="/assets/home/feedback-ph-cao-thuy-anh.jpg" alt="Feedback Phụ huynh em Cao Thùy Lâm" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" loading="lazy">
+                            <img src="/assets/home/feedback-ph-cao-thuy-anh.jpg" alt="Feedback Phụ huynh Cao Thùy Lâm" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" loading="lazy">
                             <div class="absolute inset-0 bg-slate-900/35 group-hover:bg-slate-900/15 transition-colors flex items-center justify-center">
                                 <span class="w-12 h-12 rounded-full bg-white/95 text-brand-red flex items-center justify-center shadow-xl group-hover:scale-115 transition-transform duration-300">
                                     <i class="fa-solid fa-play text-base ml-0.5 text-[#EC1E1B]"></i>
@@ -2401,7 +2401,7 @@
                         </div>
                         <div class="p-4 space-y-2">
                             <div class="flex items-center justify-between">
-                                <h3 class="font-phudu font-bold text-base text-brand-navy group-hover:text-brand-blue transition-colors">Phụ huynh em Cao Thùy Lâm</h3>
+                                <h3 class="font-phudu font-bold text-base text-brand-navy group-hover:text-brand-blue transition-colors">Bác Cao Thùy Lâm</h3>
                                 <span class="inline-flex items-center text-[10px] text-amber-600 font-semibold bg-amber-50 px-1.5 py-0.5 rounded">
                                     <i class="fas fa-heart text-xs mr-1"></i> Phụ huynh
                                 </span>
