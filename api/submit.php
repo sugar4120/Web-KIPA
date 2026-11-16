@@ -49,6 +49,12 @@ $formTypes = [
         'required' => ['name', 'phone', 'program', 'consent'],
         'contact' => 'name',
     ],
+    'duhoc_consultation' => [
+        'path' => '/du-hoc-han-quoc/',
+        'keys' => ['name', 'phone', 'email', 'program', 'notes', 'consent'],
+        'required' => ['name', 'phone', 'program', 'consent'],
+        'contact' => 'name',
+    ],
     'contact' => [
         'path' => '/lien-he/',
         'keys' => ['fullname', 'phone', 'email', 'program', 'topics', 'branch', 'message', 'consent'],
