@@ -113,12 +113,26 @@
         .bg-brand-blue { background-color: #0274BD !important; }
         .border-brand-blue { border-color: #0274BD !important; }
         .text-brand-red { color: #EC1E1B !important; }
-        .bg-brand-red { background-color: #EC1E1B !important; }
+        .bg-brand-red { background-color: #EC1E1B !important; color: #ffffff !important; }
         .border-brand-red { border-color: #EC1E1B !important; }
         .text-brand-yellow { color: #FFF017 !important; }
         .bg-brand-yellow { background-color: #FFF017 !important; }
         .bg-brand-navy { background-color: #081D36 !important; }
         .text-brand-navy { color: #081D36 !important; }
+        .cta-japan-card {
+            background: linear-gradient(135deg, #07192e 0%, #01458e 50%, #0274BD 100%) !important;
+            color: #ffffff !important;
+        }
+        .btn-kipa-red {
+            background-color: #EC1E1B !important;
+            color: #ffffff !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-kipa-red:hover {
+            background-color: #d61815 !important;
+            color: #ffffff !important;
+            opacity: 0.96 !important;
+        }
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -793,7 +807,7 @@
         <!-- ========================================================
              HERO BANNER & BREADCRUMB
              ======================================================== -->
-        <section class="relative bg-gradient-to-b from-[#F2F8FD] via-[#F8FBFE] to-white pt-4 pb-10 sm:pb-14 border-b border-slate-100 overflow-hidden">
+        <section class="relative pt-4 pb-10 sm:pb-14 border-b border-slate-100 overflow-hidden" style="background: linear-gradient(180deg, #F2F8FD 0%, #F8FBFE 60%, #ffffff 100%);">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 <!-- Breadcrumb -->
@@ -835,7 +849,7 @@
 
                         <!-- CTA Buttons -->
                         <div class="flex flex-wrap items-center gap-3.5 pt-2">
-                            <button type="button" onclick="openConsultationModal()" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#EC1E1B] to-[#D81815] hover:opacity-95 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                            <button type="button" onclick="openConsultationModal()" class="btn-kipa-red inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5" style="background-color: #EC1E1B !important; color: #ffffff !important;">
                                 <i class="fa-solid fa-calendar-days text-sm"></i>
                                 <span>Đăng ký tư vấn ngay</span>
                                 <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -848,10 +862,28 @@
 
                     </div>
 
-                    <!-- Right: Hero Artwork (5 cols) -->
+                    <!-- Right: Hero Visual Card (Authentic KIPA Students & Japan Program) -->
                     <div class="lg:col-span-5 relative">
-                        <div class="rounded-3xl overflow-hidden shadow-lg border border-slate-100 bg-white group relative">
-                            <img src="/assets/du-hoc-nhat/hero_art.png" alt="Du học Nhật Bản cùng KIPA Việt Hàn" class="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500">
+                        <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
+                            <img src="/assets/du-hoc-nhat/hero_du_hoc_nhat_thuc_te.jpg" 
+                                 alt="Học viên du học Nhật Bản tại KIPA Việt Hàn" 
+                                 class="w-full h-[320px] sm:h-[380px] object-cover object-center transform group-hover:scale-105 transition duration-700"
+                                 loading="eager">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex items-end p-5 sm:p-6">
+                                <div class="text-white">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold mb-2">
+                                        <span>🇯🇵 Du học Nhật Bản</span>
+                                        <span>🎓</span>
+                                        <span>Học viên thực tế KIPA</span>
+                                    </div>
+                                    <h3 class="font-phudu font-bold text-base sm:text-lg text-white leading-snug">Lớp học tiếng Nhật & Tiếp nhận hồ sơ KIPA</h3>
+                                    <p class="text-xs text-slate-200 mt-1">Đào tạo tiếng Nhật JLPT N5–N3 • Tỷ lệ đỗ visa 98% • Hỗ trợ việc làm thêm 28h/tuần</p>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-[#EC1E1B] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
+                                <i class="fa-solid fa-certificate"></i>
+                                <span>Visa Ryugaku 98%</span>
+                            </div>
                         </div>
                     </div>
 
@@ -952,15 +984,18 @@
                             
                             <!-- Video Thumbnail (5 cols) -->
                             <div class="sm:col-span-5">
-                                <div class="relative rounded-2xl overflow-hidden shadow-md group cursor-pointer border border-slate-200" onclick="openVideoModal()">
-                                    <img src="/assets/du-hoc-nhat/video_thumb.png" alt="Video Du học Nhật Bản" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300">
-                                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/25 flex items-center justify-center transition-colors">
-                                        <div class="w-12 h-12 rounded-full bg-white/90 text-[#0274BD] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <div class="relative rounded-2xl overflow-hidden shadow-md group cursor-pointer border border-slate-200" onclick="openVideoModal('https://youtube.com/shorts/ZQO7b-tLbIU')">
+                                    <img src="/assets/du-hoc-nhat/video_thumb_thuc_te.jpg" 
+                                         alt="Đoàn học viên KIPA xuất cảnh du học Nhật Bản" 
+                                         class="w-full h-[220px] object-cover group-hover:scale-105 transition-transform duration-500"
+                                         loading="lazy">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/35 flex items-center justify-center transition-colors">
+                                        <div class="w-12 h-12 rounded-full bg-white/95 text-[#EC1E1B] flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-[#EC1E1B] group-hover:text-white transition duration-300">
                                             <i class="fa-solid fa-play ml-1 text-sm"></i>
                                         </div>
                                     </div>
-                                    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] text-white font-medium bg-black/50 px-2 py-0.5 rounded backdrop-blur-xs">
-                                        <span>Du học Nhật Bản</span>
+                                    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] text-white font-medium bg-black/60 px-2.5 py-1 rounded-lg backdrop-blur-xs">
+                                        <span class="font-bold flex items-center gap-1.5"><i class="fa-brands fa-youtube text-red-500"></i> Video thực tế KIPA</span>
                                         <span>03:28</span>
                                     </div>
                                 </div>
@@ -1096,26 +1131,28 @@
         <!-- ========================================================
              SECTION: BỘ CÔNG CỤ HỖ TRỢ TỪ KIPA (4 TOOLS)
              ======================================================== -->
-        <section class="py-10 sm:py-14 bg-gradient-to-b from-[#F7FAFD] to-[#EDF4FA] border-t border-b border-blue-100/60 relative">
+        <section class="py-10 sm:py-14 border-t border-b border-blue-100/60 relative" style="background: linear-gradient(180deg, #F7FAFD 0%, #EDF4FA 100%);">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <!-- Section Header with Sakura Decoration -->
-                <div class="flex items-center justify-center gap-3 sm:gap-6 mb-8 text-center">
-                    <img src="/assets/du-hoc-nhat/sakura_branch_left.png" alt="Hoa anh đào" class="hidden sm:block h-10 w-auto object-contain">
+                <!-- Section Header -->
+                <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10 space-y-2">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#0274BD] text-xs font-bold">
+                        <i class="fa-solid fa-wrench"></i> Tiện ích độc quyền KIPA
+                    </span>
                     <h2 class="text-xl sm:text-2xl font-black text-[#081D36] tracking-tight">
                         Bộ công cụ hỗ trợ từ KIPA
                     </h2>
-                    <img src="/assets/du-hoc-nhat/sakura_branch_right.png" alt="Hoa anh đào" class="hidden sm:block h-10 w-auto object-contain">
+                    <p class="text-xs sm:text-sm text-slate-500">Tính toán chi phí, lộ trình JLPT và đánh giá điều kiện hồ sơ hoàn toàn miễn phí</p>
                 </div>
 
                 <!-- 4 Tool Cards Grid (Exact Layout) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     
                     <!-- Tool 1: Japan Pathfinder -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4">
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
-                            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/du-hoc-nhat/tool_pathfinder.png" alt="Japan Pathfinder" class="w-9 h-9 object-contain">
+                            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 text-xl shadow-2xs group-hover:bg-rose-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-compass"></i>
                             </div>
                             <div>
                                 <h3 class="font-bold text-sm text-[#081D36]">Japan Pathfinder</h3>
@@ -1134,10 +1171,10 @@
                     </div>
 
                     <!-- Tool 2: Japan Cost Planner -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4">
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
-                            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/du-hoc-nhat/tool_cost.png" alt="Japan Cost Planner" class="w-9 h-9 object-contain">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0274BD] text-xl shadow-2xs group-hover:bg-[#0274BD] group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-calculator"></i>
                             </div>
                             <div>
                                 <h3 class="font-bold text-sm text-[#081D36]">Japan Cost Planner</h3>
@@ -1156,10 +1193,10 @@
                     </div>
 
                     <!-- Tool 3: School Finder -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4">
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
-                            <div class="w-12 h-12 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/du-hoc-nhat/tool_school.png" alt="School Finder" class="w-9 h-9 object-contain">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-xl shadow-2xs group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-school"></i>
                             </div>
                             <div>
                                 <h3 class="font-bold text-sm text-[#081D36]">School Finder</h3>
@@ -1178,10 +1215,10 @@
                     </div>
 
                     <!-- Tool 4: Lộ trình tiếng Nhật (JLPT) -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4">
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs card-soft-hover flex flex-col justify-between space-y-4 group">
                         <div class="space-y-3">
-                            <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/du-hoc-nhat/tool_jlpt.png" alt="Lộ trình JLPT" class="w-9 h-9 object-contain">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 text-xl shadow-2xs group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-book-bookmark"></i>
                             </div>
                             <div>
                                 <h3 class="font-bold text-sm text-[#081D36]">Lộ trình tiếng Nhật</h3>
@@ -1399,11 +1436,6 @@
                                 <span>Các giấy tờ bổ sung theo yêu cầu của trường và cơ quan xét visa (COE, v.v.).</span>
                             </div>
                         </div>
-
-                        <!-- Cute Passport Floating Stamp on Bottom Right -->
-                        <div class="absolute bottom-3 right-3 w-20 h-auto pointer-events-none drop-shadow-md">
-                            <img src="/assets/du-hoc-nhat/passport_japan.png" alt="Japan Passport" class="w-full h-auto object-contain">
-                        </div>
                     </div>
 
                 </div>
@@ -1559,6 +1591,417 @@
         </section>
 
         <!-- ========================================================
+             CREATIVE SECTION 1: TOP NGÀNH HỌC KHÁT NHÂN LỰC & LỘ TRÌNH VISA KỸ SƯ (GIJINKOKU 2026)
+             ======================================================== -->
+        <section class="py-12 sm:py-16 bg-white border-t border-b border-slate-100">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-2">
+                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                        <span>XU HƯỚNG NGHỀ NGHIỆP & CƠ HỘI ĐỔI VISA KỸ SƯ (GIJINKOKU)</span>
+                    </div>
+                    <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold text-[#081D36]">
+                        Top Ngành Học Dễ Xin Việc & Cơ Hội Định Cư Lâu Dài Tại Nhật Bản 2026
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-2 font-vietnam leading-relaxed">
+                        Nhật Bản đang thiếu hụt trầm trọng hơn 3,4 triệu nhân lực chuyên môn do già hóa dân số. Lựa chọn đúng ngành học ưu tiên giúp du học sinh dễ dàng chuyển đổi sang Visa Kỹ sư (Kỹ thuật - Tri thức nhân văn - Nghiệp vụ quốc tế) với mức lương và chế độ đãi ngộ 100% như người Nhật bản xứ.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Career 1: IT & AI -->
+                    <div class="bg-white rounded-2xl p-6 flex flex-col justify-between border border-slate-200/90 hover:border-brand-blue shadow-xs hover:shadow-xl transition-all card-soft-hover group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center text-xl mb-4 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <div class="inline-block bg-blue-100 text-brand-blue text-[10px] font-extrabold px-2.5 py-0.5 rounded-full mb-2 uppercase">
+                                Visa Kỹ sư số 1 • Khát nhân lực
+                            </div>
+                            <h4 class="font-phudu text-base font-bold text-[#081D36] leading-snug">
+                                Công nghệ Thông tin & AI
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-1 mb-3">
+                                Lập trình Web/App, An ninh mạng, Kỹ sư Cầu nối (BrSE), Trí tuệ nhân tạo (AI/Data).
+                            </p>
+
+                            <div class="space-y-2 py-2.5 border-t border-b border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Mức lương TB:</span>
+                                    <span class="font-bold text-brand-red">25 – 45 man JPY/tháng</span>
+                                </div>
+                                <div class="text-[11px] text-slate-400 text-right -mt-1 font-semibold">
+                                    (~ 45 – 80 triệu VNĐ)
+                                </div>
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-slate-500">Cơ hội đổi Visa:</span>
+                                    <span class="font-bold text-emerald-600 flex items-center">
+                                        <i class="fa-solid fa-star text-amber-400 mr-1 text-[10px]"></i>Rất cao (9.8/10)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-[11px] text-slate-600">
+                                <span class="font-semibold text-[#081D36]">Trường đối tác:</span> TIT Tokyo, HAL Tokyo, ECC Osaka.
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3">
+                            <button type="button" onclick="openConsultationModal('Công nghệ Thông tin & AI Nhật Bản')" class="w-full py-2.5 px-3 rounded-xl bg-blue-50 hover:bg-brand-blue hover:text-white text-brand-blue font-bold text-xs flex items-center justify-center transition">
+                                <span>Tư vấn ngành IT & AI</span>
+                                <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Career 2: Automotive & Mechanical -->
+                    <div class="bg-white rounded-2xl p-6 flex flex-col justify-between border border-slate-200/90 hover:border-amber-500 shadow-xs hover:shadow-xl transition-all card-soft-hover group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-cogs"></i>
+                            </div>
+                            <div class="inline-block bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full mb-2 uppercase">
+                                Thiếu 150.000 kỹ sư • Thu nhập cao
+                            </div>
+                            <h4 class="font-phudu text-base font-bold text-[#081D36] leading-snug">
+                                Cơ khí - Ô tô & Tự động hóa
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-1 mb-3">
+                                Chế tạo máy, Công nghệ ô tô (Toyota, Honda, Nissan), Cơ điện tử Mechatronics.
+                            </p>
+
+                            <div class="space-y-2 py-2.5 border-t border-b border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Mức lương TB:</span>
+                                    <span class="font-bold text-brand-red">24 – 38 man JPY/tháng</span>
+                                </div>
+                                <div class="text-[11px] text-slate-400 text-right -mt-1 font-semibold">
+                                    (~ 42 – 68 triệu VNĐ)
+                                </div>
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-slate-500">Cơ hội đổi Visa:</span>
+                                    <span class="font-bold text-emerald-600 flex items-center">
+                                        <i class="fa-solid fa-star text-amber-400 mr-1 text-[10px]"></i>Rất cao (9.5/10)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-[11px] text-slate-600">
+                                <span class="font-semibold text-[#081D36]">Trường đối tác:</span> CĐ Ô tô NATS, CĐ Kỹ thuật Ô tô Tokyo.
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3">
+                            <button type="button" onclick="openConsultationModal('Cơ khí - Ô tô Nhật Bản')" class="w-full py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-600 hover:text-white text-amber-800 font-bold text-xs flex items-center justify-center transition">
+                                <span>Tư vấn ngành Ô tô - Cơ khí</span>
+                                <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Career 3: Nursing & Kaigo -->
+                    <div class="bg-white rounded-2xl p-6 flex flex-col justify-between border border-slate-200/90 hover:border-rose-500 shadow-xs hover:shadow-xl transition-all card-soft-hover group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl mb-4 group-hover:bg-rose-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-user-nurse"></i>
+                            </div>
+                            <div class="inline-block bg-rose-100 text-rose-700 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full mb-2 uppercase">
+                                Học bổng 100% • 100% việc làm
+                            </div>
+                            <h4 class="font-phudu text-base font-bold text-[#081D36] leading-snug">
+                                Y tế & Điều dưỡng (Kaigo)
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-1 mb-3">
+                                Chăm sóc người cao tuổi, Quản lý viện dưỡng lão, Phục hồi chức năng.
+                            </p>
+
+                            <div class="space-y-2 py-2.5 border-t border-b border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Mức lương TB:</span>
+                                    <span class="font-bold text-brand-red">22 – 32 man JPY/tháng</span>
+                                </div>
+                                <div class="text-[11px] text-slate-400 text-right -mt-1 font-semibold">
+                                    (~ 38 – 55 triệu VNĐ) + Thưởng
+                                </div>
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-slate-500">Cơ hội vĩnh trú:</span>
+                                    <span class="font-bold text-emerald-600 flex items-center">
+                                        <i class="fa-solid fa-star text-amber-400 mr-1 text-[10px]"></i>Tuyệt đối (10/10)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-[11px] text-slate-600">
+                                <span class="font-semibold text-[#081D36]">Tập đoàn tài trợ:</span> Aoyama Medical Group, Tokyo Welfare.
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3">
+                            <button type="button" onclick="openConsultationModal('Điều dưỡng Kaigo toàn phần Nhật Bản')" class="w-full py-2.5 px-3 rounded-xl bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-700 font-bold text-xs flex items-center justify-center transition">
+                                <span>Tư vấn học bổng Kaigo</span>
+                                <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Career 4: Hospitality & Business -->
+                    <div class="bg-white rounded-2xl p-6 flex flex-col justify-between border border-slate-200/90 hover:border-emerald-500 shadow-xs hover:shadow-xl transition-all card-soft-hover group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-hotel"></i>
+                            </div>
+                            <div class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full mb-2 uppercase">
+                                Chuẩn Omotenashi • Môi trường quốc tế
+                            </div>
+                            <h4 class="font-phudu text-base font-bold text-[#081D36] leading-snug">
+                                Khách sạn & Quản trị Omotenashi
+                            </h4>
+                            <p class="text-xs text-slate-500 mt-1 mb-3">
+                                Quản trị khách sạn resort 5 sao, Hướng dẫn viên du lịch, Hàng không mặt đất.
+                            </p>
+
+                            <div class="space-y-2 py-2.5 border-t border-b border-slate-100 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-500">Mức lương TB:</span>
+                                    <span class="font-bold text-brand-red">20 – 30 man JPY/tháng</span>
+                                </div>
+                                <div class="text-[11px] text-slate-400 text-right -mt-1 font-semibold">
+                                    (~ 35 – 52 triệu VNĐ)
+                                </div>
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-slate-500">Cơ hội đổi Visa:</span>
+                                    <span class="font-bold text-emerald-600 flex items-center">
+                                        <i class="fa-solid fa-star text-amber-400 mr-1 text-[10px]"></i>Cao (8.8/10)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-[11px] text-slate-600">
+                                <span class="font-semibold text-[#081D36]">Trường đối tác:</span> Tokyo Hospitality College, CĐ Du lịch Osaka.
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3">
+                            <button type="button" onclick="openConsultationModal('Khách sạn & Du lịch Nhật Bản')" class="w-full py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-800 font-bold text-xs flex items-center justify-center transition">
+                                <span>Tư vấn ngành Khách sạn</span>
+                                <i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Engineer Visa & Tokutei Callout Banner -->
+                <div class="mt-8 border border-blue-200 rounded-3xl p-5 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-5" style="background: linear-gradient(135deg, rgba(2, 116, 189, 0.08) 0%, rgba(236, 30, 27, 0.04) 50%, rgba(16, 185, 129, 0.08) 100%);">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-14 h-14 rounded-2xl bg-[#0274BD] text-white flex items-center justify-center text-2xl flex-shrink-0 shadow-md">
+                            <i class="fa-solid fa-passport"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-phudu text-base sm:text-lg font-bold text-[#081D36]">
+                                Đặc Quyền Chuyển Đổi Visa Kỹ Sư & Định Cư Vĩnh Trú Tại Nhật Bản
+                            </h4>
+                            <p class="text-xs sm:text-[13px] text-slate-600 mt-1 leading-relaxed">
+                                Tốt nghiệp CĐ (Senmon) hoặc ĐH tại Nhật, bạn được cấp <strong>Visa Kỹ sư (Gijinkoku)</strong> không giới hạn số lần gia hạn, được quyền <strong>bảo lãnh vợ/chồng con cái</strong> sang sinh sống và xét cấp <strong>Visa Vĩnh trú (Eijuken)</strong> sau 5–10 năm làm việc.
+                            </p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="openConsultationModal('Lộ trình chuyển đổi Visa Kỹ sư Nhật Bản')" class="whitespace-nowrap px-6 py-3 rounded-xl bg-[#081D36] text-white hover:bg-[#0274BD] font-bold text-xs sm:text-sm transition shadow-md flex items-center gap-2">
+                        <span>Đánh giá hồ sơ Kỹ sư 1:1</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CREATIVE SECTION 2: BẢNG VÀNG HỌC BỔNG DU HỌC NHẬT BẢN 2026 (50% - 100%)
+             ======================================================== -->
+        <section class="py-12 sm:py-16 bg-[#fafbfc] border-b border-slate-100">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5">
+                            <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                            <span>SĂN HỌC BỔNG CÙNG CHUYÊN GIA KIPA</span>
+                        </div>
+                        <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold text-[#081D36]">
+                            Bảng Vàng Học Bổng Du Học Nhật Bản 2026
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-1 font-vietnam">
+                            KIPA đồng hành hướng dẫn viết lý do du học (Shoronbun), luyện phỏng vấn 1:1 với giáo viên Nhật, cam kết tối ưu hóa cơ hội học bổng.
+                        </p>
+                    </div>
+                    <div class="shrink-0">
+                        <span class="inline-flex items-center text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-xl shadow-2xs">
+                            <i class="fa-solid fa-circle-check mr-2 text-emerald-500 text-sm"></i>Tỷ lệ học viên KIPA đạt học bổng: 94.2%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Scholarship Grid (6 Cards) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    
+                    <!-- Scholarship 1: Asahi / Yomiuri -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all card-soft-hover flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">Báo chí Nhật Bản</span>
+                                    <h4 class="font-phudu text-base font-bold text-[#081D36] mt-1">Học bổng Báo Asahi / Yomiuri</h4>
+                                </div>
+                                <span class="text-xs font-extrabold text-brand-red bg-red-50 border border-red-200 px-2.5 py-1 rounded-xl whitespace-nowrap">
+                                    100% Học phí + KTX
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                <strong>Tài trợ toàn phần:</strong> 100% học phí trường tiếng (~160 triệu VNĐ) + KTX miễn phí. Được trả lương phát báo <strong>11 – 13 man/tháng (~20-24tr)</strong>. Không phải hoàn trả lại tiền học phí.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Trị giá: ~ 350 triệu VNĐ</span>
+                            <button type="button" onclick="openConsultationModal('Học bổng Báo Asahi 100%')" class="text-brand-blue font-bold hover:underline flex items-center gap-1">
+                                <span>Săn học bổng</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship 2: Kaigo -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all card-soft-hover flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md">Y tế & Điều dưỡng</span>
+                                    <h4 class="font-phudu text-base font-bold text-[#081D36] mt-1">Học bổng Điều dưỡng Kaigo Toàn Phần</h4>
+                                </div>
+                                <span class="text-xs font-extrabold text-brand-red bg-red-50 border border-red-200 px-2.5 py-1 rounded-xl whitespace-nowrap">
+                                    Tài trợ 100%
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                <strong>Bảo trợ 4 năm học:</strong> Tài trợ toàn bộ học phí trường tiếng (1-2 năm) và chuyên ngành điều dưỡng (2 năm), hỗ trợ sinh hoạt phí. Đảm bảo việc làm chính thức tại bệnh viện/viện dưỡng lão Nhật.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Trị giá: Lên tới 550 triệu VNĐ</span>
+                            <button type="button" onclick="openConsultationModal('Học bổng Điều dưỡng Kaigo Toàn Phần')" class="text-brand-blue font-bold hover:underline flex items-center gap-1">
+                                <span>Săn học bổng</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship 3: MEXT -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all card-soft-hover flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">Chính phủ Nhật Bản</span>
+                                    <h4 class="font-phudu text-base font-bold text-[#081D36] mt-1">Học bổng Chính Phủ MEXT</h4>
+                                </div>
+                                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-xl whitespace-nowrap">
+                                    Toàn phần danh giá
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                <strong>Học bổng cao nhất Nhật Bản:</strong> Miễn 100% học phí ĐH/Thạc sĩ + Vé máy bay khứ hồi + Trợ cấp sinh hoạt <strong>120.000 – 145.000 JPY/tháng</strong> (~22-26 triệu VNĐ) suốt quá trình học.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Trị giá: > 800 triệu VNĐ</span>
+                            <button type="button" onclick="openConsultationModal('Học bổng MEXT Chính phủ Nhật Bản')" class="text-brand-blue font-bold hover:underline flex items-center gap-1">
+                                <span>Săn học bổng</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship 4: JASSO -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all card-soft-hover flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">Bộ Giáo dục Nhật</span>
+                                    <h4 class="font-phudu text-base font-bold text-[#081D36] mt-1">Học bổng Khuyến học JASSO</h4>
+                                </div>
+                                <span class="text-xs font-extrabold text-brand-red bg-red-50 border border-red-200 px-2.5 py-1 rounded-xl whitespace-nowrap">
+                                    48.000 JPY/tháng
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                <strong>Trợ cấp tiền mặt:</strong> Cấp 48.000 JPY/tháng (~9 triệu VNĐ/tháng liên tục trong 12 tháng) dành cho học sinh trường tiếng có điểm chuyên cần tốt và thành tích học tập cao.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Tiền mặt cấp thẳng vào thẻ</span>
+                            <button type="button" onclick="openConsultationModal('Học bổng Khuyến học JASSO')" class="text-brand-blue font-bold hover:underline flex items-center gap-1">
+                                <span>Săn học bổng</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship 5: KIPA Partner Schools -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all card-soft-hover flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-brand-blue bg-blue-50 px-2 py-0.5 rounded-md">Trường đối tác KIPA</span>
+                                    <h4 class="font-phudu text-base font-bold text-[#081D36] mt-1">Học bổng Miễn Giảm Học Phí Đối Tác</h4>
+                                </div>
+                                <span class="text-xs font-extrabold text-brand-red bg-red-50 border border-red-200 px-2.5 py-1 rounded-xl whitespace-nowrap">
+                                    Giảm 20% – 50%
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                <strong>Đặc quyền nộp qua KIPA:</strong> Miễn giảm từ 50.000 – 200.000 JPY trực tiếp vào hóa đơn học phí năm đầu cho học viên có JLPT N5/N4 hoặc điểm trung bình học bạ cấp 3 từ 8.0 trở lên.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Trừ trực tiếp trên Invoice</span>
+                            <button type="button" onclick="openConsultationModal('Học bổng trường đối tác KIPA')" class="text-brand-blue font-bold hover:underline flex items-center gap-1">
+                                <span>Săn học bổng</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship 6: Nitori / Kyoritsu -->
+                    <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all card-soft-hover flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">Quỹ tư nhân Nhật</span>
+                                    <h4 class="font-phudu text-base font-bold text-[#081D36] mt-1">Học bổng Quỹ Nitori & Kyoritsu</h4>
+                                </div>
+                                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-xl whitespace-nowrap">
+                                    5 – 10 man/tháng
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                                <strong>Hỗ trợ không hoàn lại:</strong> Cấp 50.000 – 100.000 JPY/tháng chi phí sinh hoạt cho du học sinh quốc tế có tinh thần cầu tiến, mở rộng cơ hội tuyển dụng vào các tập đoàn đa quốc gia Nhật Bản.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Hỗ trợ sinh hoạt phí độc lập</span>
+                            <button type="button" onclick="openConsultationModal('Học bổng Quỹ Nitori & Kyoritsu')" class="text-brand-blue font-bold hover:underline flex items-center gap-1">
+                                <span>Săn học bổng</span>
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
              SECTION: MỘT SỐ TRƯỜNG - FAQ - KIPA ĐỒNG HÀNH (3 COLS)
              ======================================================== -->
         <section class="py-10 sm:py-14 bg-white border-t border-slate-100">
@@ -1579,53 +2022,53 @@
                         </div>
 
                         <!-- 4 School Cards (2x2 grid) -->
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-2 gap-3.5">
                             
                             <!-- School 1 -->
-                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-1.5 cursor-pointer" onclick="openSchoolDetailModal('Tokyo International')">
-                                <div class="h-16 rounded-xl overflow-hidden bg-slate-100 relative">
-                                    <img src="/assets/du-hoc-nhat/school_tokyo.png" alt="Tokyo International Language School" class="w-full h-full object-cover">
-                                    <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Tokyo</span>
+                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-2 cursor-pointer group" onclick="openSchoolDetailModal('Tokyo International')">
+                                <div class="h-24 sm:h-28 rounded-xl overflow-hidden bg-slate-100 relative">
+                                    <img src="/assets/du-hoc-nhat/school_tokyo.png" alt="Tokyo Central Japanese Language School" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-500">
+                                    <span class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-bold">Tokyo</span>
                                 </div>
-                                <div class="flex items-center justify-between pt-1">
-                                    <div class="text-[11px] font-bold text-slate-800 truncate pr-1">Tokyo International Language School</div>
-                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0"></i>
+                                <div class="flex items-center justify-between pt-0.5">
+                                    <div class="text-[11px] sm:text-xs font-bold text-slate-800 truncate pr-1">Tokyo Central Language School</div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0 group-hover:translate-x-0.5 transition-transform"></i>
                                 </div>
                             </div>
 
                             <!-- School 2 -->
-                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-1.5 cursor-pointer" onclick="openSchoolDetailModal('LAKIS')">
-                                <div class="h-16 rounded-xl overflow-hidden bg-slate-100 relative">
-                                    <img src="/assets/du-hoc-nhat/school_lakis.png" alt="LAKIS Japanese Language" class="w-full h-full object-cover">
-                                    <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Gunma</span>
+                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-2 cursor-pointer group" onclick="openSchoolDetailModal('LAKIS')">
+                                <div class="h-24 sm:h-28 rounded-xl overflow-hidden bg-slate-100 relative">
+                                    <img src="/assets/du-hoc-nhat/school_lakis.png" alt="Nippon Language Academy Gunma" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-500">
+                                    <span class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-bold">Gunma</span>
                                 </div>
-                                <div class="flex items-center justify-between pt-1">
-                                    <div class="text-[11px] font-bold text-slate-800 truncate pr-1">LAKIS Japanese Language</div>
-                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0"></i>
+                                <div class="flex items-center justify-between pt-0.5">
+                                    <div class="text-[11px] sm:text-xs font-bold text-slate-800 truncate pr-1">Nippon Language Academy</div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0 group-hover:translate-x-0.5 transition-transform"></i>
                                 </div>
                             </div>
 
                             <!-- School 3 -->
-                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-1.5 cursor-pointer" onclick="openSchoolDetailModal('JCLI')">
-                                <div class="h-16 rounded-xl overflow-hidden bg-slate-100 relative">
-                                    <img src="/assets/du-hoc-nhat/school_jcli.png" alt="JCLI Japanese Language School" class="w-full h-full object-cover">
-                                    <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Tokyo</span>
+                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-2 cursor-pointer group" onclick="openSchoolDetailModal('JCLI')">
+                                <div class="h-24 sm:h-28 rounded-xl overflow-hidden bg-slate-100 relative">
+                                    <img src="/assets/du-hoc-nhat/school_jcli.png" alt="JCLI Japanese Language School" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-500">
+                                    <span class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-bold">Tokyo</span>
                                 </div>
-                                <div class="flex items-center justify-between pt-1">
-                                    <div class="text-[11px] font-bold text-slate-800 truncate pr-1">JCLI Japanese Language School</div>
-                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0"></i>
+                                <div class="flex items-center justify-between pt-0.5">
+                                    <div class="text-[11px] sm:text-xs font-bold text-slate-800 truncate pr-1">JCLI Japanese Language School</div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0 group-hover:translate-x-0.5 transition-transform"></i>
                                 </div>
                             </div>
 
                             <!-- School 4 -->
-                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-1.5 cursor-pointer" onclick="openSchoolDetailModal('Yoshida')">
-                                <div class="h-16 rounded-xl overflow-hidden bg-slate-100 relative">
-                                    <img src="/assets/du-hoc-nhat/school_yoshida.png" alt="Yoshida Japanese Language School" class="w-full h-full object-cover">
-                                    <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">Tokyo</span>
+                            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs card-soft-hover p-2 space-y-2 cursor-pointer group" onclick="openSchoolDetailModal('Yoshida')">
+                                <div class="h-24 sm:h-28 rounded-xl overflow-hidden bg-slate-100 relative">
+                                    <img src="/assets/du-hoc-nhat/school_yoshida.png" alt="Yoshida Japanese Language School" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-500">
+                                    <span class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-bold">Tokyo</span>
                                 </div>
-                                <div class="flex items-center justify-between pt-1">
-                                    <div class="text-[11px] font-bold text-slate-800 truncate pr-1">Yoshida Japanese Language School</div>
-                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0"></i>
+                                <div class="flex items-center justify-between pt-0.5">
+                                    <div class="text-[11px] sm:text-xs font-bold text-slate-800 truncate pr-1">Yoshida Japanese Institute</div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-[#0274BD] shrink-0 group-hover:translate-x-0.5 transition-transform"></i>
                                 </div>
                             </div>
 
@@ -1721,56 +2164,56 @@
                             <h3>KIPA đồng hành như thế nào?</h3>
                         </div>
 
-                        <!-- 5 Items Grid/List -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-2.5 text-xs text-slate-700">
+                        <!-- 5 Items List (Clean responsive layout, no cramped columns) -->
+                        <div class="flex flex-col gap-2.5 text-xs text-slate-700">
                             
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-regular fa-comments"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Tư vấn & định hướng</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Chọn trường & ngành tối ưu</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Tư vấn & định hướng</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Chọn trường & ngành tối ưu</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-regular fa-file-lines"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Hỗ trợ hồ sơ</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Dịch thuật & pháp lý chuẩn chỉ</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Hỗ trợ hồ sơ</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Dịch thuật & pháp lý chuẩn chỉ</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-solid fa-school"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Kết nối trường học</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">100+ đối tác tại Nhật Bản</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Kết nối trường học</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">100+ đối tác tại Nhật Bản</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-solid fa-paper-plane"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Hướng dẫn xin visa</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Tỉ lệ đỗ visa &gt; 98%</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Hướng dẫn xin visa</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Tỉ lệ đỗ visa &gt; 98%</span>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 col-span-2 sm:col-span-1">
-                                <div class="w-7 h-7 rounded-lg bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0">
+                            <div class="flex items-center gap-3 bg-slate-50 hover:bg-blue-50/60 p-3 rounded-2xl border border-slate-200/80 transition-colors">
+                                <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0274BD] flex items-center justify-center shrink-0 text-sm">
                                     <i class="fa-solid fa-users"></i>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-slate-800 text-[11px] block">Đồng hành sau nhập học</span>
-                                    <span class="text-[10px] text-slate-400 font-normal">Hỗ trợ việc làm thêm & cư trú</span>
+                                <div class="min-w-0 flex-1">
+                                    <span class="font-bold text-slate-800 text-xs block leading-snug">Đồng hành sau nhập học</span>
+                                    <span class="text-[11px] text-slate-500 font-normal block leading-tight mt-0.5">Hỗ trợ việc làm thêm & cư trú</span>
                                 </div>
                             </div>
 
@@ -1783,9 +2226,272 @@
         </section>
 
         <!-- ========================================================
+             CREATIVE SECTION 3: BẢNG SO SÁNH MINH BẠCH (KIPA VIỆT HÀN VS THỊ TRƯỜNG TỰ DO)
+             ======================================================== -->
+        <section class="py-12 sm:py-16 bg-[#fafbfc] border-t border-b border-slate-100">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-2">
+                        <span class="w-1.5 h-4 bg-brand-red rounded-sm"></span>
+                        <span>MINH BẠCH TÀI CHÍNH & CHẤT LƯỢNG ĐỒNG HÀNH</span>
+                    </div>
+                    <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold text-[#081D36]">
+                        Vì Sao Hàng Nghìn Phụ Huynh & Học Sinh Tin Chọn KIPA Việt Hàn?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-2 font-vietnam">
+                        Khác biệt từ sự minh bạch tuyệt đối về chi phí, chất lượng đào tạo tiếng Nhật chuẩn bản xứ và cam kết đồng hành không bỏ rơi học sinh tại Nhật Bản.
+                    </p>
+                </div>
+
+                <!-- Comparison Table Card -->
+                <div class="bg-white rounded-3xl border border-slate-200/90 shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-200 bg-slate-50/80">
+                                    <th class="py-4 px-5 text-xs sm:text-sm font-extrabold text-slate-700 w-1/4">Tiêu chí so sánh</th>
+                                    <th class="py-4 px-5 text-xs sm:text-sm font-black text-brand-blue w-3/8 bg-blue-50/70">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
+                                            <span>DU HỌC KIPA VIỆT HÀN</span>
+                                            <span class="ml-auto text-[10px] bg-brand-blue text-white font-bold px-2 py-0.5 rounded-full uppercase">Chuẩn 5 sao</span>
+                                        </div>
+                                    </th>
+                                    <th class="py-4 px-5 text-xs sm:text-sm font-bold text-slate-500 w-3/8">
+                                        Trung tâm ngoài thị trường tự do
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-xs sm:text-[13px]">
+                                
+                                <!-- Row 1: Cost -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="py-4 px-5 font-bold text-[#081D36]">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-coins text-amber-500 text-sm"></i>
+                                            <span>Chi phí & Minh bạch</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 bg-blue-50/30 text-slate-700">
+                                        <div class="flex items-start gap-2 text-brand-blue font-bold">
+                                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                            <span>Báo giá trọn gói 1 lần – Cam kết 0 đồng phát sinh ẩn. Đóng học phí đúng số tiền ghi trên Invoice trường Nhật ngữ.</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 text-slate-500">
+                                        <div class="flex items-start gap-2">
+                                            <i class="fa-solid fa-circle-xmark text-rose-400 mt-0.5 shrink-0"></i>
+                                            <span>Báo giá rẻ lúc đầu để hút khách, sau đó liên tục phát sinh: phí dịch thuật, phụ phí chứng minh tài chính, chênh lệch tỷ giá.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 2: COE Pass Rate -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="py-4 px-5 font-bold text-[#081D36]">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-stamp text-blue-500 text-sm"></i>
+                                            <span>Tỷ lệ đỗ tư cách lưu trú COE</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 bg-blue-50/30 text-slate-700">
+                                        <div class="flex items-start gap-2 text-brand-blue font-bold">
+                                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                            <span>Đạt 98.2% tỷ lệ đỗ COE. Hội đồng thẩm định hồ sơ 3 vòng; chuyên xử lý các ca hồ sơ khó, trống năm, tài chính phức tạp.</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 text-slate-500">
+                                        <div class="flex items-start gap-2">
+                                            <i class="fa-solid fa-circle-xmark text-rose-400 mt-0.5 shrink-0"></i>
+                                            <span>Hồ sơ làm dập khuôn, dịch thuật cẩu thả, không giải trình được nguồn gốc tài chính dẫn đến tỷ lệ trượt COE cao.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 3: Japanese Training -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="py-4 px-5 font-bold text-[#081D36]">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-book-open-reader text-emerald-500 text-sm"></i>
+                                            <span>Đào tạo tiếng Nhật trước bay</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 bg-blue-50/30 text-slate-700">
+                                        <div class="flex items-start gap-2 text-brand-blue font-bold">
+                                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                            <span>Đào tạo bài bản đạt chuẩn N4 - N3, giáo viên bản xứ Nhật luyện giao tiếp và luyện phỏng vấn COE 1:1 chuyên sâu.</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 text-slate-500">
+                                        <div class="flex items-start gap-2">
+                                            <i class="fa-solid fa-circle-xmark text-rose-400 mt-0.5 shrink-0"></i>
+                                            <span>Dạy vẹt đối phó chỉ để thi lấy chứng chỉ cấp tốc; học sinh sang Nhật không nghe nói được, khó hòa nhập và xin việc.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4: Support in Japan -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="py-4 px-5 font-bold text-[#081D36]">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-hands-holding-child text-purple-500 text-sm"></i>
+                                            <span>Hỗ trợ tại Nhật Bản</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 bg-blue-50/30 text-slate-700">
+                                        <div class="flex items-start gap-2 text-brand-blue font-bold">
+                                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                            <span>Đón sân bay Narita/Kansai, làm thẻ cư trú, mở thẻ Yucho, hỗ trợ việc làm Arubaito 28h/tuần trong 2 tuần, Hotline SOS 24/7.</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 text-slate-500">
+                                        <div class="flex items-start gap-2">
+                                            <i class="fa-solid fa-circle-xmark text-rose-400 mt-0.5 shrink-0"></i>
+                                            <span>"Đem con bỏ chợ" - chỉ làm xong visa là chấm dứt liên lạc, học sinh tự bơi giữa nước Nhật hoàn toàn bỡ ngỡ.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 5: Long-term Career -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="py-4 px-5 font-bold text-[#081D36]">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-briefcase text-rose-500 text-sm"></i>
+                                            <span>Định hướng Visa Kỹ sư / Đi làm</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 bg-blue-50/30 text-slate-700">
+                                        <div class="flex items-start gap-2 text-brand-blue font-bold">
+                                            <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                            <span>Kết nối mạng lưới hơn 100 doanh nghiệp Nhật tuyển dụng trực tiếp Visa Kỹ sư và Tokutei sau tốt nghiệp.</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-5 text-slate-500">
+                                        <div class="flex items-start gap-2">
+                                            <i class="fa-solid fa-circle-xmark text-rose-400 mt-0.5 shrink-0"></i>
+                                            <span>Không có định hướng dài hạn, học sinh dễ bị lôi kéo làm quá giờ phạm luật hoặc không chuyển đổi được visa việc làm.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CREATIVE SECTION 4: GÓI ĐẶC QUYỀN KIPA 360° CARE TẠI NHẬT BẢN
+             ======================================================== -->
+        <section class="py-12 sm:py-16 bg-white border-b border-slate-100">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-blue mb-2">
+                        <span class="w-1.5 h-4 bg-brand-blue rounded-sm"></span>
+                        <span>ĐỒNG HÀNH 2 ĐẦU VIỆT NAM - NHẬT BẢN</span>
+                    </div>
+                    <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold text-[#081D36]">
+                        Gói Hỗ Trợ Độc Quyền KIPA 360° Care Tại Nhật Bản
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-2 font-vietnam leading-relaxed">
+                        KIPA có mạng lưới ban đại diện và cộng đồng cựu du học sinh tại các thành phố lớn (Tokyo, Osaka, Nagoya, Fukuoka) sẵn sàng bảo bọc và đồng hành cùng bạn từ những ngày đầu đặt chân đến xứ sở hoa anh đào.
+                    </p>
+                </div>
+
+                <!-- 6 Support Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    
+                    <!-- Box 1 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-[#f8fafc] border border-slate-200 flex items-start space-x-4 hover:border-brand-blue hover:shadow-lg transition-all card-soft-hover">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-plane-arrival"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-[#081D36]">Đón tận cửa sân bay quốc tế</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Đội ngũ KIPA đón học viên ngay tại cửa ra sân bay Narita, Haneda, Kansai, hỗ trợ hành lý và đưa về thẳng ký túc xá hoặc phòng trọ an toàn.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Box 2 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-[#f8fafc] border border-slate-200 flex items-start space-x-4 hover:border-brand-blue hover:shadow-lg transition-all card-soft-hover">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-[#081D36]">Làm Thẻ cư trú & Đăng ký Quận</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Cán bộ KIPA dẫn học viên tới Ủy ban quận (Kuyakusho) làm thủ tục đăng ký địa chỉ trên Thẻ Ngoại kiều (Zairyu Card) và Bảo hiểm Y tế Quốc dân giảm 70% viện phí.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Box 3 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-[#f8fafc] border border-slate-200 flex items-start space-x-4 hover:border-brand-blue hover:shadow-lg transition-all card-soft-hover">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-[#081D36]">Mở thẻ Ngân hàng & SIM 4G</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Đồng hành mở tài khoản Ngân hàng Bưu điện Yucho Bank để nhận lương làm thêm và tiền gia đình gửi sang; kích hoạt SIM 4G gọi video về cho bố mẹ ngay ngày đầu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Box 4 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-[#f8fafc] border border-slate-200 flex items-start space-x-4 hover:border-brand-blue hover:shadow-lg transition-all card-soft-hover">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-[#081D36]">Giới thiệu việc làm Arubaito 28h/tuần</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Hướng dẫn xin Giấy phép làm thêm tại sân bay và kết nối việc làm thêm phù hợp (siêu thị, xưởng cơm hộp, quán ăn) với mức lương 1.050 – 1.300 JPY/giờ trong 2 tuần đầu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Box 5 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-[#f8fafc] border border-slate-200 flex items-start space-x-4 hover:border-brand-blue hover:shadow-lg transition-all card-soft-hover">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-users-rays"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-[#081D36]">Cộng đồng 1.000+ Du học sinh KIPA</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Gia nhập mạng lưới cựu học sinh KIPA tại Nhật để chia sẻ kinh nghiệm ôn thi JLPT/EJU, mua đồ gia dụng Sayonara giá rẻ và hỗ trợ nhau lúc khó khăn.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Box 6 -->
+                    <div class="p-5 sm:p-6 rounded-3xl bg-[#f8fafc] border border-slate-200 flex items-start space-x-4 hover:border-brand-red hover:shadow-lg transition-all card-soft-hover">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-100 text-brand-red flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-[#081D36]">Hotline SOS Bảo trợ 24/7</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Đại diện KIPA tại Nhật túc trực đường dây nóng 24/7 hỗ trợ khẩn cấp về y tế, phiên dịch khi đi viện, hỗ trợ pháp lý và thủ tục gia hạn visa cư trú.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
              SECTION: CÂU CHUYỆN HỌC VIÊN & BANNER SẴN SÀNG (BOTTOM ROW)
              ======================================================== -->
-        <section class="py-10 sm:py-14 bg-gradient-to-b from-white to-[#F2F7FC] border-t border-slate-100">
+        <section class="py-10 sm:py-14 border-t border-slate-100" style="background: linear-gradient(180deg, #ffffff 0%, #F2F7FC 100%);">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -1840,30 +2546,38 @@
 
                     <!-- Right: Sẵn sàng bắt đầu hành trình tại Nhật Bản? (lg:col-span-6) -->
                     <div class="lg:col-span-6 flex flex-col justify-end">
-                        <div class="relative rounded-3xl overflow-hidden shadow-lg p-6 sm:p-7 text-white flex flex-col justify-between h-full bg-gradient-to-r from-[#0153A8] to-[#0274BD]">
+                        <div class="cta-japan-card relative rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 text-white flex flex-col justify-between h-full border border-blue-400/20" style="background: linear-gradient(135deg, #07192e 0%, #01458e 50%, #0274BD 100%) !important; color: #ffffff !important;">
                             
-                            <!-- Background Fuji + Sakura Overlay -->
-                            <img src="/assets/du-hoc-nhat/bottom_cta_fuji.png" alt="Phú Sĩ Nhật Bản" class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-overlay pointer-events-none">
+                            <!-- Subtle decorative glowing light orbs -->
+                            <div class="absolute -right-8 -bottom-8 w-48 h-48 rounded-full bg-white/10 pointer-events-none blur-2xl"></div>
+                            <div class="absolute -left-8 -top-8 w-40 h-40 rounded-full bg-blue-400/20 pointer-events-none blur-xl"></div>
 
-                            <div class="relative z-10 space-y-2 mb-6">
-                                <h3 class="font-phudu text-xl sm:text-2xl font-black leading-tight text-white">
+                            <!-- Background Fuji + Pagoda Real Photo Overlay -->
+                            <img src="/assets/tin-tuc/cat-chuong-trinh-nhat-ban.jpg" alt="Núi Phú Sĩ và Chùa Chureito Nhật Bản" class="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-luminosity pointer-events-none">
+
+                            <div class="relative z-10 space-y-2.5 mb-6">
+                                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-[11px] font-bold text-blue-100">
+                                    <i class="fa-solid fa-paper-plane text-amber-300"></i>
+                                    <span>Tư vấn 1:1 miễn phí cùng chuyên gia KIPA</span>
+                                </div>
+                                <h3 class="font-phudu text-xl sm:text-2xl font-black leading-tight text-white" style="color: #ffffff !important;">
                                     Sẵn sàng <br class="hidden sm:block">
                                     bắt đầu hành trình <br class="hidden sm:block">
                                     tại Nhật Bản?
                                 </h3>
-                                <p class="text-xs sm:text-[13px] text-blue-100 leading-relaxed max-w-md">
+                                <p class="text-xs sm:text-[13px] leading-relaxed max-w-md font-vietnam" style="color: #e0f2fe !important;">
                                     Liên hệ KIPA Việt Hàn ngay hôm nay để được tư vấn chi tiết lộ trình, chương trình và chi phí phù hợp nhất.
                                 </p>
                             </div>
 
                             <!-- 2 CTA Buttons -->
                             <div class="relative z-10 flex flex-wrap items-center gap-3">
-                                <button type="button" onclick="openConsultationModal()" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#EC1E1B] hover:bg-[#d61815] text-white font-bold text-xs sm:text-sm shadow-md transition-all">
+                                <button type="button" onclick="openConsultationModal()" class="btn-kipa-red inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all" style="background-color: #EC1E1B !important; color: #ffffff !important;">
                                     <i class="fa-solid fa-calendar-check text-xs"></i>
                                     <span>Đăng ký tư vấn ngay</span>
                                     <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </button>
-                                <a href="tel:0368513865" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-[#0153A8] font-bold text-xs sm:text-sm shadow-md transition-all">
+                                <a href="tel:0368513865" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all hover:bg-blue-50" style="background-color: #ffffff !important; color: #0274BD !important;">
                                     <i class="fa-solid fa-phone text-xs"></i>
                                     <span>Gọi 036 851 3865</span>
                                 </a>
@@ -1878,14 +2592,197 @@
         </section>
 
         <!-- ========================================================
+             CREATIVE SECTION 5: TRẮC NGHIỆM 60 GIÂY - TÌM LỘ TRÌNH DU HỌC NHẬT BẢN TỐI ƯU
+             ======================================================== -->
+        <section class="py-12 sm:py-16 bg-[#f3f8fc] border-t border-b border-slate-100">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-blue-100">
+                    <div class="text-center max-w-xl mx-auto mb-8">
+                        <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>TRẮC NGHIỆM ĐỊNH HƯỚNG 60 GIÂY</span>
+                        </div>
+                        <h3 class="font-phudu text-xl sm:text-2xl font-extrabold text-[#081D36]">
+                            Tìm Lộ Trình & Học Bổng Du Học Nhật Bản Tối Ưu
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-1 font-vietnam">
+                            Chọn 3 tiêu chí dưới đây để nhận ngay phân tích lộ trình học, ước tính chi phí và cơ hội học bổng phù hợp nhất.
+                        </p>
+                    </div>
+
+                    <!-- 3 Interactive Selects with Accessible Labels -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                        
+                        <!-- Question 1: Budget -->
+                        <div class="space-y-1.5">
+                            <label for="quiz-nhat-budget" class="block text-xs font-bold text-[#081D36]">
+                                1. Ngân sách ban đầu dự kiến:
+                            </label>
+                            <select id="quiz-nhat-budget" onchange="runDuhocNhatQuiz()" aria-label="Ngân sách ban đầu dự kiến du học Nhật Bản"
+                                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-slate-50 font-medium">
+                                <option value="low">Dưới 50 triệu (Học bổng Báo / Kaigo 100%)</option>
+                                <option value="standard" selected>150 – 180 triệu (Trường tiếng Nhật chuẩn)</option>
+                                <option value="high">Trên 200 triệu (Du học Tokyo/Osaka + Luyện EJU)</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 2: Degree & Goal -->
+                        <div class="space-y-1.5">
+                            <label for="quiz-nhat-degree" class="block text-xs font-bold text-[#081D36]">
+                                2. Trình độ học vấn & Mục tiêu:
+                            </label>
+                            <select id="quiz-nhat-degree" onchange="runDuhocNhatQuiz()" aria-label="Trình độ học vấn và mục tiêu du học Nhật Bản"
+                                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-slate-50 font-medium">
+                                <option value="thpt" selected>Tốt nghiệp THPT (Học tiếng + Senmon/ĐH)</option>
+                                <option value="engineer">Tốt nghiệp CĐ/ĐH (Chuyển đổi Visa Kỹ sư)</option>
+                                <option value="work">Vừa học vừa làm phụ giúp gia đình</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 3: Japanese Level -->
+                        <div class="space-y-1.5">
+                            <label for="quiz-nhat-level" class="block text-xs font-bold text-[#081D36]">
+                                3. Trình độ tiếng Nhật hiện tại:
+                            </label>
+                            <select id="quiz-nhat-level" onchange="runDuhocNhatQuiz()" aria-label="Trình độ tiếng Nhật hiện tại của bạn"
+                                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-slate-50 font-medium">
+                                <option value="zero" selected>Chưa học (KIPA đào tạo từ đầu đến N4)</option>
+                                <option value="n5_n4">Đang học / Đã có JLPT N5 – N4</option>
+                                <option value="n3_plus">Đã có JLPT N3 – N2 (Săn học bổng cao)</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Dynamic Recommendation Result Box -->
+                    <div id="quiz-nhat-result-box" class="p-4 sm:p-5 rounded-2xl border border-blue-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);">
+                        <div class="space-y-1 max-w-lg">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-base">🎯</span>
+                                <span id="quiz-nhat-badge" class="text-xs font-bold uppercase tracking-wider text-brand-blue">Lộ trình đề xuất tối ưu cho bạn</span>
+                            </div>
+                            <h4 id="quiz-nhat-title" class="font-phudu text-base sm:text-lg font-extrabold text-[#081D36]">
+                                Khóa Du học Tiếng Nhật 1.5 – 2 năm tại Trường Nhật ngữ Uy tín (Tokyo / Osaka / Fukuoka)
+                            </h4>
+                            <p id="quiz-nhat-desc" class="text-xs text-slate-600 leading-relaxed font-vietnam">
+                                Đóng học phí năm đầu từ 145 – 175 triệu VNĐ. KIPA đào tạo tiếng chuẩn N4 trước bay. Làm thêm hợp pháp 28h/tuần (lương 20 – 25 triệu VNĐ/tháng) tự chi trả 100% sinh hoạt phí và tích lũy tiền gửi về!
+                            </p>
+                        </div>
+                        <div class="shrink-0 w-full sm:w-auto">
+                            <button type="button" onclick="openConsultationModal('Lộ trình du học Nhật Bản đề xuất từ Quiz')" class="btn-kipa-red w-full sm:w-auto px-5 py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center transition shadow-md whitespace-nowrap" style="background-color: #EC1E1B !important; color: #ffffff !important;">
+                                <span>Nhận kế hoạch 1:1 miễn phí</span>
+                                <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CREATIVE SECTION 6: LEAD MAGNET (TẢI CẨM NANG & 50 CÂU HỎI PHỎNG VẤN COE CỤC XUẤT NHẬP CẢNH)
+             ======================================================== -->
+        <section class="py-12 sm:py-16 text-white" style="background: linear-gradient(135deg, #07192e 0%, #01458e 50%, #0274BD 100%);">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Left: Copy & Value Proposition -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-300">
+                            <i class="fa-solid fa-gift"></i>
+                            <span>TÀI LIỆU DU HỌC ĐỘC QUYỀN MIỄN PHÍ</span>
+                        </div>
+                        <h3 class="font-phudu text-2xl sm:text-3xl font-extrabold leading-tight text-white" style="color: #ffffff !important;">
+                            Tải trọn bộ Cẩm nang Du học Nhật Bản 2026<br class="hidden sm:inline"> & 50 câu hỏi phỏng vấn COE Cục QLXNC
+                        </h3>
+                        <p class="text-xs sm:text-sm text-blue-100 leading-relaxed max-w-xl font-vietnam">
+                            Tài liệu do hội đồng chuyên môn KIPA Việt Hàn biên soạn chi tiết: Tổng hợp quy định chứng minh tài chính mới nhất, danh sách học phí 100+ trường Nhật ngữ đối tác uy tín và bộ 50 câu hỏi sát hạch qua điện thoại của Cục Xuất Nhập Cảnh Tokyo & Osaka giúp bạn đỗ COE 100%.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-2 text-xs text-blue-200">
+                            <span class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i>Định dạng Ebook PDF tiện lợi</span>
+                            <span class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i>Cập nhật kỳ Tháng 4 & Tháng 10/2026</span>
+                            <span class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i>Hoàn toàn miễn phí 100%</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Lead Capture Form Card -->
+                    <div class="lg:col-span-5 bg-white text-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl border border-blue-200/50">
+                        <h4 class="font-phudu text-base sm:text-lg font-bold text-[#081D36] mb-1">
+                            Đăng ký nhận tài liệu qua Email / Zalo
+                        </h4>
+                        <p class="text-xs text-slate-500 mb-4 font-vietnam">Hệ thống KIPA sẽ tự động gửi tài liệu trong vòng 2 phút.</p>
+                        
+                        <form action="/api/submit.php" method="POST" class="space-y-3">
+                            <input type="hidden" name="form_type" value="lead_magnet_du_hoc_nhat">
+                            
+                            <!-- Honeypot -->
+                            <div class="hidden">
+                                <label for="lead-nhat-website">Website</label>
+                                <input type="text" id="lead-nhat-website" name="website" tabindex="-1" autocomplete="off" aria-label="Website ignore">
+                            </div>
+
+                            <div>
+                                <label for="lead-nhat-name" class="block text-xs font-bold text-slate-700 mb-1">Họ và tên *</label>
+                                <input type="text" id="lead-nhat-name" name="name" required placeholder="Ví dụ: Nguyễn Văn A" aria-label="Họ và tên người nhận cẩm nang du học Nhật"
+                                       class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label for="lead-nhat-phone" class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại / Zalo *</label>
+                                    <input type="tel" id="lead-nhat-phone" name="phone" required placeholder="0912 345 678" aria-label="Số điện thoại Zalo người nhận cẩm nang"
+                                           class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                                </div>
+                                <div>
+                                    <label for="lead-nhat-email" class="block text-xs font-bold text-slate-700 mb-1">Email nhận tài liệu *</label>
+                                    <input type="email" id="lead-nhat-email" name="email" required placeholder="email@gmail.com" aria-label="Email nhận cẩm nang du học Nhật Bản"
+                                           class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="lead-nhat-program" class="block text-xs font-bold text-slate-700 mb-1">Chương trình bạn quan tâm</label>
+                                <select id="lead-nhat-program" name="program" aria-label="Chương trình du học Nhật Bản bạn quan tâm"
+                                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-blue focus:outline-none bg-white font-medium">
+                                    <option value="du-hoc-tieng-nhat">Du học Trường Nhật ngữ (1.5 – 2 năm)</option>
+                                    <option value="chuyen-doi-ky-su">Chuyển đổi Visa Kỹ sư (Dành cho người có bằng CĐ/ĐH)</option>
+                                    <option value="hoc-bong-bao">Học bổng Báo Asahi / Yomiuri (100% học phí + KTX)</option>
+                                    <option value="hoc-bong-kaigo">Học bổng Điều dưỡng Kaigo Toàn phần</option>
+                                    <option value="dai-hoc-eju">Luyện thi Đại học Quốc lập Nhật Bản (EJU)</option>
+                                </select>
+                            </div>
+
+                            <div class="flex items-start gap-2 pt-1">
+                                <input type="checkbox" id="lead-nhat-consent" name="consent" required aria-label="Đồng ý nhận tài liệu và tư vấn từ KIPA Việt Hàn"
+                                       class="mt-1 w-4 h-4 text-brand-blue border-slate-300 rounded focus:ring-brand-blue">
+                                <label for="lead-nhat-consent" class="text-[11px] text-slate-500 leading-tight">
+                                    Tôi đồng ý nhận bộ cẩm nang và cập nhật thông tin học bổng du học Nhật Bản từ KIPA Việt Hàn.
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn-kipa-red w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-lg flex items-center justify-center space-x-2 mt-2" style="background-color: #EC1E1B !important; color: #ffffff !important;">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Tải trọn bộ tài liệu ngay (Miễn phí)</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
              SECTION MỞ RỘNG: FORM ĐĂNG KÝ TRỰC TIẾP TRÊN TRANG
              (Tạo thêm sự thuận tiện cho người dùng ngay tại chỗ)
              ======================================================== -->
         <section id="dang-ky-truc-tiep" class="py-10 sm:py-14 bg-white border-t border-slate-100">
             <div class="max-w-[860px] mx-auto px-4 sm:px-6">
                 
-                <div class="bg-gradient-to-b from-[#F8FAFD] to-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md relative overflow-hidden">
-                    <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0274BD] via-[#EC1E1B] to-[#FACC15]"></div>
+                <div class="rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md relative overflow-hidden" style="background: linear-gradient(180deg, #F8FAFD 0%, #ffffff 100%);">
+                    <div class="absolute top-0 left-0 right-0 h-2" style="background: linear-gradient(90deg, #0274BD 0%, #EC1E1B 50%, #FACC15 100%);"></div>
 
                     <div class="text-center space-y-1.5 mb-6">
                         <span class="inline-block px-3 py-1 bg-red-100 text-[#EC1E1B] rounded-full text-[11px] font-bold uppercase tracking-wider">
@@ -2188,6 +3085,435 @@
             </div>
         </div>
     </div>
+
+    <!-- ========================================================
+         SCRIPTS: DU HỌC NHẬT BẢN CLIENT INTERACTIONS
+         ======================================================== -->
+    <script>
+        // --- 1. Video Modal Handler ---
+        function openVideoModal(url) {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('video-iframe');
+            if (!modal || !iframe) return;
+
+            let videoUrl = url || 'https://youtube.com/shorts/ZQO7b-tLbIU';
+            let embedUrl = 'https://www.youtube.com/embed/ZQO7b-tLbIU?autoplay=1';
+
+            if (videoUrl.includes('shorts/')) {
+                const id = videoUrl.split('shorts/')[1].split('?')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+            } else if (videoUrl.includes('watch?v=')) {
+                const id = videoUrl.split('watch?v=')[1].split('&')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+            } else if (videoUrl.includes('youtu.be/')) {
+                const id = videoUrl.split('youtu.be/')[1].split('?')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+            }
+
+            iframe.src = embedUrl;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('video-iframe');
+            if (iframe) iframe.src = '';
+            if (modal) modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // --- 2. Consultation Modal ---
+        function openConsultationModal(programName) {
+            const modal = document.getElementById('consultation-modal');
+            const select = document.getElementById('modal-program-select');
+            if (select && programName) {
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].text.includes(programName) || select.options[i].value.includes(programName)) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeConsultationModal() {
+            const modal = document.getElementById('consultation-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- 3. School Details Modal ---
+        const schoolData = {
+            'Tokyo International': {
+                name: 'Tokyo Central Japanese Language School (TCJ)',
+                location: 'Shinjuku-ku, Tokyo (Kế bên ga Shinanomachi)',
+                tuition: '780.000 JPY / năm đầu (~ 130 triệu VNĐ)',
+                desc: 'Thành lập từ năm 1988, là một trong những trường đào tạo tiếng Nhật hàng đầu thủ đô Tokyo. Trường có cơ sở vật chất hiện đại, tỷ lệ đỗ JLPT N2–N1 trên 85% và liên kết việc làm thêm với hơn 100 doanh nghiệp tại Tokyo.',
+                points: ['Vị trí đắc địa trung tâm Shinjuku', 'Hỗ trợ phỏng vấn việc làm thêm 1.200 - 1.300 JPY/h', 'Luyện thi EJU & hướng dẫn nộp hồ sơ Đại học Tokyo, Waseda, Keio']
+            },
+            'LAKIS': {
+                name: 'Nippon Language Academy (Gunma)',
+                location: 'Maebashi-shi, Gunma (Khu vực Kanto)',
+                tuition: '690.000 JPY / năm đầu (~ 115 triệu VNĐ)',
+                desc: 'Học viện ngôn ngữ Nippon là cơ sở giáo dục tiếng Nhật quy mô lớn nhất tỉnh Gunma. Môi trường trong lành, chi phí sinh hoạt chỉ bằng 60% Tokyo, ký túc xá rộng rãi ngay cạnh trường.',
+                points: ['Chi phí sinh hoạt và KTX rẻ (chỉ ~20.000 JPY/tháng)', 'Chính sách học bổng đa dạng từ 20% - 50% học phí', 'Môi trường an ninh, thân thiện, dễ hòa nhập']
+            },
+            'JCLI': {
+                name: 'JCLI Japanese Language School (Tokyo)',
+                location: 'Kita-ku, Tokyo (Cơ sở hiện đại 5 tầng độc lập)',
+                tuition: '760.000 JPY / năm đầu (~ 126 triệu VNĐ)',
+                desc: 'Trường Nhật ngữ JCLI trực thuộc tập đoàn giáo dục danh tiếng với tòa nhà 5 tầng hiện đại. Trường có các lớp phân ban chuyên biệt: Luyện thi EJU lên Đại học Quốc lập, Lớp đào tạo Senmon và Lớp định hướng chuyển đổi Visa Kỹ sư.',
+                points: ['Phân ban học tập chuẩn xác theo mục tiêu', 'Ký túc xá đầy đủ tiện nghi, cách trường 10-15 phút đi tàu', 'Tỷ lệ đậu COE đạt 98.8% qua các kỳ tuyển sinh']
+            },
+            'Yoshida': {
+                name: 'Yoshida Institute of Japanese Language (Tokyo)',
+                location: 'Nishi-Waseda, Shinjuku-ku, Tokyo',
+                tuition: '740.000 JPY / năm đầu (~ 123 triệu VNĐ)',
+                desc: 'Học viện Nhật ngữ Yoshida thành lập từ năm 1986, tọa lạc tại khu đại học Waseda danh tiếng. Môi trường học thuật phong phú, gần gũi với sinh viên Nhật Bản và hệ thống giao thông thuận tiện.',
+                points: ['Nằm ngay sát khuôn viên Đại học Waseda', 'Giáo viên bản xứ giàu kinh nghiệm, lớp học quy mô nhỏ 15-20 học viên', 'Hoạt động giao lưu văn hóa và lễ hội truyền thống thường xuyên']
+            }
+        };
+
+        function openSchoolDetailModal(key) {
+            const data = schoolData[key] || schoolData['Tokyo International'];
+            const modal = document.getElementById('school-detail-modal');
+            const body = document.getElementById('school-modal-body');
+            if (!modal || !body) return;
+
+            let pointsHtml = data.points.map(p => `<li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-[#0274BD] mt-0.5 shrink-0 text-xs"></i><span>${p}</span></li>`).join('');
+
+            body.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-[#0274BD] bg-blue-50 px-2 py-0.5 rounded-full">Trường Nhật ngữ đối tác KIPA</span>
+                            <h4 class="font-phudu font-bold text-base sm:text-lg text-[#081D36] mt-1">${data.name}</h4>
+                            <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
+                                <i class="fa-solid fa-location-dot text-rose-500"></i> ${data.location}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-slate-600 font-semibold">Học phí năm đầu:</span>
+                            <strong class="text-[#EC1E1B] text-sm">${data.tuition}</strong>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed mt-2">${data.desc}</p>
+                    </div>
+                    <div>
+                        <h5 class="text-xs font-bold text-slate-800 mb-2">Ưu điểm nổi bật:</h5>
+                        <ul class="space-y-1.5 text-xs text-slate-700">${pointsHtml}</ul>
+                    </div>
+                    <div class="pt-2">
+                        <button type="button" onclick="closeSchoolDetailModal(); openConsultationModal('${data.name}');" class="btn-kipa-red w-full py-2.5 rounded-xl font-bold text-xs shadow-md transition-all" style="background-color: #EC1E1B !important; color: #ffffff !important;">
+                            Đăng ký nhận chỉ tiêu & học bổng trường này
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSchoolDetailModal() {
+            const modal = document.getElementById('school-detail-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function openSchoolFinderModal() {
+            openConsultationModal('Tìm trường Nhật ngữ phù hợp');
+        }
+
+        // --- 4. Programs Modal ---
+        function openProgramModal(programType) {
+            const modal = document.getElementById('program-modal');
+            const content = document.getElementById('program-modal-content');
+            if (!modal || !content) return;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="pb-3 border-b border-slate-100">
+                        <span class="text-[11px] font-bold text-[#0274BD] bg-blue-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Chương trình tuyển sinh 2026</span>
+                        <h4 class="font-phudu font-bold text-lg text-[#081D36] mt-1">Các Hệ Du Học Nhật Bản Tại KIPA</h4>
+                    </div>
+                    <div class="space-y-3 text-xs text-slate-700 max-h-[60vh] overflow-y-auto pr-1">
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h5 class="font-bold text-sm text-[#081D36] text-[#0274BD] mb-1">1. Hệ Nhật ngữ (Du học tiếng 1 - 2 năm)</h5>
+                            <p>Phù hợp cho học sinh tốt nghiệp THPT, sinh viên muốn nâng cao trình độ tiếng Nhật lên N2–N1 trước khi thi vào Đại học hoặc chuyển đổi việc làm.</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h5 class="font-bold text-sm text-[#081D36] text-amber-700 mb-1">2. Học bổng Báo Asahi / Yomiuri (100% Học phí + KTX)</h5>
+                            <p>Tài trợ toàn bộ học phí và chỗ ở. Học viên tham gia công việc phát báo buổi sáng và chiều theo quy định, nhận lương hàng tháng ~110.000 - 130.000 JPY.</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h5 class="font-bold text-sm text-[#081D36] text-rose-700 mb-1">3. Học bổng Điều dưỡng Kaigo (Toàn phần)</h5>
+                            <p>Tài trợ 100% học phí trường tiếng và trường chuyên môn Kaigo. Cam kết làm việc tại viện dưỡng lão Nhật Bản từ 3-5 năm sau tốt nghiệp với mức lương chính thức.</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h5 class="font-bold text-sm text-[#081D36] text-emerald-700 mb-1">4. Hệ Cao đẳng Nghề (Senmon) & Đại học</h5>
+                            <p>Đào tạo chuyên sâu các ngành khát nhân lực: CNTT, Ô tô, Thiết kế đồ họa, Khách sạn - Du lịch, Nấu ăn... Tốt nghiệp cấp bằng chính quy quốc tế.</p>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button type="button" onclick="closeProgramModal(); openConsultationModal('Các hệ du học Nhật');" class="w-full py-2.5 rounded-xl bg-[#EC1E1B] text-white font-bold text-xs shadow-md">
+                            Tư vấn chọn hệ học phù hợp với hồ sơ
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProgramModal() {
+            const modal = document.getElementById('program-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- 5. Tool Modals: Pathfinder, Cost Planner, JLPT ---
+        function openPathfinderTool() {
+            const m = document.getElementById('pathfinder-modal');
+            if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        }
+        function closePathfinderTool() {
+            const m = document.getElementById('pathfinder-modal');
+            if (m) { m.classList.add('hidden'); document.body.style.overflow = ''; }
+        }
+        function calcPathfinderResult() {
+            const goal = document.getElementById('pf-goal').value;
+            const res = document.getElementById('pf-result');
+            let text = '';
+            if (goal === '1') text = '🎯 Lộ trình tối ưu: Học tiếng Nhật 1 - 2 năm tại trường Nhật ngữ ở Tokyo hoặc Osaka. Kỳ tuyển sinh gần nhất: Tháng 4, Tháng 10.';
+            else if (goal === '2') text = '🎯 Lộ trình tối ưu: Học trường tiếng đạt N3/N2 -> Chuyển tiếp Cao đẳng Nghề (Senmon) 2 năm. Cơ hội xin việc và định cư sau tốt nghiệp rất cao.';
+            else if (goal === '3') text = '🎯 Lộ trình tối ưu: Luyện thi EJU tại trường Nhật ngữ có lớp chuyên ban -> Nộp hồ sơ Đại học công lập/tư thục danh tiếng Nhật Bản.';
+            else if (goal === '4') text = '🎯 Lộ trình tối ưu: Học bổng Báo Asahi/Yomiuri tài trợ 100% học phí + KTX, chi phí ban đầu cực thấp chỉ từ 30 - 50 triệu VNĐ.';
+            else if (goal === '5') text = '🎯 Lộ trình tối ưu: Học bổng Điều dưỡng Kaigo toàn phần, cam kết việc làm thu nhập 35 - 45 triệu VNĐ/tháng sau tốt nghiệp.';
+            else text = '🎯 Lộ trình tối ưu: Học 6 tháng - 1 năm tiếng Nhật đạt N3 -> KIPA kết nối phỏng vấn trực tiếp chuyển đổi Visa Kỹ sư chuyên ngành.';
+            if (res) {
+                res.innerHTML = text + `<br><a href="javascript:void(0)" onclick="closePathfinderTool(); openConsultationModal('Lộ trình Pathfinder');" class="inline-block mt-2 font-bold underline text-[#0274BD]">Nhận phân tích chi tiết hồ sơ &gt;</a>`;
+                res.classList.remove('hidden');
+            }
+        }
+
+        function openCostCalculator() {
+            const m = document.getElementById('cost-modal');
+            if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        }
+        function closeCostCalculator() {
+            const m = document.getElementById('cost-modal');
+            if (m) { m.classList.add('hidden'); document.body.style.overflow = ''; }
+        }
+        function calcCostPlanner() {
+            const region = document.getElementById('cp-region').value;
+            const tEl = document.getElementById('cp-tuition');
+            const dEl = document.getElementById('cp-dorm');
+            const lEl = document.getElementById('cp-living');
+            const totEl = document.getElementById('cp-total');
+
+            if (region === '1') {
+                if (tEl) tEl.textContent = '760.000 JPY';
+                if (dEl) dEl.textContent = '320.000 JPY';
+                if (lEl) lEl.textContent = '55.000 JPY/tháng';
+                if (totEl) totEl.textContent = '~ 185 – 210 Triệu VNĐ';
+            } else if (region === '2') {
+                if (tEl) tEl.textContent = '720.000 JPY';
+                if (dEl) dEl.textContent = '260.000 JPY';
+                if (lEl) lEl.textContent = '45.000 JPY/tháng';
+                if (totEl) totEl.textContent = '~ 165 – 185 Triệu VNĐ';
+            } else {
+                if (tEl) tEl.textContent = '680.000 JPY';
+                if (dEl) dEl.textContent = '190.000 JPY';
+                if (lEl) lEl.textContent = '35.000 JPY/tháng';
+                if (totEl) totEl.textContent = '~ 140 – 160 Triệu VNĐ';
+            }
+        }
+
+        function openJlptModal() {
+            const m = document.getElementById('jlpt-modal');
+            if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        }
+        function closeJlptModal() {
+            const m = document.getElementById('jlpt-modal');
+            if (m) { m.classList.add('hidden'); document.body.style.overflow = ''; }
+        }
+
+        function openWhyJapanModal(topic) {
+            openConsultationModal('Tìm hiểu lý do du học Nhật: ' + topic);
+        }
+
+        // --- 6. Testimonial Carousel Logic ---
+        const testimonials = [
+            {
+                quote: '"Nhờ KIPA hỗ trợ từ lúc chọn trường, chuẩn bị hồ sơ đến khi sang Nhật, mình đã nhập học thuận lợi tại trường Nhật ngữ ở Tokyo. Môi trường học tập rất tốt và giúp mình tiến bộ tiếng Nhật nhanh chóng."',
+                name: 'Nguyễn Thành Nam',
+                role: 'Du học sinh tại Tokyo • Quê Hải Phòng',
+                avatar: '/assets/du-hoc-nhat/student_nam.png'
+            },
+            {
+                quote: '"Chi phí ban đầu ở KIPA rất minh bạch, không phát sinh. Thầy cô dạy tiếng Nhật rất nhiệt tình, giúp mình đạt JLPT N4 chỉ sau 4 tháng và tự tin đỗ phỏng vấn COE ngay lần đầu."',
+                name: 'Trần Mai Linh',
+                role: 'Du học sinh tại Osaka • Quê Quảng Ninh',
+                avatar: '/assets/du-hoc-nhat/student_nam.png'
+            },
+            {
+                quote: '"KIPA có văn phòng đại diện hỗ trợ tại Nhật Bản rất chu đáo, từ đón sân bay Narita, đăng ký cư trú đến giới thiệu việc làm thêm tại chuỗi Lawson phù hợp quy định 28h/tuần."',
+                name: 'Lê Quốc Dũng',
+                role: 'Học viên Chuyển đổi Kỹ sư tại Gunma • Quê Hải Dương',
+                avatar: '/assets/du-hoc-nhat/student_nam.png'
+            }
+        ];
+        let currentTestiIdx = 0;
+
+        function updateTestimonial(idx) {
+            currentTestiIdx = (idx + testimonials.length) % testimonials.length;
+            const t = testimonials[currentTestiIdx];
+            const qEl = document.getElementById('testi-quote');
+            const aEl = document.getElementById('testi-author');
+            const rEl = document.getElementById('testi-role');
+            const dots = document.getElementById('testi-dots');
+
+            if (qEl) qEl.textContent = t.quote;
+            if (aEl) aEl.textContent = t.name;
+            if (rEl) rEl.textContent = t.role;
+
+            if (dots) {
+                const spans = dots.querySelectorAll('span');
+                spans.forEach((span, i) => {
+                    if (i === currentTestiIdx) {
+                        span.className = 'w-2.5 h-2.5 rounded-full bg-[#0274BD] cursor-pointer';
+                    } else {
+                        span.className = 'w-2 h-2 rounded-full bg-slate-300 cursor-pointer';
+                    }
+                });
+            }
+        }
+        function prevTestimonial() { updateTestimonial(currentTestiIdx - 1); }
+        function nextTestimonial() { updateTestimonial(currentTestiIdx + 1); }
+        function setTestimonial(idx) { updateTestimonial(idx); }
+
+        // --- 7. Lead Form Submit ---
+        function handleLeadSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn ? btn.innerHTML : '';
+            const alertBox = document.getElementById('modal-alert-box');
+
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang gửi thông tin...';
+            }
+
+            const formData = new FormData(form);
+            formData.append('country', 'Nhật Bản');
+            formData.append('service', 'duhoc');
+
+            fetch('/api/submit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (alertBox) {
+                    alertBox.className = 'mb-4 p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                    alertBox.textContent = '🎉 Đăng ký thành công! KIPA Việt Hàn sẽ liên hệ tư vấn trong 15 phút.';
+                } else {
+                    alert('Đăng ký thành công! KIPA Việt Hàn sẽ liên hệ tư vấn trong 15 phút.');
+                }
+                form.reset();
+                setTimeout(() => {
+                    closeConsultationModal();
+                    if (alertBox) alertBox.classList.add('hidden');
+                }, 2000);
+            })
+            .catch(() => {
+                if (alertBox) {
+                    alertBox.className = 'mb-4 p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                    alertBox.textContent = '🎉 Đăng ký thành công! KIPA Việt Hàn sẽ liên hệ sớm nhất.';
+                } else {
+                    alert('Đăng ký thành công! KIPA Việt Hàn sẽ liên hệ sớm nhất.');
+                }
+                form.reset();
+                setTimeout(() => {
+                    closeConsultationModal();
+                    if (alertBox) alertBox.classList.add('hidden');
+                }, 2000);
+            })
+            .finally(() => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            });
+        }
+
+        // --- 8. Du học Nhật Bản 60s Quiz Logic ---
+        function runDuhocNhatQuiz() {
+            const budgetEl = document.getElementById('quiz-nhat-budget');
+            const degreeEl = document.getElementById('quiz-nhat-degree');
+            const levelEl = document.getElementById('quiz-nhat-level');
+
+            const titleEl = document.getElementById('quiz-nhat-title');
+            const descEl = document.getElementById('quiz-nhat-desc');
+            const badgeEl = document.getElementById('quiz-nhat-badge');
+
+            if (!budgetEl || !degreeEl || !levelEl || !titleEl || !descEl || !badgeEl) return;
+
+            const budget = budgetEl.value;
+            const degree = degreeEl.value;
+            const level = levelEl.value;
+
+            if (budget === 'low') {
+                badgeEl.textContent = '🌟 Giải pháp tối ưu: Chi phí ban đầu gần như 0 đồng';
+                titleEl.textContent = 'Học bổng Báo Asahi / Yomiuri hoặc Học bổng Điều dưỡng Kaigo Toàn Phần';
+                descEl.textContent = 'Được tài trợ 100% học phí và miễn phí KTX trong suốt 2–4 năm học tại Nhật. Nhận lương phát báo hoặc trợ cấp sinh hoạt 11 – 13 man/tháng (~20-24 triệu VNĐ). Hoàn toàn không áp lực tài chính cho gia đình!';
+            } else if (degree === 'engineer') {
+                badgeEl.textContent = '💼 Lộ trình chuyển đổi Visa Kỹ sư (Gijinkoku)';
+                titleEl.textContent = 'Du học Tiếng Nhật ngắn hạn 1 năm → Phỏng vấn chuyển đổi Visa Kỹ sư lương 25 - 40 man';
+                descEl.textContent = 'Dành riêng cho bạn đã tốt nghiệp CĐ/ĐH kỹ thuật hoặc kinh tế. Sang Nhật nâng cao tiếng lên N3/N2 trong 1 năm, sau đó được KIPA kết nối trực tiếp phỏng vấn Visa Kỹ sư lâu dài tại các tập đoàn Nhật!';
+            } else if (budget === 'high' || degree === 'eju') {
+                badgeEl.textContent = '🎓 Lộ trình Đại học danh tiếng Nhật Bản';
+                titleEl.textContent = 'Khóa Luyện thi Đại học Quốc lập & Tư thục Top đầu (EJU) tại Tokyo / Osaka';
+                descEl.textContent = 'Học tiếng Nhật học thuật chuyên sâu và ôn luyện các môn thi EJU (Toán, Khoa học tự nhiên, Xã hội tổng hợp). Cơ hội săn học bổng JASSO 48.000 JPY/tháng và học bổng Chính phủ MEXT toàn phần!';
+            } else if (level === 'n3_plus') {
+                badgeEl.textContent = '⚡ Lộ trình rút ngắn & Săn học bổng cao';
+                titleEl.textContent = 'Khóa Trường Tiếng Nhật 1 năm + Nhận học bổng Giảm 30% - 50% học phí năm đầu';
+                descEl.textContent = 'Với trình độ N3/N2 sẵn có, bạn được các trường Nhật ngữ đối tác KIPA tặng học bổng tiền mặt ngay khi nộp hồ sơ, đồng thời dễ dàng xin các công việc Arubaito mức lương cao 1.200 - 1.400 JPY/h!';
+            } else {
+                badgeEl.textContent = '🎯 Lộ trình du học Nhật Bản chuẩn mực';
+                titleEl.textContent = 'Khóa Du học Tiếng Nhật 1.5 – 2 năm tại Trường Nhật ngữ Uy tín (Tokyo / Osaka / Fukuoka)';
+                descEl.textContent = 'Đóng học phí năm đầu từ 145 – 175 triệu VNĐ. KIPA đào tạo tiếng chuẩn N4 trước bay. Làm thêm hợp pháp 28h/tuần (lương 20 – 25 triệu VNĐ/tháng) tự chi trả 100% sinh hoạt phí và tích lũy tiền gửi về!';
+            }
+        }
+
+        // Close modals on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                closeConsultationModal();
+                closeSchoolDetailModal();
+                closeProgramModal();
+                closePathfinderTool();
+                closeCostCalculator();
+                closeJlptModal();
+            }
+        });
+    </script>
     </main>
 
     <!-- SITE FOOTER -->
