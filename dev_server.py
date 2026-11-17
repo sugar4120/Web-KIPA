@@ -282,6 +282,8 @@ def get_student_portal_data(email='maianh.kipa@gmail.com'):
             cur.execute('SELECT * FROM kipa_students LIMIT 1')
             student = cur.fetchone()
         student_dict = dict(student) if student else {}
+        if student_dict and student_dict.get('email'):
+            email = student_dict['email']
         
         cur.execute('SELECT * FROM kipa_student_journey WHERE student_email = ? ORDER BY step_number ASC', (email,))
         journey = []

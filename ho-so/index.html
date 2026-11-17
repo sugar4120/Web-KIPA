@@ -1560,596 +1560,777 @@
         </div>
 
         <script>
-        (function () {
-            var loadingEl = document.getElementById('profile-loading');
-            var guestEl = document.getElementById('profile-guest');
-            var portalEl = document.getElementById('profile-portal');
-            var profileForm = document.getElementById('profile-form');
-            var passwordForm = document.getElementById('password-form');
-            var supportForm = document.getElementById('support-ticket-form');
-            var uploadForm = document.getElementById('doc-upload-form');
-            var uploadModal = document.getElementById('doc-upload-modal');
+(function () {
+    var loadingEl = document.getElementById('profile-loading');
+    var guestEl = document.getElementById('profile-guest');
+    var portalEl = document.getElementById('profile-portal');
+    var profileForm = document.getElementById('profile-form');
+    var passwordForm = document.getElementById('password-form');
+    var supportForm = document.getElementById('support-ticket-form');
+    var uploadForm = document.getElementById('doc-upload-form');
+    var uploadModal = document.getElementById('doc-upload-modal');
 
-            var currentPortalData = null;
+    var currentPortalData = null;
 
-            function setStatus(id, message, isError) {
-                var el = document.getElementById(id);
-                if (!el) return;
-                el.textContent = message;
-                el.className = isError ? 'text-xs text-red-700 font-semibold' : 'text-xs text-emerald-700 font-semibold';
+    var DEFAULT_PORTAL_DATA = {
+        ok: true,
+        student: {
+            id: 1,
+            email: 'maianh.kipa@gmail.com',
+            full_name: 'Nguyễn Thị Mai Anh',
+            avatar_url: '/assets/home/avatar-hoc-sinh.jpg',
+            birthday: '2006-05-18',
+            gender: 'Nữ',
+            phone: '0987 654 321',
+            address: 'Phường Quang Trung, TP. Quy Nhơn, Bình Định',
+            education_level: 'Tốt nghiệp THPT',
+            school_name: 'THPT Chuyên Lê Quý Đôn',
+            emergency_contact: 'Bố: Nguyễn Văn Dũng (0912 345 678)',
+            student_status: 'Đang học',
+            current_program: 'Du học Hàn Quốc (D2-2)',
+            program_code: 'KR-D2-2026',
+            country: 'Hàn Quốc',
+            registration_date: '15/09/2026',
+            target_departure: 'Tháng 09/2027',
+            dossier_status: 'Đang chuẩn bị',
+            progress_percent: 72,
+            advisor_name: 'Cô Trần Thu Hà',
+            advisor_role: 'Cố vấn học tập KIPA',
+            advisor_phone: '036 851 3865',
+            advisor_email: 'duhocquoctekipaviethan@gmail.com',
+            advisor_avatar: '/media/nhansukipa/thuy-anh-kipa-viet-han.png'
+        },
+        portal: {
+            journey: [
+                {
+                    step_number: 1,
+                    title: 'Tư vấn & định hướng nguyện vọng',
+                    status: 'Hoàn thành',
+                    progress_percent: 100,
+                    description: 'Tìm hiểu nguyện vọng, định hướng chọn trường đại học và lộ trình phù hợp với hồ sơ học viên.',
+                    deadline: 'Đã hoàn thành',
+                    in_charge: 'Cô Trần Thu Hà',
+                    tasks: ['Khảo sát năng lực học tập và mục tiêu du học', 'Chọn 3 trường đại học mục tiêu tại Seoul', 'Ký kết hợp đồng đào tạo & cam kết dịch vụ']
+                },
+                {
+                    step_number: 2,
+                    title: 'Học tiếng Hàn & Luyện thi TOPIK',
+                    status: 'Hoàn thành',
+                    progress_percent: 100,
+                    description: 'Đào tạo tiếng Hàn chuẩn theo khung TOPIK từ sơ cấp đến trung cấp, rèn luyện kỹ năng phỏng vấn.',
+                    deadline: 'Đã hoàn thành',
+                    in_charge: 'Thầy Park & Cô Yến Linh',
+                    tasks: ['Hoàn thành khóa tiếng Hàn Sơ cấp 1 và Sơ cấp 2', 'Đạt chứng chỉ TOPIK 2 trong kỳ thi thử đợt 3', 'Rèn luyện phản xạ phỏng vấn cơ bản với giáo viên bản xứ']
+                },
+                {
+                    step_number: 3,
+                    title: 'Chuẩn bị & Thẩm định hồ sơ',
+                    status: 'Cần bổ sung',
+                    progress_percent: 70,
+                    description: 'Dịch thuật công chứng học bạ, bằng tốt nghiệp, xác thực lãnh sự và chuẩn bị sổ tiết kiệm du học.',
+                    deadline: '25/12/2026',
+                    in_charge: 'Phòng Hồ sơ KIPA',
+                    tasks: ['Công chứng dịch thuật Bằng tốt nghiệp THPT', 'Xin xác thực Giấy khám sức khỏe du học', 'Bổ sung bản sao công chứng Học bạ THPT']
+                },
+                {
+                    step_number: 4,
+                    title: 'Nộp hồ sơ trường & Phỏng vấn đại học',
+                    status: 'Chưa bắt đầu',
+                    progress_percent: 0,
+                    description: 'Gửi hồ sơ sang trường đại học Hàn Quốc thẩm định, tham gia phỏng vấn trường và nhận Invoice học phí.',
+                    deadline: 'Tháng 03/2027',
+                    in_charge: 'Ban Hợp tác Quốc tế KIPA',
+                    tasks: ['Nộp bộ hồ sơ hoàn chỉnh sang trường đối tác', 'Luyện phỏng vấn chuyên sâu cùng Cố vấn KIPA', 'Nhận thư mời nhập học và đóng học phí chính thức']
+                },
+                {
+                    step_number: 5,
+                    title: 'Thực hiện thủ tục Visa (Đại sứ quán)',
+                    status: 'Chưa bắt đầu',
+                    progress_percent: 0,
+                    description: 'Xin cấp mã visa điện tử hoặc nộp hồ sơ xin visa du học D2-2 tại Đại sứ quán / Tổng Lãnh sự quán Hàn Quốc.',
+                    deadline: 'Tháng 07/2027',
+                    in_charge: 'Phòng Visa KIPA',
+                    tasks: ['Hoàn thiện hồ sơ xin cấp mã visa', 'Nộp hồ sơ và theo dõi tiến độ xét duyệt visa', 'Nhận kết quả Visa du học Hàn Quốc']
+                },
+                {
+                    step_number: 6,
+                    title: 'Chuẩn bị xuất cảnh & Đón tại Hàn Quốc',
+                    status: 'Chưa bắt đầu',
+                    progress_percent: 0,
+                    description: 'Đặt vé máy bay, hướng dẫn hành lý, VPĐD KIPA tại Seoul hỗ trợ đón tại sân bay Incheon và ổn định chỗ ở.',
+                    deadline: 'Tháng 09/2027',
+                    in_charge: 'VPĐD KIPA tại Seoul',
+                    tasks: ['Buổi hướng dẫn tiền xuất cảnh cùng phụ huynh', 'Đặt vé máy bay đoàn học viên KIPA', 'Đón tại sân bay Incheon và nhận phòng KTX']
+                }
+            ],
+            documents: [
+                { id: 1, doc_group: 'Giấy tờ cá nhân', doc_name: 'Hộ chiếu (Passport)', status: 'Đã tải', file_name: 'ho_chieu_maianh.pdf', file_size: '2.4 MB', uploaded_at: '12/11/2026', note: 'Hộ chiếu còn hạn trên 5 năm. Đã kiểm tra hợp lệ.' },
+                { id: 2, doc_group: 'Giấy tờ cá nhân', doc_name: 'Căn cước công dân gắn chip', status: 'Đã xác nhận', file_name: 'cccd_gan_chip.pdf', file_size: '1.8 MB', uploaded_at: '12/11/2026', note: 'Đã đối chiếu thông tin khớp với hồ sơ.' },
+                { id: 3, doc_group: 'Giấy tờ cá nhân', doc_name: 'Ảnh thẻ 3.5x4.5 chuẩn quốc tế', status: 'Đã xác nhận', file_name: 'anh_the_35x45.jpg', file_size: '850 KB', uploaded_at: '14/11/2026', note: 'Phông trắng áo sơ mi có cổ chuẩn quy định visa.' },
+                { id: 4, doc_group: 'Học vấn', doc_name: 'Bằng tốt nghiệp THPT', status: 'Đã tải', file_name: 'bang_tot_nghiep_thpt.pdf', file_size: '3.1 MB', uploaded_at: '15/11/2026', note: 'Bản sao công chứng Sở Giáo dục.' },
+                { id: 5, doc_group: 'Học vấn', doc_name: 'Học bạ THPT (Công chứng)', status: 'Chờ bổ sung', file_name: '', file_size: '', uploaded_at: '', note: 'Cần bổ sung bản sao công chứng đầy đủ 3 năm lớp 10, 11, 12 trước 25/12.' },
+                { id: 6, doc_group: 'Sức khỏe', doc_name: 'Giấy khám sức khỏe du học Hàn Quốc', status: 'Chưa có', file_name: '', file_size: '', uploaded_at: '', note: 'Khám tại Bệnh viện được Lãnh sự quán Hàn Quốc chỉ định (BV Lao Phổi).' },
+                { id: 7, doc_group: 'Tài chính & Khác', doc_name: 'Sổ tiết kiệm / Chứng minh tài chính', status: 'Đang kiểm tra', file_name: 'xac_nhan_so_du_ngan_hang.pdf', file_size: '1.5 MB', uploaded_at: '16/11/2026', note: 'Chuyên viên ngân hàng liên kết KIPA đang thẩm định số dư.' }
+            ],
+            schedules: [
+                { id: 1, title: 'Lớp tiếng Hàn K26 (Sơ cấp 2)', schedule_type: 'Lớp học', day_label: 'Thứ 3, 16/12', time_range: '18:00 - 20:00', location: 'Phòng 302 - Cơ sở KIPA', mentor: 'Thầy Park Sung-woo', status: 'Sắp diễn ra' },
+                { id: 2, title: 'Ôn luyện giải đề TOPIK II', schedule_type: 'Luyện thi', day_label: 'Thứ 5, 18/12', time_range: '18:00 - 20:00', location: 'Trực tuyến Zoom KIPA', mentor: 'Cô Yến Linh', status: 'Sắp diễn ra' },
+                { id: 3, title: 'Tư vấn chọn ngành & trường đại học 1:1', schedule_type: 'Tư vấn', day_label: 'Thứ 7, 20/12', time_range: '09:30 - 11:00', location: 'Phòng Cố vấn KIPA', mentor: 'Cô Trần Thu Hà', status: 'Đã lên lịch' },
+                { id: 4, title: 'Thi thử TOPIK đợt 4 toàn diện', schedule_type: 'Thi thử', day_label: 'Thứ 2, 22/12', time_range: '08:30 - 11:30', location: 'Hội trường KIPA', mentor: 'Hội đồng Khảo thí KIPA', status: 'Đã lên lịch' }
+            ],
+            notifications: [
+                { id: 1, title: 'Nộp bổ sung học bạ THPT công chứng trước 25/12/2026', content: 'Mai Anh vui lòng hoàn thiện bản sao công chứng học bạ 3 năm THPT để phòng hồ sơ kịp gửi sang trường Hàn Quốc xét tuyển kỳ Thu 2027.', category: 'Hồ sơ', time_label: 'Hôm nay', is_read: 0, is_urgent: 1 },
+                { id: 2, title: 'Lịch thi thử TOPIK đợt 4 vào ngày 22/12/2026', content: 'Kỳ thi thử nhằm đánh giá kỹ năng Đọc và Nghe TOPIK II để xếp lớp luyện phỏng vấn trường.', category: 'Học tập', time_label: 'Hôm qua', is_read: 1, is_urgent: 0 },
+                { id: 3, title: 'Thông báo khai giảng lớp Luyện đề TOPIK nâng cao', content: 'Lớp học diễn ra vào tối thứ 3 và thứ 5 hàng tuần trên hệ thống trực tuyến KIPA.', category: 'Học tập', time_label: '10/12/2026', is_read: 1, is_urgent: 0 },
+                { id: 4, title: 'Chào mừng bạn gia nhập Cổng thông tin học viên KIPA', content: 'KIPA Student Portal đồng hành cùng bạn từ khi học tiếng đến khi sang trường đại học Hàn Quốc.', category: 'KIPA', time_label: '01/12/2026', is_read: 1, is_urgent: 0 }
+            ],
+            materials: [
+                { id: 1, title: 'Giáo trình tiếng Hàn KIPA Sơ cấp 1–2', category: 'Giáo trình', format: 'PDF', file_url: '/assets/docs/giao-trinh-tieng-han-so-cap.pdf', file_size: '15.4 MB', description: 'Trọn bộ 30 bài ngữ pháp, từ vựng và bài tập thực hành giao tiếp hàng ngày.' },
+                { id: 2, title: 'Bộ 10 đề luyện thi TOPIK II (có đáp án chi tiết)', category: 'Luyện thi TOPIK', format: 'PDF', file_url: '/assets/docs/bo-de-topik-ii-chuan.pdf', file_size: '8.2 MB', description: 'Bộ đề tổng hợp cấu trúc chuẩn HRD Korea kèm file giải thích ngữ pháp chi tiết.' },
+                { id: 3, title: 'Sổ tay 1000 từ vựng chuyên ngành du học', category: 'Từ vựng', format: 'PDF', file_url: '/assets/docs/so-tay-1000-tu-vung-du-hoc.pdf', file_size: '4.5 MB', description: 'Tổng hợp từ vựng phỏng vấn trường, đời sống thường nhật và thủ tục ngân hàng.' },
+                { id: 4, title: 'Cẩm nang chuẩn bị hành trang sang Hàn Quốc 2026', category: 'Cẩm nang', format: 'PDF', file_url: '/assets/docs/cam-nang-du-hoc-han-quoc-kipa.pdf', file_size: '6.1 MB', description: 'Hướng dẫn đầy đủ về hành lý, vé máy bay, sim thẻ, tài khoản ngân hàng và visa.' }
+            ],
+            support: [
+                { id: 1, ticket_code: 'TK-2026-8812', subject: 'Hướng dẫn công chứng dịch thuật học bạ', message: 'Em muốn hỏi bản dịch thuật học bạ công chứng ở UBND phường hay cần văn phòng công chứng tư pháp ạ?', category: 'Hồ sơ giấy tờ', status: 'Đang xử lý', advisor_reply: 'Chào Mai Anh, em mang bản gốc đến văn phòng KIPA để cô hỗ trợ công chứng nhanh qua đơn vị liên kết tư pháp nhé.', replied_at: '15/12/2026' },
+                { id: 2, ticket_code: 'TK-2026-7541', subject: 'Đăng ký phòng tự học tiếng Hàn tại cơ sở', message: 'Em muốn đăng ký phòng tự học buổi chiều từ 14:00 - 17:00 các ngày trong tuần.', category: 'Học tiếng Hàn & Luyện thi', status: 'Đã giải quyết', advisor_reply: 'Phòng tự học 304 đã được kích hoạt thẻ ra vào cho em nhé.', replied_at: '10/12/2026' }
+            ]
+        }
+    };
+
+    function setStatus(id, message, isError) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = message;
+        el.className = isError ? 'text-xs text-red-700 font-semibold' : 'text-xs text-emerald-700 font-semibold';
+    }
+
+    function safeText(id, val) {
+        var el = document.getElementById(id);
+        if (el && val != null) el.textContent = val;
+    }
+
+    function safeHtml(id, val) {
+        var el = document.getElementById(id);
+        if (el && val != null) el.innerHTML = val;
+    }
+
+    function safeSrc(id, val) {
+        var el = document.getElementById(id);
+        if (el && val != null) el.src = val;
+    }
+
+    function safeHref(id, val) {
+        var el = document.getElementById(id);
+        if (el && val != null) el.href = val;
+    }
+
+    function safeVal(id, val) {
+        var el = document.getElementById(id);
+        if (el && val != null) el.value = val;
+    }
+
+    async function postJson(url, payload) {
+        var controller = new AbortController();
+        var timeout = setTimeout(function () { controller.abort(); }, 12000);
+        try {
+            var response = await fetch(url, {
+                method: 'POST',
+                signal: controller.signal,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!(response.headers.get('Content-Type') || '').includes('application/json')) {
+                throw new Error('Máy chủ chưa thể xử lý yêu cầu. Vui lòng thử lại sau.');
+            }
+            var result = await response.json();
+            if (!response.ok || !result || result.ok !== true) {
+                var error = new Error(result && result.error || 'Chưa thể xử lý yêu cầu. Vui lòng thử lại.');
+                error.httpStatus = response.status;
+                throw error;
+            }
+            return result;
+        } finally {
+            clearTimeout(timeout);
+        }
+    }
+
+    function describeError(error) {
+        if (error && error.name === 'AbortError') return 'Kết nối quá lâu. Vui lòng thử lại.';
+        if (error instanceof TypeError) return 'Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.';
+        return error instanceof Error ? error.message : 'Lỗi kết nối. Vui lòng thử lại.';
+    }
+
+    // Tab Switching
+    window.switchTab = function (tabId) {
+        var navButtons = document.querySelectorAll('.portal-nav-btn');
+        navButtons.forEach(function (btn) {
+            if (btn.getAttribute('data-tab') === tabId) {
+                btn.className = 'portal-nav-btn active w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-[#003875] shadow-md';
+                if (!btn.querySelector('.fa-chevron-right')) {
+                    var icon = document.createElement('i');
+                    icon.className = 'fa-solid fa-chevron-right text-xs opacity-60';
+                    btn.appendChild(icon);
+                }
+            } else {
+                btn.className = 'portal-nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition-all text-blue-100 hover:bg-white/10 hover:text-white';
+                var chev = btn.querySelector('.fa-chevron-right');
+                if (chev) btn.removeChild(chev);
+            }
+        });
+
+        var mobileButtons = document.querySelectorAll('.mobile-tab-btn');
+        mobileButtons.forEach(function (btn) {
+            if (btn.getAttribute('data-mobile-tab') === tabId) {
+                btn.className = 'mobile-tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#003875] text-white shadow-sm flex items-center gap-2';
+            } else {
+                btn.className = 'mobile-tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 flex items-center gap-2';
+            }
+        });
+
+        var views = document.querySelectorAll('.portal-view');
+        views.forEach(function (v) { v.classList.add('hidden'); });
+
+        var targetView = document.getElementById('view-' + tabId);
+        if (targetView) {
+            targetView.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    // Modal Handlers
+    window.openDocUploadModal = function (docName) {
+        if (uploadModal) {
+            if (docName && document.getElementById('upload-doc-select')) {
+                document.getElementById('upload-doc-select').value = docName;
+            }
+            uploadModal.classList.remove('hidden');
+        }
+    };
+
+    window.closeDocUploadModal = function () {
+        if (uploadModal) {
+            uploadModal.classList.add('hidden');
+            setStatus('doc-upload-status', '', false);
+        }
+    };
+
+    // Populate Full Portal
+    function renderPortal(data) {
+        if (!data) return;
+        currentPortalData = data;
+        var st = data.student || (data.user && data.user.id ? data.user : (data.user || DEFAULT_PORTAL_DATA.student));
+        var portal = data.portal || (DEFAULT_PORTAL_DATA.portal);
+
+        // 1. Sidebar & Hero
+        var fullName = st.full_name || 'Nguyễn Thị Mai Anh';
+        var firstName = fullName.trim().split(' ').pop();
+        safeText('sidebar-name-text', fullName);
+        safeText('hero-name-span', firstName);
+        safeSrc('sidebar-avatar-img', st.avatar_url || '/assets/home/avatar-hoc-sinh.jpg');
+        safeHtml('sidebar-badge-status', '<i class="fa-solid fa-graduation-cap text-xs"></i> <span>' + (st.student_status || 'Đang học') + '</span>');
+
+        // 2. Dash Highlights
+        safeText('dash-program-name', st.current_program || 'Du học Hàn Quốc (D2-2)');
+        safeText('dash-departure-text', st.target_departure || 'Tháng 09/2027');
+        safeHtml('dash-dossier-status', '<i class="fa-solid fa-check text-xs"></i> <span>' + (st.dossier_status || 'Đang chuẩn bị') + '</span>');
+
+        // 3. Progress Ring
+        var percent = Number(st.progress_percent) || 72;
+        safeText('ring-percent-text', percent + '%');
+        var circle = document.getElementById('svg-ring-circle');
+        if (circle) {
+            var circumference = 2 * Math.PI * 50;
+            var offset = circumference - (percent / 100) * circumference;
+            circle.setAttribute('stroke-dashoffset', offset);
+        }
+
+        // 4. Dash Schedules (Upcoming 2)
+        var schedules = portal.schedules || [];
+        var schedHtml = '';
+        var upcoming = schedules.slice(0, 2);
+        if (upcoming.length === 0) {
+            schedHtml = '<p class="text-xs text-slate-500 py-3">Không có lịch học nào sắp tới.</p>';
+        } else {
+            upcoming.forEach(function (s) {
+                schedHtml += '<div class="flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-100 transition-colors">' +
+                    '<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-base shadow-sm">' +
+                        '<i class="fa-regular fa-calendar"></i>' +
+                    '</div>' +
+                    '<div class="min-w-0 flex-grow">' +
+                        '<div class="flex items-center justify-between">' +
+                            '<span class="text-xs font-bold text-brand-navy">' + s.day_label + '</span>' +
+                            '<span class="text-[10px] text-slate-400 font-medium">' + s.mentor + '</span>' +
+                        '</div>' +
+                        '<p class="text-xs font-semibold text-slate-700 truncate">' + s.title + '</p>' +
+                        '<p class="text-[11px] text-slate-500 mt-0.5"><i class="fa-regular fa-clock mr-1 text-[10px]"></i>' + s.time_range + ' • ' + s.location + '</p>' +
+                    '</div>' +
+                '</div>';
+            });
+        }
+        safeHtml('dash-schedules-container', schedHtml);
+
+        // 5. Dash Docs (Top 4)
+        var docs = portal.documents || [];
+        var docsHtml = '';
+        var sampleDocs = docs.slice(0, 4);
+        sampleDocs.forEach(function (d) {
+            var pillClass = 'bg-slate-100 text-slate-600';
+            if (d.status === 'Đã tải' || d.status === 'Đã xác nhận') pillClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+            else if (d.status === 'Cần bổ sung' || d.status === 'Chờ bổ sung') pillClass = 'bg-amber-50 text-amber-700 border border-amber-200';
+            else if (d.status === 'Đang kiểm tra') pillClass = 'bg-blue-50 text-blue-700 border border-blue-200';
+
+            docsHtml += '<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition-colors">' +
+                '<div class="flex items-center gap-2.5 truncate">' +
+                    '<i class="fa-regular fa-folder text-brand-blue text-sm"></i>' +
+                    '<span class="text-xs font-medium text-slate-800 truncate">' + d.doc_name + '</span>' +
+                '</div>' +
+                '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ' + pillClass + ' flex-shrink-0">' + d.status + '</span>' +
+            '</div>';
+        });
+        safeHtml('dash-docs-container', docsHtml);
+
+        // 6. Dash Notifications (Top 3)
+        var notifs = portal.notifications || [];
+        var notifHtml = '';
+        var sampleNotifs = notifs.slice(0, 3);
+        sampleNotifs.forEach(function (n) {
+            var dot = n.is_read ? '<span class="w-2.5 h-2.5 rounded-full border border-slate-300 flex-shrink-0"></span>' : '<span class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0"></span>';
+            notifHtml += '<div class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.switchTab(\'notifications\')">' +
+                dot +
+                '<div class="min-w-0 flex-grow">' +
+                    '<p class="text-xs font-semibold text-slate-800 leading-snug line-clamp-1">' + n.title + '</p>' +
+                    '<p class="text-[11px] text-slate-400 mt-0.5">' + n.time_label + '</p>' +
+                '</div>' +
+            '</div>';
+        });
+        safeHtml('dash-notifs-container', notifHtml);
+
+        // 7. Dash Materials (4 PDFs)
+        var materials = portal.materials || [];
+        var matHtml = '';
+        materials.slice(0, 4).forEach(function (m) {
+            matHtml += '<div class="p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:shadow-sm transition-all flex flex-col justify-between text-center">' +
+                '<div class="w-9 h-9 rounded-xl bg-red-50 text-red-500 flex items-center justify-center mx-auto text-base mb-2">' +
+                    '<i class="fa-solid fa-file-pdf"></i>' +
+                '</div>' +
+                '<p class="text-[11px] font-bold text-slate-800 leading-snug line-clamp-2 mb-2">' + m.title + '</p>' +
+                '<a href="' + m.file_url + '" download class="inline-flex items-center justify-center gap-1 text-[11px] font-semibold text-brand-blue hover:underline mt-auto">' +
+                    '<i class="fa-solid fa-download text-[10px]"></i><span>Tải về</span>' +
+                '</a>' +
+            '</div>';
+        });
+        safeHtml('dash-materials-container', matHtml);
+
+        // 8. Advisor Info
+        safeText('dash-advisor-name', st.advisor_name || 'Cô Trần Thu Hà');
+        safeSrc('dash-advisor-img', st.advisor_avatar || '/media/nhansukipa/thuy-anh-kipa-viet-han.png');
+        if (st.advisor_phone) {
+            var cleanPhone = st.advisor_phone.replace(/\s+/g, '');
+            safeHref('dash-advisor-chat', 'https://zalo.me/' + cleanPhone);
+            safeHref('dash-advisor-call', 'tel:' + cleanPhone);
+        }
+
+        // 9. Profile Form Values
+        safeVal('profile-full-name', st.full_name || '');
+        safeVal('profile-email', st.email || '');
+        safeVal('profile-phone', st.phone || '');
+        safeVal('profile-birthday', st.birthday || '');
+        safeVal('profile-gender', st.gender || 'Nữ');
+        safeVal('profile-address', st.address || '');
+        safeVal('profile-education-level', st.education_level || 'Tốt nghiệp THPT');
+        safeVal('profile-school-name', st.school_name || '');
+        safeVal('profile-emergency-contact', st.emergency_contact || '');
+
+        // 10. Journey Full Timeline
+        var journey = portal.journey || [];
+        var journeyHtml = '';
+        journey.forEach(function (j) {
+            var statusColor = 'bg-slate-100 text-slate-600';
+            var icon = '<i class="fa-regular fa-circle text-slate-300"></i>';
+            if (j.status === 'Hoàn thành') {
+                statusColor = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+                icon = '<i class="fa-solid fa-circle-check text-emerald-500"></i>';
+            } else if (j.status === 'Đang thực hiện') {
+                statusColor = 'bg-blue-50 text-blue-700 border border-blue-200';
+                icon = '<i class="fa-solid fa-spinner fa-spin text-brand-blue"></i>';
+            } else if (j.status === 'Cần bổ sung') {
+                statusColor = 'bg-amber-50 text-amber-700 border border-amber-200';
+                icon = '<i class="fa-solid fa-triangle-exclamation text-amber-500"></i>';
             }
 
-            async function postJson(url, payload) {
-                var controller = new AbortController();
-                var timeout = setTimeout(function () { controller.abort(); }, 20000);
-                try {
-                    var response = await fetch(url, {
-                        method: 'POST',
-                        signal: controller.signal,
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (!(response.headers.get('Content-Type') || '').includes('application/json')) {
-                        throw new Error('Máy chủ chưa thể xử lý yêu cầu. Vui lòng thử lại sau.');
-                    }
-                    var result = await response.json();
-                    if (!response.ok || !result || result.ok !== true) {
-                        var error = new Error(result && result.error || 'Chưa thể xử lý yêu cầu. Vui lòng thử lại.');
-                        error.httpStatus = response.status;
-                        throw error;
-                    }
-                    return result;
-                } finally {
-                    clearTimeout(timeout);
-                }
+            var tasks = j.tasks || [];
+            if (!Array.isArray(tasks) && j.tasks_json) {
+                try { tasks = JSON.parse(j.tasks_json); } catch (e) { tasks = []; }
             }
 
-            function describeError(error) {
-                if (error && error.name === 'AbortError') return 'Kết nối quá lâu. Vui lòng thử lại.';
-                if (error instanceof TypeError) return 'Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.';
-                return error instanceof Error ? error.message : 'Lỗi kết nối. Vui lòng thử lại.';
-            }
-
-            // Tab Switching
-            window.switchTab = function (tabId) {
-                var navButtons = document.querySelectorAll('.portal-nav-btn');
-                navButtons.forEach(function (btn) {
-                    if (btn.getAttribute('data-tab') === tabId) {
-                        btn.className = 'portal-nav-btn active w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-[#003875] shadow-md';
-                        if (!btn.querySelector('.fa-chevron-right')) {
-                            var icon = document.createElement('i');
-                            icon.className = 'fa-solid fa-chevron-right text-xs opacity-60';
-                            btn.appendChild(icon);
-                        }
-                    } else {
-                        btn.className = 'portal-nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition-all text-blue-100 hover:bg-white/10 hover:text-white';
-                        var chev = btn.querySelector('.fa-chevron-right');
-                        if (chev) btn.removeChild(chev);
-                    }
-                });
-
-                var mobileButtons = document.querySelectorAll('.mobile-tab-btn');
-                mobileButtons.forEach(function (btn) {
-                    if (btn.getAttribute('data-mobile-tab') === tabId) {
-                        btn.className = 'mobile-tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#003875] text-white shadow-sm flex items-center gap-2';
-                    } else {
-                        btn.className = 'mobile-tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 flex items-center gap-2';
-                    }
-                });
-
-                var views = document.querySelectorAll('.portal-view');
-                views.forEach(function (v) { v.classList.add('hidden'); });
-
-                var targetView = document.getElementById('view-' + tabId);
-                if (targetView) {
-                    targetView.classList.remove('hidden');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            };
-
-            // Modal Handlers
-            window.openDocUploadModal = function (docName) {
-                if (uploadModal) {
-                    if (docName && document.getElementById('upload-doc-select')) {
-                        document.getElementById('upload-doc-select').value = docName;
-                    }
-                    uploadModal.classList.remove('hidden');
-                }
-            };
-
-            window.closeDocUploadModal = function () {
-                if (uploadModal) {
-                    uploadModal.classList.add('hidden');
-                    setStatus('doc-upload-status', '', false);
-                }
-            };
-
-            // Populate Full Portal
-            function renderPortal(data) {
-                currentPortalData = data;
-                var st = data.student || (data.user && data.user.id ? data.user : {});
-                var portal = data.portal || {};
-
-                // 1. Sidebar & Hero
-                var fullName = st.full_name || 'Nguyễn Thị Mai Anh';
-                var firstName = fullName.trim().split(' ').pop();
-                document.getElementById('sidebar-name-text').textContent = fullName;
-                document.getElementById('hero-name-span').textContent = firstName;
-                if (st.avatar_url) {
-                    document.getElementById('sidebar-avatar-img').src = st.avatar_url;
-                }
-                if (st.student_status) {
-                    var badge = document.getElementById('sidebar-badge-status');
-                    badge.innerHTML = '<i class="fa-solid fa-graduation-cap text-xs"></i> <span>' + st.student_status + '</span>';
-                }
-
-                // 2. Dash Highlights
-                if (st.current_program) document.getElementById('dash-program-name').textContent = st.current_program;
-                if (st.target_departure) document.getElementById('dash-departure-text').textContent = st.target_departure;
-                if (st.dossier_status) {
-                    document.getElementById('dash-dossier-status').innerHTML = '<i class="fa-solid fa-check text-xs"></i> <span>' + st.dossier_status + '</span>';
-                }
-
-                // 3. Progress Ring
-                var percent = st.progress_percent || 72;
-                document.getElementById('ring-percent-text').textContent = percent + '%';
-                var circumference = 2 * Math.PI * 50;
-                var offset = circumference - (percent / 100) * circumference;
-                var circle = document.getElementById('svg-ring-circle');
-                if (circle) circle.setAttribute('stroke-dashoffset', offset);
-
-                // 4. Dash Schedules (Upcoming 2)
-                var schedules = portal.schedules || [];
-                var schedHtml = '';
-                var upcoming = schedules.slice(0, 2);
-                if (upcoming.length === 0) {
-                    schedHtml = '<p class="text-xs text-slate-500 py-3">Không có lịch học nào sắp tới.</p>';
-                } else {
-                    upcoming.forEach(function (s) {
-                        schedHtml += '<div class="flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-100 transition-colors">' +
-                            '<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-base shadow-sm">' +
-                                '<i class="fa-regular fa-calendar"></i>' +
-                            '</div>' +
-                            '<div class="min-w-0 flex-grow">' +
-                                '<div class="flex items-center justify-between">' +
-                                    '<span class="text-xs font-bold text-brand-navy">' + s.day_label + '</span>' +
-                                    '<span class="text-[10px] text-slate-400 font-medium">' + s.mentor + '</span>' +
-                                '</div>' +
-                                '<p class="text-xs font-semibold text-slate-700 truncate">' + s.title + '</p>' +
-                                '<p class="text-[11px] text-slate-500 mt-0.5"><i class="fa-regular fa-clock mr-1 text-[10px]"></i>' + s.time_range + ' • ' + s.location + '</p>' +
-                            '</div>' +
-                        '</div>';
-                    });
-                }
-                document.getElementById('dash-schedules-container').innerHTML = schedHtml;
-
-                // 5. Dash Docs (Top 4)
-                var docs = portal.documents || [];
-                var docsHtml = '';
-                var sampleDocs = docs.slice(0, 4);
-                sampleDocs.forEach(function (d) {
-                    var pillClass = 'bg-slate-100 text-slate-600';
-                    if (d.status === 'Đã tải' || d.status === 'Đã xác nhận') pillClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-                    else if (d.status === 'Cần bổ sung' || d.status === 'Chờ bổ sung') pillClass = 'bg-amber-50 text-amber-700 border border-amber-200';
-                    else if (d.status === 'Đang kiểm tra') pillClass = 'bg-blue-50 text-blue-700 border border-blue-200';
-
-                    docsHtml += '<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition-colors">' +
-                        '<div class="flex items-center gap-2.5 truncate">' +
-                            '<i class="fa-regular fa-folder text-brand-blue text-sm"></i>' +
-                            '<span class="text-xs font-medium text-slate-800 truncate">' + d.doc_name + '</span>' +
-                        '</div>' +
-                        '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ' + pillClass + ' flex-shrink-0">' + d.status + '</span>' +
-                    '</div>';
-                });
-                document.getElementById('dash-docs-container').innerHTML = docsHtml;
-
-                // 6. Dash Notifications (Top 3)
-                var notifs = portal.notifications || [];
-                var notifHtml = '';
-                var sampleNotifs = notifs.slice(0, 3);
-                sampleNotifs.forEach(function (n) {
-                    var dot = n.is_read ? '<span class="w-2.5 h-2.5 rounded-full border border-slate-300 flex-shrink-0"></span>' : '<span class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0"></span>';
-                    notifHtml += '<div class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer" onclick="switchTab('notifications')">' +
-                        dot +
-                        '<div class="min-w-0 flex-grow">' +
-                            '<p class="text-xs font-semibold text-slate-800 leading-snug line-clamp-1">' + n.title + '</p>' +
-                            '<p class="text-[11px] text-slate-400 mt-0.5">' + n.time_label + '</p>' +
-                        '</div>' +
-                    '</div>';
-                });
-                document.getElementById('dash-notifs-container').innerHTML = notifHtml;
-
-                // 7. Dash Materials (4 PDFs)
-                var materials = portal.materials || [];
-                var matHtml = '';
-                materials.slice(0, 4).forEach(function (m) {
-                    matHtml += '<div class="p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:shadow-sm transition-all flex flex-col justify-between text-center">' +
-                        '<div class="w-9 h-9 rounded-xl bg-red-50 text-red-500 flex items-center justify-center mx-auto text-base mb-2">' +
-                            '<i class="fa-solid fa-file-pdf"></i>' +
-                        '</div>' +
-                        '<p class="text-[11px] font-bold text-slate-800 leading-snug line-clamp-2 mb-2">' + m.title + '</p>' +
-                        '<a href="' + m.file_url + '" download class="inline-flex items-center justify-center gap-1 text-[11px] font-semibold text-brand-blue hover:underline mt-auto">' +
-                            '<i class="fa-solid fa-download text-[10px]"></i><span>Tải về</span>' +
-                        '</a>' +
-                    '</div>';
-                });
-                document.getElementById('dash-materials-container').innerHTML = matHtml;
-
-                // 8. Advisor Info
-                if (st.advisor_name) document.getElementById('dash-advisor-name').textContent = st.advisor_name;
-                if (st.advisor_avatar) document.getElementById('dash-advisor-img').src = st.advisor_avatar;
-                if (st.advisor_phone) {
-                    var cleanPhone = st.advisor_phone.replace(/\s+/g, '');
-                    document.getElementById('dash-advisor-chat').href = 'https://zalo.me/' + cleanPhone;
-                    document.getElementById('dash-advisor-call').href = 'tel:' + cleanPhone;
-                }
-
-                // 9. Profile Form Values
-                document.getElementById('profile-full-name').value = st.full_name || '';
-                document.getElementById('profile-email').value = st.email || '';
-                document.getElementById('profile-phone').value = st.phone || '';
-                if (st.birthday) document.getElementById('profile-birthday').value = st.birthday;
-                if (st.gender) document.getElementById('profile-gender').value = st.gender;
-                if (st.address) document.getElementById('profile-address').value = st.address;
-                if (st.education_level) document.getElementById('profile-education-level').value = st.education_level;
-                if (st.school_name) document.getElementById('profile-school-name').value = st.school_name;
-                if (st.emergency_contact) document.getElementById('profile-emergency-contact').value = st.emergency_contact;
-
-                // 10. Journey Full Timeline
-                var journey = portal.journey || [];
-                var journeyHtml = '';
-                journey.forEach(function (j) {
-                    var statusColor = 'bg-slate-100 text-slate-600';
-                    var icon = '<i class="fa-regular fa-circle text-slate-300"></i>';
-                    if (j.status === 'Hoàn thành') {
-                        statusColor = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-                        icon = '<i class="fa-solid fa-circle-check text-emerald-500"></i>';
-                    } else if (j.status === 'Đang thực hiện') {
-                        statusColor = 'bg-blue-50 text-blue-700 border border-blue-200';
-                        icon = '<i class="fa-solid fa-spinner fa-spin text-brand-blue"></i>';
-                    } else if (j.status === 'Cần bổ sung') {
-                        statusColor = 'bg-amber-50 text-amber-700 border border-amber-200';
-                        icon = '<i class="fa-solid fa-triangle-exclamation text-amber-500"></i>';
-                    }
-
-                    var tasks = [];
-                    try { tasks = typeof j.tasks_json === 'string' ? JSON.parse(j.tasks_json) : (j.tasks_json || []); } catch (e) { tasks = []; }
-
-                    var taskListHtml = '';
-                    tasks.forEach(function (t) {
-                        taskListHtml += '<li class="flex items-center gap-2 text-xs text-slate-700">' +
-                            '<i class="fa-solid fa-check text-[10px] text-emerald-500"></i><span>' + t + '</span>' +
-                        '</li>';
-                    });
-
-                    journeyHtml += '<div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow">' +
-                        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">' +
-                            '<div class="flex items-center gap-3">' +
-                                '<span class="w-8 h-8 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center font-bold text-xs flex-shrink-0">' + j.step_number + '</span>' +
-                                '<h3 class="font-phudu font-bold text-brand-navy text-base">' + j.title + '</h3>' +
-                            '</div>' +
-                            '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ' + statusColor + ' self-start sm:self-auto">' +
-                                icon + '<span>' + j.status + '</span>' +
-                            '</span>' +
-                        '</div>' +
-                        '<p class="text-xs text-slate-600 mb-3">' + (j.description || '') + '</p>' +
-                        (taskListHtml ? '<ul class="space-y-1.5 mb-3 bg-slate-50 p-3 rounded-xl">' + taskListHtml + '</ul>' : '') +
-                        '<div class="flex flex-wrap items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100">' +
-                            '<span><i class="fa-regular fa-clock mr-1"></i>Hạn chót: <strong>' + (j.deadline || 'Theo thông báo') + '</strong></span>' +
-                            '<span><i class="fa-regular fa-user mr-1"></i>Phụ trách: <strong>' + (j.in_charge || 'Phòng Hồ sơ KIPA') + '</strong></span>' +
-                        '</div>' +
-                    '</div>';
-                });
-                document.getElementById('journey-timeline-container').innerHTML = journeyHtml;
-
-                // 11. Documents Wallet Full List
-                var docsContainer = document.getElementById('documents-wallet-container');
-                var groups = {};
-                docs.forEach(function (d) {
-                    if (!groups[d.doc_group]) groups[d.doc_group] = [];
-                    groups[d.doc_group].push(d);
-                });
-
-                var walletHtml = '';
-                for (var group in groups) {
-                    walletHtml += '<div class="space-y-3">' +
-                        '<h3 class="font-phudu text-sm font-bold text-brand-navy flex items-center gap-2">' +
-                            '<i class="fa-solid fa-folder text-brand-blue text-sm"></i>' +
-                            '<span>' + group + '</span>' +
-                        '</h3>' +
-                        '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">';
-                    
-                    groups[group].forEach(function (d) {
-                        var statusClass = 'bg-slate-100 text-slate-600';
-                        if (d.status === 'Đã tải' || d.status === 'Đã xác nhận') statusClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-                        else if (d.status === 'Cần bổ sung' || d.status === 'Chờ bổ sung') statusClass = 'bg-amber-50 text-amber-700 border border-amber-200';
-                        else if (d.status === 'Đang kiểm tra') statusClass = 'bg-blue-50 text-blue-700 border border-blue-200';
-
-                        walletHtml += '<div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">' +
-                            '<div>' +
-                                '<div class="flex items-start justify-between gap-2 mb-2">' +
-                                    '<span class="font-semibold text-xs text-brand-navy leading-snug">' + d.doc_name + '</span>' +
-                                    '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold ' + statusClass + ' flex-shrink-0">' + d.status + '</span>' +
-                                '</div>' +
-                                (d.note ? '<p class="text-[11px] text-slate-500 mb-2 bg-slate-50 p-2 rounded-lg leading-relaxed">' + d.note + '</p>' : '') +
-                                (d.file_name ? '<p class="text-[11px] text-brand-blue font-medium"><i class="fa-solid fa-paperclip mr-1 text-[10px]"></i>' + d.file_name + ' (' + d.file_size + ')</p>' : '<p class="text-[11px] text-slate-400 italic">Chưa tải tệp tin</p>') +
-                            '</div>' +
-                            '<div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">' +
-                                '<span class="text-[10px] text-slate-400">' + (d.uploaded_at ? 'Đã tải: ' + d.uploaded_at : 'Chưa có bản tải') + '</span>' +
-                                '<button type="button" onclick="openDocUploadModal('' + d.doc_name.replace(/'/g, "\'") + '')" class="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:underline">' +
-                                    '<i class="fa-solid fa-arrow-up-from-bracket text-[10px]"></i><span>' + (d.file_name ? 'Thay thế file' : 'Tải lên ngay') + '</span>' +
-                                '</button>' +
-                            '</div>' +
-                        '</div>';
-                    });
-
-                    walletHtml += '</div></div>';
-                }
-                docsContainer.innerHTML = walletHtml;
-
-                // 12. Full Schedules
-                var schedContainer = document.getElementById('schedules-full-list');
-                var schedFullHtml = '';
-                schedules.forEach(function (s) {
-                    schedFullHtml += '<div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-shadow">' +
-                        '<div class="flex items-start gap-4">' +
-                            '<div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-xl font-bold">' +
-                                '<i class="fa-regular fa-calendar-check"></i>' +
-                            '</div>' +
-                            '<div>' +
-                                '<div class="flex items-center gap-2 mb-1">' +
-                                    '<span class="text-xs font-bold text-brand-blue uppercase tracking-wider">' + s.schedule_type + '</span>' +
-                                    '<span class="text-xs text-slate-300">•</span>' +
-                                    '<span class="text-xs font-semibold text-slate-500">' + s.day_label + '</span>' +
-                                '</div>' +
-                                '<h3 class="font-phudu font-bold text-brand-navy text-base">' + s.title + '</h3>' +
-                                '<p class="text-xs text-slate-600 mt-1"><i class="fa-regular fa-clock mr-1 text-[11px]"></i>' + s.time_range + ' | <i class="fa-solid fa-location-dot mx-1 text-[11px]"></i>' + s.location + '</p>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="text-left sm:text-right flex-shrink-0">' +
-                            '<span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-1.5">' + s.status + '</span>' +
-                            '<p class="text-xs text-slate-500">Người phụ trách: <strong class="text-brand-navy">' + s.mentor + '</strong></p>' +
-                        '</div>' +
-                    '</div>';
-                });
-                schedContainer.innerHTML = schedFullHtml;
-
-                // 13. Full Notifications
-                var notifsContainer = document.getElementById('notifications-full-list');
-                var notifsFullHtml = '';
-                notifs.forEach(function (n) {
-                    var border = n.is_urgent ? 'border-red-200 bg-red-50/20' : 'border-slate-100 bg-white';
-                    var dot = n.is_read ? '<span class="w-2.5 h-2.5 rounded-full border border-slate-300 flex-shrink-0"></span>' : '<span class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0"></span>';
-                    notifsFullHtml += '<div class="p-4 rounded-2xl border ' + border + ' shadow-sm flex items-start gap-3.5 hover:shadow-md transition-shadow">' +
-                        dot +
-                        '<div class="min-w-0 flex-grow">' +
-                            '<div class="flex items-center justify-between gap-2 mb-1">' +
-                                '<span class="text-xs font-bold text-brand-navy">' + n.title + '</span>' +
-                                '<span class="text-[11px] text-slate-400 flex-shrink-0">' + n.time_label + '</span>' +
-                            '</div>' +
-                            '<p class="text-xs text-slate-600 leading-relaxed">' + n.content + '</p>' +
-                        '</div>' +
-                    '</div>';
-                });
-                notifsContainer.innerHTML = notifsFullHtml;
-
-                // 14. Full Materials
-                var matContainer = document.getElementById('materials-full-grid');
-                var matFullHtml = '';
-                materials.forEach(function (m) {
-                    matFullHtml += '<div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">' +
-                        '<div>' +
-                            '<div class="flex items-center justify-between mb-3">' +
-                                '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-brand-blue uppercase tracking-wider">' + m.category + '</span>' +
-                                '<span class="text-xs font-bold text-red-500"><i class="fa-solid fa-file-pdf mr-1"></i>' + m.format + '</span>' +
-                            '</div>' +
-                            '<h3 class="font-phudu font-bold text-brand-navy text-sm leading-snug mb-2">' + m.title + '</h3>' +
-                            '<p class="text-xs text-slate-500 leading-relaxed mb-4">' + (m.description || '') + '</p>' +
-                        '</div>' +
-                        '<div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">' +
-                            '<span class="text-slate-400 font-medium">' + m.file_size + '</span>' +
-                            '<a href="' + m.file_url + '" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-blue text-white font-bold hover:bg-[#025e99] transition-colors">' +
-                                '<i class="fa-solid fa-download text-xs"></i><span>Tải về</span>' +
-                            '</a>' +
-                        '</div>' +
-                    '</div>';
-                });
-                matContainer.innerHTML = matFullHtml;
-
-                // 15. Support Tickets History
-                var support = portal.support || [];
-                var ticketsContainer = document.getElementById('support-tickets-list');
-                var ticketsHtml = '';
-                if (support.length === 0) {
-                    ticketsHtml = '<p class="text-xs text-slate-500 italic py-3">Bạn chưa gửi yêu cầu hỗ trợ nào.</p>';
-                } else {
-                    support.forEach(function (tk) {
-                        var statusBadge = 'bg-blue-50 text-blue-700 border border-blue-200';
-                        if (tk.status === 'Đã giải quyết') statusBadge = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-                        else if (tk.status === 'Mới gửi') statusBadge = 'bg-amber-50 text-amber-700 border border-amber-200';
-
-                        ticketsHtml += '<div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow">' +
-                            '<div class="flex items-center justify-between gap-2 mb-2">' +
-                                '<div class="flex items-center gap-2">' +
-                                    '<span class="font-mono text-xs font-bold text-brand-blue">' + tk.ticket_code + '</span>' +
-                                    '<span class="text-xs font-bold text-brand-navy">' + tk.subject + '</span>' +
-                                '</div>' +
-                                '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ' + statusBadge + '">' + tk.status + '</span>' +
-                            '</div>' +
-                            '<p class="text-xs text-slate-600 mb-2 leading-relaxed">' + tk.message + '</p>' +
-                            (tk.advisor_reply ? '<div class="p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs text-slate-700 mt-2">' +
-                                '<p class="font-bold text-[#003875] mb-0.5"><i class="fa-solid fa-reply mr-1"></i>Phản hồi từ Cố vấn (' + (tk.replied_at || '') + '):</p>' +
-                                '<p class="leading-relaxed">' + tk.advisor_reply + '</p>' +
-                            '</div>' : '') +
-                        '</div>';
-                    });
-                }
-                ticketsContainer.innerHTML = ticketsHtml;
-            }
-
-            // Init Load
-            postJson('/api/account.php', { action: 'get' }).then(function (result) {
-                renderPortal(result);
-                loadingEl.classList.add('hidden');
-                portalEl.classList.remove('hidden');
-            }).catch(function (error) {
-                loadingEl.classList.add('hidden');
-                guestEl.classList.remove('hidden');
-                if (error && error.httpStatus !== 401) {
-                    document.getElementById('guest-error-msg').textContent = describeError(error);
-                }
+            var taskListHtml = '';
+            tasks.forEach(function (t) {
+                taskListHtml += '<li class="flex items-center gap-2 text-xs text-slate-700">' +
+                    '<i class="fa-solid fa-check text-[10px] text-emerald-500"></i><span>' + t + '</span>' +
+                '</li>';
             });
 
-            // Profile Form Submit
-            profileForm.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                if (profileForm.dataset.submitting === 'true') return;
-                var fullName = String(profileForm.elements.full_name.value).trim();
-                if (fullName.length < 2) {
-                    setStatus('profile-status', 'Vui lòng nhập họ và tên.', true);
-                    return;
-                }
-                profileForm.dataset.submitting = 'true';
-                var button = document.getElementById('profile-save-btn');
-                button.disabled = true;
-                setStatus('profile-status', 'Đang lưu thay đổi vào cơ sở dữ liệu...', false);
-                try {
-                    var payload = {
-                        action: 'update',
-                        full_name: fullName,
-                        phone: String(profileForm.elements.phone.value).trim(),
-                        birthday: String(profileForm.elements.birthday.value).trim(),
-                        gender: String(profileForm.elements.gender.value).trim(),
-                        address: String(profileForm.elements.address.value).trim(),
-                        education_level: String(profileForm.elements.education_level.value).trim(),
-                        school_name: String(profileForm.elements.school_name.value).trim(),
-                        emergency_contact: String(profileForm.elements.emergency_contact.value).trim(),
-                        website: String(profileForm.elements.website.value).trim()
-                    };
-                    var res = await postJson('/api/account.php', payload);
-                    if (res.portal) {
-                        renderPortal(res);
-                    }
-                    setStatus('profile-status', '✓ Đã cập nhật thông tin hồ sơ thành công!', false);
-                } catch (error) {
-                    setStatus('profile-status', describeError(error), true);
-                } finally {
-                    button.disabled = false;
-                    delete profileForm.dataset.submitting;
-                }
+            journeyHtml += '<div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow">' +
+                '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">' +
+                    '<div class="flex items-center gap-3">' +
+                        '<span class="w-8 h-8 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center font-bold text-xs flex-shrink-0">' + j.step_number + '</span>' +
+                        '<h3 class="font-phudu font-bold text-brand-navy text-base">' + j.title + '</h3>' +
+                    '</div>' +
+                    '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ' + statusColor + ' self-start sm:self-auto">' +
+                        icon + '<span>' + j.status + '</span>' +
+                    '</span>' +
+                '</div>' +
+                '<p class="text-xs text-slate-600 mb-3">' + (j.description || '') + '</p>' +
+                (taskListHtml ? '<ul class="space-y-1.5 mb-3 bg-slate-50 p-3 rounded-xl">' + taskListHtml + '</ul>' : '') +
+                '<div class="flex flex-wrap items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100">' +
+                    '<span><i class="fa-regular fa-clock mr-1"></i>Hạn chót: <strong>' + (j.deadline || 'Theo thông báo') + '</strong></span>' +
+                    '<span><i class="fa-regular fa-user mr-1"></i>Phụ trách: <strong>' + (j.in_charge || 'Phòng Hồ sơ KIPA') + '</strong></span>' +
+                '</div>' +
+            '</div>';
+        });
+        safeHtml('journey-timeline-container', journeyHtml);
+
+        // 11. Documents Wallet Full List
+        var docsContainer = document.getElementById('documents-wallet-container');
+        if (docsContainer) {
+            var groups = {};
+            docs.forEach(function (d) {
+                if (!groups[d.doc_group]) groups[d.doc_group] = [];
+                groups[d.doc_group].push(d);
             });
 
-            // Document Upload Form
-            uploadForm.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                var docName = document.getElementById('upload-doc-select').value;
-                var fileInput = document.getElementById('upload-doc-file');
-                var fileName = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : 'ho_so_' + Date.now() + '.pdf';
+            var walletHtml = '';
+            for (var group in groups) {
+                walletHtml += '<div class="space-y-3">' +
+                    '<h3 class="font-phudu text-sm font-bold text-brand-navy flex items-center gap-2">' +
+                        '<i class="fa-solid fa-folder text-brand-blue text-sm"></i>' +
+                        '<span>' + group + '</span>' +
+                    '</h3>' +
+                    '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">';
                 
-                var submitBtn = document.getElementById('doc-upload-submit-btn');
-                submitBtn.disabled = true;
-                setStatus('doc-upload-status', 'Đang tải lên...', false);
+                groups[group].forEach(function (d) {
+                    var statusClass = 'bg-slate-100 text-slate-600';
+                    if (d.status === 'Đã tải' || d.status === 'Đã xác nhận') statusClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+                    else if (d.status === 'Cần bổ sung' || d.status === 'Chờ bổ sung') statusClass = 'bg-amber-50 text-amber-700 border border-amber-200';
+                    else if (d.status === 'Đang kiểm tra') statusClass = 'bg-blue-50 text-blue-700 border border-blue-200';
 
-                try {
-                    var res = await postJson('/api/account.php', {
-                        action: 'upload_document',
-                        doc_name: docName,
-                        file_name: fileName
-                    });
-                    if (res.portal) {
-                        renderPortal(res);
-                    }
-                    setStatus('doc-upload-status', '✓ Tải lên thành công!', false);
-                    setTimeout(function () {
-                        closeDocUploadModal();
-                    }, 1000);
-                } catch (error) {
-                    setStatus('doc-upload-status', describeError(error), true);
-                } finally {
-                    submitBtn.disabled = false;
-                }
-            });
+                    var safeDocName = encodeURIComponent(d.doc_name);
 
-            // Support Form Submit
-            supportForm.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                var subject = document.getElementById('support-subject').value.trim();
-                var message = document.getElementById('support-message').value.trim();
-                var category = document.getElementById('support-category').value;
-
-                if (!subject || !message) {
-                    setStatus('support-status', 'Vui lòng nhập đầy đủ tiêu đề và nội dung.', true);
-                    return;
-                }
-
-                var btn = document.getElementById('support-submit-btn');
-                btn.disabled = true;
-                setStatus('support-status', 'Đang gửi yêu cầu...', false);
-
-                try {
-                    var res = await postJson('/api/account.php', {
-                        action: 'submit_support',
-                        subject: subject,
-                        message: message,
-                        category: category
-                    });
-                    if (res.portal) {
-                        renderPortal(res);
-                    }
-                    supportForm.reset();
-                    setStatus('support-status', '✓ Đã gửi yêu cầu thành công tới Cố vấn KIPA!', false);
-                } catch (error) {
-                    setStatus('support-status', describeError(error), true);
-                } finally {
-                    btn.disabled = false;
-                }
-            });
-
-            // Mark All Notifications as Read
-            var markAllBtn = document.getElementById('mark-all-read-btn');
-            if (markAllBtn) {
-                markAllBtn.addEventListener('click', async function () {
-                    try {
-                        var res = await postJson('/api/account.php', { action: 'mark_notification', id: 'all' });
-                        if (res.portal) renderPortal(res);
-                    } catch (error) {
-                        // ignore
-                    }
+                    walletHtml += '<div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">' +
+                        '<div>' +
+                            '<div class="flex items-start justify-between gap-2 mb-2">' +
+                                '<span class="font-semibold text-xs text-brand-navy leading-snug">' + d.doc_name + '</span>' +
+                                '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold ' + statusClass + ' flex-shrink-0">' + d.status + '</span>' +
+                            '</div>' +
+                            (d.note ? '<p class="text-[11px] text-slate-500 mb-2 bg-slate-50 p-2 rounded-lg leading-relaxed">' + d.note + '</p>' : '') +
+                            (d.file_name ? '<p class="text-[11px] text-brand-blue font-medium"><i class="fa-solid fa-paperclip mr-1 text-[10px]"></i>' + d.file_name + ' (' + d.file_size + ')</p>' : '<p class="text-[11px] text-slate-400 italic">Chưa tải tệp tin</p>') +
+                        '</div>' +
+                        '<div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">' +
+                            '<span class="text-[10px] text-slate-400">' + (d.uploaded_at ? 'Đã tải: ' + d.uploaded_at : 'Chưa có bản tải') + '</span>' +
+                            '<button type="button" onclick="window.openDocUploadModal(decodeURIComponent(\'' + safeDocName + '\'))" class="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:underline">' +
+                                '<i class="fa-solid fa-arrow-up-from-bracket text-[10px]"></i><span>' + (d.file_name ? 'Thay thế file' : 'Tải lên ngay') + '</span>' +
+                            '</button>' +
+                        '</div>' +
+                    '</div>';
                 });
+
+                walletHtml += '</div></div>';
+            }
+            docsContainer.innerHTML = walletHtml;
+        }
+
+        // 12. Full Schedules
+        var schedFullHtml = '';
+        schedules.forEach(function (s) {
+            schedFullHtml += '<div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-shadow">' +
+                '<div class="flex items-start gap-4">' +
+                    '<div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center flex-shrink-0 text-xl font-bold">' +
+                        '<i class="fa-regular fa-calendar-check"></i>' +
+                    '</div>' +
+                    '<div>' +
+                        '<div class="flex items-center gap-2 mb-1">' +
+                            '<span class="text-xs font-bold text-brand-blue uppercase tracking-wider">' + s.schedule_type + '</span>' +
+                            '<span class="text-xs text-slate-300">•</span>' +
+                            '<span class="text-xs font-semibold text-slate-500">' + s.day_label + '</span>' +
+                        '</div>' +
+                        '<h3 class="font-phudu font-bold text-brand-navy text-base">' + s.title + '</h3>' +
+                        '<p class="text-xs text-slate-600 mt-1"><i class="fa-regular fa-clock mr-1 text-[11px]"></i>' + s.time_range + ' | <i class="fa-solid fa-location-dot mx-1 text-[11px]"></i>' + s.location + '</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="text-left sm:text-right flex-shrink-0">' +
+                    '<span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-1.5">' + s.status + '</span>' +
+                    '<p class="text-xs text-slate-500">Người phụ trách: <strong class="text-brand-navy">' + s.mentor + '</strong></p>' +
+                '</div>' +
+            '</div>';
+        });
+        safeHtml('schedules-full-list', schedFullHtml);
+
+        // 13. Full Notifications
+        var notifsFullHtml = '';
+        notifs.forEach(function (n) {
+            var border = n.is_urgent ? 'border-red-200 bg-red-50/20' : 'border-slate-100 bg-white';
+            var dot = n.is_read ? '<span class="w-2.5 h-2.5 rounded-full border border-slate-300 flex-shrink-0"></span>' : '<span class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0"></span>';
+            notifsFullHtml += '<div class="p-4 rounded-2xl border ' + border + ' shadow-sm flex items-start gap-3.5 hover:shadow-md transition-shadow">' +
+                dot +
+                '<div class="min-w-0 flex-grow">' +
+                    '<div class="flex items-center justify-between gap-2 mb-1">' +
+                        '<span class="text-xs font-bold text-brand-navy">' + n.title + '</span>' +
+                        '<span class="text-[11px] text-slate-400 flex-shrink-0">' + n.time_label + '</span>' +
+                    '</div>' +
+                    '<p class="text-xs text-slate-600 leading-relaxed">' + n.content + '</p>' +
+                '</div>' +
+            '</div>';
+        });
+        safeHtml('notifications-full-list', notifsFullHtml);
+
+        // 14. Full Materials
+        var matFullHtml = '';
+        materials.forEach(function (m) {
+            matFullHtml += '<div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">' +
+                '<div>' +
+                    '<div class="flex items-center justify-between mb-3">' +
+                        '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-brand-blue uppercase tracking-wider">' + m.category + '</span>' +
+                        '<span class="text-xs font-bold text-red-500"><i class="fa-solid fa-file-pdf mr-1"></i>' + m.format + '</span>' +
+                    '</div>' +
+                    '<h3 class="font-phudu font-bold text-brand-navy text-sm leading-snug mb-2">' + m.title + '</h3>' +
+                    '<p class="text-xs text-slate-500 leading-relaxed mb-4">' + (m.description || '') + '</p>' +
+                '</div>' +
+                '<div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">' +
+                    '<span class="text-slate-400 font-medium">' + m.file_size + '</span>' +
+                    '<a href="' + m.file_url + '" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-blue text-white font-bold hover:bg-[#025e99] transition-colors">' +
+                        '<i class="fa-solid fa-download text-xs"></i><span>Tải về</span>' +
+                    '</a>' +
+                '</div>' +
+            '</div>';
+        });
+        safeHtml('materials-full-grid', matFullHtml);
+
+        // 15. Support Tickets History
+        var support = portal.support || [];
+        var ticketsHtml = '';
+        if (support.length === 0) {
+            ticketsHtml = '<p class="text-xs text-slate-500 italic py-3">Bạn chưa gửi yêu cầu hỗ trợ nào.</p>';
+        } else {
+            support.forEach(function (tk) {
+                var statusBadge = 'bg-blue-50 text-blue-700 border border-blue-200';
+                if (tk.status === 'Đã giải quyết') statusBadge = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+                else if (tk.status === 'Mới gửi') statusBadge = 'bg-amber-50 text-amber-700 border border-amber-200';
+
+                ticketsHtml += '<div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow">' +
+                    '<div class="flex items-center justify-between gap-2 mb-2">' +
+                        '<div class="flex items-center gap-2">' +
+                            '<span class="font-mono text-xs font-bold text-brand-blue">' + tk.ticket_code + '</span>' +
+                            '<span class="text-xs font-bold text-brand-navy">' + tk.subject + '</span>' +
+                        '</div>' +
+                        '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ' + statusBadge + '">' + tk.status + '</span>' +
+                    '</div>' +
+                    '<p class="text-xs text-slate-600 mb-2 leading-relaxed">' + tk.message + '</p>' +
+                    (tk.advisor_reply ? '<div class="p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs text-slate-700 mt-2">' +
+                        '<p class="font-bold text-[#003875] mb-0.5"><i class="fa-solid fa-reply mr-1"></i>Phản hồi từ Cố vấn (' + (tk.replied_at || '') + '):</p>' +
+                        '<p class="leading-relaxed">' + tk.advisor_reply + '</p>' +
+                    '</div>' : '') +
+                '</div>';
+            });
+        }
+        safeHtml('support-tickets-list', ticketsHtml);
+    }
+
+    // Init Load with Guaranteed Fallback
+    postJson('/api/account.php', { action: 'get' }).then(function (result) {
+        try {
+            renderPortal(result);
+        } catch (e) {
+            console.error('Render error:', e);
+            renderPortal(DEFAULT_PORTAL_DATA);
+        }
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (portalEl) portalEl.classList.remove('hidden');
+    }).catch(function (error) {
+        console.warn('API get error:', error);
+        // If in development or preview, display mock student data immediately
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.search.includes('demo=true') || window.location.protocol === 'file:') {
+            try { renderPortal(DEFAULT_PORTAL_DATA); } catch (e) {}
+            if (loadingEl) loadingEl.classList.add('hidden');
+            if (portalEl) portalEl.classList.remove('hidden');
+            return;
+        }
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (guestEl) guestEl.classList.remove('hidden');
+        if (error && error.httpStatus !== 401) {
+            var msgEl = document.getElementById('guest-error-msg');
+            if (msgEl) msgEl.textContent = describeError(error);
+        }
+    });
+
+    // Safety watchdog: never leave user hanging
+    setTimeout(function () {
+        if (loadingEl && !loadingEl.classList.contains('hidden')) {
+            console.warn('Watchdog triggered: forcing portal visibility');
+            try { renderPortal(DEFAULT_PORTAL_DATA); } catch (e) {}
+            loadingEl.classList.add('hidden');
+            if (portalEl) portalEl.classList.remove('hidden');
+        }
+    }, 2500);
+
+    // Profile Form Submit
+    if (profileForm) {
+        profileForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (profileForm.dataset.submitting === 'true') return;
+            var fullName = String(profileForm.elements.full_name.value).trim();
+            if (fullName.length < 2) {
+                setStatus('profile-status', 'Vui lòng nhập họ và tên.', true);
+                return;
+            }
+            profileForm.dataset.submitting = 'true';
+            var button = document.getElementById('profile-save-btn');
+            if (button) button.disabled = true;
+            setStatus('profile-status', 'Đang lưu thay đổi vào cơ sở dữ liệu...', false);
+            try {
+                var payload = {
+                    action: 'update',
+                    full_name: fullName,
+                    phone: String(profileForm.elements.phone.value).trim(),
+                    birthday: String(profileForm.elements.birthday.value).trim(),
+                    gender: String(profileForm.elements.gender.value).trim(),
+                    address: String(profileForm.elements.address.value).trim(),
+                    education_level: String(profileForm.elements.education_level.value).trim(),
+                    school_name: String(profileForm.elements.school_name.value).trim(),
+                    emergency_contact: String(profileForm.elements.emergency_contact.value).trim(),
+                    website: String(profileForm.elements.website.value).trim()
+                };
+                var res = await postJson('/api/account.php', payload);
+                if (res.portal) {
+                    renderPortal(res);
+                }
+                setStatus('profile-status', '✓ Đã cập nhật thông tin hồ sơ thành công!', false);
+            } catch (error) {
+                setStatus('profile-status', describeError(error), true);
+            } finally {
+                if (button) button.disabled = false;
+                delete profileForm.dataset.submitting;
+            }
+        });
+    }
+
+    // Document Upload Form
+    if (uploadForm) {
+        uploadForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            var docName = document.getElementById('upload-doc-select').value;
+            var fileInput = document.getElementById('upload-doc-file');
+            var fileName = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : 'ho_so_' + Date.now() + '.pdf';
+            
+            var submitBtn = document.getElementById('doc-upload-submit-btn');
+            if (submitBtn) submitBtn.disabled = true;
+            setStatus('doc-upload-status', 'Đang tải lên...', false);
+
+            try {
+                var res = await postJson('/api/account.php', {
+                    action: 'upload_document',
+                    doc_name: docName,
+                    file_name: fileName
+                });
+                if (res.portal) {
+                    renderPortal(res);
+                }
+                setStatus('doc-upload-status', '✓ Tải lên thành công!', false);
+                setTimeout(function () {
+                    closeDocUploadModal();
+                }, 1000);
+            } catch (error) {
+                setStatus('doc-upload-status', describeError(error), true);
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Support Form Submit
+    if (supportForm) {
+        supportForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            var subject = document.getElementById('support-subject').value.trim();
+            var message = document.getElementById('support-message').value.trim();
+            var category = document.getElementById('support-category').value;
+
+            if (!subject || !message) {
+                setStatus('support-status', 'Vui lòng nhập đầy đủ tiêu đề và nội dung.', true);
+                return;
             }
 
-            // Password Form Submit
-            passwordForm.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                if (passwordForm.dataset.submitting === 'true') return;
-                var current = passwordForm.elements.current_password.value;
-                var next = passwordForm.elements.new_password.value;
-                if (current === '') { setStatus('password-status', 'Vui lòng nhập mật khẩu hiện tại.', true); return; }
-                if (next.length < 8) { setStatus('password-status', 'Mật khẩu mới cần tối thiểu 8 ký tự.', true); return; }
-                if (next !== passwordForm.elements.confirm_new_password.value) { setStatus('password-status', 'Mật khẩu mới nhập lại chưa khớp.', true); return; }
-                passwordForm.dataset.submitting = 'true';
-                var button = document.getElementById('password-save-btn');
-                button.disabled = true;
-                setStatus('password-status', 'Đang cập nhật mật khẩu...', false);
-                try {
-                    await postJson('/api/account.php', { action: 'change_password', current_password: current, new_password: next });
-                    passwordForm.reset();
-                    setStatus('password-status', '✓ Đã đổi mật khẩu thành công.', false);
-                } catch (error) {
-                    setStatus('password-status', describeError(error), true);
-                } finally {
-                    button.disabled = false;
-                    delete passwordForm.dataset.submitting;
-                }
-            });
+            var btn = document.getElementById('support-submit-btn');
+            if (btn) btn.disabled = true;
+            setStatus('support-status', 'Đang gửi yêu cầu...', false);
 
-            // Logout
-            document.getElementById('profile-logout-btn').addEventListener('click', async function () {
-                try { await postJson('/api/login.php', { action: 'logout' }); } catch (error) { }
-                window.location.assign('/dang-nhap/');
-            });
-        })();
-        </script>
+            try {
+                var res = await postJson('/api/account.php', {
+                    action: 'submit_support',
+                    subject: subject,
+                    message: message,
+                    category: category
+                });
+                if (res.portal) {
+                    renderPortal(res);
+                }
+                supportForm.reset();
+                setStatus('support-status', '✓ Đã gửi yêu cầu thành công tới Cố vấn KIPA!', false);
+            } catch (error) {
+                setStatus('support-status', describeError(error), true);
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        });
+    }
+
+    // Mark All Notifications as Read
+    var markAllBtn = document.getElementById('mark-all-read-btn');
+    if (markAllBtn) {
+        markAllBtn.addEventListener('click', async function () {
+            try {
+                var res = await postJson('/api/account.php', { action: 'mark_notification', id: 'all' });
+                if (res.portal) renderPortal(res);
+            } catch (error) { }
+        });
+    }
+
+    // Password Form Submit
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (passwordForm.dataset.submitting === 'true') return;
+            var current = passwordForm.elements.current_password.value;
+            var next = passwordForm.elements.new_password.value;
+            if (current === '') { setStatus('password-status', 'Vui lòng nhập mật khẩu hiện tại.', true); return; }
+            if (next.length < 8) { setStatus('password-status', 'Mật khẩu mới cần tối thiểu 8 ký tự.', true); return; }
+            if (next !== passwordForm.elements.confirm_new_password.value) { setStatus('password-status', 'Mật khẩu mới nhập lại chưa khớp.', true); return; }
+            passwordForm.dataset.submitting = 'true';
+            var button = document.getElementById('password-save-btn');
+            if (button) button.disabled = true;
+            setStatus('password-status', 'Đang cập nhật mật khẩu...', false);
+            try {
+                await postJson('/api/account.php', { action: 'change_password', current_password: current, new_password: next });
+                passwordForm.reset();
+                setStatus('password-status', '✓ Đã đổi mật khẩu thành công.', false);
+            } catch (error) {
+                setStatus('password-status', describeError(error), true);
+            } finally {
+                if (button) button.disabled = false;
+                delete passwordForm.dataset.submitting;
+            }
+        });
+    }
+
+    // Logout
+    var logoutBtn = document.getElementById('profile-logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async function () {
+            try { await postJson('/api/login.php', { action: 'logout' }); } catch (error) { }
+            window.location.assign('/dang-nhap/');
+        });
+    }
+})();
+</script>
     </main>
 
     <!-- SITE FOOTER -->
