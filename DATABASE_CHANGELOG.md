@@ -5,34 +5,54 @@
 
 ---
 
-## [Phiên bản 2.1.0] — Ngày 17/11/2026 (VÒNG KIỂM TRA CUỐI CÙNG & HOÀN THIỆN ĐẶC TẢ)
-### Hoàn thiện Kiến trúc Database KIPA CRM + Student Portal trước khi Deploy cPanel
+## [Phiên bản 2.2.0] — Ngày 17/11/2026 (HOÀN THIỆN NÂNG CAO & BẢO VỆ TOÀN DIỆN)
+### Hoàn thiện Nghiệp vụ Tư vấn, Phân quyền, SLA, Phê duyệt kép, Kho tài liệu & Bảo mật Cổng học viên
 
 #### Quyết định kiến trúc trọng tâm:
 1. **Kiểm toán chính xác bằng công cụ tự động:**
-   - Sử dụng script `tools/verify_schema.py` đếm chính xác: **28 bảng vật lý** (`CREATE TABLE`) và **1 SQL View** (`kipa_student_documents`).
-   - Tổng cộng 44 khóa ngoại (Foreign Keys), 100% sử dụng kiểu dữ liệu `BIGINT UNSIGNED`, `ENGINE=InnoDB`, `utf8mb4_unicode_ci`.
-2. **Hợp nhất kho tài liệu qua SQL View:**
-   - Thay vì duy trì 2 bảng tài liệu độc lập (`kipa_dossier_documents` và `kipa_student_documents`) gây xung đột đồng bộ và tốn tài nguyên lưu trữ, thiết kế hợp nhất sử dụng `kipa_dossier_documents` + `kipa_document_versions` làm kho vật lý duy nhất (Single Source of Truth).
-   - Tạo **`VIEW kipa_student_documents`** đảm bảo tương thích 100% với giao diện Cổng học viên và API hiện hữu mà không tạo dữ liệu trùng lặp.
-3. **Bổ sung các bảng nghiệp vụ CRM nâng cao đã thống nhất:**
-   - `kipa_teams`: Phân cấp nhóm làm việc chuyên môn dưới phòng ban.
-   - `kipa_role_delegations`: Ủy quyền vai trò tạm thời khi nhân sự nghỉ phép/công tác.
-   - `kipa_dossier_status_history`: Theo dõi vòng đời hồ sơ (Tạm dừng, Mở lại, Đóng, Lưu trữ).
-   - Nâng cấp `kipa_tasks`: Bổ sung `sla_hours`, `reminder_at`, `escalated_to` phục vụ quản lý cam kết dịch vụ.
-   - Nâng cấp `kipa_approvals`: Bổ sung `approval_level` và `next_approver_id` cho quy trình duyệt nhiều cấp.
-   - Nâng cấp `kipa_service_dossiers`: Bổ sung `collaborator_id` và hỗ trợ vai trò `COLLABORATOR` trong `kipa_dossier_assignments`.
-4. **Bảo vệ tuyệt đối chống xóa dây chuyền (Cascade Protection):**
-   - Rà soát toàn bộ khóa ngoại trỏ tới `kipa_leads` và `kipa_users`: 100% sử dụng `ON DELETE SET NULL`.
-   - Cập nhật quy trình an toàn cho `api/cleanup.php` chỉ xóa lead chưa chuyển đổi sau 12 tháng.
-5. **Cập nhật đồng bộ các tài liệu bàn giao:**
-   - [DATABASE_CURRENT_INVENTORY.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_CURRENT_INVENTORY.md)
-   - [DATABASE_FIELD_AUDIT.xlsx](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_FIELD_AUDIT.xlsx) (125 bảng và view)
-   - [DATABASE_GAP_ANALYSIS.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_GAP_ANALYSIS.md) (Bảng tổng hợp 5 nhóm)
-   - [DATABASE_RELATIONSHIP_MAP.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_RELATIONSHIP_MAP.md) (ERD Mermaid hoàn chỉnh)
-   - [DATABASE_NEW_TABLES_SPEC.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_NEW_TABLES_SPEC.md) (Đặc tả chi tiết 28 bảng + 1 View)
-   - [DATABASE_MIGRATION_PLAN.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_MIGRATION_PLAN.md) (Quy trình triển khai SOP 6 bước trên cPanel)
-   - [crm_portal_schema.sql](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/crm_portal_schema.sql) (Đồng bộ tại thư mục gốc và `backend/`)
+   - Sử dụng script `tools/verify_schema.py` đếm chính xác: **42 bảng vật lý** (`CREATE TABLE`) và **1 SQL View** (`kipa_student_documents`).
+   - Tổng cộng **78 khóa ngoại** (Foreign Keys), 100% sử dụng kiểu dữ liệu `BIGINT UNSIGNED`, `ENGINE=InnoDB`, `utf8mb4_unicode_ci`.
+2. **Bổ sung Phân hệ Tiếp nhận Lead & Hồ sơ Tư vấn Riêng (5 bảng mới):**
+   - `kipa_lead_sources`: Danh mục nguồn tiếp nhận (Facebook, Zalo, Website, Hotline, Giới thiệu).
+   - `kipa_campaigns`: Chiến dịch tuyển sinh theo mùa.
+   - `kipa_consultation_dossiers`: Hồ sơ tư vấn riêng biệt, **tách độc lập với Hồ sơ dịch vụ**, lưu lịch hẹn, lý do không tiếp tục (`lost_reason`) và quy trình bàn giao (`handover_status`).
+   - `kipa_consultation_interests`: Nhu cầu dịch vụ chi tiết của đợt tư vấn.
+   - `kipa_consultation_activities`: Lịch sử cuộc gọi, gặp mặt, tương tác Zalo và lịch hẹn.
+3. **Hoàn thiện Phân quyền RBAC & Quản lý Tổ chức:**
+   - Bổ sung `direct_manager_id` vào `kipa_staff` để xác định một cấp trên trực tiếp chính.
+   - `kipa_role_permissions`: Bảng ma trận gán quyền cụ thể cho từng vai trò.
+   - `kipa_permissions.is_sensitive`: Đánh dấu quyền truy cập dữ liệu nhạy cảm.
+   - `kipa_staff_role_history`: Lịch sử cấp, sửa, thu hồi quyền khi chuyển phòng ban.
+   - `kipa_role_delegations`: Bổ sung trạng thái duyệt `approved_by` và phạm vi ủy quyền `delegated_scope`.
+4. **Hoàn thiện Nhiệm vụ và Cam kết SLA:**
+   - `kipa_sla_policies`: Chính sách SLA theo loại dịch vụ và chi nhánh.
+   - `kipa_working_calendars`: Khung giờ hành chính và ngày nghỉ lễ để tính SLA thời gian thực.
+   - `kipa_tasks`: Hỗ trợ nhiệm vụ con (`parent_id`), tạm dừng/tiếp tục đồng hồ SLA (`sla_status`, `sla_paused_at`, `sla_total_paused_minutes`), nhiệm vụ lặp lại (`is_recurring`), xác nhận hoàn thành (`completion_confirmed_by`, `completion_rating`).
+   - `kipa_task_collaborators`: Quản lý người phối hợp trong nhiệm vụ.
+   - `kipa_task_history`: Lịch sử thay đổi nhiệm vụ và gia hạn deadline.
+5. **Hoàn thiện Quy trình Phê duyệt Nhiều bước & Phê duyệt kép:**
+   - `kipa_approval_workflows`: Định nghĩa quy trình duyệt nhiều bước, phiên bản và cờ phê duyệt kép (`requires_dual_approval`).
+   - `kipa_approval_workflow_steps`: Chi tiết các bước duyệt kèm SLA và vai trò phụ trách.
+   - `kipa_approvals`: Bổ sung `snapshot_payload` (JSON) đóng băng cấu hình dữ liệu tại thời điểm gửi duyệt, ràng buộc chống tự duyệt `CHECK (requested_by != approver_id)`, hỗ trợ người duyệt thứ 2 (`second_approver_id`).
+6. **Bảo vệ Kho Tài liệu & An toàn Lưu trữ:**
+   - Thay đổi ràng buộc `kipa_dossier_documents.dossier_id` thành **`ON DELETE RESTRICT`** để không bị xóa mất dữ liệu lịch sử khi đóng hồ sơ.
+   - `kipa_document_access_logs`: Nhật ký kiểm tra quyền xem, tải xuống và chia sẻ tài liệu nhạy cảm.
+   - Phân biệt rõ 3 trạng thái: Lưu trữ (`ARCHIVED`), Hủy hợp đồng (`CANCELLED`), Xóa vĩnh viễn (`PURGED`).
+   - Đảm bảo đường dẫn file scan lưu tại `kipa-private/storage/documents/` ngoài webroot, tải qua proxy endpoint bảo mật.
+7. **Bảo mật Cổng Học Viên & Kiểm tra View Hợp Nhất:**
+   - Nâng cấp `VIEW kipa_student_documents` bổ sung `user_id`, `customer_id`, `dossier_id`.
+   - API Cổng học viên bắt buộc lọc strictly theo Session `$_SESSION['user_id']` từ server, loại bỏ hoàn toàn lỗ hổng lộ tài liệu chéo (IDOR).
+8. **Kiểm tra Đối chiếu Thực tế Mã Nguồn:**
+   - Đã đọc trực tiếp 5 file: `api/submit.php`, `api/account.php`, `api/cleanup.php`, `api/bootstrap.php`, `api/admin.php`.
+   - Phát hiện lệnh xóa lead 12 tháng xuất hiện ở cả `api/cleanup.php` (dòng 16) và `api/submit.php` (dòng 200). Đã ghi rõ hiện trạng và đề xuất sửa đổi cụ thể khi triển khai.
+
+---
+
+## [Phiên bản 2.1.0] — Ngày 17/11/2026
+### Vòng Kiểm Tra Cuối Cùng & Chuẩn Hóa Toàn Diện DDL
+- Xác định 28 bảng vật lý và 1 SQL View.
+- Khắc phục nguy cơ cascade xóa lead 12 tháng bằng `ON DELETE SET NULL`.
+- Hợp nhất kho tài liệu qua SQL View `kipa_student_documents`.
 
 ---
 
@@ -40,32 +60,21 @@
 ### Khởi tạo Kiến trúc CRM KIPA và Student Portal Thống Nhất
 - Xác lập quyết định dùng chung 1 database MySQL duy nhất trên cPanel Shared Hosting.
 - Thiết kế 18 bảng CRM sơ bộ và 7 bảng Cổng học viên.
-- Phát hiện và đưa ra giải pháp khắc phục nguy cơ xóa dây chuyền của cronjob dọn dẹp lead 12 tháng.
 
 ---
 
 ## [Phiên bản 1.2.0] — Đầu Tháng 11/2026
 ### Thiết kế Giao diện Cổng Học Viên 10 Tab (Student Portal Prototype)
 - Bổ sung cấu trúc 7 bảng lưu trữ thông tin học viên trong `backend/schema.sql`.
-- Tạo cơ sở dữ liệu giả lập SQLite `backend/dev_leads.sqlite` phục vụ phát triển local qua `dev_server.py`.
-- Tích hợp các API `POST /api/account.php` hỗ trợ cập nhật hồ sơ, đổi mật khẩu, nộp giấy tờ, gửi ticket hỗ trợ và theo dõi lộ trình 5 bước.
 
 ---
 
 ## [Phiên bản 1.1.0] — Tháng 10/2026
 ### Thiết kế Mô hình CMS Nội Dung 85 Bảng (Theo SEO Plan)
 - Chuẩn hóa mô hình dữ liệu CMS theo tài liệu Excel `KIPA - SEO Plan.xlsx`.
-- Tạo file đặc tả dữ liệu `api/content-model.json` và script sinh DDL `backend/content-schema.sql`.
-- Thiết kế 10 nhóm bảng A -> J (Chương trình, Trường học, Học bổng, Địa điểm, Tin tức, Đăng ký, Cài đặt).
-- Bổ sung bảng `kipa_content_state` theo dõi fingerprint và phiên bản migration.
 
 ---
 
 ## [Phiên bản 1.0.0] — Khởi tạo ban đầu
 ### Nền tảng Website KIPA Core
-- Tạo 5 bảng nền tảng:
-  - `kipa_leads`: Lưu dữ liệu form đăng ký tư vấn.
-  - `kipa_rate_limits`: Chống spam và brute-force.
-  - `kipa_otp_codes`: Mã xác thực email 6 số.
-  - `kipa_users`: Tài khoản đăng nhập học viên.
-  - `kipa_admins`: Quản trị viên kỹ thuật.
+- Tạo 5 bảng nền tảng: `kipa_leads`, `kipa_rate_limits`, `kipa_otp_codes`, `kipa_users`, `kipa_admins`.

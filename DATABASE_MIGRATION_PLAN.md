@@ -1,7 +1,7 @@
 # KIPA VIỆT HÀN — KẾ HOẠCH TRIỂN KHAI, SAO LƯU & PHỤC HỒI DATABASE (DATABASE MIGRATION PLAN)
 
-> **Tài liệu quy trình vận hành chuẩn (SOP):** Kế hoạch triển khai bổ sung 28 bảng vật lý và 1 SQL View CRM & Student Portal trên cPanel Shared Hosting  
-> **Phiên bản:** 2.1.0 (Kiểm toán hoàn tất — ĐANG CHỜ PHÊ DUYỆT CỦA USER, CHƯA CHẠY TRÊN PRODUCTION)  
+> **Tài liệu quy trình vận hành chuẩn (SOP):** Kế hoạch triển khai bổ sung 42 bảng vật lý và 1 SQL View CRM & Student Portal trên cPanel Shared Hosting  
+> **Phiên bản:** 2.2.0 (Kiểm toán hoàn tất — ĐANG CHỜ PHÊ DUYỆT CỦA USER, CHƯA CHẠY TRÊN PRODUCTION)  
 > **Mục tiêu tối thượng:** An toàn 100% dữ liệu cũ, không gián đoạn website, ngăn ngừa xóa dây chuyền và có kịch bản Rollback tức thì.  
 
 ---
@@ -24,8 +24,8 @@
 flowchart TD
     B1["BƯỚC 1: Kiểm tra dung lượng & Quyền DB trên cPanel"] --> B2["BƯỚC 2: Sao lưu Full Database qua phpMyAdmin & mysqldump"]
     B2 --> B3["BƯỚC 3: Mở rộng an toàn 2 bảng kipa_leads & kipa_users"]
-    B3 --> B4["BƯỚC 4: Thực thi nạp 28 bảng mới & 1 View từ crm_portal_schema.sql"]
-    B4 --> B5["BƯỚC 5: Cập nhật điều kiện loại trừ trong api/cleanup.php"]
+    B3 --> B4["BƯỚC 4: Thực thi nạp 42 bảng mới & 1 View từ crm_portal_schema.sql"]
+    B4 --> B5["BƯỚC 5: Cập nhật điều kiện loại trừ trong api/cleanup.php & submit.php"]
     B5 --> B6["BƯỚC 6: Kiểm tra hồi quy toàn diện & Nghiệm thu bàn giao"]
 ```
 
@@ -79,30 +79,38 @@ ALTER TABLE `kipa_users`
 
 ---
 
-### BƯỚC 4: THỰC THI TẠO 28 BẢNG BỔ SUNG VÀ 1 VIEW TỪ `crm_portal_schema.sql`
+### BƯỚC 4: THỰC THI TẠO 42 BẢNG BỔ SUNG VÀ 1 VIEW TỪ `crm_portal_schema.sql`
 
 1. Mở file **`crm_portal_schema.sql`** (hoặc `backend/crm_portal_schema.sql`) trong mã nguồn dự án.
 2. Sao chép toàn bộ nội dung file.
 3. Trong phpMyAdmin -> Chọn Database KIPA -> Chọn tab **SQL**.
 4. Dán toàn bộ nội dung file `crm_portal_schema.sql` vào khung nhập liệu.
 5. Bấm nút **Go (Thực hiện)**.
-6. Kết quả mong đợi: MySQL báo thực thi thành công, tạo mới 28 bảng vật lý và 1 View `kipa_student_documents`.
+6. Kết quả mong đợi: MySQL báo thực thi thành công, tạo mới 42 bảng vật lý và 1 View `kipa_student_documents`.
 
 ---
 
-### BƯỚC 5: CẬP NHẬT CHÍNH SÁCH LƯU TRỮ TRONG `api/cleanup.php`
+### BƯỚC 5: CẬP NHẬT MÃ NGUỒN PHÒNG CHỐNG XÓA LEAD TRONG `api/cleanup.php` & `api/submit.php`
 
-Để ngăn chặn vĩnh viễn rủi ro xóa nhầm khách hàng sau 12 tháng, cập nhật file `api/cleanup.php` trên hosting:
+**LƯU Ý:** Trên mã nguồn hiện tại, các file này **CHƯA ĐƯỢC SỬA**. Đây là các bước cần triển khai trên máy chủ khi đưa CRM vào hoạt động:
 
-- **Đoạn mã cũ (Nguy hiểm):**
-  ```php
-  $leads = $db->exec('DELETE FROM kipa_leads WHERE created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
-  ```
-- **Đoạn mã mới (Đã bảo vệ an toàn):**
-  ```php
-  // Chỉ xóa các Lead rác/chưa chuyển đổi thành Khách hàng sau 12 tháng theo chính sách bảo mật
-  $leads = $db->exec('DELETE FROM kipa_leads WHERE (converted_to_customer_id IS NULL OR converted_to_customer_id = 0) AND created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
-  ```
+1. **Cập nhật `api/cleanup.php` (dòng 16):**
+   ```php
+   // Đoạn mã cũ:
+   // $leads = $db->exec('DELETE FROM kipa_leads WHERE created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
+   
+   // Đoạn mã mới đã bảo vệ:
+   $leads = $db->exec('DELETE FROM kipa_leads WHERE (converted_to_customer_id IS NULL OR converted_to_customer_id = 0) AND created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
+   ```
+
+2. **Cập nhật `api/submit.php` (dòng 200):**
+   ```php
+   // Đoạn mã cũ:
+   // $db->exec('DELETE FROM kipa_leads WHERE created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
+   
+   // Đoạn mã mới đã bảo vệ:
+   $db->exec('DELETE FROM kipa_leads WHERE (converted_to_customer_id IS NULL OR converted_to_customer_id = 0) AND created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
+   ```
 
 ---
 
@@ -127,20 +135,23 @@ Thực hiện kiểm thử xác nhận:
 Trong trường hợp xảy ra bất kỳ lỗi không mong muốn nào:
 
 ### Tình huống 1: Lỗi trong quá trình tạo bảng mới
-Vì toàn bộ 28 bảng mới đều độc lập và có tiền tố `kipa_`, việc hủy bỏ cực kỳ an toàn:
+Vì toàn bộ 42 bảng mới đều độc lập và có tiền tố `kipa_`, việc hủy bỏ cực kỳ an toàn:
 ```sql
 SET FOREIGN_KEY_CHECKS = 0;
 DROP VIEW IF EXISTS `kipa_student_documents`;
 DROP TABLE IF EXISTS 
   `kipa_notification_settings`, `kipa_student_support`, `kipa_student_materials`,
   `kipa_student_notifications`, `kipa_student_schedules`, `kipa_student_journey`,
-  `kipa_students`, `kipa_document_reviews`, `kipa_document_versions`,
-  `kipa_dossier_documents`, `kipa_audit_logs`, `kipa_approvals`,
-  `kipa_tasks`, `kipa_dossier_status_history`, `kipa_dossier_assignments`,
-  `kipa_service_dossiers`, `kipa_customer_education`, `kipa_customer_relations`,
+  `kipa_students`, `kipa_document_access_logs`, `kipa_document_reviews`, `kipa_document_versions`,
+  `kipa_dossier_documents`, `kipa_audit_logs`, `kipa_approvals`, `kipa_approval_workflow_steps`,
+  `kipa_approval_workflows`, `kipa_task_history`, `kipa_task_collaborators`, `kipa_tasks`,
+  `kipa_working_calendars`, `kipa_sla_policies`, `kipa_dossier_status_history`,
+  `kipa_dossier_assignments`, `kipa_service_dossiers`, `kipa_consultation_activities`,
+  `kipa_consultation_interests`, `kipa_consultation_dossiers`, `kipa_campaigns`,
+  `kipa_lead_sources`, `kipa_customer_education`, `kipa_customer_relations`,
   `kipa_customer_addresses`, `kipa_customers`, `kipa_role_delegations`,
-  `kipa_staff_roles`, `kipa_permissions`, `kipa_roles`,
-  `kipa_staff`, `kipa_teams`, `kipa_departments`, `kipa_branches`;
+  `kipa_staff_role_history`, `kipa_staff_roles`, `kipa_role_permissions`,
+  `kipa_permissions`, `kipa_roles`, `kipa_staff`, `kipa_teams`, `kipa_departments`, `kipa_branches`;
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 *Lưu ý: Không bao giờ DROP 5 bảng nền tảng `kipa_leads`, `kipa_rate_limits`, `kipa_otp_codes`, `kipa_users`, `kipa_admins`.*

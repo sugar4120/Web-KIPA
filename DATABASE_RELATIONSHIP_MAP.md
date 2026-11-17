@@ -1,7 +1,7 @@
 # KIPA VIỆT HÀN — SƠ ĐỒ QUAN HỆ THỰC THỂ DỮ LIỆU (DATABASE RELATIONSHIP MAP)
 
 > **Tài liệu kiến trúc cơ sở dữ liệu:** Sơ đồ quan hệ thực thể (ERD) kết nối Website, CRM, Student Portal và LMS  
-> **Phiên bản:** 2.1.0 (Vòng kiểm tra & Đối chiếu kỹ thuật cuối cùng)  
+> **Phiên bản:** 2.2.0 (Hoàn thiện nghiệp vụ Tiếp nhận & Tư vấn, Phân quyền, SLA, Phê duyệt kép, Bảo vệ Kho tài liệu & Bảo mật Cổng học viên)  
 > **Chuẩn mô hình hóa:** Mermaid ER Diagrams & Khóa ngoại MySQL InnoDB  
 
 ---
@@ -12,6 +12,7 @@
 erDiagram
     %% WEBSITE CORE & AUTHENTICATION
     kipa_leads ||--o| kipa_customers : "chuyển đổi thành (ON DELETE SET NULL)"
+    kipa_leads ||--o{ kipa_consultation_dossiers : "intake vào tư vấn (ON DELETE SET NULL)"
     kipa_users ||--o| kipa_customers : "tài khoản đăng nhập 1-1 (ON DELETE SET NULL)"
     kipa_admins ||--o| kipa_staff : "tài khoản quản trị nhân sự (ON DELETE SET NULL)"
     kipa_users ||--o| kipa_students : "xác thực cổng học viên"
@@ -20,12 +21,17 @@ erDiagram
     kipa_branches ||--o{ kipa_departments : "có các phòng ban"
     kipa_branches ||--o{ kipa_staff : "trực thuộc chi nhánh"
     kipa_branches ||--o{ kipa_customers : "tiếp nhận khách hàng"
-    kipa_departments ||--o{ kipa_teams : "chia thành các nhóm chuyên môn"
+    kipa_branches ||--o{ kipa_working_calendars : "lịch làm việc theo chi nhánh"
+    kipa_branches ||--o{ kipa_sla_policies : "áp dụng SLA chi nhánh"
+    kipa_departments ||--o{ kipa_teams : "chia thành nhóm chuyên môn"
     kipa_departments ||--o{ kipa_staff : "thuộc phòng ban"
     kipa_teams ||--o{ kipa_staff : "thuộc nhóm chuyên môn"
+    kipa_staff ||--o{ kipa_staff : "quản lý trực tiếp chính"
+    kipa_roles ||--o{ kipa_role_permissions : "gồm các quyền"
+    kipa_permissions ||--o{ kipa_role_permissions : "thuộc các vai trò"
     kipa_staff ||--o{ kipa_staff_roles : "được gán vai trò"
     kipa_roles ||--o{ kipa_staff_roles : "vai trò hệ thống"
-    kipa_roles ||--o{ kipa_permissions : "gồm các quyền hạn"
+    kipa_staff ||--o{ kipa_staff_role_history : "lịch sử luân chuyển quyền"
     kipa_staff ||--o{ kipa_role_delegations : "người ủy quyền"
     kipa_staff ||--o{ kipa_role_delegations : "người được ủy quyền"
     kipa_roles ||--o{ kipa_role_delegations : "vai trò ủy quyền"
@@ -34,24 +40,49 @@ erDiagram
     kipa_customers ||--o{ kipa_customer_addresses : "sổ địa chỉ"
     kipa_customers ||--o{ kipa_customer_relations : "quan hệ nhân thân & bảo lãnh"
     kipa_customers ||--o{ kipa_customer_education : "học vấn, GPA & chứng chỉ"
-    kipa_customers ||--o{ kipa_service_dossiers : "đăng ký các hồ sơ dịch vụ"
+    kipa_customers ||--o{ kipa_consultation_dossiers : "có các đợt tư vấn"
+    kipa_customers ||--o{ kipa_service_dossiers : "ký các hợp đồng dịch vụ"
     kipa_customers ||--o| kipa_students : "cache profile cổng học viên"
     kipa_customers ||--o| kipa_notification_settings : "cấu hình nhận tin"
 
-    %% CRM SERVICE DOSSIERS & WORKFLOW
-    kipa_staff ||--o{ kipa_service_dossiers : "cố vấn tư vấn phụ trách"
+    %% LEAD INTAKE & CONSULTATION DOSSIERS
+    kipa_lead_sources ||--o{ kipa_consultation_dossiers : "nguồn tiếp nhận"
+    kipa_campaigns ||--o{ kipa_consultation_dossiers : "chiến dịch marketing"
+    kipa_staff ||--o{ kipa_consultation_dossiers : "chuyên viên tư vấn phụ trách"
+    kipa_consultation_dossiers ||--o{ kipa_consultation_interests : "chi tiết nhu cầu dịch vụ"
+    kipa_consultation_dossiers ||--o{ kipa_consultation_activities : "lịch sử cuộc gọi, gặp mặt, lịch hẹn"
+    kipa_consultation_dossiers ||--o| kipa_service_dossiers : "bàn giao khi ký hợp đồng"
+
+    %% SERVICE DOSSIERS & LIFECYCLE
+    kipa_staff ||--o{ kipa_service_dossiers : "tư vấn phụ trách"
     kipa_staff ||--o{ kipa_service_dossiers : "chuyên viên hồ sơ xử lý"
     kipa_staff ||--o{ kipa_service_dossiers : "cộng tác viên giới thiệu (CTV)"
     kipa_service_dossiers ||--o{ kipa_dossier_assignments : "lịch sử phân công & bàn giao"
     kipa_service_dossiers ||--o{ kipa_dossier_status_history : "lịch sử tạm dừng, mở lại, đóng, lưu trữ"
-    kipa_service_dossiers ||--o{ kipa_tasks : "nhiệm vụ & cam kết SLA"
-    kipa_service_dossiers ||--o{ kipa_approvals : "quy trình phê duyệt nhiều cấp"
-    kipa_service_dossiers ||--o{ kipa_dossier_documents : "checklist hồ sơ giấy tờ"
+    kipa_service_dossiers ||--o{ kipa_tasks : "nhiệm vụ gắn với hồ sơ"
+    kipa_service_dossiers ||--o{ kipa_approvals : "yêu cầu phê duyệt"
+    kipa_service_dossiers ||--o{ kipa_dossier_documents : "checklist hồ sơ giấy tờ (RESTRICT)"
     kipa_service_dossiers ||--o{ kipa_student_journey : "5 mốc tiến độ hành trình"
 
-    %% MASTER DOCUMENT VAULT
-    kipa_dossier_documents ||--o{ kipa_document_versions : "các phiên bản file scan/PDF"
+    %% TASKS & SLA POLICIES
+    kipa_sla_policies ||--o{ kipa_tasks : "chính sách cam kết SLA"
+    kipa_tasks ||--o{ kipa_tasks : "nhiệm vụ con (parent_id)"
+    kipa_tasks ||--o{ kipa_task_collaborators : "người phối hợp"
+    kipa_staff ||--o{ kipa_task_collaborators : "tham gia phối hợp"
+    kipa_tasks ||--o{ kipa_task_history : "lịch sử thay đổi & gia hạn"
+
+    %% APPROVAL WORKFLOWS & SNAPSHOTS
+    kipa_approval_workflows ||--o{ kipa_approval_workflow_steps : "các bước quy trình"
+    kipa_approval_workflows ||--o{ kipa_approvals : "quy trình áp dụng"
+    kipa_approval_workflow_steps ||--o{ kipa_approvals : "bước hiện tại"
+    kipa_staff ||--o{ kipa_approvals : "người gửi duyệt"
+    kipa_staff ||--o{ kipa_approvals : "người duyệt 1"
+    kipa_staff ||--o{ kipa_approvals : "người duyệt 2 (phê duyệt kép)"
+
+    %% MASTER DOCUMENT VAULT & ACCESS LOGS
+    kipa_dossier_documents ||--o{ kipa_document_versions : "quản lý các phiên bản"
     kipa_document_versions ||--o{ kipa_document_reviews : "lịch sử thẩm định & phản hồi"
+    kipa_document_versions ||--o{ kipa_document_access_logs : "nhật ký xem & tải file nhạy cảm"
     kipa_dossier_documents ||--o{ kipa_student_documents : "VIEW ánh xạ sang cổng học viên"
 
     %% STUDENT PORTAL EXPERIENCES
@@ -59,57 +90,108 @@ erDiagram
     kipa_customers ||--o{ kipa_student_notifications : "thông báo đẩy"
     kipa_customers ||--o{ kipa_student_support : "ticket yêu cầu hỗ trợ"
     kipa_staff ||--o{ kipa_student_support : "chuyên viên tiếp nhận giải đáp"
-
-    %% LMS FOUNDATION (STAGE 2)
-    kipa_staff ||--o{ kipa_lms_classes : "giáo viên phụ trách"
-    kipa_lms_classes ||--o{ kipa_lms_lessons : "chi tiết buổi học"
-    kipa_lms_classes ||--o{ kipa_lms_enrollments : "danh sách học viên ghi danh"
-    kipa_customers ||--o{ kipa_lms_enrollments : "khách hàng tham gia khóa học"
-    kipa_lms_lessons ||--o{ kipa_lms_attendance : "điểm danh từng buổi"
-    kipa_lms_enrollments ||--o{ kipa_lms_attendance : "chuyên cần của học viên"
-    kipa_lms_classes ||--o{ kipa_lms_exams : "kỳ thi đánh giá"
-    kipa_lms_exams ||--o{ kipa_lms_grades : "bảng điểm thi"
-    kipa_lms_enrollments ||--o{ kipa_lms_grades : "điểm của từng học viên"
 ```
 
 ---
 
-## II. SƠ ĐỒ CHI TIẾT CƠ CẤU TỔ CHỨC & PHÂN QUYỀN RBAC NÂNG CAO
+## II. SƠ ĐỒ CHI TIẾT TIẾP NHẬN LEAD & HỒ SƠ TƯ VẤN (CONSULTATION INTAKE)
 
 ```mermaid
 erDiagram
-    kipa_branches {
+    kipa_leads {
         bigint id PK
-        varchar branch_code UK
-        varchar branch_name
+        varchar form_type
+        varchar contact_name
         varchar phone
-        varchar address
-        varchar province
-        varchar country
-        boolean is_active
+        varchar email
+        varchar program
+        varchar source_page
+        json details_json
+        bigint converted_to_customer_id
+        varchar lead_status
+        datetime created_at
     }
 
-    kipa_departments {
+    kipa_lead_sources {
         bigint id PK
-        bigint branch_id FK
-        varchar dept_code UK
-        varchar dept_name
+        varchar source_code UK
+        varchar source_name
+        varchar channel_type
         boolean is_active
     }
 
-    kipa_teams {
+    kipa_campaigns {
         bigint id PK
-        bigint dept_id FK
-        varchar team_code UK
-        varchar team_name
-        bigint leader_id FK
-        boolean is_active
+        varchar campaign_code UK
+        varchar campaign_name
+        date start_date
+        date end_date
+        decimal budget
+        varchar status
     }
 
+    kipa_consultation_dossiers {
+        bigint id PK
+        varchar consultation_code UK
+        bigint customer_id FK
+        bigint legacy_lead_id FK
+        bigint lead_source_id FK
+        bigint campaign_id FK
+        bigint assigned_staff_id FK
+        varchar stage
+        varchar primary_interest
+        varchar target_intake
+        decimal estimated_budget
+        datetime last_contacted_at
+        datetime next_appointment_at
+        varchar lost_reason
+        text lost_notes
+        varchar handover_status
+        bigint handed_over_by FK
+        datetime handed_over_at
+        bigint accepted_by FK
+        datetime accepted_at
+        bigint created_service_dossier_id FK
+    }
+
+    kipa_consultation_interests {
+        bigint id PK
+        bigint consultation_id FK
+        varchar service_type
+        varchar target_country
+        varchar target_major
+        varchar preferred_school
+    }
+
+    kipa_consultation_activities {
+        bigint id PK
+        bigint consultation_id FK
+        bigint staff_id FK
+        varchar activity_type
+        datetime activity_time
+        varchar outcome
+        text content
+        datetime scheduled_next_at
+    }
+
+    kipa_leads ||--o{ kipa_consultation_dossiers : "intake"
+    kipa_lead_sources ||--o{ kipa_consultation_dossiers : "nguồn"
+    kipa_campaigns ||--o{ kipa_consultation_dossiers : "chiến dịch"
+    kipa_consultation_dossiers ||--o{ kipa_consultation_interests : "nhu cầu"
+    kipa_consultation_dossiers ||--o{ kipa_consultation_activities : "hoạt động"
+```
+
+---
+
+## III. SƠ ĐỒ CHI TIẾT CƠ CẤU TỔ CHỨC & PHÂN QUYỀN RBAC NÂNG CAO
+
+```mermaid
+erDiagram
     kipa_staff {
         bigint id PK
         varchar staff_code UK
         bigint admin_id FK
+        bigint direct_manager_id FK
         varchar full_name
         varchar email
         varchar phone
@@ -132,6 +214,12 @@ erDiagram
         varchar permission_code UK
         varchar permission_name
         varchar module_name
+        boolean is_sensitive
+    }
+
+    kipa_role_permissions {
+        bigint role_id PK,FK
+        bigint permission_id PK,FK
     }
 
     kipa_staff_roles {
@@ -143,129 +231,172 @@ erDiagram
         datetime expires_at
     }
 
+    kipa_staff_role_history {
+        bigint id PK
+        bigint staff_id FK
+        bigint role_id FK
+        varchar action
+        varchar scope
+        varchar reason
+        bigint performed_by FK
+        datetime occurred_at
+    }
+
     kipa_role_delegations {
         bigint id PK
         bigint delegator_id FK
         bigint delegatee_id FK
         bigint role_id FK
+        varchar delegated_scope
         date start_date
         date end_date
         varchar reason
-        boolean is_active
+        bigint approved_by FK
+        varchar status
     }
 
-    kipa_branches ||--o{ kipa_departments : "có"
-    kipa_departments ||--o{ kipa_teams : "chia thành"
-    kipa_departments ||--o{ kipa_staff : "thuộc"
-    kipa_teams ||--o{ kipa_staff : "thuộc"
-    kipa_staff ||--o{ kipa_staff_roles : "gán"
-    kipa_roles ||--o{ kipa_staff_roles : "chứa"
+    kipa_staff ||--o{ kipa_staff : "báo cáo trực tiếp (direct_manager_id)"
+    kipa_roles ||--o{ kipa_role_permissions : "có quyền"
+    kipa_permissions ||--o{ kipa_role_permissions : "gán cho vai trò"
+    kipa_staff ||--o{ kipa_staff_roles : "được phân quyền"
+    kipa_staff ||--o{ kipa_staff_role_history : "lịch sử luân chuyển quyền"
     kipa_staff ||--o{ kipa_role_delegations : "ủy quyền"
-    kipa_roles ||--o{ kipa_role_delegations : "ủy quyền vai trò"
 ```
 
 ---
 
-## III. SƠ ĐỒ CHI TIẾT KHÁCH HÀNG, HỒ SƠ DỊCH VỤ & QUY TRÌNH XỬ LÝ
+## IV. SƠ ĐỒ CHI TIẾT NHIỆM VỤ, QUẢN LÝ SLA & LỊCH LÀM VIỆC
 
 ```mermaid
 erDiagram
-    kipa_customers {
+    kipa_sla_policies {
         bigint id PK
-        varchar customer_code UK
-        varchar full_name
-        varchar phone
-        varchar email
-        date birthday
-        varchar gender
-        varchar id_card_number
-        bigint user_id FK
-        bigint legacy_lead_id FK
-        bigint assigned_staff_id FK
-        bigint branch_id FK
-        varchar customer_status
-        datetime created_at
-    }
-
-    kipa_service_dossiers {
-        bigint id PK
-        varchar dossier_code UK
-        bigint customer_id FK
+        varchar policy_code UK
+        varchar policy_name
         varchar service_type
-        varchar target_country
-        varchar target_intake
-        varchar stage
-        int progress_percent
-        bigint consultant_id FK
-        bigint case_officer_id FK
-        bigint collaborator_id FK
-        varchar status
-        datetime created_at
+        bigint branch_id FK
+        varchar priority
+        int response_time_hours
+        int resolution_time_hours
+        boolean is_active
     }
 
-    kipa_dossier_assignments {
+    kipa_working_calendars {
         bigint id PK
-        bigint dossier_id FK
-        bigint staff_id FK
-        varchar assignment_role
-        datetime assigned_at
-        datetime unassigned_at
-        boolean is_current
-        varchar note
-    }
-
-    kipa_dossier_status_history {
-        bigint id PK
-        bigint dossier_id FK
-        varchar from_status
-        varchar to_status
-        varchar change_type
-        text reason
-        bigint changed_by FK
-        datetime changed_at
+        bigint branch_id FK
+        date calendar_date
+        boolean is_working_day
+        time start_time
+        time end_time
+        time lunch_start
+        time lunch_end
+        varchar holiday_name
     }
 
     kipa_tasks {
         bigint id PK
+        bigint parent_id FK
         bigint dossier_id FK
         bigint customer_id FK
         varchar title
         bigint assigned_to FK
+        bigint created_by FK
         varchar priority
-        int sla_hours
+        bigint sla_policy_id FK
+        varchar sla_status
+        datetime sla_paused_at
+        int sla_total_paused_minutes
         datetime due_date
         datetime reminder_at
         bigint escalated_to FK
+        boolean is_recurring
         varchar status
+        bigint completion_confirmed_by FK
+        datetime completion_confirmed_at
+    }
+
+    kipa_task_collaborators {
+        bigint task_id PK,FK
+        bigint staff_id PK,FK
+        varchar role_description
+    }
+
+    kipa_task_history {
+        bigint id PK
+        bigint task_id FK
+        bigint changed_by FK
+        varchar field_name
+        text old_value
+        text new_value
+        varchar reason
+        datetime changed_at
+    }
+
+    kipa_sla_policies ||--o{ kipa_tasks : "áp dụng SLA"
+    kipa_tasks ||--o{ kipa_tasks : "nhiệm vụ con (parent_id)"
+    kipa_tasks ||--o{ kipa_task_collaborators : "người phối hợp"
+    kipa_tasks ||--o{ kipa_task_history : "lịch sử thay đổi & gia hạn"
+```
+
+---
+
+## V. SƠ ĐỒ CHI TIẾT QUY TRÌNH PHÊ DUYỆT & PHÊ DUYỆT KÉP
+
+```mermaid
+erDiagram
+    kipa_approval_workflows {
+        bigint id PK
+        varchar workflow_code UK
+        varchar workflow_name
+        varchar approval_type
+        int version
+        boolean requires_dual_approval
+        boolean is_active
+    }
+
+    kipa_approval_workflow_steps {
+        bigint id PK
+        bigint workflow_id FK
+        int step_order
+        varchar step_name
+        bigint required_role_id FK
+        bigint specific_approver_id FK
+        int sla_hours
+        boolean is_final_step
     }
 
     kipa_approvals {
         bigint id PK
         bigint dossier_id FK
+        bigint workflow_id FK
+        bigint step_id FK
         varchar approval_type
         int approval_level
+        json snapshot_payload
         bigint requested_by FK
         bigint approver_id FK
         bigint next_approver_id FK
+        bigint second_approver_id FK
         varchar status
         text comments
+        text second_comments
+        datetime reviewed_at
+        datetime second_approved_at
     }
 
-    kipa_customers ||--o{ kipa_service_dossiers : "đăng ký"
-    kipa_service_dossiers ||--o{ kipa_dossier_assignments : "lịch sử bàn giao"
-    kipa_service_dossiers ||--o{ kipa_dossier_status_history : "vòng đời hồ sơ"
-    kipa_service_dossiers ||--o{ kipa_tasks : "giao việc & SLA"
-    kipa_service_dossiers ||--o{ kipa_approvals : "phê duyệt nhiều cấp"
+    kipa_approval_workflows ||--o{ kipa_approval_workflow_steps : "chứa các bước"
+    kipa_approval_workflows ||--o{ kipa_approvals : "áp dụng quy trình"
+    kipa_approval_workflow_steps ||--o{ kipa_approvals : "bước xử lý"
 ```
 
 ---
 
-## IV. SƠ ĐỒ CHI TIẾT KHO TÀI LIỆU DUY NHẤT & VIEW CỔNG HỌC VIÊN
+## VI. SƠ ĐỒ KHO TÀI LIỆU GỐC, NHẬT KÝ TRUY CẬP & VIEW CỔNG HỌC VIÊN
 
 ```mermaid
 erDiagram
-    kipa_service_dossiers ||--o{ kipa_dossier_documents : "yêu cầu danh mục giấy tờ"
-    kipa_customers ||--o{ kipa_dossier_documents : "sở hữu giấy tờ"
+    kipa_service_dossiers ||--o{ kipa_dossier_documents : "yêu cầu checklist (ON DELETE RESTRICT)"
+    kipa_customers ||--o{ kipa_dossier_documents : "chủ sở hữu giấy tờ"
 
     kipa_dossier_documents {
         bigint id PK
@@ -276,6 +407,8 @@ erDiagram
         varchar doc_name
         boolean is_required
         varchar status
+        varchar access_level
+        boolean is_archived
         bigint current_version_id
     }
 
@@ -290,7 +423,6 @@ erDiagram
         varchar uploaded_by_type
         bigint uploaded_by_id
         datetime uploaded_at
-        text note
     }
 
     kipa_document_reviews {
@@ -303,10 +435,25 @@ erDiagram
         datetime reviewed_at
     }
 
+    kipa_document_access_logs {
+        bigint id PK
+        bigint version_id FK
+        varchar actor_type
+        bigint actor_id
+        varchar access_type
+        varchar ip_address
+        varchar user_agent
+        datetime accessed_at
+    }
+
     kipa_student_documents {
         bigint id
+        bigint dossier_id
+        bigint customer_id
+        bigint user_id
         varchar student_email
         varchar doc_group
+        varchar doc_code
         varchar doc_name
         varchar status
         varchar file_url
@@ -319,18 +466,6 @@ erDiagram
 
     kipa_dossier_documents ||--o{ kipa_document_versions : "quản lý phiên bản"
     kipa_document_versions ||--o{ kipa_document_reviews : "thẩm định"
-    kipa_dossier_documents ||--o{ kipa_student_documents : "VIEW KHÔNG GHI ĐÈ / TỒN TẠI ĐỘC LẬP"
+    kipa_document_versions ||--o{ kipa_document_access_logs : "nhật ký xem & tải file"
+    kipa_dossier_documents ||--o{ kipa_student_documents : "VIEW HỢP NHẤT (Chống lộ chéo IDOR)"
 ```
-
----
-
-## V. NGUYÊN TẮC RÀNG BUỘC TOÀN VẸN (INTEGRITY CONSTRAINTS)
-
-1. **Bảo tồn khách hàng khi xóa Lead rác (`legacy_lead_id`):**  
-   `ON DELETE SET NULL` — Tuyệt đối không dùng `CASCADE` để bảo vệ khách hàng khỏi cronjob dọn dẹp sau 12 tháng của `api/cleanup.php`.
-2. **Xóa theo tầng đối với thông tin bổ trợ khách hàng:**  
-   Khi khách hàng bị xóa có chủ đích (GDPR/quyết định Ban Giám Đốc), các bảng `kipa_customer_addresses`, `kipa_customer_relations`, `kipa_customer_education` sẽ tự động xóa dọn dẹp theo (`ON DELETE CASCADE`).
-3. **Bảo vệ hồ sơ dịch vụ (`customer_id` trong `kipa_service_dossiers`):**  
-   `ON DELETE RESTRICT` — Không cho phép xóa khách hàng nếu khách hàng đó đang có hồ sơ dịch vụ hoặc hợp đồng đang xử lý.
-4. **Nhân sự rời khỏi công ty (`assigned_to`, `case_officer_id`):**  
-   `ON DELETE SET NULL` hoặc `ON DELETE RESTRICT` — Ngăn ngừa xóa mất dấu nhân viên đã ký duyệt hoặc phụ trách hồ sơ.
