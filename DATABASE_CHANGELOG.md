@@ -5,33 +5,42 @@
 
 ---
 
-## [Phiên bản 2.0.0] — Tháng 11/2026 (HIỆN TẠI)
-### Bổ sung phân hệ KIPA CRM và KIPA Student Portal Thống Nhất
+## [Phiên bản 2.1.0] — Ngày 17/11/2026 (VÒNG KIỂM TRA CUỐI CÙNG & HOÀN THIỆN ĐẶC TẢ)
+### Hoàn thiện Kiến trúc Database KIPA CRM + Student Portal trước khi Deploy cPanel
 
-#### Quyết định kiến trúc được xác nhận:
-- **Tiếp tục sử dụng 1 Database MySQL duy nhất** cho toàn bộ Website, CRM và Student Portal. Phân tách ranh giới nghiệp vụ bằng tiền tố bảng và quyền truy cập.
-- **Bảo toàn dữ liệu cũ 100%:** Không đổi tên, không xóa bảng/cột, không drop dữ liệu hiện có.
-- **Khắc phục triệt để nguy cơ xóa dây chuyền (Cascade Deletion):** Cấu hình khóa ngoại từ `kipa_customers` sang `kipa_leads` là `ON DELETE SET NULL`. Cập nhật `api/cleanup.php` chỉ dọn lead rác chưa chuyển đổi thành khách hàng.
+#### Quyết định kiến trúc trọng tâm:
+1. **Kiểm toán chính xác bằng công cụ tự động:**
+   - Sử dụng script `tools/verify_schema.py` đếm chính xác: **28 bảng vật lý** (`CREATE TABLE`) và **1 SQL View** (`kipa_student_documents`).
+   - Tổng cộng 44 khóa ngoại (Foreign Keys), 100% sử dụng kiểu dữ liệu `BIGINT UNSIGNED`, `ENGINE=InnoDB`, `utf8mb4_unicode_ci`.
+2. **Hợp nhất kho tài liệu qua SQL View:**
+   - Thay vì duy trì 2 bảng tài liệu độc lập (`kipa_dossier_documents` và `kipa_student_documents`) gây xung đột đồng bộ và tốn tài nguyên lưu trữ, thiết kế hợp nhất sử dụng `kipa_dossier_documents` + `kipa_document_versions` làm kho vật lý duy nhất (Single Source of Truth).
+   - Tạo **`VIEW kipa_student_documents`** đảm bảo tương thích 100% với giao diện Cổng học viên và API hiện hữu mà không tạo dữ liệu trùng lặp.
+3. **Bổ sung các bảng nghiệp vụ CRM nâng cao đã thống nhất:**
+   - `kipa_teams`: Phân cấp nhóm làm việc chuyên môn dưới phòng ban.
+   - `kipa_role_delegations`: Ủy quyền vai trò tạm thời khi nhân sự nghỉ phép/công tác.
+   - `kipa_dossier_status_history`: Theo dõi vòng đời hồ sơ (Tạm dừng, Mở lại, Đóng, Lưu trữ).
+   - Nâng cấp `kipa_tasks`: Bổ sung `sla_hours`, `reminder_at`, `escalated_to` phục vụ quản lý cam kết dịch vụ.
+   - Nâng cấp `kipa_approvals`: Bổ sung `approval_level` và `next_approver_id` cho quy trình duyệt nhiều cấp.
+   - Nâng cấp `kipa_service_dossiers`: Bổ sung `collaborator_id` và hỗ trợ vai trò `COLLABORATOR` trong `kipa_dossier_assignments`.
+4. **Bảo vệ tuyệt đối chống xóa dây chuyền (Cascade Protection):**
+   - Rà soát toàn bộ khóa ngoại trỏ tới `kipa_leads` và `kipa_users`: 100% sử dụng `ON DELETE SET NULL`.
+   - Cập nhật quy trình an toàn cho `api/cleanup.php` chỉ xóa lead chưa chuyển đổi sau 12 tháng.
+5. **Cập nhật đồng bộ các tài liệu bàn giao:**
+   - [DATABASE_CURRENT_INVENTORY.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_CURRENT_INVENTORY.md)
+   - [DATABASE_FIELD_AUDIT.xlsx](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_FIELD_AUDIT.xlsx) (125 bảng và view)
+   - [DATABASE_GAP_ANALYSIS.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_GAP_ANALYSIS.md) (Bảng tổng hợp 5 nhóm)
+   - [DATABASE_RELATIONSHIP_MAP.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_RELATIONSHIP_MAP.md) (ERD Mermaid hoàn chỉnh)
+   - [DATABASE_NEW_TABLES_SPEC.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_NEW_TABLES_SPEC.md) (Đặc tả chi tiết 28 bảng + 1 View)
+   - [DATABASE_MIGRATION_PLAN.md](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_MIGRATION_PLAN.md) (Quy trình triển khai SOP 6 bước trên cPanel)
+   - [crm_portal_schema.sql](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/crm_portal_schema.sql) (Đồng bộ tại thư mục gốc và `backend/`)
 
-#### Thay đổi cấu trúc (DDL):
-- **Mở rộng an toàn 2 bảng hiện có:**
-  - `kipa_leads`: Bổ sung `converted_to_customer_id` (BIGINT UNSIGNED NULL) và `lead_status` (VARCHAR 32 DEFAULT 'NEW').
-  - `kipa_users`: Bổ sung `avatar_url` (VARCHAR 255 NULL), `is_active` (BOOLEAN DEFAULT 1), `last_login_at` (DATETIME NULL).
-- **Tạo mới 18 bảng KIPA CRM:**
-  - Cơ cấu tổ chức & Nhân sự: `kipa_branches`, `kipa_departments`, `kipa_staff`, `kipa_roles`, `kipa_permissions`, `kipa_staff_roles`.
-  - Khách hàng trung tâm: `kipa_customers`, `kipa_customer_addresses`, `kipa_customer_relations`, `kipa_customer_education`.
-  - Hồ sơ dịch vụ & Nhiệm vụ: `kipa_service_dossiers`, `kipa_dossier_assignments`, `kipa_tasks`.
-  - Giấy tờ & Thẩm định: `kipa_dossier_documents`, `kipa_document_versions`, `kipa_document_reviews`.
-  - Phê duyệt & Giám sát: `kipa_approvals`, `kipa_audit_logs`, `kipa_notification_settings`.
-- **Hoàn thiện 7 bảng KIPA Student Portal:**
-  - `kipa_students`, `kipa_student_journey`, `kipa_student_documents`, `kipa_student_schedules`, `kipa_student_notifications`, `kipa_student_materials`, `kipa_student_support`.
-- **Chuẩn bị DDL cho 6 bảng LMS tương lai:**
-  - `kipa_lms_classes`, `kipa_lms_lessons`, `kipa_lms_enrollments`, `kipa_lms_attendance`, `kipa_lms_exams`, `kipa_lms_grades`.
+---
 
-#### Kiểm thử & Kết quả:
-- 100% câu lệnh DDL sử dụng `CREATE TABLE IF NOT EXISTS`, `ENGINE=InnoDB`, `utf8mb4`.
-- Tương thích tuyệt đối với các script nộp form cũ (`api/submit.php`, `api/register.php`, `api/login.php`).
-- Sinh thành công báo cáo đối chiếu chi tiết [DATABASE_FIELD_AUDIT.xlsx](file:///d:/JOB/KIPA%20Vi%E1%BB%87t%20H%C3%A0n/Website/dev/Web-KIPA-master/Web-KIPA-master/DATABASE_FIELD_AUDIT.xlsx).
+## [Phiên bản 2.0.0] — Tháng 11/2026
+### Khởi tạo Kiến trúc CRM KIPA và Student Portal Thống Nhất
+- Xác lập quyết định dùng chung 1 database MySQL duy nhất trên cPanel Shared Hosting.
+- Thiết kế 18 bảng CRM sơ bộ và 7 bảng Cổng học viên.
+- Phát hiện và đưa ra giải pháp khắc phục nguy cơ xóa dây chuyền của cronjob dọn dẹp lead 12 tháng.
 
 ---
 
@@ -59,6 +68,4 @@
   - `kipa_rate_limits`: Chống spam và brute-force.
   - `kipa_otp_codes`: Mã xác thực email 6 số.
   - `kipa_users`: Tài khoản đăng nhập học viên.
-  - `kipa_admins`: Tài khoản quản trị kỹ thuật.
-- Thiết lập tệp cấu hình bảo mật `kipa-private/config.php` nằm ngoài webroot.
-- Thiết lập cơ chế xóa lead tự động sau 12 tháng qua cronjob `api/cleanup.php`.
+  - `kipa_admins`: Quản trị viên kỹ thuật.
