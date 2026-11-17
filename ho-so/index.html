@@ -776,6 +776,311 @@
 
     <!-- MAIN PAGE CONTENT -->
     <main class="flex-grow">
+        <style id="kipa-student-portal-custom-css">
+/* KIPA STUDENT PORTAL CORE STYLES (Tuong thich doc lap khong phu thuoc Tailwind build) */
+.portal-wrap-all {
+    background-color: #F8FAFC !important;
+    min-height: 80vh;
+}
+.portal-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
+}
+@media (min-width: 640px) {
+    .portal-container { padding: 32px 24px; }
+}
+
+.portal-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: flex-start !important;
+}
+@media (min-width: 1024px) {
+    .portal-layout {
+        flex-direction: row !important;
+        gap: 32px !important;
+    }
+}
+
+/* SIDEBAR STYLING */
+.portal-sidebar {
+    width: 100% !important;
+    background: linear-gradient(180deg, #003875 0%, #002754 50%, #001938 100%) !important;
+    color: #ffffff !important;
+    border-radius: 24px !important;
+    padding: 24px !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 30, 60, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-sizing: border-box !important;
+}
+@media (min-width: 1024px) {
+    .portal-sidebar {
+        width: 300px !important;
+        flex-shrink: 0 !important;
+        position: sticky !important;
+        top: 96px !important;
+    }
+}
+
+.portal-avatar-box {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.portal-avatar-img {
+    width: 96px !important;
+    height: 96px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    margin: 0 auto !important;
+    display: block !important;
+    border: 3.5px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+.portal-student-name {
+    font-family: 'Phudu', cursive, sans-serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-top: 12px !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+}
+.portal-student-sub {
+    font-size: 12px !important;
+    color: #93c5fd !important;
+    margin-top: 2px !important;
+    text-align: center !important;
+}
+.portal-badge-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 4px 14px !important;
+    border-radius: 9999px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    background-color: #F59E0B !important;
+    color: #0f172a !important;
+    margin-top: 10px !important;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* MENU BUTTONS */
+.portal-nav-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    margin-top: 20px !important;
+}
+.portal-nav-btn {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+    border-radius: 12px !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    color: #dbeafe !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-align: left !important;
+}
+.portal-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+.portal-nav-btn.active {
+    background-color: #ffffff !important;
+    color: #003875 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+.portal-nav-btn.active i {
+    color: #003875 !important;
+}
+
+.portal-logout-box {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.portal-logout-btn {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #cbd5e1 !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+}
+.portal-logout-btn:hover {
+    color: #fca5a5 !important;
+    background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+/* MAIN BODY & VIEWS */
+.portal-main-area {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+}
+
+/* HERO BANNER */
+.portal-hero-banner {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 24px !important;
+    background: linear-gradient(135deg, #003875 0%, #0056a8 60%, #0274bd 100%) !important;
+    color: #ffffff !important;
+    padding: 26px 30px !important;
+    box-shadow: 0 10px 25px -5px rgba(2, 116, 189, 0.25) !important;
+    box-sizing: border-box !important;
+}
+@media (min-width: 768px) {
+    .portal-hero-banner { padding: 32px 36px !important; }
+}
+.portal-hero-illustration {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 100% !important;
+    width: 38% !important;
+    background-image: url('/assets/home/seoul-airplane-banner.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right bottom !important;
+    background-size: contain !important;
+    pointer-events: none !important;
+    opacity: 0.95 !important;
+}
+@media (max-width: 767px) {
+    .portal-hero-illustration { display: none !important; }
+}
+
+/* 3 HIGHLIGHT STATS */
+.portal-highlight-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+}
+@media (min-width: 768px) {
+    .portal-highlight-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+.portal-stat-item {
+    background-color: #ffffff !important;
+    border-radius: 16px !important;
+    padding: 16px 20px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+}
+.portal-stat-item:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 6 CORE GRID CARDS (2x3) */
+.portal-core-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+}
+@media (min-width: 1024px) {
+    .portal-core-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+.portal-dashboard-card {
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 22px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+}
+
+/* WHITE PANELS FOR OTHER TABS */
+.portal-white-panel {
+    background-color: #ffffff !important;
+    border-radius: 24px !important;
+    padding: 24px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    box-sizing: border-box !important;
+}
+@media (min-width: 640px) {
+    .portal-white-panel { padding: 32px !important; }
+}
+
+/* TAB DISPLAY */
+.portal-view {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+.portal-view.hidden {
+    display: none !important;
+}
+
+/* MOBILE NAV */
+.portal-mobile-bar {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 16px !important;
+    scrollbar-width: none !important;
+}
+.portal-mobile-bar::-webkit-scrollbar { display: none !important; }
+@media (min-width: 1024px) {
+    .portal-mobile-bar { display: none !important; }
+}
+.mobile-tab-btn {
+    padding: 8px 14px !important;
+    border-radius: 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    border: 1px solid #cbd5e1 !important;
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+.mobile-tab-btn.active {
+    background-color: #003875 !important;
+    color: #ffffff !important;
+    border-color: #003875 !important;
+}
+</style>
+
+
         <!-- Loading State -->
         <div id="profile-loading" class="py-20 text-center">
             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-brand-blue mb-4 animate-spin">
@@ -806,7 +1111,7 @@
 
         <!-- Authenticated KIPA Student Portal -->
         <div id="profile-portal" class="hidden py-6 md:py-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="portal-container">
                 
                 <!-- MOBILE HORIZONTAL SCROLL NAV -->
                 <div class="lg:hidden mb-6 overflow-x-auto pb-2 scrollbar-none">
@@ -844,11 +1149,11 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+                <div class="portal-layout">
                     
                     <!-- LEFT SIDEBAR (Mô phỏng 100% demo) -->
-                    <aside class="w-full lg:w-72 xl:w-80 flex-shrink-0">
-                        <div class="bg-gradient-to-b from-[#003875] via-[#002f63] to-[#001f42] text-white rounded-3xl p-6 shadow-xl border border-blue-900/40 lg:sticky lg:top-24">
+                    <aside class="portal-sidebar-col" style="width: 100%; max-width: 100%;">
+<div class="portal-sidebar">
                             <!-- Student Profile Card in Sidebar -->
                             <div class="text-center mb-6">
                                 <div class="relative inline-block">
@@ -943,15 +1248,15 @@
                     </aside>
 
                     <!-- RIGHT MAIN CONTENT (Views) -->
-                    <div class="flex-grow min-w-0 space-y-6">
+                    <div class="portal-main-area">
                         
                         <!-- VIEW 1: TỔNG QUAN (DASHBOARD) -->
                         <div id="view-overview" class="portal-view space-y-6">
                             
                             <!-- Hero Welcome Banner -->
-                            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#003875] via-[#00509d] to-[#0274bd] p-6 sm:p-8 text-white shadow-xl">
+                            <div class="portal-hero-banner">
                                 <!-- Background Illustration -->
-                                <div class="hidden md:block absolute top-0 right-0 h-full w-2/5 bg-contain bg-right bg-no-repeat opacity-95 pointer-events-none" style="background-image: url('/assets/home/seoul-airplane-banner.png');"></div>
+                                <div class="portal-hero-illustration"></div>
                                 
                                 <div class="relative z-10 max-w-lg">
                                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-white backdrop-blur-sm mb-3">
@@ -967,7 +1272,7 @@
                             </div>
 
                             <!-- 3 Top Highlight Cards -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="portal-highlight-grid">
                                 <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer" onclick="switchTab('journey')">
                                     <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center text-2xl flex-shrink-0 shadow-inner">
                                         <span>🇰🇷</span>
@@ -1006,10 +1311,10 @@
                             </div>
 
                             <!-- 6 Core 2x3 Grid Cards -->
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="portal-core-grid">
                                 
                                 <!-- Card 1: Tiến độ tổng quan -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                                <div class="portal-dashboard-card">
                                     <div class="flex items-center justify-between mb-5">
                                         <h2 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-2">
                                             <span class="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-sm"><i class="fa-solid fa-chart-pie"></i></span>
@@ -1076,7 +1381,7 @@
                                 </div>
 
                                 <!-- Card 2: Lịch học sắp tới -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                                <div class="portal-dashboard-card">
                                     <div class="flex items-center justify-between mb-4">
                                         <h2 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-2">
                                             <span class="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-sm"><i class="fa-regular fa-calendar-days"></i></span>
@@ -1090,7 +1395,7 @@
                                 </div>
 
                                 <!-- Card 3: Hồ sơ của tôi -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                                <div class="portal-dashboard-card">
                                     <div class="flex items-center justify-between mb-4">
                                         <h2 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-2">
                                             <span class="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-sm"><i class="fa-regular fa-folder-closed"></i></span>
@@ -1107,7 +1412,7 @@
                                 </div>
 
                                 <!-- Card 4: Thông báo mới -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                                <div class="portal-dashboard-card">
                                     <div class="flex items-center justify-between mb-4">
                                         <h2 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-2">
                                             <span class="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-sm"><i class="fa-regular fa-bell"></i></span>
@@ -1121,7 +1426,7 @@
                                 </div>
 
                                 <!-- Card 5: Tài liệu học tập -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                                <div class="portal-dashboard-card">
                                     <div class="flex items-center justify-between mb-4">
                                         <h2 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-2">
                                             <span class="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-sm"><i class="fa-solid fa-book-open"></i></span>
@@ -1135,7 +1440,7 @@
                                 </div>
 
                                 <!-- Card 6: Hỗ trợ & Liên hệ -->
-                                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                                <div class="portal-dashboard-card">
                                     <div class="flex items-center justify-between mb-4">
                                         <h2 class="font-phudu text-lg font-bold text-brand-navy flex items-center gap-2">
                                             <span class="w-8 h-8 rounded-xl bg-red-50 text-red-500 flex items-center justify-center text-sm"><i class="fa-solid fa-headset"></i></span>
@@ -1180,7 +1485,7 @@
 
                         <!-- VIEW 2: THÔNG TIN CÁ NHÂN -->
                         <div id="view-profile" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                                     <div>
                                         <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Hồ sơ cá nhân</span>
@@ -1256,7 +1561,7 @@
 
                         <!-- VIEW 3: LỘ TRÌNH HỌC TẬP (KIPA JOURNEY) -->
                         <div id="view-journey" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                                     <div>
                                         <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Bản đồ hành trình</span>
@@ -1278,7 +1583,7 @@
 
                         <!-- VIEW 4: HỒ SƠ & GIẤY TỜ (DIGITAL WALLET) -->
                         <div id="view-documents" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                                     <div>
                                         <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Ví hồ sơ số KIPA</span>
@@ -1299,7 +1604,7 @@
 
                         <!-- VIEW 5: ĐĂNG KÝ CHƯƠNG TRÌNH -->
                         <div id="view-programs" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Chương trình đã đăng ký</span>
                                 <h2 class="font-phudu text-2xl font-bold text-brand-navy mb-4">Du Học Hàn Quốc – Hệ Đại Học Chính Quy (D2-2)</h2>
                                 
@@ -1345,7 +1650,7 @@
 
                         <!-- VIEW 6: LỊCH HẸN & TƯ VẤN -->
                         <div id="view-schedules" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                                     <div>
                                         <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Thời gian biểu</span>
@@ -1366,7 +1671,7 @@
 
                         <!-- VIEW 7: THÔNG BÁO -->
                         <div id="view-notifications" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                                     <div>
                                         <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Trung tâm thông báo</span>
@@ -1387,7 +1692,7 @@
 
                         <!-- VIEW 8: TÀI LIỆU HỌC TẬP -->
                         <div id="view-materials" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                                     <div>
                                         <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Thư viện số KIPA</span>
@@ -1411,7 +1716,7 @@
 
                         <!-- VIEW 9: HỖ TRỢ HỌC VIÊN -->
                         <div id="view-support" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="pb-6 border-b border-slate-100">
                                     <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Đồng hành & Giải đáp</span>
                                     <h2 class="font-phudu text-2xl font-bold text-brand-navy">Hỗ Trợ Học Viên KIPA</h2>
@@ -1464,7 +1769,7 @@
 
                         <!-- VIEW 10: CÀI ĐẶT TÀI KHOẢN -->
                         <div id="view-settings" class="portal-view hidden space-y-6">
-                            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                            <div class="portal-white-panel">
                                 <div class="pb-6 border-b border-slate-100">
                                     <span class="inline-block bg-blue-50 text-brand-blue text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-2">Bảo mật tài khoản</span>
                                     <h2 class="font-phudu text-2xl font-bold text-brand-navy">Cài Đặt & Đổi Mật Khẩu</h2>
