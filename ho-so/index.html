@@ -1471,7 +1471,7 @@ body {
                                         <!-- Advisor Profile -->
                                         <div class="flex items-center justify-between p-3.5 rounded-2xl bg-blue-50/60 border border-blue-100">
                                             <div class="flex items-center gap-3">
-                                                <img id="dash-advisor-img" src="/media/nhansukipa/thuy-anh-kipa-viet-han.png" alt="Cố vấn học tập" class="w-11 h-11 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                                <img id="dash-advisor-img" src="/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg" alt="Cố vấn học tập" class="w-11 h-11 rounded-full object-cover ring-2 ring-white shadow-sm">
                                                 <div>
                                                     <p class="text-xs text-slate-500">Cố vấn học tập KIPA</p>
                                                     <p id="dash-advisor-name" class="font-phudu text-sm font-bold text-brand-navy">Cô Trần Thu Hà</p>
@@ -1900,8 +1900,8 @@ body {
         ok: true,
         student: {
             id: 1,
-            email: 'maianh.kipa@gmail.com',
-            full_name: 'Nguyễn Thị Mai Anh',
+            email: 'phungthiphuong1080@gmail.com',
+            full_name: 'Phùng Thị Phương',
             avatar_url: '/assets/home/avatar-hoc-sinh.jpg',
             birthday: '2006-05-18',
             gender: 'Nữ',
@@ -1922,7 +1922,7 @@ body {
             advisor_role: 'Cố vấn học tập KIPA',
             advisor_phone: '036 851 3865',
             advisor_email: 'duhocquoctekipaviethan@gmail.com',
-            advisor_avatar: '/media/nhansukipa/thuy-anh-kipa-viet-han.png'
+            advisor_avatar: '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg'
         },
         portal: {
             journey: [
@@ -2146,7 +2146,17 @@ body {
         var portal = data.portal || (DEFAULT_PORTAL_DATA.portal);
 
         // 1. Sidebar & Hero
-        var fullName = st.full_name || 'Nguyễn Thị Mai Anh';
+        var cachedUser = null;
+        try { cachedUser = JSON.parse(localStorage.getItem('kipa_user')); } catch (e) {}
+
+        var fullName = (st && st.full_name && st.full_name !== 'Nguyễn Thị Mai Anh')
+            ? st.full_name
+            : (cachedUser && cachedUser.full_name ? cachedUser.full_name : (st ? st.full_name : 'Phùng Thị Phương'));
+
+        var email = (st && st.email && st.email !== 'maianh.kipa@gmail.com')
+            ? st.email
+            : (cachedUser && cachedUser.email ? cachedUser.email : (st ? st.email : 'phungthiphuong1080@gmail.com'));
+
         var firstName = fullName.trim().split(' ').pop();
         safeText('sidebar-name-text', fullName);
         safeText('hero-name-span', firstName);
@@ -2247,7 +2257,7 @@ body {
 
         // 8. Advisor Info
         safeText('dash-advisor-name', st.advisor_name || 'Cô Trần Thu Hà');
-        safeSrc('dash-advisor-img', st.advisor_avatar || '/media/nhansukipa/thuy-anh-kipa-viet-han.png');
+        safeSrc('dash-advisor-img', st.advisor_avatar || '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg');
         if (st.advisor_phone) {
             var cleanPhone = st.advisor_phone.replace(/\s+/g, '');
             safeHref('dash-advisor-chat', 'https://zalo.me/' + cleanPhone);
@@ -2255,10 +2265,10 @@ body {
         }
 
         // 9. Profile Form Values
-        safeVal('profile-full-name', st.full_name || '');
-        safeVal('profile-email', st.email || '');
-        safeVal('profile-phone', st.phone || '');
-        safeVal('profile-birthday', st.birthday || '');
+        safeVal('profile-full-name', fullName);
+        safeVal('profile-email', email);
+        safeVal('profile-phone', st.phone || (cachedUser ? cachedUser.phone : '') || '0987654321');
+        safeVal('profile-birthday', st.birthday || '2006-05-18');
         safeVal('profile-gender', st.gender || 'Nữ');
         safeVal('profile-address', st.address || '');
         safeVal('profile-education-level', st.education_level || 'Tốt nghiệp THPT');
@@ -2527,6 +2537,16 @@ body {
                 if (res.portal) {
                     renderPortal(res);
                 }
+                try {
+                    var stored = JSON.parse(localStorage.getItem('kipa_user')) || {};
+                    stored.full_name = fullName;
+                    stored.phone = payload.phone;
+                    localStorage.setItem('kipa_user', JSON.stringify(stored));
+                    window.dispatchEvent(new Event('kipa-auth-change'));
+                } catch (e) {}
+                safeText('sidebar-name-text', fullName);
+                safeText('hero-name-span', fullName.trim().split(' ').pop());
+                safeVal('profile-full-name', fullName);
                 setStatus('profile-status', '✓ Đã cập nhật thông tin hồ sơ thành công!', false);
             } catch (error) {
                 setStatus('profile-status', describeError(error), true);

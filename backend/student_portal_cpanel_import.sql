@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `kipa_students` (
   `advisor_role` VARCHAR(128) DEFAULT 'Cố vấn học tập KIPA',
   `advisor_phone` VARCHAR(32) DEFAULT '036 851 3865',
   `advisor_email` VARCHAR(254) DEFAULT 'duhocquoctekipaviethan@gmail.com',
-  `advisor_avatar` VARCHAR(255) DEFAULT '/media/nhansukipa/thuy-anh-kipa-viet-han.png',
+  `advisor_avatar` VARCHAR(255) DEFAULT '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg',
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -288,8 +288,8 @@ INSERT IGNORE INTO `kipa_branches` (`id`, `branch_code`, `branch_name`, `address
 
 -- 2. Thêm Nhân sự & Cố vấn KIPA
 INSERT IGNORE INTO `kipa_staff` (`id`, `branch_id`, `staff_code`, `full_name`, `role_title`, `email`, `phone`, `avatar_url`, `is_active`) VALUES
-(1, 1, 'ST-001', 'Cô Trần Thu Hà', 'Cố vấn học tập KIPA', 'duhocquoctekipaviethan@gmail.com', '0368513865', '/media/nhansukipa/thuy-anh-kipa-viet-han.png', 1),
-(2, 2, 'ST-002', 'Cô Vũ Thúy Anh', 'Chuyên viên Xử lý Hồ sơ', 'thuyanh.kipa@gmail.com', '0368513865', '/media/nhansukipa/thuy-anh-kipa-viet-han.png', 1);
+(1, 1, 'ST-001', 'Cô Trần Thu Hà', 'Cố vấn học tập KIPA', 'duhocquoctekipaviethan@gmail.com', '0368513865', '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg', 1),
+(2, 2, 'ST-002', 'Cô Vũ Thúy Anh', 'Chuyên viên Xử lý Hồ sơ', 'thuyanh.kipa@gmail.com', '0368513865', '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg', 1);
 
 -- 3. Khách hàng đại diện
 INSERT IGNORE INTO `kipa_customers` (`id`, `customer_code`, `user_id`, `full_name`, `phone`, `email`, `gender`, `date_of_birth`, `current_address`, `branch_id`, `customer_status`) VALUES
@@ -310,7 +310,7 @@ INSERT IGNORE INTO `kipa_students` (
   '0987 654 321', 'Phường Quang Trung, TP. Quy Nhơn, Bình Định', 'Tốt nghiệp THPT', 'THPT Chuyên Lê Quý Đôn',
   'Bố: Nguyễn Văn Dũng (0912 345 678)', 'Đang học', 'Du học Hàn Quốc (D2-2)', 'KR-D2-2026', 'Hàn Quốc',
   '15/09/2026', 'Tháng 09/2027', 'Đang chuẩn bị', 72, 'Cô Trần Thu Hà', 'Cố vấn học tập KIPA',
-  '036 851 3865', 'duhocquoctekipaviethan@gmail.com', '/media/nhansukipa/thuy-anh-kipa-viet-han.png'
+  '036 851 3865', 'duhocquoctekipaviethan@gmail.com', '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg'
 );
 
 -- 6. 5 Mốc Lộ Trình Học Tập (Journey)

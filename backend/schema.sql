@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS kipa_students (
     advisor_role VARCHAR(128) DEFAULT 'Cố vấn học tập KIPA',
     advisor_phone VARCHAR(32) DEFAULT '036 851 3865',
     advisor_email VARCHAR(254) DEFAULT 'duhocquoctekipaviethan@gmail.com',
-    advisor_avatar VARCHAR(255) DEFAULT '/media/nhansukipa/thuy-anh-kipa-viet-han.png',
+    advisor_avatar VARCHAR(255) DEFAULT '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),

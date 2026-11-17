@@ -94,7 +94,7 @@ function kipa_fetch_student_portal(PDO $db, array $user): array
             'advisor_role' => 'Cố vấn học tập KIPA',
             'advisor_phone' => '036 851 3865',
             'advisor_email' => 'duhocquoctekipaviethan@gmail.com',
-            'advisor_avatar' => '/media/nhansukipa/thuy-anh-kipa-viet-han.png'
+            'advisor_avatar' => '/assets/doi-ngu/ban-quan-tri-thuy-anh.jpg'
         ];
     } else {
         if (!empty($user['full_name']) && ($student['full_name'] === 'Nguyễn Thị Mai Anh' || empty($student['full_name']))) {
