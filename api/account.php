@@ -65,7 +65,55 @@ try {
     }
 
     if ($action === 'get') {
-        kipa_json_response(200, ['ok' => true, 'user' => kipa_account_view($user)]);
+        $response = ['ok' => true, 'user' => kipa_account_view($user)];
+        try {
+            $studentQuery = $db->prepare('SELECT * FROM kipa_students WHERE email = :email LIMIT 1');
+            $studentQuery->execute(['email' => $user['email']]);
+            $student = $studentQuery->fetch();
+            if ($student) {
+                $response['student'] = $student;
+
+                $journeyQuery = $db->prepare('SELECT * FROM kipa_student_journey WHERE student_email = :email ORDER BY step_number ASC');
+                $journeyQuery->execute(['email' => $user['email']]);
+                $journey = $journeyQuery->fetchAll();
+                foreach ($journey as &$step) {
+                    if (isset($step['tasks_json']) && is_string($step['tasks_json'])) {
+                        $step['tasks'] = json_decode($step['tasks_json'], true) ?: [];
+                    }
+                }
+                unset($step);
+
+                $schedQuery = $db->prepare('SELECT * FROM kipa_student_schedules WHERE student_email = :email ORDER BY id DESC');
+                $schedQuery->execute(['email' => $user['email']]);
+                $schedules = $schedQuery->fetchAll();
+
+                $notifQuery = $db->prepare('SELECT * FROM kipa_student_notifications WHERE student_email = :email ORDER BY id DESC');
+                $notifQuery->execute(['email' => $user['email']]);
+                $notifications = $notifQuery->fetchAll();
+
+                $docsQuery = $db->prepare('SELECT d.* FROM kipa_dossier_documents d 
+                    JOIN kipa_service_dossiers sd ON d.dossier_id = sd.id 
+                    JOIN kipa_customers c ON sd.customer_id = c.id 
+                    WHERE c.email = :email OR (c.phone != "" AND c.phone = :phone) ORDER BY d.id ASC');
+                $docsQuery->execute(['email' => $user['email'], 'phone' => (string)($user['phone'] ?? '')]);
+                $documents = $docsQuery->fetchAll();
+
+                $supportQuery = $db->prepare('SELECT * FROM kipa_student_support WHERE student_email = :email ORDER BY id DESC');
+                $supportQuery->execute(['email' => $user['email']]);
+                $supportTickets = $supportQuery->fetchAll();
+
+                $response['portal'] = [
+                    'journey' => $journey,
+                    'documents' => $documents,
+                    'schedules' => $schedules,
+                    'notifications' => $notifications,
+                    'support_tickets' => $supportTickets,
+                ];
+            }
+        } catch (Throwable $e) {
+            error_log('[kipa-account] Portal data enrichment ignored: ' . $e->getMessage());
+        }
+        kipa_json_response(200, $response);
     }
 
     if ($action === 'update') {
