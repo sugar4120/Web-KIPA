@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import re
 import json
 import sqlite3
 import datetime
@@ -264,13 +265,19 @@ PAGE_TITLES = {
 }
 
 DEV_AUTH_USER = {
-    'email': 'hocvien@kipaviethan.edu.vn',
-    'full_name': 'Học viên KIPA',
-    'phone': '0368513865'
+    'email': 'phungthiphuong1080@gmail.com',
+    'full_name': 'Phùng Thị Phương',
+    'phone': '0987654321'
 }
 DEV_LOGGED_IN = True
 
-def get_student_portal_data(email='maianh.kipa@gmail.com'):
+def get_student_portal_data(email=None):
+    global DEV_AUTH_USER
+    if not email:
+        email = DEV_AUTH_USER.get('email', 'phungthiphuong1080@gmail.com')
+    user_full_name = DEV_AUTH_USER.get('full_name', 'Phùng Thị Phương')
+    user_phone = DEV_AUTH_USER.get('phone', '0987654321')
+
     init_dev_db()
     with sqlite3.connect(DB_PATH) as conn:
         conn.row_factory = sqlite3.Row
@@ -281,9 +288,17 @@ def get_student_portal_data(email='maianh.kipa@gmail.com'):
         if not student:
             cur.execute('SELECT * FROM kipa_students LIMIT 1')
             student = cur.fetchone()
+            if student:
+                cur.execute('UPDATE kipa_students SET email = ?, full_name = ? WHERE id = ?', 
+                            (email, user_full_name, student['id']))
+                conn.commit()
+                cur.execute('SELECT * FROM kipa_students WHERE id = ?', (student['id'],))
+                student = cur.fetchone()
+        
         student_dict = dict(student) if student else {}
-        if student_dict and student_dict.get('email'):
-            email = student_dict['email']
+        if user_full_name and user_full_name != 'Học viên KIPA':
+            student_dict['full_name'] = user_full_name
+            student_dict['email'] = email
         
         cur.execute('SELECT * FROM kipa_student_journey WHERE student_email = ? ORDER BY step_number ASC', (email,))
         journey = []
@@ -412,14 +427,19 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 school_name = data.get('school_name', '').strip()
                 emergency_contact = data.get('emergency_contact', '').strip()
 
+                if full_name:
+                    DEV_AUTH_USER['full_name'] = full_name
+                if phone:
+                    DEV_AUTH_USER['phone'] = phone
+
                 if phone:
                     clean_phone = re.sub(r'\D+', '', phone)
                     with sqlite3.connect(DB_PATH) as conn:
                         cur = conn.cursor()
                         cur.execute('''
                             SELECT id FROM kipa_students 
-                            WHERE id != 1 AND REPLACE(REPLACE(REPLACE(phone, ' ', ''), '-', ''), '.', '') = ?
-                        ''', (clean_phone,))
+                            WHERE id != 1 AND email != ? AND REPLACE(REPLACE(REPLACE(phone, ' ', ''), '-', ''), '.', '') = ?
+                        ''', (DEV_AUTH_USER.get('email', ''), clean_phone))
                         if cur.fetchone():
                             response_data = {
                                 'ok': False,
@@ -446,8 +466,8 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                             school_name = COALESCE(NULLIF(?, ''), school_name),
                             emergency_contact = COALESCE(NULLIF(?, ''), emergency_contact),
                             updated_at = CURRENT_TIMESTAMP
-                        WHERE id = 1
-                    ''', (full_name, phone, birthday, gender, address, education_level, school_name, emergency_contact))
+                        WHERE id = 1 OR email = ?
+                    ''', (full_name, phone, birthday, gender, address, education_level, school_name, emergency_contact, DEV_AUTH_USER.get('email', '')))
                     conn.commit()
 
                 portal = get_student_portal_data()

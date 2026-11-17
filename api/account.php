@@ -96,6 +96,10 @@ function kipa_fetch_student_portal(PDO $db, array $user): array
             'advisor_email' => 'duhocquoctekipaviethan@gmail.com',
             'advisor_avatar' => '/media/nhansukipa/thuy-anh-kipa-viet-han.png'
         ];
+    } else {
+        if (!empty($user['full_name']) && ($student['full_name'] === 'Nguyễn Thị Mai Anh' || empty($student['full_name']))) {
+            $student['full_name'] = $user['full_name'];
+        }
     }
 
     // 2. Lộ trình 5 bước học tập (kipa_student_journey)
