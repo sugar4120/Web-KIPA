@@ -270,6 +270,54 @@ DEV_AUTH_USER = {
 }
 DEV_LOGGED_IN = True
 
+def get_student_portal_data(email='maianh.kipa@gmail.com'):
+    init_dev_db()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        
+        cur.execute('SELECT * FROM kipa_students WHERE email = ?', (email,))
+        student = cur.fetchone()
+        if not student:
+            cur.execute('SELECT * FROM kipa_students LIMIT 1')
+            student = cur.fetchone()
+        student_dict = dict(student) if student else {}
+        
+        cur.execute('SELECT * FROM kipa_student_journey WHERE student_email = ? ORDER BY step_number ASC', (email,))
+        journey = []
+        for r in cur.fetchall():
+            d = dict(r)
+            try:
+                d['tasks'] = json.loads(d['tasks_json']) if d.get('tasks_json') else []
+            except Exception:
+                d['tasks'] = []
+            journey.append(d)
+            
+        cur.execute('SELECT * FROM kipa_student_documents WHERE student_email = ? ORDER BY id ASC', (email,))
+        documents = [dict(r) for r in cur.fetchall()]
+        
+        cur.execute('SELECT * FROM kipa_student_schedules WHERE student_email = ? ORDER BY id ASC', (email,))
+        schedules = [dict(r) for r in cur.fetchall()]
+        
+        cur.execute('SELECT * FROM kipa_student_notifications WHERE student_email = ? ORDER BY id DESC', (email,))
+        notifications = [dict(r) for r in cur.fetchall()]
+        
+        cur.execute('SELECT * FROM kipa_student_materials ORDER BY id ASC')
+        materials = [dict(r) for r in cur.fetchall()]
+        
+        cur.execute('SELECT * FROM kipa_student_support WHERE student_email = ? ORDER BY id DESC', (email,))
+        support_tickets = [dict(r) for r in cur.fetchall()]
+        
+        return {
+            'student': student_dict,
+            'journey': journey,
+            'documents': documents,
+            'schedules': schedules,
+            'notifications': notifications,
+            'materials': materials,
+            'support_tickets': support_tickets
+        }
+
 class KipaDevHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         sys.stderr.write("[%s] %s\n" % (self.log_date_time_string(), format % args))
@@ -344,21 +392,108 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 }
                 status_code = 401
             elif action == 'get':
+                portal = get_student_portal_data()
                 response_data = {
                     'ok': True,
-                    'user': DEV_AUTH_USER
+                    'user': portal['student'],
+                    'student': portal['student'],
+                    'portal': portal
                 }
                 status_code = 200
             elif action == 'update':
                 full_name = data.get('full_name', '').strip()
                 phone = data.get('phone', '').strip()
-                if full_name:
-                    DEV_AUTH_USER['full_name'] = full_name
-                if phone:
-                    DEV_AUTH_USER['phone'] = phone
+                birthday = data.get('birthday', '').strip()
+                gender = data.get('gender', '').strip()
+                address = data.get('address', '').strip()
+                education_level = data.get('education_level', '').strip()
+                school_name = data.get('school_name', '').strip()
+                emergency_contact = data.get('emergency_contact', '').strip()
+
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('''
+                        UPDATE kipa_students 
+                        SET full_name = COALESCE(NULLIF(?, ''), full_name),
+                            phone = COALESCE(NULLIF(?, ''), phone),
+                            birthday = COALESCE(NULLIF(?, ''), birthday),
+                            gender = COALESCE(NULLIF(?, ''), gender),
+                            address = COALESCE(NULLIF(?, ''), address),
+                            education_level = COALESCE(NULLIF(?, ''), education_level),
+                            school_name = COALESCE(NULLIF(?, ''), school_name),
+                            emergency_contact = COALESCE(NULLIF(?, ''), emergency_contact),
+                            updated_at = CURRENT_TIMESTAMP
+                        WHERE id = 1
+                    ''', (full_name, phone, birthday, gender, address, education_level, school_name, emergency_contact))
+                    conn.commit()
+
+                portal = get_student_portal_data()
                 response_data = {
                     'ok': True,
-                    'user': DEV_AUTH_USER
+                    'user': portal['student'],
+                    'student': portal['student'],
+                    'portal': portal,
+                    'message': 'Đã cập nhật thông tin hồ sơ thành công vào cơ sở dữ liệu!'
+                }
+                status_code = 200
+            elif action == 'upload_document':
+                doc_name = data.get('doc_name', '').strip()
+                file_name = data.get('file_name', 'tai_lieu_moi.pdf').strip()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('''
+                        UPDATE kipa_student_documents
+                        SET status = 'Đã tải',
+                            file_name = ?,
+                            file_url = '/uploads/docs/' || ?,
+                            file_size = '2.8 MB',
+                            uploaded_at = strftime('%d/%m/%Y', 'now'),
+                            note = 'Học viên vừa tải lên tài liệu mới. Chuyên viên đang thụ lý thẩm định.',
+                            updated_at = CURRENT_TIMESTAMP
+                        WHERE doc_name = ?
+                    ''', (file_name, file_name, doc_name))
+                    conn.commit()
+                portal = get_student_portal_data()
+                response_data = {
+                    'ok': True,
+                    'portal': portal,
+                    'message': f'Đã tải lên giấy tờ "{doc_name}" thành công!'
+                }
+                status_code = 200
+            elif action == 'mark_notification':
+                notif_id = data.get('id')
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    if notif_id == 'all':
+                        cur.execute('UPDATE kipa_student_notifications SET is_read = 1')
+                    else:
+                        cur.execute('UPDATE kipa_student_notifications SET is_read = 1 WHERE id = ?', (notif_id,))
+                    conn.commit()
+                portal = get_student_portal_data()
+                response_data = {
+                    'ok': True,
+                    'portal': portal,
+                    'message': 'Đã cập nhật thông báo.'
+                }
+                status_code = 200
+            elif action == 'submit_support':
+                subject = data.get('subject', '').strip()
+                message = data.get('message', '').strip()
+                category = data.get('category', 'Hồ sơ giấy tờ').strip()
+                import random
+                code = f"TK-2026-{random.randint(1000, 9999)}"
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('''
+                        INSERT INTO kipa_student_support (student_email, ticket_code, subject, message, category, status, created_at, updated_at)
+                        VALUES (?, ?, ?, ?, ?, 'Mới gửi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                    ''', ('maianh.kipa@gmail.com', code, subject, message, category))
+                    conn.commit()
+                portal = get_student_portal_data()
+                response_data = {
+                    'ok': True,
+                    'portal': portal,
+                    'message': f'Yêu cầu hỗ trợ #{code} đã được gửi thành công tới Cố vấn KIPA!'
                 }
                 status_code = 200
             elif action == 'change_password':
