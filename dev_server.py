@@ -263,6 +263,13 @@ PAGE_TITLES = {
     '404.html': '404 - Không Tìm Thấy Trang | KIPA Việt Hàn'
 }
 
+DEV_AUTH_USER = {
+    'email': 'hocvien@kipaviethan.edu.vn',
+    'full_name': 'Học viên KIPA',
+    'phone': '0368513865'
+}
+DEV_LOGGED_IN = True
+
 class KipaDevHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         sys.stderr.write("[%s] %s\n" % (self.log_date_time_string(), format % args))
@@ -279,6 +286,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
         self.handle_request(head_only=False)
 
     def do_POST(self):
+        global DEV_AUTH_USER, DEV_LOGGED_IN
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         if path == '/api/login.php':
@@ -293,22 +301,81 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 email = data.get('email', 'hocvien@kipaviethan.edu.vn')
                 raw_name = email.split('@')[0].replace('.', ' ').replace('_', ' ').title()
                 full_name = raw_name if raw_name else 'Học viên KIPA'
+                DEV_AUTH_USER['email'] = email
+                DEV_AUTH_USER['full_name'] = full_name
+                DEV_LOGGED_IN = True
                 response_data = {
                     'ok': True,
                     'user': {
                         'full_name': full_name,
-                        'email': email
+                        'email': email,
+                        'phone': DEV_AUTH_USER.get('phone', '0368513865')
                     }
                 }
             elif action == 'logout':
+                DEV_LOGGED_IN = False
                 response_data = {'ok': True}
             elif action == 'me':
-                response_data = {'ok': True, 'user': None}
+                response_data = {'ok': True, 'user': DEV_AUTH_USER if DEV_LOGGED_IN else None}
             else:
                 response_data = {'ok': True}
 
             resp_bytes = json.dumps(response_data).encode('utf-8')
             self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
+            return
+
+        if path == '/api/account.php':
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length) if length > 0 else b'{}'
+            try:
+                data = json.loads(body.decode('utf-8'))
+            except Exception:
+                data = {}
+            action = data.get('action')
+
+            if not DEV_LOGGED_IN:
+                response_data = {
+                    'ok': False,
+                    'error': 'Bạn chưa đăng nhập. Vui lòng đăng nhập để tiếp tục.'
+                }
+                status_code = 401
+            elif action == 'get':
+                response_data = {
+                    'ok': True,
+                    'user': DEV_AUTH_USER
+                }
+                status_code = 200
+            elif action == 'update':
+                full_name = data.get('full_name', '').strip()
+                phone = data.get('phone', '').strip()
+                if full_name:
+                    DEV_AUTH_USER['full_name'] = full_name
+                if phone:
+                    DEV_AUTH_USER['phone'] = phone
+                response_data = {
+                    'ok': True,
+                    'user': DEV_AUTH_USER
+                }
+                status_code = 200
+            elif action == 'change_password':
+                response_data = {
+                    'ok': True,
+                    'message': 'Đã đổi mật khẩu thành công.'
+                }
+                status_code = 200
+            else:
+                response_data = {
+                    'ok': False,
+                    'error': 'Hành động không hợp lệ.'
+                }
+                status_code = 400
+
+            resp_bytes = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
+            self.send_response(status_code)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Content-Length', str(len(resp_bytes)))
             self.end_headers()
