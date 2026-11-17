@@ -87,4 +87,8 @@
 .bg-\[\#e11d48\] { background-color: #e11d48 !important; }
 .bg-\[\#f0f7fe\] { background-color: #f0f7fe !important; }
 
+/* Layout & Input Alignment Helpers */
+.inset-y-0 { top: 0px !important; bottom: 0px !important; }
+
+
 
