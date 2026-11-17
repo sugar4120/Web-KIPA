@@ -1,7 +1,7 @@
 # KIPA VIỆT HÀN — BÁO CÁO KIỂM TOÁN HIỆN TRẠNG DATABASE (DATABASE CURRENT INVENTORY)
 
 > **Tài liệu kiểm toán kỹ thuật:** Dành cho Ban Lãnh Đạo KIPA, Senior Database Architect & Đội ngũ Kỹ thuật Triển khai CRM / Student Portal  
-> **Phiên bản:** 2.2.0 (Hoàn thiện nghiệp vụ Tiếp nhận & Tư vấn, Phân quyền, SLA, Phê duyệt kép, Bảo vệ Kho tài liệu & Bảo mật Cổng học viên)  
+> **Phiên bản:** 2.3.0 (Hoàn thiện nghiệp vụ Tiếp nhận & Tư vấn, Phân quyền, SLA, Phê duyệt kép, Bảo vệ Kho tài liệu & Bảo mật Cổng học viên)  
 > **Hệ thống:** Website KIPA Việt Hàn + CMS Nội Dung + KIPA CRM + KIPA Student Portal + KIPA LMS  
 > **Môi trường:** Production / Shared Hosting cPanel (LiteSpeed Web Server, PHP 8.3, MySQL 8.0 / MariaDB 10.5+)  
 > **Cam kết an toàn:** **TUYỆT ĐỐI CHƯA CHẠY BẤT KỲ CÂU LỆNH SQL NÀO TRÊN PRODUCTION.** Toàn bộ tài liệu nhằm rà soát, kiểm toán và chờ phê duyệt.

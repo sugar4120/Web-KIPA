@@ -408,6 +408,7 @@ erDiagram
         boolean is_required
         varchar status
         varchar access_level
+        boolean can_download
         boolean is_archived
         bigint current_version_id
     }
@@ -456,6 +457,7 @@ erDiagram
         varchar doc_code
         varchar doc_name
         varchar status
+        boolean can_download
         varchar file_url
         varchar file_name
         varchar file_size

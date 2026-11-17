@@ -360,6 +360,7 @@
       d.doc_code AS doc_code,
       d.doc_name AS doc_name,
       d.status AS status,
+      d.can_download AS can_download,
       COALESCE(v.file_url, '') AS file_url,
       COALESCE(v.file_name, '') AS file_name,
       COALESCE(v.file_size, '') AS file_size,

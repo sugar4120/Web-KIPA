@@ -1,6 +1,6 @@
 -- ============================================================================
 -- KIPA VIỆT HÀN — SCHEMA DATABASE TOÀN DIỆN CHO CRM & STUDENT PORTAL
--- Phiên bản: 2.2.0 (Hoàn thiện nghiệp vụ Tư vấn, Phân quyền, SLA, Phê duyệt, Kho tài liệu & Bảo mật)
+-- Phiên bản: 2.3.0 (Chuẩn hóa Pipeline KIPA, Lịch T2-T7, 7 Nhóm Duyệt kép, Khử trùng CMS)
 -- Kiến trúc: Sử dụng chung 1 Database duy nhất, tiền tố kipa_
 -- Storage Engine: InnoDB | Charset: utf8mb4 | Collation: utf8mb4_unicode_ci
 -- Khóa chính: BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
@@ -10,7 +10,7 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ============================================================================
--- 1. HỆ THỐNG CƠ CẤU TỔ CHỨC, NHÂN SỰ & PHÂN QUYỀN RBAC NÂNG CAO
+-- 1. HỆ THỐNG CƠ CẤU TỔ CHỨC, NHÂN SỰ & PHÂN QUYỀN RBAC NÂNG CAO (10 BẢNG)
 -- ============================================================================
 
 -- 1.1. Chi nhánh & Văn phòng đại diện KIPA (7 cơ sở tại VN, Hàn Quốc, Úc)
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `kipa_staff` (
     CONSTRAINT `fk_kipa_staff_team` FOREIGN KEY (`team_id`) REFERENCES `kipa_teams` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 1.5. Danh mục vai trò CRM (ADMIN, DIRECTOR, CONSULTANT, CASE_OFFICER...)
+-- 1.5. Danh mục vai trò CRM (ADMIN, DIRECTOR, BRANCH_MANAGER, CONSULTANT...)
 CREATE TABLE IF NOT EXISTS `kipa_roles` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `role_code` VARCHAR(32) NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `kipa_roles` (
     UNIQUE KEY `uq_kipa_roles_code` (`role_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 1.6. Danh mục quyền hạn chi tiết (view_leads, review_docs, approve_visa...)
+-- 1.6. Danh mục quyền hạn chi tiết (view_leads, review_docs, view_sensitive_financials...)
 CREATE TABLE IF NOT EXISTS `kipa_permissions` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `permission_code` VARCHAR(64) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `kipa_staff_roles` (
     CONSTRAINT `fk_kipa_sr_granter` FOREIGN KEY (`granted_by`) REFERENCES `kipa_staff` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 1.9. Lịch sử cấp, sửa, thu hồi quyền (Audit trail khi chuyển phòng ban)
+-- 1.9. Lịch sử cấp, sửa, thu hồi quyền (Audit trail khi chuyển chi nhánh/phòng ban)
 CREATE TABLE IF NOT EXISTS `kipa_staff_role_history` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `staff_id` BIGINT UNSIGNED NOT NULL,
@@ -187,10 +187,10 @@ CREATE TABLE IF NOT EXISTS `kipa_role_delegations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 2. HỆ THỐNG KHÁCH HÀNG TRUNG TÂM CRM & HỒ SƠ PHÁP LÝ
+-- 2. HỆ THỐNG KHÁCH HÀNG TRUNG TÂM CRM & HỒ SƠ PHÁP LÝ (4 BẢNG)
 -- ============================================================================
 
--- 2.1. Hồ sơ Khách hàng trung tâm (Single Source of Customer Identity)
+-- 2.1. Hồ sơ Khách hàng trung tâm (Giữ mã khách hàng vĩnh viễn khi quay lại)
 CREATE TABLE IF NOT EXISTS `kipa_customers` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `customer_code` VARCHAR(32) NOT NULL,
@@ -216,6 +216,7 @@ CREATE TABLE IF NOT EXISTS `kipa_customers` (
     UNIQUE KEY `uq_kipa_customers_code` (`customer_code`),
     KEY `idx_kipa_customers_phone` (`phone`),
     KEY `idx_kipa_customers_email` (`email`),
+    KEY `idx_kipa_customers_idcard` (`id_card_number`),
     KEY `idx_kipa_customers_user` (`user_id`),
     KEY `idx_kipa_customers_lead` (`legacy_lead_id`),
     KEY `idx_kipa_customers_staff` (`assigned_staff_id`),
@@ -264,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `kipa_customer_relations` (
     CONSTRAINT `fk_kipa_rel_customer` FOREIGN KEY (`customer_id`) REFERENCES `kipa_customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 2.4. Hồ sơ học vấn & ngoại ngữ (GPA học bạ, TOPIK, IELTS, KLAT)
+-- 2.4. Hồ sơ học vấn & ngoại ngữ (GPA học bạ cấp 3/Đại học, chứng chỉ ngoại ngữ)
 CREATE TABLE IF NOT EXISTS `kipa_customer_education` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `customer_id` BIGINT UNSIGNED NOT NULL,
@@ -284,17 +285,21 @@ CREATE TABLE IF NOT EXISTS `kipa_customer_education` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 3. HỆ THỐNG TIẾP NHẬN LEAD, CHIẾN DỊCH & HỒ SƠ TƯ VẤN CRM (CONSULTATION)
+-- 3. HỆ THỐNG TIẾP NHẬN LEAD, CHIẾN DỊCH & HỒ SƠ TƯ VẤN CRM (5 BẢNG - KHỬ TRÙNG CMS)
 -- ============================================================================
 
--- 3.1. Danh mục Nguồn tiếp nhận Lead (Facebook, Zalo, Website, Hotline, Giới thiệu)
+-- 3.1. Danh mục Nguồn tiếp nhận Lead (Chuẩn hóa cấu trúc dùng chung Website CMS & CRM)
 CREATE TABLE IF NOT EXISTS `kipa_lead_sources` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `source_code` VARCHAR(32) NOT NULL,
-    `source_name` VARCHAR(128) NOT NULL,
+    `source_name` VARCHAR(150) NOT NULL,
+    `source_code` VARCHAR(50) NOT NULL,
+    `source_group` VARCHAR(100) NULL,
     `channel_type` VARCHAR(64) NOT NULL DEFAULT 'DIGITAL',
-    `is_active` BOOLEAN NOT NULL DEFAULT 1,
+    `description` VARCHAR(500) NULL,
+    `display_order` INT NOT NULL DEFAULT 0,
+    `status` VARCHAR(20) NOT NULL DEFAULT 'active',
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     UNIQUE KEY `uq_kipa_ls_code` (`source_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -314,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `kipa_campaigns` (
     UNIQUE KEY `uq_kipa_camp_code` (`campaign_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 3.3. Hồ sơ tư vấn riêng biệt (Tách độc lập với Hồ sơ dịch vụ đã ký hợp đồng)
+-- 3.3. Hồ sơ tư vấn riêng biệt (Giữ nguyên Pipeline KIPA thống nhất)
 CREATE TABLE IF NOT EXISTS `kipa_consultation_dossiers` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `consultation_code` VARCHAR(32) NOT NULL,
@@ -324,6 +329,7 @@ CREATE TABLE IF NOT EXISTS `kipa_consultation_dossiers` (
     `campaign_id` BIGINT UNSIGNED NULL,
     `assigned_staff_id` BIGINT UNSIGNED NULL,
     `stage` VARCHAR(32) NOT NULL DEFAULT 'NEW',
+    `sub_stage` VARCHAR(64) NULL,
     `primary_interest` VARCHAR(64) NOT NULL,
     `target_intake` VARCHAR(32) NULL,
     `estimated_budget` DECIMAL(15,2) NULL,
@@ -355,30 +361,40 @@ CREATE TABLE IF NOT EXISTS `kipa_consultation_dossiers` (
     CONSTRAINT `fk_kipa_cd_accept_by` FOREIGN KEY (`accepted_by`) REFERENCES `kipa_staff` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 3.4. Chi tiết nhu cầu dịch vụ trong hồ sơ tư vấn
+-- 3.4. Danh mục & Chi tiết nhu cầu tư vấn (Đồng bộ cấu trúc Master CMS Group G)
 CREATE TABLE IF NOT EXISTS `kipa_consultation_interests` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `consultation_id` BIGINT UNSIGNED NOT NULL,
-    `service_type` VARCHAR(64) NOT NULL,
-    `target_country` VARCHAR(64) NOT NULL,
+    `consultation_id` BIGINT UNSIGNED NULL,
+    `interest_name` VARCHAR(255) NOT NULL,
+    `interest_code` VARCHAR(50) NOT NULL,
+    `slug` VARCHAR(255) NULL,
+    `service_type` VARCHAR(64) NULL,
+    `target_country` VARCHAR(64) NULL,
     `target_major` VARCHAR(128) NULL,
     `preferred_school` VARCHAR(160) NULL,
-    `notes` TEXT NULL,
+    `description` VARCHAR(500) NULL,
+    `display_order` INT NOT NULL DEFAULT 0,
+    `status` VARCHAR(20) NOT NULL DEFAULT 'active',
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     KEY `idx_kipa_ci_cons` (`consultation_id`),
     CONSTRAINT `fk_kipa_ci_cons` FOREIGN KEY (`consultation_id`) REFERENCES `kipa_consultation_dossiers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 3.5. Lịch sử hoạt động tư vấn (Cuộc gọi, gặp mặt, tương tác Zalo, lịch hẹn)
+-- 3.5. Lịch sử hoạt động tư vấn & Hẹn lịch (Chuẩn hóa dùng chung CMS & CRM)
 CREATE TABLE IF NOT EXISTS `kipa_consultation_activities` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `consultation_id` BIGINT UNSIGNED NOT NULL,
-    `staff_id` BIGINT UNSIGNED NOT NULL,
-    `activity_type` VARCHAR(32) NOT NULL,
-    `activity_time` DATETIME NOT NULL,
-    `outcome` VARCHAR(64) NOT NULL,
-    `content` TEXT NOT NULL,
+    `consultation_id` BIGINT UNSIGNED NULL,
+    `consultation_request_id` BIGINT UNSIGNED NULL,
+    `staff_id` BIGINT UNSIGNED NULL,
+    `activity_type` VARCHAR(50) NOT NULL,
+    `activity_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `outcome` VARCHAR(64) NULL,
+    `activity_content` LONGTEXT NOT NULL,
+    `old_status` VARCHAR(30) NULL,
+    `new_status` VARCHAR(30) NULL,
+    `performed_by` BIGINT UNSIGNED NULL,
     `scheduled_next_at` DATETIME NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
@@ -390,10 +406,10 @@ CREATE TABLE IF NOT EXISTS `kipa_consultation_activities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 4. HỆ THỐNG HỒ SƠ DỊCH VỤ, VÒNG ĐỜI & LỊCH SỬ BÀN GIAO (CRM SERVICE DOSSIERS)
+-- 4. HỆ THỐNG HỒ SƠ DỊCH VỤ, VÒNG ĐỜI & LỊCH SỬ BÀN GIAO (3 BẢNG)
 -- ============================================================================
 
--- 4.1. Hồ sơ Dịch vụ / Hợp đồng đã ký kết chính thức
+-- 4.1. Hồ sơ Dịch vụ / Hợp đồng đã ký kết chính thức (Chỉ tạo khi xác nhận bàn giao)
 CREATE TABLE IF NOT EXISTS `kipa_service_dossiers` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `dossier_code` VARCHAR(32) NOT NULL,
@@ -466,7 +482,7 @@ CREATE TABLE IF NOT EXISTS `kipa_dossier_status_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 5. HỆ THỐNG NHIỆM VỤ, QUẢN LÝ SLA, LỊCH LÀM VIỆC & NHẮC HẠN (TASKS & SLA)
+-- 5. HỆ THỐNG NHIỆM VỤ, QUẢN LÝ SLA, LỊCH LÀM VIỆC & NHẮC HẠN (5 BẢNG)
 -- ============================================================================
 
 -- 5.1. Chính sách SLA theo dịch vụ và chi nhánh
@@ -487,14 +503,14 @@ CREATE TABLE IF NOT EXISTS `kipa_sla_policies` (
     CONSTRAINT `fk_kipa_sla_branch` FOREIGN KEY (`branch_id`) REFERENCES `kipa_branches` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 5.2. Lịch làm việc & ngày nghỉ lễ tính SLA theo thời gian hành chính thực tế
+-- 5.2. Lịch làm việc mặc định KIPA (T2-T6: 8h-17h, T7: 8h-12h, CN nghỉ, Lễ tết)
 CREATE TABLE IF NOT EXISTS `kipa_working_calendars` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `branch_id` BIGINT UNSIGNED NULL,
     `calendar_date` DATE NOT NULL,
     `is_working_day` BOOLEAN NOT NULL DEFAULT 1,
     `start_time` TIME NOT NULL DEFAULT '08:00:00',
-    `end_time` TIME NOT NULL DEFAULT '17:30:00',
+    `end_time` TIME NOT NULL DEFAULT '17:00:00',
     `lunch_start` TIME NOT NULL DEFAULT '12:00:00',
     `lunch_end` TIME NOT NULL DEFAULT '13:30:00',
     `holiday_name` VARCHAR(128) NULL,
@@ -583,10 +599,10 @@ CREATE TABLE IF NOT EXISTS `kipa_task_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 6. HỆ THỐNG QUY TRÌNH PHÊ DUYỆT NHIỀU CẤP & PHÊ DUYỆT KÉP (APPROVALS)
+-- 6. HỆ THỐNG QUY TRÌNH PHÊ DUYỆT NHIỀU CẤP & 7 NHÓM DUYỆT KÉP (4 BẢNG)
 -- ============================================================================
 
--- 6.1. Định nghĩa quy trình phê duyệt (Workflows: Duyệt hợp đồng, nộp trường, visa, hoàn cọc)
+-- 6.1. Định nghĩa quy trình phê duyệt (Khôi phục đầy đủ 7 nhóm phê duyệt kép KIPA)
 CREATE TABLE IF NOT EXISTS `kipa_approval_workflows` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `workflow_code` VARCHAR(32) NOT NULL,
@@ -655,7 +671,7 @@ CREATE TABLE IF NOT EXISTS `kipa_approvals` (
     CONSTRAINT `chk_kipa_app_no_self` CHECK (`requested_by` != `approver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 6.4. Nhật ký kiểm toán thao tác hệ thống (Audit Logs)
+-- 6.4. Nhật ký kiểm toán thao tác hệ thống (Audit Logs - Không tự động xóa)
 CREATE TABLE IF NOT EXISTS `kipa_audit_logs` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `actor_type` VARCHAR(32) NOT NULL DEFAULT 'STAFF',
@@ -675,7 +691,7 @@ CREATE TABLE IF NOT EXISTS `kipa_audit_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 7. KHO TÀI LIỆU SỐ MASTER VAULT & BẢO MẬT TRUY CẬP (DOCUMENTS)
+-- 7. KHO TÀI LIỆU SỐ MASTER VAULT & PHÂN QUYỀN TRUY CẬP (4 BẢNG)
 -- ============================================================================
 
 -- 7.1. Danh mục giấy tờ Checklist gốc (Bảo toàn khi đóng hồ sơ: ON DELETE RESTRICT)
@@ -689,6 +705,7 @@ CREATE TABLE IF NOT EXISTS `kipa_dossier_documents` (
     `is_required` BOOLEAN NOT NULL DEFAULT 1,
     `status` VARCHAR(64) NOT NULL DEFAULT 'Chưa tải lên',
     `access_level` VARCHAR(32) NOT NULL DEFAULT 'INTERNAL',
+    `can_download` BOOLEAN NOT NULL DEFAULT 1,
     `is_archived` BOOLEAN NOT NULL DEFAULT 0,
     `current_version_id` BIGINT UNSIGNED NULL,
     `notes` TEXT NULL,
@@ -702,7 +719,7 @@ CREATE TABLE IF NOT EXISTS `kipa_dossier_documents` (
     CONSTRAINT `fk_kipa_doc_customer` FOREIGN KEY (`customer_id`) REFERENCES `kipa_customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 7.2. Quản lý đa phiên bản file scan/PDF (Protected Storage)
+-- 7.2. Quản lý đa phiên bản file scan/PDF (Protected Storage ngoài webroot)
 CREATE TABLE IF NOT EXISTS `kipa_document_versions` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `document_id` BIGINT UNSIGNED NOT NULL,
@@ -737,7 +754,7 @@ CREATE TABLE IF NOT EXISTS `kipa_document_reviews` (
     CONSTRAINT `fk_kipa_rev_reviewer` FOREIGN KEY (`reviewer_id`) REFERENCES `kipa_staff` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 7.4. Nhật ký truy cập, xem & tải tài liệu nhạy cảm (Document Access Audit)
+-- 7.4. Nhật ký truy cập, xem & tải tài liệu nhạy cảm (Tách biệt quyền Xem và Tải)
 CREATE TABLE IF NOT EXISTS `kipa_document_access_logs` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `version_id` BIGINT UNSIGNED NOT NULL,
@@ -755,7 +772,7 @@ CREATE TABLE IF NOT EXISTS `kipa_document_access_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
--- 8. GIAO DIỆN CỔNG HỌC VIÊN (STUDENT PORTAL EXPERIENCES & VIEW)
+-- 8. GIAO DIỆN CỔNG HỌC VIÊN (STUDENT PORTAL EXPERIENCES & VIEW - 7 BẢNG + 1 VIEW)
 -- ============================================================================
 
 -- 8.1. Profile Cache học viên (Hiển thị trang cá nhân tức thì, không JOIN nặng)
@@ -889,7 +906,7 @@ CREATE TABLE IF NOT EXISTS `kipa_notification_settings` (
     CONSTRAINT `fk_kipa_notif_cust` FOREIGN KEY (`customer_id`) REFERENCES `kipa_customers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 8.8. SQL View Hợp Nhất Ví Hồ Sơ Số (Tương thích 100% Cổng học viên, chống lộ chéo dữ liệu)
+-- 8.8. SQL View Hợp Nhất Ví Hồ Sơ Số (Tương thích 100% Cổng học viên, chống lộ chéo IDOR)
 CREATE OR REPLACE VIEW `kipa_student_documents` AS
 SELECT 
     d.id AS id,
@@ -901,6 +918,7 @@ SELECT
     d.doc_code AS doc_code,
     d.doc_name AS doc_name,
     d.status AS status,
+    d.can_download AS can_download,
     COALESCE(v.file_url, '') AS file_url,
     COALESCE(v.file_name, '') AS file_name,
     COALESCE(v.file_size, '') AS file_size,
