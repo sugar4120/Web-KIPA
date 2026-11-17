@@ -1,0 +1,84 @@
+{
+  "host_info": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 94 Stepping 3, GenuineIntel",
+    "machine": "AMD64",
+    "python_version": "3.12.10",
+    "sqlite_version": "3.49.1"
+  },
+  "database_size_mb": 113.55,
+  "records_loaded": {
+    "customers": 100000,
+    "consultation_dossiers": 200000,
+    "service_dossiers": 100000,
+    "consultation_activities": 500000,
+    "task_history": 500000,
+    "documents": 100000,
+    "total_records": 1500000
+  },
+  "query_results": [
+    {
+      "id": "PERF-Q1",
+      "name": "Tìm kiếm chính xác Khách hàng theo SĐT (Phone Index)",
+      "target": "< 5 ms",
+      "avg_ms": 0.331,
+      "min_ms": 0.086,
+      "max_ms": 1.252,
+      "sql": "SELECT * FROM kipa_customers WHERE phone = '0912055555' LIMIT 1;"
+    },
+    {
+      "id": "PERF-Q2",
+      "name": "Tìm kiếm chính xác Khách hàng theo Mã (Customer Code Unique Index)",
+      "target": "< 5 ms",
+      "avg_ms": 0.21,
+      "min_ms": 0.08,
+      "max_ms": 0.666,
+      "sql": "SELECT * FROM kipa_customers WHERE customer_code = 'KH-2026-088888';"
+    },
+    {
+      "id": "PERF-Q3",
+      "name": "Tìm kiếm tiền tố số điện thoại (LIKE '091205%' Prefix Search)",
+      "target": "< 10 ms",
+      "avg_ms": 53.565,
+      "min_ms": 33.127,
+      "max_ms": 101.804,
+      "sql": "SELECT id, customer_code, full_name, phone FROM kipa_customers WHERE phone LIKE '091205%' LIMIT 20;"
+    },
+    {
+      "id": "PERF-Q4",
+      "name": "Phân trang Hồ sơ tư vấn theo Chi nhánh (ORDER BY created_at OFFSET 100 LIMIT 20)",
+      "target": "< 20 ms",
+      "avg_ms": 431.765,
+      "min_ms": 195.631,
+      "max_ms": 874.434,
+      "sql": "SELECT id, consultation_code, customer_id, stage, created_at FROM kipa_consultation_dossiers WHERE branch_id = 1 ORDER BY created_at DESC LIMIT 20 OFFSET 100;"
+    },
+    {
+      "id": "PERF-Q5",
+      "name": "JOIN Khách hàng + Hồ sơ dịch vụ + Đếm tài liệu (Complex Relational Join)",
+      "target": "< 30 ms",
+      "avg_ms": 0.587,
+      "min_ms": 0.132,
+      "max_ms": 2.337,
+      "sql": "SELECT c.customer_code, c.full_name, sd.dossier_code, COUNT(d.id) AS total_docs\n                FROM kipa_service_dossiers sd\n                JOIN kipa_customers c ON sd.customer_id = c.id\n                LEFT JOIN kipa_dossier_documents d ON sd.id = d.dossier_id\n                WHERE sd.branch_id = 2\n                GROUP BY sd.id\n                LIMIT 20;"
+    },
+    {
+      "id": "PERF-Q6",
+      "name": "Thống kê Dashboard Pipeline (GROUP BY stage trên 200.000 hồ sơ)",
+      "target": "< 50 ms",
+      "avg_ms": 5.641,
+      "min_ms": 4.675,
+      "max_ms": 6.539,
+      "sql": "SELECT stage, COUNT(*) AS count FROM kipa_consultation_dossiers WHERE branch_id = 1 GROUP BY stage;"
+    },
+    {
+      "id": "PERF-Q7",
+      "name": "Thống kê Hoạt động Tư vấn theo Chuyên viên (GROUP BY trên 500.000 bản ghi)",
+      "target": "< 100 ms",
+      "avg_ms": 2667.089,
+      "min_ms": 2241.471,
+      "max_ms": 3394.232,
+      "sql": "SELECT staff_id, activity_type, COUNT(*) AS total FROM kipa_consultation_activities GROUP BY staff_id, activity_type LIMIT 20;"
+    }
+  ]
+}
