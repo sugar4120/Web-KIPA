@@ -412,6 +412,27 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 school_name = data.get('school_name', '').strip()
                 emergency_contact = data.get('emergency_contact', '').strip()
 
+                if phone:
+                    clean_phone = re.sub(r'\D+', '', phone)
+                    with sqlite3.connect(DB_PATH) as conn:
+                        cur = conn.cursor()
+                        cur.execute('''
+                            SELECT id FROM kipa_students 
+                            WHERE id != 1 AND REPLACE(REPLACE(REPLACE(phone, ' ', ''), '-', ''), '.', '') = ?
+                        ''', (clean_phone,))
+                        if cur.fetchone():
+                            response_data = {
+                                'ok': False,
+                                'error': 'Số điện thoại này đã được sử dụng bởi một tài khoản khác. Mỗi số điện thoại chỉ được đăng ký 1 tài khoản duy nhất.'
+                            }
+                            resp_bytes = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
+                            self.send_response(409)
+                            self.send_header('Content-Type', 'application/json; charset=utf-8')
+                            self.send_header('Content-Length', str(len(resp_bytes)))
+                            self.end_headers()
+                            self.wfile.write(resp_bytes)
+                            return
+
                 with sqlite3.connect(DB_PATH) as conn:
                     cur = conn.cursor()
                     cur.execute('''

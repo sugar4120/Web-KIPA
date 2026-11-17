@@ -814,8 +814,9 @@
                         <p class="text-xs text-slate-500 mt-1">Mã OTP xác thực sẽ được gửi tới email này.</p>
                     </div>
                     <div>
-                        <label for="register-phone" class="block text-sm font-semibold text-brand-navy mb-1.5">Số điện thoại</label>
-                        <input type="tel" id="register-phone" name="phone" maxlength="32" autocomplete="tel" placeholder="0368 513 865" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                        <label for="register-phone" class="block text-sm font-semibold text-brand-navy mb-1.5">Số điện thoại <span class="text-brand-red">*</span></label>
+                        <input type="tel" id="register-phone" name="phone" required maxlength="32" autocomplete="tel" placeholder="0368 513 865" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0274BD] focus:border-transparent">
+                        <p class="text-xs text-slate-500 mt-1">Mỗi số điện thoại chỉ được đăng ký duy nhất 1 tài khoản.</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>

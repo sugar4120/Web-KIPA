@@ -218,6 +218,13 @@ try {
             if (strlen($phone) > 32 || $digits === null || strlen($digits) < 7 || strlen($digits) > 15 || !preg_match('/^\+?[\d\s().-]+$/', $phone)) {
                 kipa_json_response(422, ['error' => 'Vui lòng nhập số điện thoại hợp lệ.']);
             }
+            // Chống trùng lặp số điện thoại (1 số điện thoại chỉ liên kết 1 tài khoản)
+            $cleanPhone = $digits;
+            $dupPhone = $db->prepare('SELECT id FROM kipa_users WHERE id <> :id AND (phone = :phone OR REPLACE(REPLACE(REPLACE(phone, " ", ""), "-", ""), ".", "") = :clean_phone) LIMIT 1');
+            $dupPhone->execute(['id' => (int)$user['id'], 'phone' => $phone, 'clean_phone' => $cleanPhone]);
+            if ($dupPhone->fetchColumn()) {
+                kipa_json_response(409, ['error' => 'Số điện thoại này đã được sử dụng bởi một tài khoản khác. Mỗi số điện thoại chỉ được đăng ký 1 tài khoản duy nhất.']);
+            }
         }
         $birthday = is_string($request['birthday'] ?? null) ? trim($request['birthday']) : '';
         $gender = is_string($request['gender'] ?? null) ? trim($request['gender']) : 'Nữ';

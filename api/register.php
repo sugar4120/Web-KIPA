@@ -77,6 +77,17 @@ try {
         kipa_json_response(409, ['error' => 'Email này đã được đăng ký tài khoản. Vui lòng dùng email khác.']);
     }
 
+    // Kiểm tra chống trùng số điện thoại (Mỗi số điện thoại chỉ đăng ký 1 tài khoản duy nhất)
+    if ($phone !== '') {
+        $cleanPhone = preg_replace('/\D+/', '', $phone);
+        $existingPhone = $db->prepare('SELECT id FROM kipa_users WHERE phone = :phone OR REPLACE(REPLACE(REPLACE(phone, " ", ""), "-", ""), ".", "") = :clean_phone LIMIT 1');
+        $existingPhone->execute(['phone' => $phone, 'clean_phone' => $cleanPhone]);
+        if ($existingPhone->fetchColumn()) {
+            $db->commit();
+            kipa_json_response(409, ['error' => 'Số điện thoại này đã được đăng ký cho một tài khoản khác. Vui lòng đăng nhập hoặc sử dụng số điện thoại khác.']);
+        }
+    }
+
     // The registration itself consumes the OTP so the check and the insert stay atomic.
     $statement = $db->prepare(
         'SELECT id, code_hash, attempts FROM kipa_otp_codes
