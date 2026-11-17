@@ -792,6 +792,13 @@
     .portal-container { padding: 32px 24px; }
 }
 
+html, body {
+    overflow-x: clip !important;
+}
+body {
+    overflow-x: clip !important;
+}
+
 .portal-layout {
     display: flex !important;
     flex-direction: column !important;
@@ -804,7 +811,7 @@
     .portal-layout {
         flex-direction: row !important;
         gap: 28px !important;
-        align-items: flex-start !important;
+        align-items: stretch !important;
     }
 }
 
@@ -821,13 +828,12 @@
         min-width: 290px !important;
         max-width: 290px !important;
         flex: 0 0 290px !important;
-        position: sticky !important;
-        top: 96px !important;
-        z-index: 10 !important;
+        align-self: stretch !important;
+        position: relative !important;
     }
 }
 
-/* SIDEBAR STYLING */
+/* SIDEBAR STYLING - CỐ ĐỊNH KHI CUỘN TRANG */
 .portal-sidebar {
     width: 100% !important;
     background: linear-gradient(180deg, #003875 0%, #002754 50%, #001938 100%) !important;
@@ -837,6 +843,24 @@
     box-shadow: 0 10px 25px -5px rgba(0, 30, 60, 0.25) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     box-sizing: border-box !important;
+}
+@media (min-width: 1024px) {
+    .portal-sidebar {
+        position: sticky !important;
+        top: 96px !important;
+        z-index: 40 !important;
+        max-height: calc(100vh - 116px) !important;
+        overflow-y: auto !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+    }
+    .portal-sidebar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .portal-sidebar::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+    }
 }
 
 .portal-avatar-box {
@@ -967,22 +991,6 @@
 }
 @media (min-width: 768px) {
     .portal-hero-banner { padding: 32px 36px !important; }
-}
-.portal-hero-illustration {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    height: 100% !important;
-    width: 38% !important;
-    background-image: url('/assets/home/seoul-airplane-banner.png') !important;
-    background-repeat: no-repeat !important;
-    background-position: right bottom !important;
-    background-size: contain !important;
-    pointer-events: none !important;
-    opacity: 0.95 !important;
-}
-@media (max-width: 767px) {
-    .portal-hero-illustration { display: none !important; }
 }
 
 /* 3 HIGHLIGHT STATS */
@@ -1269,10 +1277,7 @@
                             
                             <!-- Hero Welcome Banner -->
                             <div class="portal-hero-banner">
-                                <!-- Background Illustration -->
-                                <div class="portal-hero-illustration"></div>
-                                
-                                <div class="relative z-10 max-w-lg">
+                                <div class="relative z-10 max-w-2xl">
                                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-white backdrop-blur-sm mb-3">
                                         <span>✨ KIPA STUDENT PORTAL</span>
                                     </div>
