@@ -6,8 +6,8 @@ if (PHP_SAPI !== 'cli') {
     exit;
 }
 
-if ($argc !== 3 || !in_array($argv[1], ['--migrate-only', '--create'], true) || !is_dir($argv[2] . '/api')) {
-    fwrite(STDERR, "Usage: php backend/admin_account.php --migrate-only|--create /absolute/path/to/public_html\nFor --create, provide the initial password on standard input. Existing accounts are never overwritten.\n");
+if ($argc !== 3 || !in_array($argv[1], ['--migrate-only', '--create', '--reset'], true) || !is_dir($argv[2] . '/api')) {
+    fwrite(STDERR, "Usage: php backend/admin_account.php --migrate-only|--create|--reset /absolute/path/to/public_html\nFor --create or --reset, provide the password on standard input.\n");
     exit(2);
 }
 
@@ -21,8 +21,33 @@ try {
     if (!$column) {
         $db->exec('ALTER TABLE kipa_admins ADD COLUMN must_change_password BOOLEAN NOT NULL DEFAULT 0');
     }
+    $emailColumn = $db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
+    if (!$emailColumn) {
+        $db->exec('ALTER TABLE kipa_admins ADD COLUMN email VARCHAR(191) NULL DEFAULT NULL AFTER username');
+    }
     if ($argv[1] === '--migrate-only') {
         fwrite(STDOUT, "Administrator password-change migration completed; existing passwords retained.\n");
+        exit;
+    }
+    if ($argv[1] === '--reset') {
+        $input = fgets(STDIN, 75);
+        $password = $input === false ? '' : rtrim($input, "\r\n");
+        if ($password === '' || strlen($password) > 72 || str_contains($password, "\0")) {
+            throw new RuntimeException('New password must contain 1–72 bytes without null bytes.');
+        }
+        $existing = $db->prepare('SELECT id FROM kipa_admins WHERE username = ?');
+        $existing->execute(['admin']);
+        $adminId = $existing->fetchColumn();
+        if ($adminId) {
+            $query = $db->prepare('UPDATE kipa_admins SET password_hash = ?, must_change_password = 0 WHERE id = ?');
+            $query->execute([password_hash($password, PASSWORD_DEFAULT), (int)$adminId]);
+            fwrite(STDOUT, "Admin account password reset successfully.\n");
+        } else {
+            $query = $db->prepare('INSERT INTO kipa_admins (username, password_hash, must_change_password, created_at) VALUES (?, ?, 0, UTC_TIMESTAMP())');
+            $query->execute(['admin', password_hash($password, PASSWORD_DEFAULT)]);
+            fwrite(STDOUT, "Admin account created with specified password.\n");
+        }
+        unset($password, $input);
         exit;
     }
     $existing = $db->prepare('SELECT id FROM kipa_admins WHERE username = ?');

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 define('KIPA_API_BOOTSTRAP', true);
 require __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/mailer.php';
 
 header('Content-Type: text/html; charset=utf-8');
 header('Cache-Control: no-store');
@@ -19,16 +20,22 @@ function kipa_admin_page(string $title, string $content): never
     echo '<title>' . kipa_h($title) . ' | KIPA</title>';
     echo '<style>
         *{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}
-        main{max-width:1100px;margin:32px auto;padding:0 16px}.card{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:20px;margin-bottom:18px}
-        h1{font-size:24px;margin:0 0 16px}h2{font-size:18px;margin:0 0 12px}.muted{color:#64748b;font-size:13px}
-        label{display:block;font-weight:600;margin:10px 0 4px}input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:7px}
-        button{border:0;border-radius:7px;background:#0274bd;color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}
-        button.danger{background:#b91c1c}button.secondary{background:#334155}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-        .message{padding:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:7px;margin:12px 0}
+        main{max-width:1100px;margin:32px auto;padding:0 16px}.card{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        h1{font-size:24px;margin:0 0 16px;color:#081d36}h2{font-size:18px;margin:0 0 12px;color:#081d36}.muted{color:#64748b;font-size:13px}
+        label{display:block;font-weight:600;margin:10px 0 4px;color:#1e293b}input{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:7px;font-size:14px}
+        input:focus{outline:none;border-color:#0274bd;box-shadow:0 0 0 2px rgba(2,116,189,0.2)}
+        button{border:0;border-radius:7px;background:#0274bd;color:#fff;padding:10px 16px;font-weight:700;cursor:pointer;font-size:14px;transition:background .15s}
+        button:hover{background:#025c96}
+        button.danger{background:#b91c1c}button.danger:hover{background:#991b1b}
+        button.secondary{background:#334155}button.secondary:hover{background:#1e293b}
+        .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        .message{padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:7px;margin:12px 0;font-size:14px}
+        .message.success{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+        a{color:#0274bd;text-decoration:none;font-weight:600}a:hover{text-decoration:underline}
         .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:800px}th,td{text-align:left;vertical-align:top;padding:10px;border-bottom:1px solid #e2e8f0}
         pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:420px;font:12px/1.5 ui-monospace,monospace;margin:0}
         form.inline{display:inline}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-        @media(max-width:600px){main{margin:16px auto} .card{padding:14px}h1{font-size:21px}}
+        @media(max-width:600px){main{margin:16px auto}.card{padding:14px}h1{font-size:21px}}
     </style></head><body><main>' . $content . '</main></body></html>';
     exit;
 }
@@ -108,6 +115,164 @@ try {
             $_SESSION['must_change_password'] = (bool)$admin['must_change_password'];
             header('Location: /api/admin.php', true, 303);
             exit;
+        }
+
+        if ($action === 'send_otp') {
+            if (kipa_rate_limited($db, 'admin_otp_send', $remoteKey, 5, 15)) {
+                kipa_admin_error('Yêu cầu gửi mã OTP quá nhiều lần. Vui lòng đợi 15 phút rồi thử lại.', 429);
+            }
+            kipa_record_rate_event($db, 'admin_otp_send', $remoteKey);
+            $account = trim((string)($_POST['account'] ?? ''));
+            if ($account === '') {
+                kipa_admin_error('Vui lòng nhập tên đăng nhập hoặc email quản trị.');
+            }
+
+            // Check if column email exists in kipa_admins
+            $hasEmailCol = (bool)$db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
+            $queryStr = $hasEmailCol
+                ? 'SELECT id, username, email FROM kipa_admins WHERE username = :acc OR email = :acc LIMIT 1'
+                : 'SELECT id, username, NULL as email FROM kipa_admins WHERE username = :acc LIMIT 1';
+
+            $statement = $db->prepare($queryStr);
+            $statement->execute(['acc' => $account]);
+            $admin = $statement->fetch();
+            if (!$admin) {
+                kipa_admin_error('Không tìm thấy tài khoản quản trị khớp với thông tin này.');
+            }
+            $adminEmail = trim((string)($admin['email'] ?? ''));
+            if ($adminEmail === '' || filter_var($adminEmail, FILTER_VALIDATE_EMAIL) === false) {
+                kipa_admin_error('Tài khoản quản trị chưa được gán email để nhận OTP. Vui lòng dùng Mã thiết lập (setup_token) để đặt lại mật khẩu.');
+            }
+
+            $otp = kipa_otp_generate_code();
+            $db->prepare(
+                'INSERT INTO kipa_otp_codes (email, code_hash, attempts, expires_at, created_at)
+                 VALUES (:email, :code_hash, 0, UTC_TIMESTAMP() + INTERVAL 10 MINUTE, UTC_TIMESTAMP())'
+            )->execute(['email' => $adminEmail, 'code_hash' => kipa_otp_hash_code($adminEmail, $otp, $config['app_key'])]);
+
+            try {
+                $smtp = kipa_smtp_config($config);
+                kipa_send_mail(
+                    $smtp,
+                    $adminEmail,
+                    'Mã OTP đặt lại mật khẩu Quản trị viên KIPA Việt Hàn',
+                    "Xin chào Quản trị viên KIPA Việt Hàn,\n\n"
+                    . "Hệ thống ghi nhận yêu cầu đặt lại mật khẩu cho tài khoản quản trị: {$admin['username']}\n\n"
+                    . "Mã xác thực OTP của bạn là: {$otp}\n\n"
+                    . "Mã có hiệu lực trong 10 phút. Tuyệt đối không chia sẻ mã này cho bất kỳ ai.\n"
+                    . "Nếu bạn không thực hiện yêu cầu này, vui lòng kiểm tra an ninh máy chủ ngay lập tức.\n\n"
+                    . "KIPA Việt Hàn - Ban Quản Trị Hệ Thống\n"
+                    . "Hotline: 036 851 3865 | 0889 2222 55\n"
+                );
+            } catch (Throwable $e) {
+                error_log('[kipa-admin-otp] Failed to send admin OTP: ' . $e->getMessage());
+                kipa_admin_error('Chưa thể gửi email OTP lúc này. Vui lòng kiểm tra SMTP hoặc chuyển sang dùng Mã thiết lập (setup_token) để đặt lại mật khẩu.', 503);
+            }
+
+            $parts = explode('@', $adminEmail);
+            $obfuscated = substr($parts[0], 0, 2) . '***@' . ($parts[1] ?? '');
+            header('Location: /api/admin.php?view=reset&step=2&account=' . urlencode($admin['username']) . '&email_hint=' . urlencode($obfuscated), true, 303);
+            exit;
+        }
+
+        if ($action === 'reset_password') {
+            if (kipa_rate_limited($db, 'admin_reset', $remoteKey, 5, 15)) {
+                kipa_admin_error('Yêu cầu đặt lại mật khẩu quá nhiều lần. Vui lòng đợi 15 phút rồi thử lại.', 429);
+            }
+            kipa_record_rate_event($db, 'admin_reset', $remoteKey);
+            $account = trim((string)($_POST['account'] ?? ''));
+            $otpCode = trim((string)($_POST['otp_code'] ?? ''));
+            $token = (string)($_POST['setup_token'] ?? '');
+            $newPassword = (string)($_POST['new_password'] ?? '');
+            $confirmPassword = (string)($_POST['new_password_confirm'] ?? '');
+
+            if ($account === '') {
+                kipa_admin_error('Vui lòng cung cấp tên đăng nhập hoặc email quản trị.');
+            }
+            if (strlen($newPassword) < 12 || strlen($newPassword) > 72 || str_contains($newPassword, "\0") || !hash_equals($newPassword, $confirmPassword)) {
+                kipa_admin_error('Mật khẩu mới phải có từ 12 đến 72 byte và hai lần nhập phải giống nhau.');
+            }
+
+            $hasEmailCol = (bool)$db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
+            $queryStr = $hasEmailCol
+                ? 'SELECT id, username, email, password_hash FROM kipa_admins WHERE username = :acc OR email = :acc LIMIT 1'
+                : 'SELECT id, username, NULL as email, password_hash FROM kipa_admins WHERE username = :acc LIMIT 1';
+
+            $statement = $db->prepare($queryStr);
+            $statement->execute(['acc' => $account]);
+            $admin = $statement->fetch();
+            if (!$admin) {
+                kipa_admin_error('Tài khoản quản trị không tồn tại.');
+            }
+
+            $verified = false;
+            // 1. Xác thực bằng OTP Email
+            if ($otpCode !== '') {
+                $adminEmail = trim((string)($admin['email'] ?? ''));
+                if ($adminEmail === '') {
+                    kipa_admin_error('Tài khoản này chưa có email để xác thực OTP. Vui lòng sử dụng Mã thiết lập (setup_token).');
+                }
+                $st = $db->prepare(
+                    'SELECT id, code_hash, attempts FROM kipa_otp_codes
+                     WHERE email = :email AND verified_at IS NULL AND expires_at >= UTC_TIMESTAMP()
+                     ORDER BY id DESC LIMIT 1 FOR UPDATE'
+                );
+                $st->execute(['email' => $adminEmail]);
+                $row = $st->fetch();
+                if (!$row) {
+                    kipa_admin_error('Mã OTP không đúng hoặc đã hết hạn. Vui lòng gửi lại mã mới.');
+                }
+                if ((int)$row['attempts'] >= KIPA_OTP_MAX_ATTEMPTS) {
+                    kipa_admin_error('Mã OTP đã bị khóa do nhập sai nhiều lần. Vui lòng yêu cầu mã mới.');
+                }
+                $db->prepare('UPDATE kipa_otp_codes SET attempts = attempts + 1 WHERE id = ?')->execute([$row['id']]);
+                if (!hash_equals($row['code_hash'], kipa_otp_hash_code($adminEmail, $otpCode, $config['app_key']))) {
+                    kipa_admin_error('Mã OTP không chính xác. Vui lòng kiểm tra lại email.');
+                }
+                $db->prepare('UPDATE kipa_otp_codes SET verified_at = UTC_TIMESTAMP() WHERE id = ?')->execute([$row['id']]);
+                $verified = true;
+            }
+            // 2. Xác thực bằng Master Setup Token dự phòng
+            elseif ($token !== '') {
+                if (!hash_equals($config['setup_token'], $token)) {
+                    kipa_admin_error('Mã thiết lập bí mật không đúng. Vui lòng kiểm tra lại trong cấu hình máy chủ.');
+                }
+                $verified = true;
+            } else {
+                kipa_admin_error('Vui lòng nhập mã OTP gửi về email hoặc mã thiết lập máy chủ.');
+            }
+
+            if ($verified) {
+                $update = $db->prepare('UPDATE kipa_admins SET password_hash = :password_hash, must_change_password = 0 WHERE id = :id');
+                $update->execute([
+                    'password_hash' => password_hash($newPassword, PASSWORD_DEFAULT),
+                    'id' => (int)$admin['id'],
+                ]);
+
+                // Gửi thông báo an ninh nếu có email
+                if (!empty($admin['email'])) {
+                    try {
+                        $smtp = kipa_smtp_config($config);
+                        kipa_send_mail(
+                            $smtp,
+                            $admin['email'],
+                            'Cảnh báo: Mật khẩu quản trị KIPA vừa được đặt lại',
+                            "Xin chào Quản trị viên KIPA,\n\n"
+                            . "Mật khẩu cho tài khoản '{$admin['username']}' vừa được đặt lại thành công vào lúc " . gmdate('Y-m-d H:i:s') . " UTC.\n"
+                            . "Nếu không phải bạn thực hiện, vui lòng liên hệ ngay với bộ phận kỹ thuật để bảo vệ hệ thống.\n\n"
+                            . "KIPA Việt Hàn\n"
+                        );
+                    } catch (Throwable $e) {
+                        // ignore notify failure
+                    }
+                }
+
+                session_regenerate_id(true);
+                $_SESSION = [];
+                $_SESSION['csrf'] = bin2hex(random_bytes(32));
+                header('Location: /api/admin.php?reset_success=1', true, 303);
+                exit;
+            }
         }
 
         if (!isset($_SESSION['admin_id'])) {
@@ -215,16 +380,60 @@ try {
 
     if (!isset($_SESSION['admin_id'])) {
         $csrf = kipa_h($_SESSION['csrf']);
+        $view = $_GET['view'] ?? '';
+        $mode = $_GET['mode'] ?? 'email';
+        $step = $_GET['step'] ?? '1';
+        $account = trim((string)($_GET['account'] ?? ''));
+        $emailHint = trim((string)($_GET['email_hint'] ?? ''));
+
+        if ($view === 'reset') {
+            $content = '<section class="card"><h1>Đặt lại mật khẩu quản trị KIPA</h1>';
+
+            if ($mode === 'token') {
+                $content .= '<p class="muted">Xác thực bằng Mã thiết lập bí mật (setup_token) từ tệp cấu hình máy chủ để đặt lại mật khẩu khẩn cấp.</p>';
+                $content .= kipa_admin_form_start('reset_password', $csrf);
+                $content .= '<label>Tên đăng nhập hoặc Email quản trị<input name="account" required minlength="3" maxlength="64" autocomplete="username" placeholder="Ví dụ: admin"></label>';
+                $content .= '<label>Mã thiết lập bí mật (setup_token)<input name="setup_token" type="password" required autocomplete="off" placeholder="Khóa bảo mật trong file cấu hình"></label>';
+                $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự"></label>';
+                $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác"></label>';
+                $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Xác nhận đặt lại mật khẩu</button> <a href="/api/admin.php?view=reset" style="margin-left:12px;font-size:14px">← Đổi bằng Mã OTP Email</a> <a href="/api/admin.php" style="margin-left:12px;font-size:14px">Quay lại Đăng nhập</a></p></form>';
+            } elseif ($step === '2') {
+                $content .= '<p class="message success">✓ Đã gửi mã xác thực OTP 6 số đến email ' . ($emailHint ? '<strong>' . kipa_h($emailHint) . '</strong>' : 'quản trị') . '. Vui lòng kiểm tra hộp thư đến (hoặc hòm thư Spam).</p>';
+                $content .= kipa_admin_form_start('reset_password', $csrf);
+                $content .= '<input type="hidden" name="account" value="' . kipa_h($account) . '">';
+                $content .= '<p class="muted" style="margin-bottom:10px;">Tài khoản quản trị: <strong>' . kipa_h($account) . '</strong></p>';
+                $content .= '<label>Mã xác thực OTP (6 chữ số)<input name="otp_code" required pattern="\\d{6}" maxlength="6" autocomplete="one-time-code" placeholder="Nhập 6 số từ email" autofocus></label>';
+                $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự"></label>';
+                $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác"></label>';
+                $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Xác nhận đổi mật khẩu</button> <a href="/api/admin.php?view=reset" style="margin-left:12px;font-size:14px">Gửi lại mã OTP</a> <a href="/api/admin.php" style="margin-left:12px;font-size:14px">Quay lại Đăng nhập</a></p></form>';
+            } else {
+                $content .= '<p class="muted">Nhập Tên đăng nhập hoặc Email quản trị để nhận mã xác thực OTP gửi về hòm thư của bạn.</p>';
+                if (kipa_rate_limited($db, 'admin_otp_send', $remoteKey, 5, 15)) {
+                    $content .= '<p class="message">Yêu cầu gửi OTP quá nhiều lần. Vui lòng thử lại sau 15 phút.</p>';
+                } else {
+                    $content .= kipa_admin_form_start('send_otp', $csrf);
+                    $content .= '<label>Tên đăng nhập hoặc Email quản trị<input name="account" required minlength="3" maxlength="191" autocomplete="username" placeholder="Ví dụ: admin hoặc email@kipaviethan.edu.vn" autofocus></label>';
+                    $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Gửi mã OTP về Email</button> <a href="/api/admin.php" style="margin-left:12px;font-size:14px">← Quay lại Đăng nhập</a></p></form>';
+                    $content .= '<div style="margin-top:20px;border-top:1px solid #e2e8f0;padding-top:14px;"><p class="muted" style="margin-bottom:6px;">Chưa liên kết email hoặc không nhận được thư?</p><a href="/api/admin.php?view=reset&mode=token" style="font-size:13px;">Đặt lại mật khẩu bằng Mã thiết lập máy chủ (setup_token) →</a></div>';
+                }
+            }
+            $content .= '</section>';
+            kipa_admin_page('Đặt lại mật khẩu quản trị', $content);
+        }
+
         $content = '<section class="card"><h1>Quản trị đăng ký tư vấn KIPA</h1>';
+        if (isset($_GET['reset_success'])) {
+            $content .= '<p class="message success">✓ Đã đặt lại mật khẩu quản trị thành công! Vui lòng đăng nhập bằng mật khẩu mới.</p>';
+        }
         if (kipa_rate_limited($db, 'login', $remoteKey, 8, 15)) {
             $content .= '<p class="message">Đăng nhập quá nhiều lần. Vui lòng thử lại sau.</p>';
         } else {
             $content .= kipa_admin_form_start('login', $csrf);
             $content .= '<label>Tên đăng nhập<input name="username" required maxlength="64" autocomplete="username"></label>';
             $content .= '<label>Mật khẩu<input name="password" type="password" required autocomplete="current-password"></label>';
-            $content .= '<p><button type="submit">Đăng nhập</button></p></form>';
+            $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Đăng nhập</button> <a href="/api/admin.php?view=reset" style="margin-left:12px;font-size:13px">Quên mật khẩu? Đặt lại mật khẩu</a></p></form>';
         }
-        $content .= '<p class="muted">Chỉ tài khoản được ủy quyền mới có thể xem thông tin đăng ký.</p></section>';
+        $content .= '<p class="muted" style="margin-top:16px">Chỉ tài khoản được ủy quyền mới có thể xem thông tin đăng ký.</p></section>';
         kipa_admin_page('Đăng nhập', $content);
     }
 

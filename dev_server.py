@@ -6,12 +6,18 @@ import json
 import sqlite3
 import datetime
 import mimetypes
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote, urlparse, parse_qs, quote
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 PORT = 3000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'backend', 'dev_leads.sqlite')
+
+DEV_ADMIN_LOGGED_IN = False
+DEV_ADMIN_PASSWORD = "admin_password_123"
+DEV_ADMIN_EMAIL = "duhocquoctekipaviethan@gmail.com"
+DEV_SETUP_TOKEN = "kipa_secret_setup_token_2026"
+DEV_ADMIN_OTP = "123456"
 
 
 def init_dev_db():
@@ -351,9 +357,108 @@ class KipaDevHandler(BaseHTTPRequestHandler):
         self.handle_request(head_only=False)
 
     def do_POST(self):
-        global DEV_AUTH_USER, DEV_LOGGED_IN
+        global DEV_AUTH_USER, DEV_LOGGED_IN, DEV_ADMIN_LOGGED_IN, DEV_ADMIN_PASSWORD, DEV_SETUP_TOKEN, DEV_ADMIN_OTP
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
+
+        if path in {'/admin', '/admin/'}:
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length) if length > 0 else b''
+            content_type = self.headers.get('Content-Type', '')
+            post_data = {}
+            if 'application/x-www-form-urlencoded' in content_type:
+                parsed_form = parse_qs(body.decode('utf-8', errors='ignore'))
+                post_data = {k: v[0] for k, v in parsed_form.items()}
+            elif 'application/json' in content_type:
+                try:
+                    post_data = json.loads(body.decode('utf-8'))
+                except Exception:
+                    post_data = {}
+
+            action = post_data.get('action', '')
+            if action == 'send_otp':
+                account = post_data.get('account', '').strip()
+                if not account:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?view=reset&error=empty')
+                    self.end_headers()
+                    return
+                if account in {'admin', DEV_ADMIN_EMAIL}:
+                    import random
+                    DEV_ADMIN_OTP = f"{random.randint(100000, 999999)}"
+                    parts = DEV_ADMIN_EMAIL.split('@')
+                    email_hint = parts[0][:2] + '***@' + parts[1]
+                    self.send_response(303)
+                    self.send_header('Location', f'/admin/?view=reset&step=2&account=admin&email_hint={quote(email_hint)}')
+                    self.end_headers()
+                    return
+                else:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?view=reset&error=notfound')
+                    self.end_headers()
+                    return
+
+            elif action == 'reset_password':
+                account = post_data.get('account', '').strip() or post_data.get('username', '').strip()
+                token = post_data.get('setup_token', '').strip()
+                otp_code = post_data.get('otp_code', '').strip()
+                new_pass = post_data.get('new_password', '')
+                confirm_pass = post_data.get('new_password_confirm', '')
+
+                if token:
+                    if token != DEV_SETUP_TOKEN:
+                        self.send_response(303)
+                        self.send_header('Location', '/admin/?view=reset&mode=token&error=token')
+                        self.end_headers()
+                        return
+                else:
+                    if not otp_code or otp_code != DEV_ADMIN_OTP:
+                        self.send_response(303)
+                        self.send_header('Location', f'/admin/?view=reset&step=2&account={quote(account)}&error=otp')
+                        self.end_headers()
+                        return
+
+                if len(new_pass) < 12:
+                    redir = '/admin/?view=reset&mode=token&error=length' if token else f'/admin/?view=reset&step=2&account={quote(account)}&error=length'
+                    self.send_response(303)
+                    self.send_header('Location', redir)
+                    self.end_headers()
+                    return
+                if new_pass != confirm_pass:
+                    redir = '/admin/?view=reset&mode=token&error=mismatch' if token else f'/admin/?view=reset&step=2&account={quote(account)}&error=mismatch'
+                    self.send_response(303)
+                    self.send_header('Location', redir)
+                    self.end_headers()
+                    return
+
+                DEV_ADMIN_PASSWORD = new_pass
+                self.send_response(303)
+                self.send_header('Location', '/admin/?reset_success=1')
+                self.end_headers()
+                return
+
+            elif action == 'login':
+                username = post_data.get('username', '').strip()
+                password = post_data.get('password', '')
+                if username == 'admin' and password == DEV_ADMIN_PASSWORD:
+                    DEV_ADMIN_LOGGED_IN = True
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/')
+                    self.end_headers()
+                    return
+                else:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?error=invalid')
+                    self.end_headers()
+                    return
+
+            elif action == 'logout':
+                DEV_ADMIN_LOGGED_IN = False
+                self.send_response(303)
+                self.send_header('Location', '/admin/')
+                self.end_headers()
+                return
+
         if path == '/api/login.php':
             length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(length) if length > 0 else b'{}'
@@ -629,6 +734,274 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             self.send_header('Location', 'https://kipaviethan.edu.vn' + path)
             self.send_header('Content-Length', '0')
             self.end_headers()
+            return
+
+        if path in {'/admin', '/admin/'}:
+            query = parse_qs(parsed.query)
+            view = query.get('view', [''])[0]
+            step = query.get('step', ['1'])[0]
+            mode = query.get('mode', [''])[0]
+            account = query.get('account', ['admin'])[0]
+            email_hint = query.get('email_hint', [''])[0]
+            reset_success = 'reset_success' in query
+            error = query.get('error', [''])[0]
+
+            error_html = ''
+            if error == 'token':
+                error_html = f'<div class="message">Mã thiết lập bí mật không đúng. Gợi ý local: <code>{DEV_SETUP_TOKEN}</code></div>'
+            elif error == 'otp':
+                error_html = f'<div class="message">Mã xác thực OTP không chính xác hoặc đã hết hạn. Thử lại với mã: <code>{DEV_ADMIN_OTP}</code></div>'
+            elif error == 'notfound':
+                error_html = '<div class="message">Không tìm thấy tài khoản quản trị khớp với thông tin này. (Gợi ý: "admin" hoặc email quản trị).</div>'
+            elif error == 'empty':
+                error_html = '<div class="message">Vui lòng nhập tên đăng nhập hoặc email quản trị.</div>'
+            elif error == 'length':
+                error_html = '<div class="message">Mật khẩu mới phải có tối thiểu 12 ký tự.</div>'
+            elif error == 'mismatch':
+                error_html = '<div class="message">Hai lần nhập mật khẩu mới không trùng khớp.</div>'
+            elif error == 'invalid':
+                error_html = '<div class="message">Tên đăng nhập hoặc mật khẩu không chính xác.</div>'
+
+            if view == 'reset':
+                content_html = ''
+                if mode == 'token':
+                    content_html = f"""
+        <h1>Đặt lại mật khẩu (Mã thiết lập)</h1>
+        <p class="muted">Nhập mã thiết lập bí mật (setup_token) từ tệp cấu hình máy chủ để xác thực quyền quản trị và đặt lại mật khẩu mới an toàn.</p>
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="reset_password">
+            <label>Tên đăng nhập quản trị
+                <input name="username" value="{account}" required minlength="3" maxlength="64" autocomplete="username">
+            </label>
+            <label>Mã thiết lập bí mật (setup_token)
+                <input name="setup_token" value="{DEV_SETUP_TOKEN}" required autocomplete="off" placeholder="Gợi ý local: {DEV_SETUP_TOKEN}">
+            </label>
+            <label>Mật khẩu mới (12–72 ký tự)
+                <input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự">
+            </label>
+            <label>Nhập lại mật khẩu mới
+                <input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác">
+            </label>
+            <p class="actions">
+                <button type="submit">Xác nhận đặt lại mật khẩu</button>
+                <a href="/admin/?view=reset">← Đổi bằng Mã OTP Email</a>
+                <a href="/admin/">Quay lại Đăng nhập</a>
+            </p>
+        </form>"""
+                elif step == '2':
+                    hint_text = f"<strong>{email_hint}</strong>" if email_hint else "email quản trị"
+                    content_html = f"""
+        <h1>Nhập mã xác thực OTP</h1>
+        <p class="message success">✓ Đã gửi mã xác thực OTP 6 số đến {hint_text}. Vui lòng kiểm tra hộp thư đến (hoặc hòm thư Spam).</p>
+        <div style="background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px;">
+            💡 <strong>Môi trường Localhost giả lập email:</strong> Mã OTP vừa gửi là: <code>{DEV_ADMIN_OTP}</code>
+        </div>
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="reset_password">
+            <input type="hidden" name="account" value="{account}">
+            <p class="muted" style="margin-bottom:12px;">Tài khoản quản trị: <strong>{account}</strong></p>
+            <label>Mã xác thực OTP (6 chữ số)
+                <input name="otp_code" required pattern="\\d{{6}}" maxlength="6" autocomplete="one-time-code" placeholder="Nhập 6 số từ email" autofocus value="{DEV_ADMIN_OTP}">
+            </label>
+            <label>Mật khẩu mới (12–72 ký tự)
+                <input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự">
+            </label>
+            <label>Nhập lại mật khẩu mới
+                <input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác">
+            </label>
+            <p class="actions">
+                <button type="submit">Xác nhận đổi mật khẩu</button>
+                <a href="/admin/?view=reset">Gửi lại mã OTP</a>
+                <a href="/admin/">Quay lại Đăng nhập</a>
+            </p>
+        </form>"""
+                else:
+                    content_html = f"""
+        <h1>Quên mật khẩu Quản trị viên</h1>
+        <p class="muted">Nhập Tên đăng nhập hoặc Email quản trị để nhận mã xác thực OTP gửi về hòm thư của bạn.</p>
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="send_otp">
+            <label>Tên đăng nhập hoặc Email quản trị
+                <input name="account" value="admin" required minlength="3" maxlength="191" autocomplete="username" placeholder="Ví dụ: admin hoặc email@kipaviethan.edu.vn" autofocus>
+            </label>
+            <p class="actions">
+                <button type="submit">Gửi mã OTP về Email</button>
+                <a href="/admin/">← Quay lại Đăng nhập</a>
+            </p>
+        </form>
+        <div style="margin-top:24px;border-top:1px solid #e2e8f0;padding-top:14px;">
+            <p class="muted" style="margin-bottom:6px;">Chưa liên kết email hoặc không nhận được thư?</p>
+            <a href="/admin/?view=reset&mode=token" style="font-size:13px;">Đặt lại mật khẩu bằng Mã thiết lập máy chủ (setup_token) →</a>
+        </div>"""
+
+                html = f"""<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đặt lại mật khẩu quản trị | KIPA</title>
+    <style>
+        *{{box-sizing:border-box}}body{{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}}
+        main{{max-width:560px;margin:50px auto;padding:0 16px}}
+        .card{{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:28px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}}
+        h1{{font-size:22px;margin:0 0 12px;color:#081d36;font-weight:700}}
+        .muted{{color:#64748b;font-size:13px;line-height:1.5;margin-bottom:18px}}
+        label{{display:block;font-weight:600;margin:14px 0 6px;color:#1e293b;font-size:14px}}
+        input{{width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;background:#f8fafc;transition:border-color .15s}}
+        input:focus{{outline:none;border-color:#0274bd;background:#fff;box-shadow:0 0 0 3px rgba(2,116,189,0.15)}}
+        button{{border:0;border-radius:8px;background:#0274bd;color:#fff;padding:12px 20px;font-weight:700;cursor:pointer;font-size:14px;transition:background .15s}}
+        button:hover{{background:#025c96}}
+        .actions{{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}}
+        .message{{padding:12px 14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;margin:14px 0;font-size:14px;color:#9a3412}}
+        .message.success{{background:#f0fdf4;border-color:#bbf7d0;color:#166534}}
+        a{{color:#0274bd;text-decoration:none;font-weight:600}}a:hover{{text-decoration:underline}}
+        .badge-dev{{background:#fef3c7;color:#92400e;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;margin-bottom:12px;display:inline-block}}
+        code{{background:#e2e8f0;padding:2px 5px;border-radius:4px;font-size:12px;}}
+    </style>
+</head>
+<body>
+<main>
+    <section class="card">
+        <span class="badge-dev">MÔI TRƯỜNG LOCALHOST DEV</span>
+        {content_html}
+    </section>
+</main>
+</body>
+</html>"""
+                resp_bytes = html.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+
+            if not DEV_ADMIN_LOGGED_IN:
+                success_html = '<p class="message success">✓ Đã đặt lại mật khẩu quản trị thành công! Vui lòng đăng nhập bằng mật khẩu mới.</p>' if reset_success else ''
+                html = f"""<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản trị KIPA | Đăng nhập</title>
+    <style>
+        *{{box-sizing:border-box}}body{{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}}
+        main{{max-width:500px;margin:50px auto;padding:0 16px}}
+        .card{{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:28px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}}
+        h1{{font-size:22px;margin:0 0 8px;color:#081d36;font-weight:700}}
+        .muted{{color:#64748b;font-size:13px;margin-bottom:18px}}
+        label{{display:block;font-weight:600;margin:14px 0 6px;color:#1e293b;font-size:14px}}
+        input{{width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;background:#f8fafc;transition:border-color .15s}}
+        input:focus{{outline:none;border-color:#0274bd;background:#fff;box-shadow:0 0 0 3px rgba(2,116,189,0.15)}}
+        button{{border:0;border-radius:8px;background:#0274bd;color:#fff;padding:12px 20px;font-weight:700;cursor:pointer;font-size:14px;transition:background .15s}}
+        button:hover{{background:#025c96}}
+        .actions{{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}}
+        .message{{padding:12px 14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;margin:14px 0;font-size:14px;color:#9a3412}}
+        .message.success{{background:#f0fdf4;border-color:#bbf7d0;color:#166534}}
+        a{{color:#0274bd;text-decoration:none;font-weight:600}}a:hover{{text-decoration:underline}}
+        .badge-dev{{background:#fef3c7;color:#92400e;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;margin-bottom:12px;display:inline-block}}
+    </style>
+</head>
+<body>
+<main>
+    <section class="card">
+        <span class="badge-dev">MÔI TRƯỜNG LOCALHOST DEV</span>
+        <h1>Quản trị đăng ký tư vấn KIPA</h1>
+        {success_html}
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="login">
+            <label>Tên đăng nhập
+                <input name="username" value="admin" required maxlength="64" autocomplete="username">
+            </label>
+            <label>Mật khẩu
+                <input name="password" type="password" required autocomplete="current-password" placeholder="Nhập mật khẩu (Mặc định: {DEV_ADMIN_PASSWORD})">
+            </label>
+            <p class="actions">
+                <button type="submit">Đăng nhập</button>
+                <a href="/admin/?view=reset" style="font-size:13px;margin-left:auto;">Quên mật khẩu? Đặt lại mật khẩu</a>
+            </p>
+        </form>
+        <p class="muted" style="margin-top:20px;border-top:1px solid #e2e8f0;padding-top:14px;">Chỉ tài khoản được ủy quyền mới có thể truy cập hệ thống quản trị KIPA.</p>
+    </section>
+</main>
+</body>
+</html>"""
+                resp_bytes = html.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+
+            leads = get_dev_leads(100)
+            rows_html = "".join([
+                f"""<tr style='border-bottom:1px solid #e2e8f0;'>
+                    <td style='padding:10px 14px;font-weight:bold;'>#{l['id']}</td>
+                    <td style='padding:10px 14px;white-space:nowrap;font-size:12px;color:#64748b;'>{l['created_at']}</td>
+                    <td style='padding:10px 14px;font-weight:bold;color:#0274bd;'>{l['contact_name']}</td>
+                    <td style='padding:10px 14px;font-weight:600;'>{l['phone']}</td>
+                    <td style='padding:10px 14px;'><span style='background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:bold;'>{l['form_type']}</span></td>
+                    <td style='padding:10px 14px;font-size:12px;'><a href='{l['source_page']}' style='color:#0274bd;'>{l['source_page']}</a></td>
+                </tr>""" for l in leads
+            ])
+            html = f"""<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bảng điều khiển Quản trị | KIPA</title>
+    <style>
+        *{{box-sizing:border-box}}body{{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}}
+        main{{max-width:1100px;margin:32px auto;padding:0 16px}}
+        .card{{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}}
+        h1{{font-size:24px;margin:0 0 16px;color:#081d36}}
+        .top{{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;}}
+        .badge-dev{{background:#fef3c7;color:#92400e;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;}}
+        button{{border:0;border-radius:7px;background:#334155;color:#fff;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px;}}
+        button:hover{{background:#1e293b;}}
+        table{{width:100%;border-collapse:collapse;min-width:600px}}th,td{{text-align:left;vertical-align:middle;padding:10px;border-bottom:1px solid #e2e8f0}}
+        .table-wrap{{overflow:auto;border:1px solid #e2e8f0;border-radius:8px;}}
+    </style>
+</head>
+<body>
+<main>
+    <section class="card">
+        <div class="top">
+            <div>
+                <span class="badge-dev">MÔI TRƯỜNG LOCALHOST DEV</span>
+                <h1 style="margin-top:8px;">Bảng điều khiển Quản trị Leads ({len(leads)} đăng ký)</h1>
+                <p style="color:#64748b;font-size:13px;margin:0;">Đang đăng nhập: <strong>admin</strong> | Mật khẩu hiện tại: <code>{DEV_ADMIN_PASSWORD}</code></p>
+            </div>
+            <form method="post" action="/admin/">
+                <input type="hidden" name="action" value="logout">
+                <button type="submit">Đăng xuất</button>
+            </form>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead style="background:#f8fafc;">
+                    <tr><th>ID</th><th>Ngày tạo</th><th>Họ tên</th><th>Số ĐT</th><th>Biểu mẫu</th><th>Trang nguồn</th></tr>
+                </thead>
+                <tbody>
+                    {rows_html if leads else '<tr><td colspan="6" style="text-align:center;padding:20px;color:#94a3b8;">Chưa có dữ liệu lead.</td></tr>'}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>"""
+            resp_bytes = html.encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.end_headers()
+            self.wfile.write(resp_bytes)
             return
 
         if path in {'/api/quiz_questions.php', '/api/quiz_questions'}:
