@@ -480,7 +480,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 return
 
             elif action == 'create_admin':
-                username = post_data.get('username', '').strip()
+                username = post_data.get('username', '').strip().lower()
                 full_name = post_data.get('full_name', '').strip()
                 email = post_data.get('email', '').strip()
                 phone = post_data.get('phone', '').strip()
@@ -492,17 +492,17 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
                 if not username or len(username) < 3:
                     self.send_response(303)
-                    self.send_header('Location', '/admin/?tab=accounts&error=username')
+                    self.send_header('Location', '/admin/?tab=accounts&subview=add&error=username')
                     self.end_headers()
                     return
                 if not full_name or len(full_name) < 2:
                     self.send_response(303)
-                    self.send_header('Location', '/admin/?tab=accounts&error=fullname')
+                    self.send_header('Location', '/admin/?tab=accounts&subview=add&error=fullname')
                     self.end_headers()
                     return
                 if not password or len(password) < 8:
                     self.send_response(303)
-                    self.send_header('Location', '/admin/?tab=accounts&error=password_short')
+                    self.send_header('Location', '/admin/?tab=accounts&subview=add&error=password_short')
                     self.end_headers()
                     return
 
@@ -512,7 +512,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                     cur.execute('SELECT id FROM kipa_admins WHERE username = ? OR (email IS NOT NULL AND email != "" AND email = ?)', (username, email))
                     if cur.fetchone():
                         self.send_response(303)
-                        self.send_header('Location', '/admin/?tab=accounts&error=duplicate')
+                        self.send_header('Location', '/admin/?tab=accounts&subview=add&error=duplicate')
                         self.end_headers()
                         return
 
@@ -524,7 +524,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                     conn.commit()
 
                 self.send_response(303)
-                self.send_header('Location', '/admin/?tab=accounts&admin_created=1')
+                self.send_header('Location', '/admin/?tab=accounts&subview=users&admin_created=1')
                 self.end_headers()
                 return
 

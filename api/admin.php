@@ -647,7 +647,7 @@ try {
         }
 
         if ($action === 'create_admin') {
-            $currentRole = $_SESSION['admin_role'] ?? 'super_admin';
+            $currentRole = (($_SESSION['admin_username'] ?? '') === 'admin' || ((int)($_SESSION['admin_id'] ?? 0) === 1)) ? 'super_admin' : ($_SESSION['admin_role'] ?? 'super_admin');
             if ($currentRole !== 'super_admin' && $currentRole !== 'website_manager') {
                 kipa_admin_error('Bạn không có quyền tạo tài khoản nhân sự.', 403);
             }
@@ -702,12 +702,12 @@ try {
                 'must_change' => $mustChange,
             ]);
 
-            header('Location: /api/admin.php?tab=accounts&admin_created=1', true, 303);
+            header('Location: /api/admin.php?tab=accounts&subview=users&admin_created=1', true, 303);
             exit;
         }
 
         if ($action === 'toggle_admin_status') {
-            $currentRole = $_SESSION['admin_role'] ?? 'super_admin';
+            $currentRole = (($_SESSION['admin_username'] ?? '') === 'admin' || ((int)($_SESSION['admin_id'] ?? 0) === 1)) ? 'super_admin' : ($_SESSION['admin_role'] ?? 'super_admin');
             if ($currentRole !== 'super_admin' && $currentRole !== 'website_manager') {
                 kipa_admin_error('Bạn không có quyền thay đổi trạng thái tài khoản.', 403);
             }
@@ -732,7 +732,8 @@ try {
         }
 
         if ($action === 'delete_admin') {
-            if (($_SESSION['admin_role'] ?? 'super_admin') !== 'super_admin') {
+            $isSuperAdmin = (($_SESSION['admin_username'] ?? '') === 'admin' || ((int)($_SESSION['admin_id'] ?? 0) === 1) || ($_SESSION['admin_role'] ?? 'super_admin') === 'super_admin');
+            if (!$isSuperAdmin) {
                 kipa_admin_error('Chỉ Super Admin mới có quyền xóa tài khoản.', 403);
             }
             $targetId = filter_var($_POST['target_id'] ?? null, FILTER_VALIDATE_INT);
@@ -1023,8 +1024,9 @@ try {
             </div>
             <p class="role-card-desc">' . kipa_h($rv['desc']) . '</p>
             <div class="role-card-footer">
-                <a href="javascript:void(0)" onclick="filterByRole('' . kipa_h($rk) . '')" class="role-link">Lọc nhân sự (' . $countU . ')</a>
-                <a href="javascript:void(0)" onclick="switchSubview('matrix')" class="role-link secondary">Xem ma trận quyền →</a>
+                <a href="javascript:void(0)" onclick="openAddUserWithRole(\'' . kipa_h($rk) . '\')" class="role-link" style="color:#2563eb;font-weight:700;">+ Thêm vào vai trò này</a>
+                <a href="javascript:void(0)" onclick="filterByRole(\'' . kipa_h($rk) . '\')" class="role-link">Lọc (' . $countU . ')</a>
+                <a href="javascript:void(0)" onclick="switchSubview(\'matrix\')" class="role-link secondary">Ma trận quyền →</a>
             </div>
         </div>';
     }
@@ -1039,7 +1041,7 @@ try {
         </div>
         <h3 class="role-card-title" style="margin-top:8px;text-align:center;">+ Tạo vai trò mới</h3>
         <p class="role-card-desc" style="text-align:center;">Tùy biến nhóm quyền P01-P12 và cấu hình vai trò riêng cho bộ phận.</p>
-        <button type="button" class="btn-create-role" style="background:#2563eb;color:#fff;border:0;padding:8px 16px;border-radius:7px;font-weight:700;cursor:pointer;font-size:12px;margin:0 auto;" onclick="alert('Chức năng tạo vai trò tùy biến được quản lý bởi Super Admin.');">+ Tạo vai trò mới</button>
+        <button type="button" class="btn-create-role" style="background:#2563eb;color:#fff;border:0;padding:8px 16px;border-radius:7px;font-weight:700;cursor:pointer;font-size:12px;margin:0 auto;" onclick="switchSubview('add')">+ Thêm tài khoản nhân sự</button>
     </div>';
 
     // Build View 3: Taskora-style Permission Matrix Table
@@ -1331,7 +1333,7 @@ try {
                     <h1 class="page-title">' . ($tab === 'accounts' ? 'Quản lý Nhân sự & Phân quyền (Roles & Permissions)' : 'Quản lý Đăng ký Tư vấn (Leads)') . '</h1>
                     <p class="page-subtitle">' . ($tab === 'accounts' ? 'Hệ thống kiểm soát truy cập theo vai trò (RBAC 8 vai trò chính & 12 nhóm quyền P01-P12) KIPA Việt Hàn.' : 'Danh sách học viên và phụ huynh đăng ký tư vấn du học & xuất khẩu lao động.') . '</p>
                 </div>
-                ' . ($tab === 'accounts' ? '<div class="header-actions"><button type="button" class="btn-primary" onclick="toggleAddUserForm()">+ Thêm tài khoản nhân sự</button></div>' : '') . '
+                ' . ($tab === 'accounts' ? '<div class="header-actions"><button type="button" class="btn-primary" onclick="switchSubview(\'add\')">➕ Thêm tài khoản mới</button></div>' : '') . '
             </div>
 
             ' . $bannerHtml . '
@@ -1373,74 +1375,79 @@ try {
 
     if ($tab === 'accounts') {
         echo '<div class="subviews-bar">
-            <button type="button" class="subview-btn ' . ($subview === 'users' ? 'active' : '') . '" onclick="switchSubview('users')" id="btnSubUsers">
+            <button type="button" class="subview-btn ' . ($subview === 'users' ? 'active' : '') . '" onclick="switchSubview(\'users\')" id="btnSubUsers">
                 👥 Danh sách Nhân sự (' . count($allAdmins) . ')
             </button>
-            <button type="button" class="subview-btn ' . ($subview === 'roles' ? 'active' : '') . '" onclick="switchSubview('roles')" id="btnSubRoles">
+            <button type="button" class="subview-btn ' . ($subview === 'add' ? 'active' : '') . '" onclick="switchSubview(\'add\')" id="btnSubAdd" style="background:' . ($subview === 'add' ? '#2563eb' : '#f1f5f9') . ';color:' . ($subview === 'add' ? '#fff' : '#1e293b') . ';font-weight:700;">
+                ➕ Thêm tài khoản mới
+            </button>
+            <button type="button" class="subview-btn ' . ($subview === 'roles' ? 'active' : '') . '" onclick="switchSubview(\'roles\')" id="btnSubRoles">
                 🏷️ 8 Thẻ Vai trò chính (Sneat)
             </button>
-            <button type="button" class="subview-btn ' . ($subview === 'matrix' ? 'active' : '') . '" onclick="switchSubview('matrix')" id="btnSubMatrix">
+            <button type="button" class="subview-btn ' . ($subview === 'matrix' ? 'active' : '') . '" onclick="switchSubview(\'matrix\')" id="btnSubMatrix">
                 📊 Ma trận Phân quyền chi tiết (Taskora)
             </button>
         </div>';
 
-        // Add User Form Card
-        echo '<div class="add-user-card" id="addUserCard">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <h2 style="font-size:17px;font-weight:800;color:#081d36;">+ Tạo tài khoản Quản trị & Nhân sự mới</h2>
-                <button type="button" onclick="toggleAddUserForm()" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;">✕</button>
+        // VIEW: THÊM TÀI KHOẢN MỚI
+        echo '<div id="viewAdd" class="subview-panel" style="display:' . ($subview === 'add' ? 'block' : 'none') . ';">
+            <div class="add-user-card open" id="addUserCard" style="display:block;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <h2 style="font-size:18px;font-weight:800;color:#081d36;">➕ Tạo tài khoản Quản trị & Nhân sự mới</h2>
+                    <button type="button" onclick="switchSubview(\'users\')" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;" title="Đóng">✕</button>
+                </div>
+                <p style="font-size:13px;color:#64748b;margin-top:4px;">Là <strong>Super Admin</strong>, bạn có toàn quyền khởi tạo tài khoản nhân sự, phân bổ 1 trong 8 vai trò và lưu trực tiếp vào CSDL MySQL máy chủ.</p>
+                ' . kipa_admin_form_start('create_admin', $csrf) . '
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Tên đăng nhập (Username) *</label>
+                        <input name="username" id="addUsernameInput" required minlength="3" maxlength="64" placeholder="Ví dụ: nguyene">
+                    </div>
+                    <div class="form-group">
+                        <label>Họ và tên nhân sự *</label>
+                        <input name="full_name" required minlength="2" maxlength="160" placeholder="Ví dụ: Nguyễn Văn E">
+                    </div>
+                    <div class="form-group">
+                        <label>Email nhận OTP & Thông báo *</label>
+                        <input name="email" type="email" required placeholder="nhansu@kipaviethan.edu.vn">
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại liên hệ</label>
+                        <input name="phone" placeholder="Ví dụ: 0912 345 679">
+                    </div>
+                    <div class="form-group">
+                        <label>Phòng ban</label>
+                        <select name="department">
+                            <option value="Marketing">Marketing</option>
+                            <option value="SEO">SEO & Kỹ thuật</option>
+                            <option value="Tuyển sinh">Tuyển sinh</option>
+                            <option value="Đào tạo & Học vụ">Đào tạo & Học vụ</option>
+                            <option value="Ban Giám Đốc">Ban Giám Đốc</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Vai trò hệ thống (Role) *</label>
+                        <select name="role" id="addRoleSelect">' . $roleSelectOptions . '</select>
+                    </div>
+                    <div class="form-group">
+                        <label>Phạm vi dữ liệu (Scope)</label>
+                        <input name="scope" value="Du học" placeholder="Ví dụ: Du học, Toàn Website, Lead được giao...">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu khởi tạo *</label>
+                        <input name="password" type="text" value="Kipa@2026!pass" required minlength="8" maxlength="72">
+                    </div>
+                </div>
+                <div style="margin-top:14px;display:flex;align-items:center;gap:8px;">
+                    <input type="checkbox" id="mcp" name="must_change_password" value="1" checked style="width:auto;">
+                    <label for="mcp" style="font-size:13px;font-weight:normal;color:#334155;margin:0;">Bắt buộc nhân sự phải đổi mật khẩu ở lần đăng nhập đầu tiên</label>
+                </div>
+                <div style="margin-top:18px;display:flex;gap:10px;">
+                    <button type="submit" class="btn-primary" style="padding:10px 22px;font-weight:700;">+ Lưu và Tạo tài khoản vào CSDL</button>
+                    <button type="button" class="btn-secondary" onclick="switchSubview(\'users\')">Quay lại danh sách</button>
+                </div>
+                </form>
             </div>
-            <p style="font-size:12px;color:#64748b;margin-top:2px;">Thông tin tài khoản mới sẽ được mã hóa an toàn và lưu trực tiếp vào CSDL MySQL máy chủ.</p>
-            ' . kipa_admin_form_start('create_admin', $csrf) . '
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Tên đăng nhập (Username) *</label>
-                    <input name="username" required minlength="3" maxlength="64" placeholder="Ví dụ: nguyene">
-                </div>
-                <div class="form-group">
-                    <label>Họ và tên nhân sự *</label>
-                    <input name="full_name" required minlength="2" maxlength="160" placeholder="Ví dụ: Nguyễn Văn E">
-                </div>
-                <div class="form-group">
-                    <label>Email nhận OTP & Thông báo *</label>
-                    <input name="email" type="email" required placeholder="nhansu@kipaviethan.edu.vn">
-                </div>
-                <div class="form-group">
-                    <label>Số điện thoại liên hệ</label>
-                    <input name="phone" placeholder="Ví dụ: 0912 345 679">
-                </div>
-                <div class="form-group">
-                    <label>Phòng ban</label>
-                    <select name="department">
-                        <option value="Marketing">Marketing</option>
-                        <option value="SEO">SEO & Kỹ thuật</option>
-                        <option value="Tuyển sinh">Tuyển sinh</option>
-                        <option value="Đào tạo & Học vụ">Đào tạo & Học vụ</option>
-                        <option value="Ban Giám Đốc">Ban Giám Đốc</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Vai trò hệ thống (Role) *</label>
-                    <select name="role">' . $roleSelectOptions . '</select>
-                </div>
-                <div class="form-group">
-                    <label>Phạm vi dữ liệu (Scope)</label>
-                    <input name="scope" value="Du học" placeholder="Ví dụ: Du học, Toàn Website, Lead được giao...">
-                </div>
-                <div class="form-group">
-                    <label>Mật khẩu khởi tạo *</label>
-                    <input name="password" type="text" value="Kipa@2026!pass" required minlength="8" maxlength="72">
-                </div>
-            </div>
-            <div style="margin-top:14px;display:flex;align-items:center;gap:8px;">
-                <input type="checkbox" id="mcp" name="must_change_password" value="1" checked style="width:auto;">
-                <label for="mcp" style="font-size:13px;font-weight:normal;color:#334155;margin:0;">Bắt buộc nhân sự phải đổi mật khẩu ở lần đăng nhập đầu tiên</label>
-            </div>
-            <div style="margin-top:18px;display:flex;gap:10px;">
-                <button type="submit" class="btn-primary">+ Lưu và Tạo tài khoản vào CSDL</button>
-                <button type="button" class="btn-secondary" onclick="toggleAddUserForm()">Hủy bỏ</button>
-            </div>
-            </form>
         </div>';
 
         // View 1: Team Members Table
@@ -1451,11 +1458,31 @@ try {
                         <span style="color:#94a3b8;">🔍</span>
                         <input type="text" id="userSearchInput" placeholder="Tìm theo tên, username, email..." onkeyup="filterUserTable()">
                     </div>
-                    <div style="display:flex;gap:10px;align-items:center;">
+                    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
                         <select class="filter-select" id="deptFilter" onchange="filterUserTable()">
                             <option value="">Tất cả phòng ban</option>
                             <option value="Ban Giám Đốc">Ban Giám Đốc</option>
                             <option value="Marketing">Marketing</option>
+                            <option value="SEO">SEO</option>
+                            <option value="Tuyển sinh">Tuyển sinh</option>
+                            <option value="Đào tạo & Học vụ">Đào tạo & Học vụ</option>
+                        </select>
+                        <select class="filter-select" id="roleFilter" onchange="filterUserTable()">
+                            <option value="">Tất cả vai trò (8 vai trò)</option>
+                            <option value="super_admin">01. Super Admin</option>
+                            <option value="website_manager">02. Website Manager</option>
+                            <option value="admissions_manager">03. Admissions Manager</option>
+                            <option value="admissions_consultant">04. Admissions Consultant</option>
+                            <option value="content_manager">05. Content Manager</option>
+                            <option value="content_seo_executive">06. Content & SEO Executive</option>
+                            <option value="seo_manager">07. SEO Manager</option>
+                            <option value="academic_coordinator">08. Academic Coordinator</option>
+                        </select>
+                        <button type="button" class="btn-primary" onclick="switchSubview(\'add\')" style="padding:8px 16px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">
+                            ➕ Thêm tài khoản mới
+                        </button>
+                    </div>
+                </div>
                             <option value="SEO">SEO</option>
                             <option value="Tuyển sinh">Tuyển sinh</option>
                             <option value="Đào tạo & Học vụ">Đào tạo & Học vụ</option>
@@ -1541,7 +1568,7 @@ try {
     // Script
     echo '<script>
         function switchSubview(sub) {
-            const views = ['users', 'roles', 'matrix'];
+            const views = ['users', 'add', 'roles', 'matrix'];
             views.forEach(v => {
                 const el = document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1));
                 const btn = document.getElementById('btnSub' + v.charAt(0).toUpperCase() + v.slice(1));
@@ -1551,16 +1578,21 @@ try {
                     else btn.classList.remove('active');
                 }
             });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleAddUserForm() {
-            const card = document.getElementById('addUserCard');
-            if (card) {
-                card.classList.toggle('open');
-                if (card.classList.contains('open')) {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+            switchSubview('add');
+        }
+
+        function openAddUserWithRole(roleKey) {
+            switchSubview('add');
+            const sel = document.getElementById('addRoleSelect');
+            if (sel) {
+                sel.value = roleKey;
             }
+            const inputUser = document.getElementById('addUsernameInput');
+            if (inputUser) inputUser.focus();
         }
 
         function filterUserTable() {
