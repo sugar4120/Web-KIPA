@@ -715,8 +715,8 @@ try {
             if ($targetId === false || $targetId < 1) {
                 kipa_admin_error('Mã tài khoản không hợp lệ.');
             }
-            if ($targetId === (int)$_SESSION['admin_id']) {
-                kipa_admin_error('Không thể tự khóa tài khoản đang đăng nhập của chính bạn.');
+            if ($targetId === (int)$_SESSION['admin_id'] || $targetId === 1) {
+                kipa_admin_error('Không thể tự khóa tài khoản của bạn hoặc tài khoản Tổng quản trị hệ thống gốc.');
             }
             $target = $db->prepare('SELECT id, status FROM kipa_admins WHERE id = :id');
             $target->execute(['id' => $targetId]);
@@ -739,8 +739,8 @@ try {
             if ($targetId === false || $targetId < 1) {
                 kipa_admin_error('Mã tài khoản không hợp lệ.');
             }
-            if ($targetId === (int)$_SESSION['admin_id']) {
-                kipa_admin_error('Không thể xóa tài khoản của chính bạn.');
+            if ($targetId === (int)$_SESSION['admin_id'] || $targetId === 1) {
+                kipa_admin_error('Không thể xóa tài khoản của bạn hoặc tài khoản Tổng quản trị hệ thống gốc.');
             }
             $del = $db->prepare('DELETE FROM kipa_admins WHERE id = :id');
             $del->execute(['id' => $targetId]);
