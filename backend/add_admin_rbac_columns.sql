@@ -41,4 +41,12 @@ SET `full_name` = 'Tổng quản trị KIPA',
     `email` = IF(`email` IS NULL OR `email` = '', 'duhocquoctekipaviethan@gmail.com', `email`)
 WHERE `username` = 'admin';
 
+-- Khởi tạo 4 nhân sự mẫu theo ma trận phân quyền KIPA (nếu chưa có)
+INSERT IGNORE INTO `kipa_admins` (`username`, `full_name`, `email`, `phone`, `password_hash`, `department`, `role`, `scope`, `status`, `must_change_password`, `created_at`)
+VALUES 
+('nguyena', 'Nguyễn A', 'nguyena@kipaviethan.edu.vn', '0912 345 671', '$2y$10$Y14v1R674.lG48w21hDk0OHmO6d4rF07rC2qX/7jP/VekZqR3QYWy', 'Marketing', 'content_seo_executive', 'Du học', 'active', 0, UTC_TIMESTAMP()),
+('nguyenb', 'Nguyễn B', 'nguyenb@kipaviethan.edu.vn', '0912 345 672', '$2y$10$Y14v1R674.lG48w21hDk0OHmO6d4rF07rC2qX/7jP/VekZqR3QYWy', 'Marketing', 'content_manager', 'Marketing', 'active', 0, UTC_TIMESTAMP()),
+('nguyenc', 'Nguyễn C', 'nguyenc@kipaviethan.edu.vn', '0912 345 673', '$2y$10$Y14v1R674.lG48w21hDk0OHmO6d4rF07rC2qX/7jP/VekZqR3QYWy', 'SEO', 'seo_manager', 'Toàn Website', 'active', 0, UTC_TIMESTAMP()),
+('nguyend', 'Nguyễn D', 'nguyend@kipaviethan.edu.vn', '0912 345 674', '$2y$10$Y14v1R674.lG48w21hDk0OHmO6d4rF07rC2qX/7jP/VekZqR3QYWy', 'Tuyển sinh', 'admissions_consultant', 'Lead được giao', 'active', 0, UTC_TIMESTAMP());
+
 SET FOREIGN_KEY_CHECKS = 1;
