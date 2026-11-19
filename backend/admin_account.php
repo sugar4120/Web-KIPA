@@ -21,6 +21,10 @@ try {
     if (!$column) {
         $db->exec('ALTER TABLE kipa_admins ADD COLUMN must_change_password BOOLEAN NOT NULL DEFAULT 0');
     }
+    $emailColumn = $db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
+    if (!$emailColumn) {
+        $db->exec('ALTER TABLE kipa_admins ADD COLUMN email VARCHAR(191) NULL DEFAULT NULL AFTER username');
+    }
     if ($argv[1] === '--migrate-only') {
         fwrite(STDOUT, "Administrator password-change migration completed; existing passwords retained.\n");
         exit;

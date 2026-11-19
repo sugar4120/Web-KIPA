@@ -6,7 +6,7 @@ import json
 import sqlite3
 import datetime
 import mimetypes
-from urllib.parse import unquote, urlparse, parse_qs
+from urllib.parse import unquote, urlparse, parse_qs, quote
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 PORT = 3000
@@ -15,7 +15,9 @@ DB_PATH = os.path.join(BASE_DIR, 'backend', 'dev_leads.sqlite')
 
 DEV_ADMIN_LOGGED_IN = False
 DEV_ADMIN_PASSWORD = "admin_password_123"
+DEV_ADMIN_EMAIL = "duhocquoctekipaviethan@gmail.com"
 DEV_SETUP_TOKEN = "kipa_secret_setup_token_2026"
+DEV_ADMIN_OTP = "123456"
 
 
 def init_dev_db():
@@ -355,7 +357,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
         self.handle_request(head_only=False)
 
     def do_POST(self):
-        global DEV_AUTH_USER, DEV_LOGGED_IN, DEV_ADMIN_LOGGED_IN, DEV_ADMIN_PASSWORD, DEV_SETUP_TOKEN
+        global DEV_AUTH_USER, DEV_LOGGED_IN, DEV_ADMIN_LOGGED_IN, DEV_ADMIN_PASSWORD, DEV_SETUP_TOKEN, DEV_ADMIN_OTP
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
 
@@ -374,25 +376,58 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                     post_data = {}
 
             action = post_data.get('action', '')
-            if action == 'reset_password':
-                username = post_data.get('username', '').strip()
+            if action == 'send_otp':
+                account = post_data.get('account', '').strip()
+                if not account:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?view=reset&error=empty')
+                    self.end_headers()
+                    return
+                if account in {'admin', DEV_ADMIN_EMAIL}:
+                    import random
+                    DEV_ADMIN_OTP = f"{random.randint(100000, 999999)}"
+                    parts = DEV_ADMIN_EMAIL.split('@')
+                    email_hint = parts[0][:2] + '***@' + parts[1]
+                    self.send_response(303)
+                    self.send_header('Location', f'/admin/?view=reset&step=2&account=admin&email_hint={quote(email_hint)}')
+                    self.end_headers()
+                    return
+                else:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?view=reset&error=notfound')
+                    self.end_headers()
+                    return
+
+            elif action == 'reset_password':
+                account = post_data.get('account', '').strip() or post_data.get('username', '').strip()
                 token = post_data.get('setup_token', '').strip()
+                otp_code = post_data.get('otp_code', '').strip()
                 new_pass = post_data.get('new_password', '')
                 confirm_pass = post_data.get('new_password_confirm', '')
 
-                if token != DEV_SETUP_TOKEN:
-                    self.send_response(303)
-                    self.send_header('Location', '/admin/?view=reset&error=token')
-                    self.end_headers()
-                    return
+                if token:
+                    if token != DEV_SETUP_TOKEN:
+                        self.send_response(303)
+                        self.send_header('Location', '/admin/?view=reset&mode=token&error=token')
+                        self.end_headers()
+                        return
+                else:
+                    if not otp_code or otp_code != DEV_ADMIN_OTP:
+                        self.send_response(303)
+                        self.send_header('Location', f'/admin/?view=reset&step=2&account={quote(account)}&error=otp')
+                        self.end_headers()
+                        return
+
                 if len(new_pass) < 12:
+                    redir = '/admin/?view=reset&mode=token&error=length' if token else f'/admin/?view=reset&step=2&account={quote(account)}&error=length'
                     self.send_response(303)
-                    self.send_header('Location', '/admin/?view=reset&error=length')
+                    self.send_header('Location', redir)
                     self.end_headers()
                     return
                 if new_pass != confirm_pass:
+                    redir = '/admin/?view=reset&mode=token&error=mismatch' if token else f'/admin/?view=reset&step=2&account={quote(account)}&error=mismatch'
                     self.send_response(303)
-                    self.send_header('Location', '/admin/?view=reset&error=mismatch')
+                    self.send_header('Location', redir)
                     self.end_headers()
                     return
 
@@ -704,12 +739,22 @@ class KipaDevHandler(BaseHTTPRequestHandler):
         if path in {'/admin', '/admin/'}:
             query = parse_qs(parsed.query)
             view = query.get('view', [''])[0]
+            step = query.get('step', ['1'])[0]
+            mode = query.get('mode', [''])[0]
+            account = query.get('account', ['admin'])[0]
+            email_hint = query.get('email_hint', [''])[0]
             reset_success = 'reset_success' in query
             error = query.get('error', [''])[0]
 
             error_html = ''
             if error == 'token':
                 error_html = f'<div class="message">Mã thiết lập bí mật không đúng. Gợi ý local: <code>{DEV_SETUP_TOKEN}</code></div>'
+            elif error == 'otp':
+                error_html = f'<div class="message">Mã xác thực OTP không chính xác hoặc đã hết hạn. Thử lại với mã: <code>{DEV_ADMIN_OTP}</code></div>'
+            elif error == 'notfound':
+                error_html = '<div class="message">Không tìm thấy tài khoản quản trị khớp với thông tin này. (Gợi ý: "admin" hoặc email quản trị).</div>'
+            elif error == 'empty':
+                error_html = '<div class="message">Vui lòng nhập tên đăng nhập hoặc email quản trị.</div>'
             elif error == 'length':
                 error_html = '<div class="message">Mật khẩu mới phải có tối thiểu 12 ký tự.</div>'
             elif error == 'mismatch':
@@ -718,6 +763,80 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 error_html = '<div class="message">Tên đăng nhập hoặc mật khẩu không chính xác.</div>'
 
             if view == 'reset':
+                content_html = ''
+                if mode == 'token':
+                    content_html = f"""
+        <h1>Đặt lại mật khẩu (Mã thiết lập)</h1>
+        <p class="muted">Nhập mã thiết lập bí mật (setup_token) từ tệp cấu hình máy chủ để xác thực quyền quản trị và đặt lại mật khẩu mới an toàn.</p>
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="reset_password">
+            <label>Tên đăng nhập quản trị
+                <input name="username" value="{account}" required minlength="3" maxlength="64" autocomplete="username">
+            </label>
+            <label>Mã thiết lập bí mật (setup_token)
+                <input name="setup_token" value="{DEV_SETUP_TOKEN}" required autocomplete="off" placeholder="Gợi ý local: {DEV_SETUP_TOKEN}">
+            </label>
+            <label>Mật khẩu mới (12–72 ký tự)
+                <input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự">
+            </label>
+            <label>Nhập lại mật khẩu mới
+                <input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác">
+            </label>
+            <p class="actions">
+                <button type="submit">Xác nhận đặt lại mật khẩu</button>
+                <a href="/admin/?view=reset">← Đổi bằng Mã OTP Email</a>
+                <a href="/admin/">Quay lại Đăng nhập</a>
+            </p>
+        </form>"""
+                elif step == '2':
+                    hint_text = f"<strong>{email_hint}</strong>" if email_hint else "email quản trị"
+                    content_html = f"""
+        <h1>Nhập mã xác thực OTP</h1>
+        <p class="message success">✓ Đã gửi mã xác thực OTP 6 số đến {hint_text}. Vui lòng kiểm tra hộp thư đến (hoặc hòm thư Spam).</p>
+        <div style="background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px;">
+            💡 <strong>Môi trường Localhost giả lập email:</strong> Mã OTP vừa gửi là: <code>{DEV_ADMIN_OTP}</code>
+        </div>
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="reset_password">
+            <input type="hidden" name="account" value="{account}">
+            <p class="muted" style="margin-bottom:12px;">Tài khoản quản trị: <strong>{account}</strong></p>
+            <label>Mã xác thực OTP (6 chữ số)
+                <input name="otp_code" required pattern="\\d{{6}}" maxlength="6" autocomplete="one-time-code" placeholder="Nhập 6 số từ email" autofocus value="{DEV_ADMIN_OTP}">
+            </label>
+            <label>Mật khẩu mới (12–72 ký tự)
+                <input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự">
+            </label>
+            <label>Nhập lại mật khẩu mới
+                <input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác">
+            </label>
+            <p class="actions">
+                <button type="submit">Xác nhận đổi mật khẩu</button>
+                <a href="/admin/?view=reset">Gửi lại mã OTP</a>
+                <a href="/admin/">Quay lại Đăng nhập</a>
+            </p>
+        </form>"""
+                else:
+                    content_html = f"""
+        <h1>Quên mật khẩu Quản trị viên</h1>
+        <p class="muted">Nhập Tên đăng nhập hoặc Email quản trị để nhận mã xác thực OTP gửi về hòm thư của bạn.</p>
+        {error_html}
+        <form method="post" action="/admin/">
+            <input type="hidden" name="action" value="send_otp">
+            <label>Tên đăng nhập hoặc Email quản trị
+                <input name="account" value="admin" required minlength="3" maxlength="191" autocomplete="username" placeholder="Ví dụ: admin hoặc email@kipaviethan.edu.vn" autofocus>
+            </label>
+            <p class="actions">
+                <button type="submit">Gửi mã OTP về Email</button>
+                <a href="/admin/">← Quay lại Đăng nhập</a>
+            </p>
+        </form>
+        <div style="margin-top:24px;border-top:1px solid #e2e8f0;padding-top:14px;">
+            <p class="muted" style="margin-bottom:6px;">Chưa liên kết email hoặc không nhận được thư?</p>
+            <a href="/admin/?view=reset&mode=token" style="font-size:13px;">Đặt lại mật khẩu bằng Mã thiết lập máy chủ (setup_token) →</a>
+        </div>"""
+
                 html = f"""<!doctype html>
 <html lang="vi">
 <head>
@@ -747,28 +866,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 <main>
     <section class="card">
         <span class="badge-dev">MÔI TRƯỜNG LOCALHOST DEV</span>
-        <h1>Đặt lại mật khẩu quản trị KIPA</h1>
-        <p class="muted">Nhập mã thiết lập bí mật (setup_token) từ tệp cấu hình máy chủ để xác thực quyền quản trị và đặt lại mật khẩu mới an toàn.</p>
-        {error_html}
-        <form method="post" action="/admin/">
-            <input type="hidden" name="action" value="reset_password">
-            <label>Tên đăng nhập quản trị
-                <input name="username" value="admin" required minlength="3" maxlength="64" autocomplete="username">
-            </label>
-            <label>Mã thiết lập bí mật (setup_token)
-                <input name="setup_token" value="{DEV_SETUP_TOKEN}" required autocomplete="off" placeholder="Gợi ý local: {DEV_SETUP_TOKEN}">
-            </label>
-            <label>Mật khẩu mới (12–72 byte)
-                <input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự">
-            </label>
-            <label>Nhập lại mật khẩu mới
-                <input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác">
-            </label>
-            <p class="actions">
-                <button type="submit">Xác nhận đặt lại mật khẩu</button>
-                <a href="/admin/">← Quay lại Đăng nhập</a>
-            </p>
-        </form>
+        {content_html}
     </section>
 </main>
 </body>
