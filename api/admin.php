@@ -20,10 +20,10 @@ function kipa_admin_page(string $title, string $content): never
     echo '<title>' . kipa_h($title) . ' | KIPA</title>';
     echo '<style>
         *{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}
-        main{max-width:1100px;margin:32px auto;padding:0 16px}.card{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        main{max-width:1160px;margin:32px auto;padding:0 16px}.card{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
         h1{font-size:24px;margin:0 0 16px;color:#081d36}h2{font-size:18px;margin:0 0 12px;color:#081d36}.muted{color:#64748b;font-size:13px}
-        label{display:block;font-weight:600;margin:10px 0 4px;color:#1e293b}input{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:7px;font-size:14px}
-        input:focus{outline:none;border-color:#0274bd;box-shadow:0 0 0 2px rgba(2,116,189,0.2)}
+        label{display:block;font-weight:600;margin:10px 0 4px;color:#1e293b}input,select{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:7px;font-size:14px;background:#fff}
+        input:focus,select:focus{outline:none;border-color:#0274bd;box-shadow:0 0 0 2px rgba(2,116,189,0.2)}
         button{border:0;border-radius:7px;background:#0274bd;color:#fff;padding:10px 16px;font-weight:700;cursor:pointer;font-size:14px;transition:background .15s}
         button:hover{background:#025c96}
         button.danger{background:#b91c1c}button.danger:hover{background:#991b1b}
@@ -32,12 +32,66 @@ function kipa_admin_page(string $title, string $content): never
         .message{padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:7px;margin:12px 0;font-size:14px}
         .message.success{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
         a{color:#0274bd;text-decoration:none;font-weight:600}a:hover{text-decoration:underline}
-        .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:800px}th,td{text-align:left;vertical-align:top;padding:10px;border-bottom:1px solid #e2e8f0}
+        .table-wrap{overflow:auto;border:1px solid #e2e8f0;border-radius:8px;}table{width:100%;border-collapse:collapse;min-width:800px}th,td{text-align:left;vertical-align:middle;padding:11px 14px;border-bottom:1px solid #e2e8f0}
+        thead th{background:#f8fafc;font-size:13px;color:#475569;}
         pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:420px;font:12px/1.5 ui-monospace,monospace;margin:0}
         form.inline{display:inline}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+        .nav-tabs{display:flex;gap:10px;margin-bottom:20px;border-bottom:2px solid #e2e8f0;padding-bottom:12px;flex-wrap:wrap}
+        .nav-tab{padding:9px 16px;border-radius:8px;font-weight:600;text-decoration:none;background:#f1f5f9;color:#475569;display:inline-flex;align-items:center;gap:6px}
+        .nav-tab:hover{background:#e2e8f0;text-decoration:none}
+        .nav-tab.active{background:#0274bd;color:#fff}
+        .badge{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:bold;display:inline-block;}
         @media(max-width:600px){main{margin:16px auto}.card{padding:14px}h1{font-size:21px}}
     </style></head><body><main>' . $content . '</main></body></html>';
     exit;
+}
+
+function kipa_roles_list(): array
+{
+    return [
+        'super_admin' => ['title' => '01. Super Admin', 'desc' => 'Quản trị hệ thống toàn quyền', 'color' => '#dc2626'],
+        'website_manager' => ['title' => '02. Website Manager', 'desc' => 'Quản lý vận hành Website & CMS', 'color' => '#0284c7'],
+        'admissions_manager' => ['title' => '03. Admissions Manager', 'desc' => 'Quản lý bộ phận tuyển sinh & Lead', 'color' => '#059669'],
+        'admissions_consultant' => ['title' => '04. Admissions Consultant', 'desc' => 'Tư vấn tuyển sinh & CSKH', 'color' => '#10b981'],
+        'content_manager' => ['title' => '05. Content Manager', 'desc' => 'Quản lý nội dung & biên tập', 'color' => '#d97706'],
+        'content_seo_executive' => ['title' => '06. Content & SEO Executive', 'desc' => 'Viết nội dung & SEO cơ bản', 'color' => '#f59e0b'],
+        'seo_manager' => ['title' => '07. SEO Manager', 'desc' => 'Quản trị SEO chiến lược & kỹ thuật', 'color' => '#7c3aed'],
+        'academic_coordinator' => ['title' => '08. Academic & Student Coordinator', 'desc' => 'Quản lý học viên & điều phối học vụ', 'color' => '#2563eb'],
+    ];
+}
+
+function kipa_ensure_admin_columns(PDO $db): void
+{
+    static $ensured = false;
+    if ($ensured) return;
+    try {
+        $cols = $db->query("SHOW COLUMNS FROM kipa_admins")->fetchAll(PDO::FETCH_COLUMN);
+        if ($cols && is_array($cols)) {
+            if (!in_array('full_name', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN full_name VARCHAR(160) NOT NULL DEFAULT '' AFTER username");
+            }
+            if (!in_array('email', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN email VARCHAR(191) NULL DEFAULT NULL AFTER full_name");
+            }
+            if (!in_array('phone', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN phone VARCHAR(32) NULL DEFAULT NULL AFTER email");
+            }
+            if (!in_array('department', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN department VARCHAR(64) NOT NULL DEFAULT 'Ban Giám Đốc' AFTER phone");
+            }
+            if (!in_array('role', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN role VARCHAR(64) NOT NULL DEFAULT 'super_admin' AFTER department");
+            }
+            if (!in_array('scope', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN scope VARCHAR(255) NOT NULL DEFAULT 'Toàn hệ thống' AFTER role");
+            }
+            if (!in_array('status', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN status VARCHAR(32) NOT NULL DEFAULT 'active' AFTER scope");
+            }
+        }
+    } catch (Throwable) {
+    }
+    $ensured = true;
 }
 
 function kipa_admin_error(string $message, int $status = 400): never
@@ -102,16 +156,31 @@ try {
             kipa_record_rate_event($db, 'login', $remoteKey);
             $username = trim((string)($_POST['username'] ?? ''));
             $password = (string)($_POST['password'] ?? '');
-            $statement = $db->prepare('SELECT id, username, password_hash, must_change_password FROM kipa_admins WHERE username = :username LIMIT 1');
-            $statement->execute(['username' => $username]);
-            $admin = $statement->fetch();
+
+            kipa_ensure_admin_columns($db);
+            try {
+                $statement = $db->prepare('SELECT id, username, full_name, email, password_hash, role, department, scope, status, must_change_password FROM kipa_admins WHERE username = :username LIMIT 1');
+                $statement->execute(['username' => $username]);
+                $admin = $statement->fetch();
+            } catch (Throwable) {
+                $fallbackStmt = $db->prepare('SELECT id, username, password_hash, must_change_password FROM kipa_admins WHERE username = :username LIMIT 1');
+                $fallbackStmt->execute(['username' => $username]);
+                $admin = $fallbackStmt->fetch();
+            }
             if (!$admin || !password_verify($password, $admin['password_hash'])) {
                 kipa_admin_error('Tên đăng nhập hoặc mật khẩu không đúng.');
+            }
+            if (isset($admin['status']) && $admin['status'] === 'locked') {
+                kipa_admin_error('Tài khoản này hiện đang bị tạm khóa. Vui lòng liên hệ Super Admin.', 403);
             }
             session_regenerate_id(true);
             $_SESSION['csrf'] = bin2hex(random_bytes(32));
             $_SESSION['admin_id'] = (int)$admin['id'];
             $_SESSION['admin_username'] = $admin['username'];
+            $_SESSION['admin_full_name'] = !empty($admin['full_name']) ? $admin['full_name'] : $admin['username'];
+            $_SESSION['admin_role'] = $admin['role'] ?? 'super_admin';
+            $_SESSION['admin_department'] = $admin['department'] ?? 'Ban Giám Đốc';
+            $_SESSION['admin_scope'] = $admin['scope'] ?? 'Toàn hệ thống';
             $_SESSION['must_change_password'] = (bool)$admin['must_change_password'];
             header('Location: /api/admin.php', true, 303);
             exit;
@@ -342,6 +411,108 @@ try {
             header('Location: /api/admin.php?password_changed=1', true, 303);
             exit;
         }
+
+        if ($action === 'create_admin') {
+            $currentRole = $_SESSION['admin_role'] ?? 'super_admin';
+            if ($currentRole !== 'super_admin' && $currentRole !== 'website_manager') {
+                kipa_admin_error('Bạn không có quyền tạo tài khoản nhân sự.', 403);
+            }
+            kipa_ensure_admin_columns($db);
+            $newUsername = trim((string)($_POST['username'] ?? ''));
+            $fullName = trim((string)($_POST['full_name'] ?? ''));
+            $email = trim((string)($_POST['email'] ?? ''));
+            $phone = trim((string)($_POST['phone'] ?? ''));
+            $department = trim((string)($_POST['department'] ?? 'Ban Giám Đốc'));
+            $role = trim((string)($_POST['role'] ?? 'super_admin'));
+            $scope = trim((string)($_POST['scope'] ?? 'Toàn hệ thống'));
+            $password = (string)($_POST['password'] ?? '');
+            $mustChange = isset($_POST['must_change_password']) ? 1 : 0;
+
+            if (!preg_match('/^[A-Za-z0-9._-]{3,64}$/', $newUsername)) {
+                kipa_admin_error('Tên đăng nhập phải từ 3 đến 64 ký tự (chữ cái, số, ., -, _).');
+            }
+            if (mb_strlen($fullName) < 2 || mb_strlen($fullName) > 160) {
+                kipa_admin_error('Họ và tên nhân sự không được để trống (từ 2 đến 160 ký tự).');
+            }
+            if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                kipa_admin_error('Địa chỉ email không hợp lệ.');
+            }
+            if (strlen($password) < 8 || strlen($password) > 72 || str_contains($password, "\0")) {
+                kipa_admin_error('Mật khẩu khởi tạo phải từ 8 đến 72 byte.');
+            }
+
+            $validRoles = array_keys(kipa_roles_list());
+            if (!in_array($role, $validRoles, true)) {
+                kipa_admin_error('Vai trò được chọn không hợp lệ.');
+            }
+
+            $dup = $db->prepare('SELECT id FROM kipa_admins WHERE username = :u OR (email IS NOT NULL AND email != "" AND email = :e) LIMIT 1');
+            $dup->execute(['u' => $newUsername, 'e' => $email]);
+            if ($dup->fetch()) {
+                kipa_admin_error('Tên đăng nhập hoặc Email này đã tồn tại trong hệ thống.');
+            }
+
+            $stmt = $db->prepare(
+                'INSERT INTO kipa_admins (username, full_name, email, phone, password_hash, department, role, scope, status, must_change_password, created_at)
+                 VALUES (:username, :full_name, :email, :phone, :password_hash, :department, :role, :scope, "active", :must_change, UTC_TIMESTAMP())'
+            );
+            $stmt->execute([
+                'username' => $newUsername,
+                'full_name' => $fullName,
+                'email' => $email !== '' ? $email : null,
+                'phone' => $phone !== '' ? $phone : null,
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                'department' => $department,
+                'role' => $role,
+                'scope' => $scope,
+                'must_change' => $mustChange,
+            ]);
+
+            header('Location: /api/admin.php?tab=accounts&admin_created=1', true, 303);
+            exit;
+        }
+
+        if ($action === 'toggle_admin_status') {
+            $currentRole = $_SESSION['admin_role'] ?? 'super_admin';
+            if ($currentRole !== 'super_admin' && $currentRole !== 'website_manager') {
+                kipa_admin_error('Bạn không có quyền thay đổi trạng thái tài khoản.', 403);
+            }
+            $targetId = filter_var($_POST['target_id'] ?? null, FILTER_VALIDATE_INT);
+            if ($targetId === false || $targetId < 1) {
+                kipa_admin_error('Mã tài khoản không hợp lệ.');
+            }
+            if ($targetId === (int)$_SESSION['admin_id']) {
+                kipa_admin_error('Không thể tự khóa tài khoản đang đăng nhập của chính bạn.');
+            }
+            $target = $db->prepare('SELECT id, status FROM kipa_admins WHERE id = :id');
+            $target->execute(['id' => $targetId]);
+            $adminRow = $target->fetch();
+            if (!$adminRow) {
+                kipa_admin_error('Tài khoản không tồn tại.');
+            }
+            $newStatus = ($adminRow['status'] ?? 'active') === 'active' ? 'locked' : 'active';
+            $update = $db->prepare('UPDATE kipa_admins SET status = :st WHERE id = :id');
+            $update->execute(['st' => $newStatus, 'id' => $targetId]);
+            header('Location: /api/admin.php?tab=accounts&status_updated=1', true, 303);
+            exit;
+        }
+
+        if ($action === 'delete_admin') {
+            if (($_SESSION['admin_role'] ?? 'super_admin') !== 'super_admin') {
+                kipa_admin_error('Chỉ Super Admin mới có quyền xóa tài khoản.', 403);
+            }
+            $targetId = filter_var($_POST['target_id'] ?? null, FILTER_VALIDATE_INT);
+            if ($targetId === false || $targetId < 1) {
+                kipa_admin_error('Mã tài khoản không hợp lệ.');
+            }
+            if ($targetId === (int)$_SESSION['admin_id']) {
+                kipa_admin_error('Không thể xóa tài khoản của chính bạn.');
+            }
+            $del = $db->prepare('DELETE FROM kipa_admins WHERE id = :id');
+            $del->execute(['id' => $targetId]);
+            header('Location: /api/admin.php?tab=accounts&deleted_admin=1', true, 303);
+            exit;
+        }
         kipa_admin_error('Tác vụ không hợp lệ.');
     }
 
@@ -453,62 +624,278 @@ try {
     $statement->execute();
     $leads = $statement->fetchAll();
 
+    kipa_ensure_admin_columns($db);
+    $adminListStmt = $db->query('SELECT id, username, full_name, email, phone, department, role, scope, status, created_at FROM kipa_admins ORDER BY id ASC');
+    $allAdmins = $adminListStmt ? $adminListStmt->fetchAll() : [];
+
     $csrf = kipa_h($_SESSION['csrf']);
-    $content = '<section class="card"><div class="top"><div><h1>Đăng ký tư vấn KIPA</h1><p class="muted">Đang đăng nhập: ' .
-        kipa_h((string)$_SESSION['admin_username']) . ' · ' . $total . ' đăng ký</p></div>';
-    $content .= '<a href="/api/cms.php">Quản trị dữ liệu A–J</a>' . kipa_admin_form_start('logout', $csrf) . '<button class="secondary" type="submit">Đăng xuất</button></form></div>';
+    $tab = $_GET['tab'] ?? 'leads';
+    $rolesMeta = kipa_roles_list();
+
+    $tabLeadsClass = $tab === 'leads' ? 'nav-tab active' : 'nav-tab';
+    $tabAccountsClass = $tab === 'accounts' ? 'nav-tab active' : 'nav-tab';
+    $tabMatrixClass = $tab === 'roles_matrix' ? 'nav-tab active' : 'nav-tab';
+
+    $tabNavigation = '<nav class="nav-tabs">
+        <a class="' . $tabLeadsClass . '" href="/api/admin.php?tab=leads">📋 Đăng ký tư vấn (Leads) <span class="badge" style="background:' . ($tab === 'leads' ? 'rgba(255,255,255,0.3)' : '#e2e8f0') . ';color:' . ($tab === 'leads' ? '#fff' : '#334155') . '">' . $total . '</span></a>
+        <a class="' . $tabAccountsClass . '" href="/api/admin.php?tab=accounts">👥 Quản lý Nhân sự & Phân quyền <span class="badge" style="background:' . ($tab === 'accounts' ? 'rgba(255,255,255,0.3)' : '#e2e8f0') . ';color:' . ($tab === 'accounts' ? '#fff' : '#334155') . '">' . count($allAdmins) . '</span></a>
+        <a class="' . $tabMatrixClass . '" href="/api/admin.php?tab=roles_matrix">📊 Ma trận 8 Vai trò (RBAC)</a>
+        <a class="nav-tab" href="/api/cms.php" target="_blank" style="margin-left:auto;color:#0274bd;">🌐 Quản trị CMS A–J ↗</a>
+    </nav>';
+
+    $headerTop = '<div class="top" style="margin-bottom:16px;">
+        <div>
+            <h1>Quản trị hệ thống KIPA</h1>
+            <p class="muted" style="margin:0;">Đang đăng nhập: <strong>' . kipa_h((string)$_SESSION['admin_username']) . ' (' . kipa_h((string)($_SESSION['admin_role'] ?? 'super_admin')) . ')</strong> · ' . kipa_h((string)($_SESSION['admin_department'] ?? 'Ban Giám Đốc')) . '</p>
+        </div>
+        ' . kipa_admin_form_start('logout', $csrf) . '<button class="secondary" type="submit">Đăng xuất</button></form>
+    </div>';
+
+    $bannerHtml = '';
+    if (isset($_GET['admin_created'])) {
+        $bannerHtml .= '<p class="message success">✓ Đã tạo tài khoản nhân sự mới thành công và lưu trực tiếp vào CSDL!</p>';
+    }
+    if (isset($_GET['status_updated'])) {
+        $bannerHtml .= '<p class="message success">✓ Đã cập nhật trạng thái hoạt động của tài khoản trong CSDL!</p>';
+    }
+    if (isset($_GET['deleted_admin'])) {
+        $bannerHtml .= '<p class="message success">✓ Đã xóa tài khoản nhân sự khỏi CSDL!</p>';
+    }
     if (isset($_GET['deleted'])) {
-        $content .= '<p class="message">Đã xóa đăng ký.</p>';
+        $bannerHtml .= '<p class="message">Đã xóa đăng ký tư vấn.</p>';
     }
     if (isset($_GET['password_changed'])) {
-        $content .= '<p class="message">Đã đổi mật khẩu quản trị.</p>';
+        $bannerHtml .= '<p class="message success">✓ Đã đổi mật khẩu quản trị thành công.</p>';
     }
-    if ($leads === []) {
-        $content .= '<p>Chưa có đăng ký nào.</p>';
-    } else {
-        $content .= '<div class="table-wrap"><table><thead><tr><th>Ngày gửi (UTC)</th><th>Biểu mẫu</th><th>Liên hệ</th><th>Nhu cầu</th><th>Chi tiết</th><th>Tác vụ</th></tr></thead><tbody>';
-        foreach ($leads as $lead) {
-            $details = json_decode($lead['details_json'], true);
-            if (!is_array($details)) {
-                $details = [];
+
+    $bodyHtml = '';
+    if ($tab === 'accounts') {
+        $adminRows = '';
+        foreach ($allAdmins as $a) {
+            $rKey = (string)($a['role'] ?? 'super_admin');
+            $rInfo = $rolesMeta[$rKey] ?? ['title' => $rKey, 'desc' => '', 'color' => '#64748b'];
+            $st = (string)($a['status'] ?? 'active');
+            $stBadge = $st === 'active'
+                ? '<span style="background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:12px;font-size:11px;font-weight:700;">Hoạt động</span>'
+                : '<span style="background:#fee2e2;color:#b91c1c;padding:4px 8px;border-radius:12px;font-size:11px;font-weight:700;">Đã khóa</span>';
+
+            $actions = '';
+            if ((int)$a['id'] !== (int)$_SESSION['admin_id']) {
+                $toggleTxt = $st === 'active' ? 'Khóa' : 'Mở khóa';
+                $toggleColor = $st === 'active' ? '#b91c1c' : '#15803d';
+                $actions .= kipa_admin_form_start('toggle_admin_status', $csrf) .
+                    '<input type="hidden" name="target_id" value="' . (int)$a['id'] . '">' .
+                    '<button type="submit" style="background:' . $toggleColor . ';padding:4px 10px;font-size:12px;border-radius:5px;margin-right:6px;">' . $toggleTxt . '</button></form>';
+
+                if (($_SESSION['admin_role'] ?? 'super_admin') === 'super_admin') {
+                    $actions .= kipa_admin_form_start('delete_admin', $csrf) .
+                        '<input type="hidden" name="target_id" value="' . (int)$a['id'] . '">' .
+                        '<button type="submit" class="danger" style="padding:4px 10px;font-size:12px;border-radius:5px;" onclick="return confirm(\'Bạn có chắc chắn muốn xóa tài khoản này khỏi CSDL?\');">Xóa</button></form>';
+                }
+            } else {
+                $actions = '<span style="color:#94a3b8;font-size:12px;">Đang đăng nhập</span>';
             }
-            $program = (string)($lead['program'] ?? '');
-            $contact = '<strong>' . kipa_h($lead['contact_name']) . '</strong><br>' . kipa_h($lead['phone']);
-            if ($lead['email'] !== null) {
-                $contact .= '<br>' . kipa_h($lead['email']);
-            }
-            $detailsText = [];
-            foreach ($details as $key => $value) {
-                $formatted = is_array($value) ? implode(', ', array_map('strval', $value)) : (string)$value;
-                $detailsText[] = (string)$key . ': ' . $formatted;
-            }
-            $content .= '<tr><td>' . kipa_h($lead['created_at']) . '</td><td>' . kipa_h($lead['form_type']) .
-                '<br><span class="muted">' . kipa_h($lead['source_page']) . '</span></td><td>' . $contact .
-                '</td><td>' . kipa_h($program) . '</td><td><pre>' . kipa_h(implode("\n", $detailsText)) .
-                '</pre></td><td>' . kipa_admin_form_start('delete', $csrf) .
-                '<input type="hidden" name="lead_id" value="' . (int)$lead['id'] .
-                '"><button class="danger" type="submit">Xóa</button></form></td></tr>';
+
+            $adminRows .= '<tr>
+                <td><strong>' . kipa_h((string)($a['full_name'] ?: $a['username'])) . '</strong><br><span class="muted">@' . kipa_h((string)$a['username']) . '</span></td>
+                <td>' . kipa_h((string)($a['email'] ?? '—')) . '<br><span class="muted">' . kipa_h((string)($a['phone'] ?? '—')) . '</span></td>
+                <td><strong>' . kipa_h((string)($a['department'] ?? 'Ban Giám Đốc')) . '</strong></td>
+                <td><span style="background:' . $rInfo['color'] . '15;color:' . $rInfo['color'] . ';border:1px solid ' . $rInfo['color'] . '40;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;">' . kipa_h($rInfo['title']) . '</span></td>
+                <td style="font-size:13px;color:#475569;">' . kipa_h((string)($a['scope'] ?? 'Toàn hệ thống')) . '</td>
+                <td>' . $stBadge . '</td>
+                <td style="white-space:nowrap;">' . $actions . '</td>
+            </tr>';
         }
-        $content .= '</tbody></table></div>';
+
+        $roleOpts = '';
+        foreach ($rolesMeta as $k => $v) {
+            $roleOpts .= '<option value="' . kipa_h($k) . '">' . kipa_h($v['title']) . ' — ' . kipa_h($v['desc']) . '</option>';
+        }
+
+        $bodyHtml .= '<div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:22px;margin-bottom:24px;">
+            <h2 style="font-size:17px;margin:0 0 14px;color:#081d36;font-weight:700;">+ Tạo tài khoản Quản trị & Nhân sự mới</h2>
+            ' . kipa_admin_form_start('create_admin', $csrf) . '
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;">
+                <div>
+                    <label>Tên đăng nhập (Username) *</label>
+                    <input name="username" required minlength="3" maxlength="64" placeholder="Ví dụ: nguyenvana">
+                </div>
+                <div>
+                    <label>Họ và tên nhân sự *</label>
+                    <input name="full_name" required minlength="2" maxlength="160" placeholder="Ví dụ: Nguyễn Văn A">
+                </div>
+                <div>
+                    <label>Email nhận OTP & Thông báo *</label>
+                    <input name="email" type="email" required placeholder="nhansu@kipaviethan.edu.vn">
+                </div>
+                <div>
+                    <label>Số điện thoại liên hệ</label>
+                    <input name="phone" placeholder="Ví dụ: 0912 345 678">
+                </div>
+                <div>
+                    <label>Phòng ban</label>
+                    <select name="department">
+                        <option value="Ban Giám Đốc">Ban Giám Đốc</option>
+                        <option value="Tuyển sinh">Tuyển sinh</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="SEO">SEO & Kỹ thuật</option>
+                        <option value="Đào tạo & Học vụ">Đào tạo & Học vụ</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Vai trò hệ thống (Role) *</label>
+                    <select name="role">' . $roleOpts . '</select>
+                </div>
+                <div>
+                    <label>Phạm vi dữ liệu (Scope)</label>
+                    <input name="scope" value="Toàn hệ thống" placeholder="Ví dụ: Du học, XKLĐ, Lead được giao...">
+                </div>
+                <div>
+                    <label>Mật khẩu khởi tạo *</label>
+                    <input name="password" type="text" value="Kipa@2026!pass" required minlength="8" maxlength="72">
+                </div>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:8px;">
+                <input type="checkbox" id="mcp" name="must_change_password" value="1" checked style="width:auto;">
+                <label for="mcp" style="font-size:13px;margin:0;font-weight:normal;color:#334155;">Bắt buộc nhân sự phải đổi mật khẩu ở lần đăng nhập đầu tiên</label>
+            </div>
+            <div style="margin-top:16px;">
+                <button type="submit">+ Lưu và Tạo tài khoản vào CSDL</button>
+            </div>
+            </form>
+        </div>
+
+        <div>
+            <h2 style="font-size:18px;margin:0 0 12px;color:#081d36;font-weight:700;">Danh sách Nhân sự & Phân quyền (' . count($allAdmins) . ' tài khoản)</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nhân sự</th>
+                            <th>Email / SĐT</th>
+                            <th>Phòng ban</th>
+                            <th>Vai trò</th>
+                            <th>Phạm vi dữ liệu</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>' . $adminRows . '</tbody>
+                </table>
+            </div>
+        </div>';
+
+    } elseif ($tab === 'roles_matrix') {
+        $bodyHtml .= '<div>
+            <h2 style="font-size:18px;margin:0 0 8px;color:#081d36;font-weight:700;">Ma trận Phân quyền 8 Vai trò chính (KIPA RBAC)</h2>
+            <p style="color:#64748b;font-size:13px;margin-bottom:14px;">Quy tắc: <span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-weight:bold;">✅ Được phép</span> | <span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:4px;font-weight:bold;">🟡 Có điều kiện / theo phạm vi</span> | <span style="background:#fee2e2;color:#b91c1c;padding:2px 6px;border-radius:4px;font-weight:bold;">🔒 Không được phép</span></p>
+            <div class="table-wrap">
+                <table style="font-size:13px;">
+                    <thead>
+                        <tr>
+                            <th style="min-width:180px;">Nhóm quyền / Chức năng</th>
+                            <th>1. Super Admin</th>
+                            <th>2. Website Mgr</th>
+                            <th>3. Admissions Mgr</th>
+                            <th>4. Admissions Cons</th>
+                            <th>5. Content Mgr</th>
+                            <th>6. Content & SEO</th>
+                            <th>7. SEO Mgr</th>
+                            <th>8. Academic Coord</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:#f1f5f9;font-weight:bold;"><td colspan="9">P01. Dashboard & Báo cáo</td></tr>
+                        <tr><td>Xem Dashboard</td><td>✅</td><td>✅</td><td>🟡</td><td>🟡</td><td>🟡</td><td>🟡</td><td>🟡</td><td>🟡</td></tr>
+                        <tr><td>Xem Báo cáo Tuyển sinh/Lead</td><td>✅</td><td>🟡</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+
+                        <tr style="background:#f1f5f9;font-weight:bold;"><td colspan="9">P11 & P12. Quản trị Tài khoản & Hệ thống</td></tr>
+                        <tr><td>Xem tài khoản nhân viên</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Tạo tài khoản mới</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Khóa / Mở khóa tài khoản</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Cấu hình hệ thống</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+
+                        <tr style="background:#f1f5f9;font-weight:bold;"><td colspan="9">P02, P03 & P04. Nội dung, Duyệt & Xuất bản</td></tr>
+                        <tr><td>Tạo & Sửa bài viết</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Gửi bài duyệt</td><td>🟡</td><td>🟡</td><td>🔒</td><td>🔒</td><td>✅</td><td>✅</td><td>🟡</td><td>🔒</td></tr>
+                        <tr><td>Duyệt / Từ chối bài</td><td>🟡</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Xuất bản bài (Publish)</td><td>🟡</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🟡</td><td>🔒</td><td>🟡</td><td>🔒</td></tr>
+                        <tr><td>Xóa bài viết (vào Trash)</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+
+                        <tr style="background:#f1f5f9;font-weight:bold;"><td colspan="9">P05 & P06. SEO Cơ bản & Kỹ thuật</td></tr>
+                        <tr><td>Meta Title / Description</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🟡</td><td>✅</td><td>✅</td><td>🔒</td></tr>
+                        <tr><td>Heading, Alt ảnh, Từ khóa</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🟡</td><td>✅</td><td>✅</td><td>🔒</td></tr>
+                        <tr><td>Canonical, Schema, Robots</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>✅</td><td>🔒</td></tr>
+                        <tr><td>Sitemap, Redirect 301/302</td><td>✅</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>✅</td><td>🔒</td></tr>
+
+                        <tr style="background:#f1f5f9;font-weight:bold;"><td colspan="9">Tuyển sinh & Quản lý Khách hàng (Leads)</td></tr>
+                        <tr><td>Xem Lead & Số ĐT</td><td>✅</td><td>🟡</td><td>🟡</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Phân chia / Chuyển Lead</td><td>🟡</td><td>🔒</td><td>✅</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Ghi chú & Lịch chăm sóc</td><td>🟡</td><td>🔒</td><td>🟡</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+                        <tr><td>Xóa Lead</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td></tr>
+
+                        <tr style="background:#f1f5f9;font-weight:bold;"><td colspan="9">Học viên & Điều phối Học vụ</td></tr>
+                        <tr><td>Danh sách & Hồ sơ học viên</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🟡</td></tr>
+                        <tr><td>Tiến độ Visa & Lớp tiếng Hàn</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🟡</td></tr>
+                        <tr><td>Gửi thông báo cho học viên</td><td>🟡</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🔒</td><td>🟡</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>';
+
+    } else { # Leads tab
+        if ($leads === []) {
+            $bodyHtml .= '<p>Chưa có đăng ký nào.</p>';
+        } else {
+            $bodyHtml .= '<div class="table-wrap"><table><thead><tr><th>Ngày gửi (UTC)</th><th>Biểu mẫu</th><th>Liên hệ</th><th>Nhu cầu</th><th>Chi tiết</th><th>Tác vụ</th></tr></thead><tbody>';
+            foreach ($leads as $lead) {
+                $details = json_decode($lead['details_json'], true);
+                if (!is_array($details)) {
+                    $details = [];
+                }
+                $program = (string)($lead['program'] ?? '');
+                $contact = '<strong>' . kipa_h($lead['contact_name']) . '</strong><br>' . kipa_h($lead['phone']);
+                if ($lead['email'] !== null) {
+                    $contact .= '<br>' . kipa_h($lead['email']);
+                }
+                $detailsText = [];
+                foreach ($details as $key => $value) {
+                    $formatted = is_array($value) ? implode(', ', array_map('strval', $value)) : (string)$value;
+                    $detailsText[] = (string)$key . ': ' . $formatted;
+                }
+                $bodyHtml .= '<tr><td>' . kipa_h($lead['created_at']) . '</td><td>' . kipa_h($lead['form_type']) .
+                    '<br><span class="muted">' . kipa_h($lead['source_page']) . '</span></td><td>' . $contact .
+                    '</td><td>' . kipa_h($program) . '</td><td><pre>' . kipa_h(implode("\n", $detailsText)) .
+                    '</pre></td><td>' . kipa_admin_form_start('delete', $csrf) .
+                    '<input type="hidden" name="lead_id" value="' . (int)$lead['id'] .
+                    '"><button class="danger" type="submit">Xóa</button></form></td></tr>';
+            }
+            $bodyHtml .= '</tbody></table></div>';
+        }
+        if ($totalPages > 1) {
+            $bodyHtml .= '<nav class="actions" aria-label="Phân trang đăng ký" style="margin-top:14px;">';
+            if ($page > 1) {
+                $bodyHtml .= '<a href="/api/admin.php?tab=leads&page=' . ($page - 1) . '">Trang trước</a>';
+            }
+            $bodyHtml .= '<span>Trang ' . $page . ' / ' . $totalPages . '</span>';
+            if ($page < $totalPages) {
+                $bodyHtml .= '<a href="/api/admin.php?tab=leads&page=' . ($page + 1) . '">Trang sau</a>';
+            }
+            $bodyHtml .= '</nav>';
+        }
+        $bodyHtml .= '<p class="muted" style="margin-top:14px;">Dữ liệu quá 12 tháng sẽ tự xóa khi trang quản trị hoặc biểu mẫu được sử dụng. Múi giờ hiển thị: UTC.</p>';
     }
-    if ($totalPages > 1) {
-        $content .= '<nav class="actions" aria-label="Phân trang đăng ký">';
-        if ($page > 1) {
-            $content .= '<a href="/api/admin.php?page=' . ($page - 1) . '">Trang trước</a>';
-        }
-        $content .= '<span>Trang ' . $page . ' / ' . $totalPages . '</span>';
-        if ($page < $totalPages) {
-            $content .= '<a href="/api/admin.php?page=' . ($page + 1) . '">Trang sau</a>';
-        }
-        $content .= '</nav>';
+
+    $content = '<section class="card">' . $headerTop . $tabNavigation . $bannerHtml . $bodyHtml . '</section>';
+
+    if ($tab === 'leads') {
+        $content .= '<section class="card"><h2>Đổi mật khẩu tài khoản</h2>' . kipa_admin_form_start('change_password', $csrf);
+        $content .= '<label>Mật khẩu hiện tại<input name="old_password" type="password" required autocomplete="current-password"></label>';
+        $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
+        $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
+        $content .= '<p><button type="submit">Đổi mật khẩu</button></p></form></section>';
     }
-    $content .= '<p class="muted">Dữ liệu quá 12 tháng sẽ tự xóa khi trang quản trị hoặc biểu mẫu được sử dụng. Múi giờ hiển thị: UTC.</p></section>';
-    $content .= '<section class="card"><h2>Đổi mật khẩu</h2>' . kipa_admin_form_start('change_password', $csrf);
-    $content .= '<label>Mật khẩu hiện tại<input name="old_password" type="password" required autocomplete="current-password"></label>';
-    $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
-    $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password"></label>';
-    $content .= '<p><button type="submit">Đổi mật khẩu</button></p></form></section>';
-    kipa_admin_page('Đăng ký tư vấn', $content);
+    kipa_admin_page('Quản trị hệ thống KIPA', $content);
 } catch (PDOException $error) {
     error_log('[kipa-admin] Database operation failed: ' . $error->getCode());
     http_response_code(503);
