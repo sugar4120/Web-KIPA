@@ -19,16 +19,22 @@ function kipa_admin_page(string $title, string $content): never
     echo '<title>' . kipa_h($title) . ' | KIPA</title>';
     echo '<style>
         *{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}
-        main{max-width:1100px;margin:32px auto;padding:0 16px}.card{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:20px;margin-bottom:18px}
-        h1{font-size:24px;margin:0 0 16px}h2{font-size:18px;margin:0 0 12px}.muted{color:#64748b;font-size:13px}
-        label{display:block;font-weight:600;margin:10px 0 4px}input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:7px}
-        button{border:0;border-radius:7px;background:#0274bd;color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}
-        button.danger{background:#b91c1c}button.secondary{background:#334155}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-        .message{padding:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:7px;margin:12px 0}
+        main{max-width:1100px;margin:32px auto;padding:0 16px}.card{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        h1{font-size:24px;margin:0 0 16px;color:#081d36}h2{font-size:18px;margin:0 0 12px;color:#081d36}.muted{color:#64748b;font-size:13px}
+        label{display:block;font-weight:600;margin:10px 0 4px;color:#1e293b}input{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:7px;font-size:14px}
+        input:focus{outline:none;border-color:#0274bd;box-shadow:0 0 0 2px rgba(2,116,189,0.2)}
+        button{border:0;border-radius:7px;background:#0274bd;color:#fff;padding:10px 16px;font-weight:700;cursor:pointer;font-size:14px;transition:background .15s}
+        button:hover{background:#025c96}
+        button.danger{background:#b91c1c}button.danger:hover{background:#991b1b}
+        button.secondary{background:#334155}button.secondary:hover{background:#1e293b}
+        .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        .message{padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:7px;margin:12px 0;font-size:14px}
+        .message.success{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+        a{color:#0274bd;text-decoration:none;font-weight:600}a:hover{text-decoration:underline}
         .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:800px}th,td{text-align:left;vertical-align:top;padding:10px;border-bottom:1px solid #e2e8f0}
         pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:420px;font:12px/1.5 ui-monospace,monospace;margin:0}
         form.inline{display:inline}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-        @media(max-width:600px){main{margin:16px auto} .card{padding:14px}h1{font-size:21px}}
+        @media(max-width:600px){main{margin:16px auto}.card{padding:14px}h1{font-size:21px}}
     </style></head><body><main>' . $content . '</main></body></html>';
     exit;
 }
@@ -107,6 +113,46 @@ try {
             $_SESSION['admin_username'] = $admin['username'];
             $_SESSION['must_change_password'] = (bool)$admin['must_change_password'];
             header('Location: /api/admin.php', true, 303);
+            exit;
+        }
+
+        if ($action === 'reset_password') {
+            if (kipa_rate_limited($db, 'admin_reset', $remoteKey, 5, 15)) {
+                kipa_admin_error('Yêu cầu đặt lại mật khẩu quá nhiều lần. Vui lòng đợi 15 phút rồi thử lại.', 429);
+            }
+            kipa_record_rate_event($db, 'admin_reset', $remoteKey);
+            $token = (string)($_POST['setup_token'] ?? '');
+            $username = trim((string)($_POST['username'] ?? ''));
+            $newPassword = (string)($_POST['new_password'] ?? '');
+            $confirmPassword = (string)($_POST['new_password_confirm'] ?? '');
+
+            if (!is_string($token) || !hash_equals($config['setup_token'], $token)) {
+                kipa_admin_error('Mã thiết lập bí mật không đúng. Vui lòng kiểm tra lại trong cấu hình máy chủ.');
+            }
+            if (!preg_match('/^[A-Za-z0-9._-]{3,64}$/', $username)) {
+                kipa_admin_error('Tên đăng nhập phải có từ 3 đến 64 ký tự gồm chữ cái, số, dấu chấm, gạch ngang hoặc gạch dưới.');
+            }
+            if (strlen($newPassword) < 12 || strlen($newPassword) > 72 || str_contains($newPassword, "\0") || !hash_equals($newPassword, $confirmPassword)) {
+                kipa_admin_error('Mật khẩu mới phải có từ 12 đến 72 byte và hai lần nhập phải giống nhau.');
+            }
+
+            $statement = $db->prepare('SELECT id, password_hash FROM kipa_admins WHERE username = :username LIMIT 1');
+            $statement->execute(['username' => $username]);
+            $admin = $statement->fetch();
+            if (!$admin) {
+                kipa_admin_error('Tài khoản quản trị không tồn tại.');
+            }
+
+            $update = $db->prepare('UPDATE kipa_admins SET password_hash = :password_hash, must_change_password = 0 WHERE id = :id');
+            $update->execute([
+                'password_hash' => password_hash($newPassword, PASSWORD_DEFAULT),
+                'id' => (int)$admin['id'],
+            ]);
+
+            session_regenerate_id(true);
+            $_SESSION = [];
+            $_SESSION['csrf'] = bin2hex(random_bytes(32));
+            header('Location: /api/admin.php?reset_success=1', true, 303);
             exit;
         }
 
@@ -215,16 +261,38 @@ try {
 
     if (!isset($_SESSION['admin_id'])) {
         $csrf = kipa_h($_SESSION['csrf']);
+        $view = $_GET['view'] ?? '';
+
+        if ($view === 'reset') {
+            $content = '<section class="card"><h1>Đặt lại mật khẩu quản trị KIPA</h1>';
+            $content .= '<p class="muted">Nhập mã thiết lập bí mật (setup_token) từ tệp cấu hình máy chủ để xác thực quyền quản trị và đặt lại mật khẩu mới an toàn.</p>';
+            if (kipa_rate_limited($db, 'admin_reset', $remoteKey, 5, 15)) {
+                $content .= '<p class="message">Yêu cầu đặt lại mật khẩu quá nhiều lần. Vui lòng thử lại sau 15 phút.</p>';
+            } else {
+                $content .= kipa_admin_form_start('reset_password', $csrf);
+                $content .= '<label>Tên đăng nhập quản trị<input name="username" required minlength="3" maxlength="64" autocomplete="username" placeholder="Ví dụ: admin"></label>';
+                $content .= '<label>Mã thiết lập bí mật (setup_token)<input name="setup_token" type="password" required autocomplete="off" placeholder="Mã bí mật trong tệp cấu hình"></label>';
+                $content .= '<label>Mật khẩu mới (12–72 byte)<input name="new_password" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Tối thiểu 12 ký tự"></label>';
+                $content .= '<label>Nhập lại mật khẩu mới<input name="new_password_confirm" type="password" required minlength="12" maxlength="72" autocomplete="new-password" placeholder="Nhập lại chính xác"></label>';
+                $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Xác nhận đặt lại mật khẩu</button> <a href="/api/admin.php" style="margin-left:12px;font-size:14px">← Quay lại Đăng nhập</a></p></form>';
+            }
+            $content .= '</section>';
+            kipa_admin_page('Đặt lại mật khẩu quản trị', $content);
+        }
+
         $content = '<section class="card"><h1>Quản trị đăng ký tư vấn KIPA</h1>';
+        if (isset($_GET['reset_success'])) {
+            $content .= '<p class="message success">✓ Đã đặt lại mật khẩu quản trị thành công! Vui lòng đăng nhập bằng mật khẩu mới.</p>';
+        }
         if (kipa_rate_limited($db, 'login', $remoteKey, 8, 15)) {
             $content .= '<p class="message">Đăng nhập quá nhiều lần. Vui lòng thử lại sau.</p>';
         } else {
             $content .= kipa_admin_form_start('login', $csrf);
             $content .= '<label>Tên đăng nhập<input name="username" required maxlength="64" autocomplete="username"></label>';
             $content .= '<label>Mật khẩu<input name="password" type="password" required autocomplete="current-password"></label>';
-            $content .= '<p><button type="submit">Đăng nhập</button></p></form>';
+            $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Đăng nhập</button> <a href="/api/admin.php?view=reset" style="margin-left:12px;font-size:13px">Quên mật khẩu? Đặt lại mật khẩu</a></p></form>';
         }
-        $content .= '<p class="muted">Chỉ tài khoản được ủy quyền mới có thể xem thông tin đăng ký.</p></section>';
+        $content .= '<p class="muted" style="margin-top:16px">Chỉ tài khoản được ủy quyền mới có thể xem thông tin đăng ký.</p></section>';
         kipa_admin_page('Đăng nhập', $content);
     }
 
