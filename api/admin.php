@@ -1423,6 +1423,11 @@ try {
                 <span>🛡️</span>
                 <span>Nhật ký bảo mật</span>
             </a>
+            <div style="margin-top:14px;padding:12px 14px 4px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;">Bảo mật tài khoản</div>
+            <a href="/api/admin.php?view=reset" class="nav-link">
+                <span>🔑</span>
+                <span>Đặt lại / Đổi mật khẩu</span>
+            </a>
         </nav>
         <div class="sidebar-footer">
             <div class="user-avatar-sm">SA</div>
