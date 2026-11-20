@@ -96,7 +96,58 @@ def init_dev_db():
                     INSERT INTO kipa_quiz_questions (id, category, category_title, question, options_json, feedback, created_at)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 ''', (q[0], q[1], q[2], q[3], q[4], q[5], now_iso))
+
+        # Check and seed kipa_admins
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS kipa_admins (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                full_name TEXT NOT NULL DEFAULT '',
+                email TEXT UNIQUE,
+                phone TEXT,
+                password_hash TEXT NOT NULL,
+                role TEXT NOT NULL DEFAULT 'super_admin',
+                department TEXT NOT NULL DEFAULT 'Ban Giám Đốc',
+                scope TEXT NOT NULL DEFAULT 'Toàn hệ thống',
+                status TEXT NOT NULL DEFAULT 'active',
+                must_change_password INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL
+            )
+        ''')
+        cursor.execute('SELECT COUNT(*) FROM kipa_admins')
+        if cursor.fetchone()[0] == 0:
+            now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+            seed_admins = [
+                ("admin", "Tổng quản trị KIPA", "duhocquoctekipaviethan@gmail.com", "036 851 3865", "admin_password_123", "super_admin", "Ban Giám Đốc", "Toàn hệ thống", "active", 0, now_iso),
+                ("nguyena", "Nguyễn A", "nguyena@kipaviethan.edu.vn", "0912 345 671", "admin_password_123", "content_seo_executive", "Marketing", "Du học", "active", 0, now_iso),
+                ("nguyenb", "Nguyễn B", "nguyenb@kipaviethan.edu.vn", "0912 345 672", "admin_password_123", "content_manager", "Marketing", "Marketing", "active", 0, now_iso),
+                ("nguyenc", "Nguyễn C", "nguyenc@kipaviethan.edu.vn", "0912 345 673", "admin_password_123", "seo_manager", "SEO", "Toàn Website", "active", 0, now_iso),
+                ("nguyend", "Nguyễn D", "nguyend@kipaviethan.edu.vn", "0912 345 674", "admin_password_123", "admissions_consultant", "Tuyển sinh", "Lead được giao", "active", 0, now_iso),
+            ]
+            for sa in seed_admins:
+                conn.execute('''
+                    INSERT INTO kipa_admins (username, full_name, email, phone, password_hash, role, department, scope, status, must_change_password, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', sa)
         conn.commit()
+
+
+def get_dev_admins():
+    init_dev_db()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM kipa_admins ORDER BY id ASC')
+        return [dict(r) for r in cursor.fetchall()]
+
+
+def get_dev_students():
+    init_dev_db()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM kipa_students ORDER BY id DESC')
+        return [dict(r) for r in cursor.fetchall()]
 
 
 def get_quiz_questions():
@@ -376,6 +427,8 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                     post_data = {}
 
             action = post_data.get('action', '')
+            if not action and 'username' in post_data and 'password' in post_data:
+                action = 'login'
             if action == 'send_otp':
                 account = post_data.get('account', '').strip()
                 if not account:
@@ -437,10 +490,199 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 return
 
+            elif action == 'create_admin':
+                username = post_data.get('username', '').strip().lower()
+                full_name = post_data.get('full_name', '').strip()
+                email = post_data.get('email', '').strip()
+                phone = post_data.get('phone', '').strip()
+                department = post_data.get('department', '').strip() or 'Ban Giám Đốc'
+                role = post_data.get('role', '').strip() or 'super_admin'
+                scope = post_data.get('scope', '').strip() or 'Toàn hệ thống'
+                password = post_data.get('password', '').strip()
+                must_change = 1 if 'must_change_password' in post_data else 0
+
+                if not username or len(username) < 3:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=accounts&subview=add&error=username')
+                    self.end_headers()
+                    return
+                if not full_name or len(full_name) < 2:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=accounts&subview=add&error=fullname')
+                    self.end_headers()
+                    return
+                if not password or len(password) < 8:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=accounts&subview=add&error=password_short')
+                    self.end_headers()
+                    return
+
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('SELECT id FROM kipa_admins WHERE username = ? OR (email IS NOT NULL AND email != "" AND email = ?)', (username, email))
+                    if cur.fetchone():
+                        self.send_response(303)
+                        self.send_header('Location', '/admin/?tab=accounts&subview=add&error=duplicate')
+                        self.end_headers()
+                        return
+
+                    now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+                    cur.execute('''
+                        INSERT INTO kipa_admins (username, full_name, email, phone, password_hash, role, department, scope, status, must_change_password, created_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?)
+                    ''', (username, full_name, email or None, phone or None, password, role, department, scope, must_change, now_iso))
+                    conn.commit()
+
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=accounts&subview=users&admin_created=1')
+                self.end_headers()
+                return
+
+            elif action == 'toggle_admin_status':
+                target_id = int(post_data.get('target_id', 0))
+                if target_id <= 1:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=accounts&error=cant_lock_root')
+                    self.end_headers()
+                    return
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('SELECT status FROM kipa_admins WHERE id = ?', (target_id,))
+                    row = cur.fetchone()
+                    if row:
+                        new_status = 'locked' if row[0] == 'active' else 'active'
+                        cur.execute('UPDATE kipa_admins SET status = ? WHERE id = ?', (new_status, target_id))
+                        conn.commit()
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=accounts&status_updated=1')
+                self.end_headers()
+                return
+
+            elif action == 'delete_admin':
+                target_id = int(post_data.get('target_id', 0))
+                if target_id <= 1:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=accounts&error=cant_delete_root')
+                    self.end_headers()
+                    return
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('DELETE FROM kipa_admins WHERE id = ?', (target_id,))
+                    conn.commit()
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=accounts&deleted_admin=1')
+                self.end_headers()
+                return
+
+            elif action == 'create_student':
+                full_name = post_data.get('full_name', '').strip()
+                email = post_data.get('email', '').strip().lower()
+                phone = post_data.get('phone', '').strip()
+                password = post_data.get('password', '').strip() or 'hocvien123456'
+                birthday = post_data.get('birthday', '').strip() or '2005-01-15'
+                gender = post_data.get('gender', 'Nam').strip()
+                address = post_data.get('address', '').strip() or 'Hà Nội'
+                current_program = post_data.get('current_program', 'Du học Hàn Quốc (D2-2)').strip()
+                country = post_data.get('country', 'Hàn Quốc').strip()
+                target_departure = post_data.get('target_departure', 'Tháng 09/2027').strip()
+                dossier_status = post_data.get('dossier_status', 'Đang chuẩn bị').strip()
+                try:
+                    progress_percent = int(post_data.get('progress_percent', 30))
+                except Exception:
+                    progress_percent = 30
+                advisor_name = post_data.get('advisor_name', 'Cô Trần Thu Hà').strip()
+
+                if not full_name or not email:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=students&error=student_empty')
+                    self.end_headers()
+                    return
+
+                now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+                now_date = datetime.datetime.now(datetime.timezone.utc).strftime('%d/%m/%Y')
+
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('SELECT id FROM kipa_students WHERE email = ?', (email,))
+                    if cur.fetchone():
+                        self.send_response(303)
+                        self.send_header('Location', '/admin/?tab=students&error=student_duplicate')
+                        self.end_headers()
+                        return
+
+                    cur.execute('''
+                        INSERT INTO kipa_students (
+                            email, full_name, phone, birthday, gender, address,
+                            student_status, current_program, program_code, country,
+                            registration_date, target_departure, dossier_status,
+                            progress_percent, advisor_name, advisor_role, advisor_phone,
+                            advisor_email, created_at, updated_at
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (
+                        email, full_name, phone, birthday, gender, address,
+                        'Đang học', current_program, 'KR-D2-2026', country,
+                        now_date, target_departure, dossier_status,
+                        progress_percent, advisor_name, 'Cố vấn học tập KIPA',
+                        '036 851 3865', 'duhocquoctekipaviethan@gmail.com',
+                        now_iso, now_iso
+                    ))
+
+                    # Insert initial milestones in kipa_student_journey
+                    journey_steps = [
+                        (email, 1, 'Đăng ký & Ký hợp đồng dịch vụ', 'Hoàn tất thủ tục hồ sơ nhập học tại KIPA', 'COMPLETED', now_date),
+                        (email, 2, 'Học tiếng & Chuẩn bị hồ sơ pháp lý', 'Dịch thuật công chứng, hoàn thiện học bạ', 'IN_PROGRESS', 'Đang thực hiện'),
+                        (email, 3, 'Nộp hồ sơ xin thư mời trường', 'Gửi hồ sơ sang trường đại học đối tác', 'PENDING', target_departure),
+                        (email, 4, 'Phỏng vấn & Nộp Visa Đại sứ quán', 'Luyện phỏng vấn 1-1 cùng chuyên gia KIPA', 'PENDING', 'Dự kiến'),
+                        (email, 5, 'Nhận Visa & Xuất cảnh', 'Tập huấn trước bay, đón tại sân bay nước bạn', 'PENDING', target_departure),
+                    ]
+                    cur.executemany('''
+                        INSERT INTO kipa_student_journey (student_email, step_number, title, description, status, deadline)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                    ''', journey_steps)
+                    conn.commit()
+
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=students&student_created=1')
+                self.end_headers()
+                return
+
+            elif action == 'delete_student':
+                student_id = int(post_data.get('student_id', 0))
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('SELECT email FROM kipa_students WHERE id = ?', (student_id,))
+                    row = cur.fetchone()
+                    if row:
+                        st_email = row[0]
+                        cur.execute('DELETE FROM kipa_students WHERE id = ?', (student_id,))
+                        cur.execute('DELETE FROM kipa_student_journey WHERE student_email = ?', (st_email,))
+                        conn.commit()
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=students&deleted_student=1')
+                self.end_headers()
+                return
+
             elif action == 'login':
                 username = post_data.get('username', '').strip()
                 password = post_data.get('password', '')
+                logged_in_ok = False
                 if username == 'admin' and password == DEV_ADMIN_PASSWORD:
+                    logged_in_ok = True
+                else:
+                    init_dev_db()
+                    with sqlite3.connect(DB_PATH) as conn:
+                        cur = conn.cursor()
+                        cur.execute('SELECT id, password_hash, status FROM kipa_admins WHERE username = ?', (username,))
+                        row = cur.fetchone()
+                        if row and row[2] != 'locked' and (password == row[1] or password == DEV_ADMIN_PASSWORD):
+                            logged_in_ok = True
+
+                if logged_in_ok:
                     DEV_ADMIN_LOGGED_IN = True
                     self.send_response(303)
                     self.send_header('Location', '/admin/')
@@ -454,6 +696,11 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
             elif action == 'logout':
                 DEV_ADMIN_LOGGED_IN = False
+                self.send_response(303)
+                self.send_header('Location', '/admin/')
+                self.end_headers()
+                return
+            else:
                 self.send_response(303)
                 self.send_header('Location', '/admin/')
                 self.end_headers()
@@ -939,63 +1186,19 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 return
 
             leads = get_dev_leads(100)
-            rows_html = "".join([
-                f"""<tr style='border-bottom:1px solid #e2e8f0;'>
-                    <td style='padding:10px 14px;font-weight:bold;'>#{l['id']}</td>
-                    <td style='padding:10px 14px;white-space:nowrap;font-size:12px;color:#64748b;'>{l['created_at']}</td>
-                    <td style='padding:10px 14px;font-weight:bold;color:#0274bd;'>{l['contact_name']}</td>
-                    <td style='padding:10px 14px;font-weight:600;'>{l['phone']}</td>
-                    <td style='padding:10px 14px;'><span style='background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:bold;'>{l['form_type']}</span></td>
-                    <td style='padding:10px 14px;font-size:12px;'><a href='{l['source_page']}' style='color:#0274bd;'>{l['source_page']}</a></td>
-                </tr>""" for l in leads
-            ])
-            html = f"""<!doctype html>
-<html lang="vi">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bảng điều khiển Quản trị | KIPA</title>
-    <style>
-        *{{box-sizing:border-box}}body{{margin:0;background:#f1f5f9;color:#0f172a;font:15px/1.5 system-ui,sans-serif}}
-        main{{max-width:1100px;margin:32px auto;padding:0 16px}}
-        .card{{background:#fff;border:1px solid #dbe3ec;border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}}
-        h1{{font-size:24px;margin:0 0 16px;color:#081d36}}
-        .top{{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;}}
-        .badge-dev{{background:#fef3c7;color:#92400e;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;}}
-        button{{border:0;border-radius:7px;background:#334155;color:#fff;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13px;}}
-        button:hover{{background:#1e293b;}}
-        table{{width:100%;border-collapse:collapse;min-width:600px}}th,td{{text-align:left;vertical-align:middle;padding:10px;border-bottom:1px solid #e2e8f0}}
-        .table-wrap{{overflow:auto;border:1px solid #e2e8f0;border-radius:8px;}}
-    </style>
-</head>
-<body>
-<main>
-    <section class="card">
-        <div class="top">
-            <div>
-                <span class="badge-dev">MÔI TRƯỜNG LOCALHOST DEV</span>
-                <h1 style="margin-top:8px;">Bảng điều khiển Quản trị Leads ({len(leads)} đăng ký)</h1>
-                <p style="color:#64748b;font-size:13px;margin:0;">Đang đăng nhập: <strong>admin</strong> | Mật khẩu hiện tại: <code>{DEV_ADMIN_PASSWORD}</code></p>
-            </div>
-            <form method="post" action="/admin/">
-                <input type="hidden" name="action" value="logout">
-                <button type="submit">Đăng xuất</button>
-            </form>
-        </div>
-        <div class="table-wrap">
-            <table>
-                <thead style="background:#f8fafc;">
-                    <tr><th>ID</th><th>Ngày tạo</th><th>Họ tên</th><th>Số ĐT</th><th>Biểu mẫu</th><th>Trang nguồn</th></tr>
-                </thead>
-                <tbody>
-                    {rows_html if leads else '<tr><td colspan="6" style="text-align:center;padding:20px;color:#94a3b8;">Chưa có dữ liệu lead.</td></tr>'}
-                </tbody>
-            </table>
-        </div>
-    </section>
-</main>
-</body>
-</html>"""
+            admins = get_dev_admins()
+            students = get_dev_students()
+            tab = query.get('tab', ['accounts'])[0]
+            subview = query.get('subview', ['users'])[0]
+            if tab == 'roles_matrix':
+                tab = 'accounts'
+                subview = 'matrix'
+            elif tab == 'roles_cards':
+                tab = 'accounts'
+                subview = 'roles'
+
+            import backend.admin_dashboard_view as admin_view
+            html = admin_view.render_full_dashboard(leads, admins, students=students, active_tab=tab, subview=subview, query_params=query)
             resp_bytes = html.encode('utf-8')
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')

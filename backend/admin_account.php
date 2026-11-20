@@ -21,9 +21,27 @@ try {
     if (!$column) {
         $db->exec('ALTER TABLE kipa_admins ADD COLUMN must_change_password BOOLEAN NOT NULL DEFAULT 0');
     }
-    $emailColumn = $db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
-    if (!$emailColumn) {
-        $db->exec('ALTER TABLE kipa_admins ADD COLUMN email VARCHAR(191) NULL DEFAULT NULL AFTER username');
+    $columns = $db->query("SHOW COLUMNS FROM kipa_admins")->fetchAll(PDO::FETCH_COLUMN);
+    if (!in_array('full_name', $columns, true)) {
+        $db->exec("ALTER TABLE kipa_admins ADD COLUMN full_name VARCHAR(160) NOT NULL DEFAULT '' AFTER username");
+    }
+    if (!in_array('email', $columns, true)) {
+        $db->exec('ALTER TABLE kipa_admins ADD COLUMN email VARCHAR(191) NULL DEFAULT NULL AFTER full_name');
+    }
+    if (!in_array('phone', $columns, true)) {
+        $db->exec('ALTER TABLE kipa_admins ADD COLUMN phone VARCHAR(32) NULL DEFAULT NULL AFTER email');
+    }
+    if (!in_array('department', $columns, true)) {
+        $db->exec("ALTER TABLE kipa_admins ADD COLUMN department VARCHAR(64) NOT NULL DEFAULT 'Ban Giám Đốc' AFTER phone");
+    }
+    if (!in_array('role', $columns, true)) {
+        $db->exec("ALTER TABLE kipa_admins ADD COLUMN role VARCHAR(64) NOT NULL DEFAULT 'super_admin' AFTER department");
+    }
+    if (!in_array('scope', $columns, true)) {
+        $db->exec("ALTER TABLE kipa_admins ADD COLUMN scope VARCHAR(255) NOT NULL DEFAULT 'Toàn hệ thống' AFTER role");
+    }
+    if (!in_array('status', $columns, true)) {
+        $db->exec("ALTER TABLE kipa_admins ADD COLUMN status VARCHAR(32) NOT NULL DEFAULT 'active' AFTER scope");
     }
     if ($argv[1] === '--migrate-only') {
         fwrite(STDOUT, "Administrator password-change migration completed; existing passwords retained.\n");
