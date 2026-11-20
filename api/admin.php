@@ -749,6 +749,96 @@ try {
             exit;
         }
 
+        if ($action === 'import_admins') {
+            $isSuperAdmin = (($_SESSION['admin_username'] ?? '') === 'admin' || ((int)($_SESSION['admin_id'] ?? 0) === 1) || ($_SESSION['admin_role'] ?? 'super_admin') === 'super_admin');
+            if (!$isSuperAdmin) {
+                kipa_admin_error('Chỉ Super Admin mới có quyền nhập dữ liệu vào bảng kipa_admins.', 403);
+            }
+            kipa_ensure_admin_columns($db);
+
+            $importContent = '';
+            if (isset($_FILES['import_file']) && is_uploaded_file($_FILES['import_file']['tmp_name'])) {
+                $importContent = (string)file_get_contents($_FILES['import_file']['tmp_name']);
+            } elseif (!empty($_POST['import_text'])) {
+                $importContent = (string)$_POST['import_text'];
+            }
+
+            if (trim($importContent) === '') {
+                kipa_admin_error('Vui lòng chọn tệp tin (.sql / .csv) hoặc dán nội dung để nhập.');
+            }
+
+            $importedCount = 0;
+            if (stripos($importContent, 'INSERT INTO') !== false || stripos($importContent, 'ALTER TABLE') !== false || stripos($importContent, 'REPLACE INTO') !== false || stripos($importContent, 'UPDATE') !== false) {
+                $statements = array_filter(array_map('trim', explode(';', $importContent)));
+                foreach ($statements as $st) {
+                    if ($st === '' || str_starts_with($st, '--')) continue;
+                    try {
+                        $db->exec($st);
+                        $importedCount++;
+                    } catch (Throwable) {
+                    }
+                }
+            } else {
+                $lines = explode("\n", str_replace("\r", "", $importContent));
+                $header = null;
+                foreach ($lines as $line) {
+                    $line = trim($line);
+                    if ($line === '') continue;
+                    $cols = str_getcsv($line);
+                    if ($header === null) {
+                        $header = array_map('trim', $cols);
+                        continue;
+                    }
+                    if (count($cols) >= 2) {
+                        $rowU = trim($cols[1] ?? $cols[0]);
+                        $rowName = trim($cols[2] ?? $rowU);
+                        $rowEmail = !empty($cols[3]) ? trim($cols[3]) : null;
+                        $rowPhone = !empty($cols[4]) ? trim($cols[4]) : null;
+                        $rowDept = !empty($cols[5]) ? trim($cols[5]) : 'Marketing';
+                        $rowRole = !empty($cols[6]) ? trim($cols[6]) : 'super_admin';
+                        $rowScope = !empty($cols[7]) ? trim($cols[7]) : 'Toàn hệ thống';
+                        $rowStatus = !empty($cols[8]) ? trim($cols[8]) : 'active';
+
+                        if ($rowU !== '' && preg_match('/^[A-Za-z0-9._-]{3,64}$/', $rowU)) {
+                            $check = $db->prepare('SELECT id FROM kipa_admins WHERE username = :u LIMIT 1');
+                            $check->execute(['u' => $rowU]);
+                            $exists = $check->fetch();
+                            if ($exists) {
+                                $up = $db->prepare('UPDATE kipa_admins SET full_name = :fn, email = :em, phone = :ph, department = :dp, role = :ro, scope = :sc, status = :st WHERE id = :id');
+                                $up->execute([
+                                    'fn' => $rowName,
+                                    'em' => $rowEmail,
+                                    'ph' => $rowPhone,
+                                    'dp' => $rowDept,
+                                    'ro' => $rowRole,
+                                    'sc' => $rowScope,
+                                    'st' => $rowStatus,
+                                    'id' => (int)$exists['id']
+                                ]);
+                            } else {
+                                $ins = $db->prepare('INSERT INTO kipa_admins (username, full_name, email, phone, password_hash, department, role, scope, status, must_change_password, created_at) VALUES (:u, :fn, :em, :ph, :pw, :dp, :ro, :sc, :st, 0, UTC_TIMESTAMP())');
+                                $ins->execute([
+                                    'u' => $rowU,
+                                    'fn' => $rowName,
+                                    'em' => $rowEmail,
+                                    'ph' => $rowPhone,
+                                    'pw' => password_hash('KipaAdmin@2026', PASSWORD_DEFAULT),
+                                    'dp' => $rowDept,
+                                    'ro' => $rowRole,
+                                    'sc' => $rowScope,
+                                    'st' => $rowStatus
+                                ]);
+                            }
+                            $importedCount++;
+                        }
+                    }
+                }
+            }
+
+            header('Location: /api/admin.php?tab=accounts&admins_imported=' . $importedCount, true, 303);
+            exit;
+        }
+
         if ($action === 'create_student') {
             $fullName = trim((string)($_POST['full_name'] ?? ''));
             $email = trim((string)($_POST['email'] ?? ''));
@@ -936,10 +1026,85 @@ try {
             $content .= kipa_admin_form_start('login', $csrf);
             $content .= '<label>Tên đăng nhập<input name="username" required maxlength="64" autocomplete="username"></label>';
             $content .= '<label>Mật khẩu<input name="password" type="password" required autocomplete="current-password"></label>';
-            $content .= '<p class="actions" style="margin-top:18px"><button type="submit">Đăng nhập</button> <a href="/api/admin.php?view=reset" style="margin-left:12px;font-size:13px">Quên mật khẩu? Đặt lại mật khẩu</a></p></form>';
+            $content .= '<p class="actions" style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;"><button type="submit">Đăng nhập</button> <a href="/api/admin.php?view=reset" style="font-size:13px;font-weight:600;color:#0274bd;text-decoration:none;">Quên mật khẩu?</a></p></form>';
         }
-        $content .= '<p class="muted" style="margin-top:16px">Chỉ tài khoản được ủy quyền mới có thể xem thông tin đăng ký.</p></section>';
+        $content .= '<div style="margin-top:20px;padding:14px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;">';
+        $content .= '<div><strong style="color:#166534;font-size:13px;">🔑 Quên hoặc cần đặt lại mật khẩu?</strong><p style="margin:2px 0 0;font-size:12px;color:#15803d;">Khôi phục nhanh chóng qua mã OTP gửi về Email hoặc qua setup_token.</p></div>';
+        $content .= '<a href="/api/admin.php?view=reset" style="display:inline-block;padding:8px 14px;background:#16a34a;color:#ffffff;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;">Đặt lại mật khẩu →</a>';
+        $content .= '</div>';
+        $content .= '<p class="muted" style="margin-top:16px;border-top:1px solid #e2e8f0;padding-top:14px;">Chỉ tài khoản được ủy quyền mới có thể xem thông tin đăng ký.</p></section>';
         kipa_admin_page('Đăng nhập', $content);
+    }
+
+    $exportAction = (string)($_GET['action'] ?? '');
+    if ($exportAction === 'export_admins_sql') {
+        kipa_ensure_admin_columns($db);
+        $stmt = $db->query('SELECT id, username, full_name, email, phone, password_hash, department, role, scope, status, must_change_password, created_at FROM kipa_admins ORDER BY id ASC');
+        $rows = $stmt ? $stmt->fetchAll() : [];
+        $sql = "-- ==============================================================================\n";
+        $sql .= "-- KIPA VIỆT HÀN - XUẤT DỮ LIỆU BẢNG kipa_admins\n";
+        $sql .= "-- Cơ sở dữ liệu: nhkip9ij_kipa_forms | Bảng: kipa_admins\n";
+        $sql .= "-- Thời gian xuất: " . gmdate('Y-m-d H:i:s') . " UTC\n";
+        $sql .= "-- ==============================================================================\n\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `full_name` VARCHAR(160) NOT NULL DEFAULT '' AFTER `username`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `email` VARCHAR(191) NULL DEFAULT NULL AFTER `full_name`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `phone` VARCHAR(32) NULL DEFAULT NULL AFTER `email`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `department` VARCHAR(64) NOT NULL DEFAULT 'Ban Giám Đốc' AFTER `phone`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `role` VARCHAR(64) NOT NULL DEFAULT 'super_admin' AFTER `department`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `scope` VARCHAR(255) NOT NULL DEFAULT 'Toàn hệ thống' AFTER `role`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `status` VARCHAR(32) NOT NULL DEFAULT 'active' AFTER `scope`;\n";
+        $sql .= "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `must_change_password` TINYINT(1) NOT NULL DEFAULT 0 AFTER `status`;\n\n";
+        if (!empty($rows)) {
+            $sql .= "INSERT INTO `kipa_admins` (`id`, `username`, `full_name`, `email`, `phone`, `password_hash`, `department`, `role`, `scope`, `status`, `must_change_password`, `created_at`)\nVALUES\n";
+            $parts = [];
+            foreach ($rows as $r) {
+                $parts[] = "  (" . (int)$r['id'] . ", " .
+                    $db->quote($r['username']) . ", " .
+                    $db->quote($r['full_name'] ?? '') . ", " .
+                    ($r['email'] !== null ? $db->quote($r['email']) : "NULL") . ", " .
+                    ($r['phone'] !== null ? $db->quote($r['phone']) : "NULL") . ", " .
+                    $db->quote($r['password_hash']) . ", " .
+                    $db->quote($r['department'] ?? 'Ban Giám Đốc') . ", " .
+                    $db->quote($r['role'] ?? 'super_admin') . ", " .
+                    $db->quote($r['scope'] ?? 'Toàn hệ thống') . ", " .
+                    $db->quote($r['status'] ?? 'active') . ", " .
+                    (int)($r['must_change_password'] ?? 0) . ", " .
+                    $db->quote($r['created_at']) . ")";
+            }
+            $sql .= implode(",\n", $parts) . "\n";
+            $sql .= "ON DUPLICATE KEY UPDATE `full_name`=VALUES(`full_name`), `email`=VALUES(`email`), `phone`=VALUES(`phone`), `department`=VALUES(`department`), `role`=VALUES(`role`), `scope`=VALUES(`scope`), `status`=VALUES(`status`);\n";
+        }
+        header('Content-Type: application/sql; charset=utf-8');
+        header('Content-Disposition: attachment; filename="kipa_admins_export_' . date('Ymd_His') . '.sql"');
+        echo $sql;
+        exit;
+    }
+
+    if ($exportAction === 'export_admins_csv') {
+        kipa_ensure_admin_columns($db);
+        $stmt = $db->query('SELECT id, username, full_name, email, phone, department, role, scope, status, created_at FROM kipa_admins ORDER BY id ASC');
+        $rows = $stmt ? $stmt->fetchAll() : [];
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="kipa_admins_export_' . date('Ymd_His') . '.csv"');
+        $out = fopen('php://output', 'w');
+        fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
+        fputcsv($out, ['ID', 'Tên đăng nhập', 'Họ và tên', 'Email', 'Số điện thoại', 'Phòng ban', 'Vai trò (Role)', 'Phạm vi phụ trách', 'Trạng thái', 'Ngày tạo']);
+        foreach ($rows as $r) {
+            fputcsv($out, [
+                $r['id'],
+                $r['username'],
+                $r['full_name'],
+                $r['email'] ?? '',
+                $r['phone'] ?? '',
+                $r['department'],
+                $r['role'],
+                $r['scope'],
+                $r['status'],
+                $r['created_at']
+            ]);
+        }
+        fclose($out);
+        exit;
     }
 
     $db->exec('DELETE FROM kipa_leads WHERE created_at < UTC_TIMESTAMP() - INTERVAL 12 MONTH');
@@ -1008,6 +1173,10 @@ try {
     $healthPercent = $totalAssignedUsers > 0 ? (int)round(($activeCount / $totalAssignedUsers) * 100) : 100;
 
     $bannerHtml = '';
+    if (isset($_GET['admins_imported'])) {
+        $cnt = (int)$_GET['admins_imported'];
+        $bannerHtml .= '<div class="banner banner-success">✓ Đã đồng bộ & nhập thành công ' . $cnt . ' bản ghi vào bảng kipa_admins trong CSDL!</div>';
+    }
     if (isset($_GET['admin_created'])) {
         $bannerHtml .= '<div class="banner banner-success">✓ Đã tạo tài khoản nhân sự mới thành công và lưu trực tiếp vào CSDL!</div>';
     }
@@ -1457,7 +1626,12 @@ try {
                     <h1 class="page-title">' . ($tab === 'accounts' ? 'Quản lý Nhân sự & Phân quyền (Roles & Permissions)' : 'Quản lý Đăng ký Tư vấn (Leads)') . '</h1>
                     <p class="page-subtitle">' . ($tab === 'accounts' ? 'Hệ thống kiểm soát truy cập theo vai trò (RBAC 8 vai trò chính & 12 nhóm quyền P01-P12) KIPA Việt Hàn.' : 'Danh sách học viên và phụ huynh đăng ký tư vấn du học & xuất khẩu lao động.') . '</p>
                 </div>
-                ' . ($tab === 'accounts' ? '<div class="header-actions"><button type="button" class="btn-primary" onclick="switchSubview(\'add\')">➕ Thêm tài khoản mới</button></div>' : '') . '
+                ' . ($tab === 'accounts' ? '<div class="header-actions" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <a href="?action=export_admins_sql" class="btn-secondary" style="padding:8px 12px;background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="Tải file .sql để nhập thẳng vào phpMyAdmin">📥 Xuất SQL</a>
+                    <a href="?action=export_admins_csv" class="btn-secondary" style="padding:8px 12px;background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="Xuất file CSV cho Excel">📥 Xuất CSV</a>
+                    <button type="button" class="btn-secondary" onclick="switchSubview(\'import\')" style="padding:8px 12px;background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">📤 Nhập dữ liệu</button>
+                    <button type="button" class="btn-primary" onclick="switchSubview(\'add\')" style="padding:8px 14px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">➕ Thêm tài khoản mới</button>
+                </div>' : '') . '
             </div>
 
             ' . $bannerHtml . '
@@ -1504,6 +1678,9 @@ try {
             </button>
             <button type="button" class="subview-btn ' . ($subview === 'add' ? 'active' : '') . '" onclick="switchSubview(\'add\')" id="btnSubAdd" style="background:' . ($subview === 'add' ? '#2563eb' : '#f1f5f9') . ';color:' . ($subview === 'add' ? '#fff' : '#1e293b') . ';font-weight:700;">
                 ➕ Thêm tài khoản mới
+            </button>
+            <button type="button" class="subview-btn ' . ($subview === 'import' ? 'active' : '') . '" onclick="switchSubview(\'import\')" id="btnSubImport">
+                🔄 Xuất / Nhập CSDL (kipa_admins)
             </button>
             <button type="button" class="subview-btn ' . ($subview === 'roles' ? 'active' : '') . '" onclick="switchSubview(\'roles\')" id="btnSubRoles">
                 🏷️ 8 Thẻ Vai trò chính (Sneat)
@@ -1571,6 +1748,66 @@ try {
                     <button type="button" class="btn-secondary" onclick="switchSubview(\'users\')">Quay lại danh sách</button>
                 </div>
                 </form>
+            </div>
+        </div>';
+
+        // VIEW: XUẤT NHẬP CSDL (kipa_admins)
+        echo '<div id="viewImport" class="subview-panel" style="display:' . ($subview === 'import' ? 'block' : 'none') . ';">
+            <div class="add-user-card open" style="display:block;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <h2 style="font-size:18px;font-weight:800;color:#081d36;">🔄 Xuất & Nhập Dữ liệu CSDL (Bảng kipa_admins)</h2>
+                    <button type="button" onclick="switchSubview(\'users\')" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;" title="Đóng">✕</button>
+                </div>
+                <p style="font-size:13px;color:#64748b;margin-top:4px;">Dữ liệu được đọc/ghi trực tiếp từ bảng <code>kipa_admins</code> trên CSDL MySQL (nhkip9ij_kipa_forms). Bạn có thể xuất file SQL để đối chiếu hoặc nhập file dữ liệu để đồng bộ 1:1 với phpMyAdmin.</p>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
+                    <!-- Cột 1: Xuất dữ liệu -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;">
+                        <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:8px;">📥 1. Xuất dữ liệu từ bảng kipa_admins</h3>
+                        <p style="font-size:13px;color:#64748b;margin-bottom:16px;">Tải về bản sao lưu toàn bộ cấu trúc và tài khoản đang có trong bảng kipa_admins để lưu trữ hoặc nhập vào phpMyAdmin.</p>
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                            <a href="?action=export_admins_sql" class="btn-primary" style="padding:10px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;">
+                                📄 Tải tệp .SQL (phpMyAdmin)
+                            </a>
+                            <a href="?action=export_admins_csv" class="btn-secondary" style="padding:10px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;background:#fff;border:1px solid #cbd5e1;color:#1e293b;">
+                                📊 Tải tệp .CSV (Excel)
+                            </a>
+                        </div>
+                        <div style="margin-top:16px;padding:10px 14px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:6px;font-size:12px;color:#065f46;">
+                            ✓ Tệp .SQL xuất ra tương thích 100% với phpMyAdmin, tự động bổ sung cột và tài khoản.
+                        </div>
+                    </div>
+
+                    <!-- Cột 2: Nhập dữ liệu -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;">
+                        <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:8px;">📤 2. Nhập dữ liệu vào bảng kipa_admins</h3>
+                        <p style="font-size:13px;color:#64748b;margin-bottom:14px;">Tải lên tệp .sql / .csv hoặc dán các câu lệnh SQL INSERT/UPDATE để nạp tài khoản vào bảng kipa_admins.</p>
+                        <form method="post" action="/api/admin.php" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="import_admins">
+                            <input type="hidden" name="csrf" value="' . $csrf . '">
+                            <div class="form-group" style="margin-bottom:12px;">
+                                <label style="font-size:12px;font-weight:600;color:#475569;">Chọn tệp tin (.sql hoặc .csv):</label>
+                                <input type="file" name="import_file" accept=".sql,.csv" style="padding:6px;font-size:13px;width:100%;background:#fff;">
+                            </div>
+                            <div class="form-group" style="margin-bottom:12px;">
+                                <label style="font-size:12px;font-weight:600;color:#475569;">Hoặc dán nội dung câu lệnh SQL / CSV:</label>
+                                <textarea name="import_text" rows="3" style="width:100%;font-family:monospace;font-size:12px;padding:8px;border:1px solid #cbd5e1;border-radius:6px;" placeholder="Ví dụ: INSERT INTO kipa_admins (username, full_name, email)..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary" style="padding:10px 18px;font-weight:700;width:100%;">🚀 Tiến hành Nhập dữ liệu</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px;padding:16px;background:#fff;border:1px solid #cbd5e1;border-radius:8px;">
+                    <h4 style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:8px;">💡 Hướng dẫn đối chiếu 1:1 với phpMyAdmin (cPanel Hosting):</h4>
+                    <ol style="font-size:13px;color:#475569;margin-left:20px;line-height:1.6;">
+                        <li>Đăng nhập hosting cPanel $\rightarrow$ Mở <strong>phpMyAdmin</strong>.</li>
+                        <li>Ở cây cơ sở dữ liệu bên trái, chọn CSDL <code>nhkip9ij_kipa_forms</code> $\rightarrow$ Chọn bảng <code>kipa_admins</code>.</li>
+                        <li>Nếu muốn đồng bộ nhanh các cột và tài khoản, nhấp tab <strong>"Nhập" (Import)</strong> ở thanh trên cùng.</li>
+                        <li>Chọn tệp <code>kipa_admins_export.sql</code> vừa tải về (hoặc tệp <code>backend/sync_kipa_admins.sql</code>) rồi nhấn nút <strong>"Thực hiện" (Go)</strong>.</li>
+                        <li>Hệ thống sẽ cập nhật đầy đủ các trường và tài khoản nhân sự vào thẳng CSDL.</li>
+                    </ol>
+                </div>
             </div>
         </div>';
 
@@ -1858,7 +2095,7 @@ try {
     ?>
     <script>
         function switchSubview(sub) {
-            const views = ['users', 'add', 'roles', 'matrix'];
+            const views = ['users', 'add', 'roles', 'matrix', 'import'];
             views.forEach(v => {
                 const el = document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1));
                 const btn = document.getElementById('btnSub' + v.charAt(0).toUpperCase() + v.slice(1));
