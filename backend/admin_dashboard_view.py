@@ -245,9 +245,11 @@ def get_avatar_meta(admin):
     return initials, colors[idx][0], colors[idx][1]
 
 
-def render_full_dashboard(leads, admins, active_tab='accounts', subview='users', query_params=None):
+def render_full_dashboard(leads, admins, students=None, active_tab='accounts', subview='users', query_params=None):
     if query_params is None:
         query_params = {}
+    if students is None:
+        students = []
 
     # Normalize query params if values are lists (from parse_qs)
     norm_params = {}
@@ -261,6 +263,8 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
     admin_created = 'admin_created' in query_params
     status_updated = 'status_updated' in query_params
     deleted_admin = 'deleted_admin' in query_params
+    student_created = 'student_created' in query_params
+    deleted_student = 'deleted_student' in query_params
     error = query_params.get('error', '')
     active_subview = query_params.get('subview', subview)
     if isinstance(active_subview, list):
@@ -269,6 +273,7 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
     # Calculate statistics
     total_roles = 8
     total_assigned_users = len(admins)
+    total_students = len(students)
     total_permission_groups = 12
     active_users = sum(1 for a in admins if a.get('status') == 'active')
     health_percent = int((active_users / max(1, total_assigned_users)) * 100)
@@ -288,6 +293,10 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
         banner_html += '<div class="banner banner-success">✓ Đã cập nhật trạng thái hoạt động của nhân sự trong CSDL!</div>'
     if deleted_admin:
         banner_html += '<div class="banner banner-success">✓ Đã xóa tài khoản nhân sự khỏi CSDL!</div>'
+    if student_created:
+        banner_html += '<div class="banner banner-success">✓ Đã tạo tài khoản học viên mới thành công! Học viên có thể đăng nhập ngay vào Cổng thông tin học viên.</div>'
+    if deleted_student:
+        banner_html += '<div class="banner banner-success">✓ Đã xóa hồ sơ học viên khỏi CSDL!</div>'
     if error == 'duplicate':
         banner_html += '<div class="banner banner-error">Lỗi: Tên đăng nhập hoặc Email này đã tồn tại trong CSDL.</div>'
     elif error == 'username':
@@ -298,6 +307,10 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
         banner_html += '<div class="banner banner-error">Lỗi: Mật khẩu khởi tạo phải có từ 8 ký tự trở lên.</div>'
     elif error in ('cant_lock_root', 'cant_delete_root'):
         banner_html += '<div class="banner banner-error">Lỗi an ninh: Không thể khóa hoặc xóa tài khoản Tổng quản trị hệ thống gốc.</div>'
+    elif error == 'student_duplicate':
+        banner_html += '<div class="banner banner-error">Lỗi: Email học viên này đã tồn tại trong hệ thống.</div>'
+    elif error == 'student_empty':
+        banner_html += '<div class="banner banner-error">Lỗi: Vui lòng nhập đầy đủ họ tên và email của học viên.</div>'
 
     # Build View 1: Team Members Table (AdminOS + Sneat Activity Table)
     user_rows = []
@@ -511,6 +524,203 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
         </table>
     </div>
     '''
+
+    # Build Students Tab HTML
+    students_rows = []
+    for s in (students or []):
+        progress = int(s.get('progress_percent') or 0)
+        status = s.get('dossier_status') or 'Đang chuẩn bị'
+        status_bg = '#eff6ff'
+        status_color = '#1d4ed8'
+        if 'cấp Visa' in status or 'Hoàn tất' in status or 'xuất cảnh' in status:
+            status_bg = '#f0fdf4'
+            status_color = '#15803d'
+        elif 'Phỏng vấn' in status or 'nộp trường' in status:
+            status_bg = '#fffbeb'
+            status_color = '#b45309'
+
+        s_email = s.get('email', '')
+        s_initials = (s.get('full_name') or 'HV')[:2].upper()
+        students_rows.append(f'''
+        <tr class="student-row">
+            <td style="font-weight:bold;color:#1e293b;">#{s.get('id')}</td>
+            <td>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:#e0f2fe;color:#0369a1;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">{s_initials}</div>
+                    <div>
+                        <div style="font-weight:700;color:#081d36;">{s.get('full_name')}</div>
+                        <div style="font-size:12px;color:#64748b;">{s.get('email')} · {s.get('gender') or 'N/A'}</div>
+                    </div>
+                </div>
+            </td>
+            <td style="font-weight:600;color:#334155;">{s.get('phone') or 'Chưa có'}</td>
+            <td>
+                <div style="font-weight:600;color:#0284c7;">{s.get('current_program') or 'Chưa phân'}</div>
+                <div style="font-size:11px;color:#64748b;">Kỳ bay: {s.get('target_departure') or 'Chưa rõ'}</div>
+            </td>
+            <td>
+                <div style="display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:bold;background:{status_bg};color:{status_color};margin-bottom:4px;">{status}</div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#64748b;">
+                    <div style="width:80px;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;">
+                        <div style="width:{progress}%;height:100%;background:#0284c7;border-radius:3px;"></div>
+                    </div>
+                    <span>{progress}%</span>
+                </div>
+            </td>
+            <td style="font-size:13px;color:#475569;">
+                <strong>{s.get('advisor_name') or 'Cô Trần Thu Hà'}</strong>
+            </td>
+            <td>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <a href="/ho-so.html" target="_blank" class="btn-table-action" style="background:#eff6ff;color:#2563eb;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:4px;" title="Xem Cổng thông tin học viên">👁️ Portal</a>
+                    <form method="post" action="/admin/" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa hồ sơ học viên {s.get('full_name')}?');">
+                        <input type="hidden" name="action" value="delete_student">
+                        <input type="hidden" name="student_id" value="{s.get('id')}">
+                        <button type="submit" class="btn-table-action" style="background:#fef2f2;color:#dc2626;border:none;padding:5px 8px;border-radius:6px;cursor:pointer;" title="Xóa học viên">🗑️</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        ''')
+
+    students_content_html = f'''
+    <!-- STUDENT SUBVIEWS BAR -->
+    <div class="subviews-bar">
+        <button type="button" class="subview-btn active" onclick="switchStudentTab('list')" id="btnStudentTabList">
+            🎓 Danh sách Học viên ({len(students or [])})
+        </button>
+        <button type="button" class="subview-btn" onclick="switchStudentTab('add')" id="btnStudentTabAdd" style="background:#059669;color:#fff;font-weight:700;">
+            ➕ Tạo tài khoản Học viên mới
+        </button>
+    </div>
+
+    <!-- VIEW ADD STUDENT -->
+    <div id="viewStudentAdd" class="subview-panel" style="display:none;margin-bottom:20px;">
+        <div class="add-user-card open" style="display:block;border-left:4px solid #059669;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <h2 style="font-size:18px;font-weight:800;color:#081d36;">🎓 Tạo tài khoản Học viên mới & Cấp Cổng Portal</h2>
+                <button type="button" onclick="switchStudentTab('list')" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;" title="Đóng">✕</button>
+            </div>
+            <p style="font-size:13px;color:#64748b;margin-top:4px;">
+                Tạo tài khoản học viên để học sinh/phụ huynh có thể trực tiếp đăng nhập vào <strong>Cổng thông tin học viên</strong> (<code>/dang-nhap.html</code> &rarr; <code>/ho-so.html</code>) để theo dõi lộ trình visa, tiến độ và tài liệu.
+            </p>
+            <form method="post" action="/admin/">
+                <input type="hidden" name="action" value="create_student">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Họ và tên học viên *</label>
+                        <input name="full_name" required minlength="2" maxlength="160" placeholder="Ví dụ: Nguyễn Phương Linh">
+                    </div>
+                    <div class="form-group">
+                        <label>Email đăng nhập (Tài khoản Portal) *</label>
+                        <input name="email" type="email" required placeholder="phuonglinh@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu khởi tạo *</label>
+                        <input name="password" required minlength="6" maxlength="72" value="hocvien123456" placeholder="Mặc định: hocvien123456">
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại liên hệ *</label>
+                        <input name="phone" required placeholder="0987 654 321">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input name="birthday" type="date" value="2005-06-15">
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <select name="gender">
+                            <option value="Nữ">Nữ</option>
+                            <option value="Nam">Nam</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Chương trình theo học *</label>
+                        <select name="current_program">
+                            <option value="Du học Hàn Quốc (D2-2)">Du học Hàn Quốc (Visa D2-2 Chuyên ngành Đại học)</option>
+                            <option value="Du học Hàn Quốc (D4-1)">Du học Hàn Quốc (Visa D4-1 Hệ tiếng)</option>
+                            <option value="Du học Úc">Du học Úc (Vocational / Đại học)</option>
+                            <option value="Du học Nhật Bản">Du học Nhật Bản (Học bổng / Hệ tiếng)</option>
+                            <option value="XKLĐ Hàn Quốc (E-9 EPS)">Xuất khẩu lao động Hàn Quốc (E-9 EPS)</option>
+                            <option value="XKLĐ Hàn Quốc (E-7 Kỹ sư)">Xuất khẩu lao động Hàn Quốc (E-7 Kỹ sư)</option>
+                            <option value="Đào tạo Tiếng Hàn Topik">Đào tạo Tiếng Hàn KIPA (Topik 1-4)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quốc gia</label>
+                        <select name="country">
+                            <option value="Hàn Quốc">Hàn Quốc</option>
+                            <option value="Úc">Úc</option>
+                            <option value="Nhật Bản">Nhật Bản</option>
+                            <option value="Đài Loan">Đài Loan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái hồ sơ ban đầu</label>
+                        <select name="dossier_status">
+                            <option value="Đang chuẩn bị">Đang chuẩn bị hồ sơ</option>
+                            <option value="Đang học tiếng Hàn">Đang học tiếng Hàn & Dịch thuật</option>
+                            <option value="Đã nộp trường">Đã gửi hồ sơ sang trường</option>
+                            <option value="Phỏng vấn Visa">Đang luyện phỏng vấn Đại sứ quán</option>
+                            <option value="Đã cấp Visa">Đã được cấp Visa (Chuẩn bị bay)</option>
+                            <option value="Đã xuất cảnh">Đã xuất cảnh an toàn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tiến độ ban đầu (%)</label>
+                        <input name="progress_percent" type="number" min="0" max="100" value="25">
+                    </div>
+                    <div class="form-group">
+                        <label>Kỳ nhập học / Dự kiến bay</label>
+                        <input name="target_departure" value="Tháng 09/2027" placeholder="Ví dụ: Tháng 09/2027">
+                    </div>
+                    <div class="form-group">
+                        <label>Cố vấn học tập phụ trách</label>
+                        <select name="advisor_name">
+                            <option value="Cô Trần Thu Hà">Cô Trần Thu Hà (036 851 3865)</option>
+                            <option value="Thầy Nguyễn Văn Tuấn">Thầy Nguyễn Văn Tuấn (0889 2222 55)</option>
+                            <option value="Cô Lê Thùy Anh">Cô Lê Thùy Anh (0912 345 678)</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:18px;display:flex;gap:12px;align-items:center;">
+                    <button type="submit" class="btn-primary" style="background:#059669;padding:12px 24px;font-size:14px;">
+                        ✓ Tạo tài khoản Học viên & Kích hoạt Portal
+                    </button>
+                    <button type="button" class="btn-secondary" onclick="switchStudentTab('list')">Hủy bỏ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- VIEW LIST STUDENTS -->
+    <div id="viewStudentList" class="table-wrap" style="background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <table class="data-table" id="studentsTable">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Học viên & Tài khoản</th><th>Số điện thoại</th><th>Chương trình & Kỳ bay</th><th>Trạng thái & Tiến độ</th><th>Cố vấn học tập</th><th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {''.join(students_rows) if students else '<tr><td colspan="7" style="text-align:center;padding:28px;color:#94a3b8;">Chưa có tài khoản học viên nào. Hãy bấm "Tạo tài khoản Học viên mới" để thêm học sinh đầu tiên!</td></tr>'}
+            </tbody>
+        </table>
+    </div>
+    '''
+
+    # Page title and header actions
+    if active_tab == 'students':
+        page_title = 'Quản lý Tài khoản & Hồ sơ Học viên (Student Portal)'
+        page_subtitle = 'Cấp phát tài khoản đăng nhập Cổng thông tin học viên (/dang-nhap.html → /ho-so.html), theo dõi tiến độ visa và học tập.'
+        header_actions_html = '<div class="header-actions"><button type="button" class="btn-primary" style="background:#059669;" onclick="switchStudentTab(\'add\')">➕ Thêm học viên mới</button></div>'
+    elif active_tab == 'accounts':
+        page_title = 'Quản lý Nhân sự & Phân quyền (Roles & Permissions)'
+        page_subtitle = 'Hệ thống kiểm soát truy cập theo vai trò (RBAC 8 vai trò chính & 12 nhóm quyền P01-P12) KIPA Việt Hàn.'
+        header_actions_html = '<div class="header-actions"><button type="button" class="btn-primary" onclick="switchSubview(\'add\')">➕ Thêm nhân sự mới</button></div>'
+    else:
+        page_title = 'Quản lý Đăng ký Tư vấn (Leads)'
+        page_subtitle = 'Danh sách học viên và phụ huynh đăng ký tư vấn du học & xuất khẩu lao động.'
+        header_actions_html = ''
 
     # Complete HTML Document
     html = f'''<!doctype html>
@@ -1378,6 +1588,11 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
                 <span>Nhân sự & Phân quyền</span>
                 <span class="nav-badge">{len(admins)}</span>
             </a>
+            <a href="/admin/?tab=students" class="nav-link {'active' if active_tab == 'students' else ''}">
+                <span>🎓</span>
+                <span>Tài khoản Học viên</span>
+                <span class="nav-badge">{len(students)}</span>
+            </a>
             <a href="https://kipaviethan.edu.vn/api/cms.php" target="_blank" class="nav-link">
                 <span>🌐</span>
                 <span>Quản trị CMS A–J</span>
@@ -1417,7 +1632,7 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
             <div class="topbar-right">
                 <span class="dev-badge-top">CSDL SQLite Localhost: dev_leads.sqlite</span>
                 <button type="button" class="btn-secondary" onclick="exportDataCSV()">📥 Xuất CSV</button>
-                <div style="font-size:12px;color:#64748b;font-weight:600;">UTC: 2026-11-19</div>
+                <div style="font-size:12px;color:#64748b;font-weight:600;">UTC: 2026-11-20</div>
             </div>
         </header>
 
@@ -1425,14 +1640,10 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
             <!-- PAGE HEADER -->
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">
-                        {'Quản lý Nhân sự & Phân quyền (Roles & Permissions)' if active_tab == 'accounts' else 'Quản lý Đăng ký Tư vấn (Leads)'}
-                    </h1>
-                    <p class="page-subtitle">
-                        {'Hệ thống kiểm soát truy cập theo vai trò (RBAC 8 vai trò chính & 12 nhóm quyền P01-P12) KIPA Việt Hàn.' if active_tab == 'accounts' else 'Danh sách học viên và phụ huynh đăng ký tư vấn du học & xuất khẩu lao động.'}
-                    </p>
+                    <h1 class="page-title">{page_title}</h1>
+                    <p class="page-subtitle">{page_subtitle}</p>
                 </div>
-                {'<div class="header-actions"><button type="button" class="btn-primary" onclick="switchSubview(\'add\')">➕ Thêm tài khoản mới</button></div>' if active_tab == 'accounts' else ''}
+                {header_actions_html}
             </div>
 
             <!-- BANNERS -->
@@ -1450,18 +1661,29 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
                 </div>
                 <div class="stat-card">
                     <div>
-                        <div class="stat-meta-title">NHÂN SỰ ĐƯỢC GÁN</div>
+                        <div class="stat-meta-title">NHÂN SỰ & QUẢN TRỊ</div>
                         <div class="stat-value">{total_assigned_users}</div>
-                        <div class="stat-desc">1 Super Admin + 4 Nhân viên</div>
+                        <div class="stat-desc">Tài khoản nội bộ KIPA</div>
                     </div>
                     <div class="stat-icon-wrap" style="background:#ecfdf5;color:#059669;">👥</div>
                 </div>
                 <div class="stat-card">
                     <div>
-                        <div class="stat-meta-title">NHÓM QUYỀN HỆ THỐNG</div>
-                        <div class="stat-value">{total_permission_groups}</div>
-                        <div class="stat-desc">P01 Dashboard → P12 System</div>
+                        <div class="stat-meta-title">HỌC VIÊN CÓ PORTAL</div>
+                        <div class="stat-value">{total_students}</div>
+                        <div class="stat-desc">Tài khoản học viên KIPA</div>
                     </div>
+                    <div class="stat-icon-wrap" style="background:#eff6ff;color:#0284c7;">🎓</div>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <div class="stat-meta-title">ĐĂNG KÝ TƯ VẤN</div>
+                        <div class="stat-value">{len(leads)}</div>
+                        <div class="stat-desc">Lead khách hàng website</div>
+                    </div>
+                    <div class="stat-icon-wrap" style="background:#ecfdf5;color:#10b981;">📋</div>
+                </div>
+            </div>
                     <div class="stat-icon-wrap" style="background:#f5f3ff;color:#7c3aed;">🧩</div>
                 </div>
                 <div class="stat-card">
@@ -1635,13 +1857,38 @@ def render_full_dashboard(leads, admins, active_tab='accounts', subview='users',
                 </div>
                 {''.join(matrix_sections_html)}
             </div>
-            ''' if active_tab == 'accounts' else leads_table_html}
+            ''' if active_tab == 'accounts' else (students_content_html if active_tab == 'students' else leads_table_html)}
 
         </main>
     </div>
 
     <!-- CLIENT SCRIPT -->
     <script>
+        function switchStudentTab(tab) {{
+            const viewAdd = document.getElementById('viewStudentAdd');
+            const viewList = document.getElementById('viewStudentList');
+            const btnAdd = document.getElementById('btnStudentTabAdd');
+            const btnList = document.getElementById('btnStudentTabList');
+            if (tab === 'add') {{
+                if (viewAdd) viewAdd.style.display = 'block';
+                if (viewList) viewList.style.display = 'none';
+                if (btnAdd) {{
+                    btnAdd.classList.add('active');
+                    btnAdd.style.background = '#047857';
+                }}
+                if (btnList) btnList.classList.remove('active');
+            }} else {{
+                if (viewAdd) viewAdd.style.display = 'none';
+                if (viewList) viewList.style.display = 'block';
+                if (btnAdd) {{
+                    btnAdd.classList.remove('active');
+                    btnAdd.style.background = '#059669';
+                }}
+                if (btnList) btnList.classList.add('active');
+            }}
+            window.scrollTo({{ top: 0, behavior: 'smooth' }});
+        }}
+
         function switchSubview(sub) {{
             const views = ['users', 'add', 'roles', 'matrix'];
             views.forEach(v => {{

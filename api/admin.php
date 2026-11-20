@@ -748,6 +748,105 @@ try {
             header('Location: /api/admin.php?tab=accounts&deleted_admin=1', true, 303);
             exit;
         }
+
+        if ($action === 'create_student') {
+            $fullName = trim((string)($_POST['full_name'] ?? ''));
+            $email = trim((string)($_POST['email'] ?? ''));
+            $phone = trim((string)($_POST['phone'] ?? ''));
+            $password = (string)($_POST['password'] ?? 'hocvien123456');
+            $birthday = trim((string)($_POST['birthday'] ?? '2005-01-15'));
+            $gender = trim((string)($_POST['gender'] ?? 'Nam'));
+            $address = trim((string)($_POST['address'] ?? 'Hà Nội'));
+            $currentProgram = trim((string)($_POST['current_program'] ?? 'Du học Hàn Quốc (D2-2)'));
+            $country = trim((string)($_POST['country'] ?? 'Hàn Quốc'));
+            $targetDeparture = trim((string)($_POST['target_departure'] ?? 'Tháng 09/2027'));
+            $dossierStatus = trim((string)($_POST['dossier_status'] ?? 'Đang chuẩn bị'));
+            $progressPercent = max(0, min(100, (int)($_POST['progress_percent'] ?? 30)));
+            $advisorName = trim((string)($_POST['advisor_name'] ?? 'Cô Trần Thu Hà'));
+
+            if ($fullName === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                kipa_admin_error('Vui lòng điền họ tên và địa chỉ email học viên hợp lệ.');
+            }
+
+            // 1. Kiểm tra và chèn vào kipa_users (cho phép đăng nhập Cổng học viên)
+            $hasUsers = (bool)$db->query("SHOW TABLES LIKE 'kipa_users'")->fetch();
+            if ($hasUsers) {
+                $chkUser = $db->prepare('SELECT id FROM kipa_users WHERE email = :email');
+                $chkUser->execute(['email' => $email]);
+                if ($chkUser->fetch()) {
+                    kipa_admin_error('Email này đã được sử dụng cho một tài khoản học viên khác.');
+                }
+                $insUser = $db->prepare(
+                    'INSERT INTO kipa_users (email, password_hash, full_name, phone, email_verified_at, created_at)
+                     VALUES (:email, :password_hash, :full_name, :phone, UTC_TIMESTAMP(), UTC_TIMESTAMP())'
+                );
+                $insUser->execute([
+                    'email' => $email,
+                    'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                    'full_name' => $fullName,
+                    'phone' => $phone !== '' ? $phone : null,
+                ]);
+            }
+
+            // 2. Chèn vào kipa_students nếu bảng tồn tại
+            $hasStudents = (bool)$db->query("SHOW TABLES LIKE 'kipa_students'")->fetch();
+            if ($hasStudents) {
+                $chkStudent = $db->prepare('SELECT id FROM kipa_students WHERE email = :email');
+                $chkStudent->execute(['email' => $email]);
+                if (!$chkStudent->fetch()) {
+                    $insStudent = $db->prepare(
+                        'INSERT INTO kipa_students (
+                            email, full_name, phone, birthday, gender, address,
+                            student_status, current_program, country, target_departure,
+                            dossier_status, progress_percent, advisor_name, created_at
+                        ) VALUES (
+                            :email, :full_name, :phone, :birthday, :gender, :address,
+                            "Đang học", :current_program, :country, :target_departure,
+                            :dossier_status, :progress_percent, :advisor_name, UTC_TIMESTAMP()
+                        )'
+                    );
+                    $insStudent->execute([
+                        'email' => $email,
+                        'full_name' => $fullName,
+                        'phone' => $phone,
+                        'birthday' => $birthday,
+                        'gender' => $gender,
+                        'address' => $address,
+                        'current_program' => $currentProgram,
+                        'country' => $country,
+                        'target_departure' => $targetDeparture,
+                        'dossier_status' => $dossierStatus,
+                        'progress_percent' => $progressPercent,
+                        'advisor_name' => $advisorName,
+                    ]);
+                }
+            }
+
+            header('Location: /api/admin.php?tab=students&student_created=1', true, 303);
+            exit;
+        }
+
+        if ($action === 'delete_student') {
+            $studentId = filter_var($_POST['student_id'] ?? null, FILTER_VALIDATE_INT);
+            if ($studentId && $studentId > 0) {
+                $hasStudents = (bool)$db->query("SHOW TABLES LIKE 'kipa_students'")->fetch();
+                if ($hasStudents) {
+                    $stCheck = $db->prepare('SELECT email FROM kipa_students WHERE id = :id');
+                    $stCheck->execute(['id' => $studentId]);
+                    $stRow = $stCheck->fetch();
+                    if ($stRow) {
+                        $stEmail = $stRow['email'];
+                        $db->prepare('DELETE FROM kipa_students WHERE id = :id')->execute(['id' => $studentId]);
+                        $hasUsers = (bool)$db->query("SHOW TABLES LIKE 'kipa_users'")->fetch();
+                        if ($hasUsers) {
+                            $db->prepare('DELETE FROM kipa_users WHERE email = :email')->execute(['email' => $stEmail]);
+                        }
+                    }
+                }
+            }
+            header('Location: /api/admin.php?tab=students&deleted_student=1', true, 303);
+            exit;
+        }
         kipa_admin_error('Tác vụ không hợp lệ.');
     }
 
@@ -863,8 +962,17 @@ try {
     $adminListStmt = $db->query('SELECT id, username, full_name, email, phone, department, role, scope, status, created_at FROM kipa_admins ORDER BY id ASC');
     $allAdmins = $adminListStmt ? $adminListStmt->fetchAll() : [];
 
+    $hasStudents = (bool)$db->query("SHOW TABLES LIKE 'kipa_students'")->fetch();
+    $allStudents = [];
+    $totalStudents = 0;
+    if ($hasStudents) {
+        $stListStmt = $db->query('SELECT * FROM kipa_students ORDER BY id DESC');
+        $allStudents = $stListStmt ? $stListStmt->fetchAll() : [];
+        $totalStudents = count($allStudents);
+    }
+
     $csrf = kipa_h($_SESSION['csrf']);
-    $tab = $_GET['tab'] ?? 'leads';
+    $tab = $_GET['tab'] ?? 'accounts';
     $rolesMeta = kipa_roles_list();
 
     $tabLeadsClass = $tab === 'leads' ? 'nav-tab active' : 'nav-tab';
@@ -911,6 +1019,12 @@ try {
     }
     if (isset($_GET['deleted'])) {
         $bannerHtml .= '<div class="banner banner-success">✓ Đã xóa đăng ký tư vấn khỏi CSDL.</div>';
+    }
+    if (isset($_GET['student_created'])) {
+        $bannerHtml .= '<div class="banner banner-success">✓ Đã tạo tài khoản học viên mới thành công! Học viên có thể đăng nhập ngay vào Cổng thông tin học viên.</div>';
+    }
+    if (isset($_GET['deleted_student'])) {
+        $bannerHtml .= '<div class="banner banner-success">✓ Đã xóa hồ sơ học viên khỏi CSDL!</div>';
     }
     if (isset($_GET['password_changed'])) {
         $bannerHtml .= '<div class="banner banner-success">✓ Đã đổi mật khẩu quản trị thành công.</div>';
@@ -1291,6 +1405,11 @@ try {
                 <span>Nhân sự & Phân quyền</span>
                 <span class="nav-badge">' . count($allAdmins) . '</span>
             </a>
+            <a href="/api/admin.php?tab=students" class="nav-link ' . ($tab === 'students' ? 'active' : '') . '">
+                <span>🎓</span>
+                <span>Tài khoản Học viên</span>
+                <span class="nav-badge">' . $totalStudents . '</span>
+            </a>
             <a href="/api/cms.php" target="_blank" class="nav-link">
                 <span>🌐</span>
                 <span>Quản trị CMS A–J</span>
@@ -1541,6 +1660,171 @@ try {
             ' . $matrixSectionsHtml . '
         </div>';
 
+    } elseif ($tab === 'students') {
+        // Students Table View
+        $stRows = '';
+        foreach ($allStudents as $s) {
+            $prog = (int)($s['progress_percent'] ?? 0);
+            $st = (string)($s['dossier_status'] ?? 'Đang chuẩn bị');
+            $stBg = '#eff6ff'; $stFg = '#1d4ed8';
+            if (str_contains($st, 'cấp Visa') || str_contains($st, 'Hoàn tất') || str_contains($st, 'xuất cảnh')) {
+                $stBg = '#f0fdf4'; $stFg = '#15803d';
+            } elseif (str_contains($st, 'Phỏng vấn') || str_contains($st, 'nộp trường')) {
+                $stBg = '#fffbeb'; $stFg = '#b45309';
+            }
+            $init = mb_strtoupper(mb_substr((string)($s['full_name'] ?? 'HV'), 0, 2));
+            $stRows .= '<tr>
+                <td style="font-weight:bold;color:#1e293b;">#' . (int)$s['id'] . '</td>
+                <td>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="width:36px;height:36px;border-radius:50%;background:#e0f2fe;color:#0369a1;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;">' . kipa_h($init) . '</div>
+                        <div>
+                            <div style="font-weight:700;color:#081d36;">' . kipa_h((string)$s['full_name']) . '</div>
+                            <div style="font-size:12px;color:#64748b;">' . kipa_h((string)$s['email']) . ' · ' . kipa_h((string)($s['gender'] ?? 'N/A')) . '</div>
+                        </div>
+                    </div>
+                </td>
+                <td style="font-weight:600;color:#334155;">' . kipa_h((string)($s['phone'] ?? 'Chưa có')) . '</td>
+                <td>
+                    <div style="font-weight:600;color:#0284c7;">' . kipa_h((string)($s['current_program'] ?? 'Chưa phân')) . '</div>
+                    <div style="font-size:11px;color:#64748b;">Kỳ bay: ' . kipa_h((string)($s['target_departure'] ?? 'Chưa rõ')) . '</div>
+                </td>
+                <td>
+                    <div style="display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:bold;background:' . $stBg . ';color:' . $stFg . ';margin-bottom:4px;">' . kipa_h($st) . '</div>
+                    <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#64748b;">
+                        <div style="width:80px;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;">
+                            <div style="width:' . $prog . '%;height:100%;background:#0284c7;border-radius:3px;"></div>
+                        </div>
+                        <span>' . $prog . '%</span>
+                    </div>
+                </td>
+                <td style="font-size:13px;color:#475569;"><strong>' . kipa_h((string)($s['advisor_name'] ?? 'Cô Trần Thu Hà')) . '</strong></td>
+                <td>
+                    <div style="display:flex;gap:6px;align-items:center;">
+                        <a href="/ho-so.html" target="_blank" style="background:#eff6ff;color:#2563eb;padding:5px 10px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;">👁️ Portal</a>
+                        ' . kipa_admin_form_start('delete_student', $csrf) . '
+                        <input type="hidden" name="student_id" value="' . (int)$s['id'] . '">
+                        <button type="submit" style="background:#fef2f2;color:#dc2626;border:none;padding:5px 8px;border-radius:6px;cursor:pointer;" onclick="return confirm(\'Bạn có chắc chắn muốn xóa học viên này khỏi CSDL?\');">🗑️</button></form>
+                    </div>
+                </td>
+            </tr>';
+        }
+
+        echo '<div class="subviews-bar">
+            <button type="button" class="subview-btn active" onclick="switchStudentTab(\'list\')" id="btnStudentTabList">
+                🎓 Danh sách Học viên (' . count($allStudents) . ')
+            </button>
+            <button type="button" class="subview-btn" onclick="switchStudentTab(\'add\')" id="btnStudentTabAdd" style="background:#059669;color:#fff;font-weight:700;">
+                ➕ Tạo tài khoản Học viên mới
+            </button>
+        </div>
+
+        <div id="viewStudentAdd" class="subview-panel" style="display:none;margin-bottom:20px;">
+            <div class="add-user-card open" style="display:block;border-left:4px solid #059669;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <h2 style="font-size:18px;font-weight:800;color:#081d36;">🎓 Tạo tài khoản Học viên mới & Cấp Cổng Portal</h2>
+                    <button type="button" onclick="switchStudentTab(\'list\')" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;" title="Đóng">✕</button>
+                </div>
+                <p style="font-size:13px;color:#64748b;margin-top:4px;">Tạo tài khoản học viên để học sinh/phụ huynh đăng nhập vào <strong>Cổng thông tin học viên</strong> (<code>/dang-nhap.html</code> &rarr; <code>/ho-so.html</code>) để theo dõi lộ trình visa, tiến độ và tài liệu.</p>
+                ' . kipa_admin_form_start('create_student', $csrf) . '
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Họ và tên học viên *</label>
+                        <input name="full_name" required minlength="2" maxlength="160" placeholder="Ví dụ: Nguyễn Phương Linh">
+                    </div>
+                    <div class="form-group">
+                        <label>Email đăng nhập (Tài khoản Portal) *</label>
+                        <input name="email" type="email" required placeholder="phuonglinh@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu khởi tạo *</label>
+                        <input name="password" required minlength="6" maxlength="72" value="hocvien123456" placeholder="Mặc định: hocvien123456">
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại liên hệ *</label>
+                        <input name="phone" required placeholder="0987 654 321">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input name="birthday" type="date" value="2005-06-15">
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <select name="gender">
+                            <option value="Nữ">Nữ</option>
+                            <option value="Nam">Nam</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Chương trình theo học *</label>
+                        <select name="current_program">
+                            <option value="Du học Hàn Quốc (D2-2)">Du học Hàn Quốc (Visa D2-2 Chuyên ngành Đại học)</option>
+                            <option value="Du học Hàn Quốc (D4-1)">Du học Hàn Quốc (Visa D4-1 Hệ tiếng)</option>
+                            <option value="Du học Úc">Du học Úc (Vocational / Đại học)</option>
+                            <option value="Du học Nhật Bản">Du học Nhật Bản (Học bổng / Hệ tiếng)</option>
+                            <option value="XKLĐ Hàn Quốc (E-9 EPS)">Xuất khẩu lao động Hàn Quốc (E-9 EPS)</option>
+                            <option value="XKLĐ Hàn Quốc (E-7 Kỹ sư)">Xuất khẩu lao động Hàn Quốc (E-7 Kỹ sư)</option>
+                            <option value="Đào tạo Tiếng Hàn Topik">Đào tạo Tiếng Hàn KIPA (Topik 1-4)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quốc gia</label>
+                        <select name="country">
+                            <option value="Hàn Quốc">Hàn Quốc</option>
+                            <option value="Úc">Úc</option>
+                            <option value="Nhật Bản">Nhật Bản</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái hồ sơ ban đầu</label>
+                        <select name="dossier_status">
+                            <option value="Đang chuẩn bị">Đang chuẩn bị hồ sơ</option>
+                            <option value="Đang học tiếng Hàn">Đang học tiếng Hàn & Dịch thuật</option>
+                            <option value="Đã nộp trường">Đã gửi hồ sơ sang trường</option>
+                            <option value="Phỏng vấn Visa">Đang luyện phỏng vấn Đại sứ quán</option>
+                            <option value="Đã cấp Visa">Đã được cấp Visa (Chuẩn bị bay)</option>
+                            <option value="Đã xuất cảnh">Đã xuất cảnh an toàn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tiến độ ban đầu (%)</label>
+                        <input name="progress_percent" type="number" min="0" max="100" value="25">
+                    </div>
+                    <div class="form-group">
+                        <label>Kỳ nhập học / Dự kiến bay</label>
+                        <input name="target_departure" value="Tháng 09/2027" placeholder="Ví dụ: Tháng 09/2027">
+                    </div>
+                    <div class="form-group">
+                        <label>Cố vấn học tập phụ trách</label>
+                        <select name="advisor_name">
+                            <option value="Cô Trần Thu Hà">Cô Trần Thu Hà (036 851 3865)</option>
+                            <option value="Thầy Nguyễn Văn Tuấn">Thầy Nguyễn Văn Tuấn (0889 2222 55)</option>
+                            <option value="Cô Lê Thùy Anh">Cô Lê Thùy Anh (0912 345 678)</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:18px;display:flex;gap:12px;align-items:center;">
+                    <button type="submit" class="btn-primary" style="background:#059669;padding:12px 24px;font-size:14px;">
+                        ✓ Tạo tài khoản Học viên & Kích hoạt Portal
+                    </button>
+                    <button type="button" class="btn-secondary" onclick="switchStudentTab(\'list\')">Hủy bỏ</button>
+                </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="viewStudentList" class="table-wrap" style="background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+            <table class="data-table" id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Học viên & Tài khoản</th><th>Số điện thoại</th><th>Chương trình & Kỳ bay</th><th>Trạng thái & Tiến độ</th><th>Cố vấn học tập</th><th>Tác vụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ' . ($stRows !== '' ? $stRows : '<tr><td colspan="7" style="text-align:center;padding:28px;color:#94a3b8;">Chưa có tài khoản học viên nào. Hãy bấm "Tạo tài khoản Học viên mới" để thêm học sinh đầu tiên!</td></tr>') . '
+                </tbody>
+            </table>
+        </div>';
     } else {
         // Leads Table View
         echo '<div class="table-card">

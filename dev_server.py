@@ -141,6 +141,15 @@ def get_dev_admins():
         return [dict(r) for r in cursor.fetchall()]
 
 
+def get_dev_students():
+    init_dev_db()
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM kipa_students ORDER BY id DESC')
+        return [dict(r) for r in cursor.fetchall()]
+
+
 def get_quiz_questions():
     init_dev_db()
     with sqlite3.connect(DB_PATH) as conn:
@@ -418,6 +427,8 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                     post_data = {}
 
             action = post_data.get('action', '')
+            if not action and 'username' in post_data and 'password' in post_data:
+                action = 'login'
             if action == 'send_otp':
                 account = post_data.get('account', '').strip()
                 if not account:
@@ -566,6 +577,96 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 return
 
+            elif action == 'create_student':
+                full_name = post_data.get('full_name', '').strip()
+                email = post_data.get('email', '').strip().lower()
+                phone = post_data.get('phone', '').strip()
+                password = post_data.get('password', '').strip() or 'hocvien123456'
+                birthday = post_data.get('birthday', '').strip() or '2005-01-15'
+                gender = post_data.get('gender', 'Nam').strip()
+                address = post_data.get('address', '').strip() or 'Hà Nội'
+                current_program = post_data.get('current_program', 'Du học Hàn Quốc (D2-2)').strip()
+                country = post_data.get('country', 'Hàn Quốc').strip()
+                target_departure = post_data.get('target_departure', 'Tháng 09/2027').strip()
+                dossier_status = post_data.get('dossier_status', 'Đang chuẩn bị').strip()
+                try:
+                    progress_percent = int(post_data.get('progress_percent', 30))
+                except Exception:
+                    progress_percent = 30
+                advisor_name = post_data.get('advisor_name', 'Cô Trần Thu Hà').strip()
+
+                if not full_name or not email:
+                    self.send_response(303)
+                    self.send_header('Location', '/admin/?tab=students&error=student_empty')
+                    self.end_headers()
+                    return
+
+                now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+                now_date = datetime.datetime.now(datetime.timezone.utc).strftime('%d/%m/%Y')
+
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('SELECT id FROM kipa_students WHERE email = ?', (email,))
+                    if cur.fetchone():
+                        self.send_response(303)
+                        self.send_header('Location', '/admin/?tab=students&error=student_duplicate')
+                        self.end_headers()
+                        return
+
+                    cur.execute('''
+                        INSERT INTO kipa_students (
+                            email, full_name, phone, birthday, gender, address,
+                            student_status, current_program, program_code, country,
+                            registration_date, target_departure, dossier_status,
+                            progress_percent, advisor_name, advisor_role, advisor_phone,
+                            advisor_email, created_at, updated_at
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (
+                        email, full_name, phone, birthday, gender, address,
+                        'Đang học', current_program, 'KR-D2-2026', country,
+                        now_date, target_departure, dossier_status,
+                        progress_percent, advisor_name, 'Cố vấn học tập KIPA',
+                        '036 851 3865', 'duhocquoctekipaviethan@gmail.com',
+                        now_iso, now_iso
+                    ))
+
+                    # Insert initial milestones in kipa_student_journey
+                    journey_steps = [
+                        (email, 1, 'Đăng ký & Ký hợp đồng dịch vụ', 'Hoàn tất thủ tục hồ sơ nhập học tại KIPA', 'COMPLETED', now_date),
+                        (email, 2, 'Học tiếng & Chuẩn bị hồ sơ pháp lý', 'Dịch thuật công chứng, hoàn thiện học bạ', 'IN_PROGRESS', 'Đang thực hiện'),
+                        (email, 3, 'Nộp hồ sơ xin thư mời trường', 'Gửi hồ sơ sang trường đại học đối tác', 'PENDING', target_departure),
+                        (email, 4, 'Phỏng vấn & Nộp Visa Đại sứ quán', 'Luyện phỏng vấn 1-1 cùng chuyên gia KIPA', 'PENDING', 'Dự kiến'),
+                        (email, 5, 'Nhận Visa & Xuất cảnh', 'Tập huấn trước bay, đón tại sân bay nước bạn', 'PENDING', target_departure),
+                    ]
+                    cur.executemany('''
+                        INSERT INTO kipa_student_journey (student_email, step_number, title, description, status, deadline)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                    ''', journey_steps)
+                    conn.commit()
+
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=students&student_created=1')
+                self.end_headers()
+                return
+
+            elif action == 'delete_student':
+                student_id = int(post_data.get('student_id', 0))
+                init_dev_db()
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.cursor()
+                    cur.execute('SELECT email FROM kipa_students WHERE id = ?', (student_id,))
+                    row = cur.fetchone()
+                    if row:
+                        st_email = row[0]
+                        cur.execute('DELETE FROM kipa_students WHERE id = ?', (student_id,))
+                        cur.execute('DELETE FROM kipa_student_journey WHERE student_email = ?', (st_email,))
+                        conn.commit()
+                self.send_response(303)
+                self.send_header('Location', '/admin/?tab=students&deleted_student=1')
+                self.end_headers()
+                return
+
             elif action == 'login':
                 username = post_data.get('username', '').strip()
                 password = post_data.get('password', '')
@@ -595,6 +696,11 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
             elif action == 'logout':
                 DEV_ADMIN_LOGGED_IN = False
+                self.send_response(303)
+                self.send_header('Location', '/admin/')
+                self.end_headers()
+                return
+            else:
                 self.send_response(303)
                 self.send_header('Location', '/admin/')
                 self.end_headers()
@@ -1081,7 +1187,8 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
             leads = get_dev_leads(100)
             admins = get_dev_admins()
-            tab = query.get('tab', ['leads'])[0]
+            students = get_dev_students()
+            tab = query.get('tab', ['accounts'])[0]
             subview = query.get('subview', ['users'])[0]
             if tab == 'roles_matrix':
                 tab = 'accounts'
@@ -1091,7 +1198,7 @@ class KipaDevHandler(BaseHTTPRequestHandler):
                 subview = 'roles'
 
             import backend.admin_dashboard_view as admin_view
-            html = admin_view.render_full_dashboard(leads, admins, active_tab=tab, subview=subview, query_params=query)
+            html = admin_view.render_full_dashboard(leads, admins, students=students, active_tab=tab, subview=subview, query_params=query)
             resp_bytes = html.encode('utf-8')
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
