@@ -1272,7 +1272,7 @@ try {
             --radius-lg: 14px;
         }
         *{box-sizing:border-box;margin:0;padding:0;}
-        body{background:var(--bg-body);color:var(--text-main);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;display:flex;min-height:100vh;}
+        body{background:var(--bg-body);color:var(--text-main);font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:14px;line-height:1.5;display:flex;min-height:100vh;}
         .sidebar{width:260px;background:var(--bg-sidebar);border-right:1px solid var(--sidebar-border);display:flex;flex-direction:column;flex-shrink:0;color:#fff;position:sticky;top:0;height:100vh;overflow-y:auto;}
         .brand-header{padding:22px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--sidebar-border);}
         .brand-icon{width:38px;height:38px;background:linear-gradient(135deg,#2563eb,#38bdf8);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;box-shadow:0 4px 10px rgba(37,99,235,0.3);}
@@ -1850,7 +1850,8 @@ try {
     echo '</main></div>';
 
     // Script
-    echo '<script>
+    ?>
+    <script>
         function switchSubview(sub) {
             const views = ['users', 'add', 'roles', 'matrix'];
             views.forEach(v => {
@@ -1949,7 +1950,8 @@ try {
             link.click();
             document.body.removeChild(link);
         }
-    </script></body></html>';
+    </script></body></html>
+    <?php
     exit;
 } catch (PDOException $error) {
     error_log('[kipa-admin] Database operation failed: ' . $error->getCode());
