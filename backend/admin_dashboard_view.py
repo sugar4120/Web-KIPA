@@ -287,6 +287,9 @@ def render_full_dashboard(leads, admins, students=None, active_tab='accounts', s
 
     # Notification Banners
     banner_html = ''
+    admins_imported = query_params.get('admins_imported', [''])[0]
+    if admins_imported:
+        banner_html += f'<div class="banner banner-success">✓ Đã đồng bộ & nhập thành công {admins_imported} bản ghi vào bảng kipa_admins trong CSDL!</div>'
     if admin_created:
         banner_html += '<div class="banner banner-success">✓ Đã tạo tài khoản nhân sự mới thành công và đồng bộ trực tiếp vào CSDL!</div>'
     if status_updated:
@@ -716,7 +719,12 @@ def render_full_dashboard(leads, admins, students=None, active_tab='accounts', s
     elif active_tab == 'accounts':
         page_title = 'Quản lý Nhân sự & Phân quyền (Roles & Permissions)'
         page_subtitle = 'Hệ thống kiểm soát truy cập theo vai trò (RBAC 8 vai trò chính & 12 nhóm quyền P01-P12) KIPA Việt Hàn.'
-        header_actions_html = '<div class="header-actions"><button type="button" class="btn-primary" onclick="switchSubview(\'add\')">➕ Thêm nhân sự mới</button></div>'
+        header_actions_html = '''<div class="header-actions" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <a href="/admin/?action=export_admins_sql" class="btn-secondary" style="padding:8px 12px;background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="Tải file .sql để nhập thẳng vào phpMyAdmin">📥 Xuất SQL</a>
+            <a href="/admin/?action=export_admins_csv" class="btn-secondary" style="padding:8px 12px;background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="Xuất file CSV cho Excel">📥 Xuất CSV</a>
+            <button type="button" class="btn-secondary" onclick="switchSubview('import')" style="padding:8px 12px;background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">📤 Nhập dữ liệu</button>
+            <button type="button" class="btn-primary" onclick="switchSubview('add')" style="padding:8px 14px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">➕ Thêm tài khoản mới</button>
+        </div>'''
     else:
         page_title = 'Quản lý Đăng ký Tư vấn (Leads)'
         page_subtitle = 'Danh sách học viên và phụ huynh đăng ký tư vấn du học & xuất khẩu lao động.'
@@ -1711,6 +1719,9 @@ def render_full_dashboard(leads, admins, students=None, active_tab='accounts', s
                 <button type="button" class="subview-btn {'active' if active_subview == 'add' else ''}" onclick="switchSubview('add')" id="btnSubAdd" style="background:{'#2563eb' if active_subview == 'add' else '#f1f5f9'};color:{'#fff' if active_subview == 'add' else '#1e293b'};font-weight:700;">
                     ➕ Thêm tài khoản mới
                 </button>
+                <button type="button" class="subview-btn {'active' if active_subview == 'import' else ''}" onclick="switchSubview('import')" id="btnSubImport">
+                    🔄 Xuất / Nhập CSDL (kipa_admins)
+                </button>
                 <button type="button" class="subview-btn {'active' if active_subview == 'roles' else ''}" onclick="switchSubview('roles')" id="btnSubRoles">
                     🏷️ 8 Thẻ Vai trò chính (Sneat)
                 </button>
@@ -1782,6 +1793,63 @@ def render_full_dashboard(leads, admins, students=None, active_tab='accounts', s
                             <button type="button" class="btn-secondary" onclick="switchSubview('users')">Quay lại danh sách</button>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- VIEW: XUẤT NHẬP CSDL (kipa_admins) -->
+            <div id="viewImport" class="subview-panel" style="display:{'block' if active_subview == 'import' else 'none'};">
+                <div class="add-user-card open" style="display:block;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <h2 style="font-size:18px;font-weight:800;color:#081d36;">🔄 Xuất & Nhập Dữ liệu CSDL (Bảng kipa_admins)</h2>
+                        <button type="button" onclick="switchSubview('users')" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;" title="Đóng">✕</button>
+                    </div>
+                    <p style="font-size:13px;color:#64748b;margin-top:4px;">
+                        Dữ liệu được đọc/ghi trực tiếp từ bảng <code>kipa_admins</code> trên CSDL MySQL (nhkip9ij_kipa_forms). Bạn có thể xuất file SQL để đối chiếu hoặc nhập file dữ liệu để đồng bộ 1:1 với phpMyAdmin.
+                    </p>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
+                        <!-- Cột 1: Xuất dữ liệu -->
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;">
+                            <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:8px;">📥 1. Xuất dữ liệu từ bảng kipa_admins</h3>
+                            <p style="font-size:13px;color:#64748b;margin-bottom:16px;">Tải về bản sao lưu toàn bộ cấu trúc và tài khoản đang có trong bảng kipa_admins để lưu trữ hoặc nhập vào phpMyAdmin.</p>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                <a href="/admin/?action=export_admins_sql" class="btn-primary" style="padding:10px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;">
+                                    📄 Tải tệp .SQL (phpMyAdmin)
+                                </a>
+                                <a href="/admin/?action=export_admins_csv" class="btn-secondary" style="padding:10px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;background:#fff;border:1px solid #cbd5e1;color:#1e293b;">
+                                    📊 Tải tệp .CSV (Excel)
+                                </a>
+                            </div>
+                            <div style="margin-top:16px;padding:10px 14px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:6px;font-size:12px;color:#065f46;">
+                                ✓ Tệp .SQL xuất ra tương thích 100% với phpMyAdmin, tự động bổ sung cột và tài khoản.
+                            </div>
+                        </div>
+
+                        <!-- Cột 2: Nhập dữ liệu -->
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;">
+                            <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:8px;">📤 2. Nhập dữ liệu vào bảng kipa_admins</h3>
+                            <p style="font-size:13px;color:#64748b;margin-bottom:14px;">Tải lên tệp .sql / .csv hoặc dán các câu lệnh SQL INSERT/UPDATE để nạp tài khoản vào bảng kipa_admins.</p>
+                            <form method="post" action="/admin/">
+                                <input type="hidden" name="action" value="import_admins">
+                                <div class="form-group" style="margin-bottom:12px;">
+                                    <label style="font-size:12px;font-weight:600;color:#475569;">Dán nội dung câu lệnh SQL / CSV:</label>
+                                    <textarea name="import_text" rows="4" style="width:100%;font-family:monospace;font-size:12px;padding:8px;border:1px solid #cbd5e1;border-radius:6px;" placeholder="Ví dụ: INSERT INTO kipa_admins (username, full_name, email)..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary" style="padding:10px 18px;font-weight:700;width:100%;">🚀 Tiến hành Nhập dữ liệu</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:20px;padding:16px;background:#fff;border:1px solid #cbd5e1;border-radius:8px;">
+                        <h4 style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:8px;">💡 Hướng dẫn đối chiếu 1:1 với phpMyAdmin (cPanel Hosting):</h4>
+                        <ol style="font-size:13px;color:#475569;margin-left:20px;line-height:1.6;">
+                            <li>Đăng nhập hosting cPanel $\rightarrow$ Mở <strong>phpMyAdmin</strong>.</li>
+                            <li>Ở cây cơ sở dữ liệu bên trái, chọn CSDL <code>nhkip9ij_kipa_forms</code> $\rightarrow$ Chọn bảng <code>kipa_admins</code>.</li>
+                            <li>Nếu muốn đồng bộ nhanh các cột và tài khoản, nhấp tab <strong>"Nhập" (Import)</strong> ở thanh trên cùng.</li>
+                            <li>Chọn tệp <code>kipa_admins_export.sql</code> vừa tải về (hoặc tệp <code>backend/sync_kipa_admins.sql</code>) rồi nhấn nút <strong>"Thực hiện" (Go)</strong>.</li>
+                            <li>Hệ thống sẽ cập nhật đầy đủ các trường và tài khoản nhân sự vào thẳng CSDL.</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
 
@@ -1895,7 +1963,7 @@ def render_full_dashboard(leads, admins, students=None, active_tab='accounts', s
         }}
 
         function switchSubview(sub) {{
-            const views = ['users', 'add', 'roles', 'matrix'];
+            const views = ['users', 'add', 'roles', 'matrix', 'import'];
             views.forEach(v => {{
                 const el = document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1));
                 const btn = document.getElementById('btnSub' + v.charAt(0).toUpperCase() + v.slice(1));

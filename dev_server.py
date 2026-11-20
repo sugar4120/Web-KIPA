@@ -119,10 +119,6 @@ def init_dev_db():
             now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
             seed_admins = [
                 ("admin", "Tổng quản trị KIPA", "duhocquoctekipaviethan@gmail.com", "036 851 3865", "admin_password_123", "super_admin", "Ban Giám Đốc", "Toàn hệ thống", "active", 0, now_iso),
-                ("nguyena", "Nguyễn A", "nguyena@kipaviethan.edu.vn", "0912 345 671", "admin_password_123", "content_seo_executive", "Marketing", "Du học", "active", 0, now_iso),
-                ("nguyenb", "Nguyễn B", "nguyenb@kipaviethan.edu.vn", "0912 345 672", "admin_password_123", "content_manager", "Marketing", "Marketing", "active", 0, now_iso),
-                ("nguyenc", "Nguyễn C", "nguyenc@kipaviethan.edu.vn", "0912 345 673", "admin_password_123", "seo_manager", "SEO", "Toàn Website", "active", 0, now_iso),
-                ("nguyend", "Nguyễn D", "nguyend@kipaviethan.edu.vn", "0912 345 674", "admin_password_123", "admissions_consultant", "Tuyển sinh", "Lead được giao", "active", 0, now_iso),
             ]
             for sa in seed_admins:
                 conn.execute('''
@@ -536,6 +532,43 @@ class KipaDevHandler(BaseHTTPRequestHandler):
 
                 self.send_response(303)
                 self.send_header('Location', '/admin/?tab=accounts&subview=users&admin_created=1')
+                self.end_headers()
+                return
+
+            elif action == 'import_admins':
+                import_text = post_data.get('import_text', '').strip()
+                imported_count = 0
+                if import_text:
+                    init_dev_db()
+                    with sqlite3.connect(DB_PATH) as conn:
+                        cur = conn.cursor()
+                        lines = [l.strip() for l in import_text.split('\n') if l.strip()]
+                        for line in lines:
+                            if line.startswith('--') or line.startswith('/*'):
+                                continue
+                            if 'INSERT INTO' in line.upper() or 'VALUES' in line.upper():
+                                try:
+                                    sqlite_line = line.replace('NOW()', f"'{datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}'")
+                                    if 'ON DUPLICATE KEY' in sqlite_line.upper():
+                                        sqlite_line = sqlite_line[:sqlite_line.upper().index('ON DUPLICATE KEY')].strip()
+                                    cur.execute(sqlite_line)
+                                    imported_count += 1
+                                except Exception:
+                                    pass
+                            elif ',' in line:
+                                cols = [c.strip().strip('"').strip("'") for c in line.split(',')]
+                                if len(cols) >= 2 and cols[0].lower() not in ('id', 'tên đăng nhập'):
+                                    u = cols[1] if len(cols) > 2 and cols[0].isdigit() else cols[0]
+                                    fn = cols[2] if len(cols) > 2 and cols[0].isdigit() else (cols[1] if len(cols) > 1 else u)
+                                    em = cols[3] if len(cols) > 3 and '@' in cols[3] else None
+                                    ph = cols[4] if len(cols) > 4 else None
+                                    now_iso = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+                                    cur.execute('INSERT OR REPLACE INTO kipa_admins (username, full_name, email, phone, password_hash, role, department, scope, status, must_change_password, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                                                (u, fn, em, ph, 'admin_password_123', 'super_admin', 'Ban Giám Đốc', 'Toàn hệ thống', 'active', 0, now_iso))
+                                    imported_count += 1
+                        conn.commit()
+                self.send_response(303)
+                self.send_header('Location', f'/admin/?tab=accounts&admins_imported={imported_count}')
                 self.end_headers()
                 return
 
@@ -1009,6 +1042,66 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             elif error == 'invalid':
                 error_html = '<div class="message">Tên đăng nhập hoặc mật khẩu không chính xác.</div>'
 
+            action_req = query.get('action', [''])[0]
+            if action_req == 'export_admins_sql':
+                admins = get_dev_admins()
+                sql = "-- ==============================================================================\n"
+                sql += "-- KIPA VIỆT HÀN - XUẤT DỮ LIỆU BẢNG kipa_admins (Localhost Dev)\n"
+                sql += "-- Cơ sở dữ liệu: nhkip9ij_kipa_forms | Bảng: kipa_admins\n"
+                sql += "-- ==============================================================================\n\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `full_name` VARCHAR(160) NOT NULL DEFAULT '' AFTER `username`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `email` VARCHAR(191) NULL DEFAULT NULL AFTER `full_name`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `phone` VARCHAR(32) NULL DEFAULT NULL AFTER `email`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `department` VARCHAR(64) NOT NULL DEFAULT 'Ban Giám Đốc' AFTER `phone`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `role` VARCHAR(64) NOT NULL DEFAULT 'super_admin' AFTER `department`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `scope` VARCHAR(255) NOT NULL DEFAULT 'Toàn hệ thống' AFTER `role`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `status` VARCHAR(32) NOT NULL DEFAULT 'active' AFTER `scope`;\n"
+                sql += "ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `must_change_password` TINYINT(1) NOT NULL DEFAULT 0 AFTER `status`;\n\n"
+                if admins:
+                    sql += "INSERT INTO `kipa_admins` (`id`, `username`, `full_name`, `email`, `phone`, `password_hash`, `department`, `role`, `scope`, `status`, `must_change_password`, `created_at`)\nVALUES\n"
+                    parts = []
+                    for a in admins:
+                        u = str(a.get('username', '')).replace("'", "''")
+                        fn = str(a.get('full_name', '')).replace("'", "''")
+                        em = f"'{str(a['email']).replace("'", "''")}'" if a.get('email') else "NULL"
+                        ph = f"'{str(a['phone']).replace("'", "''")}'" if a.get('phone') else "NULL"
+                        pw = str(a.get('password_hash', '')).replace("'", "''")
+                        dp = str(a.get('department', 'Ban Giám Đốc')).replace("'", "''")
+                        ro = str(a.get('role', 'super_admin')).replace("'", "''")
+                        sc = str(a.get('scope', 'Toàn hệ thống')).replace("'", "''")
+                        st = str(a.get('status', 'active')).replace("'", "''")
+                        mcp = 1 if a.get('must_change_password') else 0
+                        ca = str(a.get('created_at', ''))
+                        parts.append(f"  ({a.get('id', 1)}, '{u}', '{fn}', {em}, {ph}, '{pw}', '{dp}', '{ro}', '{sc}', '{st}', {mcp}, '{ca}')")
+                    sql += ",\n".join(parts) + "\n"
+                    sql += "ON DUPLICATE KEY UPDATE `full_name`=VALUES(`full_name`), `email`=VALUES(`email`), `phone`=VALUES(`phone`), `department`=VALUES(`department`), `role`=VALUES(`role`), `scope`=VALUES(`scope`), `status`=VALUES(`status`);\n"
+                resp_bytes = sql.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/sql; charset=utf-8')
+                self.send_header('Content-Disposition', 'attachment; filename="kipa_admins_export.sql"')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+
+            if action_req == 'export_admins_csv':
+                admins = get_dev_admins()
+                import csv, io
+                sio = io.StringIO()
+                sio.write('\ufeff')
+                writer = csv.writer(sio)
+                writer.writerow(['ID', 'Tên đăng nhập', 'Họ và tên', 'Email', 'Số điện thoại', 'Phòng ban', 'Vai trò (Role)', 'Phạm vi phụ trách', 'Trạng thái', 'Ngày tạo'])
+                for a in admins:
+                    writer.writerow([a.get('id', ''), a.get('username', ''), a.get('full_name', ''), a.get('email', '') or '', a.get('phone', '') or '', a.get('department', ''), a.get('role', ''), a.get('scope', ''), a.get('status', ''), a.get('created_at', '')])
+                resp_bytes = sio.getvalue().encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/csv; charset=utf-8')
+                self.send_header('Content-Disposition', 'attachment; filename="kipa_admins_export.csv"')
+                self.send_header('Content-Length', str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+
             if view == 'reset':
                 content_html = ''
                 if mode == 'token':
@@ -1167,12 +1260,19 @@ class KipaDevHandler(BaseHTTPRequestHandler):
             <label>Mật khẩu
                 <input name="password" type="password" required autocomplete="current-password" placeholder="Nhập mật khẩu (Mặc định: {DEV_ADMIN_PASSWORD})">
             </label>
-            <p class="actions">
+            <p class="actions" style="display:flex;align-items:center;justify-content:space-between;">
                 <button type="submit">Đăng nhập</button>
-                <a href="/admin/?view=reset" style="font-size:13px;margin-left:auto;">Quên mật khẩu? Đặt lại mật khẩu</a>
+                <a href="/admin/?view=reset" style="font-size:13px;font-weight:600;color:#0274bd;text-decoration:none;">Quên mật khẩu?</a>
             </p>
         </form>
-        <p class="muted" style="margin-top:20px;border-top:1px solid #e2e8f0;padding-top:14px;">Chỉ tài khoản được ủy quyền mới có thể truy cập hệ thống quản trị KIPA.</p>
+        <div style="margin-top:20px;padding:14px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <div>
+                <strong style="color:#166534;font-size:13px;">🔑 Quên hoặc cần đặt lại mật khẩu?</strong>
+                <p style="margin:2px 0 0;font-size:12px;color:#15803d;">Đặt lại mật khẩu quản trị viên an toàn qua mã OTP gửi về Email hoặc qua setup_token.</p>
+            </div>
+            <a href="/admin/?view=reset" style="display:inline-block;padding:8px 14px;background:#16a34a;color:#ffffff;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;">Đặt lại mật khẩu →</a>
+        </div>
+        <p class="muted" style="margin-top:16px;border-top:1px solid #e2e8f0;padding-top:14px;">Chỉ tài khoản được ủy quyền mới có thể truy cập hệ thống quản trị KIPA.</p>
     </section>
 </main>
 </body>
