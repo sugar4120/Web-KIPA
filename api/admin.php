@@ -1155,7 +1155,7 @@ try {
         </div>
         <h3 class="role-card-title" style="margin-top:8px;text-align:center;">+ Tạo vai trò mới</h3>
         <p class="role-card-desc" style="text-align:center;">Tùy biến nhóm quyền P01-P12 và cấu hình vai trò riêng cho bộ phận.</p>
-        <button type="button" class="btn-create-role" style="background:#2563eb;color:#fff;border:0;padding:8px 16px;border-radius:7px;font-weight:700;cursor:pointer;font-size:12px;margin:0 auto;" onclick="switchSubview('add')">+ Thêm tài khoản nhân sự</button>
+        <button type="button" class="btn-create-role" style="background:#2563eb;color:#fff;border:0;padding:8px 16px;border-radius:7px;font-weight:700;cursor:pointer;font-size:12px;margin:0 auto;" onclick="switchSubview(\'add\')">+ Thêm tài khoản nhân sự</button>
     </div>';
 
     // Build View 3: Taskora-style Permission Matrix Table
@@ -1419,7 +1419,7 @@ try {
                 <span>📊</span>
                 <span>Ma trận 8 Vai trò (RBAC)</span>
             </a>
-            <a href="javascript:void(0)" class="nav-link" onclick="alert('Nhật ký bảo mật Audit Log đang được ghi nhận trực tiếp vào máy chủ.');">
+            <a href="javascript:void(0)" class="nav-link" onclick="alert(\'Nhật ký bảo mật Audit Log đang được ghi nhận trực tiếp vào máy chủ.\');">
                 <span>🛡️</span>
                 <span>Nhật ký bảo mật</span>
             </a>
