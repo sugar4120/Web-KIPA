@@ -1057,7 +1057,7 @@ try {
             if (($_SESSION['admin_role'] ?? 'super_admin') === 'super_admin') {
                 $actionsHtml .= kipa_admin_form_start('delete_admin', $csrf) .
                     '<input type="hidden" name="target_id" value="' . (int)$a['id'] . '">' .
-                    '<button type="submit" class="btn-sm" style="background:#64748b;color:#fff;" onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này khỏi CSDL?');">Xóa</button></form>';
+                    '<button type="submit" class="btn-sm" style="background:#64748b;color:#fff;" onclick="return confirm(\'Bạn có chắc chắn muốn xóa tài khoản này khỏi CSDL?\');">Xóa</button></form>';
             }
         } else {
             $actionsHtml = '<span class="chip-root">Đang đăng nhập</span>';
