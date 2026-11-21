@@ -1,14 +1,39 @@
 -- ==============================================================================
--- KIPA VIỆT HÀN - ĐỒNG BỘ CSDL BẢNG kipa_admins
+-- KIPA VIỆT HÀN - ĐỒNG BỘ CSDL TOÀN DIỆN CHO QUẢN TRỊ & ĐẶT LẠI MẬT KHẨU
 -- Cơ sở dữ liệu: nhkip9ij_kipa_forms
 -- Hướng dẫn thực hiện trong phpMyAdmin:
--- 1. Truy cập phpMyAdmin -> Chọn CSDL 'nhkip9ij_kipa_forms' ở cột bên trái
+-- 1. Truy cập phpMyAdmin -> Chọn CSDL 'nhkip9ij_kipa_forms' ở danh mục bên trái
 -- 2. Chọn tab 'Nhập' (Import) ở thanh menu trên cùng
 -- 3. Bấm 'Choose File' (Chọn tệp) và chọn file này (sync_kipa_admins.sql)
 -- 4. Bấm 'Thực hiện' (Go) ở cuối trang
 -- ==============================================================================
 
--- Bước 1: Đảm bảo bảng kipa_admins có đầy đủ các cột quản trị & phân quyền
+-- Bước 1: Đảm bảo bảng kipa_otp_codes tồn tại để lưu mã xác thực OTP gửi qua Email
+CREATE TABLE IF NOT EXISTS `kipa_otp_codes` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(254) NOT NULL,
+    `code_hash` CHAR(64) NOT NULL,
+    `attempts` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    `expires_at` DATETIME NOT NULL,
+    `verified_at` DATETIME NULL,
+    `created_at` DATETIME NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `idx_kipa_otp_email_created` (`email`, `created_at`),
+    KEY `idx_kipa_otp_expires` (`expires_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bước 2: Đảm bảo bảng kipa_rate_limits tồn tại để ngăn chặn gửi OTP quá tải
+CREATE TABLE IF NOT EXISTS `kipa_rate_limits` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `scope` VARCHAR(16) NOT NULL,
+    `remote_key` CHAR(64) NOT NULL,
+    `occurred_at` DATETIME NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `idx_kipa_rate_scope_remote_time` (`scope`, `remote_key`, `occurred_at`),
+    KEY `idx_kipa_rate_time` (`occurred_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bước 3: Đảm bảo bảng kipa_admins có đầy đủ các cột quản trị & phân quyền
 ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `full_name` VARCHAR(160) NOT NULL DEFAULT '' AFTER `username`;
 ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `email` VARCHAR(191) NULL DEFAULT NULL AFTER `full_name`;
 ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `phone` VARCHAR(32) NULL DEFAULT NULL AFTER `email`;
@@ -18,7 +43,7 @@ ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `scope` VARCHAR(255) NOT NULL
 ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `status` VARCHAR(32) NOT NULL DEFAULT 'active' AFTER `scope`;
 ALTER TABLE `kipa_admins` ADD COLUMN IF NOT EXISTS `must_change_password` TINYINT(1) NOT NULL DEFAULT 0 AFTER `status`;
 
--- Bước 2: Chuẩn hóa tài khoản Tổng quản trị KIPA (Super Admin gốc)
+-- Bước 4: Chuẩn hóa tài khoản Tổng quản trị KIPA (Super Admin gốc)
 UPDATE `kipa_admins`
 SET 
   `full_name` = 'Tổng quản trị KIPA',
@@ -31,7 +56,7 @@ SET
   `must_change_password` = 0
 WHERE `id` = 1 OR `username` = 'admin';
 
--- Bước 3: Đồng bộ tài khoản nhân sự 'Kiên' vào bảng kipa_admins (nếu chưa có)
+-- Bước 5: Đồng bộ tài khoản nhân sự 'Kiên' vào bảng kipa_admins (nếu chưa có)
 INSERT INTO `kipa_admins` (`username`, `full_name`, `email`, `phone`, `password_hash`, `department`, `role`, `scope`, `status`, `must_change_password`, `created_at`)
 VALUES (
   'kiên', 
