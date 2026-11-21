@@ -299,6 +299,32 @@ function kipa_ensure_admin_columns(PDO $db): void
     static $ensured = false;
     if ($ensured) return;
     try {
+        // 1. Đảm bảo bảng kipa_otp_codes tồn tại để lưu mã xác thực OTP
+        $db->exec("CREATE TABLE IF NOT EXISTS kipa_otp_codes (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            email VARCHAR(254) NOT NULL,
+            code_hash CHAR(64) NOT NULL,
+            attempts TINYINT UNSIGNED NOT NULL DEFAULT 0,
+            expires_at DATETIME NOT NULL,
+            verified_at DATETIME NULL,
+            created_at DATETIME NOT NULL,
+            PRIMARY KEY (id),
+            KEY idx_kipa_otp_email_created (email, created_at),
+            KEY idx_kipa_otp_expires (expires_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        // 2. Đảm bảo bảng kipa_rate_limits tồn tại
+        $db->exec("CREATE TABLE IF NOT EXISTS kipa_rate_limits (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            scope VARCHAR(16) NOT NULL,
+            remote_key CHAR(64) NOT NULL,
+            occurred_at DATETIME NOT NULL,
+            PRIMARY KEY (id),
+            KEY idx_kipa_rate_scope_remote_time (scope, remote_key, occurred_at),
+            KEY idx_kipa_rate_time (occurred_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        // 3. Đảm bảo các cột mở rộng của bảng kipa_admins
         $cols = $db->query("SHOW COLUMNS FROM kipa_admins")->fetchAll(PDO::FETCH_COLUMN);
         if ($cols && is_array($cols)) {
             if (!in_array('full_name', $cols, true)) {
@@ -322,8 +348,15 @@ function kipa_ensure_admin_columns(PDO $db): void
             if (!in_array('status', $cols, true)) {
                 $db->exec("ALTER TABLE kipa_admins ADD COLUMN status VARCHAR(32) NOT NULL DEFAULT 'active' AFTER scope");
             }
+            if (!in_array('must_change_password', $cols, true)) {
+                $db->exec("ALTER TABLE kipa_admins ADD COLUMN must_change_password TINYINT(1) NOT NULL DEFAULT 0 AFTER status");
+            }
+
+            // 4. Khởi tạo email mặc định cho tài khoản admin gốc nếu chưa có
+            $db->exec("UPDATE kipa_admins SET full_name = 'Tổng quản trị KIPA', email = 'duhocquoctekipaviethan@gmail.com', phone = '036 851 3865', role = 'super_admin', department = 'Ban Giám Đốc', scope = 'Toàn hệ thống', status = 'active' WHERE (id = 1 OR username = 'admin') AND (email IS NULL OR email = '')");
         }
-    } catch (Throwable) {
+    } catch (Throwable $e) {
+        error_log('[kipa-admin-ensure] Schema error: ' . $e->getMessage());
     }
     $ensured = true;
 }
@@ -343,6 +376,7 @@ function kipa_admin_form_start(string $action, string $csrf): string
 try {
     $config = kipa_config();
     $db = kipa_db($config);
+    kipa_ensure_admin_columns($db);
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     $remoteKey = kipa_remote_key($config);
     $currentAdmin = kipa_current_admin($db);
@@ -421,6 +455,7 @@ try {
         }
 
         if ($action === 'send_otp') {
+            kipa_ensure_admin_columns($db);
             if (kipa_rate_limited($db, 'admin_otp_send', $remoteKey, 5, 15)) {
                 kipa_admin_error('Yêu cầu gửi mã OTP quá nhiều lần. Vui lòng đợi 15 phút rồi thử lại.', 429);
             }
@@ -444,15 +479,42 @@ try {
             }
             $adminEmail = trim((string)($admin['email'] ?? ''));
             if ($adminEmail === '' || filter_var($adminEmail, FILTER_VALIDATE_EMAIL) === false) {
-                kipa_admin_error('Tài khoản quản trị chưa được gán email để nhận OTP. Vui lòng dùng Mã thiết lập (setup_token) để đặt lại mật khẩu.');
+                if (($admin['username'] ?? '') === 'admin' || (int)($admin['id'] ?? 0) === 1) {
+                    $adminEmail = 'duhocquoctekipaviethan@gmail.com';
+                    $db->prepare('UPDATE kipa_admins SET email = :em, full_name = "Tổng quản trị KIPA" WHERE id = :id')->execute(['em' => $adminEmail, 'id' => $admin['id']]);
+                } else {
+                    kipa_admin_error('Tài khoản quản trị chưa được gán email để nhận OTP. Vui lòng dùng Mã thiết lập (setup_token) để đặt lại mật khẩu.');
+                }
             }
 
             $otp = kipa_otp_generate_code();
-            $db->prepare(
-                'INSERT INTO kipa_otp_codes (email, code_hash, attempts, expires_at, created_at)
-                 VALUES (:email, :code_hash, 0, UTC_TIMESTAMP() + INTERVAL 10 MINUTE, UTC_TIMESTAMP())'
-            )->execute(['email' => $adminEmail, 'code_hash' => kipa_otp_hash_code($adminEmail, $otp, $config['app_key'])]);
+            try {
+                $db->prepare(
+                    'INSERT INTO kipa_otp_codes (email, code_hash, attempts, expires_at, created_at)
+                     VALUES (:email, :code_hash, 0, UTC_TIMESTAMP() + INTERVAL 10 MINUTE, UTC_TIMESTAMP())'
+                )->execute(['email' => $adminEmail, 'code_hash' => kipa_otp_hash_code($adminEmail, $otp, $config['app_key'])]);
+            } catch (Throwable $e) {
+                error_log('[kipa-otp-insert] ' . $e->getMessage());
+                $db->exec("CREATE TABLE IF NOT EXISTS kipa_otp_codes (
+                    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                    email VARCHAR(254) NOT NULL,
+                    code_hash CHAR(64) NOT NULL,
+                    attempts TINYINT UNSIGNED NOT NULL DEFAULT 0,
+                    expires_at DATETIME NOT NULL,
+                    verified_at DATETIME NULL,
+                    created_at DATETIME NOT NULL,
+                    PRIMARY KEY (id),
+                    KEY idx_kipa_otp_email_created (email, created_at),
+                    KEY idx_kipa_otp_expires (expires_at)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+                $db->prepare(
+                    'INSERT INTO kipa_otp_codes (email, code_hash, attempts, expires_at, created_at)
+                     VALUES (:email, :code_hash, 0, UTC_TIMESTAMP() + INTERVAL 10 MINUTE, UTC_TIMESTAMP())'
+                )->execute(['email' => $adminEmail, 'code_hash' => kipa_otp_hash_code($adminEmail, $otp, $config['app_key'])]);
+            }
 
+            $mailSent = false;
+            $mailError = '';
             try {
                 $smtp = kipa_smtp_config($config);
                 kipa_send_mail(
@@ -467,9 +529,19 @@ try {
                     . "KIPA Việt Hàn - Ban Quản Trị Hệ Thống\n"
                     . "Hotline: 036 851 3865 | 0889 2222 55\n"
                 );
+                $mailSent = true;
             } catch (Throwable $e) {
-                error_log('[kipa-admin-otp] Failed to send admin OTP: ' . $e->getMessage());
-                kipa_admin_error('Chưa thể gửi email OTP lúc này. Vui lòng kiểm tra SMTP hoặc chuyển sang dùng Mã thiết lập (setup_token) để đặt lại mật khẩu.', 503);
+                $mailError = $e->getMessage();
+                error_log('[kipa-admin-otp] Failed to send admin OTP: ' . $mailError);
+            }
+
+            if (!$mailSent) {
+                $msg = '<section class="card"><h1>Chưa thể gửi email OTP tự động</h1>';
+                $msg .= '<p class="message">Máy chủ hosting chưa hoàn tất kết nối gửi thư SMTP (' . kipa_h($mailError) . ').</p>';
+                $msg .= '<p>Để giải quyết nhanh chóng và đặt lại mật khẩu ngay lúc này, bạn hãy chuyển sang xác thực bằng <strong>Mã thiết lập máy chủ (setup_token)</strong>:</p>';
+                $msg .= '<p style="margin:20px 0;"><a href="/api/admin.php?view=reset&mode=token&account=' . urlencode($admin['username']) . '" style="display:inline-block;padding:12px 20px;background:#0274bd;color:#ffffff;border-radius:8px;font-weight:700;text-decoration:none;">🔑 Đặt lại bằng setup_token ngay →</a></p>';
+                $msg .= '<p><a href="/api/admin.php">Quay lại trang Đăng nhập</a></p></section>';
+                kipa_admin_page('Chưa thể gửi email OTP', $msg);
             }
 
             $parts = explode('@', $adminEmail);
@@ -479,6 +551,7 @@ try {
         }
 
         if ($action === 'reset_password') {
+            kipa_ensure_admin_columns($db);
             if (kipa_rate_limited($db, 'admin_reset', $remoteKey, 5, 15)) {
                 kipa_admin_error('Yêu cầu đặt lại mật khẩu quá nhiều lần. Vui lòng đợi 15 phút rồi thử lại.', 429);
             }
@@ -515,13 +588,17 @@ try {
                 if ($adminEmail === '') {
                     kipa_admin_error('Tài khoản này chưa có email để xác thực OTP. Vui lòng sử dụng Mã thiết lập (setup_token).');
                 }
-                $st = $db->prepare(
-                    'SELECT id, code_hash, attempts FROM kipa_otp_codes
-                     WHERE email = :email AND verified_at IS NULL AND expires_at >= UTC_TIMESTAMP()
-                     ORDER BY id DESC LIMIT 1 FOR UPDATE'
-                );
-                $st->execute(['email' => $adminEmail]);
-                $row = $st->fetch();
+                try {
+                    $st = $db->prepare(
+                        'SELECT id, code_hash, attempts FROM kipa_otp_codes
+                         WHERE email = :email AND verified_at IS NULL AND expires_at >= UTC_TIMESTAMP()
+                         ORDER BY id DESC LIMIT 1'
+                    );
+                    $st->execute(['email' => $adminEmail]);
+                    $row = $st->fetch();
+                } catch (Throwable $e) {
+                    $row = null;
+                }
                 if (!$row) {
                     kipa_admin_error('Mã OTP không đúng hoặc đã hết hạn. Vui lòng gửi lại mã mới.');
                 }
@@ -2196,9 +2273,13 @@ try {
     <?php
     exit;
 } catch (PDOException $error) {
-    error_log('[kipa-admin] Database operation failed: ' . $error->getCode());
+    error_log('[kipa-admin] Database operation failed: ' . $error->getMessage());
     http_response_code(503);
-    kipa_admin_page('Tạm thời gián đoạn', '<section class="card"><h1>Trang quản trị đang tạm thời gián đoạn</h1><p>Không thể tải dữ liệu lúc này. Vui lòng thử lại sau.</p></section>');
+    $msg = '<section class="card"><h1>Trang quản trị đang tạm thời gián đoạn</h1>';
+    $msg .= '<p class="message">Lỗi cơ sở dữ liệu: ' . kipa_h($error->getMessage()) . '</p>';
+    $msg .= '<p>Vui lòng thử lại hoặc sử dụng Mã thiết lập máy chủ (setup_token) để đặt lại mật khẩu khẩn cấp: <a href="/api/admin.php?view=reset&mode=token" style="font-weight:bold;color:#0274bd;">Đặt lại bằng setup_token →</a></p>';
+    $msg .= '<p style="margin-top:14px;"><a href="/api/admin.php">Tải lại trang quản trị</a></p></section>';
+    kipa_admin_page('Tạm thời gián đoạn', $msg);
 } catch (RuntimeException $error) {
     error_log('[kipa-admin] Configuration failed.');
     http_response_code(503);
