@@ -467,12 +467,13 @@ try {
 
             // Check if column email exists in kipa_admins
             $hasEmailCol = (bool)$db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
-            $queryStr = $hasEmailCol
-                ? 'SELECT id, username, email FROM kipa_admins WHERE username = :acc OR email = :acc LIMIT 1'
-                : 'SELECT id, username, NULL as email FROM kipa_admins WHERE username = :acc LIMIT 1';
-
-            $statement = $db->prepare($queryStr);
-            $statement->execute(['acc' => $account]);
+            if ($hasEmailCol) {
+                $statement = $db->prepare('SELECT id, username, email FROM kipa_admins WHERE username = :acc_user OR email = :acc_email LIMIT 1');
+                $statement->execute(['acc_user' => $account, 'acc_email' => $account]);
+            } else {
+                $statement = $db->prepare('SELECT id, username, NULL as email FROM kipa_admins WHERE username = :acc_user LIMIT 1');
+                $statement->execute(['acc_user' => $account]);
+            }
             $admin = $statement->fetch();
             if (!$admin) {
                 kipa_admin_error('Không tìm thấy tài khoản quản trị khớp với thông tin này.');
@@ -570,12 +571,13 @@ try {
             }
 
             $hasEmailCol = (bool)$db->query("SHOW COLUMNS FROM kipa_admins LIKE 'email'")->fetch();
-            $queryStr = $hasEmailCol
-                ? 'SELECT id, username, email, password_hash FROM kipa_admins WHERE username = :acc OR email = :acc LIMIT 1'
-                : 'SELECT id, username, NULL as email, password_hash FROM kipa_admins WHERE username = :acc LIMIT 1';
-
-            $statement = $db->prepare($queryStr);
-            $statement->execute(['acc' => $account]);
+            if ($hasEmailCol) {
+                $statement = $db->prepare('SELECT id, username, email, password_hash FROM kipa_admins WHERE username = :acc_user OR email = :acc_email LIMIT 1');
+                $statement->execute(['acc_user' => $account, 'acc_email' => $account]);
+            } else {
+                $statement = $db->prepare('SELECT id, username, NULL as email, password_hash FROM kipa_admins WHERE username = :acc_user LIMIT 1');
+                $statement->execute(['acc_user' => $account]);
+            }
             $admin = $statement->fetch();
             if (!$admin) {
                 kipa_admin_error('Tài khoản quản trị không tồn tại.');
